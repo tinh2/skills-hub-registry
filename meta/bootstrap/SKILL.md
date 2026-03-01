@@ -48,7 +48,7 @@ PHASE 3: APPLY TEMPLATE
    - Set initial metrics baseline targets
    - Note the template used and date
 
-2.5. **Validate Foundation Requirements** (learned from PawPass recall — Day 1 gaps caused 100+ rework commits):
+2.5. **Validate Foundation Requirements** (learned from recall analysis — Day 1 gaps caused 100+ rework commits):
 
    Before recommending the first build skill, verify the project has these foundations.
    If any are missing, add them to the CLAUDE.md as "Foundation TODO" items and flag
@@ -82,7 +82,7 @@ PHASE 3: APPLY TEMPLATE
       across route or service files. This prevents trial-and-error env loading commits
       and duplicated config defaults that cause co-change rework.
       Prevents: 2+ trial-and-error commits per project for env loading + co-change
-      rework from duplicated defaults (was 5/13 rework commits in ollama-server).
+      rework from duplicated defaults (observed: 5/13 rework commits from duplicated defaults).
 
 3. **Display the pipeline** from `pipeline.md`:
    - Show the recommended skill sequence

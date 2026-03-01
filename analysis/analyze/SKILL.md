@@ -161,7 +161,7 @@ CALLABLE FUNCTION WIRING (CRITICAL):
 - List every callable Cloud Function (httpsCallable, onCall).
 - For each, search the Flutter/client codebase for invocations.
 - If a callable function exists but is NEVER called from the client, flag CRITICAL.
-  Example: validateCreditSpend Cloud Function existed for months but client did
+  Example: validatePayment Cloud Function existed for months but client did
   all credit validation client-side only, making it bypassable.
 - For each client-side security check (credit validation, eligibility, permissions,
   spending limits), verify matching server-side enforcement EXISTS and IS WIRED.
@@ -175,8 +175,8 @@ CLOUD FUNCTION WRITE ↔ MODEL COMPLETENESS (WARNING):
   d) toMap/toJson serialization (if client also writes it)
   e) copyWith method (if model has one)
 - Missing fields = WARNING. The backend writes data the frontend never displays.
-  Example: onMessageScanned Cloud Function wrote offPlatformWarningCount but
-  AppUser model didn't include it, so risk score calculation was incomplete.
+  Example: onItemProcessed Cloud Function wrote warningCount but
+  User model didn't include it, so risk score calculation was incomplete.
 
 CONFIG PROPAGATION (WARNING):
 - For admin-configurable settings (stored in Firestore config collections),

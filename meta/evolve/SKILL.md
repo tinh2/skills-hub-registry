@@ -81,7 +81,7 @@ For each patch (max 3):
 PHASE 4: LOG CHANGES
 ============================================================
 
-1. Append to `~/.claude/skills/CHANGELOG.md`:
+1. Append to `CHANGELOG.md`:
    ```
    ## {date}
 
@@ -98,7 +98,6 @@ PHASE 4: LOG CHANGES
    - Patched: /qa v3 → v4 (added upstream routing)
    ```
 
-3. Run `~/.claude/scripts/sync-backup.sh` to persist changes.
 
 ============================================================
 OUTPUT

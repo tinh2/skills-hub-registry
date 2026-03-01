@@ -32,7 +32,7 @@ State which mode and base branch you are using at the top of your output.
 
 STORY FORMAT AWARENESS:
 
-This team uses Fringe Jira format for stories. When parsing a story, expect:
+This team uses a structured Jira format for stories. When parsing a story, expect:
 - Title prefixed with "BE:" (backend) or "FE:" (frontend)
 - Description section (1-2 sentence paragraph)
 - Acceptance Criteria with bold category headers and nested sub-bullets
@@ -64,7 +64,7 @@ Before reviewing the story, run a targeted domain analysis on the areas the stor
 
 Include this in the output as "Domain Impact Analysis".
 
-SERVICE ARCHITECTURE CHECK (learned from PawPass recall — 66-touch god object):
+SERVICE ARCHITECTURE CHECK (learned from recall analysis — 66-touch god object):
 
 Before approving any story, evaluate the service layer architecture:
 - If the project has a single monolithic service file (e.g., one FirestoreService handling
@@ -75,7 +75,7 @@ Before approving any story, evaluate the service layer architecture:
 - No service file should handle more than 3 closely-related collections.
 - This prevents the "66 modifications to one file" pattern that generates 20%+ of fix commits.
 
-DATA PRIVACY CHECK (learned from PawPass recall — PII exposure discovered Day 7):
+DATA PRIVACY CHECK (learned from recall analysis — PII exposure discovered Day 7):
 
 For every data model in the story, evaluate public vs private data separation:
 - Identify which fields contain PII (name, email, phone, address, payment info, location).
@@ -85,7 +85,7 @@ For every data model in the story, evaluate public vs private data separation:
 - Flag any model that mixes PII with publicly-readable data as a Critical risk.
 - This prevents late-breaking "we need a public_profiles collection" migrations.
 
-INFRASTRUCTURE CHECK (learned from OpenClaw recall — 5 critical issues from config/mount mismatches):
+INFRASTRUCTURE CHECK (learned from recall analysis — 5 critical issues from config/mount mismatches):
 
 If the story involves Docker, shell scripts, CI/CD, or infrastructure changes:
 - Verify docker-compose volume mounts target paths the application actually reads from.
@@ -130,7 +130,7 @@ Flag any missing constraints or indexes.
 Flag any potential migration risks on large tables.
 If no schema changes, state that.
 
-DATABASE MIGRATION CHECK (learned from Recipe AI recall — 15 raw DDL modifications, no migration tracking):
+DATABASE MIGRATION CHECK (learned from recall analysis — 15 raw DDL modifications, no migration tracking):
 
 For every story involving database schema changes:
 - Verify a migration system exists in the project (e.g., node-pg-migrate, knex migrations,
@@ -141,7 +141,7 @@ For every story involving database schema changes:
 - Each migration must include an up AND down function (or equivalent rollback strategy).
 - Flag any project that modifies schema via direct DDL file edits (e.g., editing a
   monolithic tables.sql or schema.sql) without a migration tool. This leads to production
-  schema drift with no rollback capability — Recipe AI had 15 raw DDL modifications with
+  schema drift with no rollback capability — one project had 15 raw DDL modifications with
   10 fix commits and no way to track or reverse changes.
 - For greenfield projects: recommend setting up migrations as part of the first schema story.
 - For existing projects without migrations: recommend a "baseline migration" that captures
@@ -304,14 +304,14 @@ Are authorization checks correct and sufficient?
 Are there any information leaks in error messages?
 Could any endpoint be abused (e.g., unbounded queries, resource exhaustion)?
 
-INFRASTRUCTURE REVIEW (learned from OpenClaw recall — config path mismatches, mount errors, sed portability):
+INFRASTRUCTURE REVIEW (learned from recall analysis — config path mismatches, mount errors, sed portability):
 
 If the project includes Docker, shell scripts, or infrastructure-as-code:
 - Docker Compose: Verify image references use full registry paths (e.g., `ghcr.io/org/image`,
   not bare `org/image` that defaults to Docker Hub). Verify volume mount target paths exist
   in the container and match where the application actually reads config.
 - Config path assumptions: If code reads config from a default path (e.g.,
-  `/home/node/.openclaw/openclaw.json`), verify the deployment mounts config there — not
+  `/home/node/.app/config.json`), verify the deployment mounts config there — not
   via env var overrides the app ignores. Flag mismatches between code's config discovery
   and deployment's config delivery.
 - Shell script portability: Check `sed -i` (needs `''` on macOS), `readlink -f` (not on

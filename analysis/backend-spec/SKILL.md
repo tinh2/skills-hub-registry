@@ -1,6 +1,6 @@
 ---
 name: backend-spec-story
-description: Generates backend or frontend engineering specs in Fringe Jira format with description, categorized acceptance criteria, routes, dev notes, and table schemas.
+description: Generates backend or frontend engineering specs in structured Jira format with description, categorized acceptance criteria, routes, dev notes, and table schemas.
 version: "5.0.0"
 category: analysis
 platforms:

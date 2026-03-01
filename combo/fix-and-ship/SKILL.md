@@ -27,7 +27,7 @@ The hotfix skill will:
 - Diagnose the bug (max 2 iterations)
 - Apply the minimal fix
 - Run tests
-- Commit with `deploy:tho`
+- Commit with conventional commit format
 - Push and create a PR
 
 If the hotfix skill reports failure (couldn't fix in 2 iterations),
@@ -43,7 +43,7 @@ The preflight skill will verify:
 - Clean git status
 - Build passes
 - All tests pass
-- Conventions enforced (deploy:tho, no Co-Authored-By)
+- Conventions enforced (conventional commits)
 - Migration status
 
 ============================================================

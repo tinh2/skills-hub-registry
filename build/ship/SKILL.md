@@ -71,7 +71,7 @@ d) SCALABILITY: Every Firestore query has .limit(). Batch writes for multi-doc
 e) STRUCTURAL HEALTH: If any file exceeds 500 lines, decompose it into
    domain-specific modules. Do not let monolithic services grow across iterations.
 
-MONOLITH DECOMPOSITION GATE (learned from Recipe AI recall — 69 modifications to 3 monolithic files):
+MONOLITH DECOMPOSITION GATE (learned from recall analysis — 69 modifications to 3 monolithic files):
 
 Before adding ANY feature code to a file that exceeds 500 lines:
 1. STOP. Do not add the feature to the monolithic file.
@@ -80,11 +80,11 @@ Before adding ANY feature code to a file that exceeds 500 lines:
 4. Commit the extraction: "refactor: extract [component] from [monolith]"
 5. THEN implement the feature in the newly extracted file.
 
-This is NOT optional. "Flag and plan" does not work — Recipe AI flagged
-analyze_screen.dart (6,732 lines) but never decomposed it, resulting in 21 modifications
+This is NOT optional. "Flag and plan" does not work — one project flagged
+a monolithic screen file (6,732 lines) but never decomposed it, resulting in 21 modifications
 and a 62% fix-commit rate. Decompose BEFORE building, not after.
 
-MINIMUM TEST REQUIREMENT (learned from Recipe AI — M8: Test Coverage = 0.00):
+MINIMUM TEST REQUIREMENT (learned from recall analysis — M8: Test Coverage = 0.00):
 
 Every iteration that adds new functionality must include:
 - Backend: At least 2 tests per new API endpoint (happy path + error case).
@@ -104,7 +104,7 @@ c) MODEL SERIALIZATION: When a Cloud Function writes new fields, update the
    client model (fields, fromMap/toMap, copyWith) in the SAME commit.
 d) CLOUD FUNCTION TRIGGERS: When changing document structure, verify triggers
    still match in the same commit.
-e) SHARED CONFIGURATION (learned from ollama-server recall — 3 rework commits from
+e) SHARED CONFIGURATION (learned from recall analysis — 3 rework commits from
    duplicated defaults): When 2+ files reference the same configurable value (model
    name, base URL, API key, timeout, port), extract to a shared config module.
    Never hardcode the same default in multiple files. Create `src/config.ts` (or

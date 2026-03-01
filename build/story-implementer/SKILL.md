@@ -21,7 +21,7 @@ If `/arch-review` implementation guidance was provided, follow its recommended i
 
 STORY FORMAT AWARENESS:
 
-This team uses Fringe Jira format for stories. When parsing, expect:
+This team uses a structured Jira format for stories. When parsing, expect:
 - Title prefixed with "BE:" (backend) or "FE:" (frontend)
 - Description section
 - Acceptance Criteria with bold category headers and nested sub-bullets

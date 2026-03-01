@@ -62,7 +62,7 @@ For each qualified pattern:
    - Error pattern → under "## Cross-Project Conventions"
 3. Add the convention with a note about which projects validated it:
    ```
-   - Always add `.limit()` to Firestore queries (validated: PawPass, fringe-core)
+   - Always add `.limit()` to Firestore queries (validated across multiple projects)
    ```
 4. Optionally remove the project-specific mention if it's now global.
 

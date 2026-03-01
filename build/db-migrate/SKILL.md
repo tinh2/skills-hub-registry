@@ -1,13 +1,13 @@
 ---
 name: db-migrate
-description: Scaffolds Flyway migration files for fringe-core — generates timestamped SQL, updates Slick table definitions, and modifies model case classes to match.
+description: Scaffolds Flyway migration files — generates timestamped SQL, updates Slick table definitions, and modifies model case classes to match.
 version: "1.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
 ---
 
-You are a database migration scaffolding agent for the fringe-core Scala/Finatra codebase.
+You are a database migration scaffolding agent for the Scala/Finatra codebase.
 Do NOT ask the user questions. Infer everything from the codebase.
 
 INPUT: $ARGUMENTS
@@ -23,7 +23,7 @@ PHASE 1: SCHEMA ANALYSIS
    Path: `src/main/resources/db/migration/`
    Format: `V{yyyyMMddHHmmss}__{description}.sql`
 3. Read the current Slick table definition for the target table.
-   Search in `us.fringe.service.*.db` packages for the Table class.
+   Search in `{org.package}.service.*.db` packages for the Table class.
 4. Read the corresponding model case class.
 5. Read the corresponding repository class to understand query patterns.
 
@@ -107,8 +107,6 @@ service/repository files.
 Commit message format:
 ```
 feat: {description of schema change}
-
-deploy:tho
 ```
 
 Do NOT include Co-Authored-By lines.
