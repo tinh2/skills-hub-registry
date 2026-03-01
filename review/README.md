@@ -2,7 +2,7 @@
 
 Architecture review, API review, database review, security review, PR creation, executive-level strategic reviews (CTO, CFO, CPO), and industry-specific compliance reviews.
 
-## Skills (15)
+## Skills (21)
 
 ### Core Reviews
 
@@ -34,6 +34,17 @@ Architecture review, API review, database review, security review, PR creation, 
 | [regulatory-compliance](regulatory-compliance/) | 1.0.0 | Cross-industry regulatory review -- audit trails, data retention, RBAC/ABAC, change management, breach notification |
 | [energy-compliance](energy-compliance/) | 1.0.0 | Energy sector compliance review -- NERC CIP, FERC reporting, EPA emissions, renewable portfolio standards, pipeline safety |
 
+### Social Impact Reviews
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [care-burnout-audit](care-burnout-audit/) | 1.0.0 | Healthcare burnout review -- workload distribution, scheduling fairness, documentation burden, alert fatigue |
+| [school-ops](school-ops/) | 1.0.0 | School operations review -- scheduling, resource allocation, transportation, IDEA/Title I compliance |
+| [government-compliance](government-compliance/) | 1.0.0 | Government software review -- FedRAMP, Section 508, FISMA, NIST 800-53, FOIA, records retention |
+| [housing-compliance](housing-compliance/) | 1.0.0 | Housing software review -- Fair Housing Act, ADA, HUD reporting, LIHTC compliance, tenant rights |
+| [environmental-compliance](environmental-compliance/) | 1.0.0 | Environmental compliance review -- EPA reporting, Clean Air/Water Act, NEPA, RCRA waste management |
+| [therapist-documentation](therapist-documentation/) | 1.0.0 | Therapy documentation review -- SOAP/DAP notes, DSM-5/ICD-10 codes, informed consent, HIPAA |
+
 ## Usage
 
 - Review a story before implementation (design review): `/arch-review`
@@ -50,5 +61,11 @@ Architecture review, API review, database review, security review, PR creation, 
 - Manufacturing regulatory compliance: `/manufacturing-compliance`
 - Energy sector compliance: `/energy-compliance`
 - Cross-industry regulatory review: `/regulatory-compliance`
+- Healthcare burnout assessment: `/care-burnout-audit`
+- School operations review: `/school-ops`
+- Government compliance: `/government-compliance`
+- Housing compliance: `/housing-compliance`
+- Environmental compliance: `/environmental-compliance`
+- Therapy documentation review: `/therapist-documentation`
 - Full executive review chain (combo): `/cto-review → /cfo-review → /cpo-review`
 - Investor due diligence pipeline (combo): `/investor-ready`
