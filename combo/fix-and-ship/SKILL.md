@@ -65,3 +65,8 @@ OUTPUT
 ### Status: {SHIPPED / BLOCKED}
 {If SHIPPED: "PR is ready for review and merge."}
 {If BLOCKED: "Preflight failed. Fix the issues listed above before deploying."}
+
+NEXT STEPS:
+
+- "Run `/qa` to verify the fix didn't introduce regressions."
+- "Run `/e2e` to run automated end-to-end tests against the patched build."

@@ -82,3 +82,9 @@ STRICT RULES:
 - Do NOT ask the user to resolve review findings. Resolve them yourself.
 - If the review found gaps, the implementation MUST address them.
 - All rules from `/arch-review` and `/si` apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/e2e` to verify the implementation with automated end-to-end tests."
+- "Run `/qa` for full QA verification of the implemented story."
+- "Run `/manual-test-plan` to generate a manual test plan for the PR."

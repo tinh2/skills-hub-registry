@@ -90,3 +90,9 @@ STRICT RULES:
 - Phase 1 MUST save its output to `docs/dev-retrospective.md` so Phase 2 can read it.
 - Phase 2 MUST read the file written by Phase 1 from the `docs/` directory.
 - All rules from `/recall` and `/new-features` apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/backend-spec` to generate implementation stories from the feature ideas."
+- "Run `/research` to validate features against competitors."
+- "Run `/metrics` to compute quality metrics and track improvement."

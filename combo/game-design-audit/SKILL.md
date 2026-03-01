@@ -218,3 +218,8 @@ STRICT RULES:
 - Phase 5 (monetization) must evaluate ethics, not just revenue potential.
 - Cross-phase insights are the most valuable output — do not skip them.
 - All rules from each sub-skill apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/game-launch` for a full launch readiness audit including performance, QA, and security."
+- "Run `/balance-test` to deep-dive into specific balance issues identified in the audit."

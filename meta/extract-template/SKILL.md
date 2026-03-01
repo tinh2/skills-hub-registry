@@ -14,7 +14,7 @@ projects of the same type.
 Do NOT ask the user questions. Analyze the project autonomously.
 
 TARGET:
-
+$ARGUMENTS
 
 If no arguments, analyze the current project directory.
 If a project type name is given (e.g., "flutter-firebase"), use that as the template name.
