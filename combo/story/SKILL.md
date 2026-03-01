@@ -47,7 +47,7 @@ The story-implementer skill will:
 - Implement the story following repository conventions
 - Write unit tests with full coverage
 - Follow the Resource → Service → Repository pattern
-- Commit with conventional commit format and `deploy:tho`
+- Commit with conventional commit format
 - Push after committing
 
 ============================================================

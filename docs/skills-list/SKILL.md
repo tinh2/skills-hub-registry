@@ -14,7 +14,7 @@ Display the following skills catalog to the user. Do not invoke any skills — j
 | Skill | Description |
 |---|---|
 | **mvp** | Analyzes a video or screenshots of an app to decipher its MVP, identify core features, and suggest improvements. Start of the product pipeline. |
-| **backend-spec** | Generates backend or frontend engineering specs in Fringe Jira format with description, acceptance criteria, routes, dev notes, and schemas. |
+| **backend-spec** | Generates backend or frontend engineering specs in structured Jira format with description, acceptance criteria, routes, dev notes, and schemas. |
 | **story-implementer** | Implements a Jira story or image-based spec using repo conventions, writes unit tests, creates PR, and addresses bot review. |
 | **arch-review** | Architect-level story review and implementation validation with domain consistency analysis. Pre-code design feedback or post-code completeness check. |
 | **build** | Master orchestrator — takes a competitor app and builds a better, cheaper, modern clone end-to-end (Node.js backend + Flutter frontend). **v3: parallel story reviews, parallel feature streams, parallel UX ∥ manual-test-plan.** |
@@ -167,7 +167,7 @@ Skills that MUST stay sequential (both modify code in overlapping areas):
 5. **Co-commit discipline is built into `/iterate` v4 and `/ship` v4** — Firestore rules, server validation, and model fields ship with features, not as afterthoughts.
 6. **Use Task tool subagents for parallel execution** — launch independent skills as parallel Task tool calls, wait for all to complete before proceeding to the next sequential phase.
 
-### Development patterns (from recall analysis — Feb 2026):
+### Development patterns (from recall analysis):
 
 **6-layer architecture:** The catalog was built in distinct layers, each building on the previous:
 1. Core Pipeline (/build, /qa, /ux)
@@ -195,9 +195,7 @@ Skills that MUST stay sequential (both modify code in overlapping areas):
 4. Single documentation pass at the end (auto-generate README from frontmatter)
 5. Run /recall to close the meta feedback loop
 
-**Quality metrics (22 commits, Feb 19-23 2026):**
-- 22 commits, 7,076 lines, 26 files across 4 days (~7.5h active)
+**Quality metrics:**
 - 100% first-time-right ratio (zero fix-after-fix commits)
 - 4 integration wiring passes (each touching 4-8 hub files)
 - Zero rework — all modifications extended rather than corrected
-- Peak burst: Feb 21 evening — 7 commits, 2,877 lines in 3h19m (40% of total lines)

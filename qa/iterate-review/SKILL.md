@@ -29,7 +29,7 @@ Before reviewing code, run automated checks to clear the noise:
 4. Firebase (if applicable):
    - Cross-check firestore.rules paths against code.
    - Verify compound queries have matching indexes.
-5. Shell scripts & infrastructure (learned from OpenClaw recall — stray syntax,
+5. Shell scripts & infrastructure (learned from recall analysis — stray syntax,
    sed portability, path breakage after reorg):
    - Run `bash -n` on all .sh files to catch syntax errors (stray `fi`, unmatched brackets).
    - Check `sed -i` usage — needs `''` arg on macOS, not on Linux. Flag unportable usage.
@@ -55,14 +55,14 @@ PROCESS (max 5 iterations)
    - Code that's confusing or poorly structured
 3. CHECK WIRING COMPLETENESS (learned from recall analysis):
    - Server-side validation gaps: Are there callable Cloud Functions that exist
-     but are never called from the client? (e.g., validateCreditSpend exists but
+     but are never called from the client? (e.g., validatePayment exists but
      client does client-only checks.) This is a CRITICAL issue.
    - Model serialization gaps: Are there fields written by Cloud Functions that
      are missing from the client model's fromMap/toMap? (e.g., Cloud Function
-     writes offPlatformWarningCount but model doesn't deserialize it.)
+     writes warningCount but model doesn't deserialize it.)
    - Firestore rules lag: Are there collections the app reads/writes that have
      no matching rule in firestore.rules? Or rules that are too permissive?
-   - Config propagation: Are admin-configurable settings (e.g., CSF monthly cap,
+   - Config propagation: Are admin-configurable settings (e.g., monthly spending cap,
      pending period) actually passed through to the functions that use them, or
      are hardcoded defaults used instead?
 4. CHECK STRUCTURAL HEALTH (learned from recall analysis):

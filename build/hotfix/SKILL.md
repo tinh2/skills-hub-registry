@@ -67,8 +67,6 @@ SHIP
 2. Commit:
    ```
    fix: {brief description of what was broken and fixed}
-
-   deploy:tho
    ```
    Do NOT include Co-Authored-By lines.
 3. Push immediately.

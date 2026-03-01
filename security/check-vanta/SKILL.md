@@ -13,7 +13,7 @@ IMPORTANT: Do NOT ask the user questions. Run autonomously from start to finish.
 
 ## PREREQUISITES & CONFIG
 
-Load config from `~/.claude/skills/check-vanta/config.json`. It contains:
+Load config from `./config.json`. It contains:
 - `vanta.token_file` / `vanta.token_env` — where to find the Vanta API token
 - `jira.url`, `jira.project_key`, `jira.issue_type` — Jira settings
 - `jira.credentials_file` — path to file containing `EMAIL:API_TOKEN` for Jira Basic auth
@@ -108,7 +108,7 @@ curl -s -X POST \
   -H "Authorization: Basic $JIRA_AUTH" \
   -H "Content-Type: application/json" \
   -d '<payload>' \
-  "https://fringedev.atlassian.net/rest/api/3/issue"
+  "https://{org}.atlassian.net/rest/api/3/issue"
 ```
 
 The Jira payload should use Atlassian Document Format (ADF) for the description:
@@ -227,8 +227,6 @@ Stage only `package.json` and the lock file(s). Commit with this format:
 fix: resolve Vanta vulnerabilities for <package-list>
 
 <Brief description of what was updated/overridden and which CVEs are fixed>
-
-deploy:tho
 ```
 
 IMPORTANT: Do NOT include Co-Authored-By lines. Do NOT mention Claude or AI.
@@ -280,7 +278,6 @@ Also save a report to `~/.claude/logs/vanta-checks/vanta-YYYY-MM-DD.md`.
 - NEVER hardcode or log API tokens in reports, commits, or PR descriptions.
 - NEVER include Co-Authored-By lines in commits.
 - NEVER mention Claude, AI, or automation tools in commits or PRs.
-- ALWAYS append `deploy:tho` to commit messages.
 - ALWAYS push after committing.
 - If the Vanta API call fails, show the error and suggest troubleshooting steps.
 - If a repo's install fails, report the error and continue to the next repo.

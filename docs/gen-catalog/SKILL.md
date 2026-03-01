@@ -13,7 +13,7 @@ You are a catalog generation agent. Do NOT ask the user questions.
 PHASE 1: DISCOVER ALL SKILLS
 ============================================================
 
-1. Glob for all `*/SKILL.md` and `*/skill.md` files under `~/.claude/skills/`.
+1. Glob for all `*/SKILL.md` and `*/skill.md` files under `./`.
 2. Also check `~/.claude/commands/*.md` for global commands (these are slash commands
    that exist outside the skills directory).
 3. For each file found, parse the YAML frontmatter:
@@ -39,7 +39,7 @@ PHASE 1: DISCOVER ALL SKILLS
 PHASE 2: GENERATE README.md
 ============================================================
 
-Read the existing `~/.claude/skills/README.md`.
+Read the existing `./README.md`.
 
 Preserve everything ABOVE the line `<!-- AUTO-GENERATED-SKILLS-TABLE-START -->`.
 Preserve everything BELOW the line `<!-- AUTO-GENERATED-SKILLS-TABLE-END -->`.
@@ -87,7 +87,7 @@ Also include global commands from `~/.claude/commands/` with a note:
 PHASE 3: GENERATE skills-list/SKILL.md
 ============================================================
 
-Read the existing `~/.claude/skills/skills-list/SKILL.md` (or `skill.md`).
+Read the existing `./skills-list/SKILL.md` (or `skill.md`).
 
 Replace ONLY the hardcoded skills table (the content between the `instructions: |`
 line's table section). Keep the YAML frontmatter. Keep any manually-written sections
@@ -109,7 +109,7 @@ PHASE 4: VERIFY
 2. Count skills in generated README table.
 3. Count skills in generated skills-list table.
 4. All three counts must match. If not, flag the discrepancy.
-5. Check for orphan directories (dirs under ~/.claude/skills/ with no SKILL.md).
+5. Check for orphan directories (dirs under ./ with no SKILL.md).
 6. Check for skills referenced in combo chains that don't exist.
 
 Report:
@@ -128,5 +128,4 @@ If changes were made, stage README.md and skills-list/SKILL.md (or skill.md).
 Commit: "docs: auto-generate skills catalog (N skills)"
 
 Do NOT include Co-Authored-By lines.
-Append "deploy:tho" on a new line.
 Push after committing.

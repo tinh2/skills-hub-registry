@@ -98,7 +98,7 @@ Based on the MVP features and improvements, produce a numbered list of potential
 1. FE: [Story title]
 2. FE: [Story title]
 
-Each title should be concise and action-oriented, matching the Fringe Jira naming convention.
+Each title should be concise and action-oriented, matching Jira naming conventions.
 
 ## 9. Summary
 - One-paragraph executive summary of the application

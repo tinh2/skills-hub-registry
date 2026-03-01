@@ -68,7 +68,7 @@ PHASE 3: GENERATE PR CONTENT
 - [ ] All existing tests pass
 
 ## Jira
-[{STORY-NUMBER}](https://fringe-benefit.atlassian.net/browse/{STORY-NUMBER})
+[{STORY-NUMBER}](https://{org}.atlassian.net/browse/{STORY-NUMBER})
 ```
 
 If no story number, omit the Jira section entirely.
@@ -83,8 +83,6 @@ PHASE 4: PRE-FLIGHT CHECKS
 2. Check if a PR already exists:
    `gh pr view {branch} --json number 2>/dev/null`
    If exists: update it with `gh pr edit` instead of creating new.
-3. Verify last commit message ends with `deploy:tho`.
-   If not, warn the user but still create the PR.
 
 ============================================================
 PHASE 5: CREATE PR

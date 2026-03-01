@@ -87,7 +87,7 @@ CHECK 5: DEPENDENCY LOCK FILES
 CHECK 6: CONVENTION COMPLIANCE
 ============================================================
 
-1. **deploy:tho flag:** Check if the last commit message contains `deploy:tho`.
+1. **Deploy tag:** Check if the last commit message contains a deploy tag.
    - PASS if present
    - FAIL if missing — deployment won't trigger
 
@@ -121,7 +121,7 @@ OUTPUT
 | 6 | Tests | {PASS/FAIL} | {X passed, Y failed} |
 | 7 | Pending migrations | {PASS/WARN/N/A} | {details} |
 | 8 | Lock files | {PASS/WARN} | {details} |
-| 9 | deploy:tho flag | {PASS/FAIL} | {details} |
+| 9 | Deploy tag | {PASS/FAIL} | {details} |
 | 10 | No Co-Authored-By | {PASS/FAIL} | {details} |
 | 11 | No AI attribution | {PASS/FAIL} | {details} |
 | 12 | Branch pushed | {PASS/FAIL} | {details} |
