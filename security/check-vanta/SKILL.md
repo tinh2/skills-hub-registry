@@ -1,7 +1,7 @@
 ---
 name: check-vanta
 description: Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs for each affected repo.
-version: "2.0.0"
+version: "2.1.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -11,7 +11,18 @@ You are an autonomous security remediation agent. You fetch vulnerabilities from
 
 IMPORTANT: Do NOT ask the user questions. Run autonomously from start to finish.
 
-## PREREQUISITES & CONFIG
+TARGET: $ARGUMENTS
+
+If arguments are provided, interpret them as:
+- A repo name or comma-separated list of repos to limit remediation scope (e.g., "marketplace-app" or "marketplace-app,firebase-lambdas")
+- A severity filter (e.g., "CRITICAL" to only fix critical vulns)
+- A CVE ID to target a specific vulnerability
+
+If no arguments are provided, fetch all open vulnerabilities across all configured repos and remediate everything due within 90 days.
+
+============================================================
+PHASE 1: PREREQUISITES & CONFIG
+============================================================
 
 Load config from `./config.json`. It contains:
 - `vanta.token_file` / `vanta.token_env` — where to find the Vanta API token
@@ -28,7 +39,9 @@ Load config from `./config.json`. It contains:
    - Setup: Go to https://id.atlassian.com/manage-profile/security/api-tokens → Create API token
    - Save it: `echo "you@company.com:TOKEN" > ~/.jira-credentials && chmod 600 ~/.jira-credentials`
 
-## STEP 1: FETCH VULNERABILITIES FROM VANTA
+============================================================
+PHASE 2: FETCH VULNERABILITIES FROM VANTA
+============================================================
 
 Load the Vanta API token:
 ```bash
@@ -81,7 +94,9 @@ curl -s -H "Authorization: Bearer $VANTA_TOKEN" \
 
 Each asset has `id`, `name` (the repo name), and `assetType`.
 
-## STEP 2: GROUP & ANALYZE VULNERABILITIES
+============================================================
+PHASE 3: GROUP & ANALYZE VULNERABILITIES
+============================================================
 
 Using the asset map, group vulnerabilities by repo name. For each vulnerability, extract:
 - **Package name** and **vulnerable version range** from `packageIdentifier` (format: `npm-<package> <range>`)
@@ -97,7 +112,9 @@ For each affected package, determine the **fix version** by:
 1. Parsing the vulnerable range from `packageIdentifier` (e.g., `>= 4.1.3, < 5.3.5` means fix is `>= 5.3.5`)
 2. Running `npm view <package> version` to get the latest version and confirm it's beyond the vulnerable range
 
-## STEP 3: CREATE JIRA STORY
+============================================================
+PHASE 4: CREATE JIRA STORY
+============================================================
 
 Create a Jira story to track the work:
 ```bash
@@ -155,12 +172,14 @@ The description body should list each affected repo as a heading, with its vulne
 
 Extract the created issue key (e.g., `DEV-5001`) from the Jira API response `key` field. This will be used for the branch name.
 
-## STEP 4: FIX VULNERABILITIES IN EACH REPO
+============================================================
+PHASE 5: FIX VULNERABILITIES IN EACH REPO
+============================================================
 
 For each repo in the config that has vulnerabilities, run the following steps.
 Use the Task tool to run repos IN PARALLEL where possible for speed.
 
-### 4a. Prepare the branch
+### 5a. Prepare the branch
 
 ```bash
 cd <repo_path>
@@ -168,13 +187,13 @@ git checkout main && git pull
 git checkout -b <JIRA_KEY>-vanta-vulnerabilities
 ```
 
-### 4b. Identify direct vs transitive dependencies
+### 5b. Identify direct vs transitive dependencies
 
 For the repo's package directory (use `package_json_path` from config if set, otherwise repo root):
 - Read `package.json` to find direct dependencies
 - Check the lock file (`package-lock.json` or `yarn.lock`) to find transitive dependency versions
 
-### 4c. Apply fixes
+### 5c. Apply fixes
 
 **For direct dependencies:**
 Update the version in `package.json` to the latest safe version (use `npm view <pkg> version`).
@@ -198,7 +217,7 @@ Add or update the `"resolutions"` section in `package.json`. IMPORTANT: Yarn res
 
 Also check for any existing `resolutions` entries for the same package (like a pinned version) and update those too.
 
-### 4d. Regenerate the lock file
+### 5d. Regenerate the lock file
 
 **npm repos:**
 ```bash
@@ -212,7 +231,7 @@ If a token variable is needed but not set, use a dummy value if the affected pac
 MISSING_VAR=dummy yarn install
 ```
 
-### 4e. Verify fixes
+### 5e. Verify fixes
 
 After install, verify the vulnerable versions are gone:
 - **npm**: Check `package-lock.json` for the package versions
@@ -220,7 +239,7 @@ After install, verify the vulnerable versions are gone:
 
 If a vulnerable version persists, investigate what's still pulling it in and add additional overrides/resolutions.
 
-### 4f. Commit and push
+### 5f. Commit and push
 
 Stage only `package.json` and the lock file(s). Commit with this format:
 ```
@@ -236,7 +255,7 @@ Then push:
 git push -u origin <branch_name>
 ```
 
-### 4g. Create Pull Request
+### 5g. Create Pull Request
 
 ```bash
 gh pr create --title "fix: Resolve Vanta vulnerabilities (<JIRA_KEY>)" --body "$(cat <<'EOF'
@@ -255,7 +274,9 @@ EOF
 
 IMPORTANT: Do NOT include any AI/Claude attribution in the PR body.
 
-## STEP 5: DISPLAY SUMMARY
+============================================================
+PHASE 6: SUMMARY & REPORT
+============================================================
 
 After all repos are processed, display a summary table:
 
@@ -273,13 +294,49 @@ After all repos are processed, display a summary table:
 
 Also save a report to `~/.claude/logs/vanta-checks/vanta-YYYY-MM-DD.md`.
 
-## STRICT RULES
+============================================================
+OUTPUT
+============================================================
 
-- NEVER hardcode or log API tokens in reports, commits, or PR descriptions.
-- NEVER include Co-Authored-By lines in commits.
-- NEVER mention Claude, AI, or automation tools in commits or PRs.
-- ALWAYS push after committing.
-- If the Vanta API call fails, show the error and suggest troubleshooting steps.
-- If a repo's install fails, report the error and continue to the next repo.
+## Vanta Remediation Summary
+
+| Metric | Value |
+|--------|-------|
+| Repos scanned | N |
+| Repos with vulns | N |
+| Total vulns found | N |
+| Vulns fixed | N |
+| PRs opened | N |
+| Jira ticket | DEV-XXXX |
+
+### Per-Repo Breakdown
+
+| Repo | Vulns | Fixed | PR | Branch |
+|------|-------|-------|----|--------|
+| ... | N | N | #XX | DEV-XXXX-vanta-vulnerabilities |
+
+### Unfixed Items
+| Repo | Package | CVE | Reason |
+|------|---------|-----|--------|
+| ... | ... | ... | (e.g., no fix available, major version break) |
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT hardcode or log API tokens in reports, commits, or PR descriptions.
+- Do NOT include Co-Authored-By lines in commits.
+- Do NOT mention Claude, AI, or automation tools in commits or PRs.
 - Do NOT modify any Vanta settings or dismiss vulnerabilities — Vanta access is read-only.
-- If no vulnerabilities are due, report that and skip Jira/fix steps.
+- Do NOT force-push or rewrite git history on any repo.
+
+============================================================
+NEXT STEPS
+============================================================
+
+After remediation:
+- "Run `/preflight` on each repo to verify the branches are ready to merge."
+- "Review the PRs, merge them, and monitor Vanta for rescans clearing the vulns."
+- "Run `/check-vanta` again in 1-2 weeks to catch newly reported vulnerabilities."
+- "Run `/qa` on affected repos if the dependency changes are significant."
+- "Check the Jira ticket to confirm all acceptance criteria are met."

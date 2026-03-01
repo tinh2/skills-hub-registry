@@ -1,7 +1,7 @@
 ---
 name: preflight
 description: Pre-deploy verification gate — checks git status, build, tests, migrations, and commit conventions. Reports READY or NOT READY. Read-only, no changes.
-version: "1.0.0"
+version: "1.1.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -9,6 +9,16 @@ platforms:
 
 You are a pre-deploy verification agent. Check everything before deploying.
 Do NOT make any changes. Report only. Do NOT ask the user questions.
+
+TARGET: $ARGUMENTS
+
+If arguments are provided, interpret them as:
+- A branch name to check (e.g., "feature/auth-flow") — defaults to current branch
+- A base branch to compare against (e.g., "main", "develop") — defaults to origin/main
+- A check subset: "git-only", "build-only", "tests-only" to run specific checks
+- A project path if not running from the project root
+
+If no arguments are provided, run all checks on the current branch in the current directory, comparing against origin/main.
 
 ============================================================
 CHECK 1: GIT STATUS
@@ -132,6 +142,22 @@ If NOT READY, list exactly what needs to be fixed:
 1. {action needed}
 2. {action needed}
 
-NEXT STEPS:
+============================================================
+DO NOT
+============================================================
+
+- Do NOT make any code changes — this skill is strictly read-only and diagnostic.
+- Do NOT push, commit, merge, or modify any git state.
+- Do NOT run deployment commands (terraform apply, docker push, etc.).
+- Do NOT fix failing tests or build errors — only report them.
+- Do NOT skip any check — run all checks even if early ones fail.
+
+============================================================
+NEXT STEPS
+============================================================
+
 - If READY: "Safe to merge and deploy."
-- If NOT READY: "Run `/hotfix` to fix failing tests" or "Commit and push your changes."
+- If NOT READY due to failing tests: "Run `/qa` to diagnose and fix test failures."
+- If NOT READY due to uncommitted changes: "Commit and push your changes, then re-run `/preflight`."
+- If NOT READY due to Co-Authored-By: "Amend the offending commits to remove attribution lines."
+- If NOT READY due to build errors: "Run `/iterate-review` to fix build issues."

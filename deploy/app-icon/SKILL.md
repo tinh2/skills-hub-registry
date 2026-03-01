@@ -1,7 +1,7 @@
 ---
 name: app-icon
 description: Generates a polished app icon from an app idea or description, saves it to assets/image/, and applies it as the launcher icon for iOS and Android using flutter_launcher_icons.
-version: "1.0.0"
+version: "1.1.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
@@ -12,17 +12,17 @@ design and generate a high-quality launcher icon, save it to the project's asset
 directory, and configure the Flutter project so the icon is applied to both iOS and Android
 builds.
 
-INPUT:
+Do NOT ask the user questions. Run autonomously from start to finish.
 
-The user will provide one or more of:
-1. An app idea or description (text).
-2. The current Flutter project directory (defaults to current working directory).
-3. Color preferences or brand guidelines.
-4. An existing logo or image to base the icon on.
-5. Output from `/mvp` or `/build` describing the app.
-6. Any combination of the above.
+TARGET: $ARGUMENTS
 
-If no explicit description is provided, read the project's codebase to infer the app's
+If arguments are provided, interpret them as:
+- An app name, idea, or description to base the icon design on
+- Color preferences or hex values (e.g., "blue and white", "#4A90D9")
+- A style directive (e.g., "minimal", "bold", "playful")
+- A path to an existing logo or image to use as the basis
+
+If no arguments are provided, read the current project's codebase to infer the app's
 purpose, name, and brand colors from:
 - lib/config/theme.dart (color scheme)
 - lib/app.dart (app title)
@@ -222,28 +222,21 @@ If there are icon-related errors, diagnose and fix them.
 PHASE 4: REPORT
 ============================================================
 
-Produce a summary:
+OUTPUT:
 
-## App Icon Generated
+## App Icon Summary
 
-### Concept
-- App: [name]
-- Symbol: [description]
-- Colors: [hex values]
-- Style: [flat/semi-flat/gradient]
-
-### Files Created
-- assets/image/app_icon.svg (source vector)
-- assets/image/app_icon.png (1024x1024 raster)
-
-### Platform Icons Applied
-- Android: [number] mipmap densities generated
-- iOS: [number] icon sizes generated
-- Web: [yes/no]
-
-### Preview
-The icon uses [primary color] as the background with a [symbol description] in
-[secondary color]. It represents [what the symbol conveys about the app].
+| Aspect | Details |
+|--------|---------|
+| App | [name] |
+| Symbol | [description] |
+| Colors | [hex values] |
+| Style | [flat/semi-flat/gradient] |
+| SVG source | assets/image/app_icon.svg |
+| PNG raster | assets/image/app_icon.png (1024x1024) |
+| Android mipmaps | [number] densities generated |
+| iOS icons | [number] sizes generated |
+| Web icons | [yes/no] |
 
 ### How to See It
 - Run `flutter run` on a connected device or emulator.
@@ -276,10 +269,23 @@ git add assets/image/app_icon.svg assets/image/app_icon.png pubspec.yaml pubspec
 git commit -m "feat: add app icon — [brief symbol description]"
 ```
 
-NEXT STEPS:
+============================================================
+DO NOT
+============================================================
+
+- Do NOT embed raster images inside the SVG — use clean vector paths only.
+- Do NOT use external fonts or CSS classes in the SVG — inline all attributes.
+- Do NOT skip PNG conversion — flutter_launcher_icons requires PNG input.
+- Do NOT manually copy PNGs into mipmap or xcassets — always use flutter_launcher_icons.
+- Do NOT use more than 3 colors or include text/words in the icon.
+
+============================================================
+NEXT STEPS
+============================================================
 
 After generating the icon:
 - "Run `flutter run` to see the new icon on your device."
 - "Run `/ux` to audit the full app UX including the new branding."
 - "Run `/qa` to verify the app builds and runs correctly with the new icon."
 - "To change the icon, run `/app-icon` again with different preferences."
+- "Run `/preflight` before submitting to the App Store or Play Store."

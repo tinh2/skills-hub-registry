@@ -1,7 +1,7 @@
 ---
 name: evolve
 description: Self-improving skill that reads /recall and /metrics output, identifies which skills need patching, generates and applies additive patches, and logs changes to CHANGELOG.md.
-version: "1.0.0"
+version: "1.1.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -11,6 +11,16 @@ You are the skill evolution engine. You read development cycle analysis (/recall
 and metrics (/metrics output), then patch skill instructions to prevent recurring issues.
 
 Do NOT ask the user questions. Analyze findings and apply patches autonomously.
+
+TARGET: $ARGUMENTS
+
+If arguments are provided, interpret them as:
+- A project name or path to read recall/metrics data from (e.g., "pawpass", "~/personal/pet_sitter")
+- A specific skill to evolve (e.g., "/iterate", "/qa") — limits patching to that skill only
+- A recall file path to use directly (e.g., "recall-2026-03-01.md")
+- "dry-run" to analyze and propose patches without applying them
+
+If no arguments are provided, scan all project memory directories for the most recent recall and metrics data, then evolve skills based on the highest-impact findings across all projects.
 
 CONSTRAINTS:
 - Maximum 3 skills patched per run (keep changes reviewable)
@@ -105,6 +115,13 @@ OUTPUT
 
 ## Skill Evolution Report
 
+| Metric | Value |
+|--------|-------|
+| Projects analyzed | N |
+| Findings extracted | N |
+| Skills patched | N (max 3) |
+| Findings deferred | N |
+
 ### Findings Analyzed
 | # | Finding | Source | Impact (est. fix commits prevented) |
 |---|---------|--------|-------------------------------------|
@@ -119,7 +136,22 @@ For each patch, show the before/after diff of the skill file.
 ### Deferred Findings
 Findings that couldn't be addressed by skill patches (need architectural changes, etc.)
 
-NEXT STEPS:
+============================================================
+DO NOT
+============================================================
+
+- Do NOT delete or rewrite existing skill instructions — patches are additive only.
+- Do NOT modify skill names, descriptions, categories, or frontmatter (except version).
+- Do NOT patch more than 3 skills per run — keep changes reviewable.
+- Do NOT apply patches without a specific finding justifying the change.
+- Do NOT create new skills — only patch existing ones.
+
+============================================================
+NEXT STEPS
+============================================================
+
 - "Run the patched skills on your next project to validate improvements."
 - "Run `/metrics` after the next project to measure impact."
-- "Run `/promote` to check if these patterns should be global."
+- "Run `/promote` to check if these patterns should be global conventions."
+- "Run `/evolve dry-run` to preview patches without applying them."
+- "Review CHANGELOG.md to see the full evolution history."

@@ -1,7 +1,7 @@
 ---
 name: qa
 description: Automated QA agent that starts the app, walks through every screen and API endpoint, verifies functionality, evaluates modern design and usability, runs domain analysis, and fixes issues found.
-version: "3.0.0"
+version: "3.1.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -10,6 +10,18 @@ platforms:
 You are an automated QA and UX review agent. You start the application, exercise every
 screen and endpoint, verify everything works, evaluate design quality and usability,
 run a full domain consistency analysis, and fix any issues you find.
+
+Do NOT ask the user questions. Run autonomously from start to finish.
+
+TARGET: $ARGUMENTS
+
+If arguments are provided, interpret them as:
+- A specific screen, feature, or module to focus testing on (e.g., "auth flow", "settings screen")
+- A project directory path to test (e.g., "~/projects/my-app")
+- A test scope: "backend" for API-only, "frontend" for Flutter-only, "full" for everything
+- A phase to start from: "phase2" to skip environment setup if already running
+
+If no arguments are provided, test the entire application in the current directory with full scope (backend + frontend + domain analysis).
 
 INPUT:
 
@@ -240,7 +252,7 @@ This catches cross-cutting issues that only appear when looking across the full 
 Run ALL phases of `/analyze`:
 - Cross-layer consistency (data model, service/API, state management, business logic)
 - Server-side validation wiring (CRITICAL — callable functions must be invoked from client)
-- Cloud Function write ↔ model field completeness (WARNING if gaps)
+- Cloud Function write / model field completeness (WARNING if gaps)
 - Firestore rules coverage (CRITICAL if collections lack rules)
 - Cross-feature interactions (shared data stays in sync)
 - Config propagation (admin-configurable values not hardcoded)
@@ -289,14 +301,19 @@ Fix any issues and commit.
 PHASE 6: QA REPORT
 ============================================================
 
-Produce a structured report:
+OUTPUT:
 
-## QA Report
+## QA Report Summary
 
-### Environment
-- Backend: [running/not running] on [port]
-- Database: [connected/not connected]
-- Flutter: [builds/does not build]
+| Metric | Value |
+|--------|-------|
+| Backend endpoints tested | N |
+| Endpoints passing | N |
+| Flutter screens audited | N |
+| Screens rated GOOD+ | N |
+| Domain issues found | N |
+| Domain issues fixed | N |
+| Total commits | N |
 
 ### Backend API Results
 
@@ -304,34 +321,16 @@ Produce a structured report:
 |----------|--------|-----------|------------|------|------------|--------|
 | /api/v1/... | GET | PASS/FAIL | PASS/FAIL | PASS/FAIL | PASS/FAIL | PASS/FAIL |
 
-Total: X/Y endpoints passing
-
 ### Flutter Screen Results
 
 | Screen | Route | Functionality | States | Design | Accessibility | Rating |
 |--------|-------|--------------|--------|--------|--------------|--------|
 | ... | /... | PASS/FAIL | PASS/FAIL | PASS/FAIL | PASS/FAIL | EXCELLENT/GOOD/etc |
 
-Total: X/Y screens rated GOOD or above
-
 ### Domain Analysis Results
 
 | Feature | Model | Service | UI | Cross-Feature | Status |
 |---------|-------|---------|-----|---------------|--------|
-
-- Critical issues found: X (X fixed)
-- Warning issues found: X (X fixed)
-- Info issues: X (reported, not auto-fixed)
-
-### Server-Side Validation Audit (learned from recall)
-
-| Callable Function | Called from Client? | Client-Only Enforcement? | Status |
-|---|---|---|---|
-
-### Cloud Function ↔ Model Audit (learned from recall)
-
-| Function | Writes To | Fields Written | In Client Model? | Status |
-|---|---|---|---|---|
 
 ### Issues Fixed
 [List every fix made during this QA run with commit references]
@@ -345,9 +344,6 @@ Total: X/Y screens rated GOOD or above
 - State handling: X/Y screens have loading + error + empty states
 - Overall UX rating: [EXCELLENT / GOOD / NEEDS WORK]
 
-### Recommendations
-[Prioritized list of improvements for the next iteration]
-
 ============================================================
 CLEANUP
 ============================================================
@@ -358,28 +354,22 @@ After the QA run:
 - Leave the database intact for manual testing.
 
 ============================================================
-STRICT RULES
+DO NOT
 ============================================================
 
-- Test EVERY endpoint and EVERY screen. Do not skip any.
-- Fix issues as you find them. Do not just report — fix the code and verify the fix.
-- Do not modify business logic unless it is clearly broken. Focus on:
-  correctness, state handling, design compliance, accessibility, and usability.
-- Use realistic test data, not "test123" or "foo bar".
-- Commit fixes incrementally with descriptive messages.
-- NEVER batch fixes into a single mega-commit.
-- If the backend cannot start, diagnose and fix the startup issue before proceeding.
-- If Flutter analyze reports errors, fix them before proceeding.
-- Do not add new features. Only fix what is broken or below design standards.
-- Every fix must maintain existing test coverage — do not break existing tests.
-- Rate screens honestly. Do not inflate ratings.
+- Do NOT skip any endpoint or screen — test everything without exception.
+- Do NOT add new features or business logic — only fix what is broken or below standards.
+- Do NOT batch fixes into a single mega-commit — commit incrementally with descriptive messages.
+- Do NOT inflate screen ratings — rate honestly based on actual findings.
+- Do NOT use placeholder test data like "test123" or "foo bar" — use realistic data.
 
-NEXT STEPS:
+============================================================
+NEXT STEPS
+============================================================
 
 After the QA run:
 - "All screens passing? The app is ready for manual device testing."
 - "Run `/manual-test-plan` to generate step-by-step QA instructions for a human tester."
 - "Run `/aws` to generate deployment infrastructure."
 - "Found persistent issues? Run `/iterate-review` to refine the problematic areas."
-- "Run `/analyze` standalone to re-verify domain consistency after manual changes."
 - "Run `/ux` to run a dedicated UX and accessibility audit."
