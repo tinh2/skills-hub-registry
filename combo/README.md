@@ -2,7 +2,7 @@
 
 Multi-skill chains and pipeline compositions -- automated sequences that run multiple skills without user intervention.
 
-## Skills (14)
+## Skills (16)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -20,6 +20,8 @@ Multi-skill chains and pipeline compositions -- automated sequences that run mul
 | [design-to-code](design-to-code/) | 1.0.0 | /design-system → /responsive → /dark-mode → /ux | Full design implementation chain |
 | [data-pipeline](data-pipeline/) | 1.0.0 | /api-scaffold → /integration-test → /load-test | Data-heavy app setup chain |
 | [tech-debt-sprint](tech-debt-sprint/) | 1.0.0 | /tech-debt → /code-smell → /dead-code → /iterate-review | Debt reduction sprint |
+| [launch-readiness](launch-readiness/) | 1.0.0 | /cpo-review → /growth-audit → /ux → /secure → /preflight | Full pre-launch quality gate with go/no-go decision |
+| [investor-ready](investor-ready/) | 1.0.0 | /cto-review → /cfo-review → /cpo-review → /sales-readiness → /codebase-health | Comprehensive investor due-diligence brief |
 
 ## Usage
 
@@ -49,6 +51,10 @@ Combo skills chain multiple skills together into automated pipelines. They run s
 
 **Data:**
 - `/data-pipeline` -- API scaffold, integration tests, load tests
+
+**Executive & Strategic:**
+- `/launch-readiness` -- Pre-launch quality gate: product review, growth audit, UX, security, preflight
+- `/investor-ready` -- Investor due diligence: CTO, CFO, CPO reviews, sales readiness, codebase health
 
 **Maintenance:**
 - `/tech-debt-sprint` -- Debt inventory, code smell fixes, dead code removal, review pass

@@ -2,7 +2,7 @@
 
 Domain analysis, competitive research, metrics, technical debt, codebase health, and engineering spec generation.
 
-## Skills (14)
+## Skills (18)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -20,6 +20,10 @@ Domain analysis, competitive research, metrics, technical debt, codebase health,
 | [codebase-health](codebase-health/) | 1.0.0 | Overall codebase health score (0-100) -- complexity, coupling, cohesion, test coverage, documentation, churn hotspots |
 | [tech-debt](tech-debt/) | 1.0.0 | Technical debt inventory -- TODOs, deprecated usage, outdated deps, high-churn files, complexity hotspots, duplicated code |
 | [image-storage-optimization](image-storage-optimization/) | 1.0.0 | Reduce storage costs by automatically resizing and compressing uploaded user images |
+| [growth-audit](growth-audit/) | 1.0.0 | Growth marketing audit using the AARRR pirate metrics framework -- SEO, onboarding, retention, monetization, referral |
+| [sales-readiness](sales-readiness/) | 1.0.0 | Enterprise sales readiness audit -- SSO/SAML, RBAC, multi-tenancy, audit logging, API quality, SOC2/ISO readiness |
+| [customer-success-audit](customer-success-audit/) | 1.0.0 | Customer Success Manager perspective audit -- onboarding, self-service, health signals, support infrastructure, expansion triggers |
+| [pmf-analysis](pmf-analysis/) | 1.0.0 | Product-market fit readiness analysis -- core value delivery, feature focus, activation, retention, analytics maturity, iteration speed |
 
 ## Usage
 
@@ -37,6 +41,10 @@ Domain analysis, competitive research, metrics, technical debt, codebase health,
 - Overall codebase health score: `/codebase-health`
 - Technical debt inventory and prioritization: `/tech-debt`
 - Image storage optimization: `/image-storage-optimization`
+- Growth marketing audit (AARRR framework): `/growth-audit`
+- Enterprise sales readiness evaluation: `/sales-readiness`
+- Customer success health audit: `/customer-success-audit`
+- Product-market fit readiness analysis: `/pmf-analysis`
 - Competitive research + feature ideas (combo): `/research`
 - Retrospective + feature ideas (combo): `/retro`
 - Debt reduction sprint (combo): `/tech-debt-sprint`

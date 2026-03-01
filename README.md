@@ -2,7 +2,7 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-121 production-tested skills organized into 13 categories covering the complete software development lifecycle.
+131 production-tested skills organized into 13 categories covering the complete software development lifecycle.
 
 ## Directory Structure
 
@@ -10,16 +10,16 @@ The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a ma
 skills-hub-registry/
 ├── build/              # 12 skills — Project scaffolding and full build pipelines
 ├── test/               #  9 skills — Unit, E2E, integration, load, visual, contract, accessibility tests
-├── qa/                 #  9 skills — Quality assurance, performance, chaos, code smells, dead code
-├── review/             #  5 skills — Architecture review, API review, database review, security review, PR
+├── qa/                 # 10 skills — Quality assurance, performance, chaos, code smells, dead code, stress-test personas
+├── review/             #  8 skills — Architecture review, API review, database review, security review, PR, CTO/CFO/CPO
 ├── deploy/             # 11 skills — Docker, K8s, Terraform, CI/CD, monitoring, DNS, CDN, secrets
 ├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook
 ├── security/           #  8 skills — OWASP, pentest, GDPR, SOC2, encryption, dependency scan
 ├── ux/                 #  5 skills — UX audit, design systems, dark mode, responsive, i18n
-├── analysis/           # 14 skills — Domain analysis, competitive research, metrics, tech debt, health
+├── analysis/           # 18 skills — Domain analysis, competitive research, metrics, tech debt, health, growth, PMF
 ├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
-├── combo/              # 14 skills — Multi-skill chains and pipeline compositions
+├── combo/              # 16 skills — Multi-skill chains and pipeline compositions
 └── meta/               #  7 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
 
@@ -81,7 +81,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [visual-regression](test/visual-regression/) | 1.0.0 | Auto-detects frontend framework, sets up visual regression testing with baseline screenshots across breakpoints |
 | [manual-test-plan](test/manual-test-plan/) | 2.0.0 | Generates a manual QA test plan based on code changes on the current branch |
 
-### qa -- Quality Assurance (9 skills)
+### qa -- Quality Assurance (10 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -94,8 +94,9 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [code-smell](qa/code-smell/) | 1.0.0 | Detects Martin Fowler's catalog of code smells across the codebase with severity and recommended refactoring |
 | [dead-code](qa/dead-code/) | 1.0.0 | Detects and safely removes dead code -- unreachable paths, unused exports, unused dependencies, unused CSS |
 | [migration-verify](qa/migration-verify/) | 1.0.0 | Verifies database migrations are safe -- applies cleanly, reverses cleanly, preserves data integrity, is idempotent |
+| [stress-test-personas](qa/stress-test-personas/) | 1.0.0 | Applies 6 adversarial decision-maker personas to stress-test the product and architecture from different strategic angles |
 
-### review -- Architecture & Code Review (5 skills)
+### review -- Architecture & Code Review (8 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -104,6 +105,9 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [database-review](review/database-review/) | 1.0.0 | Database schema design review -- normalization, index coverage, constraints, naming, N+1 patterns, connection pooling |
 | [security-review](review/security-review/) | 1.0.0 | Security-focused code review -- auth bypasses, injection vectors, data exposure, hardcoded secrets, IDOR vulnerabilities |
 | [pr](review/pr/) | 1.0.0 | Creates a convention-compliant pull request -- extracts story number from branch, generates summary and test plan |
+| [cto-review](review/cto-review/) | 1.0.0 | CTO-perspective technical strategy review -- architecture decisions, scaling readiness, engineering velocity, technical debt ratio, security posture |
+| [cfo-review](review/cfo-review/) | 1.0.0 | CFO-perspective financial impact review -- infrastructure costs, pricing model alignment, build-vs-buy economics, technical debt as financial liability |
+| [cpo-review](review/cpo-review/) | 1.0.0 | CPO-perspective product strategy review -- feature completeness, user journey gaps, retention architecture, growth levers, competitive moat |
 
 ### deploy -- Infrastructure & Deployment (11 skills)
 
@@ -159,7 +163,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [responsive](ux/responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
 | [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
 
-### analysis -- Domain Analysis & Research (14 skills)
+### analysis -- Domain Analysis & Research (18 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -177,6 +181,10 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [codebase-health](analysis/codebase-health/) | 1.0.0 | Overall codebase health score (0-100) -- complexity, coupling, cohesion, test coverage, documentation, churn hotspots |
 | [tech-debt](analysis/tech-debt/) | 1.0.0 | Technical debt inventory -- TODOs, deprecated usage, outdated deps, high-churn files, complexity hotspots, duplicated code |
 | [image-storage-optimization](analysis/image-storage-optimization/) | 1.0.0 | Reduce storage costs by automatically resizing and compressing uploaded user images |
+| [growth-audit](analysis/growth-audit/) | 1.0.0 | Growth marketing audit using the AARRR pirate metrics framework -- SEO, onboarding, retention, monetization, referral |
+| [sales-readiness](analysis/sales-readiness/) | 1.0.0 | Enterprise sales readiness audit -- SSO/SAML, RBAC, multi-tenancy, audit logging, API quality, SOC2/ISO readiness |
+| [customer-success-audit](analysis/customer-success-audit/) | 1.0.0 | Customer Success Manager perspective audit -- onboarding, self-service, health signals, support infrastructure, expansion triggers |
+| [pmf-analysis](analysis/pmf-analysis/) | 1.0.0 | Product-market fit readiness analysis -- core value delivery, feature focus, activation, retention, analytics maturity, iteration speed |
 
 ### productivity -- Developer Experience (8 skills)
 
@@ -205,7 +213,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
 | [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
 
-### combo -- Multi-Skill Chains (14 skills)
+### combo -- Multi-Skill Chains (16 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -223,6 +231,8 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [design-to-code](combo/design-to-code/) | 1.0.0 | /design-system → /responsive → /dark-mode → /ux | Full design implementation chain |
 | [data-pipeline](combo/data-pipeline/) | 1.0.0 | /api-scaffold → /integration-test → /load-test | Data-heavy app setup chain |
 | [tech-debt-sprint](combo/tech-debt-sprint/) | 1.0.0 | /tech-debt → /code-smell → /dead-code → /iterate-review | Debt reduction sprint |
+| [launch-readiness](combo/launch-readiness/) | 1.0.0 | /cpo-review → /growth-audit → /ux → /secure → /preflight | Full pre-launch quality gate with go/no-go decision |
+| [investor-ready](combo/investor-ready/) | 1.0.0 | /cto-review → /cfo-review → /cpo-review → /sales-readiness → /codebase-health | Comprehensive investor due-diligence brief |
 
 ### meta -- Skills About Skills (7 skills)
 
@@ -281,6 +291,21 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 ### Tech Debt Paydown
 ```
 /tech-debt-sprint  (runs: /tech-debt → /code-smell → /dead-code → /iterate-review)
+```
+
+### Executive Review
+```
+/cto-review → /cfo-review → /cpo-review
+```
+
+### Launch Readiness
+```
+/launch-readiness  (runs: /cpo-review → /growth-audit → /ux → /secure → /preflight)
+```
+
+### Investor Due Diligence
+```
+/investor-ready  (runs: /cto-review → /cfo-review → /cpo-review → /sales-readiness → /codebase-health)
 ```
 
 ### Retrospective
@@ -371,6 +396,20 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 /qa (testing)
   └── /analyze (phase 4)
+
+/launch-readiness (launch combo)
+  ├── /cpo-review
+  ├── /growth-audit
+  ├── /ux
+  ├── /secure
+  └── /preflight
+
+/investor-ready (investor combo)
+  ├── /cto-review
+  ├── /cfo-review
+  ├── /cpo-review
+  ├── /sales-readiness
+  └── /codebase-health
 
 /evolve (meta)
   └── reads /recall + /metrics output

@@ -6,7 +6,7 @@ Quality assurance, performance profiling, chaos engineering, code smell detectio
 
 **[qa](qa/)** -- Automated QA agent that starts the app, walks through every screen and API endpoint, verifies functionality, evaluates design and usability, runs domain analysis, and fixes issues found.
 
-## Skills (9)
+## Skills (10)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -19,6 +19,7 @@ Quality assurance, performance profiling, chaos engineering, code smell detectio
 | [code-smell](code-smell/) | 1.0.0 | Detects Martin Fowler's catalog of code smells across the codebase with severity and recommended refactoring |
 | [dead-code](dead-code/) | 1.0.0 | Detects and safely removes dead code -- unreachable paths, unused exports, unused dependencies, unused CSS |
 | [migration-verify](migration-verify/) | 1.0.0 | Verifies database migrations are safe -- applies cleanly, reverses cleanly, preserves data integrity, is idempotent |
+| [stress-test-personas](stress-test-personas/) | 1.0.0 | Applies 6 adversarial decision-maker personas to stress-test the product and architecture from different strategic angles |
 
 ## Usage
 
@@ -31,3 +32,4 @@ Quality assurance, performance profiling, chaos engineering, code smell detectio
 - Code smell detection and refactoring guidance: `/code-smell`
 - Dead code removal: `/dead-code`
 - Database migration safety check: `/migration-verify`
+- Adversarial persona stress testing: `/stress-test-personas`
