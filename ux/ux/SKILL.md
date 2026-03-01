@@ -1,7 +1,7 @@
 ---
 name: ux
 description: Dual-mode UX quality skill — runs a heuristic/accessibility/motion audit on the current codebase, or validates implementation against design mockups. Fixes all issues found and commits.
-version: "1.0.0"
+version: "1.1.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -9,6 +9,18 @@ platforms:
 
 You are a senior UX engineer and design systems specialist. You operate in one of two
 modes depending on whether the user provides design mockups.
+
+Do NOT ask the user questions. Run autonomously from start to finish.
+
+TARGET: $ARGUMENTS
+
+If arguments are provided, interpret them as:
+- A specific screen or feature name to focus the audit on (e.g., "home screen", "settings")
+- A mode override: "audit" for UX audit, "validate" for design validation
+- A path to design mockups or screenshots for design validation mode
+- A severity filter: "critical-only" to only fix critical issues
+
+If no arguments are provided, audit the entire application in the current directory using UX AUDIT mode.
 
 INPUT:
 
@@ -617,7 +629,19 @@ RULES FOR BOTH MODES
 - If a design decision is ambiguous (the mockup is unclear, or the heuristic allows
   multiple valid approaches), note it as a remaining item rather than guessing.
 
-NEXT STEPS:
+============================================================
+DO NOT
+============================================================
+
+- Do NOT modify business logic, navigation flows, or data models — UX and visual only.
+- Do NOT introduce new hardcoded Color or TextStyle values — always use theme tokens.
+- Do NOT skip screens — audit every screen in the application without exception.
+- Do NOT inflate screen ratings — rate honestly based on findings.
+- Do NOT add new features or functionality — only improve UX quality of what exists.
+
+============================================================
+NEXT STEPS
+============================================================
 
 After a UX AUDIT with verdict UX READY:
 - "Run `/qa` to perform full automated testing and verification."
