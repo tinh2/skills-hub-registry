@@ -1,8 +1,8 @@
 # Build
 
-Project scaffolding and full build pipelines -- from competitor analysis to production-ready applications.
+Project scaffolding and full build pipelines -- from competitor analysis to production-ready applications, including industry-specific API scaffolds.
 
-## Skills (12)
+## Skills (14)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -18,6 +18,8 @@ Project scaffolding and full build pipelines -- from competitor analysis to prod
 | [hotfix](hotfix/) | 1.0.0 | Emergency bug fix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
 | [story-implementer](story-implementer/) | 2.0.0 | Implements a Jira story using repo conventions, writes unit tests, creates PR, addresses bot review |
 | [db-migrate](db-migrate/) | 1.0.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
+| [healthcare-api](healthcare-api/) | 1.0.0 | Scaffold a FHIR R4-compliant healthcare API with resource models, SMART on FHIR auth, audit logging, and interoperability endpoints |
+| [fintech-api](fintech-api/) | 1.0.0 | Scaffold a production-ready financial services API with Plaid integration, payment processing, double-entry ledger, and KYC workflow |
 
 ## Usage
 
@@ -34,5 +36,7 @@ Project scaffolding and full build pipelines -- from competitor analysis to prod
 - Implementing a specific Jira story: `/story-implementer`
 - Emergency bug fix: `/hotfix`
 - Database schema changes: `/db-migrate`
+- Healthcare/FHIR API scaffold: `/healthcare-api`
+- Fintech API scaffold: `/fintech-api`
 
 **Build orchestrators** (`/build`, `/ship`, `/iterate`) are self-contained pipelines that run analysis, testing, and quality checks internally. Use them for end-to-end work. Use the other skills for targeted scaffolding or focused tasks.

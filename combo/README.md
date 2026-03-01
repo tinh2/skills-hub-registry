@@ -2,7 +2,7 @@
 
 Multi-skill chains and pipeline compositions -- automated sequences that run multiple skills without user intervention.
 
-## Skills (16)
+## Skills (20)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -22,6 +22,10 @@ Multi-skill chains and pipeline compositions -- automated sequences that run mul
 | [tech-debt-sprint](tech-debt-sprint/) | 1.0.0 | /tech-debt → /code-smell → /dead-code → /iterate-review | Debt reduction sprint |
 | [launch-readiness](launch-readiness/) | 1.0.0 | /cpo-review → /growth-audit → /ux → /secure → /preflight | Full pre-launch quality gate with go/no-go decision |
 | [investor-ready](investor-ready/) | 1.0.0 | /cto-review → /cfo-review → /cpo-review → /sales-readiness → /codebase-health | Comprehensive investor due-diligence brief |
+| [healthcare-audit](healthcare-audit/) | 1.0.0 | /hipaa → /clinical-data-review → /healthcare-compliance → /security-review | Full healthcare compliance and security audit |
+| [fintech-launch](fintech-launch/) | 1.0.0 | /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight | Complete fintech launch readiness pipeline |
+| [logistics-optimize](logistics-optimize/) | 1.0.0 | /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test | Full logistics optimization and stress testing |
+| [compliance-suite](compliance-suite/) | 1.0.0 | /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest | Cross-industry compliance hardening pipeline |
 
 ## Usage
 
@@ -55,6 +59,12 @@ Combo skills chain multiple skills together into automated pipelines. They run s
 **Executive & Strategic:**
 - `/launch-readiness` -- Pre-launch quality gate: product review, growth audit, UX, security, preflight
 - `/investor-ready` -- Investor due diligence: CTO, CFO, CPO reviews, sales readiness, codebase health
+
+**Industry:**
+- `/healthcare-audit` -- Full HIPAA + clinical data + compliance + security audit
+- `/fintech-launch` -- PCI DSS + fintech API + fraud detection + credit risk + preflight
+- `/logistics-optimize` -- Route optimization + warehouse + inventory + supply chain + load test
+- `/compliance-suite` -- Cross-industry regulatory + GDPR + SOC2 + dependency scan + pentest
 
 **Maintenance:**
 - `/tech-debt-sprint` -- Debt inventory, code smell fixes, dead code removal, review pass
