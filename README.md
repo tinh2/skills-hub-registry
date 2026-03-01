@@ -2,7 +2,7 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-172 production-tested skills organized into 13 categories covering the complete software development lifecycle plus 8 industry verticals.
+230 production-tested skills organized into 13 categories covering the complete software development lifecycle, 8 industry verticals, and 14 social-impact sectors.
 
 ## Directory Structure
 
@@ -11,15 +11,15 @@ skills-hub-registry/
 ├── build/              # 14 skills — Project scaffolding and full build pipelines + industry API scaffolds
 ├── test/               #  9 skills — Unit, E2E, integration, load, visual, contract, accessibility tests
 ├── qa/                 # 10 skills — Quality assurance, performance, chaos, code smells, dead code, stress-test personas
-├── review/             # 15 skills — Architecture, API, database, security, executive, and industry compliance reviews
+├── review/             # 21 skills — Architecture, API, database, security, executive, industry, and social-impact reviews
 ├── deploy/             # 11 skills — Docker, K8s, Terraform, CI/CD, monitoring, DNS, CDN, secrets
 ├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook
-├── security/           # 10 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, encryption, dependency scan
+├── security/           # 11 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, encryption, benefits fraud
 ├── ux/                 #  5 skills — UX audit, design systems, dark mode, responsive, i18n
-├── analysis/           # 44 skills — Domain analysis, research, metrics + industry verticals
+├── analysis/           # 91 skills — Domain analysis, research, metrics, industry verticals, social impact
 ├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
-├── combo/              # 20 skills — Multi-skill chains and pipeline compositions
+├── combo/              # 24 skills — Multi-skill chains and pipeline compositions
 └── meta/               #  7 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
 
@@ -98,7 +98,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [migration-verify](qa/migration-verify/) | 1.0.0 | Verifies database migrations are safe -- applies cleanly, reverses cleanly, preserves data integrity, is idempotent |
 | [stress-test-personas](qa/stress-test-personas/) | 1.0.0 | Applies 6 adversarial decision-maker personas to stress-test the product and architecture from different strategic angles |
 
-### review -- Architecture, Code & Industry Review (15 skills)
+### review -- Architecture, Code, Industry & Social Impact Review (21 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -117,6 +117,12 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [manufacturing-compliance](review/manufacturing-compliance/) | 1.0.0 | Manufacturing regulatory review -- ISO 9001/13485/14001, FDA 21 CFR Part 11, GMP, OSHA, lot/serial traceability |
 | [regulatory-compliance](review/regulatory-compliance/) | 1.0.0 | Cross-industry regulatory review -- audit trails, data retention, RBAC/ABAC, change management, breach notification |
 | [energy-compliance](review/energy-compliance/) | 1.0.0 | Energy sector compliance review -- NERC CIP, FERC reporting, EPA emissions, renewable portfolio standards, pipeline safety |
+| [care-burnout-audit](review/care-burnout-audit/) | 1.0.0 | Healthcare burnout review -- workload distribution, scheduling fairness, documentation burden, alert fatigue |
+| [school-ops](review/school-ops/) | 1.0.0 | School operations review -- scheduling, resource allocation, transportation, IDEA/Title I compliance |
+| [government-compliance](review/government-compliance/) | 1.0.0 | Government software review -- FedRAMP, Section 508, FISMA, NIST 800-53, FOIA, records retention |
+| [housing-compliance](review/housing-compliance/) | 1.0.0 | Housing software review -- Fair Housing Act, ADA, HUD reporting, LIHTC compliance, tenant rights |
+| [environmental-compliance](review/environmental-compliance/) | 1.0.0 | Environmental compliance review -- EPA reporting, Clean Air/Water Act, NEPA, RCRA waste management |
+| [therapist-documentation](review/therapist-documentation/) | 1.0.0 | Therapy documentation review -- SOAP/DAP notes, DSM-5/ICD-10 codes, informed consent, HIPAA compliance |
 
 ### deploy -- Infrastructure & Deployment (11 skills)
 
@@ -149,7 +155,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [gen-catalog](docs/gen-catalog/) | 1.0.0 | Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories |
 | [skills-list](docs/skills-list/) | 3.0.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
 
-### security -- Security & Compliance (10 skills)
+### security -- Security & Compliance (11 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -163,6 +169,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [check-vanta](security/check-vanta/) | 2.0.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
 | [hipaa](security/hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
 | [pci-dss](security/pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
+| [benefits-fraud](security/benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
 
 ### ux -- User Experience & Design (5 skills)
 
@@ -174,7 +181,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [responsive](ux/responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
 | [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
 
-### analysis -- Domain Analysis, Research & Industry Verticals (44 skills)
+### analysis -- Domain Analysis, Research, Industry Verticals & Social Impact (91 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -222,6 +229,53 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [load-forecast](analysis/load-forecast/) | 1.0.0 | Energy load forecasting analysis -- demand prediction, weather integration, peak shaving, demand response |
 | [grid-optimizer](analysis/grid-optimizer/) | 1.0.0 | Smart grid analysis -- power flow, fault detection/isolation/restoration, DER management, SCADA integration |
 | [commodity-pricing](analysis/commodity-pricing/) | 1.0.0 | Commodity pricing analysis -- pricing models, market data feeds, position management, VaR/CVaR, settlement |
+| [mental-health-clinic](analysis/mental-health-clinic/) | 1.0.0 | Mental health clinic analysis -- scheduling, therapist-client matching, crisis detection, outcome tracking |
+| [elder-care-ops](analysis/elder-care-ops/) | 1.0.0 | Elder care analysis -- resident monitoring, medication management, ADL tracking, care plan optimization |
+| [rural-health](analysis/rural-health/) | 1.0.0 | Rural health network analysis -- telehealth readiness, provider coverage, mobile clinic scheduling |
+| [disability-services](analysis/disability-services/) | 1.0.0 | Disability services analysis -- IEP/ISP management, HCBS compliance, assistive technology integration |
+| [rehab-therapy](analysis/rehab-therapy/) | 1.0.0 | Rehabilitation therapy analysis -- recovery metrics, exercise personalization, outcome-based care |
+| [dropout-risk](analysis/dropout-risk/) | 1.0.0 | Student dropout risk prediction -- attendance, grades, behavioral indicators, early warning systems |
+| [curriculum-optimizer](analysis/curriculum-optimizer/) | 1.0.0 | Curriculum analysis -- standards coverage, pacing optimization, differentiation, assessment quality |
+| [student-personalization](analysis/student-personalization/) | 1.0.0 | Adaptive learning analysis -- learning paths, mastery detection, knowledge graphs, accessibility |
+| [teacher-workload](analysis/teacher-workload/) | 1.0.0 | Teacher workload analysis -- grading automation, lesson planning, admin task reduction |
+| [benefits-processing](analysis/benefits-processing/) | 1.0.0 | Government benefits analysis -- eligibility determination, application workflows, multi-program coordination |
+| [public-resource-allocation](analysis/public-resource-allocation/) | 1.0.0 | Public resource allocation analysis -- budget optimization, equity-based distribution, demand forecasting |
+| [emergency-response](analysis/emergency-response/) | 1.0.0 | Emergency response analysis -- 911 dispatch, resource deployment, ICS compliance, response time optimization |
+| [affordable-housing](analysis/affordable-housing/) | 1.0.0 | Affordable housing analysis -- unit allocation, waitlist management, Fair Housing compliance, LIHTC tracking |
+| [rent-burden](analysis/rent-burden/) | 1.0.0 | Rent burden analysis -- affordability calculations, AMI modeling, housing voucher management |
+| [eviction-risk](analysis/eviction-risk/) | 1.0.0 | Eviction risk prediction -- payment patterns, early warning, intervention triggers, outcome tracking |
+| [crop-yield](analysis/crop-yield/) | 1.0.0 | Crop yield analysis -- precision agriculture, soil analysis, irrigation optimization, pest detection |
+| [food-waste](analysis/food-waste/) | 1.0.0 | Food waste reduction analysis -- shelf life prediction, inventory rotation, cold chain monitoring |
+| [climate-risk-agriculture](analysis/climate-risk-agriculture/) | 1.0.0 | Agricultural climate risk -- weather impact modeling, crop insurance, carbon sequestration tracking |
+| [carbon-accounting](analysis/carbon-accounting/) | 1.0.0 | Carbon accounting analysis -- Scope 1/2/3 emissions, GHG Protocol, CDP/TCFD/GRI reporting |
+| [disaster-prediction](analysis/disaster-prediction/) | 1.0.0 | Disaster prediction analysis -- early warning systems, alert distribution, evacuation planning |
+| [sustainability-metrics](analysis/sustainability-metrics/) | 1.0.0 | ESG and sustainability analysis -- metric collection, SDG alignment, greenwashing detection |
+| [legal-aid](analysis/legal-aid/) | 1.0.0 | Legal aid analysis -- case management, client intake, document assembly, access-to-justice metrics |
+| [case-outcome-predictor](analysis/case-outcome-predictor/) | 1.0.0 | Legal case prediction analysis -- model fairness, bias detection, ethical guardrails |
+| [rights-explainer](analysis/rights-explainer/) | 1.0.0 | Legal information analysis -- plain-language accuracy, reading level, multilingual support |
+| [fundraising-optimizer](analysis/fundraising-optimizer/) | 1.0.0 | Nonprofit fundraising analysis -- donor segmentation, campaign performance, major gift scoring |
+| [grant-writer](analysis/grant-writer/) | 1.0.0 | Grant management analysis -- proposal quality, deadline tracking, outcome reporting |
+| [impact-measurement](analysis/impact-measurement/) | 1.0.0 | Program impact analysis -- logic models, attribution, cost-effectiveness, beneficiary feedback |
+| [donor-retention](analysis/donor-retention/) | 1.0.0 | Donor retention analysis -- lapse risk scoring, lifetime value modeling, stewardship workflows |
+| [crisis-triage](analysis/crisis-triage/) | 1.0.0 | Crisis triage analysis -- call prioritization, resource dispatching, severity classification |
+| [volunteer-coordination](analysis/volunteer-coordination/) | 1.0.0 | Volunteer management analysis -- skill matching, scheduling, retention, impact reporting |
+| [emergency-resource](analysis/emergency-resource/) | 1.0.0 | Emergency resource analysis -- inventory tracking, deployment optimization, inter-agency sharing |
+| [fall-risk](analysis/fall-risk/) | 1.0.0 | Fall risk prediction -- sensor integration, risk scoring, environmental hazards, mobility trends |
+| [medication-adherence](analysis/medication-adherence/) | 1.0.0 | Medication adherence analysis -- tracking accuracy, interaction checking, adverse event detection |
+| [caregiver-coordination](analysis/caregiver-coordination/) | 1.0.0 | Caregiver coordination analysis -- scheduling, handoff communication, burnout prevention |
+| [crisis-risk-monitor](analysis/crisis-risk-monitor/) | 1.0.0 | Mental health crisis monitoring -- risk signal detection, escalation protocols, ethical guardrails |
+| [treatment-outcome](analysis/treatment-outcome/) | 1.0.0 | Treatment outcome analysis -- PHQ-9/GAD-7 validity, longitudinal trends, evidence-based alignment |
+| [care-plan-optimizer](analysis/care-plan-optimizer/) | 1.0.0 | Care plan optimization -- treatment goals, intervention scheduling, step-down/step-up criteria |
+| [debt-payoff](analysis/debt-payoff/) | 1.0.0 | Debt management analysis -- payoff strategies, interest calculation, credit score impact modeling |
+| [spending-behavior](analysis/spending-behavior/) | 1.0.0 | Spending behavior analysis -- categorization, budget adherence, behavioral nudges, savings goals |
+| [retirement-optimizer](analysis/retirement-optimizer/) | 1.0.0 | Retirement planning analysis -- projection models, Social Security optimization, Monte Carlo quality |
+| [skill-gap](analysis/skill-gap/) | 1.0.0 | Workforce skill gap analysis -- taxonomy quality, labor market data, career pathway modeling |
+| [resume-optimizer](analysis/resume-optimizer/) | 1.0.0 | Resume optimization analysis -- ATS compatibility, keyword matching, job-description alignment |
+| [training-path](analysis/training-path/) | 1.0.0 | Training pathway analysis -- prerequisite mapping, competency-based progression, ROI tracking |
+| [employer-matching](analysis/employer-matching/) | 1.0.0 | Job matching analysis -- algorithm quality, bias detection, salary accuracy, candidate experience |
+| [recovery-metrics](analysis/recovery-metrics/) | 1.0.0 | Rehabilitation recovery analysis -- outcome measurement, functional assessment, readiness scoring |
+| [therapy-personalization](analysis/therapy-personalization/) | 1.0.0 | Therapy personalization analysis -- exercise recommendations, compliance prediction, plan adaptation |
+| [setback-predictor](analysis/setback-predictor/) | 1.0.0 | Rehabilitation setback prediction -- risk factors, early warning, readmission prediction |
 
 ### productivity -- Developer Experience (8 skills)
 
@@ -250,7 +304,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
 | [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
 
-### combo -- Multi-Skill Chains (20 skills)
+### combo -- Multi-Skill Chains (24 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -274,6 +328,10 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [fintech-launch](combo/fintech-launch/) | 1.0.0 | /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight | Complete fintech launch readiness pipeline |
 | [logistics-optimize](combo/logistics-optimize/) | 1.0.0 | /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test | Full logistics optimization and stress testing |
 | [compliance-suite](combo/compliance-suite/) | 1.0.0 | /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest | Cross-industry compliance hardening pipeline |
+| [public-services-audit](combo/public-services-audit/) | 1.0.0 | /benefits-processing → /benefits-fraud → /government-compliance → /security-review | Government services compliance and fraud audit |
+| [education-suite](combo/education-suite/) | 1.0.0 | /dropout-risk → /curriculum-optimizer → /student-personalization → /school-ops | Complete education system analysis pipeline |
+| [housing-audit](combo/housing-audit/) | 1.0.0 | /affordable-housing → /eviction-risk → /housing-compliance → /rent-burden | Affordable housing compliance and risk assessment |
+| [impact-org](combo/impact-org/) | 1.0.0 | /impact-measurement → /fundraising-optimizer → /grant-writer → /donor-retention | Nonprofit operational optimization pipeline |
 
 ### meta -- Skills About Skills (7 skills)
 
@@ -301,13 +359,38 @@ Skills covering domain-specific regulations, workflows, and compliance across 8 
 | Legal | contract-risk, litigation-predictor, legal-discovery, regulatory-compliance | TAR, e-discovery, RBAC/ABAC, audit trails |
 | Energy & Utilities | load-forecast, grid-optimizer, commodity-pricing, energy-compliance | NERC CIP, FERC, EPA, ISO 50001, 49 CFR 192/195 |
 
-### Industry Pipelines
+## Social Impact Sectors
+
+Skills for high-impact domains focused on human welfare, equity, and public good:
+
+| Sector | Skills | Focus Areas |
+|--------|--------|-------------|
+| Healthcare (Beyond Hospitals) | mental-health-clinic, elder-care-ops, rural-health, disability-services, rehab-therapy, care-burnout-audit | Burnout reduction, care access, scheduling, risk flagging |
+| Education | dropout-risk, curriculum-optimizer, student-personalization, teacher-workload, school-ops | K-12, higher ed, personalization, IDEA/Title I |
+| Government & Public Services | benefits-processing, public-resource-allocation, emergency-response, government-compliance, benefits-fraud | FedRAMP, Section 508, FISMA, FOIA |
+| Housing & Affordable Housing | affordable-housing, rent-burden, eviction-risk, housing-compliance | Fair Housing, HUD, LIHTC, Section 8 |
+| Agriculture & Food Systems | crop-yield, food-waste, climate-risk-agriculture | Precision ag, food security, climate adaptation |
+| Climate & Sustainability | carbon-accounting, disaster-prediction, sustainability-metrics, environmental-compliance | GHG Protocol, CDP, TCFD, SDGs, EPA |
+| Legal Aid & Public Defense | legal-aid, case-outcome-predictor, rights-explainer | Access to justice, bias detection, plain language |
+| Nonprofits & NGOs | fundraising-optimizer, grant-writer, impact-measurement, donor-retention | Impact measurement, grant management, donor CRM |
+| Emergency & Crisis Services | crisis-triage, volunteer-coordination, emergency-resource | 911 dispatch, resource deployment, mutual aid |
+| Elder Care & Caregiving | fall-risk, medication-adherence, caregiver-coordination | Wearable sensors, medication management, burnout |
+| Mental Health & Behavioral | crisis-risk-monitor, treatment-outcome, care-plan-optimizer, therapist-documentation | PHQ-9/GAD-7, crisis protocols, HIPAA |
+| Financial Literacy | debt-payoff, spending-behavior, retirement-optimizer | Payoff strategies, Monte Carlo, Social Security |
+| Workforce Development | skill-gap, resume-optimizer, training-path, employer-matching | O*NET, ATS, competency-based, bias detection |
+| Rehabilitation | recovery-metrics, therapy-personalization, setback-predictor | FIM/Barthel, exercise personalization, readmission |
+
+### Industry & Social Impact Pipelines
 
 ```
-/healthcare-audit   (runs: /hipaa → /clinical-data-review → /healthcare-compliance → /security-review)
-/fintech-launch     (runs: /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight)
-/logistics-optimize (runs: /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test)
-/compliance-suite   (runs: /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest)
+/healthcare-audit       (runs: /hipaa → /clinical-data-review → /healthcare-compliance → /security-review)
+/fintech-launch         (runs: /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight)
+/logistics-optimize     (runs: /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test)
+/compliance-suite       (runs: /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest)
+/public-services-audit  (runs: /benefits-processing → /benefits-fraud → /government-compliance → /security-review)
+/education-suite        (runs: /dropout-risk → /curriculum-optimizer → /student-personalization → /school-ops)
+/housing-audit          (runs: /affordable-housing → /eviction-risk → /housing-compliance → /rent-burden)
+/impact-org             (runs: /impact-measurement → /fundraising-optimizer → /grant-writer → /donor-retention)
 ```
 
 ## Recommended Pipelines

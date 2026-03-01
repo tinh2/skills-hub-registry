@@ -6,7 +6,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 
 **[secure](secure/)** -- Comprehensive security posture scan covering dependencies, code patterns, config, auth, and data handling with risk scoring. Routes to sub-skills for detailed analysis.
 
-## Skills (10)
+## Skills (11)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -20,6 +20,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 | [check-vanta](check-vanta/) | 2.0.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
 | [hipaa](hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
 | [pci-dss](pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
+| [benefits-fraud](benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
 
 ## Usage
 
@@ -37,3 +38,5 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 - Security-first build (combo): `/secure-ship` chains OWASP, ship, security-review, and pentest
 - Healthcare audit (combo): `/healthcare-audit` chains HIPAA, clinical-data-review, healthcare-compliance, security-review
 - Fintech launch (combo): `/fintech-launch` chains PCI DSS, fintech-api, fraud-detection, credit-risk, preflight
+- Benefits fraud detection for government services: `/benefits-fraud`
+- Public services audit (combo): `/public-services-audit` chains benefits-processing, benefits-fraud, government-compliance, security-review

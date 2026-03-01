@@ -2,7 +2,7 @@
 
 Multi-skill chains and pipeline compositions -- automated sequences that run multiple skills without user intervention.
 
-## Skills (20)
+## Skills (24)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -26,6 +26,10 @@ Multi-skill chains and pipeline compositions -- automated sequences that run mul
 | [fintech-launch](fintech-launch/) | 1.0.0 | /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight | Complete fintech launch readiness pipeline |
 | [logistics-optimize](logistics-optimize/) | 1.0.0 | /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test | Full logistics optimization and stress testing |
 | [compliance-suite](compliance-suite/) | 1.0.0 | /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest | Cross-industry compliance hardening pipeline |
+| [public-services-audit](public-services-audit/) | 1.0.0 | /benefits-processing → /benefits-fraud → /government-compliance → /security-review | Government services compliance and fraud audit |
+| [education-suite](education-suite/) | 1.0.0 | /dropout-risk → /curriculum-optimizer → /student-personalization → /school-ops | Complete education system analysis pipeline |
+| [housing-audit](housing-audit/) | 1.0.0 | /affordable-housing → /eviction-risk → /housing-compliance → /rent-burden | Affordable housing compliance and risk assessment |
+| [impact-org](impact-org/) | 1.0.0 | /impact-measurement → /fundraising-optimizer → /grant-writer → /donor-retention | Nonprofit operational optimization pipeline |
 
 ## Usage
 
@@ -65,6 +69,12 @@ Combo skills chain multiple skills together into automated pipelines. They run s
 - `/fintech-launch` -- PCI DSS + fintech API + fraud detection + credit risk + preflight
 - `/logistics-optimize` -- Route optimization + warehouse + inventory + supply chain + load test
 - `/compliance-suite` -- Cross-industry regulatory + GDPR + SOC2 + dependency scan + pentest
+
+**Social Impact:**
+- `/public-services-audit` -- Benefits processing + fraud detection + government compliance + security review
+- `/education-suite` -- Dropout risk + curriculum + personalization + school ops
+- `/housing-audit` -- Affordable housing + eviction risk + housing compliance + rent burden
+- `/impact-org` -- Impact measurement + fundraising + grant writing + donor retention
 
 **Maintenance:**
 - `/tech-debt-sprint` -- Debt inventory, code smell fixes, dead code removal, review pass
