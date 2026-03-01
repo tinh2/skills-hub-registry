@@ -1,134 +1,240 @@
 # skills-hub-registry
 
-The official skill collection for [skills-hub.ai](https://skills-hub.ai) — a marketplace for Claude Code skills.
+The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-45 production-tested skills organized into 13 categories covering the complete software development lifecycle.
+121 production-tested skills organized into 13 categories covering the complete software development lifecycle.
 
 ## Directory Structure
 
 ```
 skills-hub-registry/
-├── build/              # 7 skills  — Project scaffolding and full build pipelines
-├── test/               # 2 skills  — Unit tests, E2E tests, integration tests
-├── qa/                 # 5 skills  — Quality assurance, bug detection, code review
-├── review/             # 2 skills  — Architecture review, PR creation
-├── deploy/             # 2 skills  — Infrastructure, CI/CD, cloud deployment
-├── docs/               # 3 skills  — README generation, API docs, changelogs
-├── security/           # 1 skill   — Vulnerability checks, compliance
-├── ux/                 # 1 skill   — Accessibility, usability, design systems
-├── analysis/           # 9 skills  — Domain analysis, competitive analysis, metrics
-├── productivity/       # 1 skill   — Workflow automation, IDE tools
-├── integration/        # (empty)   — Third-party service connectors
-├── combo/              # 8 skills  — Multi-skill chains and compositions
-└── meta/               # 4 skills  — Skills about skills: recall, evolve, promote
+├── build/              # 12 skills — Project scaffolding and full build pipelines
+├── test/               #  9 skills — Unit, E2E, integration, load, visual, contract, accessibility tests
+├── qa/                 #  9 skills — Quality assurance, performance, chaos, code smells, dead code
+├── review/             #  5 skills — Architecture review, API review, database review, security review, PR
+├── deploy/             # 11 skills — Docker, K8s, Terraform, CI/CD, monitoring, DNS, CDN, secrets
+├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook
+├── security/           #  8 skills — OWASP, pentest, GDPR, SOC2, encryption, dependency scan
+├── ux/                 #  5 skills — UX audit, design systems, dark mode, responsive, i18n
+├── analysis/           # 14 skills — Domain analysis, competitive research, metrics, tech debt, health
+├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
+├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
+├── combo/              # 14 skills — Multi-skill chains and pipeline compositions
+└── meta/               #  7 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
+
+## Architecture
+
+### Main Skill + Sub-Skill Pattern
+
+Most categories follow an orchestrator pattern where a **main skill** scans for gaps and routes work to specialized **sub-skills**. This allows running the main skill for broad coverage or invoking a sub-skill directly for targeted work.
+
+| Main Skill | Category | Orchestrates |
+|------------|----------|-------------|
+| `/integrate` | integration | auth-provider, stripe, email, push-notifications, search, storage, realtime, analytics-tracking |
+| `/devops` | deploy | docker, github-actions, k8s, terraform, aws, cdn, dns, monitoring, secrets, app-icon |
+| `/secure` | security | owasp, pentest, gdpr, soc2, encryption, dependency-scan, check-vanta |
+| `/test-suite` | test | unit-test, e2e, integration-test, load-test, contract-test, accessibility-test, visual-regression, manual-test-plan |
+| `/document` | docs | readme, api-docs, adr, changelog, diagram, onboarding, runbook, gen-catalog, skills-list |
+| `/dx` | productivity | devcontainer, env-setup, git-hooks, linter, monorepo, release, vscode |
+
+**Standalone orchestrators** (no sub-skill routing, self-contained pipelines):
+
+| Skill | Category | What It Does |
+|-------|----------|-------------|
+| `/build` | build | Full project build from competitor analysis through implementation and QA |
+| `/qa` | qa | Automated QA agent that walks every screen/endpoint, verifies, and fixes |
+| `/analyze` | analysis | End-to-end domain analysis tracing features across all layers |
+| `/arch-review` | review | Architect-level story review and implementation validation |
+| `/ux` | ux | Dual-mode UX quality audit (heuristics/a11y/motion) or design validation |
 
 ## Skill Catalog
 
-### build — Project Scaffolding & Build Pipelines
+### build -- Project Scaffolding & Build Pipelines (12 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [build](build/build/) | 3.0.0 | Master orchestrator — takes a competitor app and builds a better clone end-to-end |
-| [ship](build/ship/) | 8.0.0 | Fast autonomous build loop — 4 iterations max with domain analysis |
-| [iterate](build/iterate/) | 4.0.0 | Self-iterating build loop — up to 6 iterations with validation and review |
-| [flutter](build/flutter/) | 2.0.0 | Builds Flutter mobile app from video/screenshots |
-| [hotfix](build/hotfix/) | 1.0.0 | Emergency bug fix pipeline — diagnose, fix, test, PR in 2 iterations |
-| [story-implementer](build/story-implementer/) | 2.0.0 | Implements a Jira story using repo conventions, writes tests, creates PR |
-| [db-migrate](build/db-migrate/) | 1.0.0 | Scaffolds database migration files with Slick/Prisma table definitions |
+| [build](build/build/) | 3.0.0 | Master orchestrator -- takes a competitor app and builds a better, cheaper, modern clone end-to-end with Node.js backend and Flutter frontend |
+| [ship](build/ship/) | 8.0.0 | Fast autonomous build loop -- 4 iterations max. Build it, make it work, analyze it, ship it |
+| [iterate](build/iterate/) | 4.0.0 | Self-iterating build loop -- implements, tests, reviews, analyzes, and refines up to 6 iterations |
+| [flutter](build/flutter/) | 2.0.0 | Analyzes a video or screenshots of an application and builds a Flutter mobile version |
+| [nextjs](build/nextjs/) | 1.0.0 | Scaffolds a production-ready Next.js 15 application with App Router, auth, database, and dashboard UI |
+| [react-native](build/react-native/) | 1.0.0 | Builds a production-ready React Native mobile application from a design or specification |
+| [api-scaffold](build/api-scaffold/) | 1.0.0 | Scaffolds a production-ready backend API with routes, controllers, middleware, database, auth, validation, and OpenAPI spec |
+| [chrome-extension](build/chrome-extension/) | 1.0.0 | Builds a complete Chrome extension with Manifest V3, popup UI, content scripts, and background service worker |
+| [cli-tool](build/cli-tool/) | 1.0.0 | Generates a production-ready CLI tool with command parsing, interactive prompts, and config management |
+| [hotfix](build/hotfix/) | 1.0.0 | Emergency bug fix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
+| [story-implementer](build/story-implementer/) | 2.0.0 | Implements a Jira story using repo conventions, writes unit tests, creates PR, addresses bot review |
+| [db-migrate](build/db-migrate/) | 1.0.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
 
-### test — Automated Testing
-
-| Skill | Version | Description |
-|-------|---------|-------------|
-| [e2e](test/e2e/) | 1.0.0 | Auto-detects any tech stack, generates exhaustive E2E tests with self-healing |
-| [manual-test-plan](test/manual-test-plan/) | 2.0.0 | Generates manual QA test plan from branch code changes |
-
-### qa — Quality Assurance
+### test -- Automated Testing (9 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [qa](qa/qa/) | 3.0.0 | Automated QA agent — walks every screen/endpoint, verifies and fixes |
-| [iterate-review](qa/iterate-review/) | 5.0.0 | Autonomously reviews and improves code through up to 5 iterations |
-| [preflight](qa/preflight/) | 1.0.0 | Pre-deploy verification gate — checks git, build, tests, migrations |
-| [perf](qa/perf/) | 1.0.0 | Performance profiler — analyzes queries, API chains, widget rebuilds |
-| [audit](qa/audit/) | 2.0.0 | Lightweight domain consistency audit — fast gate between pipeline phases |
+| [test-suite](test/test-suite/) | 1.0.0 | **Main skill.** Analyzes test coverage across all testing types, identifies gaps, routes to sub-skills, and produces a health report |
+| [unit-test](test/unit-test/) | 1.0.0 | Auto-detects test framework, scans for untested functions, generates unit tests with edge cases, runs and self-heals |
+| [e2e](test/e2e/) | 1.0.0 | Auto-detects any tech stack, generates exhaustive end-to-end integration tests with self-healing |
+| [integration-test](test/integration-test/) | 1.0.0 | Auto-detects framework, generates integration tests for APIs, databases, and service interactions |
+| [load-test](test/load-test/) | 1.0.0 | Auto-detects API framework, generates realistic load test scenarios with k6/Locust/Artillery |
+| [contract-test](test/contract-test/) | 1.0.0 | Auto-detects API framework, generates consumer-driven contract tests using Pact or OpenAPI validation |
+| [accessibility-test](test/accessibility-test/) | 1.0.0 | Auto-detects frontend framework, sets up axe-core and Lighthouse CI for automated WCAG 2.1 AA testing |
+| [visual-regression](test/visual-regression/) | 1.0.0 | Auto-detects frontend framework, sets up visual regression testing with baseline screenshots across breakpoints |
+| [manual-test-plan](test/manual-test-plan/) | 2.0.0 | Generates a manual QA test plan based on code changes on the current branch |
 
-### review — Architecture & Code Review
-
-| Skill | Version | Description |
-|-------|---------|-------------|
-| [arch-review](review/arch-review/) | 7.0.0 | Architect-level story review and implementation validation |
-| [pr](review/pr/) | 1.0.0 | Creates convention-compliant PRs with story extraction and test plans |
-
-### deploy — Infrastructure & Deployment
+### qa -- Quality Assurance (9 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
+| [qa](qa/qa/) | 3.0.0 | **Main skill.** Automated QA agent that walks every screen and API endpoint, verifies functionality, evaluates design, runs domain analysis, and fixes issues |
+| [iterate-review](qa/iterate-review/) | 5.0.0 | Autonomously reviews and improves existing code through up to 5 iterations of analysis and fixing |
+| [audit](qa/audit/) | 2.0.0 | Lightweight domain consistency audit -- verify all layers match and fix issues. Fast gate between pipeline phases |
+| [preflight](qa/preflight/) | 1.0.0 | Pre-deploy verification gate -- checks git status, build, tests, migrations, and commit conventions. Read-only |
+| [perf](qa/perf/) | 1.0.0 | Performance profiler -- analyzes DB queries, API call chains, frontend widget rebuilds, and bundle sizes |
+| [chaos](qa/chaos/) | 1.0.0 | Chaos engineering for application resilience. Identifies failure points, generates chaos tests, validates graceful degradation |
+| [code-smell](qa/code-smell/) | 1.0.0 | Detects Martin Fowler's catalog of code smells across the codebase with severity and recommended refactoring |
+| [dead-code](qa/dead-code/) | 1.0.0 | Detects and safely removes dead code -- unreachable paths, unused exports, unused dependencies, unused CSS |
+| [migration-verify](qa/migration-verify/) | 1.0.0 | Verifies database migrations are safe -- applies cleanly, reverses cleanly, preserves data integrity, is idempotent |
+
+### review -- Architecture & Code Review (5 skills)
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [arch-review](review/arch-review/) | 7.0.0 | Architect-level story review and implementation validation with domain consistency analysis |
+| [api-review](review/api-review/) | 1.0.0 | API design review against REST best practices -- naming, HTTP semantics, status codes, pagination, error format, versioning |
+| [database-review](review/database-review/) | 1.0.0 | Database schema design review -- normalization, index coverage, constraints, naming, N+1 patterns, connection pooling |
+| [security-review](review/security-review/) | 1.0.0 | Security-focused code review -- auth bypasses, injection vectors, data exposure, hardcoded secrets, IDOR vulnerabilities |
+| [pr](review/pr/) | 1.0.0 | Creates a convention-compliant pull request -- extracts story number from branch, generates summary and test plan |
+
+### deploy -- Infrastructure & Deployment (11 skills)
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [devops](deploy/devops/) | 1.0.0 | **Main skill.** Scans infrastructure gaps and orchestrates deployment readiness across CI/CD, containers, monitoring, and IaC |
+| [docker](deploy/docker/) | 1.0.0 | Auto-detect stack and generate optimized multi-stage Dockerfiles with compose, health checks, and security hardening |
+| [github-actions](deploy/github-actions/) | 1.0.0 | Auto-detect tech stack and generate production-grade GitHub Actions CI/CD workflows with caching and security scanning |
+| [k8s](deploy/k8s/) | 1.0.0 | Generate production-grade Kubernetes manifests with Deployments, Services, Ingress, HPA, and optional Helm charts |
+| [terraform](deploy/terraform/) | 1.0.0 | Generate modular multi-cloud Terraform configurations with VPC, compute, database, cache, CDN, and remote state |
 | [aws](deploy/aws/) | 1.0.0 | Generates production-ready Terraform files for AWS infrastructure |
-| [app-icon](deploy/app-icon/) | 1.0.0 | Generates polished app icons and applies as launcher icons |
+| [cdn](deploy/cdn/) | 1.0.0 | Auto-detect hosting and configure CDN with caching rules, SSL/TLS, edge functions, and performance optimization |
+| [dns](deploy/dns/) | 1.0.0 | Configure DNS records, SSL/TLS certificates, subdomains, email authentication, and health check routing |
+| [monitoring](deploy/monitoring/) | 1.0.0 | Auto-detect infrastructure and set up observability with dashboards, alerting rules, and application instrumentation |
+| [secrets](deploy/secrets/) | 1.0.0 | Audit secret handling, set up secrets management with rotation, and configure CI/CD secrets integration |
+| [app-icon](deploy/app-icon/) | 1.0.0 | Generates a polished app icon and applies it as the launcher icon for iOS and Android |
 
-### docs — Documentation
-
-| Skill | Version | Description |
-|-------|---------|-------------|
-| [readme](docs/readme/) | 1.0.0 | Generates comprehensive README.md by analyzing codebase |
-| [gen-catalog](docs/gen-catalog/) | 1.0.0 | Auto-generates README and skill catalog from SKILL.md frontmatter |
-| [skills-list](docs/skills-list/) | 3.0.0 | Displays the full skills catalog reference |
-
-### security — Security & Compliance
+### docs -- Documentation (10 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [check-vanta](security/check-vanta/) | 2.0.0 | Fetches Vanta vulnerabilities, fixes and creates PRs autonomously |
+| [document](docs/document/) | 1.0.0 | **Main skill.** Scans for existing documentation, identifies gaps based on project maturity, and orchestrates sub-skills to fill them |
+| [readme](docs/readme/) | 1.0.0 | Generate comprehensive, scannable README.md documentation for any application by analyzing the codebase |
+| [api-docs](docs/api-docs/) | 1.0.0 | Auto-detects API framework, extracts routes and schemas, generates OpenAPI 3.1 spec with interactive docs |
+| [adr](docs/adr/) | 1.0.0 | Creates and manages Architecture Decision Records following the Michael Nygard format with auto-numbering |
+| [changelog](docs/changelog/) | 1.0.0 | Generates or updates CHANGELOG.md from git history using conventional commit parsing and keep-a-changelog format |
+| [diagram](docs/diagram/) | 1.0.0 | Analyzes codebase structure and generates Mermaid architecture diagrams including C4, sequence, ER, and dependency graphs |
+| [onboarding](docs/onboarding/) | 1.0.0 | Analyzes codebase to generate a complete developer onboarding guide covering setup, architecture, conventions, and workflow |
+| [runbook](docs/runbook/) | 1.0.0 | Scans deployment config, Docker/K8s manifests, CI/CD, and monitoring to generate actionable operations runbooks |
+| [gen-catalog](docs/gen-catalog/) | 1.0.0 | Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories |
+| [skills-list](docs/skills-list/) | 3.0.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
 
-### ux — User Experience & Design
-
-| Skill | Version | Description |
-|-------|---------|-------------|
-| [ux](ux/ux/) | 1.0.0 | Dual-mode UX audit (heuristics/a11y/motion) or design validation |
-
-### analysis — Domain Analysis & Research
-
-| Skill | Version | Description |
-|-------|---------|-------------|
-| [analyze](analysis/analyze/) | 3.0.0 | End-to-end domain analysis — traces features across all layers |
-| [compete](analysis/compete/) | 1.0.0 | Researches competitors, produces prioritized feature gap analysis |
-| [mvp](analysis/mvp/) | 2.0.0 | Analyzes app video/screenshots to decipher MVP and suggest improvements |
-| [metrics](analysis/metrics/) | 1.0.0 | Computes development quality metrics from git history |
-| [recall](analysis/recall/) | 1.0.0 | Reconstructs development cycle from git, extracts patterns |
-| [cost-analysis](analysis/cost-analysis/) | 1.0.0 | Analyzes Firebase infrastructure costs at multiple user scales |
-| [dep-map](analysis/dep-map/) | 1.0.0 | Maps story dependencies, computes optimal implementation order |
-| [backend-spec](analysis/backend-spec/) | 5.0.0 | Generates engineering specs in Jira format with acceptance criteria |
-| [image-storage-optimization](analysis/image-storage-optimization/) | 1.0.0 | Enforces image resizing/compression to reduce storage costs |
-
-### productivity — Workflow Automation
+### security -- Security & Compliance (8 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [vscode](productivity/vscode/) | 1.0.0 | Opens VS Code in the current working directory |
+| [secure](security/secure/) | 1.0.0 | **Main skill.** Comprehensive security posture scan -- dependencies, code patterns, config, auth, and data handling with risk scoring |
+| [owasp](security/owasp/) | 1.0.0 | Audit codebase against the OWASP 2021 Top 10 web application security risks with severity-rated findings |
+| [pentest](security/pentest/) | 1.0.0 | Static-analysis penetration testing -- find exploitable vulnerabilities with proof-of-concept and remediation guidance |
+| [gdpr](security/gdpr/) | 1.0.0 | Scan codebase for GDPR and CCPA compliance gaps -- PII handling, consent, data rights, and third-party sharing |
+| [soc2](security/soc2/) | 1.0.0 | Evaluate codebase against SOC2 Trust Service Criteria -- security, availability, integrity, confidentiality, privacy |
+| [encryption](security/encryption/) | 1.0.0 | Audit and implement encryption -- data at rest, in transit, key management, password hashing, and token security |
+| [dependency-scan](security/dependency-scan/) | 1.0.0 | Auto-detect package manager, scan for vulnerable dependencies, auto-fix where possible, and generate SBOM |
+| [check-vanta](security/check-vanta/) | 2.0.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
 
-### combo — Multi-Skill Chains
+### ux -- User Experience & Design (5 skills)
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [ux](ux/ux/) | 1.0.0 | **Main skill.** Dual-mode UX quality skill -- runs heuristic/accessibility/motion audit, or validates implementation against design mockups |
+| [design-system](ux/design-system/) | 1.0.0 | Extract or create a design system from existing UI code -- tokens, component inventory, and usage guidelines |
+| [dark-mode](ux/dark-mode/) | 1.0.0 | Dark mode implementation -- generate dark palette, create theme switching, and verify WCAG contrast for both modes |
+| [responsive](ux/responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
+| [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
+
+### analysis -- Domain Analysis & Research (14 skills)
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [analyze](analysis/analyze/) | 3.0.0 | End-to-end domain analysis -- traces every feature across all layers, verifies consistency, and fixes issues |
+| [compete](analysis/compete/) | 1.0.0 | Researches competing products, catalogs their features, and produces a prioritized feature gap analysis |
+| [mvp](analysis/mvp/) | 2.0.0 | Analyzes a video or screenshots of an application to decipher its MVP and suggest improvements |
+| [backend-spec](analysis/backend-spec/) | 5.0.0 | Generates backend or frontend engineering specs in Jira format with acceptance criteria, routes, and table schemas |
+| [metrics](analysis/metrics/) | 1.0.0 | Computes development quality metrics from git history and tracks improvement over time |
+| [recall](analysis/recall/) | 1.0.0 | Reconstructs the development cycle from git history, distills patterns, and produces actionable insights |
+| [cost-analysis](analysis/cost-analysis/) | 1.0.0 | Analyzes Firebase infrastructure costs at 1K-100K user scales with optimization recommendations |
+| [dep-map](analysis/dep-map/) | 1.0.0 | Maps dependencies between engineering stories, computes optimal implementation order with parallel batches |
+| [dependency-analysis](analysis/dependency-analysis/) | 1.0.0 | Dependency graph analysis -- checks outdated, deprecated, vulnerable, duplicate, heavy, and unused packages |
+| [api-surface](analysis/api-surface/) | 1.0.0 | Maps the entire API surface -- routes, middleware, auth requirements, request/response types, and inconsistencies |
+| [bundle-analysis](analysis/bundle-analysis/) | 1.0.0 | Frontend bundle size analysis -- chunk sizes, duplicates, tree-shaking, code splitting, and size budget config |
+| [codebase-health](analysis/codebase-health/) | 1.0.0 | Overall codebase health score (0-100) -- complexity, coupling, cohesion, test coverage, documentation, churn hotspots |
+| [tech-debt](analysis/tech-debt/) | 1.0.0 | Technical debt inventory -- TODOs, deprecated usage, outdated deps, high-churn files, complexity hotspots, duplicated code |
+| [image-storage-optimization](analysis/image-storage-optimization/) | 1.0.0 | Reduce storage costs by automatically resizing and compressing uploaded user images |
+
+### productivity -- Developer Experience (8 skills)
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [dx](productivity/dx/) | 1.0.0 | **Main skill.** Audit developer experience foundations and generate a DX health report with actionable improvements |
+| [devcontainer](productivity/devcontainer/) | 1.0.0 | Auto-detect stack and generate a production-grade dev container configuration with Codespaces compatibility |
+| [env-setup](productivity/env-setup/) | 1.0.0 | Detect required tools, install dependencies, configure environment, and verify the project builds and tests pass |
+| [git-hooks](productivity/git-hooks/) | 1.0.0 | Auto-detect stack and set up pre-commit and commit-msg hooks with conventional commit enforcement |
+| [linter](productivity/linter/) | 1.0.0 | Auto-detect stack and configure linting, formatting, and editor integration with auto-fix for existing violations |
+| [monorepo](productivity/monorepo/) | 1.0.0 | Set up or migrate to a monorepo with workspaces, build pipeline, task graph, and local plus remote caching |
+| [release](productivity/release/) | 1.0.0 | Set up automated release pipeline with semantic versioning, changelog generation, and publishing |
+| [vscode](productivity/vscode/) | 1.0.0 | Open VS Code in the current working directory |
+
+### integration -- Third-Party Service Connectors (9 skills)
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [integrate](integration/integrate/) | 1.0.0 | **Main skill.** Master integration orchestrator that audits existing integrations, routes to sub-skills, and produces a health score |
+| [auth-provider](integration/auth-provider/) | 1.0.0 | Sets up complete OAuth/SSO authentication with provider configuration, session management, and login UI |
+| [stripe](integration/stripe/) | 1.0.0 | Sets up complete Stripe payment integration with checkout sessions, webhooks, and subscription billing |
+| [email](integration/email/) | 1.0.0 | Sets up transactional email with provider SDK, templated messages, delivery tracking, and webhook handling |
+| [push-notifications](integration/push-notifications/) | 1.0.0 | Sets up mobile and web push notifications with FCM, APNs, or OneSignal including deep linking |
+| [search](integration/search/) | 1.0.0 | Sets up full-text search with indexing, search UI, and ranking -- supports Algolia, Typesense, Meilisearch, Elasticsearch |
+| [storage](integration/storage/) | 1.0.0 | Sets up object storage with upload, download, presigned URLs, and CDN integration -- supports S3, GCS, R2, Supabase |
+| [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
+| [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
+
+### combo -- Multi-Skill Chains (14 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
-| [polish](combo/polish/) | 3.0.0 | /ux ∥ /scale-audit → /qa → /analyze | Full quality pass with parallel tracks |
-| [research](combo/research/) | 1.0.0 | /compete → /new-features | Competitive analysis + feature ideation |
+| [polish](combo/polish/) | 3.0.0 | /ux ∥ /scale-audit → /qa → /analyze | Full quality pass with parallel UX + scalability audit |
+| [research](combo/research/) | 1.0.0 | /compete → /new-features | Competitive gap analysis + feature ideation |
 | [spec](combo/spec/) | 1.0.0 | /mvp → /backend-spec | App analysis + story generation |
-| [story](combo/story/) | 1.0.0 | /arch-review → /si → /pr | Full story lifecycle |
-| [review-implement](combo/review-implement/) | 1.0.0 | /arch-review → /si | Review design then implement |
-| [full-test](combo/full-test/) | 1.0.0 | /e2e → /manual-test-plan | Automated + manual test plans |
-| [retro](combo/retro/) | 1.0.0 | /recall → /new-features | Dev retrospective + feature ideas |
+| [story](combo/story/) | 1.0.0 | /arch-review → /story-implementer → /pr | Full story lifecycle from review to PR |
+| [review-implement](combo/review-implement/) | 1.0.0 | /arch-review → /story-implementer | Review architecture then implement |
+| [full-test](combo/full-test/) | 1.0.0 | /e2e → /manual-test-plan | Automated E2E tests + manual test plan |
+| [retro](combo/retro/) | 1.0.0 | /recall → /new-features | Dev retrospective + feature ideation |
 | [fix-and-ship](combo/fix-and-ship/) | 1.0.0 | /hotfix → /preflight | Emergency fix + deploy verification |
+| [secure-ship](combo/secure-ship/) | 1.0.0 | /owasp → /ship → /security-review → /pentest | Security-first build chain |
+| [compliance-gate](combo/compliance-gate/) | 1.0.0 | /secure → /gdpr → /dependency-scan → /pentest | Full compliance pass with unified report |
+| [full-deploy](combo/full-deploy/) | 1.0.0 | /docker → /github-actions → /monitoring → /preflight | Complete deploy pipeline |
+| [design-to-code](combo/design-to-code/) | 1.0.0 | /design-system → /responsive → /dark-mode → /ux | Full design implementation chain |
+| [data-pipeline](combo/data-pipeline/) | 1.0.0 | /api-scaffold → /integration-test → /load-test | Data-heavy app setup chain |
+| [tech-debt-sprint](combo/tech-debt-sprint/) | 1.0.0 | /tech-debt → /code-smell → /dead-code → /iterate-review | Debt reduction sprint |
 
-### meta — Skills About Skills
+### meta -- Skills About Skills (7 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [bootstrap](meta/bootstrap/) | 3.0.0 | Scaffolds new projects from saved templates |
-| [evolve](meta/evolve/) | 1.0.0 | Self-improving — patches skills based on /recall and /metrics findings |
-| [extract-template](meta/extract-template/) | 1.0.0 | Captures pipeline + conventions as reusable template |
-| [promote](meta/promote/) | 1.0.0 | Cross-project pattern detection, promotes to global conventions |
+| [bootstrap](meta/bootstrap/) | 3.0.0 | Scaffolds a new project from a saved template -- creates CLAUDE.md, initial memory, and recommends first skill |
+| [evolve](meta/evolve/) | 1.0.0 | Self-improving skill that reads /recall and /metrics output, identifies which skills need patching, and applies fixes |
+| [extract-template](meta/extract-template/) | 1.0.0 | Extracts a reusable project template from a successful project -- captures pipeline, conventions, and pitfalls |
+| [promote](meta/promote/) | 1.0.0 | Cross-project pattern detection -- reads all project memories, finds recurring patterns, promotes to global conventions |
+| [skill-creator](meta/skill-creator/) | 1.0.0 | Creates new Claude Code skills following the marketplace SKILL.md format with proper frontmatter and quality scoring |
+| [skill-test](meta/skill-test/) | 1.0.0 | Validates a SKILL.md file against the marketplace quality rubric, checking schema, structure, and computing a score |
+| [registry-sync](meta/registry-sync/) | 1.0.0 | Scans and validates all SKILL.md files in the registry, checks category READMEs, detects duplicates, produces health report |
 
 ## Recommended Pipelines
 
@@ -150,6 +256,31 @@ skills-hub-registry/
 ### Quality Gate
 ```
 /polish  (runs: /ux ∥ /scale-audit → /qa → /analyze)
+```
+
+### Full Test Coverage
+```
+/test-suite  (scans gaps, routes to unit/e2e/integration/load/contract/a11y/visual)
+```
+
+### Security Hardening
+```
+/secure-ship  (runs: /owasp → /ship → /security-review → /pentest)
+```
+
+### Compliance Audit
+```
+/compliance-gate  (runs: /secure → /gdpr → /dependency-scan → /pentest)
+```
+
+### Deploy Pipeline
+```
+/full-deploy  (runs: /docker → /github-actions → /monitoring → /preflight)
+```
+
+### Tech Debt Paydown
+```
+/tech-debt-sprint  (runs: /tech-debt → /code-smell → /dead-code → /iterate-review)
 ```
 
 ### Retrospective
@@ -178,6 +309,59 @@ skills-hub-registry/
   ├── pre-build validation
   ├── /analyze (iterations 2, final)
   └── /readme
+
+/test-suite (test orchestrator)
+  ├── coverage scan
+  ├── /unit-test
+  ├── /e2e
+  ├── /integration-test
+  ├── /load-test
+  ├── /contract-test
+  ├── /accessibility-test
+  └── /visual-regression
+
+/secure (security orchestrator)
+  ├── /owasp
+  ├── /pentest
+  ├── /gdpr
+  ├── /soc2
+  ├── /encryption
+  └── /dependency-scan
+
+/document (docs orchestrator)
+  ├── /readme
+  ├── /api-docs
+  ├── /adr
+  ├── /changelog
+  ├── /diagram
+  ├── /onboarding
+  └── /runbook
+
+/devops (deploy orchestrator)
+  ├── /docker
+  ├── /github-actions
+  ├── /k8s
+  ├── /terraform
+  ├── /monitoring
+  └── /secrets
+
+/integrate (integration orchestrator)
+  ├── /auth-provider
+  ├── /stripe
+  ├── /email
+  ├── /push-notifications
+  ├── /search
+  ├── /storage
+  ├── /realtime
+  └── /analytics-tracking
+
+/dx (productivity orchestrator)
+  ├── /devcontainer
+  ├── /env-setup
+  ├── /git-hooks
+  ├── /linter
+  ├── /monorepo
+  └── /release
 
 /polish (quality combo)
   ├── /ux (parallel track A)
@@ -229,7 +413,7 @@ Skills are scored 0-100 on the marketplace:
 
 1. Create a new directory under the appropriate category: `{category}/{skill-name}/SKILL.md`
 2. Follow the SKILL.md format above
-3. Ensure your skill scores >= 20 on the quality scale
+3. Ensure your skill scores >= 20 on the quality scale (run `/skill-test` to check)
 4. Submit a PR
 
 ## Key Design Patterns
@@ -243,3 +427,4 @@ These patterns are validated across 7+ production projects:
 - **Parallel execution:** Independent tracks run concurrently via Task tool subagents
 - **Wiring completeness:** Detect features that exist in one layer but are never connected
 - **Monolith decomposition:** Files exceeding 500 lines are split before adding features
+- **Orchestrator pattern:** Main skills scan for gaps and route to specialized sub-skills
