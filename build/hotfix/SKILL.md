@@ -1,22 +1,31 @@
 ---
 name: hotfix
 description: Emergency bug fix pipeline — diagnose, fix, test, commit, push, and PR in 2 iterations max. Speed over perfection.
-version: "1.0.0"
+version: "1.1.0"
 category: build
 platforms:
   - CLAUDE_CODE
 ---
 
-You are in EMERGENCY MODE. Fix the bug and ship. Do NOT ask questions.
+You are in EMERGENCY MODE. Fix the bug and ship. Do NOT ask the user questions. Infer everything from the error, stack trace, and codebase.
 
 Maximum 2 iterations. Do NOT refactor surrounding code. Do NOT improve anything
 beyond the bug. Apply the minimal correct fix.
 
-INPUT: $ARGUMENTS
-Bug description, error message, stack trace, or area that's broken.
+============================================================
+TARGET: $ARGUMENTS
+============================================================
+
+$ARGUMENTS contains the bug description, error message, stack trace, or area that is broken.
+
+If $ARGUMENTS is empty:
+1. Check conversation context for an error message or bug report.
+2. Check recent git log for revert commits or fix attempts.
+3. Run the project test suite to find failing tests.
+4. If nothing is found, report that no bug was identified and suggest running `/qa` to find issues.
 
 ============================================================
-BRANCH SAFETY
+PHASE 1: BRANCH SAFETY
 ============================================================
 
 Before making any changes:
@@ -27,7 +36,7 @@ Before making any changes:
 3. If already on a feature or hotfix branch: stay on it.
 
 ============================================================
-ITERATION 1: DIAGNOSE AND FIX
+PHASE 2: DIAGNOSE AND FIX (Iteration 1)
 ============================================================
 
 1. DIAGNOSE:
@@ -47,20 +56,20 @@ ITERATION 1: DIAGNOSE AND FIX
      If no specific test identified: `ENVIRONMENT=test sbt test`
    - Flutter (pubspec.yaml): `flutter test`
    - Node.js (package.json): `npx vitest run` or `npm test`
-   - If tests pass → go to SHIP.
-   - If tests fail → go to ITERATION 2.
+   - If tests pass -> go to PHASE 4 (SHIP).
+   - If tests fail -> go to PHASE 3.
 
 ============================================================
-ITERATION 2: REFINE (only if iteration 1 tests failed)
+PHASE 3: REFINE (Iteration 2 — only if iteration 1 tests failed)
 ============================================================
 
 1. Analyze the test failures from iteration 1.
 2. Adjust the fix based on what the tests revealed.
 3. Re-run the test suite.
-4. If still failing → STOP. Report what you found and what you tried.
+4. If still failing -> STOP. Report what you found and what you tried.
 
 ============================================================
-SHIP
+PHASE 4: SHIP
 ============================================================
 
 1. Stage ONLY the files you changed (no unrelated files).
@@ -86,11 +95,36 @@ SHIP
    - Do NOT reference Claude, AI, or include any AI attribution.
    - Extract story number from branch name if present and link Jira.
 
-OUTPUT:
-## Hotfix Shipped
-- **Bug:** {what was broken}
-- **Cause:** {root cause}
-- **Fix:** {file:line — what changed}
-- **Tests:** {pass/fail, count}
-- **PR:** {URL}
-- **Iterations:** {1 or 2}/2
+============================================================
+OUTPUT
+============================================================
+
+| Section | Detail |
+|---------|--------|
+| Bug | {what was broken} |
+| Cause | {root cause} |
+| Fix | {file:line — what changed} |
+| Tests | {pass/fail, count} |
+| PR | {URL} |
+| Iterations | {1 or 2}/2 |
+
+============================================================
+NEXT STEPS
+============================================================
+
+After the hotfix is shipped:
+- "Run `/qa` to verify the fix in context of the full application."
+- "Run `/arch-review` to validate the fix does not introduce architectural issues."
+- "Run `/analyze` to check for domain consistency after the change."
+- "Run `/manual-test-plan` to generate a targeted QA plan for the affected area."
+- "Run `/ship` if additional work is needed beyond the hotfix scope."
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT refactor surrounding code — fix only the bug, nothing else.
+- Do NOT add features or improvements — this is an emergency fix.
+- Do NOT spend more than 2 iterations — if it is not fixed after 2, stop and report.
+- Do NOT make sweeping changes — change as few lines as possible.
+- Do NOT skip creating the PR — every hotfix must be tracked and reviewable.

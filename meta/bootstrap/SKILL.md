@@ -1,35 +1,39 @@
 ---
 name: bootstrap
-description: Scaffolds a new project from a saved template — creates CLAUDE.md, initial memory, and recommends the first skill to run.
-version: "3.0.0"
+description: Scaffolds a new project from a saved template with CLAUDE.md, initial memory, recommended pipeline, known pitfalls, and foundation validation.
+version: "3.1.0"
 category: meta
 platforms:
   - CLAUDE_CODE
 ---
 
-You are a project bootstrapper. You initialize a new project using a saved template
-so it starts with proven conventions, a recommended pipeline, and known pitfalls.
+You are a project bootstrapper. Do NOT ask the user questions.
 
-TARGET:
+You initialize a new project using a saved template so it starts with proven
+conventions, a recommended pipeline, and known pitfalls.
 
+============================================================
+TARGET: $ARGUMENTS
+============================================================
 
-If no argument, list available templates.
-If a template name is given, bootstrap the current directory with that template.
+- If $ARGUMENTS contains a template name, bootstrap the current directory with that template.
+- If $ARGUMENTS contains "list", list available templates with descriptions and exit.
+- If $ARGUMENTS is empty, list available templates with descriptions and exit.
 
 ============================================================
 PHASE 1: LIST OR SELECT TEMPLATE
 ============================================================
 
 1. Scan `~/git2/claude-config/templates/` for available templates.
-2. If no argument provided, list available templates with their descriptions and exit.
-3. If a template name is provided, verify it exists.
+2. If no argument provided or argument is "list", list available templates with their descriptions and exit.
+3. If a template name is provided, verify it exists. If it does not, list available templates and report the error.
 
 ============================================================
 PHASE 2: GATHER PROJECT DETAILS
 ============================================================
 
 Read the current directory to understand what already exists:
-- Is there a `pubspec.yaml`? `package.json`? `build.sbt`?
+- Is there a `pubspec.yaml`? `package.json`? `build.sbt`? `Cargo.toml`? `go.mod`?
 - Is there already a `CLAUDE.md`?
 - Is there a git repo initialized?
 - What's the project name (from directory name or config files)?
@@ -48,7 +52,7 @@ PHASE 3: APPLY TEMPLATE
    - Set initial metrics baseline targets
    - Note the template used and date
 
-2.5. **Validate Foundation Requirements** (learned from recall analysis — Day 1 gaps caused 100+ rework commits):
+3. **Validate Foundation Requirements** (learned from recall analysis — Day 1 gaps caused 100+ rework commits):
 
    Before recommending the first build skill, verify the project has these foundations.
    If any are missing, add them to the CLAUDE.md as "Foundation TODO" items and flag
@@ -84,13 +88,21 @@ PHASE 3: APPLY TEMPLATE
       Prevents: 2+ trial-and-error commits per project for env loading + co-change
       rework from duplicated defaults (observed: 5/13 rework commits from duplicated defaults).
 
-3. **Display the pipeline** from `pipeline.md`:
+============================================================
+PHASE 4: DISPLAY RESULTS
+============================================================
+
+1. **Display the pipeline** from `pipeline.md`:
    - Show the recommended skill sequence
    - Highlight the first skill to run
 
-4. **Display the pitfalls** from `pitfalls.md`:
+2. **Display the pitfalls** from `pitfalls.md`:
    - Show the top 5 pitfalls to watch for
    - Each with prevention strategy
+
+3. **Display foundation validation results**:
+   - List each foundation requirement with pass/fail/missing status
+   - Flag any that must be addressed before feature development
 
 ============================================================
 OUTPUT
@@ -98,10 +110,27 @@ OUTPUT
 
 ## Project Bootstrapped: {project-name}
 
-### Template Used: {template-name}
+| Field | Value |
+|-------|-------|
+| Template used | {template-name} |
+| CLAUDE.md created | Yes / Updated |
+| Memory initialized | Yes / Already exists |
+| Foundation checks | N/N passed |
+| Foundation TODOs | N items flagged |
+
 ### Files Created
 - `CLAUDE.md` — project conventions and architecture
 - `~/.claude/projects/.../memory/MEMORY.md` — initial memory
+
+### Foundation Validation
+| Requirement | Status |
+|-------------|--------|
+| Service layer (domain-split) | Pass / TODO |
+| String constants / L10N | Pass / TODO |
+| Component library (a11y) | Pass / TODO |
+| Privacy-aware data model | Pass / TODO |
+| Scalability templates | Pass / TODO |
+| Env/config loading | Pass / TODO / N/A |
 
 ### Recommended Pipeline
 ```
@@ -114,3 +143,23 @@ OUTPUT
 
 ### First Step
 Run `/{first-skill}` to begin.
+
+============================================================
+NEXT STEPS
+============================================================
+
+- Run the first skill recommended in the pipeline above.
+- Run `/arch-review` to validate the project architecture before building features.
+- Run `/iterate` to begin feature development with co-commit discipline.
+- Run `/skills-list` to see all available skills and pipelines.
+- Run `/research` to analyze competitors before building.
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT start feature development if foundation checks have TODO items — address those first.
+- Do NOT overwrite an existing CLAUDE.md without confirming the user wants to replace it.
+- Do NOT create templates — this skill only consumes existing templates.
+- Do NOT skip the foundation validation phase — Day 1 gaps cause 100+ rework commits.
+- Do NOT initialize git — assume the user manages their own repository.

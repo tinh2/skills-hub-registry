@@ -1,11 +1,25 @@
 ---
 name: skills-list
-description: Display the full skills catalog — lists every available skill with descriptions and autonomous build chains.
-version: "3.0.0"
+description: Displays the full skills catalog with descriptions, autonomous build chains, recommended pipelines, and parallelization rules.
+version: "3.1.0"
 category: docs
 platforms:
   - CLAUDE_CODE
 ---
+
+You are a skills catalog display agent. Do NOT ask the user questions.
+
+============================================================
+TARGET: $ARGUMENTS
+============================================================
+
+- If $ARGUMENTS contains a category name (e.g., "build", "test", "combo"), filter the catalog to show only skills in that category.
+- If $ARGUMENTS contains "chains" or "pipelines", skip the full table and show only the Autonomous Build & Improve Chains section.
+- If $ARGUMENTS is empty, display the complete skills catalog.
+
+============================================================
+PHASE 1: DISPLAY SKILLS TABLE
+============================================================
 
 Display the following skills catalog to the user. Do not invoke any skills — just print this reference table.
 
@@ -17,18 +31,18 @@ Display the following skills catalog to the user. Do not invoke any skills — j
 | **backend-spec** | Generates backend or frontend engineering specs in structured Jira format with description, acceptance criteria, routes, dev notes, and schemas. |
 | **story-implementer** | Implements a Jira story or image-based spec using repo conventions, writes unit tests, creates PR, and addresses bot review. |
 | **arch-review** | Architect-level story review and implementation validation with domain consistency analysis. Pre-code design feedback or post-code completeness check. |
-| **build** | Master orchestrator — takes a competitor app and builds a better, cheaper, modern clone end-to-end (Node.js backend + Flutter frontend). **v3: parallel story reviews, parallel feature streams, parallel UX ∥ manual-test-plan.** |
+| **build** | Master orchestrator — takes a competitor app and builds a better, cheaper, modern clone end-to-end (Node.js backend + Flutter frontend). **v3: parallel story reviews, parallel feature streams, parallel UX / manual-test-plan.** |
 | **flutter** | Analyzes a video/screenshots of an app and builds a Flutter mobile version replicating the UI, flows, and functionality. |
 | **iterate** | Self-iterating build loop — implements, tests, reviews, analyzes, and refines autonomously up to 6 iterations until all validation passes. **v4: co-commit rules, server-side validation wiring, intermediate QA gates.** |
 | **iterate-review** | Autonomously review and improve existing code through up to 5 iterations of analysis, domain verification, fixing, and validation. **v4: wiring completeness checks, structural health, config propagation.** |
 | **ship** | Fast autonomous build loop — 4 iterations max. Build it, make it work, analyze it, ship it. **v4: co-commit rules, server-side validation wiring.** |
-| **qa** | Automated QA agent — walks every screen/endpoint, verifies functionality, evaluates design/usability, and fixes issues found. **v3: callable function wiring audit, CF write ↔ model audit, Firestore rules coverage.** |
+| **qa** | Automated QA agent — walks every screen/endpoint, verifies functionality, evaluates design/usability, and fixes issues found. **v3: callable function wiring audit, CF write / model audit, Firestore rules coverage.** |
 | **walkthrough** | Spins up the Flutter app on simulator, generates and runs exhaustive integration tests for every flow/screen/button, then self-heals failures. |
 | **e2e** | Auto-detects any tech stack, generates and runs exhaustive E2E tests covering backend APIs, frontend UI flows, and full user journeys, then self-heals failures. |
 | **manual-test-plan** | Generates a manual QA test plan based on code changes on the current branch. Final step before merge. |
 | **ux** | Dual-mode UX skill — runs heuristic/accessibility/motion audit on codebase, or validates implementation against design mockups. Fixes and commits. |
-| **analyze** | End-to-end domain analysis — traces every feature across all layers, verifies consistency, and fixes issues found. Self-healing loop. **v3: wiring completeness phase (callable function audit, CF write ↔ model, config propagation).** |
-| **audit** | Lightweight domain consistency audit — verify all layers match and fix issues found. Fast gate between pipeline phases. **v2: server validation wiring, CF ↔ model fields, config propagation.** |
+| **analyze** | End-to-end domain analysis — traces every feature across all layers, verifies consistency, and fixes issues found. Self-healing loop. **v3: wiring completeness phase (callable function audit, CF write / model, config propagation).** |
+| **audit** | Lightweight domain consistency audit — verify all layers match and fix issues found. Fast gate between pipeline phases. **v2: server validation wiring, CF / model fields, config propagation.** |
 | **compete** | Researches competing products online, catalogs their features, and cross-references against the current codebase for a prioritized feature gap analysis. |
 | **aws** | Generates production-ready Terraform files for AWS infrastructure. File generation only, no deployment. |
 | **check-vanta** | Checks Vanta for open vulnerabilities and generates a prioritized security compliance report. |
@@ -39,13 +53,17 @@ Display the following skills catalog to the user. Do not invoke any skills — j
 | **contributing_sitter_first** | Enforces the trust-first marketplace rule: user must complete a paid sit as provider before redeeming volunteer-earned credits. |
 | **new-features** | Reads all `.md` files in the `docs/` folder, extracts learnings and insights, synthesizes new feature ideas, and writes them to `docs/NewFeatures-X.md` (X = 3-word theme). Global skill. |
 | **scale-audit** | Scans the entire codebase for scalability bottlenecks — DB queries, API patterns, concurrency, infra — scores readiness 1-10 and writes full report to `docs/scalability-audit.md`. Global skill. |
-| **research** | Combo: `/compete` → `/new-features`. Competitive gap analysis + feature ideation from findings. |
-| **spec** | Combo: `/mvp` → `/backend-spec`. Analyze an app, then generate implementation stories. |
-| **review-implement** | Combo: `/arch-review` → `/si`. Review a story's design, resolve gaps, then implement and PR. |
-| **full-test** | Combo: `/e2e` → `/manual-test-plan`. Automated E2E tests + complementary manual test plan. |
-| **polish** | Combo: `/ux` → `/qa` → `/analyze`. Full quality pass — UX audit, QA verification, domain analysis. Fixes everything. |
-| **retro** | Combo: `/recall` → `/new-features`. Dev cycle retrospective + feature ideas from learnings. |
+| **research** | Combo: `/compete` then `/new-features`. Competitive gap analysis + feature ideation from findings. |
+| **spec** | Combo: `/mvp` then `/backend-spec`. Analyze an app, then generate implementation stories. |
+| **review-implement** | Combo: `/arch-review` then `/si`. Review a story's design, resolve gaps, then implement and PR. |
+| **full-test** | Combo: `/e2e` then `/manual-test-plan`. Automated E2E tests + complementary manual test plan. |
+| **polish** | Combo: `/ux` then `/qa` then `/analyze`. Full quality pass — UX audit, QA verification, domain analysis. Fixes everything. |
+| **retro** | Combo: `/recall` then `/new-features`. Dev cycle retrospective + feature ideas from learnings. |
 | **skills-list** | Displays this skills catalog. |
+
+============================================================
+PHASE 2: DISPLAY AUTONOMOUS BUILD CHAINS
+============================================================
 
 ---
 
@@ -53,8 +71,8 @@ Display the following skills catalog to the user. Do not invoke any skills — j
 
 These skills chain other skills together and iterate autonomously without user input:
 
-### Starting from scratch (competitor app → finished product)
-- **`/build`** — Full end-to-end orchestrator. Chains `/mvp` → `/backend-spec` → `/story-implementer` → `/qa` → `/analyze` and loops autonomously.
+### Starting from scratch (competitor app to finished product)
+- **`/build`** — Full end-to-end orchestrator. Chains `/mvp` then `/backend-spec` then `/story-implementer` then `/qa` then `/analyze` and loops autonomously.
 
 ### Adding features and iterating on existing code
 | Skill | Style | Max iterations |
@@ -76,16 +94,16 @@ These skills chain other skills together and iterate autonomously without user i
 ### Combo chains (paired skills in one call)
 | Skill | Chain | What it does |
 |---|---|---|
-| **`/research`** | `/compete` → `/new-features` | Competitive analysis + feature ideation from findings |
-| **`/spec`** | `/mvp` → `/backend-spec` | App analysis + implementation story generation |
-| **`/review-implement`** | `/arch-review` → `/si` | Design review + implementation with PR |
-| **`/full-test`** | `/e2e` → `/manual-test-plan` | Automated E2E tests + complementary manual test plan |
-| **`/polish`** | (`/ux` ∥ `/scale-audit`) → `/qa` → `/analyze` | Parallel UX + scalability audit, then QA + domain analysis |
-| **`/retro`** | `/recall` → `/new-features` | Dev retrospective + feature ideas from learnings |
+| **`/research`** | `/compete` then `/new-features` | Competitive analysis + feature ideation from findings |
+| **`/spec`** | `/mvp` then `/backend-spec` | App analysis + implementation story generation |
+| **`/review-implement`** | `/arch-review` then `/si` | Design review + implementation with PR |
+| **`/full-test`** | `/e2e` then `/manual-test-plan` | Automated E2E tests + complementary manual test plan |
+| **`/polish`** | (`/ux` parallel `/scale-audit`) then `/qa` then `/analyze` | Parallel UX + scalability audit, then QA + domain analysis |
+| **`/retro`** | `/recall` then `/new-features` | Dev retrospective + feature ideas from learnings |
 
-platforms:
-- CLAUDE_CODE
----
+============================================================
+PHASE 3: DISPLAY RECOMMENDED PIPELINE
+============================================================
 
 ## Recommended Pipeline (learned from /recall analysis)
 
@@ -140,17 +158,21 @@ minimizes rework by catching issues early and ensures all layers stay connected.
 └────────────────────────────────┘
 ```
 
+============================================================
+PHASE 4: DISPLAY PARALLELIZATION AND PIPELINE RULES
+============================================================
+
 ### Parallelization rules:
 Skills can run in parallel when they don't conflict (one writes code, the other only reads, OR they write to completely different files).
 
 | Parallel pair | Why safe |
 |---|---|
-| `/ux` ∥ `/e2e` | UX modifies frontend UI; E2E generates/runs test files. Different file sets. |
-| `/ux` ∥ `/scale-audit` | UX modifies code; scale-audit is 100% read-only (writes only its .md report). |
-| `/ux` ∥ `/manual-test-plan` | UX modifies code; manual-test-plan only reads the branch diff. |
-| `/readme` ∥ `/manual-test-plan` | Both are read-only (readme reads codebase, manual-test-plan reads diff). |
-| `/e2e` ∥ `/manual-test-plan` | E2E writes test files; manual-test-plan only reads the branch diff. |
-| `/compete` ∥ `/scale-audit` | Both are read-only analysis (web research + codebase scan). |
+| `/ux` parallel `/e2e` | UX modifies frontend UI; E2E generates/runs test files. Different file sets. |
+| `/ux` parallel `/scale-audit` | UX modifies code; scale-audit is 100% read-only (writes only its .md report). |
+| `/ux` parallel `/manual-test-plan` | UX modifies code; manual-test-plan only reads the branch diff. |
+| `/readme` parallel `/manual-test-plan` | Both are read-only (readme reads codebase, manual-test-plan reads diff). |
+| `/e2e` parallel `/manual-test-plan` | E2E writes test files; manual-test-plan only reads the branch diff. |
+| `/compete` parallel `/scale-audit` | Both are read-only analysis (web research + codebase scan). |
 | Story reviews (within `/build`) | Design reviews are read-only spec analysis — batch 3-4 in parallel. |
 | Feature streams (within `/build`) | Independent module directories — no shared file writes. |
 
@@ -199,3 +221,36 @@ Skills that MUST stay sequential (both modify code in overlapping areas):
 - 100% first-time-right ratio (zero fix-after-fix commits)
 - 4 integration wiring passes (each touching 4-8 hub files)
 - Zero rework — all modifications extended rather than corrected
+
+============================================================
+OUTPUT
+============================================================
+
+## Skills Catalog Summary
+
+| Metric | Value |
+|--------|-------|
+| Total skills | N |
+| Categories shown | N |
+| Combo chains | N |
+| Pipeline diagrams | 3 (new feature, quick, pre-release) |
+
+============================================================
+NEXT STEPS
+============================================================
+
+- Run `/gen-catalog` to auto-regenerate this catalog and README.md from SKILL.md frontmatter.
+- Run `/bootstrap` to scaffold a new project with the recommended pipeline.
+- Run `/build` to start the full autonomous build chain from scratch.
+- Run `/research` to begin with competitive analysis and feature ideation.
+- Run `/recall` to reconstruct the dev cycle and generate pipeline improvements.
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT invoke any skills — this is a display-only reference.
+- Do NOT modify any files in the repository.
+- Do NOT omit skills from the catalog — show every registered skill.
+- Do NOT reorder skills within categories — maintain alphabetical or pipeline order.
+- Do NOT display stale information — if the catalog source has been updated, reflect the latest.

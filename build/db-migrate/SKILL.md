@@ -1,7 +1,7 @@
 ---
 name: db-migrate
 description: Scaffolds Flyway migration files — generates timestamped SQL, updates Slick table definitions, and modifies model case classes to match.
-version: "1.0.0"
+version: "1.1.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -10,8 +10,16 @@ platforms:
 You are a database migration scaffolding agent for the Scala/Finatra codebase.
 Do NOT ask the user questions. Infer everything from the codebase.
 
-INPUT: $ARGUMENTS
-A description of the schema change (e.g., "add email_verified boolean to marketplace.contacts").
+============================================================
+TARGET: $ARGUMENTS
+============================================================
+
+$ARGUMENTS contains a description of the schema change (e.g., "add email_verified boolean to marketplace.contacts").
+
+If $ARGUMENTS is empty:
+1. Check conversation context for a schema change description.
+2. Check for output from `/backend-spec` or `/arch-review` that specifies schema changes.
+3. If nothing is found, report that no schema change was described and suggest running `/backend-spec` to generate stories with schema definitions.
 
 ============================================================
 PHASE 1: SCHEMA ANALYSIS
@@ -85,9 +93,9 @@ PHASE 5: UPDATE SERVICE & REPOSITORY (if needed)
 ============================================================
 
 If the new columns require:
-- New query methods → add to repository using Slick DSL
-- New business logic → add to service layer (Resource -> Service -> Repository pattern)
-- Updated API responses → update the resource layer DTOs
+- New query methods -> add to repository using Slick DSL
+- New business logic -> add to service layer (Resource -> Service -> Repository pattern)
+- Updated API responses -> update the resource layer DTOs
 
 ============================================================
 PHASE 6: VERIFY
@@ -112,13 +120,38 @@ feat: {description of schema change}
 Do NOT include Co-Authored-By lines.
 Push after committing.
 
-OUTPUT:
-## Migration Created
-- Migration: `V{timestamp}__{description}.sql`
-- Schema: {schema name}
-- Table: {table name}
-- Changes: {what was added/modified}
-- Slick: {table class updated}
-- Model: {case class updated}
-- Compile: {pass/fail}
-- Tests: {pass/fail/skipped}
+============================================================
+OUTPUT
+============================================================
+
+| Section | Detail |
+|---------|--------|
+| Migration | `V{timestamp}__{description}.sql` |
+| Schema | {schema name} |
+| Table | {table name} |
+| Changes | {what was added/modified} |
+| Slick | {table class updated} |
+| Model | {case class updated} |
+| Compile | {pass/fail} |
+| Tests | {pass/fail/skipped} |
+
+============================================================
+NEXT STEPS
+============================================================
+
+After the migration is created:
+- "Run `/arch-review` to validate the schema change against the story requirements."
+- "Run `/si` to implement the feature that uses this new schema."
+- "Run `/qa` to verify the migration applies cleanly and the app works end-to-end."
+- "Run `/pr` to create a pull request for the migration."
+- "Run `/hotfix` if the migration needs an urgent correction."
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT use raw SQL with `sqlu` interpolator in application code — always use Slick's functional query combinators.
+- Do NOT create migrations without updating the corresponding Slick table definition and model case class in the same commit.
+- Do NOT modify existing migration files — always create new migrations for changes.
+- Do NOT skip the compile verification step — type errors from mismatched models must be caught before committing.
+- Do NOT add columns without considering nullability and defaults — every new column must have a safe migration path for existing rows.

@@ -1,22 +1,29 @@
 ---
 name: build
 description: Master orchestrator that takes a competitor app and builds a better, cheaper, modern clone end-to-end with Node.js backend and Flutter frontend — from analysis through implementation and QA.
-version: "3.0.0"
+version: "3.1.0"
 category: build
 platforms:
   - CLAUDE_CODE
 ---
 
-You are a master build orchestrator. You take a competitor app as input and execute
-a complete automated pipeline to produce a working, superior clone with a Node.js
-backend and Flutter frontend.
+You are a master build orchestrator. Do NOT ask the user questions. You take a competitor app as input and execute a complete automated pipeline to produce a working, superior clone with a Node.js backend and Flutter frontend.
 
 You run the ENTIRE pipeline end-to-end without pausing for user input unless you
 encounter a blocking ambiguity that cannot be reasonably resolved with defaults.
 
-INPUT:
+============================================================
+TARGET: $ARGUMENTS
+============================================================
 
-The user will provide one or more of:
+$ARGUMENTS contains the competitor app reference — a URL, video path, screenshot path, or text description.
+
+If $ARGUMENTS is empty:
+1. Check conversation context for an app URL, video, screenshots, or description.
+2. Check the current directory for video files, screenshots, or existing project scaffolding.
+3. If nothing is found, report that no competitor app was provided and suggest providing an App Store URL, video recording, or screenshots.
+
+Accepted input types:
 1. An App Store or Google Play Store URL.
 2. A video file or screen recording of the competitor app.
 3. Screenshots of the competitor app.
@@ -352,9 +359,9 @@ PARALLELIZATION RULES:
 - After all parallel streams complete, run a merge verification step.
 
 EXAMPLE: If the dependency graph shows:
-  Stream A: STORY-003 → STORY-006 → STORY-009 (User profiles)
-  Stream B: STORY-004 → STORY-007 (Notifications)
-  Stream C: STORY-005 → STORY-008 (Search)
+  Stream A: STORY-003 -> STORY-006 -> STORY-009 (User profiles)
+  Stream B: STORY-004 -> STORY-007 (Notifications)
+  Stream C: STORY-005 -> STORY-008 (Search)
 Then launch 3 parallel Task tool subagents, one per stream.
 
 For each story (whether parallel or sequential):
@@ -434,7 +441,7 @@ Step 5.3 — Domain Consistency Analysis
 
 Run the `/analyze` skill instructions scoped to the full project:
 - Cross-layer consistency for every feature.
-- Firebase rules ↔ data model alignment.
+- Firebase rules <-> data model alignment.
 - State management completeness.
 - Navigation integrity.
 - Business logic consistency.
@@ -445,7 +452,7 @@ Commit: "fix: validation gate — resolve analysis issues"
 This gate MUST pass before proceeding to Phase 6.
 
 ============================================================
-PHASE 6: PARALLEL VERIFICATION  (UX ∥ manual-test-plan)
+PHASE 6: PARALLEL VERIFICATION  (UX || manual-test-plan)
 ============================================================
 
 This phase runs TWO independent skills in PARALLEL using the Task tool:
@@ -577,7 +584,9 @@ STRICT RULES
   Every model change that adds/changes collection access must update rules in the same commit.
 - VALIDATION GATE (Phase 5) is NOT optional. It must pass before QA and UX phases.
 
-NEXT STEPS:
+============================================================
+NEXT STEPS
+============================================================
 
 After the build is complete:
 - "Run `/ux` to re-audit UX after manual changes."
@@ -585,3 +594,13 @@ After the build is complete:
 - "Run `/aws` to generate Terraform infrastructure for deploying this project to AWS."
 - "Run `/manual-test-plan` on a specific feature branch for targeted QA."
 - "To add a new feature, run `/backend-spec` to create the story, then `/si` to implement it."
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT pause between phases to ask for confirmation — run the entire pipeline end-to-end.
+- Do NOT substitute any technology in the specified stack (Fastify, Prisma, PostgreSQL, Riverpod, GoRouter).
+- Do NOT create placeholder or stub implementations — every file must be production-ready.
+- Do NOT batch the entire project into one commit — commit after every logical unit of work.
+- Do NOT skip the Validation Gate (Phase 5) — it must pass before QA and UX phases begin.

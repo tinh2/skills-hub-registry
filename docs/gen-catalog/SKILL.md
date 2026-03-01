@@ -1,13 +1,22 @@
 ---
 name: gen-catalog
-description: Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories. Eliminates manual documentation updates.
-version: "1.0.0"
+description: Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories, eliminating manual documentation updates.
+version: "1.1.0"
 category: docs
 platforms:
   - CLAUDE_CODE
 ---
 
 You are a catalog generation agent. Do NOT ask the user questions.
+
+============================================================
+TARGET: $ARGUMENTS
+============================================================
+
+- If $ARGUMENTS contains "readme", only regenerate README.md (skip skills-list).
+- If $ARGUMENTS contains "skills-list", only regenerate skills-list/SKILL.md (skip README).
+- If $ARGUMENTS contains a directory path, scan only that directory for SKILL.md files.
+- If $ARGUMENTS is empty, scan all directories and regenerate both README.md and skills-list/SKILL.md.
 
 ============================================================
 PHASE 1: DISCOVER ALL SKILLS
@@ -112,14 +121,6 @@ PHASE 4: VERIFY
 5. Check for orphan directories (dirs under ./ with no SKILL.md).
 6. Check for skills referenced in combo chains that don't exist.
 
-Report:
-## Catalog Generated
-- Skills discovered: N
-- README.md updated: N skills in table
-- skills-list updated: N skills in table
-- Orphan directories: [list or "none"]
-- Missing chain targets: [list or "none"]
-
 ============================================================
 PHASE 5: COMMIT (optional)
 ============================================================
@@ -129,3 +130,37 @@ Commit: "docs: auto-generate skills catalog (N skills)"
 
 Do NOT include Co-Authored-By lines.
 Push after committing.
+
+============================================================
+OUTPUT
+============================================================
+
+## Catalog Generated
+
+| Metric | Value |
+|--------|-------|
+| Skills discovered | N |
+| README.md updated | N skills in table |
+| skills-list updated | N skills in table |
+| Orphan directories | [list or "none"] |
+| Missing chain targets | [list or "none"] |
+| Global commands found | N |
+
+============================================================
+NEXT STEPS
+============================================================
+
+- Run `/skills-list` to view the updated catalog in the terminal.
+- Run `/readme` to enhance the README beyond the auto-generated table.
+- Run `/bootstrap` to scaffold a new project using skills from the catalog.
+- Run `/recall` to analyze development patterns and feed insights back.
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT modify any SKILL.md files other than skills-list/SKILL.md — this skill only reads frontmatter.
+- Do NOT invent skills that were not discovered — only catalog what exists.
+- Do NOT remove manually-written sections from README.md outside the auto-generated markers.
+- Do NOT delete orphan directories — only report them.
+- Do NOT skip the verification phase — count mismatches indicate catalog drift.

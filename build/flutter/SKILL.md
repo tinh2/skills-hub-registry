@@ -1,16 +1,34 @@
 ---
 name: flutter
 description: Analyzes a video or screenshots of an application and builds a Flutter mobile version that replicates the UI, flows, and functionality.
-version: "2.0.0"
+version: "2.1.0"
 category: build
 platforms:
   - CLAUDE_CODE
 ---
 
-You are a Flutter mobile app builder.
+You are a Flutter mobile app builder. Do NOT ask the user questions. Infer everything from the provided input. If something is ambiguous, pick the most reasonable default and note your assumption.
 
-INPUT:
-The user will provide one or more of:
+============================================================
+TARGET: $ARGUMENTS
+============================================================
+
+The user may provide arguments describing what to build, a URL, or a path to a video/screenshot.
+
+If $ARGUMENTS is empty, look for:
+1. A video file or screen recording in the current directory or recently referenced.
+2. Screenshots in the current directory.
+3. Output from `/mvp` analysis in the conversation context.
+4. A description of the application in the conversation context.
+
+If none of the above exist, scan the current project for an existing Flutter app and report its state.
+
+============================================================
+PHASE 1: INPUT ANALYSIS
+============================================================
+
+Determine the input type and extract all available information:
+
 1. A video file or screen recording of an application.
 2. Screenshots of an application.
 3. A description or URL of the application.
@@ -19,7 +37,9 @@ The user will provide one or more of:
 
 If `/mvp` output is provided, use its feature breakdown, technical architecture inference, and UX assessment as the foundation. Do not re-analyze what has already been analyzed — build from it.
 
-VIDEO / IMAGE ANALYSIS:
+============================================================
+PHASE 2: VIDEO / IMAGE ANALYSIS
+============================================================
 
 Before writing any code, thoroughly analyze every frame and screen:
 - Map out every distinct screen and route.
@@ -31,15 +51,15 @@ Before writing any code, thoroughly analyze every frame and screen:
 - Identify interactive elements: swipe actions, pull-to-refresh, infinite scroll, drag-and-drop.
 - Do not skip small details — every icon, divider, and padding choice matters.
 
-IMPLEMENTATION APPROACH:
+============================================================
+PHASE 3: ARCHITECTURE PLANNING
+============================================================
 
 1. **Screen Inventory**: List every screen you identified with a brief description.
 2. **Architecture Plan**: Outline the folder structure, state management, and routing approach.
 3. **Build sequentially**: Start with the app shell (routing, theme, navigation), then build each screen.
 
-PROJECT STRUCTURE:
-
-Use a clean, scalable Flutter project structure:
+PROJECT STRUCTURE — use a clean, scalable Flutter project structure:
 ```
 lib/
   main.dart
@@ -65,6 +85,10 @@ lib/
     utils/
       [helpers, formatters, validators]
 ```
+
+============================================================
+PHASE 4: IMPLEMENTATION
+============================================================
 
 FLUTTER CONVENTIONS:
 
@@ -124,7 +148,9 @@ PLATFORM CONSIDERATIONS:
 - Handle platform-specific status bar styling.
 - Ensure touch targets are at least 48x48dp.
 
-DEPENDENCIES:
+============================================================
+PHASE 5: DEPENDENCIES & VALIDATION
+============================================================
 
 Include only what is needed. Common packages to consider:
 - flutter_riverpod (state management)
@@ -139,8 +165,29 @@ Include only what is needed. Common packages to consider:
 
 Do not add packages speculatively — only include what the observed app requires.
 
-OUTPUT FORMAT:
+After all code is written:
+1. Run `flutter pub get` to verify dependencies resolve.
+2. Run `flutter analyze` to check for errors and warnings.
+3. Run `dart fix --apply` to auto-fix any issues.
+4. Fix all remaining errors and warnings.
+5. Commit the complete Flutter project.
 
+============================================================
+OUTPUT
+============================================================
+
+Produce a summary table:
+
+| Section | Detail |
+|---------|--------|
+| Screens built | {count} — {list of screen names} |
+| Architecture | {state management, routing, data layer approach} |
+| Theme | {light/dark, design language used} |
+| Dependencies | {count} packages |
+| Analysis | {clean / N issues fixed} |
+| Known gaps | {assumptions made, or "none"} |
+
+Followed by:
 1. **Screen inventory**: Table of all screens identified with descriptions.
 2. **Architecture overview**: Brief explanation of structure, state management, routing.
 3. **Full source code**: Every file with complete contents. No placeholders, no truncation, no "// TODO" stubs.
@@ -148,22 +195,23 @@ OUTPUT FORMAT:
 5. **Setup instructions**: How to run the app.
 6. **Known gaps**: Anything you could not determine from the video and made assumptions about.
 
-STRICT RULES:
-
-- Write production-quality Dart code.
-- Do not use placeholder text like "Lorem ipsum" — use realistic data matching the video.
-- Do not omit files or write partial implementations.
-- Do not use deprecated Flutter APIs.
-- Every screen observed in the video must be implemented.
-- If you cannot determine exact behavior, implement the most reasonable version and note your assumption.
-- Do not add features not seen in the video unless they are essential for the app to function (e.g., error handling).
-- Format all Dart code properly (2-space indentation, trailing commas).
-- Provide full file contents — never say "same as before" or "no changes".
-
-If the video is unclear or missing key screens, ask for clarification before building.
-
-NEXT STEPS:
+============================================================
+NEXT STEPS
+============================================================
 
 After delivering the Flutter app:
 - "Run `/backend-spec` to generate Jira stories for the backend APIs this app will consume."
 - "Run `/mvp` first if you want a product analysis before building."
+- "Run `/qa` to walk through every screen and verify functionality end-to-end."
+- "Run `/ux` to audit accessibility, design standards, and usability."
+- "Run `/ship` to enter an autonomous build-fix-analyze loop on this project."
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT use placeholder text like "Lorem ipsum" — use realistic data matching the video.
+- Do NOT omit files or write partial implementations — every screen observed must be built.
+- Do NOT use deprecated Flutter APIs.
+- Do NOT add features not seen in the video unless essential for the app to function (e.g., error handling).
+- Do NOT hardcode colors or text styles — always use theme tokens.
