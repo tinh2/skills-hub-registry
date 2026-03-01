@@ -1,25 +1,35 @@
 ---
 name: ship
 description: Fast autonomous build loop — 4 iterations max. Build it, make it work, analyze it, ship it.
-version: "8.0.0"
+version: "8.1.0"
 category: build
 platforms:
   - CLAUDE_CODE
 ---
 
-You are in FULLY AUTONOMOUS MODE. Zero questions. Just build.
+You are in FULLY AUTONOMOUS MODE. Zero questions. Just build. Do NOT ask the user anything. Decide and move.
 
-TASK:
-$ARGUMENTS
+============================================================
+TARGET: $ARGUMENTS
+============================================================
+
+$ARGUMENTS contains the task description — what to build, fix, or ship.
+
+If $ARGUMENTS is empty:
+1. Check conversation context for a pending task or feature request.
+2. Check recent git log for incomplete work or failing tests.
+3. If nothing is found, run `flutter analyze` or `tsc --noEmit` (whichever applies) and fix all issues found.
+4. If the project is clean, report that and suggest what to work on next.
 
 RULES:
-- Do NOT ask the user anything. Decide and move.
 - If you're unsure between two approaches, pick the simpler one.
 - If a dependency is missing, install it.
 - If tests don't exist, write them.
 - If something breaks, fix it — don't report it, fix it.
 
-=== PRE-BUILD: VALIDATION GATE ===
+============================================================
+PHASE 1: PRE-BUILD VALIDATION GATE
+============================================================
 
 Before writing any feature code, validate the project foundation.
 This prevents wasting iterations on lint, platform, and config issues.
@@ -54,7 +64,9 @@ This prevents wasting iterations on lint, platform, and config issues.
 Fix everything found. Commit: "chore: pre-build validation fixes"
 If clean, skip the commit and proceed.
 
-=== PER-SCREEN QUALITY CHECKLIST (CRITICAL — learned from metrics analysis) ===
+============================================================
+PHASE 2: QUALITY CHECKLIST (apply to every screen/module)
+============================================================
 
 Every screen you create or modify MUST satisfy these before committing.
 Applying these at creation time prevents 46+ retrofit commits later:
@@ -92,7 +104,9 @@ Every iteration that adds new functionality must include:
 - If ZERO tests exist: set up test framework + 3-5 smoke tests first.
 A feature is not complete until its tests exist and pass.
 
-=== CO-COMMIT RULES (CRITICAL — learned from recall analysis) ===
+============================================================
+PHASE 3: CO-COMMIT RULES (apply to every commit)
+============================================================
 
 These rules apply to EVERY iteration. Violating them is the #1 source of rework:
 
@@ -111,7 +125,9 @@ e) SHARED CONFIGURATION (learned from recall analysis — 3 rework commits from
    equivalent) with all shared defaults and env variable overrides centralized.
    Duplicated config is the #1 source of co-change rework in backend projects.
 
-=== ITERATION 1: MAKE IT EXIST ===
+============================================================
+PHASE 4: ITERATION 1 — MAKE IT EXIST
+============================================================
 
 - Build the simplest version that works.
 - Co-commit Firestore rules, server validation, and model fields with features.
@@ -120,7 +136,9 @@ e) SHARED CONFIGURATION (learned from recall analysis — 3 rework commits from
 - Keep commits incremental — if touching 15+ files, split into logical commits.
 - Commit: "feat: initial implementation"
 
-=== ITERATION 2: MAKE IT SOLID ===
+============================================================
+PHASE 5: ITERATION 2 — MAKE IT SOLID
+============================================================
 
 - Add error handling for real failure modes (not hypotheticals).
 - Add or fix tests for core behavior.
@@ -128,7 +146,9 @@ e) SHARED CONFIGURATION (learned from recall analysis — 3 rework commits from
 - Run full validation — fix until green.
 - Commit: "fix: harden implementation"
 
-=== ITERATION 3: DOMAIN ANALYSIS GATE ===
+============================================================
+PHASE 6: ITERATION 3 — DOMAIN ANALYSIS GATE
+============================================================
 
 Run the `/analyze` skill scoped to everything you built or changed.
 Include all analysis phases: consistency audit, server-side validation wiring,
@@ -139,37 +159,56 @@ Depth: Full analysis (all phases of /analyze).
 Action: FIX everything rated Critical or Warning. Re-run affected checks to confirm.
 Commit: "fix: resolve domain analysis issues"
 
-=== ITERATION 4: FINAL PASS (only if needed) ===
+============================================================
+PHASE 7: ITERATION 4 — FINAL PASS (only if needed)
+============================================================
 
 - Only run if the analysis gate found issues that required fixes.
 - Re-validate everything — tests, build, re-check analysis.
 - Clean up if genuinely messy, then done.
 - Commit: "refactor: final cleanup"
 
-=== POST-SHIP: DOCUMENTATION ===
+============================================================
+POST-SHIP: DOCUMENTATION
+============================================================
 
 After all iterations complete and validation passes:
 - Run `/readme` to generate or update the project's README.md.
 
-=== OUTPUT ===
+============================================================
+OUTPUT
+============================================================
 
 One short summary:
 
-  ## Shipped
-  - What: [what you built]
-  - Pre-validation: [issues found/fixed, or "clean"]
-  - Status: [tests/build passing or not]
-  - Analysis: [issues found / issues fixed / any remaining]
-  - Server-side validation: [all wired / gaps found and fixed]
-  - Firestore rules: [all collections covered / gaps found and fixed]
-  - Documentation: [README.md generated/updated]
-  - Caveats: [any known issues, or "none"]
+| Section | Detail |
+|---------|--------|
+| What | {what you built} |
+| Pre-validation | {issues found/fixed, or "clean"} |
+| Status | {tests/build passing or not} |
+| Analysis | {issues found / issues fixed / any remaining} |
+| Server-side validation | {all wired / gaps found and fixed} |
+| Firestore rules | {all collections covered / gaps found and fixed} |
+| Documentation | {README.md generated/updated} |
+| Caveats | {any known issues, or "none"} |
 
-NEXT STEPS:
+============================================================
+NEXT STEPS
+============================================================
 
 Recommended pipeline after `/ship`:
 - "Run `/qa` to verify everything works end-to-end."
 - "Run `/e2e` to generate automated end-to-end test coverage."
 - "Run `/iterate-review` to harden with a focused review pass."
 - "Run `/ux` to audit accessibility, design standards, and usability."
-- "Run `/polish` for the full quality pipeline: `/ux` → `/qa` → `/analyze`."
+- "Run `/polish` for the full quality pipeline: `/ux` -> `/qa` -> `/analyze`."
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT ask the user anything — decide and move autonomously.
+- Do NOT spend more than 4 iterations — if it is not working after 4, stop and report.
+- Do NOT refactor code unrelated to the task — stay scoped.
+- Do NOT skip the pre-build validation gate — it prevents cascading failures.
+- Do NOT commit without running tests first — every commit must have a green build.
