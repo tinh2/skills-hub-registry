@@ -1,12 +1,12 @@
 # Deploy
 
-Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, and cloud deployment.
+Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, cloud deployment, and mobile app publishing.
 
 ## Main Skill
 
 **[devops](devops/)** -- Scans infrastructure gaps and orchestrates deployment readiness across CI/CD, containers, monitoring, and IaC. Routes to the appropriate sub-skills based on what is missing.
 
-## Skills (11)
+## Skills (15)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -21,6 +21,10 @@ Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, and
 | [monitoring](monitoring/) | 1.0.0 | Auto-detect infrastructure and set up observability with dashboards, alerting rules, and application instrumentation |
 | [secrets](secrets/) | 1.0.0 | Audit secret handling, set up secrets management with rotation, and configure CI/CD secrets integration |
 | [app-icon](app-icon/) | 1.0.0 | Generates a polished app icon and applies it as the launcher icon for iOS and Android |
+| [app-store-publish](app-store-publish/) | 1.0.0 | iOS App Store publishing -- Fastlane, provisioning, screenshots, metadata, TestFlight |
+| [play-store-publish](play-store-publish/) | 1.0.0 | Google Play Store publishing -- AAB config, Fastlane supply, data safety, staged rollout |
+| [mobile-ci-cd](mobile-ci-cd/) | 1.0.0 | Mobile CI/CD -- GitHub Actions / Bitrise / Codemagic for iOS+Android |
+| [ota-updates](ota-updates/) | 1.0.0 | Over-the-air updates -- CodePush, Shorebird, Play In-App Updates, rollback |
 
 ## Usage
 
@@ -34,4 +38,9 @@ Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, and
 - Set up monitoring and alerting: `/monitoring`
 - Audit and manage secrets: `/secrets`
 - Generate and apply app icons: `/app-icon`
+- Publish to iOS App Store: `/app-store-publish`
+- Publish to Google Play Store: `/play-store-publish`
+- Set up mobile CI/CD: `/mobile-ci-cd`
+- Configure OTA updates: `/ota-updates`
 - Full deploy pipeline (combo): `/full-deploy` chains docker, CI/CD, monitoring, and preflight
+- Mobile publish pipeline (combo): `/mobile-publish` chains mobile CI/CD, App Store, Play Store, and analytics
