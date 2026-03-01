@@ -2,24 +2,24 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-131 production-tested skills organized into 13 categories covering the complete software development lifecycle.
+172 production-tested skills organized into 13 categories covering the complete software development lifecycle plus 8 industry verticals.
 
 ## Directory Structure
 
 ```
 skills-hub-registry/
-├── build/              # 12 skills — Project scaffolding and full build pipelines
+├── build/              # 14 skills — Project scaffolding and full build pipelines + industry API scaffolds
 ├── test/               #  9 skills — Unit, E2E, integration, load, visual, contract, accessibility tests
 ├── qa/                 # 10 skills — Quality assurance, performance, chaos, code smells, dead code, stress-test personas
-├── review/             #  8 skills — Architecture review, API review, database review, security review, PR, CTO/CFO/CPO
+├── review/             # 15 skills — Architecture, API, database, security, executive, and industry compliance reviews
 ├── deploy/             # 11 skills — Docker, K8s, Terraform, CI/CD, monitoring, DNS, CDN, secrets
 ├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook
-├── security/           #  8 skills — OWASP, pentest, GDPR, SOC2, encryption, dependency scan
+├── security/           # 10 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, encryption, dependency scan
 ├── ux/                 #  5 skills — UX audit, design systems, dark mode, responsive, i18n
-├── analysis/           # 18 skills — Domain analysis, competitive research, metrics, tech debt, health, growth, PMF
+├── analysis/           # 44 skills — Domain analysis, research, metrics + industry verticals
 ├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
-├── combo/              # 16 skills — Multi-skill chains and pipeline compositions
+├── combo/              # 20 skills — Multi-skill chains and pipeline compositions
 └── meta/               #  7 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
 
@@ -50,7 +50,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 ## Skill Catalog
 
-### build -- Project Scaffolding & Build Pipelines (12 skills)
+### build -- Project Scaffolding & Build Pipelines (14 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -66,6 +66,8 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [hotfix](build/hotfix/) | 1.0.0 | Emergency bug fix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
 | [story-implementer](build/story-implementer/) | 2.0.0 | Implements a Jira story using repo conventions, writes unit tests, creates PR, addresses bot review |
 | [db-migrate](build/db-migrate/) | 1.0.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
+| [healthcare-api](build/healthcare-api/) | 1.0.0 | Scaffold a FHIR R4-compliant healthcare API with resource models, SMART on FHIR auth, audit logging, and interoperability endpoints |
+| [fintech-api](build/fintech-api/) | 1.0.0 | Scaffold a production-ready financial services API with Plaid integration, payment processing, double-entry ledger, and KYC workflow |
 
 ### test -- Automated Testing (9 skills)
 
@@ -96,7 +98,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [migration-verify](qa/migration-verify/) | 1.0.0 | Verifies database migrations are safe -- applies cleanly, reverses cleanly, preserves data integrity, is idempotent |
 | [stress-test-personas](qa/stress-test-personas/) | 1.0.0 | Applies 6 adversarial decision-maker personas to stress-test the product and architecture from different strategic angles |
 
-### review -- Architecture & Code Review (8 skills)
+### review -- Architecture, Code & Industry Review (15 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -108,6 +110,13 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [cto-review](review/cto-review/) | 1.0.0 | CTO-perspective technical strategy review -- architecture decisions, scaling readiness, engineering velocity, technical debt ratio, security posture |
 | [cfo-review](review/cfo-review/) | 1.0.0 | CFO-perspective financial impact review -- infrastructure costs, pricing model alignment, build-vs-buy economics, technical debt as financial liability |
 | [cpo-review](review/cpo-review/) | 1.0.0 | CPO-perspective product strategy review -- feature completeness, user journey gaps, retention architecture, growth levers, competitive moat |
+| [healthcare-ops](review/healthcare-ops/) | 1.0.0 | Hospital operations review -- scheduling, workflows, integrations, patient flow, reporting, and staff management |
+| [financial-compliance](review/financial-compliance/) | 1.0.0 | Financial software review against KYC/AML, BSA, Reg E, SOX, GLBA, and state money transmitter regulations |
+| [procurement-review](review/procurement-review/) | 1.0.0 | Procurement software review -- sourcing workflows, PO management, vendor scorecards, spend analytics |
+| [permit-compliance](review/permit-compliance/) | 1.0.0 | Construction software review for permit tracking, building code compliance, environmental regulations, and inspections |
+| [manufacturing-compliance](review/manufacturing-compliance/) | 1.0.0 | Manufacturing regulatory review -- ISO 9001/13485/14001, FDA 21 CFR Part 11, GMP, OSHA, lot/serial traceability |
+| [regulatory-compliance](review/regulatory-compliance/) | 1.0.0 | Cross-industry regulatory review -- audit trails, data retention, RBAC/ABAC, change management, breach notification |
+| [energy-compliance](review/energy-compliance/) | 1.0.0 | Energy sector compliance review -- NERC CIP, FERC reporting, EPA emissions, renewable portfolio standards, pipeline safety |
 
 ### deploy -- Infrastructure & Deployment (11 skills)
 
@@ -140,7 +149,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [gen-catalog](docs/gen-catalog/) | 1.0.0 | Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories |
 | [skills-list](docs/skills-list/) | 3.0.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
 
-### security -- Security & Compliance (8 skills)
+### security -- Security & Compliance (10 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -152,6 +161,8 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [encryption](security/encryption/) | 1.0.0 | Audit and implement encryption -- data at rest, in transit, key management, password hashing, and token security |
 | [dependency-scan](security/dependency-scan/) | 1.0.0 | Auto-detect package manager, scan for vulnerable dependencies, auto-fix where possible, and generate SBOM |
 | [check-vanta](security/check-vanta/) | 2.0.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
+| [hipaa](security/hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
+| [pci-dss](security/pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
 
 ### ux -- User Experience & Design (5 skills)
 
@@ -163,7 +174,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [responsive](ux/responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
 | [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
 
-### analysis -- Domain Analysis & Research (18 skills)
+### analysis -- Domain Analysis, Research & Industry Verticals (44 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -185,6 +196,32 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [sales-readiness](analysis/sales-readiness/) | 1.0.0 | Enterprise sales readiness audit -- SSO/SAML, RBAC, multi-tenancy, audit logging, API quality, SOC2/ISO readiness |
 | [customer-success-audit](analysis/customer-success-audit/) | 1.0.0 | Customer Success Manager perspective audit -- onboarding, self-service, health signals, support infrastructure, expansion triggers |
 | [pmf-analysis](analysis/pmf-analysis/) | 1.0.0 | Product-market fit readiness analysis -- core value delivery, feature focus, activation, retention, analytics maturity, iteration speed |
+| [healthcare-compliance](analysis/healthcare-compliance/) | 1.0.0 | Healthcare software audit for HIPAA, HITECH, 21st Century Cures Act, and state regulatory compliance |
+| [clinical-data-review](analysis/clinical-data-review/) | 1.0.0 | Clinical data review for HL7 FHIR conformance, terminology standards, and interoperability |
+| [medical-billing](analysis/medical-billing/) | 1.0.0 | Medical billing analysis -- claims processing, revenue cycle, ICD-10/CPT validation, payer rules, denial management |
+| [patient-engagement](analysis/patient-engagement/) | 1.0.0 | Patient engagement audit -- portal completeness, secure messaging, telehealth, consent management, health literacy |
+| [credit-risk](analysis/credit-risk/) | 1.0.0 | Credit risk modeling analysis -- fairness, accuracy, regulatory compliance, model governance, scoring algorithms |
+| [fraud-detection](analysis/fraud-detection/) | 1.0.0 | Fraud detection system audit -- rule engines, ML models, real-time processing, alert workflows, adaptive learning |
+| [portfolio-optimizer](analysis/portfolio-optimizer/) | 1.0.0 | Investment portfolio analysis -- allocation models, risk metrics, rebalancing logic, performance attribution |
+| [insurance-claims](analysis/insurance-claims/) | 1.0.0 | Insurance claims processing analysis -- lifecycle completeness, automation rules, fraud indicators, reserve estimation |
+| [route-optimizer](analysis/route-optimizer/) | 1.0.0 | Routing and delivery analysis -- algorithm quality, constraint handling, real-time adaptation, cost modeling |
+| [inventory-forecast](analysis/inventory-forecast/) | 1.0.0 | Forecasting and inventory analysis -- model accuracy, safety stock logic, reorder strategies, demand signals |
+| [supply-chain-risk](analysis/supply-chain-risk/) | 1.0.0 | Supply chain risk analysis -- disruption modeling, end-to-end visibility, compliance tracking, resilience strategies |
+| [warehouse-ops](analysis/warehouse-ops/) | 1.0.0 | Warehouse management analysis -- layout optimization, picking strategies, inventory accuracy, automation readiness |
+| [cost-overrun-predictor](analysis/cost-overrun-predictor/) | 1.0.0 | Construction project analysis -- budget tracking, risk factor modeling, schedule analysis, early warning detection |
+| [property-roi](analysis/property-roi/) | 1.0.0 | Real estate investment analysis -- financial models, pro forma, tax modeling, sensitivity analysis, portfolio analytics |
+| [lease-optimizer](analysis/lease-optimizer/) | 1.0.0 | Commercial lease analysis -- lease abstraction, rent optimization, ASC 842/IFRS 16 compliance, portfolio analysis |
+| [real-estate-market](analysis/real-estate-market/) | 1.0.0 | Real estate analytics -- market data quality, demographics, economic indicators, predictive models, visualization |
+| [predictive-maintenance](analysis/predictive-maintenance/) | 1.0.0 | Manufacturing predictive maintenance analysis -- sensor pipelines, ML lifecycle, MTBF/MTTF, spare parts integration |
+| [production-optimizer](analysis/production-optimizer/) | 1.0.0 | Production scheduling analysis -- OEE calculations, bottleneck detection, changeover optimization, capacity planning |
+| [defect-detection](analysis/defect-detection/) | 1.0.0 | Quality control analysis -- computer vision, SPC, Six Sigma metrics (Cp/Cpk), inspection automation, root cause analysis |
+| [energy-efficiency](analysis/energy-efficiency/) | 1.0.0 | Energy management analysis -- power monitoring, ISO 50001, peak demand, renewable integration, carbon footprint |
+| [contract-risk](analysis/contract-risk/) | 1.0.0 | Contract management analysis -- clause extraction, obligation tracking, risk scoring, SLA monitoring, liability analysis |
+| [litigation-predictor](analysis/litigation-predictor/) | 1.0.0 | Litigation analytics -- case outcome modeling, settlement analysis, cost forecasting, precedent matching |
+| [legal-discovery](analysis/legal-discovery/) | 1.0.0 | E-discovery analysis -- document processing, TAR, privilege detection, PII redaction, defensibility audit |
+| [load-forecast](analysis/load-forecast/) | 1.0.0 | Energy load forecasting analysis -- demand prediction, weather integration, peak shaving, demand response |
+| [grid-optimizer](analysis/grid-optimizer/) | 1.0.0 | Smart grid analysis -- power flow, fault detection/isolation/restoration, DER management, SCADA integration |
+| [commodity-pricing](analysis/commodity-pricing/) | 1.0.0 | Commodity pricing analysis -- pricing models, market data feeds, position management, VaR/CVaR, settlement |
 
 ### productivity -- Developer Experience (8 skills)
 
@@ -213,7 +250,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
 | [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
 
-### combo -- Multi-Skill Chains (16 skills)
+### combo -- Multi-Skill Chains (20 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -233,6 +270,10 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [tech-debt-sprint](combo/tech-debt-sprint/) | 1.0.0 | /tech-debt → /code-smell → /dead-code → /iterate-review | Debt reduction sprint |
 | [launch-readiness](combo/launch-readiness/) | 1.0.0 | /cpo-review → /growth-audit → /ux → /secure → /preflight | Full pre-launch quality gate with go/no-go decision |
 | [investor-ready](combo/investor-ready/) | 1.0.0 | /cto-review → /cfo-review → /cpo-review → /sales-readiness → /codebase-health | Comprehensive investor due-diligence brief |
+| [healthcare-audit](combo/healthcare-audit/) | 1.0.0 | /hipaa → /clinical-data-review → /healthcare-compliance → /security-review | Full healthcare compliance and security audit |
+| [fintech-launch](combo/fintech-launch/) | 1.0.0 | /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight | Complete fintech launch readiness pipeline |
+| [logistics-optimize](combo/logistics-optimize/) | 1.0.0 | /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test | Full logistics optimization and stress testing |
+| [compliance-suite](combo/compliance-suite/) | 1.0.0 | /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest | Cross-industry compliance hardening pipeline |
 
 ### meta -- Skills About Skills (7 skills)
 
@@ -245,6 +286,29 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [skill-creator](meta/skill-creator/) | 1.0.0 | Creates new Claude Code skills following the marketplace SKILL.md format with proper frontmatter and quality scoring |
 | [skill-test](meta/skill-test/) | 1.0.0 | Validates a SKILL.md file against the marketplace quality rubric, checking schema, structure, and computing a score |
 | [registry-sync](meta/registry-sync/) | 1.0.0 | Scans and validates all SKILL.md files in the registry, checks category READMEs, detects duplicates, produces health report |
+
+## Industry Verticals
+
+Skills covering domain-specific regulations, workflows, and compliance across 8 industries:
+
+| Industry | Skills | Key Regulations/Standards |
+|----------|--------|--------------------------|
+| Healthcare | healthcare-compliance, hipaa, clinical-data-review, healthcare-ops, healthcare-api, medical-billing, patient-engagement | HIPAA, HITECH, HL7 FHIR, ICD-10/CPT |
+| Finance | credit-risk, fraud-detection, pci-dss, financial-compliance, portfolio-optimizer, fintech-api, insurance-claims | PCI DSS v4.0, KYC/AML, SOX, BSA, Reg E |
+| Logistics & Supply Chain | route-optimizer, inventory-forecast, supply-chain-risk, warehouse-ops, procurement-review | EDI, TSP/VRP, WMS, demand planning |
+| Construction & Real Estate | cost-overrun-predictor, property-roi, lease-optimizer, permit-compliance, real-estate-market | ASC 842/IFRS 16, building codes, EVM |
+| Manufacturing | predictive-maintenance, production-optimizer, defect-detection, energy-efficiency, manufacturing-compliance | ISO 9001/13485/14001, FDA 21 CFR Part 11, GMP, OSHA |
+| Legal | contract-risk, litigation-predictor, legal-discovery, regulatory-compliance | TAR, e-discovery, RBAC/ABAC, audit trails |
+| Energy & Utilities | load-forecast, grid-optimizer, commodity-pricing, energy-compliance | NERC CIP, FERC, EPA, ISO 50001, 49 CFR 192/195 |
+
+### Industry Pipelines
+
+```
+/healthcare-audit   (runs: /hipaa → /clinical-data-review → /healthcare-compliance → /security-review)
+/fintech-launch     (runs: /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight)
+/logistics-optimize (runs: /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test)
+/compliance-suite   (runs: /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest)
+```
 
 ## Recommended Pipelines
 
