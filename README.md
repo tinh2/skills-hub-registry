@@ -2,24 +2,24 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-230 production-tested skills organized into 13 categories covering the complete software development lifecycle, 8 industry verticals, and 14 social-impact sectors.
+271 production-tested skills organized into 13 categories covering the complete software development lifecycle, 8 industry verticals, 14 social-impact sectors, plus gaming and mobile app development.
 
 ## Directory Structure
 
 ```
 skills-hub-registry/
-├── build/              # 14 skills — Project scaffolding and full build pipelines + industry API scaffolds
-├── test/               #  9 skills — Unit, E2E, integration, load, visual, contract, accessibility tests
-├── qa/                 # 10 skills — Quality assurance, performance, chaos, code smells, dead code, stress-test personas
-├── review/             # 21 skills — Architecture, API, database, security, executive, industry, and social-impact reviews
-├── deploy/             # 11 skills — Docker, K8s, Terraform, CI/CD, monitoring, DNS, CDN, secrets
+├── build/              # 21 skills — Project scaffolding, game engines, mobile apps, industry API scaffolds
+├── test/               # 11 skills — Unit, E2E, integration, load, visual, contract, accessibility, mobile, device matrix
+├── qa/                 # 13 skills — QA, performance, chaos, code smells, game QA, mobile QA, balance testing
+├── review/             # 26 skills — Architecture, API, security, executive, industry, game, mobile, store compliance
+├── deploy/             # 15 skills — Docker, K8s, Terraform, CI/CD, app stores, mobile CI/CD, OTA updates
 ├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook
-├── security/           # 11 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, encryption, benefits fraud
-├── ux/                 #  5 skills — UX audit, design systems, dark mode, responsive, i18n
-├── analysis/           # 91 skills — Domain analysis, research, metrics, industry verticals, social impact
+├── security/           # 12 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, game security, benefits fraud
+├── ux/                 #  6 skills — UX audit, design systems, dark mode, responsive, i18n, game UX
+├── analysis/           #105 skills — Domain analysis, research, industry verticals, social impact, gaming, mobile
 ├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
-├── combo/              # 24 skills — Multi-skill chains and pipeline compositions
+├── combo/              # 28 skills — Multi-skill chains and pipeline compositions
 └── meta/               #  7 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
 
@@ -50,7 +50,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 ## Skill Catalog
 
-### build -- Project Scaffolding & Build Pipelines (14 skills)
+### build -- Project Scaffolding & Build Pipelines (21 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -68,8 +68,15 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [db-migrate](build/db-migrate/) | 1.0.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
 | [healthcare-api](build/healthcare-api/) | 1.0.0 | Scaffold a FHIR R4-compliant healthcare API with resource models, SMART on FHIR auth, audit logging, and interoperability endpoints |
 | [fintech-api](build/fintech-api/) | 1.0.0 | Scaffold a production-ready financial services API with Plaid integration, payment processing, double-entry ledger, and KYC workflow |
+| [unity-scaffold](build/unity-scaffold/) | 1.0.0 | Scaffold a Unity game project with folder structure, assembly definitions, input system, CI/CD, and scriptable object architecture |
+| [unreal-scaffold](build/unreal-scaffold/) | 1.0.0 | Scaffold an Unreal Engine project with module structure, GAS setup, Enhanced Input, Subsystem architecture, and BuildGraph CI/CD |
+| [godot-scaffold](build/godot-scaffold/) | 1.0.0 | Scaffold a Godot 4 project with scene tree architecture, autoloads, signal bus, export presets, and CI/CD |
+| [web-game](build/web-game/) | 1.0.0 | Scaffold a browser-based game with Phaser 3, PixiJS, or Three.js with game loop, asset pipeline, and deployment |
+| [ios-app](build/ios-app/) | 1.0.0 | Scaffold a native iOS app with SwiftUI, MVVM, Core Data/SwiftData, networking, push notifications, and multi-env config |
+| [android-app](build/android-app/) | 1.0.0 | Scaffold a native Android app with Jetpack Compose, Hilt DI, Room, Retrofit, build variants, and Gradle version catalogs |
+| [cross-platform-app](build/cross-platform-app/) | 1.0.0 | Scaffold a cross-platform mobile app -- auto-detects Flutter, React Native, KMP, or .NET MAUI |
 
-### test -- Automated Testing (9 skills)
+### test -- Automated Testing (11 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -82,8 +89,10 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [accessibility-test](test/accessibility-test/) | 1.0.0 | Auto-detects frontend framework, sets up axe-core and Lighthouse CI for automated WCAG 2.1 AA testing |
 | [visual-regression](test/visual-regression/) | 1.0.0 | Auto-detects frontend framework, sets up visual regression testing with baseline screenshots across breakpoints |
 | [manual-test-plan](test/manual-test-plan/) | 2.0.0 | Generates a manual QA test plan based on code changes on the current branch |
+| [mobile-test](test/mobile-test/) | 1.0.0 | Mobile test generation -- unit, widget/UI, integration, snapshot, and accessibility tests for any mobile framework |
+| [device-matrix](test/device-matrix/) | 1.0.0 | Device matrix testing -- Firebase Test Lab, AWS Device Farm, BrowserStack with device selection and result aggregation |
 
-### qa -- Quality Assurance (10 skills)
+### qa -- Quality Assurance (13 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -97,8 +106,11 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [dead-code](qa/dead-code/) | 1.0.0 | Detects and safely removes dead code -- unreachable paths, unused exports, unused dependencies, unused CSS |
 | [migration-verify](qa/migration-verify/) | 1.0.0 | Verifies database migrations are safe -- applies cleanly, reverses cleanly, preserves data integrity, is idempotent |
 | [stress-test-personas](qa/stress-test-personas/) | 1.0.0 | Applies 6 adversarial decision-maker personas to stress-test the product and architecture from different strategic angles |
+| [game-qa](qa/game-qa/) | 1.0.0 | Automated game QA -- scene loading, null references, boundary testing, save/load integrity, platform compliance (TRC/XR) |
+| [balance-test](qa/balance-test/) | 1.0.0 | Game balance testing -- DPS calculations, TTK analysis, win rate simulation, economy stress testing, RNG Monte Carlo |
+| [mobile-qa](qa/mobile-qa/) | 1.0.0 | Mobile QA -- permission flows, deep links, push notifications, offline mode, memory leaks, VoiceOver/TalkBack |
 
-### review -- Architecture, Code, Industry & Social Impact Review (21 skills)
+### review -- Architecture, Code, Industry, Gaming & Mobile Review (26 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -123,8 +135,13 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [housing-compliance](review/housing-compliance/) | 1.0.0 | Housing software review -- Fair Housing Act, ADA, HUD reporting, LIHTC compliance, tenant rights |
 | [environmental-compliance](review/environmental-compliance/) | 1.0.0 | Environmental compliance review -- EPA reporting, Clean Air/Water Act, NEPA, RCRA waste management |
 | [therapist-documentation](review/therapist-documentation/) | 1.0.0 | Therapy documentation review -- SOAP/DAP notes, DSM-5/ICD-10 codes, informed consent, HIPAA compliance |
+| [game-code-review](review/game-code-review/) | 1.0.0 | Game code review -- ECS vs OOP, update loop architecture, state machines, save/load, anti-patterns |
+| [game-accessibility](review/game-accessibility/) | 1.0.0 | Game accessibility review -- CVAA, Xbox XAGs, colorblind modes, subtitles, remappable controls, one-handed play |
+| [multiplayer-review](review/multiplayer-review/) | 1.0.0 | Multiplayer netcode review -- client-server architecture, lag compensation, anti-cheat, matchmaking, bandwidth |
+| [mobile-security-review](review/mobile-security-review/) | 1.0.0 | Mobile security review -- OWASP Mobile Top 10, certificate pinning, Keychain/Keystore, root detection, obfuscation |
+| [store-compliance](review/store-compliance/) | 1.0.0 | App Store and Play Store compliance review -- review guidelines, privacy labels, data safety, COPPA/GDPR-K |
 
-### deploy -- Infrastructure & Deployment (11 skills)
+### deploy -- Infrastructure & Deployment (15 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -139,6 +156,10 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [monitoring](deploy/monitoring/) | 1.0.0 | Auto-detect infrastructure and set up observability with dashboards, alerting rules, and application instrumentation |
 | [secrets](deploy/secrets/) | 1.0.0 | Audit secret handling, set up secrets management with rotation, and configure CI/CD secrets integration |
 | [app-icon](deploy/app-icon/) | 1.0.0 | Generates a polished app icon and applies it as the launcher icon for iOS and Android |
+| [app-store-publish](deploy/app-store-publish/) | 1.0.0 | iOS App Store publishing -- Fastlane, provisioning, screenshots, metadata, review compliance, TestFlight |
+| [play-store-publish](deploy/play-store-publish/) | 1.0.0 | Google Play Store publishing -- AAB config, Fastlane supply, data safety, content rating, staged rollout |
+| [mobile-ci-cd](deploy/mobile-ci-cd/) | 1.0.0 | Mobile CI/CD -- GitHub Actions / Bitrise / Codemagic for iOS+Android, code signing, beta distribution |
+| [ota-updates](deploy/ota-updates/) | 1.0.0 | Over-the-air updates -- CodePush, Shorebird, Play In-App Updates, rollback strategy, A/B testing |
 
 ### docs -- Documentation (10 skills)
 
@@ -155,7 +176,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [gen-catalog](docs/gen-catalog/) | 1.0.0 | Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories |
 | [skills-list](docs/skills-list/) | 3.0.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
 
-### security -- Security & Compliance (11 skills)
+### security -- Security & Compliance (12 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -170,8 +191,9 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [hipaa](security/hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
 | [pci-dss](security/pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
 | [benefits-fraud](security/benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
+| [game-security](security/game-security/) | 1.0.0 | Game security review -- client-side authority, memory manipulation, packet tampering, anti-cheat architecture |
 
-### ux -- User Experience & Design (5 skills)
+### ux -- User Experience & Design (6 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -180,8 +202,9 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [dark-mode](ux/dark-mode/) | 1.0.0 | Dark mode implementation -- generate dark palette, create theme switching, and verify WCAG contrast for both modes |
 | [responsive](ux/responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
 | [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
+| [game-ux](ux/game-ux/) | 1.0.0 | Game UX audit -- HUD clarity, menu flow, tutorial effectiveness, control feel, camera system, feedback/juice |
 
-### analysis -- Domain Analysis, Research, Industry Verticals & Social Impact (91 skills)
+### analysis -- Domain Analysis, Research, Industry, Social Impact, Gaming & Mobile (105 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -276,6 +299,20 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [recovery-metrics](analysis/recovery-metrics/) | 1.0.0 | Rehabilitation recovery analysis -- outcome measurement, functional assessment, readiness scoring |
 | [therapy-personalization](analysis/therapy-personalization/) | 1.0.0 | Therapy personalization analysis -- exercise recommendations, compliance prediction, plan adaptation |
 | [setback-predictor](analysis/setback-predictor/) | 1.0.0 | Rehabilitation setback prediction -- risk factors, early warning, readmission prediction |
+| [game-design-review](analysis/game-design-review/) | 1.0.0 | Game design analysis -- core loop, progression systems, difficulty curves, player motivation, feedback loops |
+| [game-economy](analysis/game-economy/) | 1.0.0 | In-game economy analysis -- currency balance, loot tables, marketplace dynamics, pay-to-win detection |
+| [game-performance](analysis/game-performance/) | 1.0.0 | Game performance analysis -- draw calls, GC pressure, physics budgets, LOD, object pooling, frame budgets |
+| [player-analytics](analysis/player-analytics/) | 1.0.0 | Player analytics analysis -- event tracking, funnel analysis, DAU/MAU, cohort analysis, churn prediction, LTV |
+| [game-monetization](analysis/game-monetization/) | 1.0.0 | Game monetization analysis -- IAP flow, ad mediation, battle pass, loot box disclosure, regional pricing |
+| [level-design](analysis/level-design/) | 1.0.0 | Level design analysis -- procedural generation, WFC, difficulty scaling, nav mesh quality, spawn distribution |
+| [game-ai](analysis/game-ai/) | 1.0.0 | Game AI analysis -- behavior trees, FSM, GOAP, utility AI, pathfinding, steering, difficulty adaptation |
+| [narrative-design](analysis/narrative-design/) | 1.0.0 | Narrative design analysis -- branching dialogue, state tracking, localization, voice-over, cinematic scripting |
+| [app-store-optimization](analysis/app-store-optimization/) | 1.0.0 | ASO analysis -- keyword research, title optimization, screenshot conversion, competitor gaps, review sentiment |
+| [mobile-performance](analysis/mobile-performance/) | 1.0.0 | Mobile performance analysis -- startup time, memory, battery, network, frame rate, app size |
+| [mobile-analytics](analysis/mobile-analytics/) | 1.0.0 | Mobile analytics analysis -- event tracking, attribution, funnels, retention, crash-free rate, ATT/GDPR |
+| [mobile-ux-patterns](analysis/mobile-ux-patterns/) | 1.0.0 | Mobile UX pattern analysis -- gestures, navigation, platform conventions (HIG vs Material), deep linking |
+| [mobile-monetization](analysis/mobile-monetization/) | 1.0.0 | Mobile monetization analysis -- StoreKit 2, Play Billing, subscriptions, ad SDKs, paywall design |
+| [app-size-optimizer](analysis/app-size-optimizer/) | 1.0.0 | App binary size analysis -- asset audit, code stripping, on-demand resources, APK splits, thinning |
 
 ### productivity -- Developer Experience (8 skills)
 
@@ -304,7 +341,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
 | [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
 
-### combo -- Multi-Skill Chains (24 skills)
+### combo -- Multi-Skill Chains (28 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -332,6 +369,10 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [education-suite](combo/education-suite/) | 1.0.0 | /dropout-risk → /curriculum-optimizer → /student-personalization → /school-ops | Complete education system analysis pipeline |
 | [housing-audit](combo/housing-audit/) | 1.0.0 | /affordable-housing → /eviction-risk → /housing-compliance → /rent-burden | Affordable housing compliance and risk assessment |
 | [impact-org](combo/impact-org/) | 1.0.0 | /impact-measurement → /fundraising-optimizer → /grant-writer → /donor-retention | Nonprofit operational optimization pipeline |
+| [game-launch](combo/game-launch/) | 1.0.0 | /game-performance → /game-qa → /game-accessibility → /game-security → /game-ux | Complete game launch readiness pipeline |
+| [game-design-audit](combo/game-design-audit/) | 1.0.0 | /game-design-review → /game-economy → /balance-test → /player-analytics → /game-monetization | Full game design analysis pipeline |
+| [mobile-launch](combo/mobile-launch/) | 1.0.0 | /mobile-performance → /mobile-qa → /mobile-security-review → /store-compliance → /app-store-optimization | Mobile app launch readiness pipeline |
+| [mobile-publish](combo/mobile-publish/) | 1.0.0 | /mobile-ci-cd → /app-store-publish → /play-store-publish → /mobile-analytics | Full mobile publishing pipeline |
 
 ### meta -- Skills About Skills (7 skills)
 
@@ -358,6 +399,8 @@ Skills covering domain-specific regulations, workflows, and compliance across 8 
 | Manufacturing | predictive-maintenance, production-optimizer, defect-detection, energy-efficiency, manufacturing-compliance | ISO 9001/13485/14001, FDA 21 CFR Part 11, GMP, OSHA |
 | Legal | contract-risk, litigation-predictor, legal-discovery, regulatory-compliance | TAR, e-discovery, RBAC/ABAC, audit trails |
 | Energy & Utilities | load-forecast, grid-optimizer, commodity-pricing, energy-compliance | NERC CIP, FERC, EPA, ISO 50001, 49 CFR 192/195 |
+| Gaming | game-design-review, game-economy, game-performance, player-analytics, game-monetization, level-design, game-ai, narrative-design, game-code-review, game-accessibility, multiplayer-review, game-qa, balance-test, game-security, game-ux, unity-scaffold, unreal-scaffold, godot-scaffold, web-game | Unity, Unreal, Godot, CVAA, Xbox XAGs |
+| Mobile | ios-app, android-app, cross-platform-app, app-store-publish, play-store-publish, mobile-ci-cd, ota-updates, app-store-optimization, mobile-performance, mobile-analytics, mobile-ux-patterns, mobile-monetization, app-size-optimizer, mobile-security-review, store-compliance, mobile-test, device-matrix, mobile-qa | App Store Guidelines, Play Store Policy, OWASP Mobile, StoreKit 2, Play Billing |
 
 ## Social Impact Sectors
 
@@ -387,6 +430,10 @@ Skills for high-impact domains focused on human welfare, equity, and public good
 /fintech-launch         (runs: /pci-dss → /fintech-api → /fraud-detection → /credit-risk → /preflight)
 /logistics-optimize     (runs: /route-optimizer → /warehouse-ops → /inventory-forecast → /supply-chain-risk → /load-test)
 /compliance-suite       (runs: /regulatory-compliance → /gdpr → /soc2 → /dependency-scan → /pentest)
+/game-launch            (runs: /game-performance → /game-qa → /game-accessibility → /game-security → /game-ux)
+/game-design-audit      (runs: /game-design-review → /game-economy → /balance-test → /player-analytics → /game-monetization)
+/mobile-launch          (runs: /mobile-performance → /mobile-qa → /mobile-security-review → /store-compliance → /app-store-optimization)
+/mobile-publish         (runs: /mobile-ci-cd → /app-store-publish → /play-store-publish → /mobile-analytics)
 /public-services-audit  (runs: /benefits-processing → /benefits-fraud → /government-compliance → /security-review)
 /education-suite        (runs: /dropout-risk → /curriculum-optimizer → /student-personalization → /school-ops)
 /housing-audit          (runs: /affordable-housing → /eviction-risk → /housing-compliance → /rent-burden)

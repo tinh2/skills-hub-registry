@@ -2,7 +2,7 @@
 
 Project scaffolding and full build pipelines -- from competitor analysis to production-ready applications, including industry-specific API scaffolds.
 
-## Skills (14)
+## Skills (21)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -20,6 +20,13 @@ Project scaffolding and full build pipelines -- from competitor analysis to prod
 | [db-migrate](db-migrate/) | 1.0.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
 | [healthcare-api](healthcare-api/) | 1.0.0 | Scaffold a FHIR R4-compliant healthcare API with resource models, SMART on FHIR auth, audit logging, and interoperability endpoints |
 | [fintech-api](fintech-api/) | 1.0.0 | Scaffold a production-ready financial services API with Plaid integration, payment processing, double-entry ledger, and KYC workflow |
+| [unity-scaffold](unity-scaffold/) | 1.0.0 | Scaffold a Unity game project with folder structure, assembly definitions, input system, CI/CD, and scriptable object architecture |
+| [unreal-scaffold](unreal-scaffold/) | 1.0.0 | Scaffold an Unreal Engine project with module structure, GAS, Enhanced Input, Subsystem architecture, and BuildGraph CI/CD |
+| [godot-scaffold](godot-scaffold/) | 1.0.0 | Scaffold a Godot 4 project with scene tree architecture, autoloads, signal bus, export presets, and CI/CD |
+| [web-game](web-game/) | 1.0.0 | Scaffold a browser-based game with Phaser 3, PixiJS, or Three.js with game loop, asset pipeline, and deployment |
+| [ios-app](ios-app/) | 1.0.0 | Scaffold a native iOS app with SwiftUI, MVVM, Core Data/SwiftData, networking, push notifications |
+| [android-app](android-app/) | 1.0.0 | Scaffold a native Android app with Jetpack Compose, Hilt DI, Room, Retrofit, build variants |
+| [cross-platform-app](cross-platform-app/) | 1.0.0 | Scaffold a cross-platform mobile app -- auto-detects Flutter, React Native, KMP, or .NET MAUI |
 
 ## Usage
 
@@ -38,5 +45,12 @@ Project scaffolding and full build pipelines -- from competitor analysis to prod
 - Database schema changes: `/db-migrate`
 - Healthcare/FHIR API scaffold: `/healthcare-api`
 - Fintech API scaffold: `/fintech-api`
+- Unity game project: `/unity-scaffold`
+- Unreal Engine project: `/unreal-scaffold`
+- Godot 4 project: `/godot-scaffold`
+- Browser game: `/web-game`
+- Native iOS app: `/ios-app`
+- Native Android app: `/android-app`
+- Cross-platform mobile app: `/cross-platform-app`
 
 **Build orchestrators** (`/build`, `/ship`, `/iterate`) are self-contained pipelines that run analysis, testing, and quality checks internally. Use them for end-to-end work. Use the other skills for targeted scaffolding or focused tasks.

@@ -2,7 +2,7 @@
 
 Multi-skill chains and pipeline compositions -- automated sequences that run multiple skills without user intervention.
 
-## Skills (24)
+## Skills (28)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -30,6 +30,10 @@ Multi-skill chains and pipeline compositions -- automated sequences that run mul
 | [education-suite](education-suite/) | 1.0.0 | /dropout-risk → /curriculum-optimizer → /student-personalization → /school-ops | Complete education system analysis pipeline |
 | [housing-audit](housing-audit/) | 1.0.0 | /affordable-housing → /eviction-risk → /housing-compliance → /rent-burden | Affordable housing compliance and risk assessment |
 | [impact-org](impact-org/) | 1.0.0 | /impact-measurement → /fundraising-optimizer → /grant-writer → /donor-retention | Nonprofit operational optimization pipeline |
+| [game-launch](game-launch/) | 1.0.0 | /game-performance → /game-qa → /game-accessibility → /game-security → /game-ux | Complete game launch readiness pipeline |
+| [game-design-audit](game-design-audit/) | 1.0.0 | /game-design-review → /game-economy → /balance-test → /player-analytics → /game-monetization | Full game design analysis |
+| [mobile-launch](mobile-launch/) | 1.0.0 | /mobile-performance → /mobile-qa → /mobile-security-review → /store-compliance → /app-store-optimization | Mobile app launch readiness |
+| [mobile-publish](mobile-publish/) | 1.0.0 | /mobile-ci-cd → /app-store-publish → /play-store-publish → /mobile-analytics | Full mobile publishing pipeline |
 
 ## Usage
 
@@ -75,6 +79,14 @@ Combo skills chain multiple skills together into automated pipelines. They run s
 - `/education-suite` -- Dropout risk + curriculum + personalization + school ops
 - `/housing-audit` -- Affordable housing + eviction risk + housing compliance + rent burden
 - `/impact-org` -- Impact measurement + fundraising + grant writing + donor retention
+
+**Gaming:**
+- `/game-launch` -- Performance + QA + accessibility + security + UX audit
+- `/game-design-audit` -- Game design + economy + balance + analytics + monetization review
+
+**Mobile:**
+- `/mobile-launch` -- Performance + QA + security + store compliance + ASO
+- `/mobile-publish` -- CI/CD + App Store + Play Store + analytics verification
 
 **Maintenance:**
 - `/tech-debt-sprint` -- Debt inventory, code smell fixes, dead code removal, review pass
