@@ -2,7 +2,7 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-271 production-tested skills organized into 13 categories covering the complete software development lifecycle, 8 industry verticals, 14 social-impact sectors, plus gaming and mobile app development.
+359 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development.
 
 ## Directory Structure
 
@@ -16,7 +16,7 @@ skills-hub-registry/
 ├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook
 ├── security/           # 12 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, game security, benefits fraud
 ├── ux/                 #  6 skills — UX audit, design systems, dark mode, responsive, i18n, game UX
-├── analysis/           #105 skills — Domain analysis, research, industry verticals, social impact, gaming, mobile
+├── analysis/           #193 skills — Domain analysis, research, 40 industry verticals, social impact, gaming, mobile
 ├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
 ├── combo/              # 28 skills — Multi-skill chains and pipeline compositions
@@ -204,7 +204,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
 | [game-ux](ux/game-ux/) | 1.0.0 | Game UX audit -- HUD clarity, menu flow, tutorial effectiveness, control feel, camera system, feedback/juice |
 
-### analysis -- Domain Analysis, Research, Industry, Social Impact, Gaming & Mobile (105 skills)
+### analysis -- Domain Analysis, Research, 40 Industry Verticals (193 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -299,6 +299,94 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [recovery-metrics](analysis/recovery-metrics/) | 1.0.0 | Rehabilitation recovery analysis -- outcome measurement, functional assessment, readiness scoring |
 | [therapy-personalization](analysis/therapy-personalization/) | 1.0.0 | Therapy personalization analysis -- exercise recommendations, compliance prediction, plan adaptation |
 | [setback-predictor](analysis/setback-predictor/) | 1.0.0 | Rehabilitation setback prediction -- risk factors, early warning, readmission prediction |
+| [lab-automation](analysis/lab-automation/) | 1.0.0 | Lab automation analysis -- LIMS integration, instrument connectivity, sample tracking, protocol automation |
+| [research-data-management](analysis/research-data-management/) | 1.0.0 | Research data management -- FAIR principles, data governance, metadata schemas, ELN evaluation |
+| [experiment-tracking](analysis/experiment-tracking/) | 1.0.0 | Experiment tracking -- version control for experiments, parameter tracking, reproducibility scoring |
+| [drug-discovery-ops](analysis/drug-discovery-ops/) | 1.0.0 | Drug discovery operations -- compound libraries, screening workflows, hit-to-lead pipelines, ADMET prediction |
+| [regulatory-submissions](analysis/regulatory-submissions/) | 1.0.0 | Regulatory submission automation -- eCTD assembly, FDA/EMA formatting, compliance checking |
+| [underwriting-analysis](analysis/underwriting-analysis/) | 1.0.0 | Underwriting analysis -- risk assessment models, pricing adequacy, loss ratio analysis, portfolio exposure |
+| [actuarial-modeling](analysis/actuarial-modeling/) | 1.0.0 | Actuarial modeling -- loss reserving, premium pricing, mortality/morbidity tables, stochastic modeling |
+| [catastrophe-modeling](analysis/catastrophe-modeling/) | 1.0.0 | Catastrophe modeling -- natural disaster exposure, portfolio aggregation, PML, reinsurance optimization |
+| [claims-workflow](analysis/claims-workflow/) | 1.0.0 | Claims workflow automation -- intake, adjudication rules, subrogation, litigation management |
+| [inventory-allocation](analysis/inventory-allocation/) | 1.0.0 | Inventory allocation -- demand-driven allocation, store clustering, safety stock, omnichannel inventory |
+| [sku-optimization](analysis/sku-optimization/) | 1.0.0 | SKU optimization -- assortment planning, long-tail analysis, cannibalization detection, rationalization |
+| [dynamic-pricing](analysis/dynamic-pricing/) | 1.0.0 | Dynamic pricing -- competitive pricing, elasticity modeling, promotional optimization, markdown optimization |
+| [returns-optimization](analysis/returns-optimization/) | 1.0.0 | Returns optimization -- return rate analysis, reverse logistics, refurbishment routing, fraud detection |
+| [merchandising-analytics](analysis/merchandising-analytics/) | 1.0.0 | Merchandising analytics -- planogram optimization, basket analysis, cross-sell/upsell, seasonal planning |
+| [production-budgeting](analysis/production-budgeting/) | 1.0.0 | Production budgeting -- film/TV budget analysis, ATL/BTL costs, cost overrun forecasting |
+| [rights-management](analysis/rights-management/) | 1.0.0 | Rights management -- content licensing, territory/window tracking, royalty calculations |
+| [content-performance](analysis/content-performance/) | 1.0.0 | Content performance analytics -- engagement metrics, audience retention, recommendation engine evaluation |
+| [ad-yield-optimization](analysis/ad-yield-optimization/) | 1.0.0 | Ad yield optimization -- CPM/CPC/CPA analysis, header bidding, fill rate optimization |
+| [studio-operations](analysis/studio-operations/) | 1.0.0 | Studio operations -- facility scheduling, post-production workflow, asset management |
+| [revenue-management](analysis/revenue-management/) | 1.0.0 | Revenue management -- dynamic pricing for hotels/airlines, inventory controls, channel management |
+| [staff-scheduling](analysis/staff-scheduling/) | 1.0.0 | Staff scheduling -- labor forecasting, shift optimization, compliance with labor laws |
+| [demand-forecasting](analysis/demand-forecasting/) | 1.0.0 | Demand forecasting -- time-series analysis, seasonal decomposition, booking curve analysis |
+| [travel-operations](analysis/travel-operations/) | 1.0.0 | Travel operations -- ground handling, turnaround optimization, GDS integration |
+| [service-triage](analysis/service-triage/) | 1.0.0 | Customer service triage -- ticket classification, priority scoring, SLA management |
+| [maintenance-scheduling](analysis/maintenance-scheduling/) | 1.0.0 | Maintenance scheduling -- preventive/predictive maintenance, work order optimization, CMMS analysis |
+| [vendor-coordination](analysis/vendor-coordination/) | 1.0.0 | Vendor coordination -- contractor performance scoring, bid analysis, SLA compliance |
+| [facilities-energy](analysis/facilities-energy/) | 1.0.0 | Facilities energy management -- building energy modeling, BMS/BAS analysis, sustainability reporting |
+| [lease-compliance](analysis/lease-compliance/) | 1.0.0 | Lease compliance -- CAM reconciliation, lease abstraction, ASC 842/IFRS 16 |
+| [asset-lifecycle](analysis/asset-lifecycle/) | 1.0.0 | Asset lifecycle planning -- capital planning, replacement scheduling, TCO, depreciation modeling |
+| [bookkeeping-automation](analysis/bookkeeping-automation/) | 1.0.0 | Bookkeeping automation -- transaction categorization, bank reconciliation, AP/AR, month-end close |
+| [audit-support](analysis/audit-support/) | 1.0.0 | Audit support -- control testing, evidence collection, sampling methodology, SOX compliance |
+| [tax-compliance](analysis/tax-compliance/) | 1.0.0 | Tax compliance -- multi-jurisdiction tax, nexus analysis, ASC 740, transfer pricing |
+| [reconciliation](analysis/reconciliation/) | 1.0.0 | Reconciliation workflows -- intercompany, suspense accounts, variance analysis, matching rules |
+| [grant-management](analysis/grant-management/) | 1.0.0 | Grant management -- proposal tracking, budget monitoring, compliance reporting, effort certification |
+| [funding-allocation](analysis/funding-allocation/) | 1.0.0 | Funding allocation -- resource distribution, faculty startup packages, strategic investment modeling |
+| [peer-review-ops](analysis/peer-review-ops/) | 1.0.0 | Peer review coordination -- reviewer matching, conflict detection, editorial workflow optimization |
+| [lab-management](analysis/lab-management/) | 1.0.0 | Lab management -- inventory tracking, equipment scheduling, safety compliance, chemical management |
+| [vehicle-routing](analysis/vehicle-routing/) | 1.0.0 | Vehicle routing optimization -- route planning, multi-stop optimization, time window constraints |
+| [fleet-maintenance](analysis/fleet-maintenance/) | 1.0.0 | Fleet maintenance -- preventive scheduling, parts forecasting, downtime minimization, telematics |
+| [fuel-optimization](analysis/fuel-optimization/) | 1.0.0 | Fuel optimization -- consumption analysis, eco-driving scoring, route efficiency, IFTA reporting |
+| [fleet-safety](analysis/fleet-safety/) | 1.0.0 | Fleet safety -- driver behavior scoring, accident analysis, CSA scores, DOT compliance |
+| [procurement-analysis](analysis/procurement-analysis/) | 1.0.0 | Procurement analysis -- spend analytics, supplier consolidation, contract compliance |
+| [vendor-management](analysis/vendor-management/) | 1.0.0 | Vendor management -- performance scorecards, risk assessment, SLA tracking, rationalization |
+| [compliance-ops](analysis/compliance-ops/) | 1.0.0 | Compliance operations -- regulatory change tracking, control mapping, audit readiness |
+| [hr-ops](analysis/hr-ops/) | 1.0.0 | HR operations -- headcount planning, attrition analysis, compensation benchmarking |
+| [budget-allocation](analysis/budget-allocation/) | 1.0.0 | Budget allocation -- departmental budgeting, variance analysis, rolling forecasts |
+| [production-scheduling](analysis/production-scheduling/) | 1.0.0 | Production scheduling -- factory capacity planning, order sequencing, lead time optimization |
+| [material-forecasting](analysis/material-forecasting/) | 1.0.0 | Material forecasting -- raw material requirements, supplier lead times, fabric yield optimization |
+| [ethical-sourcing](analysis/ethical-sourcing/) | 1.0.0 | Ethical sourcing -- supply chain transparency, labor conditions, certification tracking |
+| [apparel-demand](analysis/apparel-demand/) | 1.0.0 | Apparel demand prediction -- trend forecasting, size curve optimization, sell-through rates |
+| [rehab-scheduling](analysis/rehab-scheduling/) | 1.0.0 | Rehab scheduling -- therapist utilization, patient flow, insurance authorization tracking |
+| [therapy-outcomes](analysis/therapy-outcomes/) | 1.0.0 | Therapy outcome analytics -- functional improvement scoring, treatment effectiveness |
+| [batch-optimization](analysis/batch-optimization/) | 1.0.0 | Batch optimization -- production yield, batch record review, process parameter optimization |
+| [pharma-compliance](analysis/pharma-compliance/) | 1.0.0 | Pharmaceutical compliance -- inspection readiness, CAPA management, change control |
+| [yield-prediction](analysis/yield-prediction/) | 1.0.0 | Pharmaceutical yield prediction -- PAT, critical process parameters, design space, scale-up |
+| [pharma-quality-control](analysis/pharma-quality-control/) | 1.0.0 | Pharmaceutical QC -- OOS investigation, stability trending, method validation |
+| [threat-triage](analysis/threat-triage/) | 1.0.0 | Threat triage -- IOC classification, kill chain mapping, false positive reduction |
+| [alert-prioritization](analysis/alert-prioritization/) | 1.0.0 | Alert prioritization -- SIEM rule optimization, alert fatigue reduction, criticality scoring |
+| [incident-response](analysis/incident-response/) | 1.0.0 | Incident response -- playbook evaluation, MTTR optimization, evidence collection |
+| [cyber-risk-modeling](analysis/cyber-risk-modeling/) | 1.0.0 | Cyber risk modeling -- FAIR methodology, risk quantification, control effectiveness |
+| [defense-supply-chain](analysis/defense-supply-chain/) | 1.0.0 | Defense supply chain -- DFARS compliance, sole-source risk, counterfeit parts, ITAR |
+| [defense-maintenance](analysis/defense-maintenance/) | 1.0.0 | Defense maintenance -- MRO optimization, readiness reporting, reliability-centered maintenance |
+| [defense-budget](analysis/defense-budget/) | 1.0.0 | Defense budget -- program cost estimation, EVMS, should-cost modeling, PPBE process |
+| [risk-simulation](analysis/risk-simulation/) | 1.0.0 | Risk simulation -- Monte Carlo modeling, wargaming analysis, decision support |
+| [unit-economics](analysis/unit-economics/) | 1.0.0 | Unit economics -- per-location P&L, contribution margin, break-even, four-wall economics |
+| [franchise-benchmarking](analysis/franchise-benchmarking/) | 1.0.0 | Franchise benchmarking -- quartile comparison, same-store sales, operational audit scoring |
+| [franchise-inventory](analysis/franchise-inventory/) | 1.0.0 | Franchise inventory -- par level optimization, waste tracking, food cost analysis |
+| [expansion-modeling](analysis/expansion-modeling/) | 1.0.0 | Expansion modeling -- market feasibility, territory mapping, cannibalization analysis |
+| [mining-maintenance](analysis/mining-maintenance/) | 1.0.0 | Mining equipment maintenance -- condition monitoring, predictive analytics, fleet availability |
+| [mining-safety](analysis/mining-safety/) | 1.0.0 | Mining safety -- incident investigation, hazard identification, MSHA compliance |
+| [extraction-optimization](analysis/extraction-optimization/) | 1.0.0 | Extraction optimization -- ore grade optimization, processing throughput, recovery rate |
+| [resource-estimation](analysis/resource-estimation/) | 1.0.0 | Resource estimation -- geological modeling, reserve classification, JORC/NI 43-101 |
+| [box-optimization](analysis/box-optimization/) | 1.0.0 | Box/packaging optimization -- carton sizing, void fill, palletization, sustainable materials |
+| [shipping-cost](analysis/shipping-cost/) | 1.0.0 | Shipping cost analysis -- carrier rate comparison, zone-skip, parcel vs LTL/FTL |
+| [warehouse-flow](analysis/warehouse-flow/) | 1.0.0 | Warehouse flow design -- pick path optimization, slotting analysis, throughput bottlenecks |
+| [damage-prediction](analysis/damage-prediction/) | 1.0.0 | Damage prediction -- transit risk analysis, packaging failure modes, protection optimization |
+| [job-dispatch](analysis/job-dispatch/) | 1.0.0 | Job dispatch optimization -- technician routing, skill-based assignment, priority scheduling |
+| [parts-inventory](analysis/parts-inventory/) | 1.0.0 | Parts inventory forecasting -- truck stock optimization, first-time fix rate, reorder points |
+| [technician-productivity](analysis/technician-productivity/) | 1.0.0 | Technician productivity -- utilization analysis, callback analysis, skill gap identification |
+| [quote-automation](analysis/quote-automation/) | 1.0.0 | Quote automation -- labor estimation, material take-off, pricing rules, competitive analysis |
+| [incident-tracking](analysis/incident-tracking/) | 1.0.0 | Incident tracking -- workplace incident classification, root cause analysis, OSHA recordkeeping |
+| [workplace-risk-scoring](analysis/workplace-risk-scoring/) | 1.0.0 | Workplace risk scoring -- job hazard analysis, risk matrix, exposure assessment |
+| [safety-compliance](analysis/safety-compliance/) | 1.0.0 | Safety compliance -- regulatory gap analysis, inspection readiness, OSHA 29 CFR |
+| [safety-training](analysis/safety-training/) | 1.0.0 | Safety training automation -- competency tracking, certification management, LMS integration |
+| [survey-analysis](analysis/survey-analysis/) | 1.0.0 | Survey analysis -- response bias detection, conjoint analysis, MaxDiff scoring |
+| [pricing-sensitivity](analysis/pricing-sensitivity/) | 1.0.0 | Pricing sensitivity -- Van Westendorp, Gabor-Granger, price elasticity curves |
+| [behavioral-segmentation](analysis/behavioral-segmentation/) | 1.0.0 | Behavioral segmentation -- RFM analysis, cohort behavior, churn propensity, persona clustering |
+| [consumer-modeling](analysis/consumer-modeling/) | 1.0.0 | Consumer modeling -- purchase prediction, lifetime value, attribution analysis |
 | [game-design-review](analysis/game-design-review/) | 1.0.0 | Game design analysis -- core loop, progression systems, difficulty curves, player motivation, feedback loops |
 | [game-economy](analysis/game-economy/) | 1.0.0 | In-game economy analysis -- currency balance, loot tables, marketplace dynamics, pay-to-win detection |
 | [game-performance](analysis/game-performance/) | 1.0.0 | Game performance analysis -- draw calls, GC pressure, physics budgets, LOD, object pooling, frame budgets |
@@ -388,7 +476,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 ## Industry Verticals
 
-Skills covering domain-specific regulations, workflows, and compliance across 8 industries:
+Skills covering domain-specific regulations, workflows, and compliance across 40 industries:
 
 | Industry | Skills | Key Regulations/Standards |
 |----------|--------|--------------------------|
@@ -401,6 +489,26 @@ Skills covering domain-specific regulations, workflows, and compliance across 8 
 | Energy & Utilities | load-forecast, grid-optimizer, commodity-pricing, energy-compliance | NERC CIP, FERC, EPA, ISO 50001, 49 CFR 192/195 |
 | Gaming | game-design-review, game-economy, game-performance, player-analytics, game-monetization, level-design, game-ai, narrative-design, game-code-review, game-accessibility, multiplayer-review, game-qa, balance-test, game-security, game-ux, unity-scaffold, unreal-scaffold, godot-scaffold, web-game | Unity, Unreal, Godot, CVAA, Xbox XAGs |
 | Mobile | ios-app, android-app, cross-platform-app, app-store-publish, play-store-publish, mobile-ci-cd, ota-updates, app-store-optimization, mobile-performance, mobile-analytics, mobile-ux-patterns, mobile-monetization, app-size-optimizer, mobile-security-review, store-compliance, mobile-test, device-matrix, mobile-qa | App Store Guidelines, Play Store Policy, OWASP Mobile, StoreKit 2, Play Billing |
+| Biotech & Life Sciences | lab-automation, research-data-management, experiment-tracking, drug-discovery-ops, regulatory-submissions | GAMP 5, 21 CFR Part 11, ICH, eCTD, FAIR |
+| Insurance | underwriting-analysis, actuarial-modeling, catastrophe-modeling, claims-workflow | NAIC, Solvency II, ACORD, AM Best, SOA |
+| Retail & E-commerce | inventory-allocation, sku-optimization, dynamic-pricing, returns-optimization, merchandising-analytics | GS1, RFID, Robinson-Patman, CPFR |
+| Media & Entertainment | production-budgeting, rights-management, content-performance, ad-yield-optimization, studio-operations | AICP, SAG-AFTRA, DDEX, IAB, SMPTE |
+| Travel & Hospitality | revenue-management, staff-scheduling, demand-forecasting, travel-operations, service-triage | IATA, ICAO, HEDNA, FLSA, ITIL |
+| Facilities & Property Mgmt | maintenance-scheduling, vendor-coordination, facilities-energy, lease-compliance, asset-lifecycle | ASHRAE, BOMA, ENERGY STAR, LEED, IFMA |
+| Accounting & Tax | bookkeeping-automation, audit-support, tax-compliance, reconciliation | GAAP, PCAOB, SOX, IRC, OECD BEPS |
+| Research & Academia | grant-management, funding-allocation, peer-review-ops, lab-management | 2 CFR 200, NSF, NIH, COPE, OSHA lab |
+| Fleet & Transportation | vehicle-routing, fleet-maintenance, fuel-optimization, fleet-safety | FMCSA, DOT, ELD, IFTA, EPA SmartWay |
+| Corporate Operations | procurement-analysis, vendor-management, compliance-ops, hr-ops, budget-allocation | CIPS, COSO, ISO 37301, SHRM, FP&A |
+| Textiles & Apparel | production-scheduling, material-forecasting, ethical-sourcing, apparel-demand | WRAP, SA8000, OEKO-TEX, Higg Index |
+| Pharma Manufacturing | batch-optimization, pharma-compliance, yield-prediction, pharma-quality-control | cGMP, ICH Q7-Q14, 21 CFR 210/211, USP |
+| Cybersecurity Operations | threat-triage, alert-prioritization, incident-response, cyber-risk-modeling | MITRE ATT&CK, NIST CSF, FAIR, STIX/TAXII |
+| Defense & Aerospace | defense-supply-chain, defense-maintenance, defense-budget, risk-simulation | DFARS, ITAR, CMMC, MIL-STD, DoD 5000 |
+| Franchise Operations | unit-economics, franchise-benchmarking, franchise-inventory, expansion-modeling | FDD, IFA, Huff Model, COGS management |
+| Mining & Natural Resources | mining-maintenance, mining-safety, extraction-optimization, resource-estimation | MSHA, JORC, NI 43-101, ISO 17359 |
+| Packaging & Distribution | box-optimization, shipping-cost, warehouse-flow, damage-prediction | ISTA, ASTM D4169, NMFC, DIM weight |
+| Skilled Trades & Field Services | job-dispatch, parts-inventory, technician-productivity, quote-automation | FSM, RSMeans, Croston's method, VRP |
+| Occupational Health & Safety | incident-tracking, workplace-risk-scoring, safety-compliance, safety-training | OSHA 29 CFR, ISO 45001, ANSI Z10, NFPA 70E |
+| Behavioral Economics | survey-analysis, pricing-sensitivity, behavioral-segmentation, consumer-modeling | Van Westendorp, FAIR, RFM, CLV models |
 
 ## Social Impact Sectors
 
