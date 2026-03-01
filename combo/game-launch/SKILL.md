@@ -209,3 +209,8 @@ STRICT RULES:
 - Phase findings from earlier phases should inform later phases (e.g., QA issues may have security implications).
 - Rate each phase independently, then synthesize into the overall verdict.
 - All rules from each sub-skill apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/game-design-audit` for a comprehensive design health assessment."
+- "Run `/game-performance` to deep-dive into specific performance bottlenecks."

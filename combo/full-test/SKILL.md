@@ -85,3 +85,9 @@ STRICT RULES:
 - Do NOT duplicate automated test coverage in the manual plan.
 - Phase 2 must reference Phase 1 results to produce a complementary (not redundant) plan.
 - All rules from `/e2e` and `/manual-test-plan` apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/polish` for UX audit, QA verification, and domain analysis."
+- "Run `/qa` for additional functional verification."
+- "Run `/ship` to proceed with deployment if all tests pass."

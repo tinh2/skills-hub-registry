@@ -1,5 +1,5 @@
 ---
-name: image_storage_optimization
+name: image-storage-optimization
 description: Audits and implements mandatory image resizing and compression for all uploaded user images to reduce storage costs while preserving visual quality.
 version: "1.1.0"
 category: analysis

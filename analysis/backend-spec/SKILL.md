@@ -1,5 +1,5 @@
 ---
-name: backend-spec-story
+name: backend-spec
 description: Generates backend or frontend engineering specs in structured Jira format with description, categorized acceptance criteria, routes, dev notes, and table schemas.
 version: "5.1.0"
 category: analysis

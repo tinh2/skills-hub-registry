@@ -78,3 +78,9 @@ STRICT RULES:
 - Do NOT ask the user for input between phases.
 - Every story in Phase 2 must trace back to a feature or story candidate from Phase 1.
 - All rules from `/mvp` and `/backend-spec` apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/review-implement` to review and implement a story in one pass."
+- "Run `/arch-review` to review a story's architecture before implementing."
+- "Run `/iterate` to implement a story with autonomous refinement."

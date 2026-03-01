@@ -124,3 +124,8 @@ STRICT RULES:
 - Fix issues as you find them — do not just report.
 - Phase 3 is the final gate. If it finds issues, fix them.
 - All rules from `/ux`, `/scale-audit`, `/qa`, and `/analyze` apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/full-test` for automated E2E test coverage and a manual test plan."
+- "Run `/ship` to proceed with deployment if the quality verdict is SHIP IT."

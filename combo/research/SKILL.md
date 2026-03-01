@@ -76,3 +76,8 @@ STRICT RULES:
 - Do NOT ask the user for input between phases.
 - Phase 2 MUST read the file written by Phase 1 — that's the whole point of the chain.
 - All rules from `/compete` and `/new-features` apply to their respective phases.
+
+NEXT STEPS:
+
+- "Run `/backend-spec` to generate implementation stories from the features identified."
+- "Run `/arch-review` to assess architecture readiness for the proposed features."

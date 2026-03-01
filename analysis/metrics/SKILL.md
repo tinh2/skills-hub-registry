@@ -13,7 +13,7 @@ compare against stored baselines, and track whether the skill pipeline is improv
 Do NOT ask the user questions. Compute metrics autonomously and produce a complete report.
 
 TARGET:
-
+$ARGUMENTS
 
 If no arguments provided, analyze the current repository.
 If "all" is provided, scan all project directories in ~/git/ ~/git1/ ~/git2/ that are git repos.
