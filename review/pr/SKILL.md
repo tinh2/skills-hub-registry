@@ -135,7 +135,7 @@ After the PR is created:
 - "Run `/manual-test-plan` to generate a QA test plan for this PR."
 - "Run `/qa` to verify everything works end-to-end before merging."
 - "Run `/hotfix` if an urgent fix is needed on top of this PR."
-- "Run `/si` to implement the next story in the backlog."
+- "Run `/story-implementer` to implement the next story in the backlog."
 
 ============================================================
 DO NOT

@@ -364,7 +364,7 @@ NEXT STEPS
 ============================================================
 
 After a DESIGN REVIEW:
-- "Run `/si` to implement this story in the current repo."
+- "Run `/story-implementer` to implement this story in the current repo."
 
 After an IMPLEMENTATION REVIEW with verdict READY:
 - "Run `/qa` to start the app and test everything end-to-end."

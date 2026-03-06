@@ -6,7 +6,7 @@ User experience auditing, design systems, dark mode, responsive design, and inte
 
 **[ux](ux/)** -- Dual-mode UX quality skill. Runs a heuristic/accessibility/motion audit on the current codebase, or validates implementation against design mockups. Fixes all issues found and commits.
 
-## Skills (5)
+## Skills (6)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -15,6 +15,7 @@ User experience auditing, design systems, dark mode, responsive design, and inte
 | [dark-mode](dark-mode/) | 1.0.0 | Dark mode implementation -- generate dark palette, create theme switching, and verify WCAG contrast for both modes |
 | [responsive](responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
 | [i18n](i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
+| [game-ux](game-ux/) | 1.0.0 | Game UX audit covering HUD clarity, menu navigation, tutorial effectiveness, control responsiveness, camera systems, feedback systems, loading screens, and settings completeness |
 
 ## Usage
 
@@ -24,4 +25,5 @@ User experience auditing, design systems, dark mode, responsive design, and inte
 - Add dark mode with WCAG contrast verification: `/dark-mode`
 - Responsive design audit and fixes: `/responsive`
 - Internationalization setup: `/i18n`
+- Game UX audit (HUD, menus, tutorials, controls): `/game-ux`
 - Full design implementation chain (combo): `/design-to-code` chains design-system, responsive, dark-mode, and UX audit

@@ -154,7 +154,7 @@ NEXT STEPS
 ============================================================
 
 - QA complete and passing? The branch is ready for merge.
-- Found issues? Run `/si` with the failing scenarios to fix them.
+- Found issues? Run `/story-implementer` with the failing scenarios to fix them.
 - Want automated tests too? Run `/e2e` to generate E2E test coverage.
 - Need a full quality pass? Run `/polish` for UX audit + QA + domain analysis.
 - Ready to document? Run `/readme` to update project documentation.

@@ -461,5 +461,5 @@ After writing the report file, print a brief summary:
 NEXT STEPS:
 
 - "Review the assumptions in docs/cost-analysis.md and adjust user behavior profiles if needed."
-- "Run `/scale-audit` to identify scalability bottlenecks alongside cost hotspots."
+- "Run `/codebase-health` to identify scalability bottlenecks alongside cost hotspots."
 - "Run `/iterate` to implement the Quick Win optimizations."

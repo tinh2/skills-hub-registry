@@ -28,7 +28,7 @@ INPUT:
 The user will provide one or more of:
 1. A project directory to test (defaults to current working directory).
 2. Specific screens or features to focus on.
-3. Output from `/build` or `/si` indicating what was just built.
+3. Output from `/build` or `/story-implementer` indicating what was just built.
 4. The original competitor app reference (URL, screenshots) for comparison.
 
 If no specific input is provided, test the entire application in the current directory.

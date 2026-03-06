@@ -179,7 +179,7 @@ NEXT STEPS
 
 - Run `/qa` to verify the image upload flows work end-to-end.
 - Run `/e2e` to generate automated tests covering image upload scenarios.
-- Run `/scale-audit` to check for other storage and performance bottlenecks.
+- Run `/codebase-health` to check for other storage and performance bottlenecks.
 - Run `/analyze` to verify image handling is consistent across all domain layers.
 
 ============================================================

@@ -55,7 +55,7 @@ SKILL USAGE DETECTION:
   - `/arch-review`: "design review", "implementation review" references
   - `/qa`: "qa fixes", "endpoint fixes", "screen fixes" references
   - `/ux`: "ux fixes", "accessibility", "design system", "a11y" references
-  - `/si`: story-numbered commits (STORY-XXX, DEV-XXXX)
+  - `/story-implementer`: story-numbered commits (STORY-XXX, DEV-XXXX)
   - `/backend-spec`: spec/story file creation
   - `/mvp`: analysis document creation
 - Map each commit to the most likely skill that produced it.
@@ -64,7 +64,7 @@ SKILL USAGE DETECTION:
 SEQUENCE ANALYSIS:
 - Identify the order in which skills were invoked.
 - Map the actual pipeline execution vs the canonical pipeline order:
-  Canonical: /mvp → /backend-spec → /arch-review → /si → /ux → /qa → /analyze
+  Canonical: /mvp → /backend-spec → /arch-review → /story-implementer → /ux → /qa → /analyze
 - Note any deviations: skipped steps, reordered steps, repeated steps.
 - Identify which steps were done in sequence (one after another on same branch).
 - Identify which steps could have been parallelized (independent features on separate branches).
@@ -103,7 +103,7 @@ Analyze what depended on what:
 
 2. SKILL DEPENDENCY GRAPH:
    - Which skill outputs fed into which skill inputs?
-   - Were there circular dependencies (e.g., /qa finding issues that sent work back to /si)?
+   - Were there circular dependencies (e.g., /qa finding issues that sent work back to /story-implementer)?
    - How many times did work cycle back to an earlier stage?
 
 3. PARALLELIZATION OPPORTUNITIES:
@@ -175,7 +175,7 @@ and milestones with timestamps. Group rapid-fire commits into phases:
 Show the actual skill execution sequence vs the canonical pipeline:
 
 ```
-Canonical:  /mvp → /backend-spec → /arch-review → /si → /ux → /qa → /analyze
+Canonical:  /mvp → /backend-spec → /arch-review → /story-implementer → /ux → /qa → /analyze
 Actual:     [actual sequence with arrows, loops, and skips marked]
 ```
 

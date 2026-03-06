@@ -141,7 +141,7 @@ NEXT STEPS
 
 After the migration is created:
 - "Run `/arch-review` to validate the schema change against the story requirements."
-- "Run `/si` to implement the feature that uses this new schema."
+- "Run `/story-implementer` to implement the feature that uses this new schema."
 - "Run `/qa` to verify the migration applies cleanly and the app works end-to-end."
 - "Run `/pr` to create a pull request for the migration."
 - "Run `/hotfix` if the migration needs an urgent correction."

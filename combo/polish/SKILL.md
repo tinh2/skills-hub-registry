@@ -1,6 +1,6 @@
 ---
 name: polish
-description: Chains /ux ∥ /scale-audit → /qa → /analyze — full quality pass with parallel UX + scalability audit, QA verification, and domain consistency analysis. Fixes everything it finds.
+description: Chains /ux ∥ /codebase-health → /qa → /analyze — full quality pass with parallel UX + scalability audit, QA verification, and domain consistency analysis. Fixes everything it finds.
 version: "3.0.0"
 category: combo
 platforms:
@@ -34,13 +34,13 @@ Evaluate every screen against:
 Fix all issues found and commit the fixes.
 Record the UX verdict: UX READY, UX NEEDS WORK, or UX POOR.
 
-PARALLEL TRACK B — Scalability Audit (/scale-audit):
-Follow the instructions defined in the `/scale-audit` skill exactly.
+PARALLEL TRACK B — Codebase Health Audit (/codebase-health):
+Follow the instructions defined in the `/codebase-health` skill exactly.
 Scan the codebase for scalability bottlenecks (DB queries, API patterns,
 concurrency, infrastructure) and write the report to `docs/scalability-audit.md`.
 This is READ-ONLY analysis — it writes only the report file, not code.
 
-WHY PARALLEL: `/ux` modifies frontend UI code. `/scale-audit` only reads the
+WHY PARALLEL: `/ux` modifies frontend UI code. `/codebase-health` only reads the
 codebase and writes a single .md report. They touch completely different concerns
 with zero file conflicts. Launch both as Task tool subagents and wait for both.
 
@@ -59,8 +59,8 @@ Fix all issues found and commit the fixes.
 
 IMPORTANT: If the UX phase fixed issues, verify those fixes didn't
 break any functionality. Pay special attention to components that
-were modified in Phase 1A. Also factor in critical scalability findings
-from Phase 1B — if the scale-audit identified CRITICAL issues, fix
+were modified in Phase 1A. Also factor in critical findings
+from Phase 1B — if the codebase-health identified CRITICAL issues, fix
 them during this phase alongside QA fixes.
 
 Do NOT stop here. Continue immediately to Phase 3.
@@ -90,8 +90,8 @@ When all phases are complete, print a summary:
 - Verdict: [UX READY / UX NEEDS WORK / UX POOR]
 - Issues found: [N] | Fixed: [N]
 
-**Phase 1B — Scalability Audit (ran in parallel with UX):**
-- Scaling readiness score: [N]/10
+**Phase 1B — Codebase Health Audit (ran in parallel with UX):**
+- Health score: [N]/100
 - Critical issues: [N] | Fixed in Phase 2: [N]
 - Report: `docs/scalability-audit.md`
 
@@ -123,7 +123,7 @@ STRICT RULES:
 - Phase 2 and 3 run sequentially after Phase 1 completes.
 - Fix issues as you find them — do not just report.
 - Phase 3 is the final gate. If it finds issues, fix them.
-- All rules from `/ux`, `/scale-audit`, `/qa`, and `/analyze` apply to their respective phases.
+- All rules from `/ux`, `/codebase-health`, `/qa`, and `/analyze` apply to their respective phases.
 
 NEXT STEPS:
 
