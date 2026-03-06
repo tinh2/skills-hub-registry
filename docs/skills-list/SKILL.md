@@ -37,7 +37,7 @@ Display the following skills catalog to the user. Do not invoke any skills — j
 | **iterate-review** | Autonomously review and improve existing code through up to 5 iterations of analysis, domain verification, fixing, and validation. **v4: wiring completeness checks, structural health, config propagation.** |
 | **ship** | Fast autonomous build loop — 4 iterations max. Build it, make it work, analyze it, ship it. **v4: co-commit rules, server-side validation wiring.** |
 | **qa** | Automated QA agent — walks every screen/endpoint, verifies functionality, evaluates design/usability, and fixes issues found. **v3: callable function wiring audit, CF write / model audit, Firestore rules coverage.** |
-| **walkthrough** | Spins up the Flutter app on simulator, generates and runs exhaustive integration tests for every flow/screen/button, then self-heals failures. |
+| **mobile-test** | Generates and runs exhaustive integration tests for Flutter and React Native apps on simulator/emulator for every flow/screen/button, then self-heals failures. |
 | **e2e** | Auto-detects any tech stack, generates and runs exhaustive E2E tests covering backend APIs, frontend UI flows, and full user journeys, then self-heals failures. |
 | **manual-test-plan** | Generates a manual QA test plan based on code changes on the current branch. Final step before merge. |
 | **ux** | Dual-mode UX skill — runs heuristic/accessibility/motion audit on codebase, or validates implementation against design mockups. Fixes and commits. |
@@ -50,12 +50,10 @@ Display the following skills catalog to the user. Do not invoke any skills — j
 | **image-storage-optimization** | Enforces mandatory image resizing/compression for all uploaded user images to reduce storage costs. |
 | **readme** | Generates comprehensive, scannable README.md documentation by analyzing the codebase. |
 | **recall** | Reconstructs the development cycle from git history, distills patterns, and produces actionable insights for future iterations. |
-| **contributing_sitter_first** | Enforces the trust-first marketplace rule: user must complete a paid sit as provider before redeeming volunteer-earned credits. |
-| **new-features** | Reads all `.md` files in the `docs/` folder, extracts learnings and insights, synthesizes new feature ideas, and writes them to `docs/NewFeatures-X.md` (X = 3-word theme). Global skill. |
-| **scale-audit** | Scans the entire codebase for scalability bottlenecks — DB queries, API patterns, concurrency, infra — scores readiness 1-10 and writes full report to `docs/scalability-audit.md`. Global skill. |
+| **codebase-health** | Overall codebase health score (0-100). Measures complexity, coupling, cohesion, test coverage, churn hotspots, dependency health, and scalability bottlenecks. Produces dashboard with per-dimension scores. |
 | **research** | Combo: `/compete` then `/new-features`. Competitive gap analysis + feature ideation from findings. |
 | **spec** | Combo: `/mvp` then `/backend-spec`. Analyze an app, then generate implementation stories. |
-| **review-implement** | Combo: `/arch-review` then `/si`. Review a story's design, resolve gaps, then implement and PR. |
+| **review-implement** | Combo: `/arch-review` then `/story-implementer`. Review a story's design, resolve gaps, then implement and PR. |
 | **full-test** | Combo: `/e2e` then `/manual-test-plan`. Automated E2E tests + complementary manual test plan. |
 | **polish** | Combo: `/ux` then `/qa` then `/analyze`. Full quality pass — UX audit, QA verification, domain analysis. Fixes everything. |
 | **retro** | Combo: `/recall` then `/new-features`. Dev cycle retrospective + feature ideas from learnings. |
@@ -84,7 +82,7 @@ These skills chain other skills together and iterate autonomously without user i
 | Skill | Style | Max iterations |
 |---|---|---|
 | **`/e2e`** | Stack-agnostic E2E tests — API + UI + integration, with self-healing fix loop | 5 |
-| **`/walkthrough`** | Flutter-specific integration tests on simulator/emulator | 5 |
+| **`/mobile-test`** | Flutter/React Native integration tests on simulator/emulator | 5 |
 
 ### Polishing/fixing existing code (no new features)
 | Skill | Style | Max iterations |
@@ -96,9 +94,9 @@ These skills chain other skills together and iterate autonomously without user i
 |---|---|---|
 | **`/research`** | `/compete` then `/new-features` | Competitive analysis + feature ideation from findings |
 | **`/spec`** | `/mvp` then `/backend-spec` | App analysis + implementation story generation |
-| **`/review-implement`** | `/arch-review` then `/si` | Design review + implementation with PR |
+| **`/review-implement`** | `/arch-review` then `/story-implementer` | Design review + implementation with PR |
 | **`/full-test`** | `/e2e` then `/manual-test-plan` | Automated E2E tests + complementary manual test plan |
-| **`/polish`** | (`/ux` parallel `/scale-audit`) then `/qa` then `/analyze` | Parallel UX + scalability audit, then QA + domain analysis |
+| **`/polish`** | (`/ux` parallel `/codebase-health`) then `/qa` then `/analyze` | Parallel UX + scalability audit, then QA + domain analysis |
 | **`/retro`** | `/recall` then `/new-features` | Dev retrospective + feature ideas from learnings |
 
 ============================================================
@@ -144,7 +142,7 @@ minimizes rework by catching issues early and ensures all layers stay connected.
 ### Full quality pipeline (pre-release):
 ```
 ┌─────────── PARALLEL ───────────┐
-│  /ux              /scale-audit │  ← UX fixes code, scale-audit is read-only
+│  /ux         /codebase-health  │  ← UX fixes code, codebase-health is read-only
 └────────┬──────────────────┬────┘
          ▼                  ▼
 /qa (verify UX fixes + functional tests)
@@ -168,11 +166,11 @@ Skills can run in parallel when they don't conflict (one writes code, the other 
 | Parallel pair | Why safe |
 |---|---|
 | `/ux` parallel `/e2e` | UX modifies frontend UI; E2E generates/runs test files. Different file sets. |
-| `/ux` parallel `/scale-audit` | UX modifies code; scale-audit is 100% read-only (writes only its .md report). |
+| `/ux` parallel `/codebase-health` | UX modifies code; codebase-health is 100% read-only (writes only its .md report). |
 | `/ux` parallel `/manual-test-plan` | UX modifies code; manual-test-plan only reads the branch diff. |
 | `/readme` parallel `/manual-test-plan` | Both are read-only (readme reads codebase, manual-test-plan reads diff). |
 | `/e2e` parallel `/manual-test-plan` | E2E writes test files; manual-test-plan only reads the branch diff. |
-| `/compete` parallel `/scale-audit` | Both are read-only analysis (web research + codebase scan). |
+| `/compete` parallel `/codebase-health` | Both are read-only analysis (web research + codebase scan). |
 | Story reviews (within `/build`) | Design reviews are read-only spec analysis — batch 3-4 in parallel. |
 | Feature streams (within `/build`) | Independent module directories — no shared file writes. |
 
@@ -195,7 +193,7 @@ Skills that MUST stay sequential (both modify code in overlapping areas):
 1. Core Pipeline (/build, /qa, /ux)
 2. Standalone Tools (/app-icon, /iterate trio, /aws, /check-vanta, /image-storage-opt)
 3. Integration (/analyze, /audit + 4 wiring passes across hub skills)
-4. Testing & Analysis (/compete, /walkthrough, /e2e)
+4. Testing & Analysis (/compete, /mobile-test, /e2e)
 5. Composition (6 combo skills, v3-v4 upgrades, parallelization rules)
 6. Meta/Feedback (/recall insights fed back into documentation)
 

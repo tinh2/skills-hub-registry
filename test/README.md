@@ -6,7 +6,7 @@ Automated testing across every layer -- unit, integration, E2E, load, contract, 
 
 **[test-suite](test-suite/)** -- Analyzes test coverage across all testing types, identifies gaps, routes to the appropriate sub-skills, and produces a health report with scores per category. Start here if you are unsure which test type you need.
 
-## Skills (9)
+## Skills (11)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -19,6 +19,8 @@ Automated testing across every layer -- unit, integration, E2E, load, contract, 
 | [accessibility-test](accessibility-test/) | 1.0.0 | Auto-detects frontend framework, sets up axe-core and Lighthouse CI for automated WCAG 2.1 AA testing |
 | [visual-regression](visual-regression/) | 1.0.0 | Auto-detects frontend framework, sets up visual regression testing with baseline screenshots across breakpoints |
 | [manual-test-plan](manual-test-plan/) | 2.0.0 | Generates a manual QA test plan based on code changes on the current branch |
+| [mobile-test](mobile-test/) | 1.0.0 | Auto-detects mobile framework and generates comprehensive tests -- unit tests, widget and UI tests, integration tests, snapshot tests, platform-specific tests, accessibility tests, and device matrix configuration |
+| [device-matrix](device-matrix/) | 1.0.0 | Sets up device matrix testing -- Firebase Test Lab, AWS Device Farm, or BrowserStack configuration with device selection strategy, test sharding, result aggregation, flaky test detection, and performance benchmarking |
 
 ## Usage
 
@@ -33,3 +35,5 @@ Automated testing across every layer -- unit, integration, E2E, load, contract, 
 - `/visual-regression` for screenshot-based UI drift detection
 - `/manual-test-plan` as a final pre-merge step to generate manual QA checklists
 - `/full-test` (combo skill) to chain `/e2e` then `/manual-test-plan`
+- `/mobile-test` for Flutter/React Native specific test generation
+- `/device-matrix` for cross-device cloud testing configuration

@@ -174,5 +174,5 @@ OUTPUT
 
 NEXT STEPS:
 - "Run `/iterate` to implement the top optimizations."
-- "Run `/scale-audit` for a broader scalability assessment."
+- "Run `/codebase-health` for a broader scalability and quality assessment."
 - "Run `/e2e` after optimizations to verify nothing broke."

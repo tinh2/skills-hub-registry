@@ -39,7 +39,7 @@ For each repository being analyzed:
    - "review iteration" / "iterate-review" → `/iterate-review`
    - "(qa)" / "qa fixes" / "qa audit" → `/qa`
    - "(ux)" / "(a11y)" / "accessibility" → `/ux`
-   - "(scale)" / "scalability" → `/scale-audit`
+   - "(scale)" / "scalability" → `/codebase-health`
    - "arch-review" / "design review" → `/arch-review`
    - "domain analysis" / "domain consistency" → `/analyze`
 5. Get file modification frequency: `git log --name-only --format="" | sort | uniq -c | sort -rn`

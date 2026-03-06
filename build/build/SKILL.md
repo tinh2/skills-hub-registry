@@ -366,7 +366,7 @@ Then launch 3 parallel Task tool subagents, one per stream.
 
 For each story (whether parallel or sequential):
 
-a. Follow the `/si` skill instructions to implement the story.
+a. Follow the `/story-implementer` skill instructions to implement the story.
    Since this is a new project, "existing patterns" means the patterns
    established in Step 4.0 (the scaffold). Every module must follow:
    controller -> service -> repository layering.
@@ -393,7 +393,7 @@ Step 4.2 — Implement Remaining Sequential Stories
 For frontend stories that depend on multiple backend streams (cross-cutting),
 implement these AFTER all parallel streams complete.
 
-a. Follow the `/si` skill instructions combined with `/flutter` skill conventions.
+a. Follow the `/story-implementer` skill instructions combined with `/flutter` skill conventions.
    For FE stories, the implementation must use Riverpod for state, GoRouter for
    navigation, Dio for HTTP, and Material 3 theming. Follow the `/flutter` skill
    UI IMPLEMENTATION RULES, NAVIGATION, and PLATFORM CONSIDERATIONS sections.
@@ -593,7 +593,7 @@ After the build is complete:
 - "Run `/qa` again to re-verify after manual changes."
 - "Run `/aws` to generate Terraform infrastructure for deploying this project to AWS."
 - "Run `/manual-test-plan` on a specific feature branch for targeted QA."
-- "To add a new feature, run `/backend-spec` to create the story, then `/si` to implement it."
+- "To add a new feature, run `/backend-spec` to create the story, then `/story-implementer` to implement it."
 
 ============================================================
 DO NOT

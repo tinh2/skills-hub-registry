@@ -29,7 +29,7 @@ The user will provide one or more of:
 2. Specific screens or features to focus on.
 3. Design mockups, screenshots, or Figma frames showing the intended design.
 4. A design system specification or brand guidelines document.
-5. Output from `/si` indicating what was just implemented.
+5. Output from `/story-implementer` indicating what was just implemented.
 6. Any combination of the above.
 
 If no specific input is provided, audit the entire application in the current directory.

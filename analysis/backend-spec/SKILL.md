@@ -177,7 +177,7 @@ NEXT STEPS
 ============================================================
 
 - Run `/arch-review` with this story to get architect-level feedback before implementation.
-- Run `/si` to implement this story directly in the current repo.
+- Run `/story-implementer` to implement this story directly in the current repo.
 - Run `/review-implement` to chain architect review into implementation (combo skill).
 - Run `/manual-test-plan` to generate QA verification scenarios from the acceptance criteria.
 

@@ -839,4 +839,4 @@ NEXT STEPS:
 - "Unresolved app bugs? Run `/iterate-review` on the specific failing areas."
 - "Run `/analyze` to verify domain consistency across all layers."
 - "Run `/manual-test-plan` to generate a human-walkable QA plan complementing these automated tests."
-- "Run `/walkthrough` for Flutter-specific simulator-based exhaustive UI testing."
+- "Run `/mobile-test` for Flutter/React Native specific simulator-based exhaustive UI testing."

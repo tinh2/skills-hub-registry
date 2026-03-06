@@ -1,6 +1,6 @@
 ---
 name: review-implement
-description: Chains /arch-review → /si — reviews a story's architecture and design, fixes any gaps, then implements it and creates a PR.
+description: Chains /arch-review → /story-implementer — reviews a story's architecture and design, fixes any gaps, then implements it and creates a PR.
 version: "1.0.0"
 category: combo
 platforms:
@@ -37,10 +37,10 @@ Do NOT stop here. Continue immediately to Phase 2 with the
 reviewed (and possibly amended) story.
 
 ============================================================
-PHASE 2: IMPLEMENTATION  (/si)
+PHASE 2: IMPLEMENTATION  (/story-implementer)
 ============================================================
 
-Follow the instructions defined in the `/si` (story-implementer) skill exactly.
+Follow the instructions defined in the `/story-implementer` skill exactly.
 
 Use the reviewed and resolved spec from Phase 1 as input — NOT the original
 raw story. This ensures all design decisions and gap fixes from the review
@@ -69,7 +69,7 @@ When both phases are complete, print a summary:
 - [bullet summary of implementation]
 
 **Next steps:**
-- Run `/e2e` or `/walkthrough` to verify with automated tests
+- Run `/e2e` to verify with automated tests
 - Run `/qa` for full QA verification
 - Run `/manual-test-plan` to generate a manual test plan for the PR
 platforms:
@@ -81,7 +81,7 @@ STRICT RULES:
 - Do NOT implement without reviewing first. Phase 1 always runs.
 - Do NOT ask the user to resolve review findings. Resolve them yourself.
 - If the review found gaps, the implementation MUST address them.
-- All rules from `/arch-review` and `/si` apply to their respective phases.
+- All rules from `/arch-review` and `/story-implementer` apply to their respective phases.
 
 NEXT STEPS:
 

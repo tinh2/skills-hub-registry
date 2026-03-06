@@ -6,7 +6,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 
 **[secure](secure/)** -- Comprehensive security posture scan covering dependencies, code patterns, config, auth, and data handling with risk scoring. Routes to sub-skills for detailed analysis.
 
-## Skills (11)
+## Skills (12)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -21,6 +21,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 | [hipaa](hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
 | [pci-dss](pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
 | [benefits-fraud](benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
+| [game-security](game-security/) | 1.0.0 | Reviews game security including client-side authority vulnerabilities, memory manipulation, packet tampering, speed hacking, save tampering, API abuse, DDoS resilience, and anti-cheat architecture |
 
 ## Usage
 
@@ -39,4 +40,5 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 - Healthcare audit (combo): `/healthcare-audit` chains HIPAA, clinical-data-review, healthcare-compliance, security-review
 - Fintech launch (combo): `/fintech-launch` chains PCI DSS, fintech-api, fraud-detection, credit-risk, preflight
 - Benefits fraud detection for government services: `/benefits-fraud`
+- Game security review (anti-cheat, packet tampering, exploits): `/game-security`
 - Public services audit (combo): `/public-services-audit` chains benefits-processing, benefits-fraud, government-compliance, security-review
