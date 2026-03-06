@@ -10,10 +10,10 @@ Quality assurance, performance profiling, chaos engineering, code smell detectio
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [qa](qa/) | 3.0.0 | Main skill. Automated QA agent that walks every screen/endpoint, verifies, evaluates design, runs domain analysis, fixes issues |
+| [qa](qa/) | 3.1.0 | Main skill. Automated QA agent that walks every screen/endpoint, verifies, evaluates design, runs domain analysis, fixes issues |
 | [iterate-review](iterate-review/) | 5.0.0 | Autonomously reviews and improves existing code through up to 5 iterations of analysis and fixing |
 | [audit](audit/) | 2.0.0 | Lightweight domain consistency audit -- verify all layers match and fix issues. Fast gate between pipeline phases |
-| [preflight](preflight/) | 1.0.0 | Pre-deploy verification gate -- checks git status, build, tests, migrations, and commit conventions. Read-only |
+| [preflight](preflight/) | 1.1.0 | Pre-deploy verification gate -- checks git status, build, tests, migrations, and commit conventions. Read-only |
 | [perf](perf/) | 1.0.0 | Performance profiler -- analyzes DB queries, API call chains, frontend widget rebuilds, and bundle sizes |
 | [chaos](chaos/) | 1.0.0 | Chaos engineering for application resilience. Identifies failure points, generates chaos tests, validates graceful degradation |
 | [code-smell](code-smell/) | 1.0.0 | Detects Martin Fowler's catalog of code smells across the codebase with severity and recommended refactoring |

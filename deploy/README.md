@@ -15,12 +15,12 @@ Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, clo
 | [github-actions](github-actions/) | 1.0.0 | Auto-detect tech stack and generate production-grade GitHub Actions CI/CD workflows with caching and security scanning |
 | [k8s](k8s/) | 1.0.0 | Generate production-grade Kubernetes manifests with Deployments, Services, Ingress, HPA, and optional Helm charts |
 | [terraform](terraform/) | 1.0.0 | Generate modular multi-cloud Terraform configurations with VPC, compute, database, cache, CDN, and remote state |
-| [aws](aws/) | 1.0.0 | Generates production-ready Terraform files for AWS infrastructure |
+| [aws](aws/) | 1.1.0 | Generates production-ready Terraform files for AWS infrastructure |
 | [cdn](cdn/) | 1.0.0 | Auto-detect hosting and configure CDN with caching rules, SSL/TLS, edge functions, and performance optimization |
 | [dns](dns/) | 1.0.0 | Configure DNS records, SSL/TLS certificates, subdomains, email authentication, and health check routing |
 | [monitoring](monitoring/) | 1.0.0 | Auto-detect infrastructure and set up observability with dashboards, alerting rules, and application instrumentation |
 | [secrets](secrets/) | 1.0.0 | Audit secret handling, set up secrets management with rotation, and configure CI/CD secrets integration |
-| [app-icon](app-icon/) | 1.0.0 | Generates a polished app icon and applies it as the launcher icon for iOS and Android |
+| [app-icon](app-icon/) | 1.1.0 | Generates a polished app icon and applies it as the launcher icon for iOS and Android |
 | [app-store-publish](app-store-publish/) | 1.0.0 | iOS App Store publishing -- Fastlane, provisioning, screenshots, metadata, TestFlight |
 | [play-store-publish](play-store-publish/) | 1.0.0 | Google Play Store publishing -- AAB config, Fastlane supply, data safety, staged rollout |
 | [mobile-ci-cd](mobile-ci-cd/) | 1.0.0 | Mobile CI/CD -- GitHub Actions / Bitrise / Codemagic for iOS+Android |

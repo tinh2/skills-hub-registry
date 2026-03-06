@@ -17,7 +17,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 | [soc2](soc2/) | 1.0.0 | Evaluate codebase against SOC2 Trust Service Criteria -- security, availability, integrity, confidentiality, privacy |
 | [encryption](encryption/) | 1.0.0 | Audit and implement encryption -- data at rest, in transit, key management, password hashing, and token security |
 | [dependency-scan](dependency-scan/) | 1.0.0 | Auto-detect package manager, scan for vulnerable dependencies, auto-fix where possible, and generate SBOM |
-| [check-vanta](check-vanta/) | 2.0.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
+| [check-vanta](check-vanta/) | 2.1.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
 | [hipaa](hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
 | [pci-dss](pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
 | [benefits-fraud](benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |

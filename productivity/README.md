@@ -17,7 +17,7 @@ Developer experience tooling -- dev containers, linting, git hooks, monorepo set
 | [linter](linter/) | 1.0.0 | Auto-detect stack and configure linting, formatting, and editor integration with auto-fix for existing violations |
 | [monorepo](monorepo/) | 1.0.0 | Set up or migrate to a monorepo with workspaces, build pipeline, task graph, and local plus remote caching |
 | [release](release/) | 1.0.0 | Set up automated release pipeline with semantic versioning, changelog generation, and publishing |
-| [vscode](vscode/) | 1.0.0 | Open VS Code in the current working directory |
+| [vscode](vscode/) | 1.1.0 | Open VS Code in the current working directory |
 
 ## Usage
 
