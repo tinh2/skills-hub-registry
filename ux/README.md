@@ -10,7 +10,7 @@ User experience auditing, design systems, dark mode, responsive design, and inte
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [ux](ux/) | 1.0.0 | Main skill. Dual-mode UX audit (Nielsen heuristics, WCAG 2.1 AA, motion, design tokens) or design validation |
+| [ux](ux/) | 1.1.0 | Main skill. Dual-mode UX audit (Nielsen heuristics, WCAG 2.1 AA, motion, design tokens) or design validation |
 | [design-system](design-system/) | 1.0.0 | Extract or create a design system from existing UI code -- tokens, component inventory, and usage guidelines |
 | [dark-mode](dark-mode/) | 1.0.0 | Dark mode implementation -- generate dark palette, create theme switching, and verify WCAG contrast for both modes |
 | [responsive](responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |

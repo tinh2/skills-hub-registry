@@ -12,7 +12,7 @@ Architecture review, API review, database review, security review, PR creation, 
 | [api-review](api-review/) | 1.0.0 | API design review against REST best practices -- naming, HTTP semantics, status codes, pagination, error format, versioning |
 | [database-review](database-review/) | 1.0.0 | Database schema design review -- normalization, index coverage, constraints, naming, N+1 patterns, connection pooling |
 | [security-review](security-review/) | 1.0.0 | Security-focused code review -- auth bypasses, injection vectors, data exposure, hardcoded secrets, IDOR vulnerabilities |
-| [pr](pr/) | 1.0.0 | Creates a convention-compliant pull request -- extracts story number from branch, generates summary and test plan |
+| [pr](pr/) | 1.1.0 | Creates a convention-compliant pull request -- extracts story number from branch, generates summary and test plan |
 
 ### Executive Reviews
 

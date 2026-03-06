@@ -10,8 +10,8 @@ Domain analysis, competitive research, metrics, technical debt, codebase health,
 |-------|---------|-------------|
 | [analyze](analyze/) | 3.0.0 | End-to-end domain analysis -- traces every feature across all layers, verifies consistency, and fixes issues |
 | [compete](compete/) | 1.0.0 | Researches competing products, catalogs their features, and produces a prioritized feature gap analysis |
-| [mvp](mvp/) | 2.0.0 | Analyzes a video or screenshots of an application to decipher its MVP and suggest improvements |
-| [backend-spec](backend-spec/) | 5.0.0 | Generates backend or frontend engineering specs in Jira format with acceptance criteria, routes, and table schemas |
+| [mvp](mvp/) | 2.1.0 | Analyzes a video or screenshots of an application to decipher its MVP and suggest improvements |
+| [backend-spec](backend-spec/) | 5.1.0 | Generates backend or frontend engineering specs in Jira format with acceptance criteria, routes, and table schemas |
 | [metrics](metrics/) | 1.0.0 | Computes development quality metrics from git history and tracks improvement over time |
 | [recall](recall/) | 1.0.0 | Reconstructs the development cycle from git history, distills patterns, and produces actionable insights |
 | [cost-analysis](cost-analysis/) | 1.0.0 | Analyzes Firebase infrastructure costs at 1K-100K user scales with optimization recommendations |
@@ -21,7 +21,7 @@ Domain analysis, competitive research, metrics, technical debt, codebase health,
 | [bundle-analysis](bundle-analysis/) | 1.0.0 | Frontend bundle size analysis -- chunk sizes, duplicates, tree-shaking, code splitting, and size budget config |
 | [codebase-health](codebase-health/) | 1.0.0 | Overall codebase health score (0-100) -- complexity, coupling, cohesion, test coverage, documentation, churn hotspots |
 | [tech-debt](tech-debt/) | 1.0.0 | Technical debt inventory -- TODOs, deprecated usage, outdated deps, high-churn files, complexity hotspots, duplicated code |
-| [image-storage-optimization](image-storage-optimization/) | 1.0.0 | Reduce storage costs by automatically resizing and compressing uploaded user images |
+| [image-storage-optimization](image-storage-optimization/) | 1.1.0 | Reduce storage costs by automatically resizing and compressing uploaded user images |
 
 ### Executive & Strategy
 

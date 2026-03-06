@@ -6,18 +6,18 @@ Project scaffolding and full build pipelines -- from competitor analysis to prod
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [build](build/) | 3.0.0 | Master orchestrator -- takes a competitor app and builds a better, cheaper, modern clone end-to-end with Node.js backend and Flutter frontend |
-| [ship](ship/) | 8.0.0 | Fast autonomous build loop -- 4 iterations max. Build it, make it work, analyze it, ship it |
+| [build](build/) | 3.1.0 | Master orchestrator -- takes a competitor app and builds a better, cheaper, modern clone end-to-end with Node.js backend and Flutter frontend |
+| [ship](ship/) | 8.1.0 | Fast autonomous build loop -- 4 iterations max. Build it, make it work, analyze it, ship it |
 | [iterate](iterate/) | 4.0.0 | Self-iterating build loop -- implements, tests, reviews, analyzes, and refines up to 6 iterations |
-| [flutter](flutter/) | 2.0.0 | Analyzes a video or screenshots of an application and builds a Flutter mobile version |
+| [flutter](flutter/) | 2.1.0 | Analyzes a video or screenshots of an application and builds a Flutter mobile version |
 | [nextjs](nextjs/) | 1.0.0 | Scaffolds a production-ready Next.js 15 application with App Router, auth, database, and dashboard UI |
 | [react-native](react-native/) | 1.0.0 | Builds a production-ready React Native mobile application from a design or specification |
 | [api-scaffold](api-scaffold/) | 1.0.0 | Scaffolds a production-ready backend API with routes, controllers, middleware, database, auth, validation, and OpenAPI spec |
 | [chrome-extension](chrome-extension/) | 1.0.0 | Builds a complete Chrome extension with Manifest V3, popup UI, content scripts, and background service worker |
 | [cli-tool](cli-tool/) | 1.0.0 | Generates a production-ready CLI tool with command parsing, interactive prompts, and config management |
-| [hotfix](hotfix/) | 1.0.0 | Emergency bug fix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
-| [story-implementer](story-implementer/) | 2.0.0 | Implements a Jira story using repo conventions, writes unit tests, creates PR, addresses bot review |
-| [db-migrate](db-migrate/) | 1.0.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
+| [hotfix](hotfix/) | 1.1.0 | Emergency bug fix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
+| [story-implementer](story-implementer/) | 2.1.0 | Implements a Jira story using repo conventions, writes unit tests, creates PR, addresses bot review |
+| [db-migrate](db-migrate/) | 1.1.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
 | [healthcare-api](healthcare-api/) | 1.0.0 | Scaffold a FHIR R4-compliant healthcare API with resource models, SMART on FHIR auth, audit logging, and interoperability endpoints |
 | [fintech-api](fintech-api/) | 1.0.0 | Scaffold a production-ready financial services API with Plaid integration, payment processing, double-entry ledger, and KYC workflow |
 | [unity-scaffold](unity-scaffold/) | 1.0.0 | Scaffold a Unity game project with folder structure, assembly definitions, input system, CI/CD, and scriptable object architecture |

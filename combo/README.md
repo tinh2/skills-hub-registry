@@ -6,7 +6,7 @@ Multi-skill chains and pipeline compositions -- automated sequences that run mul
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
-| [polish](polish/) | 3.0.0 | /ux ∥ /scale-audit → /qa → /analyze | Full quality pass with parallel UX + scalability audit |
+| [polish](polish/) | 3.0.0 | /ux ∥ /codebase-health → /qa → /analyze | Full quality pass with parallel UX + scalability audit |
 | [research](research/) | 1.0.0 | /compete → /new-features | Competitive gap analysis + feature ideation |
 | [spec](spec/) | 1.0.0 | /mvp → /backend-spec | App analysis + story generation |
 | [story](story/) | 1.0.0 | /arch-review → /story-implementer → /pr | Full story lifecycle from review to PR |
