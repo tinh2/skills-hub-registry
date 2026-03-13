@@ -1,7 +1,7 @@
 ---
 name: promote
-description: Cross-project pattern detection. Reads all project memories, finds recurring patterns across 2+ projects, and promotes them to global CLAUDE.md conventions.
-version: "1.1.0"
+description: Cross-project pattern detection — discovers recurring conventions, rework patterns, and pipeline patterns across all projects, de-duplicates against existing global conventions, and promotes validated patterns to ~/.claude/CLAUDE.md.
+version: 1.0.0
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -12,145 +12,97 @@ recurring issues, fixes, and conventions, then promote them to global config.
 
 Do NOT ask the user questions. Analyze patterns autonomously.
 
-TARGET: $ARGUMENTS
-
-If arguments are provided, interpret them as:
-- A specific project path or name to include in analysis (e.g., "~/personal/pet_sitter")
-- A category filter: "architecture", "quality", "process" to focus on specific pattern types
-- "dry-run" to detect and report patterns without writing to global CLAUDE.md
-- A threshold override (e.g., "3" to require 3+ projects instead of the default 2+)
-
-If no arguments are provided, scan all project memory directories, read all recall/metrics files, and promote any pattern found in 2+ projects to global CLAUDE.md.
-
 ============================================================
 PHASE 1: GATHER ALL PROJECT MEMORIES
 ============================================================
 
-1. Scan `~/.claude/projects/*/memory/*.md` for all memory files.
-2. Read each MEMORY.md and any recall/metrics files.
-3. Also check project CLAUDE.md files in known project directories:
-   - `~/personal/*/CLAUDE.md`
-   - `~/git/*/CLAUDE.md`
-   - `~/git1/*/CLAUDE.md`
-   - `~/git2/*/CLAUDE.md`
-   - `~/work/*/CLAUDE.md`
+1. **Auto-discover project directories** from `~/.claude/projects/`:
+   - List all directories under `~/.claude/projects/*/`
+   - For each, check for `memory/*.md` files (MEMORY.md, recall reports, metrics)
+   - Read every memory file found
+2. **Read project CLAUDE.md files** in each project directory under `~/.claude/projects/*/CLAUDE.md`
+3. **Read the global CLAUDE.md** at `~/.claude/CLAUDE.md` — you will need this for de-duplication in Phase 3.
 4. Build a catalog of:
    - Conventions mentioned per project
    - Rework patterns per project
    - Skill pipeline preferences per project
    - Common fixes applied across projects
-5. Record the total number of projects and memory files analyzed.
 
 ============================================================
 PHASE 2: DETECT CROSS-PROJECT PATTERNS
 ============================================================
 
-A pattern qualifies for promotion if it appears in 2+ projects (or the threshold from arguments).
+A pattern qualifies for promotion if it appears in 2+ projects:
 
 **Convention patterns:**
 - Same coding convention enforced in multiple CLAUDE.md files
 - Same error handling pattern applied across projects
 - Same testing pattern required in multiple projects
-- Same file organization or naming convention across projects
 
 **Rework patterns:**
 - Same type of fix applied across projects (e.g., "missing mounted checks")
 - Same scalability issue found in multiple projects
 - Same accessibility issue retrofitted in multiple projects
-- Same security pattern added as afterthought in multiple projects
 
 **Pipeline patterns:**
 - Same skill ordering working well across projects
 - Same skill producing consistent rework across projects
 - Same gate/checkpoint proving valuable across projects
 
-**Anti-patterns:**
-- Same mistake repeated across projects despite prior fixes
-- Same architectural decision causing rework in multiple codebases
-- Same dependency or tool causing issues repeatedly
-
-For each candidate pattern, record:
-- The pattern description (concise, actionable)
-- Which projects validated it (with evidence: commit counts, recall findings)
-- The category (Architecture, Quality, Process)
-- Whether it is already present in global CLAUDE.md
-
 ============================================================
-PHASE 3: PROMOTE TO GLOBAL
+PHASE 3: DE-DUPLICATE AND PROMOTE TO GLOBAL
 ============================================================
 
 For each qualified pattern:
 
-1. Check if it is already in the global `~/.claude/CLAUDE.md` — skip if present.
+1. **De-duplication check** — Read the existing `## Cross-Project Conventions` section
+   in `~/.claude/CLAUDE.md`. For each candidate pattern:
+   - Check if the **same concept** is already covered by an existing convention,
+     even if worded differently. Compare semantics, not just string matching.
+   - If already present: **skip it**, but note it in the report as "already promoted".
+   - If the existing convention is weaker/narrower and the new evidence strengthens it,
+     **update the existing entry** with additional validation projects rather than adding
+     a duplicate.
 2. Determine the right section in CLAUDE.md:
-   - Coding convention → under "## Cross-Project Conventions" → "### Architecture" or "### Quality Built-In"
-   - Pipeline pattern → under "## Cross-Project Conventions" → "### Process"
-   - Error pattern → under "## Cross-Project Conventions" → "### Quality Built-In"
-3. Add the convention with a validation note:
+   - Architecture pattern → under `### Architecture`
+   - Quality pattern → under `### Quality Built-In`
+   - Process pattern → under `### Process`
+   - Pipeline pattern → under `### Process` or new `### Pipeline` if warranted
+3. Add the convention with validation evidence:
    ```
-   - **Pattern description in bold.** Explanation of why this matters and what to do.
-     (validated: Project1 evidence, Project2 evidence)
+   - **Pattern description in bold.** Explanation. (validated: Project1 evidence, Project2 evidence)
    ```
-4. Use the same formatting style as existing promoted conventions in CLAUDE.md.
-5. If a single-project pattern is close to promotion (appeared once but is high-impact),
-   add it to the "watch list" in the report but do not promote it yet.
+4. Update the `/promote` date reference in CLAUDE.md (e.g., `(from /promote {date})`).
 
 ============================================================
 PHASE 4: REPORT
 ============================================================
 
-OUTPUT:
+Output the report, then update `~/.claude/projects/{project}/memory/MEMORY.md`
+with `## Last /promote: {date}` and a summary of changes.
 
 ## Cross-Project Pattern Report
 
-| Metric | Value |
-|--------|-------|
-| Projects analyzed | N |
-| Memory files read | N |
-| Recall files read | N |
-| Patterns detected | N |
-| Patterns promoted | N |
-| Single-project (watch list) | N |
-| Already in global | N (skipped) |
-
 ### Projects Analyzed
-| Project | Path | Memory Files | Recall Data | Metrics Data |
-|---------|------|-------------|-------------|-------------|
+| Project | Memory Files | Recall Data | Metrics Data |
+|---------|-------------|-------------|-------------|
 
-### Promoted Patterns
-| # | Pattern | Category | Projects | Section Added To |
-|---|---------|----------|----------|-----------------|
+### Patterns Found
+| Pattern | Projects | Promoted? | Notes |
+|---------|----------|-----------|-------|
 
-### Promotion Details
-For each promoted pattern, show:
-- The exact text added to CLAUDE.md
-- The evidence from each validating project
-- The section it was added to
+### De-duplication Results
+| Candidate Pattern | Existing Convention | Action |
+|-------------------|-------------------|--------|
+(List patterns that were skipped because they duplicate existing conventions,
+and patterns where existing conventions were strengthened with new evidence.)
 
-### Watch List (Single-Project Patterns)
-| Pattern | Project | Category | Notes |
-|---------|---------|----------|-------|
+### Promotions Applied
+List each addition to global CLAUDE.md with justification.
+
+### Unique Patterns (single project only)
 Patterns that exist in only one project — watch for these to appear elsewhere.
 
-### Already Global (Skipped)
-Patterns that were detected but already exist in CLAUDE.md — no action needed.
-
-============================================================
-DO NOT
-============================================================
-
-- Do NOT promote patterns found in only one project (unless threshold is overridden).
-- Do NOT duplicate conventions already present in global CLAUDE.md.
-- Do NOT modify project-level CLAUDE.md files — only write to global `~/.claude/CLAUDE.md`.
-- Do NOT remove or rewrite existing global conventions — only add new ones.
-- Do NOT promote patterns without specific evidence from multiple projects.
-
-============================================================
-NEXT STEPS
-============================================================
-
-- "Run `/evolve` to apply promoted patterns directly to skill instructions."
-- "Run `/metrics` on each project to track if promoted patterns reduce rework."
-- "Run `/promote dry-run` periodically to monitor emerging patterns."
-- "Review `~/.claude/CLAUDE.md` to verify the promoted conventions read well."
-- "Run `/promote 3` to raise the threshold and only promote highly-validated patterns."
+NEXT STEPS:
+- "Run `/evolve` to apply these patterns to skill instructions too."
+- "Run `/metrics` to track if promoted patterns reduce rework."

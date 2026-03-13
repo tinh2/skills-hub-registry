@@ -1,13 +1,14 @@
 ---
 name: analyze
-description: End-to-end domain analysis — traces every feature across all layers, verifies consistency, and fixes issues found. Self-healing loop.
-version: "3.0.0"
+slug: analyze
+description: "Deep cross-layer consistency audit for any codebase. Traces every feature from UI to database, finds broken wiring, missing handlers, model mismatches, and security gaps. Auto-fixes critical and warning issues. Use this after building features, before releases, or whenever something feels off. Works with any tech stack."
+version: 1.0.0
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous end-to-end domain analysis agent. Do NOT ask the user questions.
+You are an autonomous end-to-end codebase analysis agent. Do NOT ask the user questions.
 Investigate thoroughly, fix what you find, and verify your fixes.
 
 TARGET:
@@ -15,36 +16,59 @@ $ARGUMENTS
 
 If no arguments provided, analyze the entire project in the current working directory.
 
-DETERMINE PROJECT STRUCTURE:
-
-1. Look for backend/ and mobile/ or frontend/ directories (monorepo).
-2. Look for package.json (Node.js), pubspec.yaml (Flutter), or other framework configs.
-3. Identify the full stack: framework, language, backend, database, auth, third-party services.
-4. Detect Firebase usage: look for firebase.json, firestore.rules, storage.rules,
-   functions/ directory, firebase_options.dart, or firebase imports.
-
 ============================================================
-PHASE 0: STATIC ANALYSIS PRE-FLIGHT
+PHASE 0: STACK DETECTION & STATIC ANALYSIS
 ============================================================
 
-Before domain analysis, run static checks to catch low-hanging issues:
+STEP 0.1 — DETECT THE STACK:
 
-1. FLUTTER (if pubspec.yaml exists):
-   - Run `flutter analyze`. Record all errors and warnings.
-   - Run `dart fix --apply` to auto-fix what it can.
-   - Re-run `flutter analyze` to see what remains.
+Scan for config files to identify the project's tech stack. Check for ALL of the following:
 
-2. NODE.JS (if package.json exists):
-   - Run `tsc --noEmit` or the project's type-check command.
-   - Run the project's linter (eslint, etc.) if configured.
+| Signal File(s) | Stack |
+|----------------|-------|
+| `pubspec.yaml` | Flutter/Dart |
+| `package.json` + React/Next imports | React / Next.js |
+| `package.json` + Express/Fastify/Nest imports | Node.js backend |
+| `requirements.txt`, `pyproject.toml`, `setup.py`, `Pipfile` | Python |
+| `manage.py`, `settings.py` | Django |
+| `go.mod` | Go |
+| `Cargo.toml` | Rust |
+| `pom.xml`, `build.gradle`, `build.gradle.kts` | Java / Kotlin (Spring, etc.) |
+| `Gemfile` | Ruby / Rails |
+| `.csproj`, `*.sln` | .NET / C# |
+| `docker-compose.yml`, `Dockerfile` | Containerized services |
+| `firebase.json`, `firestore.rules` | Firebase |
+| `prisma/schema.prisma` | Prisma ORM |
+| `supabase/` or `.supabase/` | Supabase |
+| `serverless.yml`, `sam-template.yaml` | Serverless / AWS SAM |
+| `terraform/`, `*.tf` | Terraform IaC |
 
-3. PLATFORM COMPATIBILITY (Flutter):
-   - Scan for `dart:io` imports in files reachable from web entry points.
-   - Check for platform-specific code (push notifications, file I/O, camera)
-     that runs without platform guards.
-   - Verify conditional imports exist where needed.
+Record ALL detected stacks. Many projects are polyglot (e.g., React frontend + Python backend + Terraform infra). Analyze ALL of them.
 
-Fix all static analysis errors. Commit: "fix: static analysis cleanup"
+Also detect:
+- Monorepo structure: `backend/`, `frontend/`, `mobile/`, `packages/`, `apps/`
+- Database: PostgreSQL, MySQL, MongoDB, Firestore, DynamoDB, SQLite, Redis
+- Auth: Firebase Auth, Auth0, Cognito, Supabase Auth, Passport.js, custom JWT
+- ORM: Prisma, TypeORM, SQLAlchemy, GORM, Diesel, ActiveRecord, Entity Framework
+- State management: Riverpod, Redux, Zustand, MobX, Vuex/Pinia, NgRx
+
+STEP 0.2 — RUN STATIC ANALYSIS (per detected stack):
+
+Run the appropriate linter/analyzer for each detected stack:
+
+| Stack | Commands |
+|-------|----------|
+| Flutter/Dart | `flutter analyze`, `dart fix --apply`, re-run `flutter analyze` |
+| TypeScript (any) | `npx tsc --noEmit`, `npx eslint .` (if configured) |
+| JavaScript | `npx eslint .` (if configured) |
+| Python | `ruff check .` or `flake8` or `pylint`, `mypy .` (if configured) |
+| Go | `go vet ./...`, `golangci-lint run` (if installed) |
+| Rust | `cargo check`, `cargo clippy` |
+| Java/Kotlin | `./gradlew check` or `mvn compile` |
+| Ruby | `bundle exec rubocop` (if configured) |
+| .NET | `dotnet build --no-restore` |
+
+Fix all errors found. Commit: "fix(static): resolve static analysis issues"
 If clean, skip commit and proceed.
 
 ============================================================
@@ -53,138 +77,161 @@ PHASE 1: DOMAIN DISCOVERY
 
 Map the full application surface:
 
-1. Catalog all features — screens/pages, API endpoints, database models, services, providers/state management.
-2. Map the domain model — entities, their relationships, and how data flows between them.
-3. Identify entry points — user-facing routes, API handlers, cloud functions, scheduled jobs.
-4. Build a feature inventory table:
+1. CATALOG FEATURES:
+   - Screens/pages/views (UI layer)
+   - API endpoints/routes (backend layer)
+   - Database models/schemas/migrations (data layer)
+   - Services/repositories/controllers (business logic layer)
+   - Background jobs, workers, cloud functions, cron tasks (async layer)
+   - Middleware, interceptors, guards (cross-cutting layer)
 
-   | Feature | Model | Service/Provider | UI Screen | API Endpoint | Cloud Function |
+2. MAP THE DOMAIN MODEL:
+   - Entities and their relationships (1:1, 1:N, N:M)
+   - How data flows between layers (UI -> service -> repository -> database)
+   - External service integrations (payment, email, SMS, storage, AI/ML)
+
+3. IDENTIFY ENTRY POINTS:
+   - User-facing routes and navigation
+   - API handlers (REST, GraphQL, gRPC, WebSocket)
+   - Event handlers (cloud functions, message queue consumers, webhooks)
+   - Scheduled/cron jobs
+
+4. BUILD A FEATURE INVENTORY:
+
+   | Feature | Model | Service | UI/Route | API Endpoint | Background Job | Status |
+   |---------|-------|---------|----------|-------------|----------------|--------|
 
 Produce a brief domain map before proceeding.
 
 ============================================================
-PHASE 2: END-TO-END CONSISTENCY AUDIT
+PHASE 2: CROSS-LAYER CONSISTENCY AUDIT
 ============================================================
 
-For each feature/flow discovered in Phase 1, verify consistency across ALL layers:
+For each feature discovered in Phase 1, verify consistency across ALL layers:
 
 DATA MODEL CONSISTENCY:
-- Every model field used in the UI exists in the data layer.
-- Every database field has a corresponding model property.
-- Serialization/deserialization covers all fields (no missing toJson/fromJson mappings).
+- Every field used in the UI exists in the model/schema definition.
+- Every database column/field has a corresponding model property.
+- Serialization covers all fields (toJSON/fromJSON, toMap/fromMap, serializers, encoders/decoders).
 - Enum values are consistent between frontend and backend.
 - Required vs optional fields match across layers.
-- Firestore document structure matches model expectations (if Firebase).
-- Prisma schema matches model definitions (if Prisma/PostgreSQL).
+- Database schema (migrations, Prisma schema, Firestore structure, etc.) matches model expectations.
+- Type safety: no implicit `any`, untyped dictionaries, or dynamic casts hiding mismatches.
 
 API / SERVICE CONSISTENCY:
 - Every UI action that calls a service has a working backend handler.
-- API request/response shapes match what the frontend expects.
-- Error codes returned by the backend are handled by the frontend.
-- Auth-protected routes actually check authentication.
+- Request/response shapes match between client and server (check DTOs, interfaces, types).
+- Error codes and error response shapes returned by the backend are handled by the frontend.
+- Auth-protected routes actually enforce authentication and authorization.
 - CRUD operations exist for all models that need them.
-- Cloud Functions match what the client expects to trigger them.
+- API versioning is consistent (if used).
+- Rate limiting, pagination, and query parameter validation are present where needed.
 
-NAVIGATION / ROUTING CONSISTENCY:
-- All routes referenced in code are defined (GoRouter, Navigator, etc.).
-- No orphaned screens (defined but unreachable).
-- Navigation arguments match what destination screens expect.
-- Deep links and named routes resolve correctly.
-- Tab/bottom navigation preserves state correctly.
+ROUTING / NAVIGATION CONSISTENCY:
+- All routes referenced in code are defined (React Router, Next.js pages/app dir, GoRouter, Rails routes, Django urls, Express router, etc.).
+- No orphaned views (defined but unreachable).
+- Navigation arguments/params match what destination components expect.
+- Deep links, dynamic routes, and catch-all routes resolve correctly.
+- Middleware/guards on routes match security requirements.
 
 STATE MANAGEMENT CONSISTENCY:
-- Every provider/controller referenced in the UI is defined.
-- State updates propagate correctly (no stale state scenarios).
-- Loading/error/empty states are handled for async data.
-- State is disposed properly (no memory leaks).
-- Riverpod providers have correct scope and lifecycle.
+- Every state container/store/provider referenced in the UI is defined.
+- State updates propagate correctly (no stale state after mutations).
+- Loading, error, and empty states are handled for all async data.
+- State cleanup on unmount/dispose (no memory leaks, no orphan subscriptions).
+- Optimistic updates are rolled back on failure (if used).
 
 BUSINESS LOGIC CONSISTENCY:
-- Validation rules match between frontend and backend.
-- Business rules are enforced server-side (not just client-side).
-- Edge cases in logic (empty lists, null values, boundary conditions).
+- Validation rules match between frontend and backend (never trust client-only validation).
+- Business rules are enforced server-side, not just client-side.
+- Edge cases: empty collections, null/undefined values, boundary conditions, concurrent access.
 - Permission checks are consistent across features.
-- Rate limiting, cooldowns, and caps are enforced where specified.
+- Rate limiting, cooldowns, quotas, and caps are enforced where the domain requires them.
 
 ASSET & CONFIGURATION CONSISTENCY:
-- Referenced assets (images, fonts, icons) exist.
-- Environment variables used in code are defined in config.
-- Feature flags or configuration values are consistent.
-- Third-party service keys/configs are referenced correctly.
+- Referenced assets (images, fonts, icons) exist at the expected paths.
+- Environment variables used in code are defined in .env / config files.
+- Feature flags and configuration values are consistent across environments.
+- Third-party service configurations (API keys, webhook URLs, OAuth settings) are referenced correctly.
 
 ============================================================
-PHASE 2.5: FIREBASE-SPECIFIC CONSISTENCY (if Firebase detected)
+PHASE 2.5: PLATFORM-SPECIFIC DEEP CHECKS
 ============================================================
 
-This phase runs ONLY if the project uses Firebase. Skip entirely for non-Firebase projects.
+Run ONLY the sections that match detected stacks. Skip all others.
 
-FIRESTORE RULES ↔ DATA MODEL:
-- For every collection the app reads from or writes to, verify a matching rule exists
-  in firestore.rules.
-- For every rule in firestore.rules, verify the app actually uses that collection path.
-- Check that rule conditions (auth != null, resource.data.userId == request.auth.uid, etc.)
-  match the app's auth model and data ownership patterns.
-- Verify rules enforce the same field validation the app enforces client-side.
-- Flag rules that are too permissive (allow read, write: if true) on non-public data.
+--- FIREBASE (if firebase.json or firestore.rules detected) ---
+
+FIRESTORE RULES vs DATA MODEL:
+- Every collection the app reads/writes has a matching rule in firestore.rules.
+- Rule conditions (auth checks, field validation, ownership) match the app's auth and data model.
+- Flag overly permissive rules (allow read, write: if true) on non-public data.
 - Flag missing rules for collections the app writes to.
 
 FIRESTORE INDEXES:
-- For every compound query in the codebase (where + orderBy, multiple where clauses),
-  verify a matching composite index exists in firestore.indexes.json.
-- Flag queries that will fail at runtime due to missing indexes.
+- Every compound query (where + orderBy, multiple where clauses) has a matching composite index in firestore.indexes.json.
 
-STORAGE RULES ↔ UPLOAD PATHS:
-- For every file upload in the app, verify storage.rules allows writes to that path.
-- Verify storage rules enforce auth and file size/type limits consistent with app logic.
+STORAGE RULES vs UPLOAD PATHS:
+- File upload paths in code match what storage.rules allows.
 
-CLOUD FUNCTIONS ↔ APP EVENTS:
-- For every Firestore trigger function (onCreate, onUpdate, onDelete), verify the
-  collection path matches what the app writes to.
-- For every callable function, verify the app calls it with the expected parameters.
-- For every scheduled function, verify it operates on collections that exist.
-- Check that function error handling matches what the client expects.
+CLOUD FUNCTIONS vs APP:
+- Firestore trigger functions reference collections the app actually writes to.
+- Callable/HTTP functions are invoked by the client with correct parameters.
+- Scheduled functions operate on existing collections.
 
-FIREBASE AUTH ↔ APP AUTH:
-- Verify the auth methods configured in Firebase match what the app's login/register
-  screens support (email/password, Google, Apple, phone, etc.).
-- Verify custom claims used in rules are set by Cloud Functions or admin SDK.
-- Verify token refresh handling in the app.
+--- PRISMA / SQL DATABASE (if prisma/ or migrations/ detected) ---
+
+- Prisma schema matches migration state (no pending migrations that change the schema).
+- Every model in the schema is used by at least one service/repository.
+- Relations defined in the schema match the query patterns in code.
+- Indexes cover the most common query patterns (check for missing indexes on foreign keys, filtered columns).
+
+--- GRAPHQL (if .graphql or schema files detected) ---
+
+- Every resolver has a matching schema definition.
+- Every query/mutation used by the client exists in the schema.
+- Input types match what resolvers expect.
+- N+1 query patterns are addressed (DataLoader, batching).
+
+--- DOCKER / INFRASTRUCTURE (if docker-compose.yml detected) ---
+
+- Services reference images/builds that exist.
+- Port mappings don't conflict.
+- Environment variables in compose match what the app expects.
+- Volume mounts point to valid paths.
+- Health checks are defined for critical services.
 
 ============================================================
-PHASE 2.75: WIRING COMPLETENESS (learned from recall analysis)
+PHASE 2.75: WIRING COMPLETENESS
 ============================================================
 
 This phase catches the most dangerous class of bugs: features that EXIST in one
 layer but are never CONNECTED to another layer. These are invisible until production.
 
-CALLABLE FUNCTION WIRING (CRITICAL):
-- List every callable Cloud Function (httpsCallable, onCall).
-- For each, search the Flutter/client codebase for invocations.
-- If a callable function exists but is NEVER called from the client, flag CRITICAL.
-  Example: validatePayment Cloud Function existed for months but client did
-  all credit validation client-side only, making it bypassable.
-- For each client-side security check (credit validation, eligibility, permissions,
-  spending limits), verify matching server-side enforcement EXISTS and IS WIRED.
+ENDPOINT/FUNCTION WIRING (CRITICAL):
+- List every backend endpoint, cloud function, or RPC handler.
+- For each, search the client codebase for invocations.
+- If a handler exists but is NEVER called from the client, flag CRITICAL.
+- For each client-side security/validation check, verify matching server-side enforcement EXISTS and IS WIRED.
 
-CLOUD FUNCTION WRITE ↔ MODEL COMPLETENESS (WARNING):
-- For every Cloud Function that writes fields to Firestore documents, list those fields.
+BACKEND WRITE vs MODEL COMPLETENESS (WARNING):
+- For every backend process that writes fields to the database (cloud functions, background jobs, admin scripts, event handlers), list those fields.
 - For each field, verify the client model includes it in:
-  a) Field declaration
-  b) Constructor parameter
-  c) fromMap/fromJson deserialization
-  d) toMap/toJson serialization (if client also writes it)
-  e) copyWith method (if model has one)
-- Missing fields = WARNING. The backend writes data the frontend never displays.
-  Example: onItemProcessed Cloud Function wrote warningCount but
-  User model didn't include it, so risk score calculation was incomplete.
+  a) Field/property declaration
+  b) Constructor / initialization
+  c) Deserialization (fromJSON, fromMap, decoder, serializer)
+  d) Serialization (if client also writes it)
+  e) Copy/clone method (if model has one)
+- Missing fields = WARNING. The backend writes data the frontend never reads or displays.
 
 CONFIG PROPAGATION (WARNING):
-- For admin-configurable settings (stored in Firestore config collections),
-  verify they are read from config providers and passed through to the functions
-  that use them.
-- Flag cases where configurable values are hardcoded instead of read from config.
-  Example: pendingPeriodDays and monthlyCreditCap were defined in CsfSettings
-  but completeVolunteerSit used hardcoded defaults instead.
+- For admin-configurable settings (stored in database config tables/collections, environment variables, feature flags), verify they are actually read and used by the code that should respect them.
+- Flag cases where configurable values are hardcoded instead of read from their config source.
+
+DEAD CODE DETECTION (INFO):
+- Exported functions/classes/modules that are never imported anywhere.
+- API routes that no client calls and no test covers.
+- Database columns/fields that are written but never read (or vice versa).
 
 ============================================================
 PHASE 3: FUNCTIONAL VERIFICATION
@@ -193,11 +240,11 @@ PHASE 3: FUNCTIONAL VERIFICATION
 Trace each major user flow end-to-end:
 
 1. For each flow, walk: UI interaction -> state change -> service call -> backend handler -> data persistence -> response -> UI update.
-2. Check for broken chains — does every trigger have a handler? Does every handler return to the UI?
-3. Verify error paths — what happens when things fail? Is there always a fallback?
-4. Cross-feature interactions — do features that share data stay in sync?
-5. Run tests if they exist. Note which flows have test coverage and which don't.
-6. Run build/compile (flutter analyze, npm run build, etc.) to catch compile-time errors.
+2. Check for broken chains: does every trigger have a handler? Does every handler return to the UI?
+3. Verify error paths: what happens when things fail? Is there always a user-facing fallback?
+4. Cross-feature interactions: do features that share data stay in sync?
+5. Run tests if they exist (`npm test`, `pytest`, `go test ./...`, `flutter test`, `cargo test`, `bundle exec rspec`, `dotnet test`, etc.). Note which flows have test coverage and which do not.
+6. Run build/compile to catch compile-time errors.
 
 ============================================================
 PHASE 4: SELF-HEALING FIX LOOP (max 3 iterations)
@@ -206,64 +253,73 @@ PHASE 4: SELF-HEALING FIX LOOP (max 3 iterations)
 After completing the audit, if Critical or Warning issues were found:
 
 EACH ITERATION:
-1. Fix all Critical issues — broken features, runtime crashes, missing handlers,
-   unwired callable functions, client-only security enforcement.
-2. Fix Warning issues — inconsistencies, missing model fields, hardcoded configs.
-3. Fix Firebase rule/index issues — missing rules, overly permissive rules, missing indexes.
-4. Run build/compile and tests to verify fixes don't introduce regressions.
-5. Re-audit the specific areas that were fixed to confirm they're now consistent.
+1. Fix all Critical issues: broken features, runtime crashes, missing handlers, unwired endpoints, client-only security enforcement.
+2. Fix Warning issues: inconsistencies, missing model fields, hardcoded configs, missing error handling.
+3. Fix platform-specific issues: missing rules, overly permissive rules, missing indexes, schema drift.
+4. Run build/compile AND tests to verify fixes don't introduce regressions.
+5. Re-audit the specific areas that were fixed to confirm they are now consistent.
 6. If new issues surfaced from the fixes, add them to the next iteration.
 
 STOP when:
 - Zero Critical issues remain.
 - Zero Warning issues remain.
 - Build and tests pass.
-- Flutter analyze is clean (if Flutter).
+- Static analysis is clean.
 
-Do NOT auto-fix Info-level issues — report them for the user.
+Do NOT auto-fix Info-level issues -- report them for the user.
+
+COMMIT STRATEGY:
+- Group fixes by category: `fix(wiring): connect unused endpoints to client`
+- One commit per fix category, not one mega-commit.
 
 ============================================================
 OUTPUT
 ============================================================
 
+## Stack Detected
+- Languages: [e.g., TypeScript, Python, Dart]
+- Frameworks: [e.g., Next.js 14, FastAPI, Flutter 3.x]
+- Database: [e.g., PostgreSQL via Prisma, Firestore]
+- Auth: [e.g., Firebase Auth, custom JWT]
+- Infrastructure: [e.g., Docker, Vercel, AWS Lambda]
+
 ## Domain Map
-Brief summary of the application's features and architecture.
+Brief summary of the application's features, architecture, and data flow.
 
 ## Static Analysis
-- Flutter analyze: [clean / N issues fixed]
-- Platform compatibility: [clean / N issues fixed]
-- Type checking: [clean / N issues fixed]
+- [Stack 1]: [clean / N issues fixed]
+- [Stack 2]: [clean / N issues fixed]
 
 ## Issues Found & Resolved
 
-**Critical** — Feature is broken or will crash at runtime
+**Critical** -- Feature is broken or will crash at runtime
 - What was broken
 - Where (file:line)
 - What was fixed
 
-**Warning** — Inconsistency that may cause bugs
+**Warning** -- Inconsistency that may cause bugs
 - What was inconsistent
 - Where (file:line)
 - What was fixed
 
-**Firebase** — Rule, index, or function mismatch (if applicable)
-- What was mismatched
-- Where (rules file + code file)
-- What was fixed
-
-**Wiring** — Callable function or model field gap (if applicable)
+**Wiring** -- Endpoint, model field, or config gap
 - What was disconnected
-- Where (function file + client file)
+- Where (source file + consumer file)
 - What was fixed
 
-**Info** — Minor inconsistency or missing coverage (not auto-fixed)
+**Platform-Specific** -- Rule, index, schema, or infrastructure mismatch
+- What was mismatched
+- Where (config file + code file)
+- What was fixed
+
+**Info** -- Minor inconsistency or missing coverage (not auto-fixed)
 - What's missing
 - Where (file:line)
 
 ## Coverage Summary
 
-| Feature | Model | Service | UI | Tests | Firebase Rules | Server Validation | Status |
-|---------|-------|---------|-----|-------|---------------|-------------------|--------|
+| Feature | Model | Service | UI | API | Tests | Auth | Status |
+|---------|-------|---------|-----|-----|-------|------|--------|
 
 ## Recommendations
 Top 3-5 highest-impact actions to improve consistency and reliability.
@@ -273,6 +329,4 @@ NEXT STEPS:
 After the analysis:
 - "Issues auto-fixed? Run `/qa` to verify everything still works end-to-end."
 - "Architecture concerns? Run `/arch-review` for a deeper structural review."
-- "Want to iterate on improvements? Run `/iterate-review` to refine further."
-- "Run `/readme` to update project documentation with the current state."
-- "Run `/ux` to audit accessibility, design standards, and usability."
+- "Run `/iterate` to refine and polish further."

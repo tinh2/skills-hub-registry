@@ -1,48 +1,50 @@
 ---
 name: evolve
-description: Self-improving skill that reads /recall and /metrics output, identifies which skills need patching, generates and applies additive patches, and logs changes to CHANGELOG.md.
-version: "1.1.0"
+description: "Self-improving skill system. Reads /recall and /metrics output, identifies which skills need patching based on rework patterns and regression data, generates additive patches, and logs changes. Evolves skills based on learnings from any tech stack."
+version: 1.0.0
 category: meta
 platforms:
   - CLAUDE_CODE
 ---
 
 You are the skill evolution engine. You read development cycle analysis (/recall output)
-and metrics (/metrics output), then patch skill instructions to prevent recurring issues.
+and quality metrics (/metrics output), then patch skill instructions to prevent recurring issues.
 
 Do NOT ask the user questions. Analyze findings and apply patches autonomously.
 
-TARGET: $ARGUMENTS
-
-If arguments are provided, interpret them as:
-- A project name or path to read recall/metrics data from (e.g., "pawpass", "~/personal/pet_sitter")
-- A specific skill to evolve (e.g., "/iterate", "/qa") — limits patching to that skill only
-- A recall file path to use directly (e.g., "recall-2026-03-01.md")
-- "dry-run" to analyze and propose patches without applying them
-
-If no arguments are provided, scan all project memory directories for the most recent recall and metrics data, then evolve skills based on the highest-impact findings across all projects.
+ARGUMENTS: $ARGUMENTS
+- If arguments contain `--dry-run`, show proposed patches WITHOUT applying them.
+- Otherwise, apply patches normally.
 
 CONSTRAINTS:
 - Maximum 3 skills patched per run (keep changes reviewable)
 - Patches are ADDITIVE only (add checklist items, add phases, add gates)
 - Never delete existing skill instructions
-- Never modify skill names, descriptions, or categories
+- Never modify skill names or descriptions
 - Every patch must be justified by a specific finding
-- Bump the version number of any modified skill
+- Bump the version number of any modified skill (if it has one)
 
 ============================================================
 PHASE 1: GATHER FINDINGS
 ============================================================
 
-1. Check the project's memory directory for:
+1. Auto-detect the project's memory directory by searching:
+   - `.claude/projects/` directories matching the current project path
+   - `~/.claude/projects/` directories (replacing path separators with `-`)
+   - The project root for any `MEMORY.md`
+2. In the memory directory, look for:
    - `recall-*.md` files (development cycle analysis)
    - `MEMORY.md` (project memory with metrics baseline and debt items)
-2. Check `~/git2/claude-config/metrics/` for metrics snapshots.
-3. If no recall/metrics data exists, run the analysis:
+   - Any `*-metrics-*.md` or `*-recall-*.md` files
+3. Search for metrics snapshots:
+   - Check the memory directory for `metrics-*.md` files
+   - Check sibling directories of the memory directory for metrics data
+   - Check for any `metrics/` subdirectory in the project
+4. If no recall/metrics data exists, run the analysis:
    - Execute `git log` commands to get commit data
    - Classify commits by type and skill signature
    - Identify rework patterns (fix commits following feat commits)
-4. Extract actionable findings:
+5. Extract actionable findings:
    - Root causes of rework (from recall "What caused unnecessary rework" section)
    - Metrics that regressed or missed targets
    - Rework hotspots and their causes
@@ -52,20 +54,27 @@ PHASE 1: GATHER FINDINGS
 PHASE 2: MAP FINDINGS TO SKILLS
 ============================================================
 
-For each finding, determine which skill(s) should be patched:
+For each finding, determine which skill(s) should be patched.
 
-| Finding Pattern | Target Skill | Patch Type |
-|----------------|-------------|------------|
-| Missing error handling in screens | `/iterate` | Add checklist item |
-| A11y added as afterthought | `/iterate` | Add a11y requirement to screen creation |
-| Unbounded Firestore queries | `/iterate` | Add .limit() checklist |
-| Missing idempotency in CFs | `/iterate` | Add CF checklist |
-| Too many QA passes (>2) | `/qa` | Add "route upstream" instruction |
-| Scale issues found late | `/iterate` | Add scale checklist |
-| Theme inconsistency | `/iterate` | Add theme-first requirement |
-| Firestore rules reactive | `/arch-review` | Add rules design phase |
-| Domain inconsistencies | `/analyze` | Add cross-layer checks |
-| Missing mounted checks | `/iterate` | Add Flutter-specific checklist |
+Use the pattern categories below. These are tech-stack-agnostic — adapt
+the specific checklist items to whatever stack the project uses.
+
+| Finding Category | Target Skill | Patch Type |
+|-----------------|-------------|------------|
+| Missing error handling / defensive coding | `/iterate` | Add error-handling checklist for the detected stack |
+| Accessibility added as afterthought | `/iterate` | Add a11y requirement to component/screen creation |
+| Unbounded queries or missing pagination | `/iterate` | Add query-safety checklist (limits, cursors, indexes) |
+| Missing idempotency in async jobs | `/iterate` | Add idempotency checklist for the job/worker framework |
+| Too many QA passes (>2) without convergence | `/qa` | Add "route upstream after 2 rounds" instruction |
+| Performance/scale issues found late | `/iterate` | Add perf checklist (N+1, caching, lazy loading) |
+| Design/theme inconsistency | `/iterate` | Add design-token-first requirement |
+| Schema/data-model churn | `/arch-review` | Add schema design phase before implementation |
+| Domain inconsistencies across layers | `/analyze` | Add cross-layer naming/contract checks |
+| Missing cleanup/disposal of resources | `/iterate` | Add resource lifecycle checklist (connections, listeners, timers) |
+| Security issues found late | `/iterate` | Add security checklist (input validation, auth checks, secrets) |
+| Tests written in batch after features | `/iterate` | Add "test with feature" co-commit requirement |
+| Dead code / orphaned files accumulating | `/iterate` | Add cleanup step to feature completion |
+| Missing input validation | `/iterate` | Add validation checklist for API/form inputs |
 
 Prioritize by impact: patches that prevent the most rework commits come first.
 
@@ -77,25 +86,34 @@ For each patch (max 3):
 
 1. Read the current SKILL.md file for the target skill.
 2. Identify WHERE to insert the new content:
-   - Checklists → add to existing checklist section or create one
-   - Phase instructions → add to the relevant phase
-   - Gates → add between existing phases
+   - Checklists: add to existing checklist section or create one
+   - Phase instructions: add to the relevant phase
+   - Gates: add between existing phases
 3. Generate the patch content:
    - Use the same formatting style as the existing skill
    - Reference the finding that justifies the patch
    - Keep additions concise (3-10 lines per patch)
-4. Apply the patch using the Edit tool.
-5. Bump the version number in the skill header.
+4. If `--dry-run` mode:
+   - Show the proposed diff (before/after) for each patch
+   - Show which file would be modified and where
+   - Do NOT apply any changes
+   - Skip Phase 4 (logging)
+   - Output the report and stop
+5. If normal mode:
+   - Apply the patch using the Edit tool
+   - Bump the version number in the skill header (if present)
 
 ============================================================
 PHASE 4: LOG CHANGES
 ============================================================
 
-1. Append to `CHANGELOG.md`:
+Skip this phase entirely if `--dry-run` was specified.
+
+1. Append to `~/.claude/skills/CHANGELOG.md`:
    ```
    ## {date}
 
-   ### {skill name} v{old} → v{new}
+   ### {skill name} v{old} -> v{new}
    **Triggered by:** {project name} /recall analysis
    **Finding:** {specific finding from recall}
    **Patch:** {what was added/changed}
@@ -104,10 +122,12 @@ PHASE 4: LOG CHANGES
 2. Update the project's MEMORY.md to note which skills were evolved:
    ```
    ## Last /evolve Run ({date})
-   - Patched: /iterate v4 → v5 (added a11y checklist)
-   - Patched: /qa v3 → v4 (added upstream routing)
+   - Patched: /iterate v4 -> v5 (added error-handling checklist)
+   - Patched: /qa v3 -> v4 (added upstream routing)
    ```
 
+3. If a sync/backup script exists at `~/.claude/scripts/sync-backup.sh`, run it.
+   Otherwise, skip this step silently.
 
 ============================================================
 OUTPUT
@@ -115,18 +135,13 @@ OUTPUT
 
 ## Skill Evolution Report
 
-| Metric | Value |
-|--------|-------|
-| Projects analyzed | N |
-| Findings extracted | N |
-| Skills patched | N (max 3) |
-| Findings deferred | N |
+**Mode:** {normal | dry-run}
 
 ### Findings Analyzed
 | # | Finding | Source | Impact (est. fix commits prevented) |
 |---|---------|--------|-------------------------------------|
 
-### Patches Applied
+### Patches {Applied | Proposed (dry-run)}
 | Skill | Version | Patch Summary | Justified By |
 |-------|---------|--------------|--------------|
 
@@ -134,24 +149,9 @@ OUTPUT
 For each patch, show the before/after diff of the skill file.
 
 ### Deferred Findings
-Findings that couldn't be addressed by skill patches (need architectural changes, etc.)
+Findings that could not be addressed by skill patches (need architectural changes, etc.)
 
-============================================================
-DO NOT
-============================================================
-
-- Do NOT delete or rewrite existing skill instructions — patches are additive only.
-- Do NOT modify skill names, descriptions, categories, or frontmatter (except version).
-- Do NOT patch more than 3 skills per run — keep changes reviewable.
-- Do NOT apply patches without a specific finding justifying the change.
-- Do NOT create new skills — only patch existing ones.
-
-============================================================
-NEXT STEPS
-============================================================
-
+NEXT STEPS:
 - "Run the patched skills on your next project to validate improvements."
 - "Run `/metrics` after the next project to measure impact."
-- "Run `/promote` to check if these patterns should be global conventions."
-- "Run `/evolve dry-run` to preview patches without applying them."
-- "Review CHANGELOG.md to see the full evolution history."
+- "Run `/promote` to check if these patterns should be global."

@@ -1,0 +1,38 @@
+{
+  "vulnerability_source": "vanta",
+  "issue_tracker": "jira",
+  "commit_suffix": "deploy:tho",
+  "vanta": {
+    "token_file": "~/.vanta-token",
+    "token_env": "VANTA_API_TOKEN",
+    "api_base": "https://api.vanta.com/v1"
+  },
+  "jira": {
+    "url": "https://fringedev.atlassian.net",
+    "project_key": "DEV",
+    "issue_type": "Story",
+    "credentials_file": "~/.jira-credentials"
+  },
+  "github": {
+    "org": "fringeus"
+  },
+  "repos": {
+    "subscription-job": {
+      "path": "/Users/thole/git/subscription-job",
+      "package_manager": "npm"
+    },
+    "firebase-lambdas": {
+      "path": "/Users/thole/git/firebase-lambdas",
+      "package_manager": "npm",
+      "package_json_path": "layers/firebaseUtil/nodejs"
+    },
+    "firebase-utilities": {
+      "path": "/Users/thole/git/firebase-utilities",
+      "package_manager": "npm"
+    },
+    "marketplace-app": {
+      "path": "/Users/thole/git/marketplace-app",
+      "package_manager": "yarn"
+    }
+  }
+}

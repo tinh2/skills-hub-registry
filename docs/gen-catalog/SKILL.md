@@ -1,7 +1,7 @@
 ---
 name: gen-catalog
-description: Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories, eliminating manual documentation updates.
-version: "1.1.0"
+description: "Generate skill catalog — auto-discovers skills, builds README tables, JSON, or HTML output. Triggers: generate skill catalog, update skills documentation, list all skills"
+version: 1.0.0
 category: docs
 platforms:
   - CLAUDE_CODE
@@ -10,99 +10,134 @@ platforms:
 You are a catalog generation agent. Do NOT ask the user questions.
 
 ============================================================
-TARGET: $ARGUMENTS
-============================================================
-
-- If $ARGUMENTS contains "readme", only regenerate README.md (skip skills-list).
-- If $ARGUMENTS contains "skills-list", only regenerate skills-list/SKILL.md (skip README).
-- If $ARGUMENTS contains a directory path, scan only that directory for SKILL.md files.
-- If $ARGUMENTS is empty, scan all directories and regenerate both README.md and skills-list/SKILL.md.
-
-============================================================
 PHASE 1: DISCOVER ALL SKILLS
 ============================================================
 
-1. Glob for all `*/SKILL.md` and `*/skill.md` files under `./`.
-2. Also check `~/.claude/commands/*.md` for global commands (these are slash commands
+1. Determine the skills directory:
+   - If the user specifies a directory, use that.
+   - Otherwise default to `~/.claude/skills/`.
+
+2. Glob for all `*/SKILL.md` and `*/skill.md` files under the skills directory.
+   Also check `~/.claude/commands/*.md` for global commands (slash commands
    that exist outside the skills directory).
-3. For each file found, parse the YAML frontmatter:
+
+3. For each file found, parse the YAML frontmatter (between `---` delimiters):
    - `name` (required)
    - `description` (required)
-   - `version` (required)
-   - `category` (optional — one of: discovery, spec, build, test, quality, docs, ops, combo)
-   - If `category` is missing, infer from the instructions content:
-     - "competitive" / "research" / "product analysis" → discovery
-     - "spec" / "story" / "jira" / "design review" → spec
-     - "implement" / "build" / "scaffold" / "iterate" / "ship" → build
-     - "test" / "e2e" / "walkthrough" / "QA test plan" → test
-     - "review" / "analyze" / "audit" / "consistency" / "UX" → quality
-     - "README" / "documentation" / "catalog" → docs
-     - "security" / "compliance" / "icon" / "image" / "infrastructure" → ops
-     - "chain" / "combo" / "Follow the instructions defined in" → combo
-4. Detect combo chains by scanning instructions for the pattern:
-   "Follow the instructions defined in the `/X` skill"
-   or "Chains /X → /Y" in the description.
-   Record the chain sequence for each combo skill.
+   - Any other frontmatter fields are preserved but not required.
+
+4. Auto-detect categories by scanning each skill's instructions content.
+   Do NOT use a fixed category list. Instead:
+   - Extract keywords and themes from the instructions.
+   - Group skills by their primary purpose. Common groupings include
+     (but are not limited to): research/discovery, spec/design, build,
+     testing, quality/review, documentation, operations, security,
+     infrastructure, combo/chain, deployment, analysis, etc.
+   - If a skill clearly chains other skills (e.g., "Follow the instructions
+     defined in the `/X` skill" or "Chains /X -> /Y"), classify it as a
+     combo/chain skill and record the chain sequence.
+   - Use short lowercase labels for categories (e.g., "research", "build",
+     "testing", "docs", "ops", "combo").
+   - Generate human-readable display names from category labels
+     (e.g., "research" -> "Research & Discovery", "build" -> "Build & Implement").
+
+5. Generate a markdown link for each skill pointing to its SKILL.md file
+   relative to the skills directory root (e.g., `[/name](./name/SKILL.md)`).
 
 ============================================================
-PHASE 2: GENERATE README.md
+PHASE 2: DETERMINE OUTPUT FORMAT
 ============================================================
 
-Read the existing `./README.md`.
+Check if the user requested a specific output format. Supported formats:
 
-Preserve everything ABOVE the line `<!-- AUTO-GENERATED-SKILLS-TABLE-START -->`.
-Preserve everything BELOW the line `<!-- AUTO-GENERATED-SKILLS-TABLE-END -->`.
+- **readme** (default): Markdown table injected into README.md
+- **json**: JSON array of skill objects written to `skills-catalog.json`
+- **html**: Standalone HTML page written to `skills-catalog.html`
 
-If these markers do not exist yet, add them. Place the start marker after the
-first heading and intro paragraph. Place the end marker before the
-"## Autonomous Build & Improve Chains" section (or at the end if that section
-does not exist).
+If no format is specified, use "readme".
+
+### README format (default)
+
+Read the existing README.md in the skills directory.
+
+Preserve everything ABOVE `<!-- AUTO-GENERATED-SKILLS-TABLE-START -->`.
+Preserve everything BELOW `<!-- AUTO-GENERATED-SKILLS-TABLE-END -->`.
+
+If these markers do not exist yet, add them after the first heading and
+intro paragraph.
 
 Between the markers, generate:
 
 ### Skills by Category
 
-For each category (in this order: discovery, spec, build, test, quality, docs, ops, combo):
+For each detected category (sorted alphabetically, with combo/chains last):
 
 #### [Category Display Name]
 
-| Skill | Description | Version |
-|-------|------------|---------|
-| `/name` | description | vN |
+| Skill | Description |
+|-------|-------------|
+| [`/name`](./name/SKILL.md) | description |
 
-Category display names:
-- discovery → "Product Discovery & Research"
-- spec → "Spec & Design"
-- build → "Build & Implement"
-- test → "Testing & QA"
-- quality → "Code Quality & Review"
-- docs → "Documentation & Reporting"
-- ops → "Operations & Security"
-- combo → "Combo Chains"
+For combo/chain skills, add a "Chain" column:
 
-For combo skills, add a "Chain" column:
-
-| Skill | Chain | Description | Version |
-|-------|-------|------------|---------|
-| `/name` | `/a` → `/b` → `/c` | description | vN |
+| Skill | Chain | Description |
+|-------|-------|-------------|
+| [`/name`](./name/SKILL.md) | `/a` -> `/b` -> `/c` | description |
 
 Also include global commands from `~/.claude/commands/` with a note:
 > Global commands (available in any project):
+
 | Command | Description |
-|---------|------------|
+|---------|-------------|
 | `/name` | description |
 
+### JSON format
+
+Write a JSON file with this structure:
+```json
+{
+  "generated": "ISO-8601 timestamp",
+  "skills_directory": "/path/to/skills",
+  "categories": {
+    "category-label": {
+      "display_name": "Category Display Name",
+      "skills": [
+        {
+          "name": "skill-name",
+          "description": "...",
+          "path": "relative/path/to/SKILL.md",
+          "chain": ["/a", "/b"] // only for combo skills
+        }
+      ]
+    }
+  },
+  "global_commands": [
+    { "name": "command-name", "description": "..." }
+  ]
+}
+```
+
+### HTML format
+
+Generate a standalone HTML page with:
+- Clean CSS styling (no external dependencies)
+- Skills grouped by category in collapsible sections
+- A search/filter input for skill names and descriptions
+- Links to each skill's SKILL.md file
+
 ============================================================
-PHASE 3: GENERATE skills-list/SKILL.md
+PHASE 3: UPDATE skills-list (README format only)
 ============================================================
 
-Read the existing `./skills-list/SKILL.md` (or `skill.md`).
+If outputting README format and `skills-list/SKILL.md` exists in the
+skills directory, update its embedded skills table:
 
-Replace ONLY the hardcoded skills table (the content between the `instructions: |`
-line's table section). Keep the YAML frontmatter. Keep any manually-written sections
-after the table (pipeline diagrams, parallelization rules, development patterns).
+- Keep the YAML frontmatter intact.
+- Replace ONLY the skills table content.
+- Keep any manually-written sections after the table (pipeline diagrams,
+  parallelization rules, development patterns).
 
-The generated table should match the format already used in skills-list:
+The generated table format:
 
 | Skill | Description |
 |---|---|
@@ -115,52 +150,25 @@ PHASE 4: VERIFY
 ============================================================
 
 1. Count total skills discovered.
-2. Count skills in generated README table.
-3. Count skills in generated skills-list table.
-4. All three counts must match. If not, flag the discrepancy.
-5. Check for orphan directories (dirs under ./ with no SKILL.md).
-6. Check for skills referenced in combo chains that don't exist.
+2. Count skills in generated output.
+3. Counts must match. If not, flag the discrepancy.
+4. Check for orphan directories (dirs under the skills directory with no SKILL.md).
+5. Check for skills referenced in combo chains that don't exist.
+
+Report:
+## Catalog Generated
+- Skills discovered: N
+- Output format: [readme|json|html]
+- Output updated: N skills
+- Orphan directories: [list or "none"]
+- Missing chain targets: [list or "none"]
 
 ============================================================
 PHASE 5: COMMIT (optional)
 ============================================================
 
-If changes were made, stage README.md and skills-list/SKILL.md (or skill.md).
+If changes were made, stage the updated files.
 Commit: "docs: auto-generate skills catalog (N skills)"
 
 Do NOT include Co-Authored-By lines.
 Push after committing.
-
-============================================================
-OUTPUT
-============================================================
-
-## Catalog Generated
-
-| Metric | Value |
-|--------|-------|
-| Skills discovered | N |
-| README.md updated | N skills in table |
-| skills-list updated | N skills in table |
-| Orphan directories | [list or "none"] |
-| Missing chain targets | [list or "none"] |
-| Global commands found | N |
-
-============================================================
-NEXT STEPS
-============================================================
-
-- Run `/skills-list` to view the updated catalog in the terminal.
-- Run `/readme` to enhance the README beyond the auto-generated table.
-- Run `/bootstrap` to scaffold a new project using skills from the catalog.
-- Run `/recall` to analyze development patterns and feed insights back.
-
-============================================================
-DO NOT
-============================================================
-
-- Do NOT modify any SKILL.md files other than skills-list/SKILL.md — this skill only reads frontmatter.
-- Do NOT invent skills that were not discovered — only catalog what exists.
-- Do NOT remove manually-written sections from README.md outside the auto-generated markers.
-- Do NOT delete orphan directories — only report them.
-- Do NOT skip the verification phase — count mismatches indicate catalog drift.

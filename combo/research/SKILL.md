@@ -1,7 +1,7 @@
 ---
 name: research
-description: Chains /compete → /new-features — runs competitive gap analysis, saves the report, then synthesizes actionable feature ideas from all markdown findings in the folder.
-version: "1.0.0"
+description: "Full-spectrum product research pipeline. Runs competitive analysis, technology trend scouting, user feedback analysis, and feature ideation. Trigger on: research, competitive research, market research, feature discovery, what should we build next, technology trends, user feedback, app store reviews, GitHub issues analysis, competitive landscape, product strategy."
+version: 1.0.0
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -28,56 +28,112 @@ as specified by the `/compete` skill (create the `docs/` directory if it doesn't
 Do NOT stop here. Continue immediately to Phase 2.
 
 ============================================================
-PHASE 2: FEATURE IDEATION  (/new-features)
+PHASE 2: TECHNOLOGY TREND RESEARCH
+============================================================
+
+Research current technology trends relevant to this project's domain.
+Use web search to find:
+
+1. **Emerging Technologies** — New frameworks, APIs, platforms, or paradigms
+   that competitors or adjacent products are adopting (e.g., on-device ML,
+   spatial computing, voice-first UX, AI-native workflows).
+2. **Developer Ecosystem Shifts** — Changes in tooling, package ecosystems,
+   or platform capabilities that could unlock new features or reduce cost
+   (e.g., new OS APIs, free-tier expansions, open-source alternatives).
+3. **UX/Design Trends** — Interaction patterns gaining traction in the
+   category (e.g., progressive disclosure, ambient computing, micro-animations).
+4. **Regulatory & Standards** — Upcoming regulations, accessibility mandates,
+   or industry standards that may force or enable product changes.
+
+For each trend, note:
+- **Trend name**
+- **Relevance** (HIGH / MEDIUM / LOW) — how directly it applies to this project
+- **Adoption window** — how soon this matters (NOW / 6 months / 12+ months)
+- **Opportunity** — what feature or improvement it could enable
+
+Save to `docs/technology-trends.md`.
+
+Do NOT stop here. Continue immediately to Phase 3.
+
+============================================================
+PHASE 3: USER FEEDBACK ANALYSIS
+============================================================
+
+Gather and analyze real user feedback from available sources:
+
+1. **App Store Reviews** — If the product (or key competitors) are on app stores,
+   search for reviews. Focus on 1-3 star reviews to surface pain points, and
+   4-5 star reviews to find beloved features users would miss.
+2. **GitHub Issues** — If the project or competitors have public repos, scan
+   open and recently closed issues for feature requests, common bugs, and
+   recurring complaints.
+3. **Community Signals** — Search Reddit, forums, Twitter/X, or HackerNews
+   for discussions about the product category. Note unmet needs users express.
+
+Produce a summary with:
+- **Top 10 Pain Points** — ranked by frequency/severity across all sources
+- **Top 5 Beloved Features** — what users love and would be angry to lose
+- **Top 5 Feature Requests** — most-requested features that don't exist yet
+- **Sentiment Summary** — overall user sentiment toward the category
+
+Save to `docs/user-feedback-analysis.md`.
+
+Do NOT stop here. Continue immediately to Phase 4.
+
+============================================================
+PHASE 4: FEATURE IDEATION  (/new-features)
 ============================================================
 
 Now follow the instructions defined in the `/new-features` skill exactly.
 
-Read ALL `.md` files in the `docs/` directory — this includes
-the `docs/competitive-gap-analysis.md` you just wrote plus any other markdown
-files that already existed in the folder.
+Read ALL `.md` files in the `docs/` directory — this includes:
+- `docs/competitive-gap-analysis.md` from Phase 1
+- `docs/technology-trends.md` from Phase 2
+- `docs/user-feedback-analysis.md` from Phase 3
+- Any other markdown files that already existed in the folder
 
 Extract learnings from every file, synthesize feature ideas, and write
 the report to `docs/NewFeatures-X.md` (where X is a 3-word kebab-case theme).
 
-IMPORTANT: Features should heavily draw from the competitive gap analysis
-just produced. Critical gaps and strategic gaps from Phase 1 should become
-HIGH priority features. Differentiator opportunities should become MEDIUM.
+IMPORTANT: Features should heavily draw from ALL prior phases:
+- Critical gaps and strategic gaps from Phase 1 → HIGH priority features
+- Differentiator opportunities from Phase 1 → MEDIUM priority
+- HIGH-relevance technology trends from Phase 2 → features that leverage new tech
+- Top pain points and feature requests from Phase 3 → user-validated features
+- Beloved features from Phase 3 → features to protect and enhance, not disrupt
 
 ============================================================
 OUTPUT
 ============================================================
 
-When both phases are complete, print a summary:
+When all phases are complete, print a summary:
 
 ---
 ## Research Complete
 
 **Files generated:**
 1. `docs/competitive-gap-analysis.md` — Full competitive landscape + gap analysis
-2. `docs/NewFeatures-[X].md` — Actionable feature ideas derived from findings
+2. `docs/technology-trends.md` — Technology trends and opportunities
+3. `docs/user-feedback-analysis.md` — User feedback from reviews, issues, and community
+4. `docs/NewFeatures-[X].md` — Actionable feature ideas derived from all findings
 
 **Key stats:**
 - Competitors analyzed: [N]
+- Technology trends identified: [N]
+- User pain points surfaced: [N]
 - Total gaps found: [N]
 - Feature ideas generated: [N] (HIGH: [N], MEDIUM: [N], LOW: [N])
 
 **Next steps:**
-- Run `/backend-spec [feature name]` to generate implementation stories
-- Run `/iterate` or `/ship` to start building a feature
+- Run `/spec [feature name]` to generate implementation stories
+- Run `/iterate` to start building a feature
 - Run `/arch-review` to assess architecture readiness for the proposed features
-platforms:
-- CLAUDE_CODE
 ---
 
 STRICT RULES:
 
-- Do NOT skip Phase 1 and go straight to Phase 2.
+- Do NOT skip any phase or reorder them.
 - Do NOT ask the user for input between phases.
-- Phase 2 MUST read the file written by Phase 1 — that's the whole point of the chain.
+- Phase 4 MUST read the files written by Phases 1-3 — that's the whole point of the chain.
 - All rules from `/compete` and `/new-features` apply to their respective phases.
-
-NEXT STEPS:
-
-- "Run `/backend-spec` to generate implementation stories from the features identified."
-- "Run `/arch-review` to assess architecture readiness for the proposed features."
+- If a source is unavailable (e.g., no app store listing, no public repo), note it and move on — do not block the pipeline.
