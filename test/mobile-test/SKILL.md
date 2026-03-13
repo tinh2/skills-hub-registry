@@ -1,6 +1,6 @@
 ---
 name: mobile-test
-description: Auto-detects mobile framework and generates comprehensive tests — unit tests, widget and UI tests, integration tests, snapshot tests, platform-specific tests, accessibility tests, and device matrix configuration.
+description: Generate a complete mobile test suite covering unit, widget, integration, snapshot, accessibility, and platform-specific tests. Auto-detects Flutter, React Native, native iOS (XCTest), or native Android (JUnit/Espresso), then produces tests for models, services, ViewModels, screens, navigation, forms, and pull-to-refresh with proper mocks and golden image comparisons. Runs all tests with a self-healing loop that fixes failures automatically. Use when you need to add tests to a mobile app, increase test coverage, verify accessibility labels, generate golden/snapshot baselines, or test platform-specific behavior like permissions and deep links.
 version: "1.0.0"
 category: test
 platforms:
@@ -344,8 +344,8 @@ DO NOT:
 - Generate tests that assert nothing (every test must verify meaningful behavior).
 - Delete failing tests to make the suite green.
 - Weaken assertions to make tests pass.
-- Use real API endpoints in unit tests — always mock.
-- Skip running the tests — generation without execution is incomplete.
+- Use real API endpoints in unit tests -- always mock.
+- Skip running the tests -- generation without execution is incomplete.
 - Generate duplicate tests for code already covered by existing tests.
 - Use hardcoded test data that only works once (use unique generators).
 - Write tests that depend on execution order.

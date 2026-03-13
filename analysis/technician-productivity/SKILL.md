@@ -1,6 +1,6 @@
 ---
 name: technician-productivity
-description: Analyzes field service technician productivity including utilization rates, job completion metrics, callback analysis, skill gap identification, and training ROI measurement using wrench time studies and field service KPI frameworks.
+description: Analyze field service technician productivity and workforce efficiency. Evaluates wrench time utilization rates (benchmark 55-65%), travel time optimization, first-time fix rate (FTFR) decomposition by root cause, callback pattern analysis, job duration accuracy (estimated vs actual), skill gap identification with certification matrix mapping, training ROI calculation, and performance tier distribution using field service KPI frameworks and wrench time study methodology.
 version: "1.0.0"
 category: analysis
 platforms:

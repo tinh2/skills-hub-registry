@@ -1,6 +1,6 @@
 ---
 name: spending-behavior
-description: Analyzes personal finance apps for spending categorization accuracy, budget adherence tracking, behavioral nudge effectiveness, savings goal optimization, subscription detection, and financial health scoring models.
+description: Audit personal finance and budgeting app spending intelligence features. Use when you need to evaluate transaction categorization accuracy (MCC mapping, ML classification, merchant matching), budget adherence tracking and alerts, behavioral nudge effectiveness and fatigue, savings goal automation (round-ups, found money), subscription detection and cancellation workflows, financial health scoring models, bank aggregation pipeline quality (Plaid, Yodlee, MX), or variable income budget handling. Covers spending categorization edge cases like transfers, refunds, and P2P payments.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -15,8 +15,10 @@ health scoring, then produce a comprehensive analysis.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., "categorization"
-or "savings goals"). If no arguments, run the full analysis.
+If arguments are provided, focus on that area (e.g., "categorization accuracy for
+generic merchants", "subscription price increase detection", "savings goal round-up
+logic", "nudge fatigue measurement", "financial health score transparency",
+"variable income budget models"). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: SYSTEM DISCOVERY

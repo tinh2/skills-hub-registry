@@ -1,6 +1,6 @@
 ---
 name: drug-discovery-ops
-description: Analyzes drug discovery operations including compound library management, screening workflows, hit-to-lead pipelines, ADMET prediction, and clinical candidate selection processes.
+description: Audit a pharmaceutical or biotech drug discovery platform -- analyze compound library management, HTS screening cascades, hit-to-lead DMTA cycles, ADMET prediction model quality, clinical candidate selection gates, and IND-enabling readiness. Use when reviewing cheminformatics pipelines, screening data systems, lead optimization workflows, or preclinical development platforms.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -27,7 +27,7 @@ Identify drug discovery platforms:
 - `*.sdf`, `*.mol2`, `*.pdb`, `*.smi` -> Chemical structure files
 - `*.fasta`, `*.pdb` -> Bioinformatics / structural biology
 - Jupyter notebooks with molecular modeling -> Computational pipeline
-- Configuration for Schr\u00f6dinger, OpenEye, MOE, ChemAxon -> Modeling tools
+- Configuration for Schrodinger, OpenEye, MOE, ChemAxon -> Modeling tools
 - REST/GraphQL APIs -> Registration systems, ELN integration
 
 Step 1.2 -- Compound Library Assessment

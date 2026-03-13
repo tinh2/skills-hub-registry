@@ -1,6 +1,6 @@
 ---
 name: environmental-compliance
-description: Reviews software for environmental regulatory compliance -- EPA reporting, Clean Air Act, Clean Water Act, NEPA requirements, environmental impact assessments, waste management tracking (RCRA), and emissions monitoring accuracy.
+description: "Audit environmental software for EPA reporting (CEDRI, NetDMR, RCRAInfo), Clean Air Act (Title V, NESHAP, CEMS, TRI), Clean Water Act (NPDES, SWPPP, SPCC), RCRA hazardous waste tracking (manifests, biennial reports), NEPA environmental impact assessment workflows, GHG reporting, and compliance calendar management. Use when reviewing environmental management systems, permit tracking, emissions monitoring, waste management, or environmental impact assessment software."
 version: "1.0.0"
 category: review
 platforms:

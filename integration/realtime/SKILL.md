@@ -1,6 +1,6 @@
 ---
 name: realtime
-description: Sets up WebSocket or SSE-based realtime communication with channels, presence, reconnection, and offline handling — supports Socket.io, Pusher, Ably, and more.
+description: "Add realtime features to my app — set up WebSockets or SSE with Socket.io, Pusher, Ably, Supabase Realtime, or Firebase using channels, presence tracking, typing indicators, reconnection with exponential backoff, offline message queuing, and rate limiting"
 version: "1.0.0"
 category: integration
 platforms:

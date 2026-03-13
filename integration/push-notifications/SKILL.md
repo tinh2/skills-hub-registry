@@ -1,6 +1,6 @@
 ---
 name: push-notifications
-description: Sets up mobile and web push notifications with FCM, APNs, or OneSignal including foreground/background handling, topics, and deep linking.
+description: "Add push notifications to my app — set up FCM, APNs, or OneSignal for Flutter, React Native, Expo, or web with permission flows, foreground and background handlers, notification channels, topic subscriptions, deep link routing, and device token management"
 version: "1.0.0"
 category: integration
 platforms:

@@ -1,6 +1,6 @@
 ---
 name: shipping-cost
-description: Analyzes shipping cost structures for carrier rate comparison, zone-skip optimization, parcel vs LTL/FTL threshold analysis, negotiation leverage identification, and accessorial charge auditing across carrier rate programs.
+description: Audit shipping costs and identify savings across carriers, zones, and modes. Use when you need to compare UPS/FedEx/USPS/DHL rates, analyze zone-skip and zone-reduction opportunities, find parcel-to-LTL and LTL-to-FTL modal break points, audit accessorial surcharges (fuel, residential, DAS, DIM weight), evaluate carrier contract negotiation leverage, benchmark lane rates against market, optimize multi-origin fulfillment, or quantify invoice audit recovery. Produces a prioritized savings waterfall with dollar estimates.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -15,9 +15,11 @@ shipping cost analysis.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., specific carriers,
-lanes, service levels, or cost categories). If no arguments, scan the current project
-for all shipping rate configurations, cost calculation logic, and carrier integrations.
+If arguments are provided, focus on that area (e.g., "UPS vs FedEx ground rates",
+"zone 5-8 cost reduction", "LTL NMFC classification accuracy", "residential surcharge
+avoidance", "fuel surcharge cap negotiation", "DIM weight optimization", specific carrier
+or lane). If no arguments, scan the current project for all shipping rate configurations,
+cost calculation logic, and carrier integrations.
 
 ============================================================
 PHASE 1: CARRIER RATE STRUCTURE DISCOVERY

@@ -1,13 +1,13 @@
 ---
 name: merchandising-analytics
-description: Analyzes merchandising systems for planogram optimization, visual merchandising effectiveness, cross-sell and upsell performance, basket analysis, and seasonal planning strategies.
+description: Analyze retail merchandising systems including planogram optimization (space-to-sales alignment, fair share index, sales per linear foot), visual merchandising effectiveness for in-store displays and e-commerce product pages, market basket analysis with association rule mining (Apriori, FP-Growth), cross-sell and upsell recommendation engine performance, seasonal calendar and event planning execution, A/B testing infrastructure for merchandising decisions, and compliance monitoring with photo recognition AI.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous merchandising analytics analyst. Do NOT ask the user questions. Analyze and act.
+You are an autonomous merchandising analytics analyst. Do NOT ask the user questions. Read the actual codebase, evaluate planogram tools, basket analytics, recommendation engines, visual merchandising systems, seasonal planning infrastructure, and performance measurement, then produce a comprehensive merchandising analysis.
 
 TARGET:
 $ARGUMENTS
@@ -226,10 +226,7 @@ PHASE 7: WRITE REPORT
 
 Write analysis to `docs/merchandising-analytics-analysis.md` (create `docs/` if needed).
 
-Include: Executive Summary, Space Planning Assessment, Planogram Optimization Findings,
-Visual Merchandising Effectiveness, Basket Analysis Results, Cross-Sell/Upsell
-Opportunities, Seasonal Planning Review, Performance Measurement Maturity, Prioritized
-Recommendations with estimated revenue impact.
+Include: Executive Summary, Space Planning Assessment, Planogram Optimization Findings, Visual Merchandising Effectiveness, Basket Analysis Results, Cross-Sell/Upsell Opportunities, Seasonal Planning Review, Performance Measurement Maturity, Prioritized Recommendations with estimated revenue impact.
 
 ============================================================
 OUTPUT

@@ -1,6 +1,6 @@
 ---
 name: vendor-management
-description: Analyzes vendor management systems for performance scorecards, risk assessment, SLA tracking, vendor rationalization, and relationship mapping following ITIL supplier management and third-party risk management frameworks.
+description: Analyze vendor management systems for performance scorecards, third-party risk assessment, SLA enforcement, vendor rationalization, and relationship governance. Evaluates vendor tiering strategies, risk taxonomy (financial, cyber, compliance, geopolitical), continuous monitoring with BitSight/SecurityScorecard, ITIL supplier management alignment, diversity program tracking, and lifecycle management from onboarding through offboarding following OCC, FFIEC, and GDPR frameworks.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -37,7 +37,7 @@ transactional), governance cadence by tier (quarterly business reviews, annual a
 escalation paths, executive sponsorship for strategic vendors, vendor management office
 (VMO) structure and responsibilities.
 
-Step 1.3 -- Regulatory & Compliance Context
+Step 1.3 -- Regulatory and Compliance Context
 
 Identify compliance requirements: third-party risk management regulations (OCC, FFIEC for
 financial services), data processing agreements (GDPR Article 28, CCPA), SOC 2 / ISO 27001
@@ -158,7 +158,7 @@ Check for: vendor segmentation for rationalization decisions, consolidation crit
 planning (volume migration, knowledge transfer), stakeholder impact assessment, savings
 projection from consolidation, risk implications of reduced vendor base.
 
-Step 5.3 -- Diversity & Inclusion
+Step 5.3 -- Diversity and Inclusion
 
 Assess: diverse vendor classification (minority-owned, women-owned, veteran-owned, small
 business, HUBZone, disability-owned), diverse spend tracking and goals, certification
@@ -167,7 +167,7 @@ diverse vendor development programs, reporting for compliance (government contra
 ESG reporting).
 
 ============================================================
-PHASE 6: RELATIONSHIP MAPPING & GOVERNANCE
+PHASE 6: RELATIONSHIP MAPPING AND GOVERNANCE
 ============================================================
 
 Step 6.1 -- Relationship Architecture

@@ -1,6 +1,6 @@
 ---
 name: donor-retention
-description: Analyzes donor management (CRM) systems for retention prediction, lapse risk scoring, stewardship workflow automation, lifetime value modeling, communication personalization, and giving pattern analysis.
+description: Analyze donor retention and CRM systems — lapse risk scoring and prediction models, stewardship workflow automation, donor lifetime value (LTV) modeling, communication personalization engines, giving pattern analysis, and retention metric benchmarking. Audit nonprofit fundraising platforms for retention rate tracking, first-year donor conversion, reactivation campaigns, and data quality foundations.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -18,7 +18,7 @@ If provided, focus on specific scope (e.g., "lapse risk scoring", "stewardship w
 "lifetime value"). If not provided, perform a full donor retention analysis.
 
 ============================================================
-PHASE 1: SYSTEM ARCHITECTURE & DONOR DATA MODEL
+PHASE 1: SYSTEM ARCHITECTURE AND DONOR DATA MODEL
 ============================================================
 
 1. Identify the tech stack and infrastructure:
@@ -47,10 +47,8 @@ PHASE 1: SYSTEM ARCHITECTURE & DONOR DATA MODEL
    - Automation and workflow engines.
 
 ============================================================
-PHASE 2: RETENTION METRICS & BENCHMARKING
+PHASE 2: RETENTION METRICS AND BENCHMARKING
 ============================================================
-
-Evaluate how the system measures and tracks retention:
 
 CORE RETENTION METRICS:
 - Check for overall donor retention rate calculation (donors who gave this year
@@ -83,10 +81,8 @@ TREND ANALYSIS:
 - Validate that external factors are considered in trend interpretation.
 
 ============================================================
-PHASE 3: LAPSE RISK SCORING & PREDICTION
+PHASE 3: LAPSE RISK SCORING AND PREDICTION
 ============================================================
-
-Evaluate predictive capabilities for donor attrition:
 
 LAPSE RISK MODEL:
 - Check for predictive model that scores donors on likelihood of lapsing.
@@ -125,8 +121,6 @@ MODEL MONITORING:
 PHASE 4: STEWARDSHIP WORKFLOW AUTOMATION
 ============================================================
 
-Evaluate stewardship activities that drive retention:
-
 ACKNOWLEDGMENT:
 - Check for automated gift acknowledgment within 48 hours of receipt.
 - Verify that acknowledgment content is personalized (name, amount, fund, impact).
@@ -159,8 +153,6 @@ STEWARDSHIP TRACKING:
 PHASE 5: LIFETIME VALUE MODELING
 ============================================================
 
-Evaluate how the system projects and maximizes long-term donor value:
-
 LIFETIME VALUE CALCULATION:
 - Check for donor lifetime value (LTV) calculation methodology.
 - Verify that LTV considers: average gift x gifts per year x expected tenure.
@@ -184,8 +176,6 @@ LTV OPTIMIZATION:
 ============================================================
 PHASE 6: COMMUNICATION PERSONALIZATION
 ============================================================
-
-Evaluate how effectively communications are tailored to individual donors:
 
 PERSONALIZATION DATA:
 - Check for donor preference tracking (communication channel, frequency, topics).
@@ -216,8 +206,6 @@ REACTIVATION CAMPAIGNS:
 PHASE 7: GIVING PATTERN ANALYSIS
 ============================================================
 
-Evaluate the system's ability to understand and act on giving behavior:
-
 GIVING PATTERN RECOGNITION:
 - Check for seasonal giving pattern identification per donor.
 - Verify that giving triggers are identified (anniversary, year-end, birthday, event).
@@ -231,24 +219,16 @@ DONOR JOURNEY MAPPING:
 - Check for pathway analysis (common journeys from acquisition to major giving).
 - Validate that the system identifies donors who are stalling in their journey.
 
-BEHAVIORAL INDICATORS:
-- Check for giving velocity analysis (accelerating or decelerating engagement).
-- Verify that cross-channel behavior is integrated (online + offline + event giving).
-- Check for peer influence analysis (donors in the same network, giving circles).
-- Validate that matching gift behavior is tracked (corporate match, challenge match).
-
 ANOMALY DETECTION:
 - Check for unusual giving pattern alerts (sudden large gift, unexpected lapse).
 - Verify that potential fraud indicators are flagged (unusual payment patterns).
 - Validate that positive anomalies trigger cultivation opportunities (unexpected upgrade).
 
 ============================================================
-PHASE 8: DATA QUALITY & INTEGRATION
+PHASE 8: DATA QUALITY AND INTEGRATION
 ============================================================
 
-Evaluate the data foundation for retention analysis:
-
-DATA COMPLETENESS & INTEGRATION:
+DATA COMPLETENESS:
 - Check for donor record completeness scoring and critical field requirements.
 - Check for duplicate detection and merge workflow quality.
 - Validate that householding logic is accurate (related donors grouped correctly).
@@ -261,6 +241,8 @@ DATA HYGIENE:
 - Verify that do-not-contact and do-not-solicit flags are respected across channels.
 - Check for regular data quality audits, cleanup schedules, and entry standards.
 - Check for opt-out and consent management compliance.
+
+Write the full analysis to `docs/donor-retention-analysis.md` (create `docs/` if needed).
 
 ============================================================
 OUTPUT
@@ -300,35 +282,6 @@ OUTPUT
 |---|---|---|---|---|
 | 1 | {description} | {module} | {Critical/High/Medium/Low} | {estimated donors/dollars at risk} |
 
-### Lapse Risk Assessment
-
-- Predictive model deployed: {Yes/No}
-- Risk score coverage: {%} of active donors scored
-- Early warning indicators: {count} configured
-- Intervention workflows triggered by risk: {Yes/No}
-- Model accuracy (if measurable): {AUC/precision/recall}
-
-### Stewardship Assessment
-
-- Acknowledgment timeliness: {within 48h/within week/inconsistent}
-- Stewardship plan by tier: {Yes/Partial/No}
-- Impact reporting to donors: {Personalized/Generic/None}
-- Stewardship gap detection: {Yes/No}
-
-### Communication Personalization Level
-
-- Ask amount personalization: {Yes/No}
-- Content personalization: {Dynamic/Segment-based/None}
-- Channel preference respected: {Yes/Partial/No}
-- Communication fatigue monitoring: {Yes/No}
-
-### Lifetime Value Utilization
-
-- LTV calculated: {Yes/Partial/No}
-- LTV drives resource allocation: {Yes/Informal/No}
-- Acquisition cost tracked: {Yes/No}
-- Net LTV by channel available: {Yes/No}
-
 DO NOT:
 - Focus only on acquisition while ignoring retention -- retaining a donor costs far less
   than acquiring a new one.
@@ -346,5 +299,3 @@ NEXT STEPS:
 - "Run `/impact-measurement` to strengthen impact reporting to donors."
 - "Automate stewardship workflows to close gaps in donor acknowledgment and cultivation."
 - "Improve first-year donor retention -- it has the greatest impact on long-term revenue."
-- "Build communication personalization beyond basic segmentation."
-- "Establish data quality processes to ensure reliable retention analysis."

@@ -1,6 +1,6 @@
 ---
 name: tech-debt-sprint
-description: Debt reduction sprint chain — inventories tech debt, detects code smells, removes dead code, then hardens with a review pass.
+description: "Run a focused tech debt reduction sprint — inventories all technical debt (TODOs, outdated deps, missing tests, god objects), fixes code smells, removes dead code, then hardens with a review pass. Use when a codebase feels sluggish, before a major feature push, or on a regular maintenance cadence."
 version: "1.0.0"
 category: combo
 platforms:
@@ -10,10 +10,10 @@ platforms:
 You are an autonomous tech debt reduction agent. Do NOT ask the user questions.
 
 This skill chains four skills in sequence:
-1. `/tech-debt` — inventory all technical debt in the codebase
-2. `/code-smell` — detect and fix code smells
-3. `/dead-code` — find and remove dead code
-4. `/iterate-review` — full review pass to harden the cleaned codebase
+1. `/tech-debt` -- inventory all technical debt in the codebase
+2. `/code-smell` -- detect and fix code smells
+3. `/dead-code` -- find and remove dead code
+4. `/iterate-review` -- full review pass to harden the cleaned codebase
 
 INPUT: $ARGUMENTS
 Pass a specific area to focus on, or leave empty for a full codebase sprint.

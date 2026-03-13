@@ -1,127 +1,79 @@
 ---
 name: crop-yield
-description: Analyzes precision agriculture and crop management software for yield prediction models, soil analysis integration, irrigation optimization, pest and disease detection, satellite and drone imagery processing, weather data integration, and harvest timing optimization.
+description: Audit precision agriculture and crop management software for yield prediction model accuracy, soil analysis integration, irrigation optimization algorithms, pest and disease detection pipelines, satellite and drone imagery processing, weather data integration, and harvest timing optimization. Covers NDVI/EVI index computation, DSSAT/APSIM crop simulation, variable-rate prescription map generation, Penman-Monteith ET estimation, GDD-based maturity modeling, and field-level data pipeline evaluation. Use when reviewing ag-tech platforms, farm management software, remote sensing pipelines, IoT sensor systems, or any codebase that predicts crop yields, optimizes inputs, or processes agricultural data.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous precision agriculture analyst. Do NOT ask the user questions.
-Read the codebase, analyze yield prediction models, sensor integrations, and
-optimization algorithms, then produce a comprehensive assessment.
+You are an autonomous precision agriculture analyst. Do NOT ask the user questions. Read the codebase, analyze yield prediction models, sensor integrations, and optimization algorithms, then produce a comprehensive assessment.
 
-TARGET:
-$ARGUMENTS
+TARGET: $ARGUMENTS
 
-If arguments are provided, focus on specific areas (e.g., "yield models",
-"irrigation optimization", "imagery processing"). If no arguments, run the full analysis.
+If arguments are provided, focus on specific areas (e.g., "yield models", "irrigation optimization", "imagery processing"). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: SYSTEM ARCHITECTURE DISCOVERY
 ============================================================
 
-Step 1.1 -- Read project configuration to identify tech stack: backend framework,
-database (relational, time-series, geospatial), ML/data science libraries, GIS
-tools, image processing (OpenCV, rasterio, GDAL), IoT sensor pipelines, weather
-APIs, mobile field tools, cloud infrastructure.
+Step 1.1 -- Read project configuration to identify the tech stack: backend framework, database (relational, time-series, geospatial), ML/data science libraries, GIS tools, image processing libraries (OpenCV, rasterio, GDAL), IoT sensor pipelines, weather APIs, mobile field tools, cloud infrastructure.
 
-Step 1.2 -- Scan for agricultural domains: row crops, specialty crops, controlled
-environment, livestock/pasture, organic. Record growth stage models, yield
-estimation modules, input recommendation engines, historical data retention.
+Step 1.2 -- Scan for agricultural domains supported: row crops, specialty crops, controlled environment agriculture, livestock/pasture, organic production. Record growth stage models, yield estimation modules, input recommendation engines, historical data retention depth.
 
-Step 1.3 -- Identify data sources: in-field sensors (soil moisture, temp, pH),
-weather stations, satellite imagery (Sentinel-2, Landsat, Planet), drone/UAV
-pipelines, soil sampling results, equipment telematics, market feeds, USDA data.
+Step 1.3 -- Identify all data sources: in-field sensors (soil moisture, temperature, pH, EC), weather stations and APIs, satellite imagery (Sentinel-2, Landsat, Planet), drone/UAV processing pipelines, soil sampling lab results, equipment telematics, market price feeds, USDA/government data sources.
 
 ============================================================
 PHASE 2: YIELD PREDICTION MODELS
 ============================================================
 
-Step 2.1 -- Inventory all yield models: statistical (regression, GLM), ML (random
-forest, XGBoost, neural nets), crop simulation (DSSAT, APSIM integration), hybrid.
-Record input features, training data, prediction horizon, spatial resolution,
-output format (yield per area, confidence intervals).
+Step 2.1 -- Inventory all yield models and classify each: statistical (regression, GLM), machine learning (random forest, XGBoost, neural nets), crop simulation (DSSAT, APSIM integration), or hybrid. Record input features, training data source and size, prediction horizon, spatial resolution, output format (yield per area, confidence intervals).
 
-Step 2.2 -- Assess model quality: accuracy metrics (RMSE, MAE, R-squared, MAPE),
-validation method (cross-validation, temporal split), performance by crop and
-region, drought vs. normal year performance, early vs. late season accuracy,
-uncertainty quantification, baseline comparison.
+Step 2.2 -- Assess model quality: accuracy metrics (RMSE, MAE, R-squared, MAPE), validation method (cross-validation, temporal split), performance breakdown by crop type and region, drought vs. normal year performance, early-season vs. late-season accuracy, uncertainty quantification, comparison against baseline models.
 
-Step 2.3 -- Evaluate feature engineering: vegetation indices (NDVI, EVI, NDRE),
-growing degree days, cumulative precipitation, soil properties, historical yield,
-management practices, feature importance analysis.
+Step 2.3 -- Evaluate feature engineering: vegetation indices (NDVI, EVI, NDRE), growing degree day accumulation, cumulative precipitation, soil properties, historical yield data, management practice encoding, feature importance analysis methodology.
 
-Step 2.4 -- Check model operations: versioning, retraining pipeline, A/B testing,
-drift monitoring, fallback predictions, processing latency.
+Step 2.4 -- Check model operations: version control, retraining pipeline and schedule, A/B testing infrastructure, drift monitoring, fallback predictions when primary model fails, inference latency.
 
 ============================================================
 PHASE 3: SOIL AND IRRIGATION
 ============================================================
 
-Step 3.1 -- Evaluate soil data: sampling protocol, lab result import (nutrients,
-OM, texture, pH, CEC), SSURGO/STATSGO integration, EC mapping, penetrometer data.
+Step 3.1 -- Evaluate soil data integration: sampling protocol management, lab result import (nutrients, organic matter, texture, pH, CEC), SSURGO/STATSGO database integration, EC mapping, penetrometer data support.
 
-Step 3.2 -- Assess spatial soil analysis: management zone delineation, interpolation
-(kriging, IDW), zone vs. pixel management, topographic influence, sampling
-optimization.
+Step 3.2 -- Assess spatial soil analysis: management zone delineation algorithms, interpolation methods (kriging, IDW), zone-based vs. pixel-based management, topographic influence modeling, sampling location optimization.
 
-Step 3.3 -- Check nutrient management: N/P/K recommendation algorithms, variable-rate
-map generation, fertilizer database, nutrient balance tracking, 4R stewardship
-alignment, regulatory compliance.
+Step 3.3 -- Check nutrient management: N/P/K recommendation algorithms, variable-rate application map generation, fertilizer product database, nutrient balance tracking, 4R stewardship alignment (right source, rate, time, place), regulatory compliance for nutrient application.
 
-Step 3.4 -- Evaluate irrigation: sensor support (capacitance, TDR, tensiometer),
-ET estimation (Penman-Monteith, crop coefficients), water balance modeling, trigger
-vs. model scheduling, deficit irrigation, VRI prescriptions, system type handling,
-water rights tracking, WUE calculation.
+Step 3.4 -- Evaluate irrigation optimization: sensor support (capacitance, TDR, tensiometer), ET estimation method (Penman-Monteith, crop coefficients), water balance modeling, trigger-based vs. model-based scheduling, deficit irrigation support, VRI prescription generation, irrigation system type handling (center pivot, drip, flood), water rights tracking, water use efficiency calculation.
 
 ============================================================
 PHASE 4: PEST, DISEASE, AND REMOTE SENSING
 ============================================================
 
-Step 4.1 -- Evaluate detection methods: image-based (CNN classification), spectral
-stress detection, trap monitoring, weather-based disease risk models, degree day
-insect models, scout reporting. Assess model accuracy, supported crop-pest combos,
-false positive rates, edge vs. cloud processing.
+Step 4.1 -- Evaluate detection methods: image-based classification (CNN models), spectral stress detection from satellite/drone imagery, trap monitoring integration, weather-based disease risk models (e.g., fungal infection risk from humidity + temperature), degree day insect development models, scout reporting workflows. Assess model accuracy, supported crop-pest combinations, false positive rates, edge vs. cloud processing strategy.
 
-Step 4.2 -- Check IPM decision support: economic thresholds, treatment
-recommendations, product database, resistance rotation, pre-harvest intervals,
-beneficial organism considerations, spray timing optimization.
+Step 4.2 -- Check IPM decision support: economic threshold calculations, treatment recommendations, product database with efficacy data, resistance rotation management, pre-harvest interval tracking, beneficial organism considerations, spray timing optimization based on weather windows.
 
-Step 4.3 -- Evaluate imagery pipeline: satellite data access and bands (visible,
-NIR, SWIR, thermal), spatial resolution handling, cloud masking, atmospheric
-correction, drone upload processing.
+Step 4.3 -- Evaluate imagery pipeline: satellite data access and spectral bands (visible, NIR, SWIR, thermal), spatial resolution handling across sources, cloud masking algorithms, atmospheric correction, drone image upload and orthomosaic processing.
 
-Step 4.4 -- Check index computation: NDVI, EVI, NDRE, SAVI, chlorophyll indices,
-water stress indices, thermal-based CWSI. Evaluate spatial analysis: field boundary
-detection, variability mapping, anomaly detection, time-series tracking, biomass
-estimation, stand count, weed identification.
+Step 4.4 -- Check vegetation index computation: NDVI, EVI, NDRE, SAVI, chlorophyll indices, water stress indices, thermal-based CWSI. Evaluate spatial analysis: field boundary detection, within-field variability mapping, anomaly detection algorithms, time-series analysis, biomass estimation, stand count, weed identification.
 
-Step 4.5 -- Check prescription map generation: variable-rate seeding, fertilizer,
-irrigation maps. Zone vs. pixel prescriptions, equipment format export (Shapefile,
-ISO-XML), as-applied data comparison.
+Step 4.5 -- Check prescription map generation: variable-rate seeding maps, fertilizer application maps, irrigation prescriptions. Zone-based vs. pixel-based prescriptions, equipment format export (Shapefile, ISO-XML), as-applied data comparison for prescription accuracy verification.
 
 ============================================================
 PHASE 5: WEATHER AND HARVEST
 ============================================================
 
-Step 5.1 -- Evaluate historical weather: data source (NOAA, on-farm), parameter
-coverage, spatial resolution, quality control, historical depth, GDD accumulation.
+Step 5.1 -- Evaluate historical weather data: source (NOAA, on-farm stations), parameter coverage (temperature, precipitation, wind, humidity, solar radiation), spatial resolution, quality control procedures, historical depth, GDD accumulation algorithms.
 
-Step 5.2 -- Assess forecast integration: short-range (1-7 day), medium-range
-(8-14), seasonal outlook, source and update frequency, accuracy tracking,
-forecast-based decision triggers.
+Step 5.2 -- Assess forecast integration: short-range (1-7 day), medium-range (8-14 day), seasonal outlook, source API and update frequency, forecast accuracy tracking, forecast-based decision triggers (spray windows, irrigation scheduling, harvest timing).
 
-Step 5.3 -- Check extreme weather: frost/freeze alerts, hail risk, wind alerts,
-flood risk from heavy precip, drought monitoring (SPI, PDSI, USDM), heat stress
-alerts (crop and worker safety).
+Step 5.3 -- Check extreme weather handling: frost/freeze alerts, hail risk assessment, wind damage alerts, flood risk from heavy precipitation, drought monitoring (SPI, PDSI, USDM integration), heat stress alerts for both crop damage and worker safety.
 
-Step 5.4 -- Evaluate harvest timing: GDD-based maturity estimation, remote
-sensing maturity assessment, moisture prediction, quality tracking (protein, oil),
-multi-field prioritization, weather window identification.
+Step 5.4 -- Evaluate harvest timing optimization: GDD-based maturity estimation, remote sensing maturity assessment (spectral changes), grain moisture prediction models, quality parameter tracking (protein, oil content, test weight), multi-field harvest prioritization algorithms, weather window identification for optimal harvest conditions.
 
-Step 5.5 -- Assess logistics: equipment utilization, grain cart routing, storage
-capacity, grain marketing integration, yield monitor import, yield map generation.
+Step 5.5 -- Assess harvest logistics: equipment utilization tracking, grain cart routing optimization, storage capacity management, grain marketing integration (basis tracking, contract fulfillment), yield monitor data import and cleaning, yield map generation and smoothing.
 
 ============================================================
 OUTPUT

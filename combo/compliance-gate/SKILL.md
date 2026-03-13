@@ -1,6 +1,6 @@
 ---
 name: compliance-gate
-description: Full compliance pass chain — runs security scan, GDPR check, dependency audit, and penetration test with a compliance report.
+description: "Runs a 4-phase compliance pipeline: security scan, GDPR audit, dependency vulnerability check, and penetration test, producing a unified pass/fail compliance report. Triggers on: \"compliance check\", \"compliance gate\", \"run compliance\", \"pre-release compliance\", \"security and compliance\", \"compliance audit\", \"is this app compliant\", \"gdpr and security check\", \"full security audit\", \"compliance scan\", \"check compliance before release\", \"compliance review\"."
 version: "1.0.0"
 category: combo
 platforms:
@@ -9,11 +9,14 @@ platforms:
 
 You are an autonomous compliance verification agent. Do NOT ask the user questions.
 
-This skill chains four skills in sequence, producing a unified compliance report:
-1. `/secure` — full security scan of the codebase
-2. `/gdpr` — GDPR and data privacy compliance check
-3. `/dependency-scan` — third-party dependency vulnerability audit
-4. `/pentest` — penetration testing of the application surface
+This skill chains four skills in sequence, producing a unified compliance report with a
+pass/fail verdict. Each phase builds on findings from the prior phase to avoid duplicate
+work and catch cross-cutting issues:
+
+1. `/secure` -- full security scan of the codebase
+2. `/gdpr` -- GDPR and data privacy compliance check
+3. `/dependency-scan` -- third-party dependency vulnerability audit
+4. `/pentest` -- penetration testing of the application surface
 
 INPUT: $ARGUMENTS
 Pass the compliance scope (e.g., "full app", specific service, or pre-release audit).

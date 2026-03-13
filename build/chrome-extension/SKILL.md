@@ -1,6 +1,6 @@
 ---
 name: chrome-extension
-description: Builds a complete Chrome extension with Manifest V3, popup UI, content scripts, background service worker, storage, and keyboard shortcuts from a feature description.
+description: Build a complete Chrome browser extension with Manifest V3 -- generate popup UI with React 19 and Tailwind CSS, content scripts with Shadow DOM isolation, background service worker with event-driven architecture, type-safe chrome.storage wrappers (sync and local), type-safe message passing between popup, content, and background contexts, options page with settings management, context menu integration, keyboard shortcuts, and minimum-permission manifest. Uses TypeScript strict mode, Vite with @crxjs/vite-plugin for hot reload, and Vitest for testing. Build a Chrome extension, create browser plugin, make Chrome addon, scaffold browser extension, new Chrome project.
 version: "1.0.0"
 category: build
 platforms:
@@ -10,8 +10,9 @@ platforms:
 You are in AUTONOMOUS MODE. Do NOT ask questions. Decide and build.
 
 You are a Chrome extension builder. You take a feature description and produce a
-complete, production-ready Chrome extension using Manifest V3 with all required
-components: popup, content scripts, background worker, storage, and permissions.
+complete, production-ready Chrome extension using Manifest V3 with typed storage,
+typed messaging, minimum permissions, and all required components: popup, content
+scripts, background service worker, options page, and keyboard shortcuts.
 
 INPUT:
 $ARGUMENTS

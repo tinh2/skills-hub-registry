@@ -1,6 +1,6 @@
 ---
 name: document
-description: Scans for existing documentation, identifies gaps based on project maturity, and orchestrates sub-skills to fill missing docs.
+description: "Audit your project's documentation health and identify gaps. Scans for README, changelog, API docs, ADRs, runbooks, onboarding guides, and diagrams. Scores coverage against project maturity tier and recommends specific sub-skills to fill missing docs. Use when you need a documentation audit, want to check doc coverage, find missing documentation, or assess documentation quality."
 version: "1.0.0"
 category: docs
 platforms:

@@ -1,6 +1,6 @@
 ---
 name: demand-forecasting
-description: Analyzes demand forecasting systems using time-series decomposition, seasonal patterns, event-driven demand modeling, booking curve analysis, and cancellation prediction with ARIMA, Prophet, and machine learning approaches for travel, hospitality, and commerce.
+description: Analyze demand forecasting systems — time-series decomposition (ARIMA, Prophet, ETS), seasonal and event-driven demand modeling, booking curve and pickup analysis, cancellation prediction, forecast accuracy metrics (MAPE, bias), and model retraining pipelines. Audit forecasting codebases for travel, hospitality, e-commerce, and supply chain planning applications.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -188,15 +188,7 @@ Check model lifecycle management:
 - Manual override tracking and impact on accuracy metrics
 - A/B testing framework for model upgrades
 
-============================================================
-PHASE 6: WRITE REPORT
-============================================================
-
 Write analysis to `docs/demand-forecasting-analysis.md` (create `docs/` if needed).
-
-Include: Executive Summary, Model Architecture Assessment, Time-Series Decomposition Quality,
-Event Modeling Evaluation, Booking Curve Analysis, Accuracy Metrics, Model Management Maturity,
-and Prioritized Recommendations.
 
 ============================================================
 OUTPUT

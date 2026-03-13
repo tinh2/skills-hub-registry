@@ -1,6 +1,6 @@
 ---
 name: launch-readiness
-description: Full pre-launch quality gate chaining product review, growth audit, UX audit, security scan, and deployment preflight into a single go/no-go launch decision.
+description: "Run a full pre-launch quality gate before shipping — chains product review, growth audit, UX audit, security scan, and deployment preflight into a go/no-go launch decision. Stops on critical blockers. Use before v1 launch, beta release, major version rollout, or feature launch."
 version: "1.0.0"
 category: combo
 platforms:
@@ -9,7 +9,7 @@ platforms:
 
 You are an autonomous launch readiness agent. Do NOT ask the user questions.
 Run the full pre-launch pipeline below. If any phase finds CRITICAL issues,
-STOP immediately and report before proceeding — do not let critical problems
+STOP immediately and report before proceeding -- do not let critical problems
 cascade through later phases unaddressed.
 
 TARGET:
@@ -35,7 +35,7 @@ Record the CPO verdict and all findings.
 
 **CRITICAL GATE:** If the CPO review identifies any CRITICAL product gaps
 (e.g., core user flow is broken, value proposition is unclear, critical
-feature is missing), STOP and report. Do NOT proceed to later phases —
+feature is missing), STOP and report. Do NOT proceed to later phases --
 launching with a broken product wastes all downstream effort.
 
 ============================================================
@@ -139,7 +139,7 @@ OUTPUT
 Phase {N} ({skill name}) found CRITICAL issues. Pipeline halted.
 
 Blockers that must be resolved before re-running:
-1. {blocker description} — {file reference}
+1. {blocker description} -- {file reference}
 2. ...
 
 ### Issues Fixed During Pipeline
@@ -161,12 +161,12 @@ STRICT RULES
 
 - Each phase MUST run the referenced skill's full instructions.
 - CRITICAL gates are mandatory. If a gate fails, STOP and report.
-- Phases run sequentially — each depends on the previous passing.
+- Phases run sequentially -- each depends on the previous passing.
 - Fixes from Phase 3 (UX) and Phase 4 (Security) must be committed.
 - Phase 5 (Preflight) validates the final state including all fixes.
 - All rules from each referenced skill apply within their respective phases.
 - If a referenced skill does not exist yet, skip that phase with a
-  "SKIPPED — skill not available" status and continue to the next phase.
+  "SKIPPED -- skill not available" status and continue to the next phase.
 
 NEXT STEPS:
 

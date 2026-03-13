@@ -1,6 +1,6 @@
 ---
 name: unit-economics
-description: Franchise unit economics analysis covering per-location P&L, contribution margin, break-even modeling, four-wall economics, and store-level ROI using FDD Item 19 and franchise finance patterns
+description: Analyze franchise and multi-location unit economics including per-location P&L construction, four-wall EBITDA margins, prime cost optimization, contribution margin analysis, break-even modeling, and store-level ROI calculations. Covers FDD Item 19 benchmarking, revenue decomposition by daypart and channel, cost structure analysis (COGS, labor, occupancy), payback period, IRR, and scenario modeling for QSR, fast-casual, retail, and service franchises.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -18,7 +18,7 @@ If arguments are provided, use them to focus the analysis (e.g., specific locati
 PHASE 1: FINANCIAL DATA DISCOVERY
 ============================================================
 
-Identify franchise financial data sources:
+Identify franchise financial data sources.
 
 Step 1.1 -- Data System Inventory
 
@@ -64,7 +64,7 @@ Establish analysis parameters:
 PHASE 2: REVENUE ANALYSIS
 ============================================================
 
-Analyze revenue performance at the unit level:
+Analyze revenue performance at the unit level.
 
 Step 2.1 -- Revenue Decomposition
 
@@ -108,7 +108,7 @@ Identify revenue vulnerabilities:
 PHASE 3: COST STRUCTURE ANALYSIS
 ============================================================
 
-Analyze all cost components at the unit level:
+Analyze all cost components at the unit level.
 
 Step 3.1 -- Cost of Goods Sold (COGS)
 
@@ -159,7 +159,7 @@ Catalog remaining cost categories:
 PHASE 4: FOUR-WALL ECONOMICS
 ============================================================
 
-Calculate the four-wall profit model:
+Calculate the four-wall profit model.
 
 Step 4.1 -- Four-Wall P&L Construction
 
@@ -223,7 +223,7 @@ Identify cost categories where the unit is underperforming the system average.
 PHASE 5: BREAK-EVEN AND ROI ANALYSIS
 ============================================================
 
-Calculate key investment return metrics:
+Calculate key investment return metrics.
 
 Step 5.1 -- Break-Even Analysis
 

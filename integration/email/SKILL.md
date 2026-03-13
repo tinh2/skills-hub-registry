@@ -1,6 +1,6 @@
 ---
 name: email
-description: Sets up transactional email with provider SDK, templated messages, delivery tracking, and webhook handling for any framework.
+description: "Add transactional email to my app — set up Resend, SendGrid, SES, Postmark, or Mailgun with HTML templates for welcome, password reset, and notification emails, delivery webhooks, bounce handling, and suppression lists"
 version: "1.0.0"
 category: integration
 platforms:

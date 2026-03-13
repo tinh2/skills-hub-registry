@@ -1,6 +1,6 @@
 ---
 name: devops
-description: "Scan infrastructure gaps and orchestrate deployment readiness across CI/CD, containers, monitoring, and IaC"
+description: "Audit deployment readiness across CI/CD, containers, monitoring, IaC, secrets, CDN, and DNS — score each area 0-100, identify critical gaps, and optionally auto-fix by chaining deploy sub-skills"
 version: "1.0.0"
 category: deploy
 platforms:
@@ -25,7 +25,7 @@ $ARGUMENTS may contain:
 PHASE 1 — INFRASTRUCTURE DISCOVERY
 ============================================================
 
-Scan the entire project root for existing infrastructure artifacts. Check for:
+Scan the entire project root for existing infrastructure artifacts:
 
 1. **CI/CD**: `.github/workflows/`, `.gitlab-ci.yml`, `Jenkinsfile`, `.circleci/`, `bitbucket-pipelines.yml`
 2. **Containers**: `Dockerfile`, `docker-compose.yml`, `docker-compose.*.yml`, `.dockerignore`
@@ -47,7 +47,7 @@ Store all findings in memory for scoring.
 PHASE 2 — READINESS SCORING
 ============================================================
 
-Score each area on a 0-100 scale:
+Score each area on a 0-100 scale using the rubric below. Be precise — partial credit is valid (e.g., 35 or 65).
 
 | Area | 0 | 25 | 50 | 75 | 100 |
 |------|---|----|----|----|----|
@@ -76,10 +76,10 @@ PHASE 3 — GAP ANALYSIS
 
 For each area scoring below 50, generate a specific remediation plan:
 
-1. What is missing
-2. What sub-skill can fix it (reference: `deploy/github-actions`, `deploy/docker`, `deploy/k8s`, `deploy/monitoring`, `deploy/terraform`, `deploy/secrets`, `deploy/cdn`, `deploy/dns`)
-3. Estimated effort (quick: <5 min, moderate: 5-15 min, significant: 15+ min)
-4. Priority (critical, high, medium, low) based on:
+1. What is missing (concrete, not vague)
+2. Which sub-skill can fix it (reference: `deploy/github-actions`, `deploy/docker`, `deploy/k8s`, `deploy/monitoring`, `deploy/terraform`, `deploy/secrets`, `deploy/cdn`, `deploy/dns`)
+3. Estimated effort: quick (<5 min), moderate (5-15 min), significant (15+ min)
+4. Priority based on:
    - **Critical**: No CI/CD, secrets in source code, no containerization for production app
    - **High**: No monitoring, no IaC for cloud resources, no health checks
    - **Medium**: Missing caching, no preview deploys, basic Kubernetes without HPA
@@ -96,9 +96,9 @@ If `--fix` was passed, execute remediations in priority order:
 3. **Medium items** — optimize CI caching, add HPA, preview deploys
 4. **Low items** — CDN, DNS, edge functions
 
-For each remediation, invoke the appropriate sub-skill pattern:
+For each remediation:
 - Read the sub-skill's approach and apply it inline (do not shell out)
-- After each fix, re-score that area
+- After each fix, re-score that area and record the before/after delta
 - Stop if cumulative changes exceed 20 new files (to avoid overwhelming a single PR)
 
 ============================================================
@@ -119,33 +119,35 @@ Generate a deployment readiness report. Print to stdout AND write to `DEPLOY_REA
 
 | Area | Score | Status | Key Finding |
 |------|-------|--------|-------------|
-| CI/CD | XX | {emoji} | {one-line summary} |
-| Containers | XX | {emoji} | {one-line summary} |
-| Kubernetes | XX | {emoji} | {one-line summary} |
-| IaC | XX | {emoji} | {one-line summary} |
-| Monitoring | XX | {emoji} | {one-line summary} |
-| Secrets | XX | {emoji} | {one-line summary} |
-| CDN | XX | {emoji} | {one-line summary} |
-| DNS | XX | {emoji} | {one-line summary} |
+| CI/CD | XX | PASS/WARN/FAIL | {one-line summary} |
+| Containers | XX | PASS/WARN/FAIL | {one-line summary} |
+| Kubernetes | XX | PASS/WARN/FAIL | {one-line summary} |
+| IaC | XX | PASS/WARN/FAIL | {one-line summary} |
+| Monitoring | XX | PASS/WARN/FAIL | {one-line summary} |
+| Secrets | XX | PASS/WARN/FAIL | {one-line summary} |
+| CDN | XX | PASS/WARN/FAIL | {one-line summary} |
+| DNS | XX | PASS/WARN/FAIL | {one-line summary} |
 
 ### Critical Gaps
-{list of critical and high priority gaps}
+{list of critical and high priority gaps with sub-skill references}
 
 ### Recommended Actions
-{ordered list of remediations with sub-skill references}
+{ordered list of remediations — each with sub-skill name, estimated effort, and expected score improvement}
 
 ### Changes Made (if --fix)
-{list of files created/modified}
+{list of files created/modified with before/after scores}
 ```
+
+Use PASS for scores >= 75, WARN for 50-74, FAIL for < 50.
 
 ============================================================
 NEXT STEPS
 ============================================================
 
 After generating the report, suggest:
-1. Which sub-skill to run first if gaps exist
+1. Which sub-skill to run first if gaps exist (with the exact command)
 2. Whether the project is ready for production deployment
-3. Any architectural concerns (e.g., no database backups, no rate limiting)
+3. Any architectural concerns (e.g., no database backups, no rate limiting, no disaster recovery)
 
 ============================================================
 DO NOT
@@ -154,7 +156,7 @@ DO NOT
 - Do NOT delete existing infrastructure files — only add or modify
 - Do NOT commit changes — leave them staged for review
 - Do NOT expose secrets in the report output
-- Do NOT assume a cloud provider — detect or ask via $ARGUMENTS
+- Do NOT assume a cloud provider — detect or use $ARGUMENTS
 - Do NOT generate Kubernetes manifests for projects that are clearly serverless/edge
 - Do NOT modify application source code — only infrastructure files
 - Do NOT install CLI tools or dependencies — work with what is available

@@ -1,6 +1,6 @@
 ---
 name: mobile-publish
-description: Full mobile publishing pipeline — chains CI/CD setup, iOS App Store publishing, Google Play Store publishing, and analytics verification into a single end-to-end publishing workflow.
+description: "Set up a complete mobile publishing pipeline — chains CI/CD workflow generation, iOS App Store publishing via Fastlane, Google Play Store publishing, and analytics verification into an end-to-end release automation. Use for Flutter, React Native, or native iOS/Android apps ready for store submission."
 version: "1.0.0"
 category: combo
 platforms:
@@ -10,10 +10,10 @@ platforms:
 You are an autonomous mobile publishing agent. Do NOT ask the user questions.
 
 This skill chains four skills in sequence, each building on the previous:
-1. `/mobile-ci-cd` — CI/CD pipeline setup
-2. `/app-store-publish` — iOS App Store publishing
-3. `/play-store-publish` — Google Play Store publishing
-4. `/mobile-analytics` — analytics verification
+1. `/mobile-ci-cd` -- CI/CD pipeline setup
+2. `/app-store-publish` -- iOS App Store publishing
+3. `/play-store-publish` -- Google Play Store publishing
+4. `/mobile-analytics` -- analytics verification
 
 INPUT: $ARGUMENTS
 Pass the app name, target platforms, or specific publishing requirements.
@@ -104,7 +104,7 @@ Verify the analytics implementation is complete before publishing:
 - Revenue event tracking (if monetized).
 
 IMPORTANT: Analytics must be verified before the first public release.
-Missing analytics cannot be backfilled — the data is lost forever.
+Missing analytics cannot be backfilled -- the data is lost forever.
 Ensure crash reporting is configured with dSYM/mapping file upload
 in the CI/CD pipeline from Phase 1.
 

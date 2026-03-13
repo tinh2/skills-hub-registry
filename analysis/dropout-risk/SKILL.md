@@ -1,6 +1,6 @@
 ---
 name: dropout-risk
-description: Analyzes student information systems for dropout risk prediction -- attendance patterns, grade trajectories, behavioral indicators, socioeconomic factors, engagement metrics, early warning system effectiveness, and intervention tracking.
+description: Audit a student information system for dropout risk prediction -- analyze attendance pattern detection, grade trajectory monitoring, behavioral early warning indicators, socioeconomic factor integration, ABC risk scoring models, intervention tracking effectiveness, and equity bias in algorithmic flagging. Use when building or reviewing K-12 SIS platforms, early warning systems, or student retention tools.
 version: "1.0.0"
 category: analysis
 platforms:

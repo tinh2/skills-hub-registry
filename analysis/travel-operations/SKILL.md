@@ -1,6 +1,6 @@
 ---
 name: travel-operations
-description: Analyzes travel operations systems including ground handling, aircraft turnaround optimization, airport operations, cruise embarkation processes, tour logistics coordination, and GDS integration using IATA and ICAO standards.
+description: Analyze airline, airport, cruise, and tour operator systems for ground handling efficiency, aircraft turnaround optimization, disruption management, and GDS integration. Covers IATA/ICAO compliance, IROPS recovery, on-time performance tracking, embarkation logistics, transfer coordination, and NDC implementation for travel technology platforms.
 version: "1.0.0"
 category: analysis
 platforms:

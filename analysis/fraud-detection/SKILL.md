@@ -1,18 +1,18 @@
 ---
 name: fraud-detection
-description: Evaluate fraud detection systems including rule engines, ML models, real-time processing, alert workflows, and adaptive learning pipelines.
+description: Analyze fraud detection systems including rule engines, ML scoring models, real-time transaction monitoring, alert triage workflows, false positive management, SAR/CTR regulatory reporting, adversarial robustness testing, and adaptive retraining pipelines for payment fraud, account takeover, identity theft, and AML compliance.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are in AUTONOMOUS MODE. Do NOT ask questions. Evaluate every component of the fraud detection system systematically.
+You are an autonomous fraud detection systems analyst. Do NOT ask the user questions. Read the actual codebase, evaluate rule engines, ML models, streaming pipelines, alert workflows, false positive management, and regulatory compliance, then produce a comprehensive fraud detection analysis.
 
 TARGET:
 $ARGUMENTS
 
-If no arguments provided, analyze the entire fraud detection codebase in the current working directory.
+If arguments are provided, use them to focus the analysis (e.g., "rule engine", "ML models", "real-time pipeline", "compliance"). If no arguments, analyze the entire fraud detection codebase in the current working directory.
 
 ============================================================
 PHASE 0: SYSTEM DISCOVERY

@@ -1,6 +1,6 @@
 ---
 name: github-actions
-description: "Auto-detect tech stack and generate production-grade GitHub Actions CI/CD workflows with caching and security scanning"
+description: "Detect project stack and generate GitHub Actions CI/CD workflows — PR checks with lint/test/build/security, deploy pipelines for Vercel/AWS/GCP/Fly/Docker, dependency caching, matrix testing, preview deploys, and Dependabot config"
 version: "1.0.0"
 category: deploy
 platforms:
@@ -103,7 +103,7 @@ Include these jobs in order:
 - Rust: `cargo audit`
 
 **Caching** — always include appropriate caching:
-- Node: `actions/cache@v4` for `node_modules` or use `actions/setup-node@v4` with `cache: 'npm'`
+- Node: `actions/setup-node@v4` with `cache: 'npm'` (or yarn/pnpm)
 - Python: `actions/setup-python@v5` with `cache: 'pip'`
 - Go: `actions/setup-go@v5` with `cache: true`
 - Rust: `Swatinem/rust-cache@v2`
@@ -115,50 +115,31 @@ Include these jobs in order:
 - Go: last two minor versions
 - OS matrix: `[ubuntu-latest]` default, add `macos-latest` if Flutter/mobile
 
+**Permissions**: Use minimal permissions per job (never `write-all`).
+
 ============================================================
 PHASE 3 — GENERATE DEPLOY WORKFLOW
 ============================================================
 
 Create `.github/workflows/deploy.yml` based on deploy target:
 
-**Vercel**:
-- Use `amondnet/vercel-action@v25` or Vercel CLI
-- Production deploy on push to main
-- Preview deploy on PR (if `--preview`)
+**Vercel**: Use `amondnet/vercel-action@v25` or Vercel CLI. Production deploy on push to main. Preview deploy on PR (if `--preview`).
 
-**AWS (ECS/ECR)**:
-- `aws-actions/configure-aws-credentials@v4`
-- `aws-actions/amazon-ecr-login@v2`
-- Build, tag, push Docker image
-- Update ECS service with new task definition
+**AWS (ECS/ECR)**: Configure AWS credentials via OIDC (`aws-actions/configure-aws-credentials@v4`), login to ECR, build/tag/push Docker image, update ECS service.
 
-**AWS (S3 + CloudFront)**:
-- Sync build output to S3
-- Invalidate CloudFront distribution
+**AWS (S3 + CloudFront)**: Sync build output to S3, invalidate CloudFront distribution.
 
-**GCP (Cloud Run)**:
-- `google-github-actions/auth@v2`
-- `google-github-actions/deploy-cloudrun@v2`
-- Build with Cloud Build or Docker
+**GCP (Cloud Run)**: Auth with `google-github-actions/auth@v2`, deploy with `google-github-actions/deploy-cloudrun@v2`.
 
-**Fly.io**:
-- `superfly/flyctl-actions/setup-flyctl@master`
-- `flyctl deploy --remote-only`
+**Fly.io**: Setup flyctl, deploy with `flyctl deploy --remote-only`.
 
-**Cloudflare (Pages/Workers)**:
-- `cloudflare/wrangler-action@v3`
+**Cloudflare (Pages/Workers)**: Use `cloudflare/wrangler-action@v3`.
 
-**Docker Registry (GHCR)**:
-- `docker/login-action@v3` with `registry: ghcr.io`
-- `docker/build-push-action@v5` with layer caching
-- Tag with SHA and `latest`
+**Docker Registry (GHCR)**: Login with `docker/login-action@v3`, build/push with `docker/build-push-action@v5` with layer caching. Tag with SHA and `latest`.
 
-**npm / PyPI**:
-- Publish on release tag creation
-- npm: `npm publish` with `NODE_AUTH_TOKEN`
-- PyPI: `pypa/gh-action-pypi-publish@release/v1`
+**npm / PyPI**: Publish on release tag creation. npm: `npm publish` with `NODE_AUTH_TOKEN`. PyPI: `pypa/gh-action-pypi-publish@release/v1`.
 
-Include environment protection rules reference:
+Include environment protection rules:
 ```yaml
 environment:
   name: production
@@ -176,13 +157,14 @@ If applicable, also create:
 - Create GitHub Release with changelog
 - Build and attach artifacts
 
-**Scheduled workflows**:
-- Dependency updates: `schedule: cron: '0 6 * * 1'` (weekly Monday 6am)
-- Security scan: if not in CI, run nightly
-
 **Preview deploy** (if `--preview`):
 - Comment on PR with preview URL
 - Clean up preview on PR close
+
+**Dependabot** (`.github/dependabot.yml`):
+- Always create if it does not exist
+- Include `github-actions` ecosystem with weekly schedule
+- Include the project's package ecosystem (npm, pip, gomod, cargo, etc.)
 
 ============================================================
 PHASE 5 — SECRETS DOCUMENTATION
@@ -198,15 +180,7 @@ Create or update `.github/SECRETS.md` listing all required repository secrets:
 | DEPLOY_TOKEN | Vercel/Fly/etc deploy token | {provider dashboard URL} |
 ```
 
-Also create `.github/dependabot.yml` if it does not exist:
-```yaml
-version: 2
-updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-```
+List every `${{ secrets.* }}` reference used in the generated workflows.
 
 ============================================================
 OUTPUT
@@ -221,6 +195,7 @@ Print a summary of all generated files:
 - .github/workflows/ci.yml — PR checks (lint, typecheck, test, build, security)
 - .github/workflows/deploy.yml — Deploy to {target} on push to main
 - .github/dependabot.yml — Automated dependency updates
+- .github/SECRETS.md — Required secrets documentation
 
 ### Required Secrets
 {list of secrets to configure in GitHub repo settings}
@@ -238,8 +213,9 @@ NEXT STEPS
 
 1. Add required secrets to GitHub repository settings
 2. Push workflows to trigger the first run
-3. Consider adding branch protection rules requiring CI to pass
+3. Enable branch protection rules requiring CI to pass before merge
 4. Review caching strategy after first run to verify cache hits
+5. Enable GitHub secret scanning and push protection on the repository
 
 ============================================================
 DO NOT

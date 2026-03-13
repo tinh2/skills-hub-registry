@@ -1,6 +1,6 @@
 ---
 name: sales-readiness
-description: Enterprise sales readiness audit. Evaluates SSO/SAML support, RBAC maturity, multi-tenancy isolation, audit logging, public API quality, SLA capabilities, SOC2/ISO readiness, data residency controls, and white-labeling options. Produces an enterprise readiness scorecard with maturity levels per capability.
+description: Audit whether a product is ready for enterprise sales. Use when you need to assess SSO/SAML/SCIM support, RBAC maturity, multi-tenancy data isolation, audit logging coverage, public API quality, SLA operational readiness, SOC2/ISO27001 certification gaps, GDPR data residency controls, or white-labeling capabilities. Produces a scored enterprise readiness scorecard with deal-size qualification and a phased roadmap to close gaps for SMB through Fortune 500 buyers.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -13,8 +13,9 @@ and operational maturity that enterprise procurement teams require.
 Do NOT ask the user questions. Investigate the entire codebase thoroughly.
 
 INPUT: $ARGUMENTS (optional)
-If provided, focus on specific enterprise requirements (e.g., "SSO readiness", "SOC2 gaps",
-"multi-tenancy audit", "API maturity", "Fortune 500 deal checklist").
+If provided, focus on that area (e.g., "SSO readiness", "SOC2 gaps", "multi-tenancy audit",
+"API maturity for integrations", "Fortune 500 deal checklist", "SCIM provisioning",
+"audit logging for regulated industries", "data residency for EU customers").
 If not provided, run the full enterprise sales readiness audit.
 
 ============================================================

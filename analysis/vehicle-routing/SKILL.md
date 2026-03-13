@@ -1,6 +1,6 @@
 ---
 name: vehicle-routing
-description: Analyzes vehicle routing optimization systems for route planning, multi-stop optimization, time window constraints, load balancing, and last-mile delivery using VRP algorithms, CVRP models, and OR-Tools patterns.
+description: Analyze vehicle routing and fleet optimization systems for route planning algorithms, multi-stop sequencing, time window constraints, and last-mile delivery performance. Evaluates VRP solver strategies (OR-Tools, OptaPlanner, VROOM), CVRP/VRPTW constraint handling, FMCSA hours-of-service compliance, load balancing, fleet utilization metrics, cost-per-delivery tracking, and dynamic re-routing for delivery and logistics operations.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -82,7 +82,7 @@ and scaling behavior, solution stability (similar inputs produce similar routes)
 to parameter changes, benchmark performance against known VRP instances (Solomon, CVRPLIB).
 
 ============================================================
-PHASE 3: TIME WINDOW & SCHEDULING
+PHASE 3: TIME WINDOW AND SCHEDULING
 ============================================================
 
 Step 3.1 -- Time Window Management
@@ -106,7 +106,7 @@ management (1-hour, 2-hour windows), appointment density optimization (cluster a
 geographically), missed appointment handling, rescheduling workflow.
 
 ============================================================
-PHASE 4: LOAD BALANCING & FLEET UTILIZATION
+PHASE 4: LOAD BALANCING AND FLEET UTILIZATION
 ============================================================
 
 Step 4.1 -- Load Optimization
@@ -146,13 +146,13 @@ Check for: delivery window communication accuracy (promised vs. actual), real-ti
 for end customers, delivery preference management (time, location, instructions), customer
 feedback integration, failed delivery notification and rescheduling.
 
-Step 5.3 -- Returns & Reverse Logistics
+Step 5.3 -- Returns and Reverse Logistics
 
 Assess: return pickup routing (combined with forward delivery), reverse logistics optimization,
 return-to-depot vs. return-to-origin routing, pickup scheduling alongside deliveries.
 
 ============================================================
-PHASE 6: PERFORMANCE & REPORTING
+PHASE 6: PERFORMANCE AND REPORTING
 ============================================================
 
 Step 6.1 -- KPI Tracking

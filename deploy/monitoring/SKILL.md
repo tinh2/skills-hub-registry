@@ -1,6 +1,6 @@
 ---
 name: monitoring
-description: "Auto-detect infrastructure and set up observability with dashboards, alerting rules, and application instrumentation"
+description: "Set up application observability with Prometheus, Grafana, Datadog, or CloudWatch — instrument metrics endpoints, configure Golden Signal dashboards, define alert rules with burn-rate SLOs, and add structured logging"
 version: "1.0.0"
 category: deploy
 platforms:
@@ -18,7 +18,7 @@ $ARGUMENTS may contain:
 - A monitoring stack: `prometheus`, `datadog`, `cloudwatch`, `newrelic`, `grafana`
 - `--instrument` — add application-level metrics instrumentation to source code
 - `--alerts-only` — generate alerting rules without full dashboard setup
-- `--slo` — define and configure SLO/SLI targets
+- `--slo` — define and configure SLO/SLI targets with burn-rate alerts
 - A specific focus: `latency`, `errors`, `traffic`, `saturation`
 - If no arguments, auto-detect existing monitoring and extend it, or default to Prometheus + Grafana
 
@@ -62,14 +62,15 @@ PHASE 2 — METRICS DESIGN (Golden Signals)
 Design metrics based on the Four Golden Signals:
 
 **1. Latency** — time to service a request
-- `http_request_duration_seconds` (histogram, buckets: 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10)
+- `http_request_duration_seconds` (histogram)
+- Buckets: 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10
 - Track by: method, route, status_code
-- P50, P90, P95, P99 percentiles
+- Report P50, P90, P95, P99 percentiles
 
 **2. Traffic** — demand on the system
 - `http_requests_total` (counter)
 - Track by: method, route, status_code
-- Requests per second, per minute
+- Report requests per second
 
 **3. Errors** — rate of failed requests
 - `http_errors_total` (counter) — 5xx responses
@@ -90,28 +91,13 @@ PHASE 3 — APPLICATION INSTRUMENTATION (if --instrument)
 Add metrics middleware to the application:
 
 **Node.js (Express/Fastify)**:
-```javascript
-// metrics.js — Prometheus metrics middleware
-const client = require('prom-client');
-
-const httpRequestDuration = new client.Histogram({
-  name: 'http_request_duration_seconds',
-  help: 'Duration of HTTP requests in seconds',
-  labelNames: ['method', 'route', 'status_code'],
-  buckets: [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]
-});
-
-const httpRequestsTotal = new client.Counter({
-  name: 'http_requests_total',
-  help: 'Total number of HTTP requests',
-  labelNames: ['method', 'route', 'status_code']
-});
-```
+- Install `prom-client` dependency
+- Create metrics middleware tracking `http_request_duration_seconds` and `http_requests_total`
 - Add `/metrics` endpoint exposing Prometheus format
-- Add `prom-client` to dependencies
+- Add default Node.js process metrics (memory, CPU, event loop)
 
 **Python (FastAPI/Django)**:
-- Add `prometheus_client` or `prometheus-fastapi-instrumentator`
+- Install `prometheus_client` or `prometheus-fastapi-instrumentator`
 - Expose `/metrics` endpoint
 - Add middleware for request duration tracking
 
@@ -132,128 +118,37 @@ PHASE 4 — PROMETHEUS + GRAFANA SETUP
 If using Prometheus stack, generate:
 
 **`monitoring/prometheus/prometheus.yml`**:
-```yaml
-global:
-  scrape_interval: 15s
-  evaluation_interval: 15s
-
-rule_files:
-  - "alerts/*.yml"
-
-scrape_configs:
-  - job_name: '{app-name}'
-    static_configs:
-      - targets: ['app:{port}']
-    metrics_path: /metrics
-    scrape_interval: 10s
-```
+- Global scrape interval: 15s, evaluation interval: 15s
+- Rule files referencing `alerts/*.yml`
+- Scrape config targeting `app:{port}` on `/metrics` with 10s interval
 
 **`monitoring/prometheus/alerts/app.yml`**:
-```yaml
-groups:
-  - name: app-alerts
-    rules:
-      - alert: HighErrorRate
-        expr: rate(http_errors_total[5m]) / rate(http_requests_total[5m]) > 0.01
-        for: 5m
-        labels:
-          severity: critical
-        annotations:
-          summary: "Error rate above 1% for 5 minutes"
-
-      - alert: HighLatency
-        expr: histogram_quantile(0.99, rate(http_request_duration_seconds_bucket[5m])) > 2
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "P99 latency above 2 seconds"
-
-      - alert: HighMemoryUsage
-        expr: process_resident_memory_bytes / 1024 / 1024 > 512
-        for: 10m
-        labels:
-          severity: warning
-        annotations:
-          summary: "Memory usage above 512MB for 10 minutes"
-
-      - alert: HighCPU
-        expr: rate(process_cpu_seconds_total[5m]) > 0.8
-        for: 10m
-        labels:
-          severity: warning
-
-      - alert: DiskUsageHigh
-        expr: (node_filesystem_size_bytes - node_filesystem_free_bytes) / node_filesystem_size_bytes > 0.8
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "Disk usage above 80%"
-
-      - alert: ServiceDown
-        expr: up == 0
-        for: 1m
-        labels:
-          severity: critical
-        annotations:
-          summary: "Service {{ $labels.instance }} is down"
-```
+Alert rules (all with `for` duration to prevent flapping):
+- `HighErrorRate`: `rate(http_errors_total[5m]) / rate(http_requests_total[5m]) > 0.01` for 5m (critical)
+- `HighLatency`: P99 > 2s for 5m (warning)
+- `HighMemoryUsage`: > 512MB for 10m (warning)
+- `HighCPU`: > 80% for 10m (warning)
+- `DiskUsageHigh`: > 80% for 5m (warning)
+- `ServiceDown`: `up == 0` for 1m (critical)
 
 **`monitoring/grafana/dashboards/app.json`**:
-Generate a Grafana dashboard JSON with panels for:
-1. **Request Rate** — graph of requests/sec by status code
-2. **Error Rate** — graph of error percentage over time
-3. **Latency Distribution** — heatmap of request duration
-4. **P50/P90/P99 Latency** — time series of percentiles
-5. **Active Connections** — gauge of concurrent requests
-6. **Memory Usage** — time series of process memory
-7. **CPU Usage** — time series of process CPU
-8. **Saturation** — connection pool, queue depth
+Grafana dashboard JSON with panels:
+1. Request Rate (by status code)
+2. Error Rate (percentage over time)
+3. Latency Distribution (heatmap)
+4. P50/P90/P99 Latency (time series)
+5. Active Connections (gauge)
+6. Memory Usage (time series)
+7. CPU Usage (time series)
+8. Saturation (connection pool, queue depth)
 
-**`monitoring/grafana/provisioning/dashboards.yml`**:
-```yaml
-apiVersion: 1
-providers:
-  - name: 'default'
-    folder: ''
-    type: file
-    options:
-      path: /var/lib/grafana/dashboards
-```
+**`monitoring/grafana/provisioning/dashboards.yml`**: File-based dashboard provisioning.
 
-**Docker Compose addition** (add to existing or create `monitoring/docker-compose.monitoring.yml`):
-```yaml
-services:
-  prometheus:
-    image: prom/prometheus:v2.51.0
-    volumes:
-      - ./monitoring/prometheus:/etc/prometheus
-      - prometheus-data:/prometheus
-    ports:
-      - "9090:9090"
-    command:
-      - '--config.file=/etc/prometheus/prometheus.yml'
-      - '--storage.tsdb.retention.time=30d'
-
-  grafana:
-    image: grafana/grafana:10.4.0
-    volumes:
-      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards
-      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
-      - grafana-data:/var/lib/grafana
-    ports:
-      - "3001:3000"
-    environment:
-      GF_SECURITY_ADMIN_PASSWORD: admin  # Change in production
-
-  alertmanager:
-    image: prom/alertmanager:v0.27.0
-    volumes:
-      - ./monitoring/alertmanager:/etc/alertmanager
-    ports:
-      - "9093:9093"
-```
+**Docker Compose** (`monitoring/docker-compose.monitoring.yml`):
+- Prometheus v2.51+ with 30d retention
+- Grafana 10.4+ with provisioned dashboards and datasources
+- Alertmanager v0.27+ for notification routing
+- All with proper volume mounts and health checks
 
 ============================================================
 PHASE 5 — CLOUD MONITORING (if Datadog/CloudWatch/New Relic)
@@ -267,8 +162,8 @@ PHASE 5 — CLOUD MONITORING (if Datadog/CloudWatch/New Relic)
 
 **CloudWatch**:
 - Generate Terraform for CloudWatch alarms, dashboards, log groups
-- Add CloudWatch agent config
 - Configure metric filters on log groups
+- Set up SNS topics for alarm notifications
 
 **New Relic**:
 - Generate `newrelic.yml` configuration
@@ -286,8 +181,8 @@ Define SLOs based on service type:
 - **Error SLO**: < 0.1% error rate
 
 Generate burn rate alerts:
-- Fast burn (2%/hour): page immediately
-- Slow burn (5%/day): ticket within 1 hour
+- Fast burn (2%/hour): page immediately — requires human attention within minutes
+- Slow burn (5%/day): ticket within 1 hour — investigate during business hours
 
 ============================================================
 OUTPUT
@@ -296,8 +191,10 @@ OUTPUT
 ```
 ## Monitoring Setup Complete
 
+### Stack: {Prometheus + Grafana / Datadog / CloudWatch / New Relic}
+
 ### Files Created
-{list of all generated files}
+{list of all generated files with one-line descriptions}
 
 ### Metrics Endpoints
 - Application: http://localhost:{port}/metrics
@@ -305,7 +202,7 @@ OUTPUT
 - Grafana: http://localhost:3001 (admin/admin)
 - Alertmanager: http://localhost:9093
 
-### Alert Rules Configured
+### Alert Rules
 | Alert | Condition | Severity |
 |-------|-----------|----------|
 | HighErrorRate | >1% for 5m | critical |
@@ -315,7 +212,7 @@ OUTPUT
 | ServiceDown | down for 1m | critical |
 
 ### Dashboard Panels
-{list of dashboard panels}
+{list of dashboard panels with their metric queries}
 ```
 
 ============================================================
@@ -323,11 +220,11 @@ NEXT STEPS
 ============================================================
 
 1. Start monitoring stack: `docker compose -f monitoring/docker-compose.monitoring.yml up -d`
-2. Verify metrics are being scraped: check Prometheus targets page
-3. Import Grafana dashboards and customize thresholds
-4. Configure alerting notification channels (Slack, PagerDuty, email)
-5. Add application-specific custom metrics for business KPIs
-6. Set up log aggregation if not already configured (Loki, ELK)
+2. Verify metrics are being scraped: check Prometheus targets page at :9090/targets
+3. Configure alerting notification channels (Slack, PagerDuty, email) in Alertmanager
+4. Add application-specific custom metrics for business KPIs
+5. Set up log aggregation if not already configured (Loki, ELK)
+6. Review alert thresholds after 1 week of baseline data
 
 ============================================================
 DO NOT

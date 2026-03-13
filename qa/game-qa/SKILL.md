@@ -1,6 +1,6 @@
 ---
 name: game-qa
-description: Automated game QA covering scene loading validation, null reference detection, boundary testing, input rebinding verification, save/load integrity, localization completeness, and platform compliance.
+description: Run a full game QA audit on Unity, Unreal, Godot, or web game projects. Finds null reference bugs, missing asset references, broken scene transitions, physics edge cases, input binding conflicts, save/load corruption risks, localization gaps, audio issues, and platform certification blockers. Use when you need to QA test a game, audit game code quality, find game bugs, check game certification compliance, or validate game save systems.
 version: "1.0.0"
 category: qa
 platforms:
@@ -27,7 +27,7 @@ Identify the engine and project layout:
 - Unity: ProjectSettings/, Assets/, *.cs files
 - Unreal: *.uproject, Source/, Content/
 - Godot: project.godot, *.gd, *.tscn
-- Web: package.json with game framework
+- Web: package.json with game framework (Phaser, PixiJS, PlayCanvas, Three.js)
 - Record engine version if detectable
 
 Step 1.2 -- Identify Test Infrastructure
@@ -76,10 +76,10 @@ GODOT (GDScript):
 - Accessing properties on potentially freed references
 - @onready variables that may not resolve
 
-WEB (TypeScript):
+WEB (TypeScript/JavaScript):
 - Optional chaining missing on nullable values
 - Array access without bounds checking
-- DOM element access without null check
+- DOM/canvas element access without null check
 - Async results used without error handling
 
 Step 2.2 -- Missing Asset References
@@ -290,7 +290,7 @@ OUTPUT
 ## Game QA Report
 
 ### Project: {name}
-### Engine: {engine}
+### Engine: {engine} ({version})
 ### Build Status: {PASSES/FAILS with error count}
 
 ### QA Summary
@@ -349,9 +349,9 @@ NEXT STEPS:
 - "Run `/game-launch` for complete launch readiness pipeline."
 
 DO NOT:
-- Do NOT run the game or execute game binaries — this is static code analysis only.
-- Do NOT fix issues automatically — report them with recommended fixes.
-- Do NOT skip platform compliance checks — certification failures are expensive.
-- Do NOT ignore warnings — they are often crash bugs waiting to happen.
-- Do NOT assume deprecated APIs will continue to work — flag them.
-- Do NOT test gameplay balance — that is the domain of `/balance-test`.
+- Do NOT run the game or execute game binaries -- this is static code analysis only.
+- Do NOT fix issues automatically -- report them with recommended fixes.
+- Do NOT skip platform compliance checks -- certification failures are expensive.
+- Do NOT ignore warnings -- they are often crash bugs waiting to happen.
+- Do NOT assume deprecated APIs will continue to work -- flag them.
+- Do NOT test gameplay balance -- that is the domain of `/balance-test`.

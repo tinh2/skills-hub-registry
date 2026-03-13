@@ -1,6 +1,6 @@
 ---
 name: manufacturing-compliance
-description: Reviews manufacturing code for regulatory compliance including ISO 9001/13485/14001, FDA 21 CFR Part 11, GMP, OSHA safety, hazmat handling, lot/serial traceability, and audit trail completeness for manufacturing operations.
+description: "Audit manufacturing software for FDA 21 CFR Part 11 (electronic records, e-signatures, audit trails), ISO 9001/13485/14001/45001 quality management (document control, CAPA, nonconformance), GMP batch records and cleaning validation, lot/serial traceability (forward, backward, process, recall-ready), OSHA safety (incident tracking, LOTO, PPE), hazmat handling (SDS, chemical inventory, RCRA waste), ALCOA+ data integrity, and AS9100/IATF 16949/ITAR/EAR compliance. Use when reviewing MES, ERP, quality, or production management codebases for regulatory compliance."
 version: "1.0.0"
 category: review
 platforms:

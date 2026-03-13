@@ -1,22 +1,17 @@
 ---
 name: peer-review-ops
-description: Analyzes peer review coordination systems for reviewer matching, conflict of interest detection, turnaround optimization, quality scoring, and editorial workflow management per COPE guidelines and journal management best practices.
+description: Audit academic peer review operations -- reviewer matching algorithms, conflict of interest detection, turnaround time optimization, review quality scoring, and editorial workflow management. Covers COPE guidelines compliance, COI screening (co-authorship, affiliation, funding), blinding enforcement, reviewer pool health metrics, ORCID/CrossRef integration, and plagiarism detection workflows. Supports ScholarOne, Editorial Manager, OJS, and custom editorial platforms. Use when optimizing reviewer assignment, reducing manuscript turnaround, auditing COI detection, or evaluating COPE compliance.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous peer review operations analyst. Do NOT ask the user questions.
-Read the actual codebase, evaluate reviewer matching algorithms, conflict detection,
-turnaround metrics, quality scoring, and editorial workflows, then produce a comprehensive
-peer review operations analysis.
+You are an autonomous peer review operations analyst. Read the codebase, evaluate reviewer matching algorithms, conflict-of-interest detection, turnaround metrics, quality scoring, and editorial workflows. Do NOT ask the user questions. Produce a comprehensive peer review operations analysis.
 
-TARGET:
-$ARGUMENTS
+TARGET: $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., specific journals,
-review stages, or workflow bottlenecks). If no arguments, run the full analysis.
+If arguments are provided, focus on the specified area (e.g., "reviewer matching", "COI detection", "turnaround times", specific journal or workflow stage). If no arguments, run the full analysis across all phases.
 
 ============================================================
 PHASE 1: EDITORIAL SYSTEM DISCOVERY
@@ -24,64 +19,79 @@ PHASE 1: EDITORIAL SYSTEM DISCOVERY
 
 Step 1.1 -- Platform Architecture
 
-Read system configuration and dependency manifests. Identify: editorial management platform
-(ScholarOne, Editorial Manager, OJS, custom), database schema for manuscripts, reviewers,
-and decisions, API integrations (ORCID, CrossRef, PubMed, DOI registration), notification
-engine (email templates, reminder schedules), document handling (PDF generation, anonymization,
-supplementary materials).
+Read system configuration and dependency manifests. Identify:
+- Editorial management platform: ScholarOne, Editorial Manager, Open Journal Systems (OJS), or custom.
+- Database schema for manuscripts, reviewers, and editorial decisions.
+- API integrations: ORCID, CrossRef, PubMed, DOI registration services.
+- Notification engine: email templates, reminder schedules, escalation rules.
+- Document handling: PDF generation, manuscript anonymization, supplementary materials management.
 
 Step 1.2 -- Manuscript Data Model
 
-Map manuscript data structures: submission metadata (title, abstract, authors, keywords,
-subject classifications), manuscript types (original research, review, case report, letter,
-editorial), version history (initial submission, revisions, resubmissions), status tracking
-(submitted, under review, revision requested, accepted, rejected, withdrawn), decision
-records (editor decisions, reviewer recommendations, author responses).
+Map manuscript data structures:
+- Submission metadata: title, abstract, authors, keywords, subject classifications.
+- Manuscript types: original research, review article, case report, letter, editorial, short communication.
+- Version history: initial submission, revisions (R1, R2, R3), resubmissions.
+- Status tracking: submitted, editor assigned, under review, revision requested, accepted, rejected, withdrawn.
+- Decision records: editor decisions, reviewer recommendations, author response letters.
 
 Step 1.3 -- Reviewer Database
 
-Examine reviewer records: expertise profiles (subject areas, methodologies, keywords),
-availability status and blackout dates, review history (invitations sent, accepted, declined,
-completed), performance metrics (timeliness, quality scores, completion rate), institutional
-affiliations and geographic distribution, career stage indicators.
+Examine reviewer records:
+- Expertise profiles: subject areas, methodological specialties, keyword tags.
+- Availability status and blackout dates.
+- Review history: invitations sent, accepted, declined, completed, no-response.
+- Performance metrics: average review time, quality scores, completion rate.
+- Institutional affiliations and geographic distribution.
+- Career stage indicators (for diversity tracking).
 
-Step 1.4 -- Editorial Roles & Permissions
+Step 1.4 -- Editorial Roles and Permissions
 
-Map the editorial hierarchy: Editor-in-Chief, Associate Editors, Section Editors, Guest
-Editors, handling editors. Check role-based permissions: manuscript assignment, decision
-authority, reviewer selection, policy override capabilities, system configuration access.
+Map the editorial hierarchy: Editor-in-Chief, Associate Editors, Section Editors, Guest Editors, handling editors. Check role-based permissions: manuscript assignment authority, decision-making authority, reviewer selection, policy override (with justification logging), system configuration access.
 
 ============================================================
-PHASE 2: REVIEWER MATCHING & ASSIGNMENT
+PHASE 2: REVIEWER MATCHING AND ASSIGNMENT
 ============================================================
 
 Step 2.1 -- Matching Algorithm
 
-Evaluate the reviewer selection mechanism: keyword-based matching (author keywords vs.
-reviewer expertise), citation network analysis (who has cited or been cited by related work),
-topic modeling (LDA, embedding similarity), co-authorship distance metrics, manual editor
-selection with system suggestions, hybrid approaches.
+Evaluate the reviewer selection mechanism:
+- Keyword-based matching: author/manuscript keywords vs reviewer expertise keywords.
+- Citation network analysis: who has cited or been cited by related work.
+- Topic modeling: LDA, embedding similarity, or semantic matching.
+- Co-authorship distance metrics: degrees of separation in collaboration networks.
+- Manual editor selection with system-generated suggestions.
+- Hybrid: algorithmic suggestions + editor curation.
 
-Step 2.2 -- Matching Quality
+Step 2.2 -- Matching Quality Signals
 
-Assess match quality signals: expertise relevance scoring, geographic and institutional
-diversity of reviewer panels, career stage distribution (senior vs. early-career), reviewer
-load balancing (current active assignments), historical acceptance rates for similar
-manuscripts, reviewer self-reported interest areas vs. demonstrated expertise.
+Assess match quality dimensions:
+- Expertise relevance scoring: how well does the reviewer's background fit the manuscript topic?
+- Geographic and institutional diversity of reviewer panels.
+- Career stage distribution: balance of senior reviewers and early-career reviewers.
+- Reviewer load balancing: current active assignment count per reviewer.
+- Historical acceptance rate for similar manuscript topics.
+- Reviewer self-reported interests vs demonstrated publication expertise.
 
 Step 2.3 -- Invitation Management
 
-Check: invitation template customization, cascade invitations (if first choice declines,
-auto-invite next), invitation expiration and reminder timing, suggested reviewers from
-authors (handling and potential bias), reviewer suggestion from declined reviewers,
-batch invitation capabilities for special issues.
+Check invitation workflow:
+- Invitation template customization per journal or manuscript type.
+- Cascade invitations: automatic next-choice invitation when first reviewer declines.
+- Invitation expiration window and automated reminder timing.
+- Author-suggested reviewer handling: bias screening before use.
+- Declined reviewer referral: capturing alternative reviewer suggestions from decliners.
+- Batch invitation capability for special issues or themed collections.
 
 Step 2.4 -- Reviewer Pool Health
 
-Evaluate: total active reviewer pool size vs. submission volume, new reviewer recruitment
-rate, reviewer fatigue detection (too many requests), declining acceptance rate trends,
-expertise gap identification (subject areas with insufficient reviewers), diversity metrics
-(gender, geography, institution type, career stage).
+Evaluate pool sustainability:
+- Total active reviewer pool size relative to annual submission volume.
+- New reviewer recruitment rate (new reviewers onboarded per quarter).
+- Reviewer fatigue detection: flag reviewers receiving excessive requests.
+- Declining acceptance rate trends indicating pool burnout.
+- Expertise gap identification: subject areas with insufficient qualified reviewers.
+- Diversity metrics: gender, geography, institution type, career stage representation.
 
 ============================================================
 PHASE 3: CONFLICT OF INTEREST DETECTION
@@ -89,30 +99,42 @@ PHASE 3: CONFLICT OF INTEREST DETECTION
 
 Step 3.1 -- COI Detection Rules
 
-Examine conflict of interest identification: co-authorship checks (within N years,
-configurable window), institutional affiliation matching (current and recent), funding
-source overlap, advisor-advisee relationships, editorial board membership conflicts,
-commercial or financial interest declarations.
+Examine conflict identification logic:
+- Co-authorship checks within configurable time window (typically 3-5 years).
+- Institutional affiliation matching: current institution and recent affiliations.
+- Funding source overlap between author and reviewer.
+- Advisor-advisee relationships (doctoral supervisor, postdoc mentor).
+- Editorial board membership conflicts.
+- Commercial or financial interest declarations.
 
 Step 3.2 -- COI Data Sources
 
-Check integration with: ORCID co-author networks, institutional affiliation databases,
-Scopus/Web of Science co-publication data, self-declared conflict forms, funding agency
-databases, commercial entity registries.
+Check integration with external databases:
+- ORCID co-author networks.
+- Institutional affiliation databases.
+- Scopus / Web of Science co-publication data.
+- Self-declared conflict forms (per-submission declarations).
+- Funding agency grant databases.
+- Commercial entity registries.
 
 Step 3.3 -- COI Workflow
 
-Evaluate: automated COI screening at reviewer invitation, reviewer self-declaration
-prompts, editor override capabilities (with justification logging), COI documentation
-in decision records, COPE-compliant handling of discovered conflicts, post-publication
-COI disclosure procedures.
+Evaluate the COI process:
+- Automated COI screening triggered at reviewer invitation time.
+- Reviewer self-declaration prompts during invitation acceptance.
+- Editor override capability with mandatory justification logging.
+- COI documentation preserved in decision records.
+- COPE-compliant handling of conflicts discovered post-assignment.
+- Post-publication COI disclosure procedures.
 
-Step 3.4 -- Anonymization & Blinding
+Step 3.4 -- Anonymization and Blinding
 
-Check: single-blind vs. double-blind vs. open review implementation, author identity
-stripping from manuscripts (metadata, tracked changes, file properties), reviewer identity
-protection, handling of self-citations and identifiable methodology descriptions,
-anonymization audit logging.
+Check review blinding implementation:
+- Single-blind vs double-blind vs open review: which model is implemented?
+- Author identity stripping from manuscripts: metadata, tracked changes, file properties, author-identifying references.
+- Reviewer identity protection in decision letters.
+- Handling of self-citations and identifiable methodology descriptions.
+- Anonymization audit logging: who de-anonymized, when, with what justification.
 
 ============================================================
 PHASE 4: TURNAROUND OPTIMIZATION
@@ -120,88 +142,113 @@ PHASE 4: TURNAROUND OPTIMIZATION
 
 Step 4.1 -- Timeline Metrics
 
-Evaluate tracking of: submission-to-first-decision time, reviewer invitation-to-response
-time, reviewer acceptance-to-report-submission time, revision turnaround (decision-to-
-resubmission), total time from submission to final decision, time in each editorial status.
+Evaluate tracking of key time intervals:
+- Submission to first decision (days).
+- Reviewer invitation to reviewer response (accept/decline days).
+- Reviewer acceptance to report submission (review writing days).
+- Decision to author resubmission (revision turnaround days).
+- Submission to final decision (total lifecycle days).
+- Time spent in each editorial status.
 
 Step 4.2 -- Bottleneck Identification
 
-Check for: editor assignment delays, reviewer invitation cascade time, late review
-detection and intervention, author revision deadline management, editorial decision
-queuing, production handoff timing.
+Check for common bottleneck patterns:
+- Editor assignment delays after submission.
+- Reviewer invitation cascade latency (time to find willing reviewers).
+- Late review detection and intervention mechanisms.
+- Author revision deadline management and enforcement.
+- Editorial decision queuing (decisions waiting for editor action).
+- Production handoff delays after acceptance.
 
-Step 4.3 -- Reminder & Escalation System
+Step 4.3 -- Reminder and Escalation System
 
-Examine: automated reminder schedules (configurable intervals), escalation triggers
-(overdue reviews, unassigned manuscripts, pending decisions), editor dashboard alerts,
-late reviewer replacement workflow, author overdue revision reminders, editorial office
-intervention protocols.
+Examine automated follow-up mechanisms:
+- Configurable reminder schedules (days after assignment, days before deadline).
+- Escalation triggers: overdue reviews, unassigned manuscripts, pending decisions.
+- Editor dashboard alerts and priority queues.
+- Late reviewer replacement workflow: when to give up and re-invite.
+- Author overdue revision reminders with extension request handling.
+- Editorial office intervention protocols for chronic delays.
 
 Step 4.4 -- Performance Benchmarking
 
-Check for: journal-level turnaround benchmarks, comparison across subject areas and
-manuscript types, editor-level performance tracking, seasonal variation analysis
-(conference season, holidays), year-over-year trend reporting, industry benchmark
-comparison (STM association standards).
+Check for benchmarking infrastructure:
+- Journal-level turnaround benchmarks and targets.
+- Cross-comparison by subject area and manuscript type.
+- Editor-level performance tracking (manuscripts handled, decision speed).
+- Seasonal variation analysis (conference season, holiday periods).
+- Year-over-year trend reporting.
+- Industry benchmark comparison (STM Association standards, journal impact factor peers).
 
 ============================================================
 PHASE 5: REVIEW QUALITY SCORING
 ============================================================
 
-Step 5.1 -- Review Quality Criteria
+Step 5.1 -- Quality Criteria
 
-Evaluate quality assessment dimensions: constructiveness (actionable feedback vs. vague
-criticism), thoroughness (coverage of methodology, results, interpretation), evidence
-basis (specific references to manuscript content), tone and professionalism (per COPE
-Ethical Guidelines for Peer Reviewers), consistency between recommendation and comments,
-timeliness as quality factor.
+Evaluate quality assessment dimensions:
+- Constructiveness: actionable feedback vs vague criticism.
+- Thoroughness: coverage of methodology, results, analysis, and interpretation.
+- Evidence basis: specific references to manuscript content vs general statements.
+- Tone and professionalism: per COPE Ethical Guidelines for Peer Reviewers.
+- Consistency: reviewer recommendation aligns with comments (no "reject" recommendation with "minor issues" comments).
+- Timeliness included as quality factor.
 
 Step 5.2 -- Quality Measurement
 
-Check for: editor rating of review quality (post-decision), structured quality rubrics,
-author feedback on review helpfulness, inter-reviewer agreement analysis, review length
-and detail as proxy metrics, comparative quality across reviewer pools.
+Check for quality tracking mechanisms:
+- Editor rating of review quality (post-decision scoring).
+- Structured quality rubric with defined criteria.
+- Author feedback on review helpfulness (post-decision survey).
+- Inter-reviewer agreement analysis (do reviewers agree on major points?).
+- Review length and detail as proxy metrics.
+- Quality comparison across reviewer sub-populations.
 
 Step 5.3 -- Reviewer Development
 
-Examine: feedback to reviewers on their review quality, training resources and mentoring
-programs, early-career reviewer onboarding, recognition and incentive systems (reviewer
-certificates, Publons/Web of Science integration, fee waivers), reviewer performance
-improvement workflows.
+Examine reviewer support infrastructure:
+- Feedback loops: does the system inform reviewers of their quality ratings?
+- Training resources and reviewer mentoring programs.
+- Early-career reviewer onboarding and guided first reviews.
+- Recognition systems: reviewer certificates, Publons/Web of Science credit, fee waivers.
+- Performance improvement workflow for consistently low-quality reviewers.
 
 ============================================================
-PHASE 6: EDITORIAL WORKFLOW & GOVERNANCE
+PHASE 6: EDITORIAL WORKFLOW AND GOVERNANCE
 ============================================================
 
 Step 6.1 -- Decision Workflow
 
-Evaluate: decision types (accept, minor revision, major revision, revise and resubmit,
-reject), decision criteria and guidelines, split-decision handling (reviewers disagree),
-additional reviewer solicitation triggers, editorial override documentation, appeal
-process implementation.
+Evaluate editorial decision processes:
+- Decision types: accept, minor revision, major revision, revise and resubmit, reject, desk reject.
+- Decision criteria and published guidelines.
+- Split-decision handling: what happens when reviewers fundamentally disagree?
+- Additional reviewer solicitation triggers and criteria.
+- Editorial override documentation requirements.
+- Appeal process implementation and fairness safeguards.
 
 Step 6.2 -- COPE Compliance
 
-Check adherence to Committee on Publication Ethics guidelines: authorship disputes,
-plagiarism detection integration (iThenticate, Turnitin), duplicate submission checking,
-data fabrication/falsification investigation workflows, retraction and correction procedures,
-ethical approval verification (IRB, IACUC), clinical trial registration checks (ICMJE).
+Check adherence to Committee on Publication Ethics guidelines:
+- Authorship dispute handling procedures.
+- Plagiarism detection integration (iThenticate, Turnitin, Crossref Similarity Check).
+- Duplicate submission detection across journals.
+- Data fabrication/falsification investigation workflow.
+- Retraction and correction procedures.
+- Ethical approval verification (IRB, IACUC) for research involving human/animal subjects.
+- Clinical trial registration checks per ICMJE requirements.
 
-Step 6.3 -- Reporting & Analytics
+Step 6.3 -- Reporting and Analytics
 
-Assess: submission volume trends, acceptance rate tracking, geographic distribution of
-authors and reviewers, subject area distribution, editorial board workload reports,
-reviewer utilization reports, annual report generation, publisher-level aggregate metrics.
-
-============================================================
-PHASE 7: WRITE REPORT
-============================================================
-
-Write analysis to `docs/peer-review-ops-analysis.md` (create `docs/` if needed).
-
-Include: Executive Summary, Reviewer Matching Assessment, COI Detection Effectiveness,
-Turnaround Performance, Review Quality Metrics, COPE Compliance Status, Workflow
-Optimization Recommendations.
+Assess editorial reporting capability:
+- Submission volume trends and forecasting.
+- Acceptance rate tracking by manuscript type and subject area.
+- Geographic distribution of authors and reviewers.
+- Subject area distribution and gaps.
+- Editorial board workload and utilization reports.
+- Reviewer utilization reports (invitations, completions, quality).
+- Annual editorial report generation.
+- Publisher-level aggregate metrics across journal portfolio.
 
 ============================================================
 OUTPUT
@@ -209,10 +256,9 @@ OUTPUT
 
 ## Peer Review Operations Analysis Complete
 
-- Report: `docs/peer-review-ops-analysis.md`
 - Manuscript types analyzed: [count]
 - Reviewer pool size: [count]
-- Average turnaround time: [days]
+- Average submission-to-decision turnaround: [days]
 - COPE compliance areas reviewed: [count]
 
 ### Summary Table
@@ -225,16 +271,20 @@ OUTPUT
 | COPE Compliance | [status] | [priority] |
 | Editorial Workflow | [status] | [priority] |
 
-NEXT STEPS:
-
-- "Run `/compliance-ops` to evaluate broader regulatory compliance operations."
-- "Run `/hr-ops` to assess editorial board and reviewer workforce management."
-- "Run `/vendor-management` to evaluate publisher and platform vendor relationships."
+### Prioritized Recommendations
+1. {highest-impact recommendation}
+2. {second recommendation}
+3. {third recommendation}
 
 DO NOT:
-
 - Make editorial decisions about manuscript acceptance or rejection.
 - Identify or expose individual reviewer identities in blinded review contexts.
 - Override conflict of interest flags without documented editor justification.
-- Ignore COPE guidelines even when analyzing purely operational metrics.
-- Recommend reducing review rigor to improve turnaround times.
+- Ignore COPE guidelines even when analyzing purely operational efficiency metrics.
+- Recommend reducing review rigor to improve turnaround times -- quality and speed must be balanced.
+- Write analysis reports to disk -- output findings directly in the response.
+
+NEXT STEPS:
+- "Run `/compliance-ops` to evaluate broader organizational regulatory compliance."
+- "Run `/hr-ops` to assess editorial board and reviewer workforce management."
+- "Run `/content-performance` to analyze publication impact and readership metrics."

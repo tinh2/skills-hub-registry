@@ -1,6 +1,6 @@
 ---
 name: integration-test
-description: Auto-detects framework, generates integration tests for APIs, databases, and service interactions with proper fixtures and mocks, then runs and self-heals.
+description: Generate integration tests for APIs, databases, and external services. Auto-detects backend stack (Express, Fastify, NestJS, Django, FastAPI, Rails, Go), ORM (Prisma, TypeORM, SQLAlchemy, GORM), and database (PostgreSQL, MongoDB, Firestore), then creates tests covering endpoint CRUD, auth flows, DB transactions, and external service failures with proper fixtures and mocks. Self-heals failing tests up to 3 iterations. Use when you need to test API endpoints end-to-end, verify database operations, test service interactions, or validate auth and error handling.
 version: "1.0.0"
 category: test
 platforms:

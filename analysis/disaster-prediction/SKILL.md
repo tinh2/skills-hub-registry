@@ -1,6 +1,6 @@
 ---
 name: disaster-prediction
-description: Analyzes disaster prediction and early warning systems for model accuracy, data pipeline reliability, alert distribution mechanisms, evacuation planning integration, resource pre-positioning, historical pattern analysis, and false positive/negative rates.
+description: Analyze disaster prediction and early warning systems — model accuracy for flood, earthquake, wildfire, hurricane, and tsunami hazards, data pipeline reliability from sensor networks and satellite feeds, alert distribution latency and channel coverage, false positive/negative rate calibration, evacuation planning integration, and system resilience under disaster conditions. Audit emergency management software for prediction quality and operational readiness.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -17,7 +17,7 @@ If provided, focus on specific scope (e.g., "flood model only", "alert distribut
 "data pipeline"). If not provided, perform a full system analysis.
 
 ============================================================
-PHASE 1: SYSTEM ARCHITECTURE & DATA PIPELINE DISCOVERY
+PHASE 1: SYSTEM ARCHITECTURE AND DATA PIPELINE DISCOVERY
 ============================================================
 
 1. Identify the tech stack and infrastructure:
@@ -42,10 +42,8 @@ PHASE 1: SYSTEM ARCHITECTURE & DATA PIPELINE DISCOVERY
    - Check model versioning and deployment mechanisms.
 
 ============================================================
-PHASE 2: DATA INGESTION & QUALITY ANALYSIS
+PHASE 2: DATA INGESTION AND QUALITY ANALYSIS
 ============================================================
-
-Evaluate the reliability of incoming data streams:
 
 DATA SOURCE COVERAGE:
 - Inventory all external data sources and their refresh rates.
@@ -75,8 +73,6 @@ PIPELINE RESILIENCE:
 ============================================================
 PHASE 3: PREDICTION MODEL ACCURACY ANALYSIS
 ============================================================
-
-Evaluate the quality and reliability of prediction models:
 
 MODEL VALIDATION:
 - Check for train/test/validation split methodology.
@@ -108,10 +104,8 @@ MODEL LIMITATIONS:
 - Verify that model confidence/uncertainty is communicated with predictions.
 
 ============================================================
-PHASE 4: ALERT GENERATION & DISTRIBUTION
+PHASE 4: ALERT GENERATION AND DISTRIBUTION
 ============================================================
-
-Evaluate the alert lifecycle from prediction to public notification:
 
 ALERT CLASSIFICATION:
 - Verify tiered alert levels (watch, warning, emergency, all-clear).
@@ -148,10 +142,8 @@ GEOGRAPHIC TARGETING:
 - Verify language localization for multilingual communities.
 
 ============================================================
-PHASE 5: EVACUATION & RESPONSE INTEGRATION
+PHASE 5: EVACUATION AND RESPONSE INTEGRATION
 ============================================================
-
-Evaluate integration with emergency response planning:
 
 EVACUATION PLANNING:
 - Check for evacuation route calculation modules.
@@ -176,10 +168,8 @@ AGENCY COORDINATION:
 - Check for public health system integration (hospital surge capacity).
 
 ============================================================
-PHASE 6: HISTORICAL ANALYSIS & PATTERN RECOGNITION
+PHASE 6: HISTORICAL ANALYSIS AND PATTERN RECOGNITION
 ============================================================
-
-Evaluate the use of historical data for improving predictions:
 
 HISTORICAL DATABASE:
 - Verify the extent of historical event records and their quality.
@@ -202,10 +192,8 @@ CONTINUOUS IMPROVEMENT:
 - Check for systematic after-action review data capture.
 
 ============================================================
-PHASE 7: SYSTEM RESILIENCE & OPERATIONAL READINESS
+PHASE 7: SYSTEM RESILIENCE AND OPERATIONAL READINESS
 ============================================================
-
-Evaluate system reliability under disaster conditions:
 
 INFRASTRUCTURE RESILIENCE:
 - Check for redundant deployment across availability zones or regions.
@@ -220,11 +208,13 @@ LOAD HANDLING:
 - Check for CDN or caching for public-facing status pages.
 - Validate that alert distribution scales to full population in target area.
 
-TESTING & DRILLS:
+TESTING AND DRILLS:
 - Check for automated system health checks and synthetic monitoring.
 - Verify drill/exercise mode that tests end-to-end without public notification.
 - Check for chaos engineering or failure injection testing.
 - Validate that backup communication channels are regularly tested.
+
+Write the full analysis to `docs/disaster-prediction-analysis.md` (create `docs/` if needed).
 
 ============================================================
 OUTPUT
@@ -252,32 +242,11 @@ OUTPUT
 |---|---|---|---|---|---|
 | {type} | {hours} | {%} | {%} | {%} | {score} |
 
-### Alert Distribution Coverage
-
-| Channel | Configured | Tested | Latency | Population Coverage |
-|---|---|---|---|---|
-| {channel} | {Yes/No} | {Yes/No} | {seconds} | {%} |
-
 ### Critical Findings
 
 | # | Finding | Component | Severity | Impact |
 |---|---|---|---|---|
 | 1 | {description} | {component} | {Critical/High/Medium/Low} | {lives at risk / response delay} |
-
-### Data Pipeline Reliability
-
-- Data sources monitored: {count}
-- Stale feed detection: {Present/Absent}
-- Fallback sources configured: {count}
-- Pipeline failure alerting: {Yes/No}
-- Mean time to recovery: {estimate}
-
-### False Alarm Analysis
-
-- Overall false positive rate: {%}
-- Missed event rate (false negatives): {%}
-- Alert fatigue risk: {High/Medium/Low}
-- Threshold calibration methodology: {description or "None documented"}
 
 DO NOT:
 - Accept model accuracy claims without verifying validation methodology.

@@ -1,6 +1,6 @@
 ---
 name: defect-detection
-description: Analyzes quality control and defect detection systems including computer vision pipelines, SPC (Statistical Process Control), Six Sigma metrics, inspection automation, defect classification, and root cause analysis implementation.
+description: Analyze manufacturing defect detection and quality control systems — computer vision inspection pipelines, SPC control charts, Six Sigma process capability (Cp/Cpk), defect classification taxonomies, root cause analysis tooling, and measurement system analysis. Audit QC codebases for detection accuracy, false reject rates, statistical rigor, and traceability compliance.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -18,7 +18,7 @@ If provided, focus on specific subsystems (e.g., "vision pipeline", "SPC charts"
 "Six Sigma metrics", "root cause analysis"). If not provided, perform a full analysis.
 
 ============================================================
-PHASE 1: STACK DETECTION & QUALITY SYSTEM MAPPING
+PHASE 1: STACK DETECTION AND QUALITY SYSTEM MAPPING
 ============================================================
 
 1. Identify the tech stack:
@@ -50,18 +50,18 @@ PHASE 2: COMPUTER VISION PIPELINE ANALYSIS
 
 IMAGE ACQUISITION:
 - Identify camera integration (GigE Vision, USB3, embedded, line scan, area scan).
-- Check for camera configuration management (exposure, gain, focus, ROI).
+- Check camera configuration management (exposure, gain, focus, ROI).
 - Verify lighting control integration (consistent illumination is critical).
-- Check for image quality validation (brightness, contrast, focus score) before processing.
+- Check image quality validation (brightness, contrast, focus score) before processing.
 - Verify frame rate matches production line speed (no missed parts).
 - Flag missing image quality checks (garbage in, garbage out).
 
 PREPROCESSING:
-- Check for image normalization (size, color space, orientation).
+- Check image normalization (size, color space, orientation).
 - Verify noise reduction appropriate to defect type (median filter, Gaussian, bilateral).
-- Check for background subtraction or region of interest extraction.
+- Check background subtraction or region of interest extraction.
 - Verify preprocessing is deterministic (same input always produces same output).
-- Check for augmentation in training pipeline (rotation, flip, brightness, noise).
+- Check augmentation in training pipeline (rotation, flip, brightness, noise).
 - Flag preprocessing steps that could mask real defects (aggressive smoothing).
 
 DETECTION MODELS:
@@ -82,17 +82,17 @@ DETECTION MODELS:
   - Confidence threshold setting and justification.
 
 MODEL DEPLOYMENT:
-- Check for model versioning and rollback capability.
+- Check model versioning and rollback capability.
 - Verify model runs on appropriate hardware (GPU, VPU, edge TPU, CPU).
-- Check for inference optimization (TensorRT, ONNX Runtime, OpenVINO, quantization).
+- Check inference optimization (TensorRT, ONNX Runtime, OpenVINO, quantization).
 - Verify model warm-up at startup (first inference is often slow).
-- Check for graceful handling of model failure (stop line, pass-through, alert).
+- Check graceful handling of model failure (stop line, pass-through, alert).
 - Flag models deployed without version tracking or rollback capability.
 
 GOLDEN SAMPLE VALIDATION:
-- Check for reference sample testing (known-good and known-defective samples).
+- Check reference sample testing (known-good and known-defective samples).
 - Verify periodic model validation against golden samples (drift detection).
-- Check for automated golden sample testing schedule.
+- Check automated golden sample testing schedule.
 - Flag systems without regular model accuracy verification.
 
 ============================================================
@@ -140,19 +140,12 @@ OUT-OF-CONTROL DETECTION RULES:
 - Verify out-of-control signals trigger appropriate actions (stop, alert, investigate).
 - Flag systems that only check Rule 1 (miss trends, shifts, and patterns).
 
-CHART MANAGEMENT:
-- Check for control chart phase management (trial limits, revised limits, standard limits).
-- Verify exclusion of out-of-control points when recalculating limits.
-- Check for rational subgrouping validation.
-- Verify chart history retention for trending and audit purposes.
-
 ============================================================
 PHASE 4: SIX SIGMA METRICS ANALYSIS
 ============================================================
 
 PROCESS CAPABILITY INDICES:
-- Locate all capability index calculations.
-- Verify formulas:
+- Locate all capability index calculations and verify formulas:
   - Cp = (USL - LSL) / (6 * sigma).
   - Cpk = min((USL - mean) / (3 * sigma), (mean - LSL) / (3 * sigma)).
   - Pp = (USL - LSL) / (6 * sigma_overall).
@@ -172,7 +165,7 @@ NORMALITY TESTING:
   - Non-normal capability analysis (Clements method, percentile method).
 - Flag capability indices calculated on non-normal data without normality check.
 
-SIGMA LEVEL / DPMO:
+SIGMA LEVEL AND DPMO:
 - Check for DPMO (Defects Per Million Opportunities) calculation.
 - Verify sigma level calculation from DPMO (Z-score conversion).
 - Check for yield calculations (first pass yield, rolled throughput yield).
@@ -181,7 +174,7 @@ SIGMA LEVEL / DPMO:
 MEASUREMENT SYSTEM ANALYSIS (MSA):
 - Check for Gage R&R study implementation.
 - Verify components: repeatability (within operator), reproducibility (between operators).
-- Check for %GRR calculation and acceptance criteria (< 10% excellent, < 30% acceptable).
+- Check %GRR calculation and acceptance criteria (< 10% excellent, < 30% acceptable).
 - Check for attribute agreement analysis (for visual inspection).
 - Flag process capability studies without MSA validation.
 
@@ -199,7 +192,7 @@ CLASSIFICATION TAXONOMY:
 - Flag ambiguous or overlapping defect categories.
 
 SEVERITY GRADING:
-- Check for severity classification criteria:
+- Check severity classification criteria:
   - Critical: safety or regulatory concern, affects function.
   - Major: likely to cause failure in use, significant appearance issue.
   - Minor: unlikely to affect function or customer satisfaction.
@@ -209,16 +202,16 @@ SEVERITY GRADING:
 - Verify severity assignment considers end-use application.
 
 AUTOMATED CLASSIFICATION:
-- If ML-based classification: verify model handles all defect types in the taxonomy.
-- Check for confidence-based routing (low confidence -> human review).
+- If ML-based: verify model handles all defect types in the taxonomy.
+- Check confidence-based routing (low confidence -> human review).
 - Verify classification accuracy per defect type (some types harder than others).
-- Check for new defect type detection (previously unseen defect triggers alert).
+- Check new defect type detection (previously unseen defect triggers alert).
 - Flag automated systems without human review for edge cases.
 
 DISPOSITION WORKFLOW:
-- Check for automated disposition based on defect type and severity.
+- Check automated disposition based on defect type and severity.
 - Verify Material Review Board (MRB) workflow for borderline cases.
-- Check for rework routing and tracking.
+- Check rework routing and tracking.
 - Verify scrap recording and cost tracking.
 - Check for customer-specific acceptance criteria handling.
 
@@ -257,12 +250,12 @@ STATISTICAL ANALYSIS:
 CORRECTIVE ACTION TRACKING:
 - Check for CAPA (Corrective Action / Preventive Action) workflow.
 - Verify corrective actions are linked to specific root causes.
-- Check for effectiveness verification (did the corrective action work?).
+- Check effectiveness verification (did the corrective action work?).
 - Verify 8D or similar structured problem-solving process support.
 - Flag systems where root causes are identified but corrective actions are not tracked.
 
 ============================================================
-PHASE 7: DATA INTEGRITY & TRACEABILITY
+PHASE 7: DATA INTEGRITY AND TRACEABILITY
 ============================================================
 
 INSPECTION DATA STORAGE:
@@ -282,11 +275,13 @@ TRACEABILITY:
 - Check for forward traceability (which finished goods contain affected material).
 - Flag inspection data without lot/serial linkage.
 
+Write the analysis to `docs/defect-detection-analysis.md` (create `docs/` if needed).
+
 ============================================================
 OUTPUT
 ============================================================
 
-## Defect Detection & Quality Control Analysis Report
+## Defect Detection and Quality Control Analysis Report
 
 ### Stack: {detected stack}
 ### Inspection Methods: {vision / SPC / manual / hybrid}
@@ -309,7 +304,7 @@ OUTPUT
 | Six Sigma Metrics (Cp/Cpk) | {score}/100 | {status} |
 | Defect Classification | {score}/100 | {status} |
 | Root Cause Analysis | {score}/100 | {status} |
-| Data Integrity & Traceability | {score}/100 | {status} |
+| Data Integrity and Traceability | {score}/100 | {status} |
 
 ### Critical Findings
 
@@ -320,35 +315,16 @@ OUTPUT
    - Impact: {escaped defects, false rejects, incorrect capability, audit failure}
    - Fix: {specific recommendation}
 
-### SPC Chart Inventory
-
-| Chart | Parameter | Type | Control Limits | OOC Rules | Status |
-|-------|----------|------|---------------|-----------|--------|
-| {name} | {parameter} | {X-bar R / I-MR / P / etc.} | {correct/incorrect} | {rules implemented} | {active/stale/misconfigured} |
-
-### Capability Summary
-
-| Parameter | Cp | Cpk | Pp | Ppk | Normality Tested | MSA Done | Status |
-|----------|-----|-----|-----|-----|-----------------|----------|--------|
-| {param} | {value} | {value} | {value} | {value} | {yes/no} | {yes/no} | {capable/marginal/incapable} |
-
-### Detection Model Performance
-
-| Model | Defect Types | Precision | Recall | Inference Time | Validated | Status |
-|-------|-------------|-----------|--------|---------------|-----------|--------|
-| {name} | {types} | {value} | {value} | {ms} | {yes/no} | {production/staging/development} |
-
 ### Recommendations (ranked by quality risk reduction)
 1. {recommendation} -- impact: {description}, effort: {S/M/L}
 2. ...
 3. ...
 
 DO NOT:
-- Assume all defect detection requires computer vision -- many manufacturing processes use dimensional measurement, functional testing, or manual inspection.
+- Assume all defect detection requires computer vision -- many processes use dimensional measurement, functional testing, or manual inspection.
 - Flag correct Cpk calculations as wrong because they differ from Ppk -- they use different sigma estimates intentionally.
 - Recommend SPC on 100% inspected characteristics -- SPC is for monitoring, not for 100% screening.
 - Ignore measurement system adequacy when evaluating process capability.
-- Penalize the system for using simple control chart rules if the process is stable and well-understood.
 - Recommend ML-based detection without verifying sufficient labeled training data exists.
 - Treat all defects as equal -- severity classification exists for a reason.
 
@@ -356,5 +332,4 @@ NEXT STEPS:
 - "Run `/production-optimizer` to analyze how quality data feeds into OEE calculations."
 - "Run `/predictive-maintenance` to review how equipment condition affects defect rates."
 - "Run `/manufacturing-compliance` to verify quality system meets regulatory requirements."
-- "Run `/energy-efficiency` to check if quality rejects impact energy waste metrics."
 - "Run `/iterate` to implement the critical findings."

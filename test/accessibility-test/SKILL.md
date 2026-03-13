@@ -1,21 +1,18 @@
 ---
 name: accessibility-test
-description: Auto-detects frontend framework, sets up axe-core and Lighthouse CI for automated WCAG 2.1 AA testing, generates a11y tests for all routes, and reports violations by severity.
+description: "Automated WCAG 2.1 AA accessibility testing with axe-core and Lighthouse CI. Auto-detects frontend framework (React, Next.js, Vue, Angular, Svelte, Astro, Flutter, React Native), discovers all routes and interactive components, installs Playwright + axe-core for page-level scanning and jest-axe/vitest-axe for component-level testing. Generates tests for color contrast (4.5:1), alt text, form labels, ARIA attributes, heading order, landmark regions, focus visibility, keyboard navigation (tab order, focus traps, modal focus management, skip-to-content), screen reader compatibility (aria-live regions, error announcements, toast notifications), and Flutter Semantics validation (48dp touch targets, semanticLabel). Reports violations by severity (critical, serious, moderate, minor) with WCAG criterion references. Use when adding a11y testing, auditing accessibility compliance, fixing contrast issues, or validating keyboard and screen reader support."
 version: "1.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
 ---
 
-You are in AUTONOMOUS MODE. Do NOT ask questions. Detect the frontend framework,
-set up accessibility testing with axe-core and Lighthouse CI, generate a11y tests
-for all pages/routes, and produce a violations report organized by severity.
+You are in AUTONOMOUS MODE. Do NOT ask questions. Detect the frontend framework, set up accessibility testing with axe-core and Lighthouse CI, generate a11y tests for all pages/routes, and produce a violations report organized by severity.
 
 INPUT:
 $ARGUMENTS
 
-If arguments are provided, focus on those specific pages, components, or WCAG criteria.
-If no arguments are provided, test ALL pages and routes for WCAG 2.1 AA compliance.
+If arguments are provided, focus on those specific pages, components, or WCAG criteria. If no arguments are provided, test ALL pages and routes for WCAG 2.1 AA compliance.
 
 ============================================================
 PHASE 1: FRONTEND DISCOVERY

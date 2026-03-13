@@ -1,6 +1,6 @@
 ---
 name: contract-test
-description: Auto-detects API framework, generates consumer-driven contract tests using Pact or OpenAPI validation, verifies backward compatibility, and sets up CI verification.
+description: Generate consumer-driven contract tests for APIs. Auto-detects framework (Express, Fastify, NestJS, Django, FastAPI, Go), selects Pact, OpenAPI validation, or schema snapshots, verifies backward compatibility, catches breaking changes before deploy, and configures CI verification. Use when you need to validate API schemas, prevent breaking changes, verify backward compatibility, or set up consumer-driven contracts.
 version: "1.0.0"
 category: test
 platforms:
@@ -23,7 +23,19 @@ PHASE 1: API DISCOVERY
 
 Step 1.1 -- Detect API Framework
 
-Scan for the API framework using the same detection table as `/integration-test`.
+Scan for the API framework:
+
+| Indicator | Framework |
+|---|---|
+| package.json with fastify | Fastify |
+| package.json with express | Express |
+| package.json with @nestjs/core | NestJS |
+| manage.py + settings.py | Django |
+| requirements.txt with fastapi | FastAPI |
+| requirements.txt with flask | Flask |
+| go.mod + net/http or gin or echo | Go |
+| Gemfile with rails | Ruby on Rails |
+| pubspec.yaml with shelf or dart_frog | Dart backend |
 
 Record: framework, language, base URL, API versioning scheme (if any).
 
@@ -44,7 +56,8 @@ Check for existing API documentation:
 
 Step 1.3 -- Discover All Endpoints
 
-Build the full endpoint inventory (same method as `/integration-test`).
+Build the full endpoint inventory by scanning route registrations, controller decorators,
+and URL patterns for the detected framework.
 
 For each endpoint, extract the ACTUAL contract:
 

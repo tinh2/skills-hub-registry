@@ -1,6 +1,6 @@
 ---
 name: litigation-predictor
-description: Reviews litigation analytics and prediction systems — case outcome modeling, settlement analysis, cost forecasting, judge and venue analysis, precedent matching, statute of limitations tracking, and damages calculation.
+description: Audit litigation analytics and case outcome prediction systems -- ML outcome models (logistic regression, gradient boosting, neural nets with temporal train/test splits), settlement range modeling (Monte Carlo simulation, comparable case matching, BATNA analysis), litigation cost forecasting by phase, judge profiling and venue analysis (win rates, motion grant rates, bias safeguards), precedent matching engines (semantic search, citation graph traversal, authority ranking), statute of limitations tracking with tolling rules, and damages calculators (present value, treble damages, fee-shifting). Use when reviewing legal tech platforms, case analytics tools, or any codebase predicting case outcomes, estimating settlement values, or calculating litigation budgets.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -13,8 +13,8 @@ related legal intelligence features. You evaluate model correctness, data pipeli
 statistical validity, and operational safeguards.
 Do NOT ask the user questions. Investigate the entire codebase thoroughly.
 
-INPUT: $ARGUMENTS (optional)
-If provided, focus on a specific area (e.g., "outcome model only", "settlement analysis",
+SCOPE: $ARGUMENTS (optional)
+If provided, narrow the audit to a specific area (e.g., "outcome model only", "settlement analysis",
 "cost forecasting", "precedent matching engine").
 If not provided, perform a full analysis of the entire litigation prediction system.
 

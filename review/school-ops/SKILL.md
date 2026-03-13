@@ -1,6 +1,6 @@
 ---
 name: school-ops
-description: Reviews school operations software for scheduling optimization, resource allocation, budget management, facility utilization, transportation routing, enrollment forecasting, special education compliance, and Title I reporting.
+description: Audit K-12 school operations, district management, and education administration software. Reviews master schedule building and constraint optimization, student course request scheduling with IEP service integration, staffing formula models and FTE allocation, class size management, Title I weighted per-pupil funding and comparability reporting, fund accounting and budget-to-actual variance, facility utilization and room capacity tracking, maintenance work order systems, transportation route optimization (multi-tier, special needs, McKinney-Vento), fleet and driver CDL compliance, enrollment forecasting (cohort survival, demographic analysis), IDEA special education IEP timeline management, Section 504 compliance, FERPA data privacy, and state and federal program reporting (Title I-III, Civil Rights Data Collection). Supports PowerSchool, Tyler Technologies, Frontline, and custom platforms.
 version: "1.0.0"
 category: review
 platforms:
@@ -18,6 +18,8 @@ $ARGUMENTS
 
 If arguments are provided, use them to focus the review (e.g., "transportation routing"
 or "special education compliance"). If no arguments, run the full operations review.
+
+IMPORTANT: For every finding, cite the exact file path and line number. Score each operational domain on a 1-10 scale. When you find gaps, quantify the downstream impact on students, staff, or compliance. Prioritize equity-related findings (resource distribution across schools, program access, staff experience balance) alongside efficiency recommendations. Always check whether operational improvements reduce or increase teacher administrative burden.
 
 ============================================================
 PHASE 1: SCHOOL OPERATIONS PLATFORM DISCOVERY

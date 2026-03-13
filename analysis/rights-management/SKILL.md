@@ -1,6 +1,6 @@
 ---
 name: rights-management
-description: Analyzes content licensing, territory and window tracking, royalty calculations, rights clearance workflows, and contract compliance for music, film, television, and digital media using DDEX standards and ASCAP/BMI/SESAC frameworks.
+description: Audit content licensing and rights management systems for territory and window tracking, royalty calculation accuracy, rights clearance workflows, and contract compliance across music, film, television, and digital media. Use when reviewing media distribution platforms, royalty engines, music publishing systems, sync licensing tools, or content catalog management using DDEX standards and ASCAP/BMI/SESAC frameworks.
 version: "1.0.0"
 category: analysis
 platforms:

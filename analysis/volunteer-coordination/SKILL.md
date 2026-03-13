@@ -1,6 +1,6 @@
 ---
 name: volunteer-coordination
-description: Analyzes volunteer management systems for skill-based matching, shift scheduling optimization, availability tracking, training compliance, background check workflows, communication efficiency, retention analysis, and impact reporting.
+description: Analyze volunteer management platforms for skill-based matching algorithms, shift scheduling optimization, availability tracking, and retention analysis. Evaluates training compliance workflows, background check integration, communication channel efficiency, engagement scoring, churn prediction, impact reporting, and recognition systems for nonprofits, disaster response, healthcare, and community service organizations.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -17,7 +17,7 @@ If provided, focus on specific subsystems (e.g., "matching only", "scheduling", 
 If not provided, perform a full volunteer coordination analysis.
 
 ============================================================
-PHASE 1: SYSTEM DISCOVERY & DATA MODEL
+PHASE 1: SYSTEM DISCOVERY AND DATA MODEL
 ============================================================
 
 1. Identify the volunteer management platform:

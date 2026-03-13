@@ -1,6 +1,6 @@
 ---
 name: stripe
-description: Sets up complete Stripe payment integration with checkout sessions, webhooks, subscription billing, and customer portal for any framework.
+description: "Add Stripe payments to my app — set up checkout sessions, payment intents, webhook handling with signature verification, subscription billing with plan management, customer portal, and idempotent event processing for any backend framework"
 version: "1.0.0"
 category: integration
 platforms:

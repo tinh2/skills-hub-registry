@@ -1,6 +1,6 @@
 ---
 name: vendor-coordination
-description: Analyzes vendor and contractor management systems for performance scoring, bid evaluation, SLA compliance tracking, vendor risk assessment, procurement optimization, and relationship management across facilities, IT, and service operations.
+description: Analyze vendor and contractor coordination systems for performance scoring, competitive bid evaluation, SLA compliance tracking, and vendor risk assessment. Covers scorecard frameworks (quality, timeliness, cost, safety), procurement workflow optimization, RFP/RFQ process evaluation, contract structure analysis, insurance and compliance verification, diversity program tracking, and vendor concentration risk for facilities, IT, and service operations.
 version: "1.0.0"
 category: analysis
 platforms:

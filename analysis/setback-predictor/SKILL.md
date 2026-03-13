@@ -1,6 +1,6 @@
 ---
 name: setback-predictor
-description: Analyzes rehabilitation setback prediction systems for risk factor modeling, early warning indicators, readmission prediction, treatment adherence correlation, psychosocial factor integration, and intervention trigger optimization.
+description: Audit rehabilitation setback prediction systems for clinical risk modeling and early intervention. Use when you need to evaluate risk factor models (Charlson, Elixhauser), early warning indicators for functional decline, 30/60/90-day readmission prediction (LACE index), treatment adherence correlation, psychosocial factor integration (PHQ-9, GAD-7, pain catastrophizing), wearable data ingestion, intervention trigger thresholds, alert fatigue management, or discharge readiness scoring. Covers physical therapy, post-surgical recovery, and inpatient rehabilitation programs.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -15,8 +15,10 @@ then produce a comprehensive analysis.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., "readmission prediction"
-or "psychosocial factors"). If no arguments, run the full analysis.
+If arguments are provided, focus on that area (e.g., "readmission prediction model accuracy",
+"psychosocial screening integration", "early warning signal aggregation", "intervention trigger
+calibration", "adherence-outcome correlation", "discharge readiness scoring"). If no arguments,
+run the full analysis.
 
 ============================================================
 PHASE 1: SYSTEM DISCOVERY

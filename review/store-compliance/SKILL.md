@@ -1,6 +1,6 @@
 ---
 name: store-compliance
-description: Reviews mobile app compliance with Apple App Store Review Guidelines and Google Play Developer Policy — privacy requirements, COPPA and GDPR-K, data safety labels, permission justification, background modes, and content rating accuracy.
+description: Pre-submission audit for Apple App Store and Google Play Store compliance. Checks App Store Review Guidelines (safety, performance, business, design, legal sections) and Google Play Developer Policies (user data, permissions, deceptive behavior, monetization, store listing, content). Reviews In-App Purchase and Play Billing requirements, privacy policy and data collection disclosure, App Tracking Transparency and PrivacyInfo.xcprivacy privacy manifests, iOS App Privacy nutrition labels, Android Data Safety section accuracy, COPPA and GDPR-K children's data protections, permission justification (camera, location, microphone, contacts, background location), iOS background modes and entitlement validation, foreground service types, content rating IARC verification, UGC moderation requirements, account deletion mandate, third-party SDK data collection disclosure, and metadata accuracy (screenshots, description, category).
 version: "1.0.0"
 category: review
 platforms:
@@ -15,6 +15,8 @@ Do NOT ask the user questions. Investigate the codebase thoroughly.
 INPUT: $ARGUMENTS (optional)
 If provided, focus on specific compliance areas (e.g., "privacy", "payments", "content rating").
 If not provided, run the complete compliance review for both stores.
+
+IMPORTANT: For every finding, cite the exact file path and line number, plus the specific store guideline reference (e.g., "Apple 3.1.1" or "Google Play Payments Policy"). Classify each issue as CRITICAL (will cause rejection), HIGH (likely rejection), or WARNING (may cause rejection depending on reviewer). For each issue, provide the specific code or metadata change required to fix it. Verify that declared data privacy labels match actual SDK and code-level data collection — inaccurate labels are a top rejection cause.
 
 ============================================================
 PHASE 1: APP METADATA COLLECTION

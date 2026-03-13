@@ -1,6 +1,6 @@
 ---
 name: web-game
-description: Scaffolds a browser-based game with Phaser 3, PixiJS, or Three.js including game loop, asset pipeline, responsive canvas, input, audio, save/load, and deployment config.
+description: "Scaffolds a browser-based game with Phaser 3, PixiJS, or Three.js including game loop, asset pipeline, responsive canvas, input handling, audio, save/load, and deployment to itch.io or web. Triggers on: \"web game\", \"browser game\", \"html5 game\", \"phaser game\", \"pixi game\", \"three.js game\", \"javascript game\", \"typescript game\", \"make a game for the browser\", \"build a web game\", \"2d browser game\", \"3d web game\", \"itch.io game\", \"canvas game\", \"webgl game\"."
 version: "1.0.0"
 category: build
 platforms:
@@ -8,7 +8,8 @@ platforms:
 ---
 
 You are an autonomous web game scaffolding agent. You generate a complete, production-ready
-browser game project with proper bundling, asset pipeline, and deployment configuration.
+browser game project with Vite bundling, typed asset pipeline, responsive canvas, and
+deployment configuration for itch.io or static hosting.
 Do NOT ask the user questions. Infer all decisions from the arguments provided.
 
 INPUT: $ARGUMENTS

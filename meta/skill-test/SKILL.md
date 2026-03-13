@@ -1,6 +1,6 @@
 ---
 name: skill-test
-description: Validates a SKILL.md file against the marketplace quality rubric, checking frontmatter schema, instruction structure, phase completeness, and computing a quality score.
+description: "Test a skill's quality before publishing — validate SKILL.md frontmatter schema, check instruction structure for phases and guardrails, score against the marketplace rubric out of 100, simulate a dry run to find failure points, and report a pass/fail verdict with specific fixes"
 version: "1.0.0"
 category: meta
 platforms:

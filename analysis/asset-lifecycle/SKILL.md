@@ -1,6 +1,25 @@
 ---
 name: asset-lifecycle
-description: Analyzes asset lifecycle planning systems for capital expenditure forecasting, replacement scheduling, total cost of ownership modeling, depreciation tracking, and facility condition assessments using IFMA standards and Facility Condition Index scoring.
+description: >
+  Analyzes asset lifecycle planning systems for capital expenditure forecasting, replacement scheduling,
+  total cost of ownership modeling, depreciation tracking, and facility condition assessments using
+  IFMA standards and Facility Condition Index scoring.
+
+  USE THIS SKILL WHEN:
+  - You are reviewing facilities management or asset management software
+  - Someone asks about capital planning, replacement scheduling, or deferred maintenance
+  - You need to evaluate Facility Condition Index (FCI) calculations or condition assessments
+  - A project involves total cost of ownership (TCO) or life cycle cost analysis (LCCA)
+  - You are auditing an asset registry, CMDB, or equipment database
+  - Someone mentions Maximo, SAP EAM, Archibus, TRIRIGA, or similar platforms
+  - You need to assess depreciation tracking or fixed asset register accuracy
+  - A facility portfolio has growing deferred maintenance or declining FCI scores
+  - Capital budget requests need data-driven prioritization
+
+  TRIGGER PHRASES: "asset lifecycle", "capital planning", "replacement schedule",
+  "facility condition index", "FCI", "deferred maintenance", "total cost of ownership",
+  "TCO", "depreciation", "asset management", "condition assessment", "capital renewal",
+  "useful life", "LCCA", "facilities management", "equipment replacement"
 version: "1.0.0"
 category: analysis
 platforms:
@@ -23,7 +42,7 @@ PHASE 1: ASSET PORTFOLIO DISCOVERY
 
 Step 1.1 -- Asset Registry Assessment
 
-Scan for asset management infrastructure:
+Scan for asset management infrastructure and record each component:
 - Asset management platform (Maximo, SAP EAM, Archibus, TRIRIGA, FM:Systems)
 - Capital planning tools (VFA, Gordian, AkitaBox, custom spreadsheets)
 - Financial system integration (ERP, GL, fixed asset module)
@@ -33,8 +52,8 @@ Scan for asset management infrastructure:
 
 Step 1.2 -- Asset Inventory
 
-Map the asset portfolio:
-- Asset hierarchy (portfolio > campus > building > system > component)
+Map the complete asset portfolio:
+- Asset hierarchy: portfolio > campus > building > system > component
 - Asset classification by system:
   - Structural (roof, facade, foundation, structural steel/concrete)
   - Mechanical (HVAC, plumbing, fire protection, elevators)
@@ -42,17 +61,17 @@ Map the asset portfolio:
   - Building envelope (windows, curtain wall, waterproofing)
   - Interior (flooring, ceilings, partitions, restrooms)
   - Site (parking, paving, landscaping, site utilities, stormwater)
-- Asset count, install date, expected useful life (EUL), and current age
+- For each asset: count, install date, expected useful life (EUL), current age
 - Original cost and current replacement value (CRV)
 - Warranty status and remaining warranty term
 
 Step 1.3 -- Data Quality Assessment
 
-Evaluate asset data completeness:
+Evaluate asset data completeness. Flag any metric below 80% as a critical gap:
 - Percentage of assets with install date and EUL
 - Percentage of assets with replacement cost data
 - Condition assessment coverage (% of assets with condition score)
-- Data currency (when was asset data last updated?)
+- Data currency (when was asset data last updated? Flag if > 2 years)
 - Missing critical fields (no install date, no replacement value, no condition)
 - Data source reliability (as-built drawings, commissioning records, visual survey)
 
@@ -62,33 +81,35 @@ PHASE 2: CONDITION ASSESSMENT ANALYSIS
 
 Step 2.1 -- Assessment Methodology
 
-Evaluate condition assessment approach:
-- Assessment levels: ASHRAE Level I (walk-through), Level II (survey + testing),
+Evaluate the condition assessment approach:
+- Assessment level: ASHRAE Level I (walk-through), Level II (survey + testing),
   Level III (detailed engineering analysis)
 - Condition scoring scale (1-5, 1-10, letter grade, descriptive)
-- Assessment frequency and recency
+- Assessment recency: flag any building not assessed in > 3 years
 - Assessor qualifications (in-house, third-party, professional engineer)
 - Uniformat II classification adherence for cost categories
 - Photo documentation and deficiency cataloging
 
 Step 2.2 -- Facility Condition Index (FCI)
 
-Analyze FCI calculations:
+Analyze FCI calculations and verify correctness:
 - FCI formula: Deferred Maintenance (DM) / Current Replacement Value (CRV)
-- FCI ranges: Good (0-0.05), Fair (0.05-0.10), Poor (0.10-0.30), Critical (>0.30)
-- FCI by building, system, and portfolio level
-- FCI trend over time (improving with capital investment, worsening with deferred work)
+- Score interpretation: Good (0-0.05), Fair (0.05-0.10), Poor (0.10-0.30), Critical (>0.30)
+- FCI by building, by system, and at portfolio level
+- FCI trend over time: improving (capital investment) or worsening (deferred work)?
 - FCI comparison across buildings for prioritization
 - Needs index: Total Renewal Needs / CRV (includes non-deferred items)
 
+Flag any building with FCI > 0.30 as requiring immediate attention.
+
 Step 2.3 -- Deficiency Prioritization
 
-Check how deficiencies are prioritized:
-- Priority categories (life safety, code compliance, operational, cosmetic)
-- Criticality scoring (failure consequence x failure probability)
-- Risk-based prioritization matrix
+Check how deficiencies are ranked:
+- Priority categories: life safety, code compliance, operational, cosmetic
+- Criticality scoring: failure consequence x failure probability
+- Risk-based prioritization matrix documentation
 - Regulatory and code deficiency flagging
-- Accessibility (ADA) deficiency tracking
+- ADA deficiency tracking
 - Deferred maintenance growth projection if deficiency is not addressed
 
 ============================================================
@@ -98,32 +119,32 @@ PHASE 3: REPLACEMENT SCHEDULING
 Step 3.1 -- Useful Life Modeling
 
 Analyze asset lifespan management:
-- Expected useful life (EUL) data sources (ASHRAE, Whitestone, RS Means, BOMA, manufacturer)
-- Remaining useful life (RUL) calculation: EUL - Age, adjusted for condition
-- Effective age vs chronological age (well-maintained assets last longer)
+- EUL data sources: ASHRAE, Whitestone, RS Means, BOMA, manufacturer
+- RUL calculation: EUL - Age, adjusted for condition
+- Effective age vs. chronological age (well-maintained assets last longer)
 - Probability of failure curves by asset type
 - Infant mortality and bathtub curve modeling
-- Environmental and usage factors affecting lifespan (climate, duty cycle, water quality)
+- Environmental and usage factors (climate, duty cycle, water quality)
 
 Step 3.2 -- Renewal Forecast
 
-Evaluate capital renewal planning:
-- Year-by-year renewal forecast (20-30 year projection)
-- Renewal cost estimation methodology (RS Means, contractor quotes, historical)
-- Inflation adjustment on future costs (construction cost index)
-- Renewal need by system and priority
-- Deferred renewal backlog (past-EUL assets still in service)
-- Scenario modeling: maintain current funding vs full funding vs deferred
+Evaluate the capital renewal plan:
+- Year-by-year renewal forecast: verify it covers at least 20 years
+- Renewal cost estimation: methodology (RS Means, contractor quotes, historical)
+- Inflation adjustment: construction cost index applied to future years
+- Renewal need by system and priority ranking
+- Deferred renewal backlog: count and cost of past-EUL assets still in service
+- Scenario modeling: compare current funding vs. full funding vs. deferred scenarios
 
-Step 3.3 -- Replacement Decision Framework
+Step 3.3 -- Replace vs. Repair Decision Framework
 
-Check decision criteria for replace vs repair:
-- Repair-to-replacement cost ratio threshold (typically replace if repair > 50% of replacement)
-- Energy efficiency improvement from replacement (new equipment vs aging)
+Check decision criteria:
+- Repair-to-replacement cost ratio threshold (typical: replace if repair > 50% of replacement)
+- Energy efficiency improvement from replacement (quantified savings)
 - Technology obsolescence considerations
 - Parts availability for aging equipment
 - Regulatory compliance drivers (refrigerant phaseout, code changes)
-- Tenant or occupant impact of replacement project
+- Tenant/occupant impact assessment
 
 ============================================================
 PHASE 4: TOTAL COST OF OWNERSHIP
@@ -131,33 +152,33 @@ PHASE 4: TOTAL COST OF OWNERSHIP
 
 Step 4.1 -- TCO Model Components
 
-Analyze total cost of ownership:
-- Acquisition cost (purchase price, delivery, installation, commissioning)
-- Operating cost (energy consumption, consumables, operator labor)
+Verify the TCO model includes all cost categories:
+- Acquisition cost (purchase, delivery, installation, commissioning)
+- Operating cost (energy, consumables, operator labor)
 - Maintenance cost (preventive, corrective, contract maintenance)
 - Downtime cost (lost productivity, revenue impact, temporary measures)
 - Disposal cost (demolition, environmental remediation, recycling)
-- Net present value calculation with appropriate discount rate
+- Net present value calculation with documented discount rate
 
 Step 4.2 -- Life Cycle Cost Analysis (LCCA)
 
 Evaluate LCCA for capital decisions:
-- Alternative comparison methodology (e.g., repair vs replace, option A vs option B)
+- Alternative comparison methodology (repair vs. replace, option A vs. B)
 - Study period selection (remaining useful life of existing asset or building)
-- Discount rate and escalation rate assumptions
+- Discount rate and escalation rate assumptions documented
 - Residual value calculation at end of study period
-- Sensitivity analysis on key assumptions (energy costs, maintenance costs, lifespan)
-- LCCA results documentation for capital request justification
+- Sensitivity analysis on key assumptions (energy costs, maintenance, lifespan)
+- LCCA results documented for capital request justification
 
 Step 4.3 -- Performance Benchmarking
 
-Check cost benchmarking:
+Check cost benchmarking against industry standards:
 - Maintenance cost per square foot by building type and age
-- Energy cost per square foot benchmarking
-- Capital renewal investment rate (annual CapEx / CRV, target: 2-4%)
-- Comparison to IFMA benchmarks by building type
-- BOMA Experience Exchange Report benchmarking
-- Cost per unit metrics for specific asset types (cost per elevator, per chiller ton)
+- Energy cost per square foot
+- Capital renewal investment rate (annual CapEx / CRV -- target: 2-4%)
+- IFMA benchmarks by building type
+- BOMA Experience Exchange Report comparisons
+- Cost per unit for specific assets (cost per elevator, per chiller ton)
 
 ============================================================
 PHASE 5: CAPITAL PLANNING AND BUDGETING
@@ -171,15 +192,15 @@ Analyze the capital planning process:
 - Funding sources (operating budget, capital reserves, debt, grants, incentives)
 - Budget cycle alignment (annual, multi-year CIP)
 - Spend pacing and cash flow timing
-- Contingency allocation (typically 10-15% of project budget)
+- Contingency allocation (benchmark: 10-15% of project budget)
 
 Step 5.2 -- Capital Project Tracking
 
 Evaluate project execution monitoring:
 - Project status tracking (planning, design, bidding, construction, closeout)
-- Budget vs actual cost tracking
-- Schedule vs actual timeline tracking
-- Change order management and approval
+- Budget vs. actual cost tracking -- flag projects > 10% over budget
+- Schedule vs. actual timeline tracking
+- Change order management and approval workflow
 - Commissioning and acceptance criteria
 - Post-project performance verification (did the investment deliver expected results?)
 
@@ -189,9 +210,9 @@ Check financial asset tracking:
 - Depreciation method (straight-line, declining balance, units of production)
 - Depreciable life alignment with actual useful life
 - Capitalization threshold and policy compliance
-- Asset impairment identification and write-down
+- Asset impairment identification and write-down procedures
 - Component depreciation (separate building components with different lives)
-- Fixed asset register reconciliation with physical assets
+- Fixed asset register reconciliation with physical assets -- flag if > 1 year since last reconciliation
 
 ============================================================
 PHASE 6: SUSTAINABILITY AND FUTURE-PROOFING
@@ -199,18 +220,18 @@ PHASE 6: SUSTAINABILITY AND FUTURE-PROOFING
 
 Step 6.1 -- Decarbonization Planning
 
-Evaluate carbon reduction in capital planning:
-- Electrification readiness assessment (gas to electric HVAC)
+Evaluate carbon reduction integration in capital planning:
+- Electrification readiness (gas to electric HVAC transition plan)
 - Refrigerant transition planning (HFC phasedown per AIM Act / Kigali)
-- EV charging infrastructure planning
-- Renewable energy integration in capital plans
+- EV charging infrastructure in capital plans
+- Renewable energy integration (solar, battery storage)
 - Embodied carbon considerations in material selection
 - Building performance standards compliance trajectory (LL97, BERDO, BEPS)
 
 Step 6.2 -- Resilience Planning
 
 Check resilience in asset planning:
-- Climate risk assessment for asset portfolio (flooding, extreme heat, storms)
+- Climate risk assessment for the asset portfolio (flooding, extreme heat, storms)
 - Critical system redundancy and backup power
 - Water efficiency and drought resilience
 - Indoor air quality and pandemic preparedness
@@ -222,9 +243,15 @@ PHASE 7: WRITE REPORT
 
 Write analysis to `docs/asset-lifecycle-analysis.md` (create `docs/` if needed).
 
-Include: Executive Summary, Asset Portfolio Overview, Condition Assessment Summary, FCI Analysis,
-Replacement Schedule, TCO/LCCA Findings, Capital Planning Assessment, Sustainability Considerations,
-and Prioritized Recommendations with estimated costs and paybacks.
+Structure the report as:
+1. **Executive Summary** -- portfolio FCI, deferred maintenance total, funding gap
+2. **Asset Portfolio Overview** -- inventory statistics and data quality assessment
+3. **Condition Assessment Summary** -- methodology and FCI analysis by building/system
+4. **Replacement Schedule** -- 10-year forecast with scenario comparison
+5. **TCO/LCCA Findings** -- cost modeling results for major capital decisions
+6. **Capital Planning Assessment** -- process maturity and budget adequacy
+7. **Sustainability Considerations** -- decarbonization and resilience readiness
+8. **Prioritized Recommendations** -- with estimated costs and payback periods
 
 ============================================================
 OUTPUT
@@ -254,7 +281,7 @@ OUTPUT
 ### Capital Needs by System
 
 | System | CRV | FCI | 5-Year Need | 10-Year Need | Priority |
-|--------|-----|-----|-------------|-------------- |----------|
+|--------|-----|-----|-------------|--------------|----------|
 | {system} | ${amount} | {score} | ${amount} | ${amount} | {P0-P3} |
 
 NEXT STEPS:

@@ -1,6 +1,6 @@
 ---
 name: dependency-analysis
-description: Dependency graph analysis. Checks outdated, deprecated, vulnerable, duplicate, heavy, and unused packages. Produces health score, update plan, and migration paths.
+description: Analyze project dependencies for health, security, and bloat — audit outdated, deprecated, vulnerable, duplicate, heavy, and unused packages across npm, pip, cargo, go mod, and more. Produce a dependency health score, CVE inventory, license compatibility matrix, bundle size impact assessment, and a prioritized update plan with migration paths.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -16,7 +16,7 @@ If provided, focus on specific dependencies or categories (e.g., "react ecosyste
 If not provided, analyze all dependencies.
 
 ============================================================
-PHASE 1: STACK DETECTION & DEPENDENCY INVENTORY
+PHASE 1: STACK DETECTION AND DEPENDENCY INVENTORY
 ============================================================
 
 1. Identify all dependency manifests:
@@ -106,7 +106,7 @@ COMPATIBILITY CHECK:
 |---------|---------|-----------|------|
 
 ============================================================
-PHASE 5: SIZE & PERFORMANCE IMPACT
+PHASE 5: SIZE AND PERFORMANCE IMPACT
 ============================================================
 
 HEAVY PACKAGES:
@@ -168,6 +168,8 @@ BREAKING UPDATES (major versions):
 REMOVALS (unused/deprecated):
 1. {package} -- {reason: unused / deprecated / replaced by X}
 
+Write the full analysis to `docs/dependency-analysis.md` (create `docs/` if needed).
+
 ============================================================
 OUTPUT
 ============================================================
@@ -177,7 +179,6 @@ OUTPUT
 ### Stack: {detected stack}
 ### Total Dependencies: {direct} direct, {transitive} transitive
 ### Lockfile: {present/missing}
-
 ### Health Score: {score}/100
 
 ### Summary
@@ -198,22 +199,6 @@ OUTPUT
 | Package | Version | CVE | Severity | Fixed In | Reachable |
 |---|---|---|---|---|---|
 | {name} | {version} | {CVE-ID} | {CRITICAL/HIGH/MED/LOW} | {version} | {yes/no/unknown} |
-
-### License Issues
-
-| Package | License | Issue | Recommendation |
-|---|---|---|---|
-| {name} | {license} | {incompatible/missing} | {replace/get permission} |
-
-### Unused Dependencies
-| Package | Type | Evidence | Recommendation |
-|---|---|---|---|
-| {name} | {prod/dev} | {no imports found} | {remove} |
-
-### Heavy Dependencies
-| Package | Install Size | Bundle Size | Alternative | Alt Size |
-|---|---|---|---|---|
-| {name} | {MB} | {KB gzip} | {alternative} | {KB gzip} |
 
 ### Update Plan
 {prioritized plan from Phase 7}

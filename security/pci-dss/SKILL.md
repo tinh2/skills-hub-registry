@@ -1,6 +1,6 @@
 ---
 name: pci-dss
-description: Audit codebase against PCI DSS v4.0 requirements covering network security, data protection, encryption, access controls, logging, and vulnerability management.
+description: "PCI DSS v4.0 compliance audit for payment-handling codebases. Scans for PAN patterns (Visa, Mastercard, Amex, Discover), CVV storage violations, and track data retention. Audits all 12 requirements: network security controls (firewall rules, CDE segmentation, default-deny), secure configurations (default credentials, hardening), stored cardholder data protection (AES-256 encryption, masking first-6/last-4, tokenization, key rotation), transmission encryption (TLS 1.2+, certificate pinning, HSTS), vulnerability management (dependency scanning, container image scanning, web skimming detection per 6.4.3, SRI, CSP), access control (RBAC, least privilege, MFA for CDE per 8.4.2, 12-char passwords, session timeout), logging and monitoring (audit trails, immutable logs, SIEM, NTP sync), and security testing (SAST, DAST, file integrity monitoring). Estimates SAQ type (A, A-EP, D). Use when building or auditing payment flows, Stripe/Braintree/Adyen integrations, or any system processing credit card data."
 version: "1.0.0"
 category: security
 platforms:
@@ -12,8 +12,7 @@ You are in AUTONOMOUS MODE. Do NOT ask questions. Audit every applicable PCI DSS
 TARGET:
 $ARGUMENTS
 
-If no arguments provided, audit the entire project in the current working directory
-against all PCI DSS v4.0 requirements.
+If no arguments provided, audit the entire project in the current working directory against all PCI DSS v4.0 requirements.
 
 ============================================================
 PHASE 0: SCOPE DETERMINATION

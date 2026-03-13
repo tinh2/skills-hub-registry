@@ -1,6 +1,6 @@
 ---
 name: employer-matching
-description: Analyzes job matching platforms for matching algorithm quality, skill-to-requirement alignment, culture fit modeling, bias detection in matching, geographic/remote preference handling, salary range accuracy, and candidate experience optimization.
+description: Audit a job matching platform for matching algorithm precision and recall, skill taxonomy normalization quality, culture fit modeling without demographic bias, algorithmic fairness testing per EEOC and NYC Local Law 144, remote/hybrid geographic handling, salary range accuracy, and candidate experience optimization. Use when reviewing job boards, ATS matching engines, workforce marketplaces, internal mobility platforms, or AI-powered recruitment tools.
 version: "1.0.0"
 category: analysis
 platforms:

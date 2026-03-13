@@ -1,6 +1,6 @@
 ---
 name: investor-ready
-description: Comprehensive investor readiness pipeline chaining CTO, CFO, CPO, sales, and codebase health reviews into a single due-diligence-ready brief with executive-level assessments.
+description: "Prepare for fundraising due diligence — runs CTO, CFO, CPO, sales, and codebase health reviews to produce a consolidated investor brief with scorecard, red flags, and strengths. Use before Series A, seed round, acqui-hire evaluation, or board presentation."
 version: "1.0.0"
 category: combo
 platforms:
@@ -109,14 +109,14 @@ PHASE 6: INVESTOR BRIEF SYNTHESIS
 
 Synthesize all 5 phases into a single investor-ready document.
 
-Step 6.1 — Executive Summary
+Step 6.1 -- Executive Summary
 
 Write a 3-paragraph executive summary that an investor can read in 60 seconds:
 - Paragraph 1: What the product does and its current state
 - Paragraph 2: Key strengths (what's working well, defensible advantages)
 - Paragraph 3: Key risks (honest assessment of weaknesses and unknowns)
 
-Step 6.2 — Scorecard
+Step 6.2 -- Scorecard
 
 Produce a consolidated scorecard across all dimensions:
 
@@ -132,7 +132,7 @@ Produce a consolidated scorecard across all dimensions:
 | Scalability | {1-10} | {Low/Med/High} | {one-line} |
 | **Overall** | **{avg}** | **{level}** | **{verdict}** |
 
-Step 6.3 — Red Flags
+Step 6.3 -- Red Flags
 
 List every finding that an investor would consider a red flag:
 - Technical: single points of failure, no tests, security gaps
@@ -141,7 +141,7 @@ List every finding that an investor would consider a red flag:
 - Market: no distribution strategy, missing enterprise features
 - Team: bus factor concerns (single contributor patterns)
 
-Step 6.4 — Strengths
+Step 6.4 -- Strengths
 
 List every finding that an investor would consider a positive signal:
 - Clean architecture, strong test coverage, modern stack
@@ -150,7 +150,7 @@ List every finding that an investor would consider a positive signal:
 - Growth mechanics, viral loops, network effects
 - Active development, fast iteration, good engineering practices
 
-Step 6.5 — Write Report
+Step 6.5 -- Write Report
 
 Write the complete investor brief to `docs/investor-brief.md` in the project
 (create the `docs/` directory if it doesn't exist).
@@ -210,9 +210,9 @@ STRICT RULES
 - Be brutally honest. Investors lose money on sugar-coated assessments.
 - Every red flag must reference specific files or code patterns.
 - The executive summary must be readable by a non-technical investor.
-- The scorecard must be defensible — explain any score above 7 or below 4.
+- The scorecard must be defensible -- explain any score above 7 or below 4.
 - If a referenced skill does not exist yet, skip that phase with a
-  "SKIPPED — skill not available" status and note it as a gap.
+  "SKIPPED -- skill not available" status and note it as a gap.
 - Do NOT propose code changes. This is an analysis pipeline, not a fix pipeline.
 - Credit genuine strengths equally with flagging weaknesses.
 

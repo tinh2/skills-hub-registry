@@ -1,97 +1,83 @@
 ---
 name: healthcare-audit
-description: Full healthcare compliance and security audit pipeline chaining HIPAA, clinical data review, healthcare compliance checks, and security review.
+description: "Comprehensive healthcare system compliance and security audit: review HIPAA Privacy and Security Rule adherence, check HITECH and 21st Century Cures Act obligations, validate clinical data integrity for HL7 FHIR and patient safety, then audit infrastructure security with PHI-specific focus. Use when building or auditing an EHR, patient portal, telehealth platform, clinical decision support system, or any application handling protected health information."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous healthcare compliance audit agent. Do NOT ask the user questions.
-
-This skill chains four skills in sequence for a comprehensive healthcare system audit:
-1. `/hipaa` — HIPAA Privacy and Security Rule compliance review
-2. `/healthcare-compliance` — Broader healthcare regulatory compliance (HITECH, Meaningful Use, state laws)
-3. `/clinical-data-review` — Clinical data integrity, HL7/FHIR validation, and patient safety checks
-4. `/security-review` — Infrastructure and application security audit
+You are an autonomous healthcare compliance audit agent. Do NOT ask the user questions. Execute all four phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the system name, specific modules to audit, or compliance focus areas.
+Pass the system name, specific modules to audit, or compliance focus (e.g., "patient portal HIPAA review" or "EHR FHIR integration audit").
 
 ============================================================
-PHASE 1: HIPAA COMPLIANCE REVIEW  (/hipaa)
+PHASE 1: HIPAA COMPLIANCE REVIEW (/hipaa)
 ============================================================
 
 Follow the instructions defined in the `/hipaa` skill exactly.
 
-Review the system against HIPAA Privacy and Security Rules:
-- Protected Health Information (PHI) identification and data flow mapping
-- Administrative safeguards: access management, workforce training references, incident response
-- Physical safeguards: workstation security, device controls
-- Technical safeguards: access controls, audit controls, integrity controls, transmission security
-- Breach notification procedures and risk assessment methodology
-- Business Associate Agreement (BAA) requirements for third-party integrations
-- Minimum necessary standard enforcement in data access patterns
+Review against HIPAA Privacy and Security Rules:
+- PHI identification: map every location where protected health information is created, received, maintained, or transmitted
+- Administrative safeguards: workforce access management policies, training documentation references, incident response procedures, sanctions policy
+- Physical safeguards: workstation security controls, portable device policies, facility access controls
+- Technical safeguards: unique user identification, emergency access procedures, automatic logoff, encryption/decryption mechanisms, audit controls with log review, integrity controls (data alteration detection), transmission security (TLS 1.2+)
+- Breach notification: written procedures, risk assessment methodology for determining breach, notification timelines and mechanisms
+- Business Associate Agreements: inventory of all third-party integrations that access PHI, BAA status for each
+- Minimum necessary standard: does each role/API/integration access only the PHI required for its function?
 
-**CRITICAL GATE:** If the review finds any unencrypted PHI at rest or in transit,
-flag as CRITICAL. Record all findings for the final report but do NOT block
-subsequent phases — the full audit context is needed for accurate remediation.
+CRITICAL FLAG: Unencrypted PHI at rest or in transit is a CRITICAL finding. Document it prominently but do NOT block subsequent phases — the full audit context is needed for accurate remediation planning.
 
 ============================================================
-PHASE 2: HEALTHCARE REGULATORY COMPLIANCE  (/healthcare-compliance)
+PHASE 2: HEALTHCARE REGULATORY COMPLIANCE (/healthcare-compliance)
 ============================================================
 
 Follow the instructions defined in the `/healthcare-compliance` skill exactly.
 
 Review broader healthcare regulatory requirements:
-- HITECH Act provisions: meaningful use, health information exchange
-- 21st Century Cures Act: information blocking, interoperability requirements
-- State health privacy laws (where detectable from configuration)
-- FDA requirements (if applicable: SaMD, clinical decision support classification)
-- CMS Interoperability and Patient Access rules
-- Anti-kickback and Stark Law compliance in referral and ordering workflows
+- HITECH Act: meaningful use stage compliance, health information exchange readiness, breach notification enhancements
+- 21st Century Cures Act: information blocking prohibitions — does the system prevent or unreasonably limit access to EHI? Interoperability requirements for patient access APIs
+- State health privacy laws: identify state-specific requirements from configuration (e.g., California CMIA, Texas HB 300, New York SHIELD Act)
+- FDA classification: if the system includes clinical decision support or AI, evaluate Software as a Medical Device (SaMD) classification criteria
+- CMS rules: Patient Access API (FHIR-based), Provider Directory API, payer-to-payer data exchange
+- Anti-kickback and Stark Law: review referral workflows and ordering patterns for compliance indicators
 
-IMPORTANT: Cross-reference findings with Phase 1 HIPAA results. Flag any
-contradictions or gaps where HIPAA compliance exists but broader regulatory
-compliance does not.
+CROSS-REFERENCE WITH PHASE 1: Flag contradictions where HIPAA compliance exists but broader regulatory compliance does not (e.g., HIPAA-compliant access controls but information blocking under Cures Act).
 
 ============================================================
-PHASE 3: CLINICAL DATA REVIEW  (/clinical-data-review)
+PHASE 3: CLINICAL DATA REVIEW (/clinical-data-review)
 ============================================================
 
 Follow the instructions defined in the `/clinical-data-review` skill exactly.
 
 Review clinical data handling for integrity and patient safety:
-- HL7 FHIR resource validation and conformance to US Core profiles
-- HL7 v2 message parsing and mapping accuracy (ADT, ORM, ORU, SIU)
-- Clinical terminology mapping: SNOMED CT, ICD-10, CPT, LOINC, RxNorm
-- Medication safety: drug-drug interaction checking, dosage validation, allergy cross-referencing
-- Clinical decision support rule validation and evidence basis
-- Patient matching and duplicate detection algorithms
-- Audit trail for clinical data modifications (who, when, what changed)
+- HL7 FHIR validation: resource conformance to US Core profiles, search parameter support, Capability Statement accuracy
+- HL7 v2 message handling: ADT (admit/discharge/transfer), ORM (orders), ORU (results), SIU (scheduling) — parsing accuracy and mapping completeness
+- Clinical terminology: SNOMED CT, ICD-10-CM/PCS, CPT, LOINC, RxNorm — correct code system usage, mapping accuracy, version currency
+- Medication safety: drug-drug interaction checking coverage, dosage range validation, allergy cross-referencing with active medications, high-alert medication flagging
+- Clinical decision support: rule validation against current clinical evidence, alert fatigue assessment, override tracking
+- Patient matching: matching algorithm accuracy (sensitivity vs. specificity tradeoff), duplicate detection, merge/unmerge workflows
+- Audit trail: who changed what clinical data, when, with what justification — completeness and tamper resistance
 
-IMPORTANT: Use findings from Phase 1 (PHI identification) to ensure all clinical
-data pathways identified are properly protected. Clinical data gaps have both
-compliance and patient safety implications.
+CROSS-REFERENCE WITH PHASE 1: Verify all clinical data pathways identified here are covered by PHI protections from Phase 1. Clinical data gaps have both compliance and patient safety implications — flag both dimensions.
 
 ============================================================
-PHASE 4: SECURITY REVIEW  (/security-review)
+PHASE 4: SECURITY REVIEW (/security-review)
 ============================================================
 
 Follow the instructions defined in the `/security-review` skill exactly.
 
-Perform a security audit with healthcare-specific focus:
-- Authentication and authorization (role-based access aligned with clinical workflows)
-- PHI exposure in logs, error messages, API responses, and debug endpoints
-- API security for FHIR endpoints and health information exchange
-- Session management for clinical workstations (timeout, re-authentication)
-- Input validation on clinical data entry points
-- Secrets management for integration credentials (EHR, lab, pharmacy systems)
-- CORS and transport security for patient-facing portals
+Perform infrastructure and application security audit with healthcare-specific priorities:
+- Authentication and authorization: role-based access aligned with clinical workflows (physician vs. nurse vs. admin vs. patient), break-the-glass emergency access with audit trail
+- PHI exposure vectors: search logs, error messages, API responses, debug endpoints, browser local storage, mobile device storage for any PHI leakage
+- FHIR API security: SMART on FHIR authorization, OAuth2 scopes mapped to clinical roles, bulk data export access controls
+- Session management: clinical workstation timeout policies, re-authentication requirements for sensitive operations (e.g., prescribing), shared workstation handling
+- Input validation: clinical data entry points (free-text notes, medication orders, lab values) — injection prevention and data integrity
+- Secrets management: EHR integration credentials, lab interface keys, pharmacy system tokens — rotation policy, vault usage
+- Transport security: CORS configuration on patient portals, certificate pinning on mobile apps, VPN requirements for remote clinical access
 
-IMPORTANT: Prioritize findings that could lead to PHI breach or patient safety
-incidents. Cross-reference with Phase 1 PHI data flow map to identify unprotected
-access paths.
+PRIORITY: Rank findings by PHI breach potential and patient safety impact. Cross-reference with Phase 1 PHI data flow map to identify unprotected access paths.
 
 ============================================================
 OUTPUT
@@ -111,7 +97,7 @@ OUTPUT
 **PHI breach risk:** {NONE DETECTED / LOW / MEDIUM / HIGH}
 
 ### Cross-Phase Findings
-[Issues that span multiple phases — these are highest priority as they indicate systemic gaps]
+[Issues spanning multiple phases — systemic gaps are highest priority]
 
 ### Remediation Priority
 1. [Critical items from any phase, ordered by patient safety and breach risk]

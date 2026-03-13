@@ -1,6 +1,6 @@
 ---
 name: analytics-tracking
-description: Sets up event tracking with analytics providers — auto-detects framework, installs SDK, creates service wrapper, and instruments key user flows.
+description: "Set up production-ready event tracking with Amplitude, Mixpanel, PostHog, or GA4. Auto-detects your framework (React, Next.js, Vue, Flutter, Angular, Python, Go, Rails), installs the correct SDK, creates a provider-agnostic analytics service wrapper, defines a typed event taxonomy, instruments page views and key user flows, and adds privacy/consent controls. Use when you need analytics, event tracking, user tracking, product analytics, usage metrics, or telemetry."
 version: "1.0.0"
 category: integration
 platforms:
@@ -17,31 +17,35 @@ define a core event taxonomy, and instrument key user flows.
 TASK:
 $ARGUMENTS
 
-============================================================ PHASE 0: DETECTION ============================================================
+============================================================
+PHASE 0: DETECTION
+============================================================
 
-1. FRAMEWORK DETECTION — scan the project root to identify the tech stack:
-   - package.json with "react" or "next" → React / Next.js
-   - package.json with "vue" → Vue
-   - package.json with "angular" → Angular
-   - pubspec.yaml → Flutter / Dart
-   - package.json with "react-native" → React Native
-   - package.json with "svelte" → SvelteKit
-   - requirements.txt or pyproject.toml with "django" or "flask" or "fastapi" → Python backend
-   - go.mod → Go backend
-   - Gemfile with "rails" → Ruby on Rails
+1. FRAMEWORK DETECTION -- scan the project root to identify the tech stack:
+   - package.json with "react" or "next" -> React / Next.js
+   - package.json with "vue" -> Vue
+   - package.json with "angular" -> Angular
+   - pubspec.yaml -> Flutter / Dart
+   - package.json with "react-native" -> React Native
+   - package.json with "svelte" -> SvelteKit
+   - requirements.txt or pyproject.toml with "django" or "flask" or "fastapi" -> Python backend
+   - go.mod -> Go backend
+   - Gemfile with "rails" -> Ruby on Rails
    - If multiple detected (e.g., monorepo), handle each workspace.
 
-2. PROVIDER DETECTION — determine analytics provider from $ARGUMENTS or existing config:
+2. PROVIDER DETECTION -- determine analytics provider from $ARGUMENTS or existing config:
    - If $ARGUMENTS names a provider, use it.
    - If an existing SDK is installed (check package.json / pubspec.yaml), match it.
    - If no provider specified and none installed, default to PostHog (open-source, self-hostable).
    - Supported providers: Amplitude, Mixpanel, PostHog, Google Analytics 4 (GA4).
 
-3. EXISTING ANALYTICS CHECK — search for existing analytics wrappers:
+3. EXISTING ANALYTICS CHECK -- search for existing analytics wrappers:
    - Grep for "analytics", "track", "mixpanel", "amplitude", "posthog", "gtag" in src/.
    - If a wrapper already exists, extend it rather than creating a duplicate.
 
-============================================================ PHASE 1: SDK INSTALLATION ============================================================
+============================================================
+PHASE 1: SDK INSTALLATION
+============================================================
 
 Install the correct SDK for the detected provider and framework:
 
@@ -71,7 +75,9 @@ After installing:
 - Add these env vars to .env.example if it exists.
 - NEVER commit real API keys. Use environment variables exclusively.
 
-============================================================ PHASE 2: ANALYTICS SERVICE ============================================================
+============================================================
+PHASE 2: ANALYTICS SERVICE
+============================================================
 
 Create a framework-agnostic analytics service wrapper. This abstraction lets the team swap
 providers without touching feature code.
@@ -84,23 +90,25 @@ FILE LOCATION:
 
 THE SERVICE MUST EXPOSE:
 
-  init(config)          — Initialize the SDK with API key and options.
-  identify(userId, properties)  — Set the current user identity and traits.
-  track(eventName, properties)  — Track a named event with arbitrary properties.
-  page(name, properties)        — Track a page/screen view.
-  reset()               — Clear the user identity on logout.
-  setUserProperties(properties) — Update user-level properties without an event.
-  group(groupType, groupId)     — Associate user with a group/company (if supported).
-  flush()               — Force-send queued events (for server-side or before app close).
+  init(config)          -- Initialize the SDK with API key and options.
+  identify(userId, properties)  -- Set the current user identity and traits.
+  track(eventName, properties)  -- Track a named event with arbitrary properties.
+  page(name, properties)        -- Track a page/screen view.
+  reset()               -- Clear the user identity on logout.
+  setUserProperties(properties) -- Update user-level properties without an event.
+  group(groupType, groupId)     -- Associate user with a group/company (if supported).
+  flush()               -- Force-send queued events (for server-side or before app close).
 
 IMPLEMENTATION REQUIREMENTS:
-  - Wrap all SDK calls in try/catch — analytics must NEVER crash the app.
+  - Wrap all SDK calls in try/catch -- analytics must NEVER crash the app.
   - Add a debug mode that logs events to console instead of sending them.
   - Support a kill switch: if `ANALYTICS_ENABLED=false`, all methods become no-ops.
   - Batch events where the SDK supports it (reduce network calls).
   - Include TypeScript types / Dart typing for event names and properties.
 
-============================================================ PHASE 3: EVENT TAXONOMY ============================================================
+============================================================
+PHASE 3: EVENT TAXONOMY
+============================================================
 
 Create a typed event catalog. This prevents typo-driven event sprawl.
 
@@ -108,19 +116,19 @@ FILE: `src/lib/analytics-events.ts` (or framework equivalent)
 
 CORE EVENTS (define all of these):
 
-  page_view          — { page_name, referrer?, duration_ms? }
-  sign_up            — { method: "email" | "google" | "github" | "apple", referral_source? }
-  login              — { method, success: boolean }
-  logout             — {}
-  purchase           — { item_id, item_name, price, currency, quantity }
-  subscription_start — { plan, billing_period, trial: boolean }
-  feature_used       — { feature_name, context? }
-  search             — { query, results_count, filters? }
-  error_occurred     — { error_type, error_message, screen?, severity }
-  cta_clicked        — { cta_name, location, destination? }
-  onboarding_step    — { step_number, step_name, completed: boolean }
-  share              — { content_type, method }
-  feedback_submitted — { rating?, comment?, screen? }
+  page_view          -- { page_name, referrer?, duration_ms? }
+  sign_up            -- { method: "email" | "google" | "github" | "apple", referral_source? }
+  login              -- { method, success: boolean }
+  logout             -- {}
+  purchase           -- { item_id, item_name, price, currency, quantity }
+  subscription_start -- { plan, billing_period, trial: boolean }
+  feature_used       -- { feature_name, context? }
+  search             -- { query, results_count, filters? }
+  error_occurred     -- { error_type, error_message, screen?, severity }
+  cta_clicked        -- { cta_name, location, destination? }
+  onboarding_step    -- { step_number, step_name, completed: boolean }
+  share              -- { content_type, method }
+  feedback_submitted -- { rating?, comment?, screen? }
 
 RULES:
   - Use snake_case for all event names.
@@ -128,7 +136,9 @@ RULES:
   - Export a single `AnalyticsEvents` enum or const object for autocompletion.
   - Add JSDoc / dartdoc comments explaining when each event fires.
 
-============================================================ PHASE 4: INSTRUMENTATION ============================================================
+============================================================
+PHASE 4: INSTRUMENTATION
+============================================================
 
 Wire tracking into the application's key flows:
 
@@ -137,7 +147,7 @@ Wire tracking into the application's key flows:
    - Vue: Router afterEach guard.
    - Flutter: NavigatorObserver or GoRouter redirect.
    - Angular: Router events subscription.
-   - Automatic — no manual calls needed per page.
+   - Automatic -- no manual calls needed per page.
 
 2. USER IDENTIFICATION:
    - After successful login/signup, call identify() with user ID and initial properties.
@@ -155,7 +165,9 @@ Wire tracking into the application's key flows:
    - Track purchase and subscription_start server-side for accuracy.
    - Use a middleware/decorator pattern to track API-level events.
 
-============================================================ PHASE 5: PRIVACY & COMPLIANCE ============================================================
+============================================================
+PHASE 5: PRIVACY AND COMPLIANCE
+============================================================
 
 1. DNT (Do Not Track):
    - Check `navigator.doNotTrack` (web) before initializing.
@@ -175,32 +187,33 @@ Wire tracking into the application's key flows:
 4. APP STORE COMPLIANCE (mobile):
    - Flutter/RN: Add ATT (App Tracking Transparency) prompt for iOS.
    - Add privacy manifest entries for iOS 17+.
-   - Respect the user's ATT choice — disable IDFA-based tracking if denied.
+   - Respect the user's ATT choice -- disable IDFA-based tracking if denied.
 
-============================================================ PHASE 6: VALIDATION ============================================================
+============================================================
+PHASE 6: VALIDATION
+============================================================
 
-1. Run the project's build/compile step — fix any errors.
-2. Run existing tests — fix any failures caused by analytics integration.
+1. Run the project's build/compile step -- fix any errors.
+2. Run existing tests -- fix any failures caused by analytics integration.
 3. Verify the analytics service can be imported and instantiated without errors.
 4. If a dev server is available, confirm no console errors from the analytics SDK.
-5. Commit all changes with descriptive messages:
-   - "feat: add analytics service with [Provider] SDK"
-   - "feat: define core event taxonomy"
-   - "feat: instrument page views and user identification"
-   - "feat: add privacy controls and consent management"
 
-============================================================ DO NOT ============================================================
+============================================================
+DO NOT
+============================================================
 
 - Do NOT commit real API keys or project IDs. Use env vars only.
-- Do NOT make analytics initialization blocking — it must not slow app startup.
+- Do NOT make analytics initialization blocking -- it must not slow app startup.
 - Do NOT track events before user consent on web apps.
 - Do NOT store analytics data in localStorage/SharedPreferences without consent.
 - Do NOT add analytics to test files or test utilities.
-- Do NOT create a second analytics wrapper if one already exists — extend it.
+- Do NOT create a second analytics wrapper if one already exists -- extend it.
 - Do NOT use deprecated SDK versions or legacy tracking APIs.
 - Do NOT track raw PII (emails, names, phone numbers) in event properties.
 
-============================================================ OUTPUT ============================================================
+============================================================
+OUTPUT
+============================================================
 
 ## Analytics Tracking Setup
 
@@ -219,6 +232,6 @@ NEXT STEPS:
 
 After analytics tracking is set up:
 - "Run `/ship` to continue building features with tracking already wired in."
-- "Run `/search` to add full-text search — tracking search queries gives great product insight."
+- "Run `/search` to add full-text search -- tracking search queries gives great product insight."
 - "Run `/qa` to verify analytics events fire correctly in all user flows."
 - "Run `/perf` to ensure the analytics SDK does not degrade page load or app startup times."

@@ -1,6 +1,6 @@
 ---
 name: food-waste
-description: Analyzes food supply chain software for waste reduction including shelf life prediction, inventory rotation optimization using FIFO and FEFO, demand forecasting accuracy, donation logistics, cold chain monitoring, and sustainability reporting.
+description: Analyze food supply chain systems for waste reduction opportunities including shelf life prediction models, FIFO and FEFO inventory rotation enforcement, demand forecasting accuracy and bias, donation logistics workflows, cold chain temperature monitoring, and sustainability reporting against EPA Food Recovery Hierarchy and UN SDG 12.3 targets.
 version: "1.0.0"
 category: analysis
 platforms:

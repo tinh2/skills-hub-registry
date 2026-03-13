@@ -1,6 +1,6 @@
 ---
 name: cto-review
-description: CTO-perspective technical strategy review. Evaluates architecture decisions, scaling readiness, engineering velocity, technical debt ratio, security posture, team scalability, and infrastructure cost efficiency. Produces a strategic briefing with risk matrix and investment priorities.
+description: Conduct a CTO-perspective technical strategy review of a codebase. Evaluates architecture decisions and build-vs-buy trade-offs, scaling readiness at 10x and 100x, engineering velocity and developer experience, technical debt ratio and blast radius, security posture at executive level, team scalability for hiring, and infrastructure cost efficiency. Produces a strategic risk matrix, architecture scorecard, and ranked investment priorities. Use when you need a technical strategy review, architecture assessment, scaling readiness check, tech debt audit, engineering velocity evaluation, Series A technical due diligence, or CTO-level briefing before a board meeting or fundraise.
 version: "1.0.0"
 category: review
 platforms:

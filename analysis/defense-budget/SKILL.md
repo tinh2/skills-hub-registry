@@ -1,6 +1,6 @@
 ---
 name: defense-budget
-description: Defense budget analysis covering program cost estimation, earned value management, should-cost modeling, budget justification, and PPBE process alignment per DoD 5000 and GAO cost estimation guidelines
+description: Analyze defense program budgets and acquisition costs — earned value management (EVM/CPI/SPI), should-cost modeling, PPBE process alignment, cost estimation per GAO guidelines, Nunn-McCurdy breach risk, FYDP profiles, and learning curve analysis. Audit DoD 5000 acquisition software, program cost databases, and budget justification systems.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -18,8 +18,6 @@ If arguments are provided, use them to focus the analysis (e.g., specific progra
 PHASE 1: PROGRAM AND BUDGET DISCOVERY
 ============================================================
 
-Identify the defense budget and acquisition landscape:
-
 Step 1.1 -- Program Identification
 
 Map defense programs and budget structure:
@@ -33,10 +31,10 @@ Map defense programs and budget structure:
 Step 1.2 -- Cost Data Sources
 
 Identify available cost data:
-- SAR (Selected Acquisition Report) -- major programs
+- SAR (Selected Acquisition Report) for major programs
 - DAES (Defense Acquisition Executive Summary)
 - CPD (Cost and Performance Document)
-- CCDR (Contractor Cost Data Report) -- DD Form 1921
+- CCDR (Contractor Cost Data Report) DD Form 1921
 - FlexFile / Quantity Report format (modern cost reporting)
 - EVM reports (CPR Format 1-5 or IPMR)
 - Independent Cost Estimates (ICE) from CAPE
@@ -65,11 +63,11 @@ Understand the acquisition framework:
 PHASE 2: COST ESTIMATION ANALYSIS
 ============================================================
 
-Evaluate and produce cost estimates per GAO Cost Estimating and Assessment Guide:
+Evaluate cost estimates per GAO Cost Estimating and Assessment Guide:
 
-Step 2.1 -- Cost Estimating Methodology Assessment
+Step 2.1 -- Cost Estimating Methodology
 
-Evaluate the cost estimating approach:
+Evaluate the approach used:
 - **Analogy**: comparable system identification, normalization factors, relevance
 - **Parametric**: CER (Cost Estimating Relationships) development, database adequacy
 - **Engineering/Bottom-Up**: WBS completeness, basis of estimate (BOE) documentation
@@ -92,13 +90,9 @@ For each major cost element, evaluate:
 | WBS Element | Estimate ($M) | Methodology | Confidence | Risk Category | Growth History |
 |------------|--------------|-------------|-----------|--------------|---------------|
 
-Key areas:
-- Hardware unit cost and learning curve assumptions
-- Software development cost (SLOC-based, function point, agile story point)
-- Systems engineering and integration
-- Test and evaluation
-- Logistics and sustainment
-- Manpower and personnel
+Key areas: hardware unit cost and learning curve assumptions, software development cost
+(SLOC-based, function point, agile story point), systems engineering and integration,
+test and evaluation, logistics and sustainment, manpower and personnel.
 
 Step 2.4 -- Ground Rules and Assumptions (GR&A)
 
@@ -135,7 +129,7 @@ Evaluate EVM trends over time:
 - Undistributed Budget status
 - Over-Target Baseline (OTB) or Over-Target Schedule (OTS) indicators
 
-Step 3.3 -- Estimate at Completion (EAC) Analysis
+Step 3.3 -- Estimate at Completion (EAC)
 
 Evaluate EAC methodologies and reasonableness:
 - Contractor EAC vs. independent EAC vs. statistical EAC
@@ -157,8 +151,6 @@ Assess EVM system integrity:
 ============================================================
 PHASE 4: SHOULD-COST ANALYSIS
 ============================================================
-
-Perform or evaluate should-cost initiatives:
 
 Step 4.1 -- Should-Cost Framework
 
@@ -184,12 +176,8 @@ Catalog should-cost reduction opportunities:
 | Initiative | Cost Element | Will-Cost | Should-Cost | Savings | Implementation Risk |
 |-----------|-------------|-----------|-------------|---------|-------------------|
 
-Common initiatives:
-- Manufacturing process improvements (lean, automation, additive manufacturing)
-- Supply chain optimization (strategic sourcing, dual-source qualification)
-- Design simplification (parts count reduction, common components)
-- Test optimization (modeling and simulation to reduce physical test)
-- Overhead rate reduction (facility consolidation, IT modernization)
+Common initiatives: manufacturing process improvements, supply chain optimization,
+design simplification, test optimization, overhead rate reduction.
 
 Step 4.4 -- Learning Curve Analysis
 
@@ -203,8 +191,6 @@ Evaluate production cost improvement:
 ============================================================
 PHASE 5: BUDGET JUSTIFICATION AND PPBE
 ============================================================
-
-Evaluate alignment with the PPBE (Planning, Programming, Budgeting, and Execution) process:
 
 Step 5.1 -- POM Submission Assessment
 
@@ -242,28 +228,7 @@ Evaluate program affordability:
 - O&S cost as percentage of lifecycle cost
 - Affordability constraints driving capability trade-offs
 
-============================================================
-PHASE 6: REPORT AND COST MANAGEMENT PLAN
-============================================================
-
-Write the complete analysis to `docs/defense-budget-analysis.md`.
-
-Step 6.1 -- Cost Dashboard
-
-Produce a program cost summary dashboard:
-- Current vs. original estimate comparison
-- EVM performance charts (CPI/SPI trend, cost variance)
-- Should-cost vs. will-cost gap analysis
-- Budget execution rate and projections
-- Risk-adjusted cost forecast
-
-Step 6.2 -- Cost Management Recommendations
-
-Prioritize cost management actions:
-- Immediate: EVM corrective actions, budget realignment requests
-- Near-term: should-cost initiative implementation
-- Medium-term: acquisition strategy adjustments, contract restructure
-- Long-term: design changes, technology insertion, sustainment reform
+Write the complete analysis to `docs/defense-budget-analysis.md` (create `docs/` if needed).
 
 ============================================================
 OUTPUT

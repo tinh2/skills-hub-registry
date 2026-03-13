@@ -1,336 +1,168 @@
 ---
 name: mobile-ci-cd
-description: Sets up mobile CI/CD pipeline — GitHub Actions, Bitrise, or Codemagic for iOS and Android, code signing in CI, build number management, automated testing, beta distribution, and release automation.
+description: "Set up mobile CI/CD pipelines for Flutter, React Native, or native iOS/Android — GitHub Actions workflows for testing, code signing, TestFlight/Play Store distribution, build number management, Fastlane integration, and artifact retention"
 version: "1.0.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous mobile CI/CD configuration agent. You set up a complete
-continuous integration and delivery pipeline for iOS and Android mobile apps.
-Do NOT ask the user questions. Detect the project type and configure accordingly.
-
-INPUT: $ARGUMENTS (optional)
-If provided, focus on specific CI/CD platform or aspect (e.g., "GitHub Actions", "Bitrise",
-"code signing only", "TestFlight only").
-If not provided, configure a complete pipeline using GitHub Actions.
+You are in AUTONOMOUS MODE. Do NOT ask questions. Do NOT pause for confirmation.
+Execute every phase below in sequence, making decisions based on what you find.
 
 ============================================================
-PHASE 1: PROJECT DETECTION
+PHASE 0 — INPUT
+============================================================
+
+$ARGUMENTS may contain:
+- A CI/CD platform: `github-actions` (default), `bitrise`, `codemagic`
+- A specific focus: `code-signing`, `testflight`, `play-store`, `testing`, `artifacts`
+- `--ios-only` or `--android-only` to limit scope
+- If no arguments, configure a complete pipeline using GitHub Actions for all detected platforms
+
+============================================================
+PHASE 1 — PROJECT DETECTION
 ============================================================
 
 1. Detect the mobile framework:
-   - pubspec.yaml with flutter SDK -> Flutter (iOS + Android)
-   - *.xcodeproj or *.xcworkspace (no Flutter) -> Native iOS
-   - build.gradle.kts with android plugin (no Flutter) -> Native Android
-   - package.json with react-native -> React Native (iOS + Android)
-   - package.json with expo -> Expo (iOS + Android)
+   - `pubspec.yaml` with flutter SDK -> Flutter (iOS + Android)
+   - `*.xcodeproj` or `*.xcworkspace` (no Flutter) -> Native iOS
+   - `build.gradle.kts` with android plugin (no Flutter) -> Native Android
+   - `package.json` with `react-native` -> React Native (iOS + Android)
+   - `package.json` with `expo` -> Expo (iOS + Android)
 
 2. Detect existing CI/CD:
-   - .github/workflows/ -> GitHub Actions
-   - bitrise.yml -> Bitrise
-   - codemagic.yaml -> Codemagic
-   - .circleci/ -> CircleCI
-   - Jenkinsfile -> Jenkins
+   - `.github/workflows/` -> GitHub Actions
+   - `bitrise.yml` -> Bitrise
+   - `codemagic.yaml` -> Codemagic
+   - `.circleci/` -> CircleCI
 
 3. Detect existing Fastlane:
-   - fastlane/Fastfile -> Use existing lanes.
-   - If absent, generate Fastlane configuration as part of this skill.
+   - `fastlane/Fastfile` -> Use existing lanes
+   - If absent, generate Fastlane configuration as part of this skill
 
 4. Detect signing configuration:
-   - iOS: Fastlane match, manual profiles, Xcode automatic signing.
-   - Android: keystore in build.gradle, key.properties, or environment-based.
+   - iOS: Fastlane match, manual profiles, Xcode automatic signing
+   - Android: keystore in build.gradle, key.properties, or environment-based
 
 ============================================================
-PHASE 2: GITHUB ACTIONS — IOS PIPELINE
+PHASE 2 — iOS PIPELINE
 ============================================================
 
-Generate .github/workflows/ios.yml:
+Generate `.github/workflows/ios.yml`:
 
-```yaml
-name: iOS Build & Deploy
+**Triggers**: Push to `main`/`develop`, PRs to `main`/`develop`. Use concurrency groups with `cancel-in-progress: true`.
 
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
+**Test job** (runs on `macos-14`):
+- Framework-specific setup (Flutter action with cache, or Xcode setup)
+- Static analysis (flutter analyze, SwiftLint)
+- Unit tests with coverage
+- Upload coverage to Codecov/Coveralls
 
-concurrency:
-  group: ios-${{ github.ref }}
-  cancel-in-progress: true
+**TestFlight job** (runs on push to `develop`):
+- Install Fastlane via Bundler
+- Code signing via Fastlane match (appstore profile, readonly)
+- Required secrets: `MATCH_PASSWORD`, `MATCH_GIT_TOKEN`, `ASC_KEY_ID`, `ASC_ISSUER_ID`, `ASC_KEY_CONTENT`
+- Build and upload via `fastlane beta`
+- Upload IPA as artifact (14-day retention)
+- Upload dSYMs for crash symbolication
 
-jobs:
-  test:
-    name: Test
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-
-      # Framework-specific setup
-      # Flutter:
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.x'
-          channel: stable
-          cache: true
-      - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test --coverage
-
-      # Native iOS:
-      # - uses: maxim-lobanov/setup-xcode@v1
-      #   with:
-      #     xcode-version: latest-stable
-      # - run: xcodebuild test -scheme AppName -destination 'platform=iOS Simulator,name=iPhone 15 Pro'
-
-  build-testflight:
-    name: Build & TestFlight
-    needs: test
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Fastlane
-        run: |
-          gem install bundler
-          bundle install --jobs 4 --retry 3
-
-      - name: Setup code signing
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_TOKEN }}
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
-        run: bundle exec fastlane match appstore --readonly
-
-      - name: Build and upload to TestFlight
-        env:
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
-        run: bundle exec fastlane beta
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: ios-ipa
-          path: "*.ipa"
-          retention-days: 14
-
-  build-release:
-    name: Build & App Store
-    needs: test
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install Fastlane
-        run: bundle install --jobs 4 --retry 3
-      - name: Build and upload to App Store
-        env:
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
-          MATCH_GIT_BASIC_AUTHORIZATION: ${{ secrets.MATCH_GIT_TOKEN }}
-          APP_STORE_CONNECT_API_KEY_ID: ${{ secrets.ASC_KEY_ID }}
-          APP_STORE_CONNECT_API_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
-          APP_STORE_CONNECT_API_KEY_CONTENT: ${{ secrets.ASC_KEY_CONTENT }}
-        run: bundle exec fastlane release
-```
+**App Store job** (runs on tag `v*.*.*`):
+- Same signing setup as TestFlight
+- Build and upload via `fastlane release`
 
 ============================================================
-PHASE 3: GITHUB ACTIONS — ANDROID PIPELINE
+PHASE 3 — ANDROID PIPELINE
 ============================================================
 
-Generate .github/workflows/android.yml:
+Generate `.github/workflows/android.yml`:
 
-```yaml
-name: Android Build & Deploy
+**Triggers**: Same as iOS. Concurrency groups.
 
-on:
-  push:
-    branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
+**Test job** (runs on `ubuntu-latest`):
+- Java 17 setup with Gradle cache
+- Framework-specific setup (Flutter, React Native, or native)
+- Static analysis (flutter analyze, `./gradlew lint`)
+- Unit tests with coverage
 
-concurrency:
-  group: android-${{ github.ref }}
-  cancel-in-progress: true
+**Internal Track job** (runs on push to `develop`):
+- Decode keystore from base64 secret
+- Required secrets: `KEYSTORE_BASE64`, `KEYSTORE_PASSWORD`, `KEY_ALIAS`, `KEY_PASSWORD`, `PLAY_STORE_JSON_KEY`
+- Build AAB (never APK for Play Store)
+- Upload to internal testing track via Fastlane supply
+- Upload AAB as artifact (14-day retention)
+- Upload mapping files for ProGuard deobfuscation
 
-jobs:
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      # Flutter:
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.x'
-          channel: stable
-          cache: true
-      - run: flutter pub get
-      - run: flutter analyze
-      - run: flutter test --coverage
-
-      # Native Android:
-      # - uses: actions/setup-java@v4
-      #   with:
-      #     distribution: temurin
-      #     java-version: 17
-      #     cache: gradle
-      # - run: ./gradlew test
-
-  build-internal:
-    name: Build & Internal Track
-    needs: test
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: gradle
-
-      - name: Decode keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > upload-keystore.jks
-
-      - name: Build AAB
-        env:
-          KEYSTORE_PATH: upload-keystore.jks
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-        run: bundle exec fastlane internal
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-aab
-          path: "**/*.aab"
-          retention-days: 14
-
-  build-release:
-    name: Build & Production
-    needs: test
-    if: startsWith(github.ref, 'refs/tags/v')
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
-          cache: gradle
-      - name: Decode keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > upload-keystore.jks
-      - name: Build and publish to production
-        env:
-          KEYSTORE_PATH: upload-keystore.jks
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-          PLAY_STORE_JSON_KEY: ${{ secrets.PLAY_STORE_JSON_KEY }}
-        run: bundle exec fastlane release
-```
+**Production job** (runs on tag `v*.*.*`):
+- Same signing setup
+- Upload to production with staged rollout (start at 10%)
 
 ============================================================
-PHASE 4: BUILD NUMBER MANAGEMENT
+PHASE 4 — BUILD NUMBER MANAGEMENT
 ============================================================
 
-Generate a build number strategy:
+Configure a build number strategy that guarantees monotonically increasing values:
 
-OPTION A — Git-based (recommended for CI):
-```bash
-# Use total git commit count as build number
-BUILD_NUMBER=$(git rev-list --count HEAD)
-```
+**Recommended**: CI run number (`${{ github.run_number }}`) — simple and monotonic.
 
-OPTION B — CI run number:
-```yaml
-# GitHub Actions
-env:
-  BUILD_NUMBER: ${{ github.run_number }}
-```
+**Alternative A**: Git commit count (`git rev-list --count HEAD`) — tied to commit history.
 
-OPTION C — Timestamp-based:
-```bash
-BUILD_NUMBER=$(date +%Y%m%d%H%M)
-```
+**Alternative B**: Timestamp (`date +%Y%m%d%H%M`) — works for infrequent builds.
 
-Configure build number injection:
+Inject build number per framework:
 - Flutter: `flutter build --build-number=$BUILD_NUMBER`
 - iOS Native: Fastlane `increment_build_number(build_number: ENV["BUILD_NUMBER"])`
-- Android Native: Set versionCode in gradle from environment variable.
-
-Ensure build numbers are monotonically increasing (required by both stores).
+- Android Native: Set `versionCode` from environment variable in gradle
 
 ============================================================
-PHASE 5: CODE SIGNING IN CI
+PHASE 5 — CODE SIGNING IN CI
 ============================================================
 
-IOS SIGNING:
-- Fastlane match with git-based certificate storage (encrypted).
-- Secrets needed: MATCH_PASSWORD, MATCH_GIT_TOKEN.
-- App Store Connect API key stored as secret: ASC_KEY_ID, ASC_ISSUER_ID, ASC_KEY_CONTENT.
-- Temporary keychain created and destroyed in CI (match handles this).
+**iOS Signing**:
+- Fastlane match with git-based encrypted certificate storage
+- App Store Connect API key (preferred over password auth in CI)
+- Temporary keychain created and destroyed per job (match handles this)
 
-ANDROID SIGNING:
-- Keystore stored as base64-encoded secret: KEYSTORE_BASE64.
-- Key credentials as secrets: KEYSTORE_PASSWORD, KEY_ALIAS, KEY_PASSWORD.
-- Play Store service account JSON as secret: PLAY_STORE_JSON_KEY.
-- Decode keystore from secret before build, delete after.
+**Android Signing**:
+- Keystore stored as base64-encoded GitHub secret
+- Decoded to file before build, deleted after
+- Play Store service account JSON key as secret
 
-Generate a secrets documentation template listing all required secrets and how to obtain them.
+Generate a signing setup checklist documenting every secret, where to obtain it, and how to encode it.
 
 ============================================================
-PHASE 6: AUTOMATED TESTING IN CI
+PHASE 6 — AUTOMATED TESTING
 ============================================================
 
-Configure test jobs:
+Configure comprehensive test jobs:
 
-UNIT TESTS:
-- Flutter: `flutter test --coverage`
-- iOS: `xcodebuild test` or `fastlane test`
-- Android: `./gradlew test` or `fastlane test`
+**Unit tests**: Flutter `flutter test --coverage`, iOS `xcodebuild test`, Android `./gradlew test`
 
-STATIC ANALYSIS:
-- Flutter: `flutter analyze`
-- iOS: SwiftLint via build phase or separate step.
-- Android: `./gradlew lint`
+**Static analysis**: Flutter `flutter analyze`, iOS SwiftLint, Android `./gradlew lint`
 
-COVERAGE REPORTING:
-- Upload coverage to Codecov or Coveralls.
-- Set minimum coverage thresholds (fail build if coverage drops).
+**Coverage**: Upload to Codecov or Coveralls. Set minimum coverage thresholds.
 
-OPTIONAL — UI TESTS IN CI:
-- iOS: Simulator-based tests on macOS runner.
-- Android: Firebase Test Lab integration via Fastlane.
-- Flutter: `flutter test integration_test/` on simulator/emulator.
+**Optional UI tests**:
+- iOS: Simulator-based tests on macOS runner
+- Android: Firebase Test Lab integration via Fastlane
+- Flutter: `flutter test integration_test/` on simulator/emulator
 
 ============================================================
-PHASE 7: ARTIFACT MANAGEMENT
+PHASE 7 — ARTIFACT MANAGEMENT
 ============================================================
 
 Configure artifact retention:
-- IPA / AAB files: 14-day retention for PR builds, 90-day for releases.
-- Test results: Always uploaded as artifacts.
-- Coverage reports: Uploaded to coverage service.
-- dSYM files: Archived for crash symbolication.
-- Mapping files: Archived for ProGuard deobfuscation.
+- IPA / AAB files: 14-day retention for PR builds, 90-day for releases
+- Test results: always uploaded as artifacts
+- Coverage reports: uploaded to coverage service
+- dSYM files: archived for crash symbolication
+- Mapping files: archived for ProGuard deobfuscation
 
 ============================================================
 OUTPUT
 ============================================================
 
+```
 ## Mobile CI/CD Pipeline Complete
 
 ### Platform: {GitHub Actions / Bitrise / Codemagic}
@@ -339,7 +171,7 @@ OUTPUT
 ### Pipeline Overview
 | Trigger | iOS Action | Android Action |
 |---------|------------|----------------|
-| PR to develop | Test + analyze | Test + lint |
+| PR | Test + analyze | Test + lint |
 | Push to develop | Test + TestFlight | Test + Internal Track |
 | Tag v*.*.* | Test + App Store | Test + Production (10%) |
 
@@ -351,26 +183,34 @@ OUTPUT
 | ASC_KEY_ID | iOS | App Store Connect > Keys |
 | ASC_ISSUER_ID | iOS | App Store Connect > Keys |
 | ASC_KEY_CONTENT | iOS | .p8 file contents |
-| KEYSTORE_BASE64 | Android | base64 encode of .jks |
+| KEYSTORE_BASE64 | Android | base64 -w0 upload-keystore.jks |
 | KEYSTORE_PASSWORD | Android | Chosen during keytool |
 | KEY_ALIAS | Android | Chosen during keytool |
 | KEY_PASSWORD | Android | Chosen during keytool |
-| PLAY_STORE_JSON_KEY | Android | GCP service account |
+| PLAY_STORE_JSON_KEY | Android | GCP service account JSON |
 
 ### Files Created
 {list all generated workflow and configuration files}
+```
 
-DO NOT:
-- Store signing keys, keystores, or API keys in the repository.
-- Use self-hosted runners for code signing — secrets on shared runners are isolated per job.
-- Skip test jobs — builds without tests provide false confidence.
-- Build APK instead of AAB for Play Store uploads.
-- Use password-based App Store Connect auth — API keys are more reliable in CI.
-- Hardcode build numbers — they must be dynamic and monotonically increasing.
-- Skip artifact upload — build outputs are needed for debugging and compliance.
+============================================================
+NEXT STEPS
+============================================================
 
-NEXT STEPS:
-- "Configure the required secrets in your repository settings."
-- "Run `/app-store-publish` to set up Fastlane lanes if not already done."
-- "Run `/play-store-publish` to configure Play Store Fastlane lanes."
-- "Run `/mobile-test` to ensure test coverage before enabling CI test gates."
+1. Configure the required secrets in your GitHub repository settings
+2. Run `deploy/play-store-publish` to set up Fastlane lanes for Play Store
+3. Run `deploy/app-store-publish` to set up Fastlane lanes for App Store
+4. Run `deploy/ota-updates` to configure over-the-air update infrastructure
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT store signing keys, keystores, or API keys in the repository
+- Do NOT use self-hosted runners for code signing without proper secret isolation
+- Do NOT skip test jobs — builds without tests provide false confidence
+- Do NOT build APK instead of AAB for Play Store uploads
+- Do NOT use password-based App Store Connect auth — API keys are more reliable in CI
+- Do NOT hardcode build numbers — they must be dynamic and monotonically increasing
+- Do NOT skip artifact upload — build outputs are needed for debugging and compliance
+- Do NOT use deprecated action versions — pin to latest major versions

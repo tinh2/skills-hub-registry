@@ -1,6 +1,6 @@
 ---
 name: staff-scheduling
-description: Analyzes workforce scheduling systems for labor demand forecasting, shift optimization, skill-based routing, FLSA and union compliance, overtime management, and employee preference balancing across hospitality, healthcare, retail, and service industries.
+description: Audit workforce scheduling systems for labor optimization and compliance. Use when you need to evaluate labor demand forecasting accuracy, shift generation and optimization algorithms, skill-based staff routing, FLSA overtime compliance, predictive scheduling law compliance (OR, NYC, Chicago, Seattle), union CBA shift bidding rules, real-time schedule adjustments (call-outs, flex staffing, VTO), cross-training ROI, or labor cost as percentage of revenue. Covers UKG/Kronos, ADP, Workday, Deputy, HotSchedules, and custom WFM platforms across hospitality, healthcare, retail, and service industries.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -14,8 +14,10 @@ rules, and workforce management configurations, then produce a comprehensive sch
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., "overtime compliance", "shift optimization",
-"forecast accuracy", specific department or location). If no arguments, perform a full scheduling audit.
+If arguments are provided, focus on that area (e.g., "overtime root cause analysis",
+"predictive scheduling law compliance", "demand forecast MAPE by department", "shift swap
+approval workflow", "agency temp cost vs overtime", "union seniority bidding rules",
+specific department or location). If no arguments, perform a full scheduling audit.
 
 ============================================================
 PHASE 1: WORKFORCE MANAGEMENT DISCOVERY

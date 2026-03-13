@@ -1,6 +1,22 @@
 ---
 name: actuarial-modeling
-description: Analyzes actuarial modeling systems for loss reserving accuracy, premium pricing methodology, mortality and morbidity tables, stochastic modeling, and capital adequacy per SOA and Solvency II standards.
+description: >
+  Analyzes actuarial modeling systems for loss reserving accuracy, premium pricing methodology,
+  mortality/morbidity tables, stochastic modeling, and capital adequacy per SOA and Solvency II standards.
+
+  USE THIS SKILL WHEN:
+  - You need to review or audit actuarial models (reserving, pricing, capital)
+  - Someone asks about loss triangle analysis or reserve adequacy
+  - You are evaluating IBNR calculations, chain ladder methods, or Bornhuetter-Ferguson
+  - A project involves insurance pricing, GLM rating models, or ratemaking
+  - You need to assess Solvency II SCR calculations or RBC compliance
+  - Someone mentions actuarial opinions, ASOP compliance, or SOA standards
+  - You are reviewing stochastic models, ESG configurations, or DFA frameworks
+  - A codebase uses actuarial libraries (chainladder, lifetables, ChainLadder R package)
+
+  TRIGGER PHRASES: "actuarial", "loss reserving", "IBNR", "chain ladder", "premium pricing",
+  "mortality table", "Solvency II", "capital adequacy", "ratemaking", "GLM pricing",
+  "risk-based capital", "reserve analysis", "actuarial opinion"
 version: "1.0.0"
 category: analysis
 platforms:
@@ -20,7 +36,7 @@ PHASE 1: ACTUARIAL SYSTEM DISCOVERY
 
 Step 1.1 -- Technology Stack Detection
 
-Identify actuarial platforms:
+Identify actuarial platforms by scanning for these markers:
 - `*.sas` / SAS configs -> SAS-based actuarial models (reserving, pricing)
 - `requirements.txt` with chainladder, lifetables -> Python actuarial libraries
 - `*.r` / `*.R` with ChainLadder, actuar -> R actuarial packages
@@ -32,14 +48,11 @@ Identify actuarial platforms:
 
 Step 1.2 -- Model Inventory
 
-Catalog actuarial models:
-- Loss reserving models (aggregate, individual claim-level)
-- Pricing/ratemaking models (GLM, classification, territory)
-- Life/health valuation models (term, whole, universal, annuity, health)
-- Capital models (internal model, standard formula, DFA)
-- Catastrophe models (integration points with CAT modeling)
-- Reinsurance optimization models
-- Model risk classification (materiality, complexity, frequency of use)
+Catalog every actuarial model found. For each model, record:
+- Model type (loss reserving, pricing, life valuation, capital, catastrophe, reinsurance)
+- Risk classification (materiality: high/medium/low, complexity, frequency of use)
+- Owner and last review date (from comments, git history, or documentation)
+- Input data sources and output consumers
 
 Step 1.3 -- Data Infrastructure
 
@@ -57,35 +70,37 @@ PHASE 2: LOSS RESERVING ANALYSIS
 
 Step 2.1 -- Reserving Methodology
 
-Evaluate reserving methods implemented:
-- Chain Ladder (paid and incurred development)
-- Bornhuetter-Ferguson (expected loss ratio method)
-- Cape Cod (Stanard-Buhlmann)
-- Generalized linear models for development patterns
-- Individual claim-level reserving (case reserves + IBNR)
-- Frequency-severity methods
-- Berquist-Sherman adjustments for changing conditions
+For each reserving model, determine the method and assess appropriateness:
+- Chain Ladder (paid and incurred development) -- check for stability of development factors
+- Bornhuetter-Ferguson (expected loss ratio method) -- check ELR source and reasonableness
+- Cape Cod (Stanard-Buhlmann) -- verify weighting methodology
+- Generalized linear models for development patterns -- check model fit
+- Individual claim-level reserving (case reserves + IBNR) -- verify completeness
+- Frequency-severity methods -- check independence assumption
+- Berquist-Sherman adjustments -- verify adjustment rationale
+
+Decision criteria: Flag any model using a single method without cross-validation against alternatives.
 
 Step 2.2 -- Triangle Analysis
 
-Assess loss development data:
-- Triangle construction: accident year/quarter, development period, evaluation date
-- Data segmentation: line of business, coverage, claim type, state
-- Development factor selection: volume-weighted, simple average, medial, optimal
-- Tail factor selection methodology and documentation
-- Diagonal effects and calendar year trends
-- Outlier identification and treatment
+Assess loss development data quality:
+- Triangle construction: verify accident year/quarter, development period, evaluation date alignment
+- Data segmentation: confirm line of business, coverage, claim type, state splits are appropriate
+- Development factor selection: compare volume-weighted, simple average, medial, optimal selections
+- Tail factor selection: verify methodology is documented and reasonable
+- Diagonal effects: check for calendar year trends that distort development
+- Outlier identification: confirm treatment is documented and consistent
 
 Step 2.3 -- Reserve Adequacy
 
-Evaluate reserve quality:
-- Actual vs. expected analysis (reserve runoff testing)
-- Reserve range estimation (point estimate, low, high, percentile)
-- Discount rate application and methodology
-- Salvage and subrogation offsets
-- ULAE/ALAE reserve calculations
-- Actuarial opinion documentation (NAIC Statement of Actuarial Opinion)
-- ASOP compliance (ASOP 36, 43 for P&C; ASOP 25 for health)
+Evaluate reserve quality against these benchmarks:
+- Actual vs. expected analysis (reserve runoff testing) -- flag if AVE ratio deviates > 5% for 2+ years
+- Reserve range estimation -- verify point estimate, low, high, and percentile ranges exist
+- Discount rate application -- confirm methodology matches regulatory requirements
+- Salvage and subrogation offsets -- verify they are not double-counted
+- ULAE/ALAE reserve calculations -- check allocation methodology
+- Actuarial opinion documentation -- verify NAIC Statement of Actuarial Opinion compliance
+- ASOP compliance -- check ASOP 36, 43 (P&C) and ASOP 25 (health)
 
 ============================================================
 PHASE 3: PREMIUM PRICING METHODOLOGY
@@ -93,64 +108,66 @@ PHASE 3: PREMIUM PRICING METHODOLOGY
 
 Step 3.1 -- Ratemaking Process
 
-Evaluate pricing methodology:
-- Pure premium vs. loss ratio approach
-- Loss trend analysis (frequency trends, severity trends, mix shifts)
-- Loss development to ultimate
-- Expense loading (fixed, variable, profit and contingency)
-- Credibility weighting (classical, Buhlmann, Buhlmann-Straub)
-- Rate level history and on-level adjustments
-- Indicated rate change calculation
+Evaluate the pricing pipeline end to end:
+- Pure premium vs. loss ratio approach -- confirm appropriate for the data volume
+- Loss trend analysis -- verify frequency, severity, and mix shift trends are separated
+- Loss development to ultimate -- confirm consistency with reserving ultimates
+- Expense loading -- verify fixed, variable, profit, and contingency loads
+- Credibility weighting -- check method (classical, Buhlmann, Buhlmann-Straub) and minimum thresholds
+- Rate level history -- verify on-level adjustments are complete and accurate
+- Indicated rate change -- confirm calculation ties to exhibits
 
 Step 3.2 -- GLM Rating Models
 
-If GLMs are used for pricing, assess:
-- Distribution selection (Tweedie, Poisson-Gamma, Logistic)
-- Link function appropriateness
-- Variable selection and interaction terms
-- Model fit statistics (deviance, AIC, BIC, residual analysis)
-- Relativities stability and reasonableness
-- Cross-validation and out-of-sample testing
-- Comparison to one-way and two-way factor analysis
+If GLMs are used for pricing, assess each model for:
+- Distribution selection appropriateness (Tweedie, Poisson-Gamma, Logistic)
+- Link function selection with justification
+- Variable selection -- check for multicollinearity and interaction terms
+- Model fit statistics (deviance, AIC, BIC, residual analysis) -- flag poor fits
+- Relativities stability -- compare across model iterations
+- Cross-validation -- confirm out-of-sample testing is performed
+- Comparison to one-way and two-way factor analysis for reasonableness
 
 Step 3.3 -- Rate Filing Support
 
-Evaluate regulatory compliance:
+Evaluate regulatory compliance readiness:
 - Rate indication documentation per state requirements
 - Support for "not excessive, inadequate, or unfairly discriminatory" standard
 - Filing exhibit preparation (loss data, trend, development, expense)
 - Competitive analysis and market impact assessment
-- Implementation and transition planning (rate capping, grandfathering)
+- Implementation planning (rate capping, grandfathering, transition rules)
 
 ============================================================
 PHASE 4: LIFE AND HEALTH ACTUARIAL MODELS
 ============================================================
 
+Skip this phase if no life/health models are found. Otherwise:
+
 Step 4.1 -- Mortality and Morbidity Tables
 
-If life/health models exist, evaluate:
-- Table sources: SOA mortality tables (2017 CSO, VBT, ILEC), company experience
-- Experience study methodology (exposure calculation, graduation, credibility)
-- Mortality improvement assumptions (Scale MP, custom improvement)
-- Morbidity assumptions by condition and duration
-- Lapse and persistency assumptions
-- Table selection vs. ultimate assumptions
+Evaluate table usage:
+- Table sources: verify SOA tables (2017 CSO, VBT, ILEC) or company experience are current
+- Experience study methodology: check exposure calculation, graduation, credibility
+- Mortality improvement assumptions: verify Scale MP or custom improvement is applied
+- Morbidity assumptions: check by condition and duration
+- Lapse and persistency: verify assumptions match recent experience
+- Selection vs. ultimate: confirm appropriate period is used
 
 Step 4.2 -- Valuation Models
 
-Assess life/health valuation:
-- Reserve methodology: GAAP (ASC 944), Statutory (VM-20, AG43), IFRS 17
-- Cash flow projection models (deterministic and stochastic)
-- Net premium reserve calculations
-- Deferred acquisition cost (DAC) modeling
-- Principle-Based Reserving (PBR) implementation for life
-- Asset adequacy analysis (cash flow testing)
+Assess reserve methodology against applicable standards:
+- GAAP (ASC 944), Statutory (VM-20, AG43), IFRS 17 -- confirm correct standard is applied
+- Cash flow projections -- verify both deterministic and stochastic runs exist
+- Net premium reserve calculations -- check for accuracy
+- DAC modeling -- verify amortization methodology
+- PBR implementation -- confirm exclusion test and stochastic reserve calculations
+- Asset adequacy analysis -- verify cash flow testing scenarios
 
 Step 4.3 -- Product Pricing
 
 Evaluate product pricing models:
 - Profit testing methodology (profit margin, IRR, embedded value)
-- Assumption setting and sensitivity analysis
+- Assumption sensitivity analysis -- confirm key assumptions are stress-tested
 - Product design optimization (benefit structure, rider pricing)
 - Reinsurance pricing and treaty optimization
 - Competitive positioning analysis
@@ -161,33 +178,33 @@ PHASE 5: STOCHASTIC MODELING AND CAPITAL ADEQUACY
 
 Step 5.1 -- Stochastic Framework
 
-Evaluate stochastic capabilities:
-- Economic Scenario Generator (ESG): interest rate models (CIR, Hull-White, Black-Karasinski)
-- Monte Carlo simulation engine (number of scenarios, convergence testing)
-- Correlation structure between risk factors
-- Random number generation (seed management, quasi-random sequences)
-- Scenario reduction and representative scenario selection
-- Runtime performance and parallelization
+Evaluate stochastic modeling infrastructure:
+- ESG: identify interest rate model (CIR, Hull-White, Black-Karasinski) and calibration
+- Monte Carlo engine: check scenario count (minimum 1,000 for screening, 10,000+ for production)
+- Convergence testing: verify results stabilize with increasing scenario count
+- Correlation structure: confirm risk factor correlations are justified
+- Random number generation: check seed management and quasi-random sequence usage
+- Runtime performance: assess parallelization and bottlenecks
 
 Step 5.2 -- Capital Modeling
 
 Assess capital adequacy models:
-- Risk categories: insurance risk, market risk, credit risk, operational risk
-- Capital metric: VaR, TVaR/CTE, economic capital, regulatory capital
-- Confidence level and time horizon selection
-- Diversification benefit calculation and correlation assumptions
-- Stress testing and reverse stress testing
-- Dynamic Financial Analysis (DFA) framework
+- Risk categories covered: insurance risk, market risk, credit risk, operational risk
+- Capital metric: VaR, TVaR/CTE, economic capital, regulatory capital -- confirm appropriate metric
+- Confidence level and time horizon: verify alignment with regulatory requirements
+- Diversification benefit: check correlation assumptions and methodology
+- Stress testing: confirm both prescribed and reverse stress tests exist
+- DFA framework: verify Dynamic Financial Analysis integration if present
 
 Step 5.3 -- Regulatory Capital Compliance
 
-Evaluate compliance with capital standards:
-- Solvency II (SCR calculation, internal model approval, ORSA)
-- NAIC Risk-Based Capital (RBC) formula
-- IFRS 17 risk adjustment methodology
-- OSFI (Canadian) capital requirements if applicable
-- Own Risk and Solvency Assessment (ORSA) documentation
-- Capital allocation by business unit or product line
+Evaluate compliance with applicable capital standards:
+- Solvency II: SCR calculation, internal model approval status, ORSA documentation
+- NAIC RBC: verify formula components and action level calculations
+- IFRS 17: risk adjustment methodology and confidence level
+- OSFI (Canadian): capital requirements if applicable
+- ORSA: verify Own Risk and Solvency Assessment is current and comprehensive
+- Capital allocation: confirm allocation methodology by business unit or product line
 
 ============================================================
 PHASE 6: MODEL GOVERNANCE AND CONTROLS
@@ -195,23 +212,23 @@ PHASE 6: MODEL GOVERNANCE AND CONTROLS
 
 Step 6.1 -- Model Risk Management
 
-Assess actuarial model governance:
-- Model inventory with risk classification
-- Model development standards and documentation
-- Independent peer review or validation
-- Change control and version management
-- Assumption setting governance and sign-off
-- Model limitation documentation
+Assess governance against regulatory expectations (SR 11-7 / SS3/18):
+- Model inventory with risk classification -- flag any models not in the inventory
+- Development standards and documentation -- check for completeness
+- Independent peer review or validation -- verify independence and qualifications
+- Change control and version management -- check for audit trail
+- Assumption setting governance and sign-off -- verify approval chain
+- Model limitation documentation -- confirm limitations are disclosed to users
 
 Step 6.2 -- Actuarial Controls
 
-Evaluate control framework:
-- Data reconciliation procedures (source to model)
-- Reasonableness checks on outputs
-- Back-testing and validation testing
-- Audit trail for assumption changes
-- SOX controls for financial reporting models
-- Actuarial certification and opinion sign-off process
+Evaluate the control framework:
+- Data reconciliation: source-to-model tie-out procedures
+- Reasonableness checks: automated bounds checking on outputs
+- Back-testing: historical validation results and trending
+- Audit trail: assumption change logging with justification
+- SOX controls: financial reporting model controls documented and tested
+- Certification process: actuarial opinion sign-off workflow and timeline
 
 ============================================================
 PHASE 7: WRITE REPORT
@@ -219,10 +236,16 @@ PHASE 7: WRITE REPORT
 
 Write analysis to `docs/actuarial-modeling-analysis.md` (create `docs/` if needed).
 
-Include: Executive Summary, Model Inventory, Loss Reserving Assessment, Pricing
-Methodology Review, Life/Health Model Evaluation (if applicable), Stochastic Modeling
-Capabilities, Capital Adequacy Assessment, Model Governance Review, Prioritized
-Recommendations with actuarial standards references.
+Structure the report as:
+1. **Executive Summary** -- 3-5 bullet points of critical findings
+2. **Model Inventory** -- table of all models with risk classification
+3. **Loss Reserving Assessment** -- methodology evaluation and adequacy findings
+4. **Pricing Methodology Review** -- ratemaking and GLM assessment
+5. **Life/Health Model Evaluation** (if applicable)
+6. **Stochastic Modeling Capabilities** -- ESG and Monte Carlo assessment
+7. **Capital Adequacy Assessment** -- regulatory compliance status
+8. **Model Governance Review** -- control gaps and recommendations
+9. **Prioritized Recommendations** -- with actuarial standards references (ASOP, SOA, Solvency II)
 
 ============================================================
 OUTPUT

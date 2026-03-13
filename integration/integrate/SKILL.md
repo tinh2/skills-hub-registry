@@ -1,6 +1,6 @@
 ---
 name: integrate
-description: Master integration orchestrator that audits existing integrations, routes to sub-skills, and produces an integration health score for production readiness.
+description: "Audit my project's third-party integrations or set up multiple at once — scans for payments, auth, email, push, analytics, storage, search, and realtime, calculates a production-readiness health score, identifies gaps, and chains sub-skills to fill them"
 version: "1.0.0"
 category: integration
 platforms:

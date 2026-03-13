@@ -1,6 +1,6 @@
 ---
 name: survey-analysis
-description: Analyzes survey data systems for response bias detection, statistical significance testing, sentiment extraction, conjoint analysis implementation, MaxDiff scoring, and survey design evaluation using Qualtrics and SurveyMonkey integration patterns.
+description: Evaluate survey data pipelines and research methodology. Analyzes response bias detection (speeders, straight-liners, bots), statistical significance testing (t-test, chi-square, ANOVA with Bonferroni correction), sentiment and theme extraction from open-ended responses, conjoint analysis (CBC/ACA with Hierarchical Bayes estimation), MaxDiff best-worst scaling, survey design quality, weighting methodology, and cross-tabulation reporting for platforms like Qualtrics and SurveyMonkey.
 version: "1.0.0"
 category: analysis
 platforms:

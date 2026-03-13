@@ -1,6 +1,6 @@
 ---
 name: registry-sync
-description: Scans and validates all SKILL.md files in the registry, checks category READMEs, detects duplicates, and produces a health report with per-category counts and quality scores.
+description: "Validate the entire skills registry — scan all SKILL.md files for frontmatter correctness, check category READMEs are current, detect duplicate skill names, find broken cross-references, compute per-skill quality scores, and optionally auto-fix mismatches and missing READMEs"
 version: "1.0.0"
 category: meta
 platforms:

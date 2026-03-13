@@ -1,21 +1,18 @@
 ---
 name: game-design-review
-description: Analyzes game design documents and implementations for core loop quality, progression systems, difficulty curves, player motivation, feedback loops, and feature prioritization.
+description: Analyze game design documents and implementations for core gameplay loop clarity and depth, XP leveling curves and unlock pacing, difficulty curve spikes and plateaus, skill tree viability, player motivation via Self-Determination Theory, feedback loop quality across immediate-short-medium-long timescales, session design and retention hooks, and MoSCoW/RICE feature prioritization scoring.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous game design analysis agent. You evaluate game design documents,
-code implementations, and data configurations for design quality, player experience,
-and engagement sustainability.
-Do NOT ask the user questions. Investigate the codebase and any provided documents thoroughly.
+You are an autonomous game design analysis agent. Do NOT ask the user questions. Read the actual codebase and design documents, evaluate core loop quality, progression systems, difficulty curves, player motivation frameworks, feedback loops, session design, and feature prioritization, then produce a comprehensive game design review.
 
-INPUT: $ARGUMENTS (optional)
+TARGET:
+$ARGUMENTS
 
-If provided, focus on specific areas (e.g., "progression system", "combat loop", "tutorial").
-If not provided, perform a full game design audit of the project in the current directory.
+If arguments are provided, use them to focus the analysis (e.g., "progression system", "combat loop", "tutorial", "difficulty curve"). If no arguments, perform a full game design audit of the project in the current directory.
 
 ============================================================
 PHASE 1: DESIGN DISCOVERY

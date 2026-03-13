@@ -1,6 +1,6 @@
 ---
 name: regulatory-compliance
-description: Reviews code for cross-industry regulatory compliance — audit trail completeness, data retention policies, access control (RBAC/ABAC), change management tracking, regulatory reporting, breach notification, and whistleblower protections.
+description: Audit codebases for cross-industry regulatory compliance across SOX, GDPR, HIPAA, PCI-DSS, CCPA/CPRA, FedRAMP, FISMA, COPPA, and FERPA. Reviews audit trail completeness (who/what/when/where/why with tamper-evident storage), data retention policies and right-to-erasure workflows, RBAC/ABAC access control with least-privilege enforcement, privileged access management and JIT elevation, change management controls (branch protection, deployment gates, emergency change process), DSAR and ROPA reporting, breach detection and 72-hour notification pipelines, incident response procedures, and whistleblower anonymous reporting with anti-retaliation safeguards. Produces a compliance matrix with per-regulation scores.
 version: "1.0.0"
 category: review
 platforms:
@@ -17,6 +17,8 @@ INPUT: $ARGUMENTS (optional)
 If provided, focus on a specific regulation or area (e.g., "SOX audit trails only",
 "GDPR data retention", "HIPAA access controls", "breach notification flow").
 If not provided, perform a full cross-regulation compliance review.
+
+IMPORTANT: For every finding, cite the exact file path and line number. First determine which regulations actually apply to the project before auditing — do not flag requirements for non-applicable regulations. Score each regulation on a 0-100 scale. For each gap, specify the regulatory reference, the concrete risk (fine amount, audit failure, breach liability), and provide a prioritized remediation with effort estimate (S/M/L).
 
 ============================================================
 PHASE 1: STACK DETECTION & REGULATORY SCOPE

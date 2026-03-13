@@ -1,80 +1,74 @@
 ---
 name: data-pipeline
-description: Data-heavy app setup chain — scaffolds an API, generates integration tests, then load tests for scalability.
+description: "Build a production-ready data API from scratch: scaffold REST endpoints with models and validation, generate integration tests that verify every route, then load test for scalability. Use when you need an API backend, data service, CRUD layer, or microservice with verified correctness and performance."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous data pipeline setup agent. Do NOT ask the user questions.
-
-This skill chains three skills in sequence:
-1. `/api-scaffold` — scaffold the API layer with routes, controllers, and models
-2. `/integration-test` — generate integration tests to verify the API works end-to-end
-3. `/load-test` — run load tests to verify the API scales under pressure
+You are an autonomous data pipeline setup agent. Do NOT ask the user questions. Execute all three phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the API description, data model, or feature requirements.
+Pass the API description, data model, feature requirements, or target stack (e.g., "Express + PostgreSQL user management API").
 
 ============================================================
-PHASE 1: API SCAFFOLD  (/api-scaffold)
+PHASE 1: API SCAFFOLD (/api-scaffold)
 ============================================================
 
 Follow the instructions defined in the `/api-scaffold` skill exactly.
 
-Scaffold the full API:
-- Routes and controllers for each resource
-- Data models and database schema
-- Validation middleware
-- Error handling and response formatting
-- Database connection and query layer
+Scaffold the complete API layer:
+- Routes and controllers for each resource with RESTful naming
+- Data models with typed fields, relationships, and database schema/migrations
+- Request validation middleware (required fields, types, constraints)
+- Consistent error handling with proper HTTP status codes and error response format
+- Database connection pool, query layer, and transaction support
+- Environment-based configuration (dev/test/prod)
 
-Commit all scaffolded code. Record the endpoints created and their
-expected request/response shapes for Phase 2.
+Commit all scaffolded code. Capture the following for Phase 2:
+- Every endpoint path, HTTP method, and expected request/response shape
+- Model names, fields, and relationships
+- Authentication/authorization requirements (if any)
 
-If scaffolding fails (unsupported stack, missing dependencies), STOP and report.
+STOP CONDITION: If scaffolding fails due to unsupported stack or missing dependencies, STOP and report what is needed.
 
 ============================================================
-PHASE 2: INTEGRATION TESTS  (/integration-test)
+PHASE 2: INTEGRATION TESTS (/integration-test)
 ============================================================
 
 Follow the instructions defined in the `/integration-test` skill exactly.
 
-Generate integration tests that verify the API from Phase 1:
-- Happy path for every endpoint scaffolded
-- Error cases (400, 401, 404, 422 responses)
-- Data persistence (create then read back)
-- Relationship integrity (foreign keys, cascades)
-- Edge cases (empty payloads, max lengths, special characters)
+Generate integration tests targeting the actual API surface from Phase 1 — not generic templates:
+- Happy path for every endpoint scaffolded in Phase 1
+- Error responses: 400 (bad input), 401 (unauthorized), 404 (not found), 422 (validation failure)
+- Data persistence round-trips: create a resource, then read it back and verify all fields
+- Relationship integrity: foreign key constraints, cascade deletes, orphan prevention
+- Edge cases: empty payloads, max-length strings, special characters, duplicate unique fields
+- Boundary conditions: pagination limits, bulk operations, concurrent writes
 
-IMPORTANT: Base the tests on the actual endpoints and models created in
-Phase 1. Do NOT write generic template tests — test the real API surface.
-
-Run the tests. If any fail:
-- Fix the API code (not the tests) if the test expectation is correct.
-- Fix the test if the expectation is wrong.
+Run the tests. On failure:
+- If the test expectation is correct, fix the API code.
+- If the test expectation is wrong, fix the test.
 - Re-run until all pass.
 
 Commit all tests and any API fixes.
 
 ============================================================
-PHASE 3: LOAD TEST  (/load-test)
+PHASE 3: LOAD TEST (/load-test)
 ============================================================
 
 Follow the instructions defined in the `/load-test` skill exactly.
 
-Load test the API to verify it scales:
-- Ramp-up test (10 → 100 → 500 concurrent users)
-- Sustained load test (target throughput for 60 seconds)
-- Spike test (sudden 5x traffic burst)
-- Measure: p50/p95/p99 latency, error rate, throughput
+Load test the API endpoints from Phase 1 with realistic payloads from the data models:
+- Ramp-up test: 10 -> 100 -> 500 concurrent users
+- Sustained load: target throughput for 60 seconds at expected production traffic
+- Spike test: sudden 5x traffic burst to test graceful degradation
+- Measure: p50, p95, p99 latency; error rate; throughput (requests/sec)
 
-IMPORTANT: Target the same endpoints from Phase 1. Use realistic
-payloads based on the data models. Identify bottlenecks.
+Target the same endpoints and use the same data shapes validated in Phase 2. Identify bottlenecks: slow queries, connection pool exhaustion, memory leaks, CPU spikes.
 
-If the load test reveals critical performance issues (p99 > 2s or
-error rate > 5%), document them with recommended optimizations.
+PERFORMANCE GATE: If p99 > 2s or error rate > 5%, document the bottleneck with a specific optimization recommendation (indexing, caching, query rewrite, connection pooling).
 
 ============================================================
 OUTPUT

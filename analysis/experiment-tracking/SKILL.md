@@ -1,6 +1,6 @@
 ---
 name: experiment-tracking
-description: Analyzes experiment tracking and reproducibility infrastructure including version control for experiments, parameter tracking, result logging, and ML experiment management.
+description: Audit ML experiment tracking infrastructure for reproducibility gaps, parameter logging completeness, metric capture, artifact management, and pipeline orchestration. Covers MLflow, Weights and Biases, DVC, Sacred, Neptune, Hydra configs, model registries, and produces a reproducibility scorecard (0-30) with actionable fixes for data science teams.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -20,7 +20,7 @@ PHASE 1: EXPERIMENT INFRASTRUCTURE DISCOVERY
 
 Step 1.1 -- Technology Stack Detection
 
-Identify experiment tracking tools:
+Identify experiment tracking tools in the codebase:
 - `mlflow` / `mlruns/` directory -> MLflow experiment tracking
 - `wandb/` / `.wandb/` -> Weights & Biases integration
 - `dvc.yaml` / `dvc.lock` / `.dvc/` -> DVC (Data Version Control)
@@ -36,19 +36,19 @@ Identify experiment tracking tools:
 Step 1.2 -- Experiment Taxonomy
 
 Map the experiment landscape:
-- Experiment types (training runs, hyperparameter sweeps, ablation studies, A/B tests)
-- Experiment hierarchy (project -> experiment -> run -> step)
+- Experiment types: training runs, hyperparameter sweeps, ablation studies, A/B tests
+- Experiment hierarchy: project -> experiment -> run -> step
 - Naming conventions and organizational structure
 - Tagging and categorization schemes
-- Experiment lifecycle states (draft, running, completed, failed, archived)
+- Experiment lifecycle states: draft, running, completed, failed, archived
 
 Step 1.3 -- Data Version Control
 
-Assess data versioning:
-- Dataset versioning strategy (DVC, Git-LFS, Delta Lake, LakeFS)
+Assess data versioning practices:
+- Dataset versioning strategy: DVC, Git-LFS, Delta Lake, LakeFS
 - Training/validation/test split reproducibility
-- Data lineage tracking (source -> transform -> dataset)
-- Feature store integration (Feast, Tecton, Hopsworks)
+- Data lineage tracking: source -> transform -> dataset
+- Feature store integration: Feast, Tecton, Hopsworks
 - Data schema evolution and backward compatibility
 
 ============================================================
@@ -57,16 +57,16 @@ PHASE 2: PARAMETER MANAGEMENT ANALYSIS
 
 Step 2.1 -- Configuration Architecture
 
-Evaluate parameter management:
-- Configuration format (YAML, JSON, TOML, Python dataclasses, Hydra)
+Evaluate how parameters are managed:
+- Configuration format: YAML, JSON, TOML, Python dataclasses, Hydra
 - Hierarchy: defaults, overrides, command-line, environment variables
 - Type validation and schema enforcement
-- Configuration composition (Hydra multirun, OmegaConf interpolation)
-- Secret management (API keys, credentials separated from config)
+- Configuration composition: Hydra multirun, OmegaConf interpolation
+- Secret management: API keys and credentials separated from config
 
 Step 2.2 -- Hyperparameter Tracking
 
-Assess hyperparameter practices:
+Assess hyperparameter logging completeness:
 - All hyperparameters logged with each experiment run
 - Learning rate schedules, optimizer configs, architecture params captured
 - Random seeds tracked and reproducible
@@ -75,10 +75,10 @@ Assess hyperparameter practices:
 
 Step 2.3 -- Parameter Search
 
-Evaluate search strategies:
-- Search methods (grid, random, Bayesian optimization, Hyperband, BOHB)
-- Search space definition (ranges, distributions, conditional params)
-- Early stopping criteria and pruning (Optuna, Ray Tune)
+Evaluate search strategy implementation:
+- Search methods: grid, random, Bayesian optimization, Hyperband, BOHB
+- Search space definition: ranges, distributions, conditional params
+- Early stopping criteria and pruning: Optuna, Ray Tune
 - Multi-objective optimization support
 - Search history persistence and resumability
 
@@ -88,26 +88,26 @@ PHASE 3: RESULT LOGGING AND METRICS
 
 Step 3.1 -- Metric Logging
 
-Assess metric capture:
-- Training metrics (loss, accuracy, learning rate per step/epoch)
-- Evaluation metrics (precision, recall, F1, AUC, BLEU, ROUGE, custom)
-- System metrics (GPU utilization, memory, throughput, training time)
+Assess metric capture completeness:
+- Training metrics: loss, accuracy, learning rate per step/epoch
+- Evaluation metrics: precision, recall, F1, AUC, BLEU, ROUGE, custom
+- System metrics: GPU utilization, memory, throughput, training time
 - Custom metric definitions and calculation logic
 - Metric logging frequency and granularity
 
 Step 3.2 -- Artifact Management
 
 Evaluate artifact tracking:
-- Model checkpoints (format, frequency, best-model selection)
-- Plots and visualizations (confusion matrices, ROC curves, loss curves)
+- Model checkpoints: format, frequency, best-model selection
+- Plots and visualizations: confusion matrices, ROC curves, loss curves
 - Prediction samples and error analysis artifacts
-- Environment snapshots (pip freeze, conda export, Docker images)
+- Environment snapshots: pip freeze, conda export, Docker images
 - Log files and stdout/stderr capture
 
 Step 3.3 -- Comparison and Visualization
 
 Check comparison capabilities:
-- Run-to-run comparison (metric tables, overlay charts)
+- Run-to-run comparison: metric tables, overlay charts
 - Parallel coordinate plots for hyperparameter visualization
 - Statistical significance testing between runs
 - Leaderboard or best-run tracking
@@ -120,24 +120,24 @@ PHASE 4: REPRODUCIBILITY ASSESSMENT
 Step 4.1 -- Computational Reproducibility
 
 Evaluate reproducibility controls:
-- Random seed management (global, per-operation, deterministic mode)
-- Environment pinning (exact library versions, system dependencies)
-- Containerization (Dockerfile, docker-compose, Singularity for HPC)
-- Hardware specification documentation (GPU model, driver version)
-- Non-deterministic operation handling (CUDA non-determinism, parallel data loading)
+- Random seed management: global, per-operation, deterministic mode
+- Environment pinning: exact library versions, system dependencies
+- Containerization: Dockerfile, docker-compose, Singularity for HPC
+- Hardware specification documentation: GPU model, driver version
+- Non-deterministic operation handling: CUDA non-determinism, parallel data loading
 
 Step 4.2 -- Code-Data-Model Linkage
 
-Check artifact linkage:
+Check artifact linkage integrity:
 - Git commit SHA linked to each experiment run
 - Dataset version/hash linked to each run
 - Model artifact linked back to exact code + data + params
-- End-to-end lineage graph (data -> code -> model -> metrics)
+- End-to-end lineage graph: data -> code -> model -> metrics
 - Ability to recreate any historical run from stored metadata
 
 Step 4.3 -- Reproducibility Scoring
 
-Score reproducibility (0-5 per dimension):
+Score reproducibility on a 0-5 scale per dimension:
 - Code versioning: Is the exact code for each run recoverable?
 - Data versioning: Is the exact dataset for each run recoverable?
 - Environment capture: Can the compute environment be recreated?
@@ -154,7 +154,7 @@ PHASE 5: PIPELINE AND WORKFLOW ANALYSIS
 Step 5.1 -- Pipeline Architecture
 
 Evaluate ML pipeline structure:
-- Pipeline definition (Airflow, Prefect, Kubeflow, Metaflow, custom)
+- Pipeline definition tool: Airflow, Prefect, Kubeflow, Metaflow, custom
 - DAG structure: data prep -> feature engineering -> training -> evaluation -> deployment
 - Pipeline versioning and parameterization
 - Caching and incremental computation
@@ -163,20 +163,20 @@ Evaluate ML pipeline structure:
 Step 5.2 -- Training Orchestration
 
 Assess training infrastructure:
-- Distributed training support (data parallel, model parallel, pipeline parallel)
-- Resource scheduling (GPU allocation, preemption, queueing)
+- Distributed training support: data parallel, model parallel, pipeline parallel
+- Resource scheduling: GPU allocation, preemption, queueing
 - Checkpoint and resume from failure
-- Multi-experiment orchestration (sweeps, ensemble training)
+- Multi-experiment orchestration: sweeps, ensemble training
 - Cost tracking and budget management for cloud compute
 
 Step 5.3 -- Model Registry
 
 Evaluate model lifecycle management:
-- Model registry (MLflow Model Registry, custom, Vertex AI, SageMaker)
-- Model versioning and stage transitions (staging, production, archived)
-- Model metadata (metrics, lineage, owner, description)
+- Model registry: MLflow Model Registry, custom, Vertex AI, SageMaker
+- Model versioning and stage transitions: staging, production, archived
+- Model metadata: metrics, lineage, owner, description
 - Approval workflows for production promotion
-- Model serving integration (batch, real-time, edge)
+- Model serving integration: batch, real-time, edge
 
 ============================================================
 PHASE 6: COLLABORATION AND GOVERNANCE
@@ -187,15 +187,15 @@ Step 6.1 -- Team Collaboration
 Assess collaboration patterns:
 - Shared experiment visibility across team members
 - Experiment annotation and commenting
-- Knowledge capture (experiment conclusions, failed approach documentation)
+- Knowledge capture: experiment conclusions, failed approach documentation
 - Notebook sharing and review workflows
 - Onboarding: can a new team member understand past experiments?
 
 Step 6.2 -- Governance and Compliance
 
-Evaluate governance:
+Evaluate governance controls:
 - Experiment access controls and permissions
-- Audit trail for model decisions (model cards, datasheets)
+- Audit trail for model decisions: model cards, datasheets
 - Bias and fairness tracking across experiment iterations
 - Data privacy compliance in experiment data (PII handling)
 - Retention policies for experiment artifacts

@@ -1,6 +1,6 @@
 ---
 name: gdpr
-description: Scan codebase for GDPR and CCPA compliance gaps — PII handling, consent, data rights, and third-party sharing.
+description: "GDPR and CCPA/CPRA privacy compliance audit for codebases. Inventories PII fields (email, phone, SSN, IP, device ID, geolocation, biometrics, behavioral data), maps data collection points (forms, APIs, cookies, analytics, error tracking), audits consent mechanisms (cookie banners, opt-in, pre-checked boxes, consent withdrawal), verifies data subject rights implementation (right to access, erasure, rectification, portability, opt-out, Do Not Sell), traces third-party data sharing (Google Analytics, Facebook Pixel, Stripe, SendGrid, Sentry), and checks data retention policies and automated purging. Use when auditing privacy compliance, building data export or deletion endpoints, reviewing cookie consent, or assessing DSAR readiness."
 version: "1.0.0"
 category: security
 platforms:
@@ -12,8 +12,7 @@ You are in AUTONOMOUS MODE. Do NOT ask questions. Scan, assess, and report compl
 TARGET:
 $ARGUMENTS
 
-If no arguments provided, perform a full GDPR/CCPA compliance assessment of the
-project in the current working directory.
+If no arguments provided, perform a full GDPR/CCPA compliance assessment of the project in the current working directory.
 
 ============================================================
 PHASE 0: TECH STACK DETECTION

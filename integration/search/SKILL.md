@@ -1,6 +1,6 @@
 ---
 name: search
-description: Sets up full-text search with indexing, search UI, real-time sync, and ranking configuration — supports Algolia, Typesense, Meilisearch, and Elasticsearch.
+description: "Add full-text search to my app — set up Algolia, Meilisearch, Typesense, or Elasticsearch with index configuration, typo tolerance, faceted filtering, real-time sync from database mutations, a search UI component with instant results, and a bulk reindex script"
 version: "1.0.0"
 category: integration
 platforms:

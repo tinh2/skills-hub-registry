@@ -1,6 +1,6 @@
 ---
 name: disability-services
-description: Analyzes disability services software for IEP/ISP management, accommodation tracking, service coordination, HCBS compliance, assistive technology integration, caregiver scheduling, and outcome measurement.
+description: Analyze disability services software — IEP and ISP management, person-centered planning workflows, HCBS Settings Rule compliance, accommodation tracking, assistive technology integration, EVV (Electronic Visit Verification), caregiver and DSP scheduling, and outcome measurement. Audit platforms serving individuals with intellectual, developmental, physical, and psychiatric disabilities for regulatory compliance and person-centered quality.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -32,13 +32,15 @@ capability (for community-based service delivery), reporting engine.
 
 Step 1.2 -- Person-Centered Data Model
 
-Read core structures: individuals served (demographics, disability type -- intellectual,
-developmental, physical, sensory, psychiatric; diagnoses, guardianship/legal status,
-communication method, support needs level, personal preferences, strengths, goals),
-service providers (agency, direct support professionals, therapists, case managers,
-guardians, natural supports), services (type -- residential, day program, employment,
-respite, community integration, therapeutic; authorization, schedule, location),
-funding (Medicaid waiver type, state plan, private insurance, self-pay, grant-funded).
+Read core structures:
+- Individuals served: demographics, disability type (intellectual, developmental,
+  physical, sensory, psychiatric), diagnoses, guardianship/legal status, communication
+  method, support needs level, personal preferences, strengths, goals
+- Service providers: agency, direct support professionals, therapists, case managers,
+  guardians, natural supports
+- Services: type (residential, day program, employment, respite, community integration,
+  therapeutic), authorization, schedule, location
+- Funding: Medicaid waiver type, state plan, private insurance, self-pay, grant-funded
 
 Step 1.3 -- Regulatory and Rights Framework
 

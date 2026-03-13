@@ -1,6 +1,13 @@
 ---
 name: batch-optimization
-description: Analyze pharmaceutical batch production records for yield optimization, process parameter tuning, deviation trending, and cycle time reduction under cGMP compliance
+description: >
+  Analyze pharmaceutical batch production records for yield optimization, process parameter tuning,
+  deviation trending, and cycle time reduction under cGMP compliance.
+  USE THIS SKILL WHEN: user mentions batch records, pharma manufacturing, yield optimization,
+  cGMP, process parameters, deviation analysis, batch production, pharmaceutical cycle time,
+  process capability (Cpk), or drug manufacturing quality. Trigger phrases: "optimize batch yield",
+  "analyze batch records", "pharma manufacturing analysis", "process parameter tuning",
+  "deviation trending", "cycle time reduction", "cGMP compliance review".
 version: "1.0.0"
 category: analysis
 platforms:
@@ -18,7 +25,7 @@ If arguments are provided, use them to focus the analysis (e.g., specific produc
 PHASE 1: MANUFACTURING SYSTEM DISCOVERY
 ============================================================
 
-Identify the manufacturing data landscape by scanning project files:
+Identify the manufacturing data landscape by scanning project files.
 
 Step 1.1 -- Data Sources
 
@@ -58,7 +65,7 @@ Search for quality specifications and process limits:
 PHASE 2: BATCH RECORD ANALYSIS
 ============================================================
 
-Analyze historical batch production records for yield patterns:
+Analyze historical batch production records for yield patterns.
 
 Step 2.1 -- Yield Calculation Model
 
@@ -97,7 +104,7 @@ For each measurable CQA:
 PHASE 3: PROCESS PARAMETER OPTIMIZATION
 ============================================================
 
-Identify optimization opportunities in critical process parameters:
+Identify optimization opportunities in critical process parameters.
 
 Step 3.1 -- Parameter Sensitivity Analysis
 
@@ -135,7 +142,7 @@ Check for environmental correlations:
 PHASE 4: DEVIATION AND CAPA ANALYSIS
 ============================================================
 
-Analyze the deviation landscape for systemic issues:
+Analyze the deviation landscape for systemic issues.
 
 Step 4.1 -- Deviation Classification
 
@@ -174,7 +181,7 @@ Flag systemic quality issues per ICH Q10:
 PHASE 5: CYCLE TIME OPTIMIZATION
 ============================================================
 
-Analyze manufacturing cycle time for reduction opportunities:
+Analyze manufacturing cycle time for reduction opportunities.
 
 Step 5.1 -- Cycle Time Breakdown
 

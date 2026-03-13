@@ -1,6 +1,6 @@
 ---
 name: expansion-modeling
-description: Franchise expansion modeling covering market feasibility analysis, territory mapping, cannibalization assessment, demographic scoring, and site selection analytics using trade area analysis and gravity models
+description: Analyze franchise expansion plans, model new market entry, score site selection candidates, map territory density, assess cannibalization risk, and build multi-year growth scenarios. Covers market feasibility scoring, Huff gravity models, trade area overlap analysis, white space identification, and unit-level investment returns for franchise development teams.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -22,7 +22,7 @@ Identify the expansion planning infrastructure:
 
 Step 1.1 -- Franchise System Profile
 
-Understand the franchise expansion context:
+Characterize the franchise expansion context:
 - Total system unit count and growth trajectory
 - Corporate vs. franchised unit ratio
 - Geographic footprint: states, regions, countries
@@ -34,7 +34,7 @@ Understand the franchise expansion context:
 Step 1.2 -- Territory Framework
 
 Map the existing territory structure:
-- Territory definition: exclusive, protected, right of first refusal
+- Territory definition type: exclusive, protected, right of first refusal
 - Territory boundaries: geographic, population-based, drive-time
 - Available vs. committed territories
 - Multi-unit development agreements (MUDAs) and development schedules
@@ -95,7 +95,7 @@ Score target markets on a composite index:
 
 Step 2.3 -- Market Prioritization
 
-Rank markets by composite score and segment:
+Rank markets by composite score and segment into tiers:
 - **Tier 1 (Enter Now)**: high score, low competition, available operators
 - **Tier 2 (Develop Next)**: good score, moderate competition, pipeline
 - **Tier 3 (Monitor)**: mixed signals, watch for improvement
@@ -123,8 +123,9 @@ Define trade areas using multiple methods:
 - **Distance rings**: 1, 3, 5-mile radius
 - **Gravity model (Huff model)**: probability of customer visit based on distance and attractiveness
 
-Huff Model: P(i,j) = S(j)^a / T(ij)^b / sum(S(k)^a / T(ik)^b)
-Where: S = store attractiveness (sq ft, brand), T = travel time, a/b = calibrated parameters
+Huff Model formula:
+P(i,j) = S(j)^a / T(ij)^b / sum(S(k)^a / T(ik)^b)
+Where S = store attractiveness (sq ft, brand), T = travel time, a/b = calibrated parameters
 
 - **Customer data-based**: actual customer origin points from loyalty/delivery data
 - **Analog matching**: trade areas of successful existing units
@@ -243,7 +244,7 @@ Build a multi-year expansion financial model:
 
 Step 5.4 -- Risk Assessment
 
-Identify expansion risks:
+Identify and quantify expansion risks:
 - Market saturation risk: too many units too fast
 - Operator quality risk: growth outpacing qualified franchisee pipeline
 - Real estate risk: site availability and construction timeline delays

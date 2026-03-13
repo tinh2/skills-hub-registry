@@ -1,6 +1,6 @@
 ---
 name: game-accessibility
-description: Reviews games for accessibility compliance including CVAA requirements, Xbox Accessibility Guidelines, colorblind modes, subtitles, remappable controls, difficulty options, and screen reader support.
+description: "Audit game projects for accessibility across visual (colorblind modes, contrast, font scaling, photosensitivity), audio (subtitles, captions, visual sound indicators, mono audio), motor (remappable controls, one-handed play, hold-to-toggle, QTE alternatives), cognitive (difficulty options, tutorials, quest logs, hint systems), and communication (CVAA text chat, voice-to-text). Checks Xbox Accessibility Guidelines (XAGs), WCAG 2.1, platform APIs (VoiceOver, TalkBack), and first-launch accessibility prompts. Use when reviewing Unity, Unreal, Godot, or web game projects for disability access."
 version: "1.0.0"
 category: review
 platforms:

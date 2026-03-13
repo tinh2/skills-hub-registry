@@ -1,6 +1,6 @@
 ---
 name: fleet-safety
-description: Analyzes fleet safety systems for driver behavior scoring, accident analysis, compliance monitoring, CSA scores, and risk mitigation strategies per FMCSA regulations, CSA methodology, and DOT audit requirements.
+description: Analyze fleet safety programs including driver behavior scoring, accident trend analysis, CSA BASIC score monitoring, DOT audit readiness, Hours of Service compliance, and drug and alcohol testing programs. Covers telematics event review, dashcam AI classification, preventability determinations, roadside inspection management, and risk mitigation ROI per FMCSA regulations and CSA methodology.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -24,32 +24,45 @@ PHASE 1: SAFETY SYSTEM DISCOVERY
 
 Step 1.1 -- Safety Data Model
 
-Read safety-related data structures. Identify: driver records (CDL status, endorsements,
-restrictions, medical certificate, MVR history), accident records (date, location, severity,
-type, vehicles involved, injuries, citations, preventability determination), violation records
-(roadside inspection results, citation type, severity weight), incident records (near-miss,
-property damage, injury reports), training records (initial, refresher, remedial).
+Read safety-related data structures. Identify:
+- Driver records: CDL status, endorsements, restrictions, medical certificate, MVR history
+- Accident records: date, location, severity, type, vehicles involved, injuries, citations, preventability determination
+- Violation records: roadside inspection results, citation type, severity weight
+- Incident records: near-miss, property damage, injury reports
+- Training records: initial, refresher, remedial
 
-Step 1.2 -- Telematics & Camera Systems
+Step 1.2 -- Telematics and Camera Systems
 
-Map safety technology: event recorders (dashcam, driver-facing camera, AI-triggered events),
-telematics safety alerts (hard braking, acceleration, cornering, speed, distraction),
-collision avoidance systems (forward collision warning, lane departure, blind spot),
-ELD integration (Hours of Service compliance), GPS tracking and geofencing.
+Map safety technology:
+- Event recorders: dashcam, driver-facing camera, AI-triggered events
+- Telematics safety alerts: hard braking, acceleration, cornering, speed, distraction
+- Collision avoidance systems: forward collision warning, lane departure, blind spot
+- ELD integration: Hours of Service compliance
+- GPS tracking and geofencing
 
 Step 1.3 -- Regulatory Framework
 
-Identify compliance implementations: FMCSA Safety Regulations (49 CFR Parts 390-399),
-CSA (Compliance, Safety, Accountability) program, SMS (Safety Measurement System) BASICs,
-DOT audit preparation, OSHA recordkeeping (injury/illness -- 29 CFR 1904), state-specific
-regulations, Drug & Alcohol testing (49 CFR Part 40, Part 382), CDL requirements and
-disqualifications (49 CFR Part 383).
+Identify compliance implementations:
+- FMCSA Safety Regulations (49 CFR Parts 390-399)
+- CSA (Compliance, Safety, Accountability) program
+- SMS (Safety Measurement System) BASICs
+- DOT audit preparation
+- OSHA recordkeeping: injury/illness (29 CFR 1904)
+- State-specific regulations
+- Drug and Alcohol testing (49 CFR Part 40, Part 382)
+- CDL requirements and disqualifications (49 CFR Part 383)
 
 Step 1.4 -- Integration Architecture
 
-Map external systems: FMCSA SAFER system, Pre-Employment Screening Program (PSP),
-Drug & Alcohol Clearinghouse, insurance providers, workers' compensation systems,
-HR/personnel systems, fleet management platforms, legal/claims management.
+Map external systems:
+- FMCSA SAFER system
+- Pre-Employment Screening Program (PSP)
+- Drug and Alcohol Clearinghouse
+- Insurance providers
+- Workers' compensation systems
+- HR/personnel systems
+- Fleet management platforms
+- Legal/claims management
 
 ============================================================
 PHASE 2: DRIVER BEHAVIOR SCORING
@@ -57,31 +70,41 @@ PHASE 2: DRIVER BEHAVIOR SCORING
 
 Step 2.1 -- Scoring Model
 
-Evaluate: behavior dimensions scored (speeding, hard braking, rapid acceleration, cornering,
-distraction, seatbelt compliance, following distance, lane departure), scoring methodology
-(event frequency per mile, severity weighting, rolling window), composite score calculation,
-normalization (by route type, vehicle type, conditions), peer benchmarking.
+Evaluate:
+- Behavior dimensions scored: speeding, hard braking, rapid acceleration, cornering, distraction, seatbelt compliance, following distance, lane departure
+- Scoring methodology: event frequency per mile, severity weighting, rolling window
+- Composite score calculation
+- Normalization: by route type, vehicle type, conditions
+- Peer benchmarking
 
-Step 2.2 -- Event Detection & Review
+Step 2.2 -- Event Detection and Review
 
-Check for: telematics event triggering thresholds (configurable G-force, speed delta),
-video event review workflow (automatic upload, manager review, driver coaching),
-AI-powered event classification (distraction, drowsiness, phone use, smoking),
-false positive management, event dispute process for drivers.
+Check for:
+- Telematics event triggering thresholds: configurable G-force, speed delta
+- Video event review workflow: automatic upload, manager review, driver coaching
+- AI-powered event classification: distraction, drowsiness, phone use, smoking
+- False positive management
+- Event dispute process for drivers
 
 Step 2.3 -- Risk Segmentation
 
-Assess: driver risk tier classification (low, moderate, high, critical), risk score trending
-(improving, stable, deteriorating), at-risk driver identification triggers, new driver
-monitoring (probationary period scoring), recidivist pattern detection, predictive risk
-models (which drivers are likely to have future accidents).
+Assess:
+- Driver risk tier classification: low, moderate, high, critical
+- Risk score trending: improving, stable, deteriorating
+- At-risk driver identification triggers
+- New driver monitoring: probationary period scoring
+- Recidivist pattern detection
+- Predictive risk models: which drivers are likely to have future accidents
 
-Step 2.4 -- Coaching & Remediation
+Step 2.4 -- Coaching and Remediation
 
-Evaluate: coaching session documentation and tracking, remedial training assignment based on
-behavior patterns, coaching effectiveness measurement (behavior change post-coaching),
-progressive discipline integration, positive recognition programs, coaching frequency
-targets by risk tier.
+Evaluate:
+- Coaching session documentation and tracking
+- Remedial training assignment based on behavior patterns
+- Coaching effectiveness measurement: behavior change post-coaching
+- Progressive discipline integration
+- Positive recognition programs
+- Coaching frequency targets by risk tier
 
 ============================================================
 PHASE 3: ACCIDENT ANALYSIS
@@ -89,64 +112,85 @@ PHASE 3: ACCIDENT ANALYSIS
 
 Step 3.1 -- Accident Recording
 
-Evaluate: accident report data capture (FMCSA-standard fields, first report of injury,
-photos, statements, police report), severity classification (DOT recordable, OSHA
-recordable, property damage only, near-miss), preventability determination process
-(following ATA guidelines or equivalent), root cause analysis methodology (5-why, fishbone).
+Evaluate:
+- Accident report data capture: FMCSA-standard fields, first report of injury, photos, statements, police report
+- Severity classification: DOT recordable, OSHA recordable, property damage only, near-miss
+- Preventability determination process: following ATA guidelines or equivalent
+- Root cause analysis methodology: 5-why, fishbone
 
 Step 3.2 -- Accident Trend Analysis
 
-Check for: accident rate calculations (per million miles, per 100 vehicles, per 100 drivers),
-accident type distribution (rear-end, intersection, backing, rollover, pedestrian),
-contributing factor analysis (time of day, day of week, weather, road condition, fatigue),
-geographic hotspot identification, seasonal patterns, year-over-year trending.
+Check for:
+- Accident rate calculations: per million miles, per 100 vehicles, per 100 drivers
+- Accident type distribution: rear-end, intersection, backing, rollover, pedestrian
+- Contributing factor analysis: time of day, day of week, weather, road condition, fatigue
+- Geographic hotspot identification
+- Seasonal patterns
+- Year-over-year trending
 
 Step 3.3 -- Post-Accident Process
 
-Assess: immediate response protocol (drug/alcohol testing triggers, vehicle inspection),
-investigation workflow and timeline, corrective action assignment and tracking, return-to-duty
-process, modified duty and light-duty management, accident review board/committee operations.
+Assess:
+- Immediate response protocol: drug/alcohol testing triggers, vehicle inspection
+- Investigation workflow and timeline
+- Corrective action assignment and tracking
+- Return-to-duty process
+- Modified duty and light-duty management
+- Accident review board/committee operations
 
 Step 3.4 -- Cost Impact Analysis
 
-Evaluate: total cost of accidents (vehicle repair, medical, workers' comp, liability, legal,
-administrative, lost productivity, rental), cost attribution (by driver, department, location,
-accident type), insurance impact modeling (premium changes, deductible exposure), reserve
-setting and development tracking for open claims.
+Evaluate:
+- Total cost of accidents: vehicle repair, medical, workers' comp, liability, legal, administrative, lost productivity, rental
+- Cost attribution: by driver, department, location, accident type
+- Insurance impact modeling: premium changes, deductible exposure
+- Reserve setting and development tracking for open claims
 
 ============================================================
-PHASE 4: CSA & REGULATORY COMPLIANCE
+PHASE 4: CSA AND REGULATORY COMPLIANCE
 ============================================================
 
 Step 4.1 -- CSA Score Monitoring
 
-Evaluate: SMS BASIC score tracking across all seven categories (Unsafe Driving, Hours of
-Service, Driver Fitness, Controlled Substances/Alcohol, Vehicle Maintenance, Hazardous
-Materials, Crash Indicator), intervention threshold monitoring (percentile rank vs. threshold),
-inspection and violation data feed (FMCSA DataQs integration), score projection modeling,
-violation severity weight awareness, time-weight decay understanding.
+Evaluate:
+- SMS BASIC score tracking across all seven categories: Unsafe Driving, Hours of Service, Driver Fitness, Controlled Substances/Alcohol, Vehicle Maintenance, Hazardous Materials, Crash Indicator
+- Intervention threshold monitoring: percentile rank vs. threshold
+- Inspection and violation data feed: FMCSA DataQs integration
+- Score projection modeling
+- Violation severity weight awareness
+- Time-weight decay understanding
 
 Step 4.2 -- Roadside Inspection Management
 
-Check for: inspection result recording and tracking, clean inspection rate (no violations
-found), out-of-service rate by category (driver OOS, vehicle OOS), inspection location
-tracking, DataQ challenge workflow for inaccurate inspection data, pre-trip inspection
-compliance (DVIR), mock inspection programs.
+Check for:
+- Inspection result recording and tracking
+- Clean inspection rate: no violations found
+- Out-of-service rate by category: driver OOS, vehicle OOS
+- Inspection location tracking
+- DataQ challenge workflow for inaccurate inspection data
+- Pre-trip inspection compliance (DVIR)
+- Mock inspection programs
 
 Step 4.3 -- Hours of Service Compliance
 
-Assess: ELD data integration and monitoring, HOS violation detection (11-hour driving,
-14-hour window, 30-minute break, 60/70-hour limit), unassigned driving time management,
-personal conveyance policy enforcement, short-haul exception tracking, HOS exception
-utilization (adverse conditions, 16-hour), driver log audit workflow.
+Assess:
+- ELD data integration and monitoring
+- HOS violation detection: 11-hour driving, 14-hour window, 30-minute break, 60/70-hour limit
+- Unassigned driving time management
+- Personal conveyance policy enforcement
+- Short-haul exception tracking
+- HOS exception utilization: adverse conditions, 16-hour
+- Driver log audit workflow
 
-Step 4.4 -- Drug & Alcohol Compliance
+Step 4.4 -- Drug and Alcohol Compliance
 
-Check for: testing program management (pre-employment, random, post-accident, reasonable
-suspicion, return-to-duty, follow-up), random testing pool and selection, FMCSA
-Clearinghouse queries (pre-employment and annual), Substance Abuse Professional (SAP)
-process tracking, MRO (Medical Review Officer) result management, DOT testing rates
-(minimum 50% random drug, 10% random alcohol for FMCSA).
+Check for:
+- Testing program management: pre-employment, random, post-accident, reasonable suspicion, return-to-duty, follow-up
+- Random testing pool and selection
+- FMCSA Clearinghouse queries: pre-employment and annual
+- Substance Abuse Professional (SAP) process tracking
+- MRO (Medical Review Officer) result management
+- DOT testing rates: minimum 50% random drug, 10% random alcohol for FMCSA
 
 ============================================================
 PHASE 5: RISK MITIGATION STRATEGIES
@@ -154,30 +198,44 @@ PHASE 5: RISK MITIGATION STRATEGIES
 
 Step 5.1 -- Training Programs
 
-Evaluate: new driver orientation content and duration, defensive driving training (Smith
-System, LLLC, commentary driving), vehicle-specific training (backing, mountain driving,
-winter driving), hazmat training (if applicable), annual refresher requirements, training
-effectiveness measurement, e-learning and simulation platforms.
+Evaluate:
+- New driver orientation content and duration
+- Defensive driving training: Smith System, LLLC, commentary driving
+- Vehicle-specific training: backing, mountain driving, winter driving
+- Hazmat training (if applicable)
+- Annual refresher requirements
+- Training effectiveness measurement
+- E-learning and simulation platforms
 
 Step 5.2 -- Safety Technology ROI
 
-Check for: technology impact measurement (accident reduction, severity reduction, near-miss
-to accident ratio), camera system ROI (exoneration savings, coaching impact, deterrence),
-collision avoidance system effectiveness, speed limiter impact, technology adoption tracking
-across fleet, cost-benefit analysis by technology type.
+Check for:
+- Technology impact measurement: accident reduction, severity reduction, near-miss to accident ratio
+- Camera system ROI: exoneration savings, coaching impact, deterrence
+- Collision avoidance system effectiveness
+- Speed limiter impact
+- Technology adoption tracking across fleet
+- Cost-benefit analysis by technology type
 
-Step 5.3 -- Insurance & Claims Management
+Step 5.3 -- Insurance and Claims Management
 
-Assess: loss run analysis and trending, insurance program structure (guaranteed cost, large
-deductible, self-insured retention), claims management workflow, subrogation recovery
-tracking, experience modification rate monitoring, safety investment impact on premiums.
+Assess:
+- Loss run analysis and trending
+- Insurance program structure: guaranteed cost, large deductible, self-insured retention
+- Claims management workflow
+- Subrogation recovery tracking
+- Experience modification rate monitoring
+- Safety investment impact on premiums
 
 Step 5.4 -- Safety Culture Assessment
 
-Evaluate: safety meeting programs and documentation, driver communication platforms,
-anonymous safety concern reporting (near-miss reporting encouragement), safety award
-and recognition programs, management safety commitment indicators, safety committee
-structure and effectiveness.
+Evaluate:
+- Safety meeting programs and documentation
+- Driver communication platforms
+- Anonymous safety concern reporting: near-miss reporting encouragement
+- Safety award and recognition programs
+- Management safety commitment indicators
+- Safety committee structure and effectiveness
 
 ============================================================
 PHASE 6: DOT AUDIT READINESS
@@ -185,16 +243,22 @@ PHASE 6: DOT AUDIT READINESS
 
 Step 6.1 -- Audit Documentation
 
-Evaluate: driver qualification file completeness (application, MVR, medical certificate,
-road test, annual review), vehicle maintenance file completeness (inspection records,
-maintenance history, annual inspection), HOS records retention (6-month ELD requirement),
-drug and alcohol testing records, accident register maintenance.
+Evaluate:
+- Driver qualification file completeness: application, MVR, medical certificate, road test, annual review
+- Vehicle maintenance file completeness: inspection records, maintenance history, annual inspection
+- HOS records retention: 6-month ELD requirement
+- Drug and alcohol testing records
+- Accident register maintenance
 
 Step 6.2 -- Compliance Gap Analysis
 
-Check for: systematic DQ file audit capability, maintenance record audit trail, HOS
-compliance rate by driver, random testing rate verification, vehicle periodic inspection
-currency, hazmat compliance (if applicable -- registration, training, shipping papers).
+Check for:
+- Systematic DQ file audit capability
+- Maintenance record audit trail
+- HOS compliance rate by driver
+- Random testing rate verification
+- Vehicle periodic inspection currency
+- Hazmat compliance (if applicable): registration, training, shipping papers
 
 ============================================================
 PHASE 7: WRITE REPORT
@@ -203,7 +267,7 @@ PHASE 7: WRITE REPORT
 Write analysis to `docs/fleet-safety-analysis.md` (create `docs/` if needed).
 
 Include: Executive Summary, Driver Behavior Assessment, Accident Analysis, CSA Performance,
-HOS Compliance, Drug & Alcohol Program, Risk Mitigation Effectiveness, DOT Audit Readiness,
+HOS Compliance, Drug and Alcohol Program, Risk Mitigation Effectiveness, DOT Audit Readiness,
 Recommendations with risk reduction estimates.
 
 ============================================================
@@ -236,8 +300,8 @@ NEXT STEPS:
 
 DO NOT:
 
-- Modify any safety records, driver scores, or compliance configurations.
-- Downplay safety violations regardless of their CSA severity weight.
-- Recommend reducing safety technology to cut costs without quantifying risk exposure.
-- Ignore drug and alcohol compliance -- it is the highest-consequence compliance area.
-- Skip DOT audit readiness even if the carrier has not been audited recently.
+- Do NOT modify any safety records, driver scores, or compliance configurations.
+- Do NOT downplay safety violations regardless of their CSA severity weight.
+- Do NOT recommend reducing safety technology to cut costs without quantifying risk exposure.
+- Do NOT ignore drug and alcohol compliance -- it is the highest-consequence compliance area.
+- Do NOT skip DOT audit readiness even if the carrier has not been audited recently.

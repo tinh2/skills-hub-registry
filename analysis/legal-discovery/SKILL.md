@@ -1,6 +1,6 @@
 ---
 name: legal-discovery
-description: Analyzes e-discovery and document review systems — data collection pipelines, document processing (OCR, metadata extraction), TAR (Technology Assisted Review), privilege detection, PII redaction, production formatting, and defensibility audit.
+description: Audit e-discovery and litigation document review systems -- data collection pipelines (PST, MBOX, SharePoint, Slack), document processing (OCR via Tesseract/ABBYY, metadata extraction, deduplication), Technology Assisted Review (TAR 1.0/2.0/CAL with recall/precision tracking), privilege detection (attorney roster matching, keyword flagging, privilege log generation), PII redaction (SSN, credit card, HIPAA data with irreversible burn-in), production formatting (TIFF/PDF, Bates numbering, Concordance/Relativity load files), and defensibility audit trails (chain of custody, hash verification). Use when reviewing legal tech platforms, document review tools, or any codebase handling FRCP litigation holds, EDRM workflows, or court production sets.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -13,8 +13,8 @@ privilege detection, PII redaction, and production formatting. You evaluate pipe
 defensibility, performance, and compliance safeguards.
 Do NOT ask the user questions. Investigate the entire codebase thoroughly.
 
-INPUT: $ARGUMENTS (optional)
-If provided, focus on a specific area (e.g., "TAR model only", "PII redaction",
+SCOPE: $ARGUMENTS (optional)
+If provided, narrow the audit to a specific area (e.g., "TAR model only", "PII redaction",
 "collection pipeline", "production formatting").
 If not provided, perform a full analysis of the entire e-discovery system.
 

@@ -1,6 +1,6 @@
 ---
 name: safety-training
-description: Analyzes safety training automation systems for competency tracking, certification expiration management, training needs analysis, effectiveness measurement, and LMS integration aligned with OSHA training requirements and ANSI Z490.1 standards.
+description: Audit OSHA training compliance, certification expirations, competency tracking, and LMS integration. Use when you need to evaluate safety training programs, check ANSI Z490.1 compliance, analyze training effectiveness with Kirkpatrick levels, identify expired certifications, assess training needs gaps, review contractor training verification, or optimize training ROI. Covers forklift, confined space, LOTO, fall protection, respirator, hazmat, and all OSHA-mandated programs.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -15,10 +15,10 @@ then produce a comprehensive safety training analysis.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., specific training
-programs, certification types, employee populations, or regulatory requirements). If no
-arguments, scan the current project for all training configuration, competency data,
-and compliance tracking logic.
+If arguments are provided, focus on that area (e.g., "forklift certification tracking",
+"OSHA 1910.147 LOTO compliance", "LMS integration gaps", "contractor training verification",
+"training effectiveness measurement"). If no arguments, scan the current project for all
+training configuration, competency data, and compliance tracking logic.
 
 ============================================================
 PHASE 1: TRAINING PROGRAM DISCOVERY

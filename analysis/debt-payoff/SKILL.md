@@ -1,6 +1,6 @@
 ---
 name: debt-payoff
-description: Analyzes personal finance and debt management software for payoff strategy optimization (avalanche, snowball, hybrid), interest calculation accuracy, payment scheduling, credit score impact modeling, hardship accommodation workflows, and progress visualization.
+description: Analyze debt payoff software — avalanche vs snowball strategy engines, interest calculation accuracy, amortization schedules, payment scheduling automation, credit score impact modeling, hardship accommodation workflows, and progress visualization. Audit personal finance apps, debt management platforms, and loan repayment calculators for correctness and completeness.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -24,19 +24,19 @@ PHASE 1: SYSTEM DISCOVERY
 
 Step 1.1 -- Technology Stack
 
-Identify from package manifests: platform type (web app, mobile, API service, hybrid),
-backend framework, database engine, financial calculation libraries, charting/visualization
-libraries, notification services, payment processing integrations, credit bureau API
-connections, data export formats.
+Scan package manifests and config files to identify: platform type (web app, mobile,
+API service, hybrid), backend framework, database engine, financial calculation libraries,
+charting/visualization libraries, notification services, payment processing integrations,
+credit bureau API connections, data export formats.
 
 Step 1.2 -- Debt Data Model
 
-Read core data structures: debts (principal balance, interest rate, minimum payment,
-payment due date, creditor name, account type -- credit card, student loan, mortgage,
-auto loan, medical, personal loan), payment records (date, amount, principal applied,
-interest applied, extra payment allocation), user profiles (income, expenses, monthly
-budget surplus, credit score, financial goals), debt snapshots (point-in-time balances
-for historical tracking).
+Read core data structures and schemas for:
+- Debts: principal balance, interest rate, minimum payment, payment due date, creditor
+  name, account type (credit card, student loan, mortgage, auto loan, medical, personal loan)
+- Payment records: date, amount, principal applied, interest applied, extra payment allocation
+- User profiles: income, expenses, monthly budget surplus, credit score, financial goals
+- Debt snapshots: point-in-time balances for historical tracking
 
 Step 1.3 -- External Integrations
 
@@ -48,35 +48,35 @@ score simulators, financial literacy content providers, budgeting tool integrati
 PHASE 2: PAYOFF STRATEGY ENGINE
 ============================================================
 
-Step 2.1 -- Avalanche Method Implementation
+Step 2.1 -- Avalanche Method
 
-Evaluate: correct ordering by interest rate (highest first), minimum payment allocation
+Verify: correct ordering by interest rate (highest first), minimum payment allocation
 to all debts before extra payments, extra payment targeting to highest-rate debt,
 rollover of freed payments when a debt is eliminated, handling of variable-rate debts
 (rate recalculation triggers), proper treatment of promotional 0% APR periods (switch
 targeting before promo expires), total interest saved calculation accuracy.
 
-Step 2.2 -- Snowball Method Implementation
+Step 2.2 -- Snowball Method
 
-Evaluate: correct ordering by balance (smallest first), psychological milestone tracking
+Verify: correct ordering by balance (smallest first), psychological milestone tracking
 (debt elimination celebrations), minimum payment allocation accuracy, rollover mechanics,
 handling of debts with equal balances (tiebreaker logic), total interest cost comparison
 vs. avalanche, estimated payoff timeline calculation.
 
 Step 2.3 -- Hybrid and Custom Strategies
 
-Evaluate: hybrid strategy options (e.g., snowball first two debts then avalanche),
-user-defined priority ordering, consolidation scenario modeling (new single loan
-replacing multiple debts), balance transfer optimization (fee vs. interest savings),
-refinancing scenario comparison, lump-sum windfall allocation recommendations,
-bi-weekly payment strategies, round-up payment integration.
+Verify: hybrid options (e.g., snowball first two debts then avalanche), user-defined
+priority ordering, consolidation scenario modeling (new single loan replacing multiple
+debts), balance transfer optimization (fee vs. interest savings), refinancing scenario
+comparison, lump-sum windfall allocation, bi-weekly payment strategies, round-up
+payment integration.
 
 Step 2.4 -- Strategy Comparison Engine
 
-Evaluate: side-by-side comparison of all strategies for the same debt portfolio,
-metrics compared (total interest paid, time to debt-free, number of debts eliminated
-per year, monthly cash flow impact), sensitivity analysis (what if extra payment
-changes by +/- $100), break-even analysis for consolidation and balance transfers.
+Verify: side-by-side comparison of all strategies for the same debt portfolio, metrics
+compared (total interest paid, time to debt-free, number of debts eliminated per year,
+monthly cash flow impact), sensitivity analysis (what if extra payment changes by
++/- $100), break-even analysis for consolidation and balance transfers.
 
 ============================================================
 PHASE 3: INTEREST CALCULATION ACCURACY
@@ -84,26 +84,26 @@ PHASE 3: INTEREST CALCULATION ACCURACY
 
 Step 3.1 -- Interest Computation Methods
 
-Evaluate: daily vs. monthly accrual handling, average daily balance calculation,
-compound interest frequency (daily, monthly, continuous), grace period handling
-(credit cards -- no interest if paid in full), minimum interest charges, interest
-rate type handling (fixed, variable, introductory/promotional), APR to daily rate
-conversion accuracy (APR / 365 vs. APR / 360), amortization schedule generation.
+Verify: daily vs. monthly accrual handling, average daily balance calculation, compound
+interest frequency (daily, monthly, continuous), grace period handling (credit cards --
+no interest if paid in full), minimum interest charges, interest rate type handling
+(fixed, variable, introductory/promotional), APR to daily rate conversion accuracy
+(APR / 365 vs. APR / 360), amortization schedule generation.
 
-Step 3.2 -- Edge Cases in Interest
+Step 3.2 -- Edge Cases
 
-Evaluate: leap year handling in daily interest (365 vs. 366 days), partial month
-interest on new debts, interest on late fees and penalties, capitalized interest
-(unpaid interest added to principal -- student loans), negative amortization
-detection, interest rate change mid-billing-cycle, retroactive interest on
-expired promotional rates, compound-on-compound accuracy over long horizons.
+Verify: leap year handling in daily interest (365 vs. 366 days), partial month interest
+on new debts, interest on late fees and penalties, capitalized interest (unpaid interest
+added to principal -- student loans), negative amortization detection, interest rate
+change mid-billing-cycle, retroactive interest on expired promotional rates,
+compound-on-compound accuracy over long horizons.
 
 Step 3.3 -- Amortization Accuracy
 
-Evaluate: amortization table generation for each debt type, remaining balance
-accuracy after each payment, final payment adjustment (last payment often differs),
-extra payment impact on amortization recalculation, total interest over life of
-loan calculation, comparison with official servicer amortization (if available).
+Verify: amortization table generation for each debt type, remaining balance accuracy
+after each payment, final payment adjustment (last payment often differs), extra payment
+impact on amortization recalculation, total interest over life of loan, comparison with
+official servicer amortization tables when available.
 
 ============================================================
 PHASE 4: PAYMENT SCHEDULING AND AUTOMATION
@@ -145,8 +145,7 @@ Step 5.2 -- Score Impact Projections
 Evaluate: credit score change estimates as debts are paid down, factors modeled
 (utilization, payment history, account age, credit mix, new inquiries), score
 projection methodology (FICO simulation, VantageScore, or proprietary), projection
-accuracy validation, timeline to target score milestones, impact of debt-free status
-on score.
+accuracy validation, timeline to target score milestones, impact of debt-free status.
 
 Step 5.3 -- Score Model Transparency
 
@@ -161,10 +160,10 @@ PHASE 6: HARDSHIP AND SPECIAL CIRCUMSTANCES
 
 Step 6.1 -- Income Change Handling
 
-Evaluate: income reduction scenario modeling, job loss planning mode (minimum
-payments only, prioritize essentials), income increase reallocation (automatically
-increase extra payments), irregular income handling (freelancers, seasonal workers),
-household income vs. individual income support.
+Evaluate: income reduction scenario modeling, job loss planning mode (minimum payments
+only, prioritize essentials), income increase reallocation (automatically increase
+extra payments), irregular income handling (freelancers, seasonal workers), household
+income vs. individual income support.
 
 Step 6.2 -- Hardship Accommodation Workflows
 

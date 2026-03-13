@@ -1,6 +1,6 @@
 ---
 name: changelog
-description: Generates or updates CHANGELOG.md from git history using conventional commit parsing and keep-a-changelog format.
+description: "Generate or update CHANGELOG.md from git history. Parses conventional commits, groups by version tags, categorizes into Added/Fixed/Changed/Breaking sections using keep-a-changelog format, and creates comparison links. Use when you need to create a changelog, update release notes, document version history, or prepare release documentation."
 version: "1.0.0"
 category: docs
 platforms:

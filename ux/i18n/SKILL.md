@@ -1,6 +1,6 @@
 ---
 name: i18n
-description: Internationalization setup — extract hardcoded strings, configure locale files, and wire up i18n library for any framework
+description: Set up internationalization by extracting all hardcoded user-facing strings to locale files. Auto-detects framework (Flutter, Next.js, React, Vue, Angular, iOS, Android) and configures the appropriate i18n library (react-intl, next-intl, vue-i18n, flutter_localizations, NSLocalizedString, strings.xml), generates namespaced translation keys with dot notation, handles pluralization via ICU MessageFormat, sets up date/number/currency formatting per locale, adds RTL layout support for Arabic and Hebrew, and replaces every hardcoded string with translation function calls. Use when you need to add multi-language support, extract hardcoded strings, set up locale files, configure translation workflows, handle pluralization, or add RTL support.
 version: "1.0.0"
 category: ux
 platforms:
@@ -20,14 +20,14 @@ INPUT:
 $ARGUMENTS
 
 The user may specify:
-1. Target locales — e.g., "en,es,fr,de,ja,ar" (default: "en" as base locale).
+1. Target locales -- e.g., "en,es,fr,de,ja,ar" (default: "en" as base locale).
 2. A specific i18n library preference.
-3. Scope — specific directories or screens to process.
-4. RTL support — explicitly request Arabic/Hebrew layout handling.
+3. Scope -- specific directories or screens to process.
+4. RTL support -- explicitly request Arabic/Hebrew layout handling.
 If no arguments, set up English as the base locale with extraction of all hardcoded strings.
 
 ============================================================
-PHASE 1 — FRAMEWORK AND I18N LIBRARY DETECTION
+PHASE 1 -- FRAMEWORK AND I18N LIBRARY DETECTION
 ============================================================
 
 Detect the framework and determine the appropriate i18n library:
@@ -53,12 +53,12 @@ If an i18n library is already configured, extend it rather than replacing it.
 Record: FRAMEWORK, I18N_LIBRARY, LOCALE_DIR, BASE_LOCALE, TARGET_LOCALES
 
 ============================================================
-PHASE 2 — STRING EXTRACTION SCAN
+PHASE 2 -- STRING EXTRACTION SCAN
 ============================================================
 
 Scan the entire source tree for hardcoded user-facing strings.
 
-Step 2.1 — Identify User-Facing Strings
+Step 2.1 -- Identify User-Facing Strings
 
 Search for strings that are displayed to users:
 - **Text content:** String literals inside Text(), <p>, <span>, <h1-h6>, <label>, <button>,
@@ -74,7 +74,7 @@ For each string found, record:
 - Context (button label, heading, body text, error message, placeholder, etc.)
 - Whether it contains dynamic values that need interpolation
 
-Step 2.2 — Exclude Non-User-Facing Strings
+Step 2.2 -- Exclude Non-User-Facing Strings
 
 Do NOT extract:
 - Log messages (console.log, logger.info, print for debug)
@@ -85,7 +85,7 @@ Do NOT extract:
 - Comments and documentation
 - String constants used only for programmatic logic (switch cases, map keys)
 
-Step 2.3 — Generate Translation Key Map
+Step 2.3 -- Generate Translation Key Map
 
 For each extracted string, generate a namespaced translation key:
 - Use dot-notation namespacing: `screen.section.element`
@@ -103,10 +103,10 @@ Produce the key map:
 |-----|--------------|---------|---------------|------|
 
 ============================================================
-PHASE 3 — LOCALE FILE GENERATION
+PHASE 3 -- LOCALE FILE GENERATION
 ============================================================
 
-Step 3.1 — Create Base Locale File
+Step 3.1 -- Create Base Locale File
 
 Generate the locale file in the format appropriate for the detected library:
 
@@ -148,7 +148,7 @@ Create `en.lproj/Localizable.strings`.
 **strings.xml** (Android):
 Create `res/values/strings.xml`.
 
-Step 3.2 — Handle Interpolation
+Step 3.2 -- Handle Interpolation
 
 Convert strings with dynamic values to use the library's interpolation syntax:
 - react-intl: `{count} items` or ICU format `{count, plural, one {# item} other {# items}}`
@@ -157,7 +157,7 @@ Convert strings with dynamic values to use the library's interpolation syntax:
 - Flutter intl: `{count, plural, =0{No items} =1{1 item} other{{count} items}}`
 - i18next: `{{count}} items` with `count` option
 
-Step 3.3 — Handle Pluralization
+Step 3.3 -- Handle Pluralization
 
 Identify strings that represent countable items and apply plural rules:
 - English: one/other
@@ -165,7 +165,7 @@ Identify strings that represent countable items and apply plural rules:
 
 Use ICU MessageFormat where the library supports it.
 
-Step 3.4 — Generate Target Locale Files
+Step 3.4 -- Generate Target Locale Files
 
 For each target locale beyond the base:
 1. Create the locale file with the same key structure.
@@ -177,10 +177,10 @@ Example: `src/locales/es.json` with `"commonSave": "[TRANSLATE] Save"`.
 Commit: "feat(i18n): generate locale files with extracted strings"
 
 ============================================================
-PHASE 4 — I18N LIBRARY SETUP
+PHASE 4 -- I18N LIBRARY SETUP
 ============================================================
 
-Step 4.1 — Install Dependencies
+Step 4.1 -- Install Dependencies
 
 Install the i18n library and any required dependencies:
 - **react-intl:** `npm install react-intl`
@@ -192,7 +192,7 @@ Install the i18n library and any required dependencies:
 
 Use the project's package manager (npm/yarn/pnpm based on lockfile).
 
-Step 4.2 — Configure Provider/Plugin
+Step 4.2 -- Configure Provider/Plugin
 
 Set up the i18n provider at the application root:
 
@@ -219,7 +219,7 @@ Set up the i18n provider at the application root:
 - Configure `angular.json` with i18n locales
 - Set up LOCALE_ID provider
 
-Step 4.3 — Configure Date and Number Formatting
+Step 4.3 -- Configure Date and Number Formatting
 
 Set up locale-aware formatting:
 - **Dates:** Use Intl.DateTimeFormat (web) or DateFormat (Flutter) with locale parameter
@@ -227,7 +227,7 @@ Set up locale-aware formatting:
 - **Currency:** Configure currency display per locale
 - Create formatting utility functions that accept locale as parameter
 
-Step 4.4 — RTL Layout Support (if Arabic, Hebrew, or Urdu in target locales)
+Step 4.4 -- RTL Layout Support (if Arabic, Hebrew, or Urdu in target locales)
 
 If any RTL locale is requested:
 - **CSS:** Add `[dir="rtl"]` selectors or use logical properties (`margin-inline-start` instead of `margin-left`)
@@ -240,12 +240,12 @@ If any RTL locale is requested:
 Commit: "feat(i18n): configure i18n library with locale detection and formatting"
 
 ============================================================
-PHASE 5 — STRING REPLACEMENT
+PHASE 5 -- STRING REPLACEMENT
 ============================================================
 
 Replace all hardcoded strings in the codebase with translation function calls:
 
-Step 5.1 — Replace Strings
+Step 5.1 -- Replace Strings
 
 For each extracted string, replace the hardcoded value with the i18n function:
 - **react-intl:** `<FormattedMessage id="key" />` or `intl.formatMessage({ id: 'key' })`
@@ -255,7 +255,7 @@ For each extracted string, replace the hardcoded value with the i18n function:
 - **i18next:** `t('key')` or `<Trans i18nKey="key" />`
 - **Angular:** `{{ 'key' | translate }}` or `$localize`
 
-Step 5.2 — Handle Interpolated Strings
+Step 5.2 -- Handle Interpolated Strings
 
 Replace strings with dynamic values:
 ```
@@ -269,7 +269,7 @@ intl.formatMessage({ id: 'greeting.welcome' }, { name: user.name })
 AppLocalizations.of(context)!.greetingWelcome(user.name)
 ```
 
-Step 5.3 — Handle Conditional Strings
+Step 5.3 -- Handle Conditional Strings
 
 Replace pluralized or conditional strings:
 ```
@@ -285,10 +285,10 @@ Commit per screen or feature module:
 - "fix(i18n): extract strings from [screen/module] to locale keys"
 
 ============================================================
-PHASE 6 — VERIFICATION
+PHASE 6 -- VERIFICATION
 ============================================================
 
-Step 6.1 — Static Analysis
+Step 6.1 -- Static Analysis
 
 Run the appropriate linter/analyzer:
 - Flutter: `flutter analyze` and `flutter gen-l10n`
@@ -297,14 +297,14 @@ Run the appropriate linter/analyzer:
 
 Fix all errors introduced by the i18n integration.
 
-Step 6.2 — String Coverage Audit
+Step 6.2 -- String Coverage Audit
 
 Re-scan the codebase for any remaining hardcoded user-facing strings:
 - Report strings found vs strings extracted
 - Coverage percentage
 - List any intentionally skipped strings with rationale
 
-Step 6.3 — Locale File Validation
+Step 6.3 -- Locale File Validation
 
 Verify locale files:
 - All keys present in base locale exist in every target locale
@@ -367,12 +367,12 @@ After i18n setup:
 DO NOT
 ============================================================
 
-- Do NOT extract log messages, debug strings, or code-only identifiers — these are not user-facing.
-- Do NOT use auto-translation APIs to fill in target locales — use placeholder markers instead.
-- Do NOT create deeply nested key structures beyond 3 levels — keep keys flat and scannable.
-- Do NOT use string concatenation for translated text — use interpolation placeholders.
-- Do NOT hardcode locale names in conditional logic — use the i18n library's locale detection.
-- Do NOT skip pluralization for countable items — different languages have different plural rules.
-- Do NOT remove the original English strings from code comments — they serve as context for translators.
-- Do NOT overwrite existing locale files without reading them first — merge new keys into existing files.
-- Do NOT assume left-to-right layout — use logical CSS properties and directional-aware widgets.
+- Do NOT extract log messages, debug strings, or code-only identifiers -- these are not user-facing.
+- Do NOT use auto-translation APIs to fill in target locales -- use placeholder markers instead.
+- Do NOT create deeply nested key structures beyond 3 levels -- keep keys flat and scannable.
+- Do NOT use string concatenation for translated text -- use interpolation placeholders.
+- Do NOT hardcode locale names in conditional logic -- use the i18n library's locale detection.
+- Do NOT skip pluralization for countable items -- different languages have different plural rules.
+- Do NOT remove the original English strings from code comments -- they serve as context for translators.
+- Do NOT overwrite existing locale files without reading them first -- merge new keys into existing files.
+- Do NOT assume left-to-right layout -- use logical CSS properties and directional-aware widgets.

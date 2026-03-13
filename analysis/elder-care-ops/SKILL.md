@@ -1,6 +1,6 @@
 ---
 name: elder-care-ops
-description: Analyzes assisted living and elder care software for resident monitoring, medication management, staff scheduling, family communication, fall detection, ADL tracking, and care plan optimization.
+description: Audit an assisted living or skilled nursing platform for resident safety monitoring, eMAR medication administration, fall detection and prevention workflows, ADL functional decline tracking, staff scheduling with acuity-based assignment, family portal communication, and care plan optimization. Use when reviewing senior living software, memory care systems, nursing home EHR platforms, or CMS compliance tools.
 version: "1.0.0"
 category: analysis
 platforms:

@@ -1,6 +1,6 @@
 ---
 name: threat-triage
-description: Threat triage analysis covering IOC classification, threat intelligence correlation, kill chain mapping, false positive reduction, and threat actor attribution using MITRE ATT&CK and Diamond Model
+description: Analyze cybersecurity threat intelligence, triage security alerts, classify IOCs, map attacks to MITRE ATT&CK kill chain, reduce false positives, and attribute threat actors. Covers SIEM tuning, threat feed quality, detection coverage gaps, Diamond Model analysis, and strategic threat assessments for SOC and incident response teams.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -18,7 +18,7 @@ If arguments are provided, use them to focus the analysis (e.g., specific IOC, a
 PHASE 1: THREAT INFRASTRUCTURE DISCOVERY
 ============================================================
 
-Identify the threat detection and intelligence ecosystem:
+Identify the threat detection and intelligence ecosystem.
 
 Step 1.1 -- Detection Stack Inventory
 
@@ -61,7 +61,7 @@ Understand the environment being defended:
 PHASE 2: IOC CLASSIFICATION AND ENRICHMENT
 ============================================================
 
-Evaluate IOC management and classification practices:
+Evaluate IOC management and classification practices.
 
 Step 2.1 -- IOC Taxonomy
 
@@ -103,7 +103,7 @@ Evaluate file-based IOC handling:
 PHASE 3: KILL CHAIN AND ATT&CK MAPPING
 ============================================================
 
-Map observed threats to attack frameworks:
+Map observed threats to attack frameworks.
 
 Step 3.1 -- Lockheed Martin Kill Chain Mapping
 
@@ -147,7 +147,7 @@ Identify related threat activity:
 PHASE 4: FALSE POSITIVE ANALYSIS
 ============================================================
 
-Systematically reduce false positive burden:
+Systematically reduce false positive burden.
 
 Step 4.1 -- False Positive Rate Assessment
 
@@ -189,7 +189,7 @@ Design or evaluate a confidence scoring framework:
 PHASE 5: THREAT ACTOR ATTRIBUTION
 ============================================================
 
-Assess attribution capabilities and evidence:
+Assess attribution capabilities and evidence.
 
 Step 5.1 -- Attribution Evidence Collection
 

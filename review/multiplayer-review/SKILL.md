@@ -1,6 +1,6 @@
 ---
 name: multiplayer-review
-description: Reviews multiplayer networking code for client-server architecture, authoritative server patterns, lag compensation, netcode tick rate, matchmaking, anti-cheat, and bandwidth optimization.
+description: Audit multiplayer netcode, online game networking, and real-time synchronization. Reviews client-server authority, lag compensation, client-side prediction, server reconciliation, entity interpolation, server rewind hit detection, tick rate tuning, delta compression, bandwidth budgets, matchmaking (ELO, Glicko-2, TrueSkill), lobby systems, reconnection flows, host migration, anti-cheat architecture, and input validation. Supports Unity Mirror/NGO/Photon/FishNet, Unreal replication, Godot ENet, WebSocket/WebRTC, Colyseus, Nakama, and custom UDP/TCP stacks.
 version: "1.0.0"
 category: review
 platforms:
@@ -15,6 +15,8 @@ INPUT: $ARGUMENTS (optional)
 
 If provided, focus on specific areas (e.g., "prediction", "matchmaking", "anti-cheat", "lobby system").
 If not provided, perform a full multiplayer code review of the project.
+
+IMPORTANT: For every finding, include the exact file path and line number. Rank all issues by severity (CRITICAL > HIGH > MEDIUM > LOW). When you identify a vulnerability or performance problem, describe the concrete exploit scenario or player-experience impact, then provide a specific code-level fix recommendation.
 
 ============================================================
 PHASE 1: NETWORKING ARCHITECTURE DETECTION

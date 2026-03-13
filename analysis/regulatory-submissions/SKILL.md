@@ -1,6 +1,6 @@
 ---
 name: regulatory-submissions
-description: Analyzes regulatory submission automation systems for eCTD assembly, FDA and EMA formatting compliance, document management, submission tracking, and ICH guideline adherence.
+description: Audit a pharmaceutical regulatory submission system -- evaluate eCTD backbone assembly and XML validation, CTD module completeness (Modules 1-5), FDA ESG and EMA CESP gateway integration, document authoring and publishing workflows, ICH M4/M8/E3 guideline compliance, pre-submission validation rules, 21 CFR Part 11 audit trails, and post-submission lifecycle tracking. Covers IND, NDA, BLA, ANDA, MAA, and variation submissions using Veeva Vault RIM, IQVIA, Lorenz docuBridge, or custom platforms.
 version: "1.0.0"
 category: analysis
 platforms:

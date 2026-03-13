@@ -1,6 +1,6 @@
 ---
 name: therapy-outcomes
-description: Analyzes therapy outcome measurement systems for functional improvement scoring, treatment effectiveness comparison, discharge readiness prediction, and patient satisfaction correlation per FOTO outcomes, AM-PAC, and OPTIMAL classification frameworks.
+description: Evaluate therapy outcome measurement systems for rehabilitation and physical therapy. Analyzes functional improvement scoring (MCID, MDC, risk-adjusted residuals), treatment effectiveness comparison by therapist, diagnosis, and facility with case-mix adjustment, discharge readiness prediction (plateau detection, visit utilization trending), patient satisfaction correlation with clinical outcomes, and quality reporting compliance (CMS MIPS, CARF accreditation) using FOTO, AM-PAC, OPTIMAL, DASH, LEFS, ODI, and PHQ-9 outcome instruments.
 version: "1.0.0"
 category: analysis
 platforms:

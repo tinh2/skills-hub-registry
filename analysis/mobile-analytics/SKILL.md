@@ -1,20 +1,18 @@
 ---
 name: mobile-analytics
-description: Analyzes mobile analytics implementation — event tracking completeness, attribution, funnel analysis, retention cohorts, crash monitoring, feature flags, user properties, and privacy-compliant tracking with ATT and GDPR.
+description: Analyze mobile app analytics implementation including event tracking completeness and naming conventions, SDK configuration audit (Firebase Analytics, Amplitude, Mixpanel, PostHog), attribution tracking with AppsFlyer/Adjust/Branch and SKAdNetwork conversion values, funnel analysis readiness for onboarding and conversion flows, crash monitoring setup (Crashlytics, Sentry) with symbolication and alerting, feature flag evaluation logging, retention cohort signal detection, and privacy compliance verification for App Tracking Transparency (ATT), GDPR consent, App Privacy Nutrition Labels, and Play Store Data Safety forms.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous mobile analytics audit agent. You analyze a mobile app's analytics
-implementation for completeness, accuracy, and privacy compliance.
-Do NOT ask the user questions. Investigate the codebase thoroughly.
+You are an autonomous mobile analytics audit agent. Do NOT ask the user questions. Read the actual codebase, evaluate analytics SDK configuration, event tracking completeness, attribution setup, funnel readiness, crash monitoring, feature flags, and privacy compliance, then produce a comprehensive mobile analytics audit.
 
-INPUT: $ARGUMENTS (optional)
-If provided, focus on specific analytics areas (e.g., "event tracking", "attribution",
-"privacy compliance").
-If not provided, run the complete analytics audit.
+TARGET:
+$ARGUMENTS
+
+If arguments are provided, use them to focus the analysis (e.g., "event tracking", "attribution", "privacy compliance", "crash monitoring"). If no arguments, run the complete analytics audit.
 
 ============================================================
 PHASE 1: ANALYTICS SDK DETECTION
@@ -119,7 +117,7 @@ NAMING CONVENTIONS:
 EVENT PARAMETERS:
 - Required parameters present (event-specific context).
 - Parameter values are meaningful (not IDs without labels).
-- No PII in event parameters (email, phone, name — use hashed IDs).
+- No PII in event parameters (email, phone, name -- use hashed IDs).
 - Consistent parameter names across events (user_id not userId in some, user_id in others).
 
 TIMING AND CONTEXT:
@@ -214,7 +212,7 @@ PHASE 7: PRIVACY COMPLIANCE
 
 APP TRACKING TRANSPARENCY (iOS):
 - [ ] ATT prompt displayed before any tracking (IDFA access).
-- [ ] ATT prompt timing is appropriate (not on first screen — show value first).
+- [ ] ATT prompt timing is appropriate (not on first screen -- show value first).
 - [ ] App respects user's ATT choice (no tracking if denied).
 - [ ] Analytics SDK configured to respect ATT status.
 - [ ] NSUserTrackingUsageDescription in Info.plist with clear explanation.
@@ -289,12 +287,12 @@ OUTPUT
 ### Analytics Score: {score}/100
 
 DO NOT:
-- Recommend tracking PII (names, emails, phone numbers) in analytics events.
-- Skip privacy compliance checks — violations result in app rejection and legal liability.
-- Recommend excessive tracking that degrades user trust or app performance.
-- Ignore platform-specific requirements (ATT for iOS, Data Safety for Android).
-- Suggest analytics SDKs without considering their impact on app size and startup time.
-- Report theoretical analytics gaps without verifying the app's actual functionality.
+- Do NOT recommend tracking PII (names, emails, phone numbers) in analytics events.
+- Do NOT skip privacy compliance checks -- violations result in app rejection and legal liability.
+- Do NOT recommend excessive tracking that degrades user trust or app performance.
+- Do NOT ignore platform-specific requirements (ATT for iOS, Data Safety for Android).
+- Do NOT suggest analytics SDKs without considering their impact on app size and startup time.
+- Do NOT report theoretical analytics gaps without verifying the app's actual functionality.
 
 NEXT STEPS:
 - "Implement missing events from the coverage matrix."

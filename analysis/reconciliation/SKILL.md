@@ -1,6 +1,6 @@
 ---
 name: reconciliation
-description: Analyzes financial reconciliation workflows for intercompany reconciliation, suspense account clearing, variance analysis, automated matching rules, and exception handling using close management best practices and balance sheet substantiation standards.
+description: Audit financial reconciliation workflows -- evaluate automated transaction matching engines, intercompany balance reconciliation, suspense and clearing account health, variance root-cause investigation, and close calendar integration. Covers bank reconciliation, subledger-to-GL matching, IC elimination for consolidation, balance sheet substantiation, and reconciliation quality metrics using BlackLine, FloQast, Trintech, or ERP-native tools.
 version: "1.0.0"
 category: analysis
 platforms:

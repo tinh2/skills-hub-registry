@@ -1,6 +1,6 @@
 ---
 name: game-code-review
-description: Reviews game code for architecture quality including ECS vs OOP patterns, component coupling, update loops, state machines, save/load serialization, and common game programming anti-patterns.
+description: "Review game code architecture for component coupling, ECS vs OOP design, update loop organization (deltaTime, fixed timestep, frame budget), state machine quality (boolean soup, string states), save/load serialization (versioning, migration, corruption handling), input handling (action-based abstraction, buffering, remapping), and anti-patterns (god objects, find-in-update, tight loop allocation, missing object pooling, magic numbers). Supports Unity, Unreal, Godot, Phaser, and custom engines. Use when auditing game project code quality, architecture, or performance patterns."
 version: "1.0.0"
 category: review
 platforms:
