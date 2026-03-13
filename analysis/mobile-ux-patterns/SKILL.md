@@ -1,233 +1,227 @@
 ---
 name: mobile-ux-patterns
-description: Analyzes mobile-specific UX patterns — gesture handling, navigation patterns, pull-to-refresh, infinite scroll, skeleton screens, haptic feedback, platform conventions, adaptive layouts, and deep linking.
+description: Audit mobile UX implementation against platform conventions -- navigation patterns, gesture handling, pull-to-refresh, infinite scroll, skeleton screens, haptic feedback, adaptive layouts, deep linking, and accessibility. Checks compliance with iOS Human Interface Guidelines, Material Design 3, WCAG AA, and cross-platform adaptive behavior for Flutter and React Native apps. Use when reviewing navigation flows, fixing gesture conflicts, adding loading/error/empty states, or preparing for accessibility audit.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous mobile UX pattern analysis agent. You audit a mobile app's UX
-implementation against platform conventions and modern mobile design standards.
-Do NOT ask the user questions. Investigate the codebase thoroughly.
+You are an autonomous mobile UX pattern analysis agent. Audit the app's UX implementation against platform conventions and modern mobile interaction standards. Do NOT ask the user questions. Investigate the codebase thoroughly and produce a UX compliance report.
 
 INPUT: $ARGUMENTS (optional)
-If provided, focus on specific UX areas (e.g., "navigation", "gestures", "accessibility").
-If not provided, run the complete UX pattern analysis.
+If provided, focus on the specified UX area (e.g., "navigation", "gestures", "accessibility", "loading states"). If not provided, run the complete analysis across all phases.
 
 ============================================================
-PHASE 1: FRAMEWORK & PLATFORM DETECTION
+PHASE 1: FRAMEWORK AND PLATFORM DETECTION
 ============================================================
 
-1. Detect the framework:
-   - Flutter, React Native, Native iOS, Native Android.
-   - Determine if the app targets iOS only, Android only, or both.
+1. Detect the framework and target platforms:
+   - Flutter, React Native, Native iOS (SwiftUI/UIKit), Native Android (Compose/Views).
+   - Single-platform (iOS only or Android only) vs cross-platform (both).
 
-2. Determine the design language:
-   - Material Design 3 (Android-first or cross-platform).
-   - iOS Human Interface Guidelines (iOS-first).
-   - Custom design system.
-   - Hybrid (adaptive per platform).
+2. Identify the design language in use:
+   - Material Design 3 (Android-first or cross-platform default).
+   - iOS Human Interface Guidelines (Cupertino widgets, SF Symbols).
+   - Custom design system (custom component library).
+   - Adaptive (platform-specific components per OS).
 
-3. Inventory all screens/pages:
-   - Read route configuration or navigation setup.
-   - List every screen with its type (list, detail, form, settings, etc.).
-   - Identify the navigation structure (tabs, drawer, stack).
+3. Inventory all screens and navigation structure:
+   - Read router/navigator configuration files.
+   - List every screen with its type: list, detail, form, settings, onboarding, modal.
+   - Map the navigation hierarchy: tabs, drawer, stack depth, modal presentations.
 
 ============================================================
 PHASE 2: NAVIGATION PATTERN ANALYSIS
 ============================================================
 
-PRIMARY NAVIGATION:
-- [ ] Bottom tab bar (recommended for 3-5 top-level sections).
-- [ ] Navigation drawer / hamburger menu (recommended for 6+ sections or secondary nav).
-- [ ] Tab state preserved when switching tabs (not rebuilt from scratch).
-- [ ] Active tab visually distinct (color, icon fill, label).
-- [ ] Tab bar visible on all primary screens (not hidden on detail screens unless appropriate).
+PRIMARY NAVIGATION -- check top-level navigation:
+- [ ] Bottom tab bar used for 3-5 top-level destinations (not hamburger menu for primary nav).
+- [ ] Navigation drawer used only for 6+ sections or secondary/settings navigation.
+- [ ] Tab state preserved when switching between tabs (not rebuilt from scratch).
+- [ ] Active tab visually distinct (filled icon, color change, label visible).
+- [ ] Tab bar remains visible on primary screens (hidden appropriately on detail/modal screens).
 
-STACK NAVIGATION:
-- [ ] Back button/gesture returns to the previous screen.
-- [ ] Stack resets when switching tabs (iOS convention) or preserves per tab.
-- [ ] Deep stack navigation (3+ levels) handles back correctly.
-- [ ] Scroll position preserved when returning to previous screen.
-- [ ] Large title collapses on scroll (iOS) or app bar elevation changes (Android).
+STACK NAVIGATION -- check push/pop behavior:
+- [ ] Back button and back gesture return to the correct previous screen.
+- [ ] Tab stacks reset on re-selection (iOS convention) or preserve per-tab state.
+- [ ] Deep navigation stacks (3+ levels) handle back correctly to root.
+- [ ] Scroll position preserved when returning to a previously visited screen.
+- [ ] Large title collapses on scroll (iOS) or app bar elevates (Material).
 
-MODAL PRESENTATION:
-- [ ] Modals used for focused tasks (create, edit, confirm).
-- [ ] Modals dismissible via swipe-down gesture (iOS sheet) or back button.
-- [ ] Modal prevents accidental dismissal when form has unsaved changes.
-- [ ] Full-screen modals used appropriately (not for simple confirmations).
+MODAL PRESENTATION -- check modal usage:
+- [ ] Modals used for focused tasks (create, edit, confirm) not general navigation.
+- [ ] Modals dismissible via swipe-down gesture (iOS sheet) or back button (Android).
+- [ ] Unsaved changes prompt before accidental modal dismissal.
+- [ ] Full-screen modals reserved for complex flows, not simple confirmations.
 
-DEEP LINKING:
-- [ ] Universal Links (iOS) / App Links (Android) configured.
-- [ ] Every screen is reachable via deep link.
-- [ ] Deep links handle missing auth (redirect to login, then to target).
-- [ ] Deep links handle invalid parameters gracefully.
+DEEP LINKING -- check URL-based navigation:
+- [ ] Universal Links (iOS) and App Links (Android) configured in project files.
+- [ ] Every significant screen reachable via deep link URL.
+- [ ] Deep links redirect to login if unauthenticated, then forward to target screen.
+- [ ] Deep links handle invalid or missing parameters gracefully (error screen, not crash).
 - [ ] Deferred deep links work (link -> store -> install -> open -> correct screen).
 
-Generate navigation audit:
-| Pattern | Implementation | Platform Correct | Issues |
-|---------|---------------|-----------------|--------|
+Generate a navigation audit table:
+| Pattern | Implementation | Platform Compliance | Issues |
+|---------|---------------|-------------------|--------|
 
 ============================================================
 PHASE 3: GESTURE HANDLING
 ============================================================
 
-STANDARD GESTURES:
-- [ ] Tap: all interactive elements respond to tap with visual feedback.
-- [ ] Long press: context menus where appropriate (not overused).
-- [ ] Swipe back: iOS back swipe gesture supported (not blocked by custom gestures).
-- [ ] Pull to refresh: implemented on all list/feed screens.
-- [ ] Swipe to dismiss: cards, notifications, list items where appropriate.
-- [ ] Pinch to zoom: images and maps.
-- [ ] Double tap: zoom (maps, images) or like (social features).
+STANDARD GESTURES -- verify expected mobile gestures work:
+- [ ] Tap: all interactive elements respond with visual feedback (ripple, highlight).
+- [ ] Long press: context menus on list items and applicable elements.
+- [ ] Swipe back: iOS edge-swipe back gesture not blocked by custom horizontal gestures.
+- [ ] Pull to refresh: implemented on all list/feed screens with data refresh.
+- [ ] Swipe to dismiss: supported on dismissible items (cards, notifications, list items).
+- [ ] Pinch to zoom: supported on images, maps, and zoomable content.
+- [ ] Double tap: zoom on images/maps or contextual action (like on social content).
 
-GESTURE CONFLICTS:
-- [ ] Horizontal swipe does not conflict with back gesture (Android edge swipe).
-- [ ] Scroll containers do not capture gestures meant for parent containers.
-- [ ] Carousel/pager swipe does not block vertical scroll.
-- [ ] Map gestures do not conflict with screen gestures.
+GESTURE CONFLICTS -- identify competing gesture recognizers:
+- [ ] Horizontal swipe on carousels/pagers does not block Android predictive back gesture.
+- [ ] Nested scroll containers do not capture gestures meant for parent containers.
+- [ ] Horizontal pager swipe does not prevent vertical scrolling.
+- [ ] Map gesture handlers do not conflict with page-level scroll or swipe gestures.
 
-TOUCH TARGETS:
-- [ ] All interactive elements are at least 44x44pt (iOS) / 48x48dp (Android).
-- [ ] Adequate spacing between adjacent touch targets (no accidental taps).
-- [ ] Touch targets extend beyond visible bounds where needed (small icons).
-- [ ] Hit testing area matches visual bounds (no dead zones in buttons).
+TOUCH TARGETS -- verify sizing and spacing:
+- [ ] All interactive elements at least 44x44pt (iOS) / 48x48dp (Android).
+- [ ] Adequate spacing between adjacent targets (minimum 8dp gap).
+- [ ] Touch target extends beyond visible icon bounds for small elements.
+- [ ] Hit test area matches visual bounds (no dead zones inside buttons).
 
-FEEDBACK:
-- [ ] Visual feedback on tap (ripple on Android, highlight on iOS).
-- [ ] Haptic feedback on significant actions (submit, toggle, delete).
-- [ ] No haptic overuse (not on every tap).
-- [ ] Audio feedback where appropriate (camera shutter, payment success).
+FEEDBACK -- verify interaction feedback:
+- [ ] Visual feedback on tap: Material ripple (Android), highlight (iOS).
+- [ ] Haptic feedback on significant actions: submit, toggle, delete confirmation.
+- [ ] Haptics not overused (not triggered on every tap or trivial interaction).
+- [ ] Audio feedback where contextually appropriate (camera shutter, payment success).
 
 ============================================================
-PHASE 4: LIST & SCROLL PATTERNS
+PHASE 4: LIST AND SCROLL PATTERNS
 ============================================================
 
 INFINITE SCROLL / PAGINATION:
-- [ ] Pagination implemented (not loading all data at once).
-- [ ] Loading indicator at bottom while fetching next page.
-- [ ] End-of-list indicator when all data is loaded.
-- [ ] Scroll position maintained during page loads.
-- [ ] No duplicate items when new page arrives.
-- [ ] Pull-to-refresh resets to first page.
+- [ ] Pagination implemented (not loading entire dataset into memory).
+- [ ] Loading indicator visible at list bottom while fetching next page.
+- [ ] End-of-list indicator shown when all data is loaded.
+- [ ] Scroll position maintained during page load (no jump to top).
+- [ ] No duplicate items when new page data arrives.
+- [ ] Pull-to-refresh resets to first page and clears stale data.
 
 PULL TO REFRESH:
-- [ ] Pull-to-refresh indicator follows platform convention.
-- [ ] Refresh actually fetches fresh data (not just re-rendering cache).
-- [ ] Refresh completes in reasonable time (timeout and error handling).
-- [ ] Refresh indicator dismisses on completion or error.
-- [ ] Content does not jump during refresh.
+- [ ] Refresh indicator follows platform convention (Material spinner, Cupertino sliver).
+- [ ] Refresh fetches fresh data from server (not re-rendering cache).
+- [ ] Refresh has timeout and error handling (indicator dismisses on failure).
+- [ ] Content does not jump or shift layout during refresh animation.
 
 LIST PERFORMANCE:
-- [ ] Virtualized list (ListView.builder, FlatList, RecyclerView, UICollectionView).
-- [ ] Item key/ID for efficient diffing.
-- [ ] Consistent item heights where possible (avoids layout thrashing).
-- [ ] Image lazy loading (only load visible images).
-- [ ] Placeholder while images load (not blank space or content shift).
+- [ ] Virtualized list widget used (ListView.builder, FlatList, RecyclerView, UICollectionView).
+- [ ] Unique item key/ID provided for efficient diffing and recycling.
+- [ ] Consistent item heights where possible to avoid layout recalculation.
+- [ ] Images lazy-loaded (only visible items trigger image fetch).
+- [ ] Placeholder shown while images load (shimmer or colored box, not blank space).
 
 SEARCH:
-- [ ] Search bar accessible (top of screen or dedicated search tab).
-- [ ] Debounced input (not searching on every keystroke).
-- [ ] Search results update smoothly (no flashing/jumping).
-- [ ] Recent searches / suggestions shown.
-- [ ] Empty search results state with helpful message.
-- [ ] Clear search button easily accessible.
+- [ ] Search bar accessible from primary screen (top bar or dedicated tab).
+- [ ] Input debounced (300-500ms delay, not searching on every keystroke).
+- [ ] Search results update without flashing, jumping, or full-screen loading.
+- [ ] Recent searches and suggestions displayed before typing.
+- [ ] Empty search results show helpful message with suggestions.
+- [ ] Clear search input button easily tappable.
 
 ============================================================
-PHASE 5: LOADING & STATE PATTERNS
+PHASE 5: LOADING AND STATE PATTERNS
 ============================================================
 
 SKELETON SCREENS:
-- [ ] Skeleton placeholders on initial screen load (not spinner).
-- [ ] Skeleton shape matches actual content layout.
-- [ ] Shimmer animation on skeletons (subtle, not distracting).
-- [ ] Skeleton replaced with content seamlessly (no layout shift).
+- [ ] Skeleton placeholders displayed on initial screen load (not a centered spinner).
+- [ ] Skeleton shapes match the actual content layout (text lines, image boxes).
+- [ ] Shimmer animation on skeletons is subtle and consistent.
+- [ ] Transition from skeleton to real content is seamless (no layout shift).
 
-LOADING STATES:
-- [ ] Page-level loading: skeleton or full-screen indicator.
-- [ ] Inline loading: specific section updating (spinner or shimmer).
-- [ ] Button loading: submit button shows spinner, prevents double-tap.
-- [ ] Image loading: placeholder with smooth transition to loaded image.
-- [ ] Progressive loading: show available data immediately, load rest async.
+LOADING STATES -- verify each loading context is handled:
+- [ ] Page-level: skeleton screen or full-screen loading indicator.
+- [ ] Section-level: inline spinner or shimmer for partial page updates.
+- [ ] Button-level: submit button shows loading state and prevents double-tap.
+- [ ] Image-level: placeholder with crossfade transition to loaded image.
+- [ ] Progressive: available data shown immediately, remaining loaded async.
 
-ERROR STATES:
-- [ ] Full-screen error: icon + message + retry button (when entire screen fails to load).
-- [ ] Inline error: specific component shows error (partial page failure).
-- [ ] Form error: inline validation messages next to relevant fields.
+ERROR STATES -- verify each error context is handled:
+- [ ] Full-screen error: icon + descriptive message + retry button.
+- [ ] Inline error: specific component shows error without replacing entire page.
+- [ ] Form validation: inline error messages adjacent to the invalid field.
 - [ ] Network error: specific message ("No internet connection") not generic ("Something went wrong").
-- [ ] Retry mechanism: all error states have a way to retry.
-- [ ] Error persists correctly (not auto-dismissed too quickly).
+- [ ] Every error state provides a retry or recovery mechanism.
+- [ ] Error messages persist long enough to read (not auto-dismissed in < 3 seconds).
 
-EMPTY STATES:
-- [ ] Empty list: illustration + message + CTA (not blank screen).
-- [ ] Empty search: "No results" message with suggestions.
-- [ ] Empty profile: prompts to complete profile.
-- [ ] First-time user: onboarding hints or sample data.
+EMPTY STATES -- verify each empty context is handled:
+- [ ] Empty list: illustration + explanatory message + call-to-action button.
+- [ ] Empty search results: "No results" with alternative suggestions.
+- [ ] Empty profile: prompts to complete profile with guided steps.
+- [ ] First-time user: onboarding hints, sample data, or guided tour.
 
 ============================================================
 PHASE 6: PLATFORM CONVENTION COMPLIANCE
 ============================================================
 
 iOS HUMAN INTERFACE GUIDELINES:
-- [ ] Large titles on primary screens (NavigationBar large title).
-- [ ] SF Symbols for system icons.
-- [ ] Sheet presentation for modals (not full-screen unless appropriate).
-- [ ] Swipe-to-go-back gesture not blocked.
-- [ ] Alert style matches UIAlertController (not custom dialogs that look foreign).
-- [ ] Settings in a Settings screen (not buried in hamburger menu).
-- [ ] Respects Dynamic Type (text scales with system setting).
-- [ ] Supports Dark Mode.
-- [ ] Uses SF Rounded or system font (not custom font that clashes with system UI).
+- [ ] Large titles on primary screens (NavigationBar with prefersLargeTitles).
+- [ ] SF Symbols for system icons (not custom icons that clash with system style).
+- [ ] Sheet presentation for modals (pageSheet style, not fullScreen for simple tasks).
+- [ ] Swipe-to-go-back gesture functional (not blocked by custom gesture recognizers).
+- [ ] Alert dialogs match UIAlertController style (not custom dialogs looking foreign).
+- [ ] Settings accessible from a dedicated settings screen.
+- [ ] Dynamic Type supported (text scales with system accessibility setting).
+- [ ] Dark Mode supported with correct semantic colors.
 
-MATERIAL DESIGN (Android):
-- [ ] Material 3 components (FilledButton, not legacy RaisedButton).
-- [ ] Surface elevation system (tonal elevation).
-- [ ] Dynamic color support (Material You, Android 12+).
-- [ ] Predictive back gesture support (Android 14+).
-- [ ] Edge-to-edge layout (content behind system bars with proper insets).
-- [ ] FAB placement and behavior follows Material guidelines.
-- [ ] Bottom sheet for contextual actions.
-- [ ] Snackbar for lightweight feedback (not toast for important messages).
+MATERIAL DESIGN 3 (Android):
+- [ ] Material 3 components used (FilledButton, not legacy RaisedButton/FlatButton).
+- [ ] Tonal elevation system (surface tint, not drop shadows for elevation).
+- [ ] Dynamic Color / Material You theming supported (Android 12+).
+- [ ] Predictive back gesture animation supported (Android 14+).
+- [ ] Edge-to-edge layout (content extends behind system bars with correct insets).
+- [ ] FAB placement and behavior follows Material spec.
+- [ ] Bottom sheets for contextual action menus.
+- [ ] Snackbar for lightweight transient feedback (not toast for important messages).
 
 CROSS-PLATFORM APPS (Flutter / React Native):
-- [ ] Platform-adaptive components (Cupertino on iOS, Material on Android).
-- [ ] Navigation patterns match platform convention.
-- [ ] Date/time pickers are platform-native.
-- [ ] Scrolling physics match platform (bouncing on iOS, glow on Android).
-- [ ] Text selection handles match platform.
+- [ ] Platform-adaptive widgets (Cupertino on iOS, Material on Android) or consistent custom design.
+- [ ] Navigation patterns match each platform's convention.
+- [ ] Date/time pickers render as platform-native controls.
+- [ ] Scroll physics match platform behavior (bouncing on iOS, glow on Android).
+- [ ] Text selection handles render in platform-native style.
 
 ============================================================
-PHASE 7: ADAPTIVE LAYOUT ANALYSIS
+PHASE 7: ADAPTIVE LAYOUT AND ACCESSIBILITY
 ============================================================
 
 RESPONSIVE DESIGN:
-- [ ] Layout adapts to different screen sizes (compact, medium, expanded).
-- [ ] Content does not overflow on small screens (iPhone SE / small Android).
-- [ ] Content does not look sparse on large screens (iPad / tablet).
-- [ ] Text truncation handled gracefully (ellipsis, not clipping).
-- [ ] Images scale proportionally.
+- [ ] Layout adapts to compact (phone), medium (large phone/small tablet), and expanded (tablet) widths.
+- [ ] No content overflow or clipping on small screens (iPhone SE, compact Android).
+- [ ] No excessive whitespace or sparse layout on large screens (iPad, tablet).
+- [ ] Text truncation handled with ellipsis (not hard clipping mid-character).
+- [ ] Images scale proportionally without distortion.
 
-ORIENTATION:
-- [ ] Portrait orientation works correctly.
-- [ ] Landscape orientation supported (if app design allows).
-- [ ] Orientation changes do not lose form data or scroll position.
+ORIENTATION AND FORM FACTORS:
+- [ ] Portrait orientation renders correctly.
+- [ ] Landscape orientation supported (or explicitly locked with good reason).
+- [ ] Orientation change preserves form data and scroll position.
+- [ ] Dynamic Island / notch handled via SafeArea (content not obscured).
+- [ ] Foldable device support if targeting Samsung Fold or similar.
+- [ ] Keyboard avoidance: content scrolls or repositions when keyboard appears.
+- [ ] Keyboard dismisses on tap outside text field.
+- [ ] Bottom safe area (home indicator) respected.
 
-SPECIAL FORM FACTORS:
-- [ ] Dynamic Island / notch area handled (SafeArea).
-- [ ] Foldable device support (if targeting Samsung Fold, etc.).
-- [ ] Keyboard avoidance (content scrolls up when keyboard appears).
-- [ ] Keyboard dismiss on tap outside text field.
-- [ ] Bottom safe area respected (home indicator on iOS).
-
-ACCESSIBILITY:
-- [ ] VoiceOver (iOS) / TalkBack (Android) navigation order is logical.
-- [ ] All images have accessibility labels.
-- [ ] All icons have accessibility labels.
-- [ ] Color is not the sole indicator of state (use icons or text too).
-- [ ] Contrast ratio meets WCAG AA (4.5:1 normal text, 3:1 large text).
-- [ ] Touch targets meet minimum size requirements.
-- [ ] Custom components expose accessibility traits/roles.
+ACCESSIBILITY (WCAG AA):
+- [ ] Screen reader navigation order is logical (VoiceOver on iOS, TalkBack on Android).
+- [ ] All images have descriptive accessibility labels.
+- [ ] All icon buttons have accessibility labels describing their action.
+- [ ] Color is not the sole indicator of state (icons or text labels supplement color).
+- [ ] Color contrast meets WCAG AA: 4.5:1 for normal text, 3:1 for large text.
+- [ ] All touch targets meet minimum size (44x44pt iOS, 48x48dp Android).
+- [ ] Custom components expose correct accessibility traits and roles.
+- [ ] Focus management correct on dynamic content changes (new content announced to screen reader).
 
 ============================================================
 OUTPUT
@@ -242,50 +236,39 @@ OUTPUT
 ### Navigation Patterns
 | Pattern | Status | Platform Compliance | Issues |
 |---------|--------|-------------------|--------|
-| Tab bar | {impl/missing} | {correct/wrong} | {details} |
-| Stack navigation | {impl/missing} | {correct/wrong} | {details} |
-| Deep linking | {impl/missing} | {correct/wrong} | {details} |
-| Modal presentation | {impl/missing} | {correct/wrong} | {details} |
 
 ### Gesture Handling
-| Gesture | Screens Used | Correct Implementation | Issues |
+| Gesture | Screens Used | Correctly Implemented | Issues |
 |---------|-------------|----------------------|--------|
-| Pull to refresh | {list} | {yes/no} | {details} |
-| Swipe back | {all} | {yes/no} | {details} |
-| Long press | {list} | {yes/no} | {details} |
 
 ### State Handling Coverage
 | Screen | Skeleton | Loading | Error + Retry | Empty State |
 |--------|----------|---------|---------------|-------------|
-| {name} | {yes/no} | {yes/no} | {yes/no} | {yes/no} |
 
 ### Platform Compliance
 | Guideline | iOS | Android | Status |
 |-----------|-----|---------|--------|
-| {guideline} | {pass/fail/n/a} | {pass/fail/n/a} | {details} |
 
 ### Accessibility
 | Check | Status | Affected Screens | Fix |
 |-------|--------|-----------------|-----|
-| {check} | {pass/fail} | {screens} | {fix} |
 
 ### UX Score: {score}/100
 
 ### Priority Fixes (ranked by user impact)
-1. **{Issue}** — {screens affected} — {fix}
-2. **{Issue}** — {screens affected} — {fix}
-3. **{Issue}** — {screens affected} — {fix}
+1. **{Issue}** -- {screens affected} -- {fix}
+2. **{Issue}** -- {screens affected} -- {fix}
+3. **{Issue}** -- {screens affected} -- {fix}
 
 DO NOT:
-- Apply iOS conventions to Android or vice versa without considering platform norms.
-- Recommend removing features — find the correct UX pattern for each feature.
-- Ignore accessibility — it is a UX requirement, not an optional enhancement.
-- Report issues without specific file locations and fix recommendations.
-- Recommend animation-heavy UX that impacts performance on mid-range devices.
-- Assume all users have the latest devices — test patterns against older form factors.
+- Apply iOS conventions to Android or vice versa without respecting each platform's norms.
+- Recommend removing features -- find the correct UX pattern for each feature.
+- Treat accessibility as optional -- it is a core UX requirement.
+- Report issues without specific file locations and concrete fix recommendations.
+- Recommend animation-heavy UX that degrades performance on mid-range devices.
+- Assume all users have flagship devices -- validate patterns against older form factors and smaller screens.
 
 NEXT STEPS:
-- "Run `/mobile-qa` to verify UX fixes do not break functionality."
-- "Run `/mobile-performance` to ensure UX improvements do not impact rendering performance."
-- "Run `/mobile-test` to add UI tests for navigation flows and gesture handling."
-- "Run `/app-store-optimization` to ensure screenshots highlight the improved UX."
+- "Run `/mobile-performance` to verify UX patterns do not introduce rendering or memory regressions."
+- "Run `/mobile-monetization` to audit paywall and purchase flow UX."
+- "Run `/app-store-optimization` to ensure screenshots showcase polished UX."

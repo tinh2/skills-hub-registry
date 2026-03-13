@@ -1,6 +1,6 @@
 ---
 name: storage
-description: Sets up object storage with upload, download, presigned URLs, lifecycle policies, and CDN integration — supports S3, GCS, R2, and Supabase.
+description: "Add file uploads and object storage to my app — set up AWS S3, Google Cloud Storage, Cloudflare R2, or Supabase Storage with presigned URLs, direct browser uploads, multipart chunked uploads, file type validation, lifecycle policies, CORS configuration, and CDN integration"
 version: "1.0.0"
 category: integration
 platforms:

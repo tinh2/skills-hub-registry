@@ -1,6 +1,6 @@
 ---
 name: emergency-response
-description: Analyzes emergency response and 911 dispatch systems for call routing optimization, resource deployment, incident prioritization, mutual aid coordination, GIS integration, response time analysis, and ICS (Incident Command System) compliance.
+description: Audit a 911 dispatch or CAD system for call routing optimization, closest-unit resource deployment, incident prioritization logic, mutual aid coordination, NG911 integration, NFPA response time benchmarking, and ICS/NIMS compliance. Use when reviewing PSAP dispatch platforms, fire/EMS CAD systems, law enforcement dispatch, or emergency operations center software.
 version: "1.0.0"
 category: analysis
 platforms:

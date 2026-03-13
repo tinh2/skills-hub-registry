@@ -1,6 +1,13 @@
 ---
 name: behavioral-segmentation
-description: Analyzes behavioral segmentation systems for RFM analysis implementation, cohort behavior tracking, churn propensity scoring, engagement scoring models, persona clustering methodology, and journey mapping using behavioral economics frameworks and Kahneman/Thaler decision patterns.
+description: >
+  Analyze behavioral segmentation systems for RFM scoring, cohort tracking, churn propensity,
+  engagement scoring, persona clustering, and journey mapping using behavioral economics frameworks.
+  USE THIS SKILL WHEN: user mentions customer segmentation, RFM analysis, cohort analysis,
+  churn prediction, engagement scoring, customer personas, journey mapping, retention analysis,
+  customer lifetime value, or behavioral analytics. Trigger phrases: "segment my customers",
+  "analyze churn", "RFM scoring", "cohort retention", "engagement model", "customer personas",
+  "journey mapping", "why are customers leaving", "identify at-risk users", "behavioral segments".
 version: "1.0.0"
 category: analysis
 platforms:

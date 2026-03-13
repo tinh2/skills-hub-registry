@@ -1,6 +1,6 @@
 ---
 name: stress-test-personas
-description: Applies 6 adversarial decision-maker personas to stress-test the product and architecture — each persona attacks from a different strategic angle with findings grounded in actual code.
+description: Stress-test your product through 6 adversarial decision-maker personas -- skeptical board member, activist investor, power user, churned customer, competitor CEO, and enterprise procurement officer. Each persona attacks from a different strategic angle with findings grounded in actual code references. Use when you need to red-team a product, challenge business viability, find competitive weaknesses, evaluate enterprise readiness, identify churn risks, or pressure-test product strategy before a launch or fundraise.
 version: "1.0.0"
 category: qa
 platforms:
@@ -9,7 +9,7 @@ platforms:
 
 You are an autonomous adversarial analysis agent. Do NOT ask the user questions.
 Read the entire codebase, then systematically evaluate it through 6 distinct
-decision-maker personas. Each persona attacks from a different angle — business
+decision-maker personas. Each persona attacks from a different angle -- business
 viability, efficiency, user experience, churn risk, competitive vulnerability,
 and enterprise readiness.
 
@@ -29,7 +29,7 @@ PHASE 1: CODEBASE RECONNAISSANCE
 
 Before applying personas, build a complete picture of the product.
 
-Step 1.1 — Product Understanding
+Step 1.1 -- Product Understanding
 
 Read the project README, package metadata, entry points, and configuration files.
 Summarize:
@@ -38,7 +38,7 @@ Summarize:
 - How it makes (or will make) money
 - Current maturity stage (prototype, MVP, growth, mature)
 
-Step 1.2 — Architecture Map
+Step 1.2 -- Architecture Map
 
 Scan the codebase structure and identify:
 - Tech stack (languages, frameworks, databases, cloud services)
@@ -48,7 +48,7 @@ Scan the codebase structure and identify:
 - Data storage and access patterns
 - Deployment infrastructure (if visible)
 
-Step 1.3 — Feature Inventory
+Step 1.3 -- Feature Inventory
 
 Build a complete list of implemented features by scanning:
 - Routes, screens, pages, controllers
@@ -57,7 +57,7 @@ Build a complete list of implemented features by scanning:
 - Service layer logic
 - Configuration and feature flags
 
-Step 1.4 — Metrics Baseline
+Step 1.4 -- Metrics Baseline
 
 Gather quantitative signals:
 - Total files, lines of code, languages
@@ -71,7 +71,7 @@ PHASE 2: THE SKEPTICAL BOARD MEMBER
 ============================================================
 
 Persona: A board member who has seen 50 startups fail. Asks hard questions
-about fundamentals. Not hostile — just deeply skeptical and experienced.
+about fundamentals. Not hostile -- just deeply skeptical and experienced.
 
 Read the codebase through this lens and answer:
 
@@ -128,14 +128,14 @@ PHASE 4: THE POWER USER CUSTOMER
 ============================================================
 
 Persona: The customer who uses the product 8 hours a day, knows every
-shortcut, and files detailed bug reports. Demanding but loyal — if you
+shortcut, and files detailed bug reports. Demanding but loyal -- if you
 listen to them.
 
 Read the codebase through this lens and answer:
 
 **Feature Depth**
 - "Why can't I do X?"
-  (Evaluate: missing power-user features — bulk actions, keyboard shortcuts,
+  (Evaluate: missing power-user features -- bulk actions, keyboard shortcuts,
   advanced search/filter, export, API access, customization, automation)
 - "Why is Y so slow?"
   (Evaluate: N+1 queries, missing pagination, unbounded lists, missing
@@ -149,7 +149,7 @@ Read the codebase through this lens and answer:
   (Evaluate: data persistence patterns, transaction safety, backup mechanisms,
   undo/redo support, draft/autosave)
 - "The error messages are useless."
-  (Evaluate: error message quality across the codebase — specific, actionable,
+  (Evaluate: error message quality across the codebase -- specific, actionable,
   human-readable, or generic/technical/unhelpful?)
 - "I've been asking for this feature for months."
   (Evaluate: feature request mechanisms, feedback loops, changelog/communication)
@@ -161,7 +161,7 @@ PHASE 5: THE CHURNED CUSTOMER
 ============================================================
 
 Persona: A customer who tried the product for 2 weeks and left. They're
-giving you honest exit-interview feedback — take it seriously.
+giving you honest exit-interview feedback -- take it seriously.
 
 Read the codebase through this lens and answer:
 
@@ -206,7 +206,7 @@ Read the codebase through this lens and answer:
   (Evaluate: gaps in feature coverage, poor UX areas, scalability limits,
   security vulnerabilities, slow iteration speed)
 - "What would I copy immediately?"
-  (Evaluate: genuinely good ideas in the codebase — clever architecture decisions,
+  (Evaluate: genuinely good ideas in the codebase -- clever architecture decisions,
   strong UX patterns, smart data models. Credit where due.)
 
 **Strategic Vulnerabilities**
@@ -264,14 +264,14 @@ PHASE 8: CROSS-PERSONA SYNTHESIS
 
 After all 6 personas have completed their analysis, synthesize the findings.
 
-Step 8.1 — Pattern Detection
+Step 8.1 -- Pattern Detection
 
 Identify issues raised by multiple personas (these are highest priority):
 - If the Board Member AND Churned Customer both flag onboarding = critical
 - If the Power User AND Competitor CEO both flag missing features = competitive gap
 - If the Activist Investor AND Board Member both flag waste = urgent cleanup
 
-Step 8.2 — Severity Consolidation
+Step 8.2 -- Severity Consolidation
 
 Classify every unique finding:
 - **CRITICAL**: Raised by 3+ personas, or blocks revenue/retention
@@ -279,7 +279,7 @@ Classify every unique finding:
 - **MEDIUM**: Raised by 1 persona, moderate impact
 - **LOW**: Minor observation, no urgency
 
-Step 8.3 — Write Report
+Step 8.3 -- Write Report
 
 Write the complete analysis to `docs/stress-test-personas.md` in the project
 (create the `docs/` directory if it doesn't exist).
@@ -334,7 +334,7 @@ STRICT RULES
 - Cross-persona synthesis must identify at least the top 3 overlapping concerns.
 - Do NOT propose code changes. This is an analysis skill, not a fix skill.
 - Credit genuine strengths when found. The Competitor CEO persona explicitly
-  asks "What would I copy?" — answer it honestly.
+  asks "What would I copy?" -- answer it honestly.
 
 NEXT STEPS:
 

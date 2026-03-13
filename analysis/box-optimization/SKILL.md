@@ -1,6 +1,15 @@
 ---
 name: box-optimization
-description: Analyzes packaging configurations for carton size selection, void fill minimization, palletization efficiency, sustainable materials evaluation, and total packaging cost reduction aligned with ISTA and ASTM D4169 standards.
+description: >
+  Analyze packaging configurations for carton size selection, void fill minimization,
+  palletization efficiency, sustainable materials, and total packaging cost reduction
+  aligned with ISTA and ASTM D4169 standards.
+  USE THIS SKILL WHEN: user mentions packaging optimization, box sizing, carton selection,
+  void fill, DIM weight, palletization, shipping cost from packaging, ISTA testing,
+  right-sizing boxes, or sustainable packaging materials. Trigger phrases: "optimize packaging",
+  "reduce shipping cost from box size", "right-size boxes", "void fill analysis",
+  "DIM weight savings", "pallet cube utilization", "packaging sustainability audit",
+  "carton selection algorithm", "box-on-demand ROI".
 version: "1.0.0"
 category: analysis
 platforms:

@@ -1,6 +1,6 @@
 ---
 name: mobile-launch
-description: Complete mobile app launch pipeline — chains performance audit, QA testing, security review, store compliance check, and App Store Optimization into a single pre-launch verification workflow.
+description: "Run a complete mobile app pre-launch verification — chains performance audit, QA testing, OWASP mobile security review, App Store and Play Store compliance checks, and store listing optimization into a single launch-ready report. Use before submitting to TestFlight, App Store, or Google Play."
 version: "1.0.0"
 category: combo
 platforms:
@@ -10,11 +10,11 @@ platforms:
 You are an autonomous mobile app launch agent. Do NOT ask the user questions.
 
 This skill chains five skills in sequence, each building on the previous:
-1. `/mobile-performance` — performance audit
-2. `/mobile-qa` — comprehensive QA testing
-3. `/mobile-security-review` — security audit
-4. `/store-compliance` — store guideline compliance
-5. `/app-store-optimization` — store listing optimization
+1. `/mobile-performance` -- performance audit
+2. `/mobile-qa` -- comprehensive QA testing
+3. `/mobile-security-review` -- security audit
+4. `/store-compliance` -- store guideline compliance
+5. `/app-store-optimization` -- store listing optimization
 
 INPUT: $ARGUMENTS
 Pass the app name, target platform(s), or specific launch concerns.
@@ -159,7 +159,7 @@ OUTPUT
 - Screenshot quality: {score}/10
 
 ### Launch Blockers (must fix)
-1. {blocker description — phase and skill that found it}
+1. {blocker description -- phase and skill that found it}
 2. {blocker description}
 
 ### Post-Launch Priorities

@@ -1,6 +1,6 @@
 ---
 name: rent-burden
-description: Analyzes housing affordability tools for rent burden calculation accuracy, area median income modeling, cost-of-living adjustments, housing voucher management, and community needs assessment data quality.
+description: Audit a housing affordability system -- evaluate rent burden calculation accuracy (30% and 50% thresholds), area median income modeling with HUD Income Limits and family size adjustments, Fair Market Rent and SAFMR tracking, payment standard administration, utility allowance schedules, housing voucher issuance and portability workflows, affordability gap analysis by income tier (ELI, VLI, LI), and community needs assessment data quality using Census/ACS, BLS, and HUD data sources. Covers LIHTC, Section 8, HOME, and public housing program rules.
 version: "1.0.0"
 category: analysis
 platforms:

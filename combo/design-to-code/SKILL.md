@@ -1,78 +1,83 @@
 ---
 name: design-to-code
-description: Full design implementation chain — creates a design system, makes it responsive, adds dark mode, then runs a UX audit.
+description: "Turn a design into production-quality frontend code: extract a design system with tokens and components, make layouts responsive across breakpoints, add dark mode with WCAG-compliant theming, then run a UX audit to validate everything. Use when implementing UI from Figma, adding theming, making an app responsive, or overhauling frontend design consistency."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous design implementation agent. Do NOT ask the user questions.
-
-This skill chains four skills in sequence:
-1. `/design-system` — extract or create the design system (tokens, components)
-2. `/responsive` — make all components and layouts responsive
-3. `/dark-mode` — add dark mode support using the design tokens
-4. `/ux` — run a full UX audit to validate the result
+You are an autonomous design implementation agent. Do NOT ask the user questions. Execute all four phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the design specs, Figma references, screens to implement, or "full app".
+Pass the design specs, Figma references, screens to implement, or "full app" for a complete design overhaul.
 
 ============================================================
-PHASE 1: DESIGN SYSTEM  (/design-system)
+PHASE 1: DESIGN SYSTEM (/design-system)
 ============================================================
 
 Follow the instructions defined in the `/design-system` skill exactly.
 
-Extract or create the design system: tokens (colors, typography, spacing,
-radii, shadows), component library, and token-based theming architecture
-(CSS variables, theme provider, or equivalent).
+Extract or create the full design system:
+- Design tokens: colors (primary, secondary, neutral, semantic), typography scale, spacing scale, border radii, shadows, z-index layers
+- Component library: buttons, inputs, cards, modals, navigation, and any app-specific components
+- Token-based theming architecture: CSS custom properties, theme provider, styled-system, or framework equivalent
+- Token naming convention that supports multiple themes (light/dark ready from the start)
 
-Commit the design system. Record the token structure and theme architecture
--- Phases 2 and 3 build directly on top of it. If the project already has
-a partial design system, extend it rather than replacing it.
+If the project already has a partial design system, extend it — do not replace it.
+
+Commit the design system. Document the token structure and theme architecture for Phases 2 and 3.
 
 ============================================================
-PHASE 2: RESPONSIVE LAYOUT  (/responsive)
+PHASE 2: RESPONSIVE LAYOUT (/responsive)
 ============================================================
 
 Follow the instructions defined in the `/responsive` skill exactly.
 
-Make all screens responsive using the design system from Phase 1:
-mobile/tablet/desktop breakpoints, fluid typography and spacing via tokens,
-responsive navigation, 48dp touch targets, and media responsiveness.
+Make all screens responsive using tokens from Phase 1 — no hardcoded pixel values:
+- Define breakpoints: mobile (<640px), tablet (640-1024px), desktop (>1024px)
+- Fluid typography and spacing that scales with viewport via token references
+- Responsive navigation: hamburger/drawer on mobile, full nav on desktop
+- Touch targets: minimum 48dp on all interactive elements
+- Media and image responsiveness: srcset, aspect ratios, lazy loading
+- Layout patterns: stack on mobile, grid on desktop; sidebar collapse; card reflow
 
-IMPORTANT: Use tokens from Phase 1 for all values — do NOT hardcode pixels.
-If tokens are missing breakpoint values, add them first. Commit changes.
+IMPORTANT: Every spacing, font size, and color value must come from Phase 1 tokens. If a token is missing, add it to the design system first.
+
+Commit all responsive changes.
 
 ============================================================
-PHASE 3: DARK MODE  (/dark-mode)
+PHASE 3: DARK MODE (/dark-mode)
 ============================================================
 
 Follow the instructions defined in the `/dark-mode` skill exactly.
 
-Add dark mode using Phase 1 tokens: dark palette mapped to same token names,
-system preference detection, manual toggle with persistence, WCAG AA contrast
-(4.5:1 text, 3:1 UI), and smooth transitions (no flash of wrong theme).
+Add dark mode as a theme variant built on Phase 1 tokens — not as CSS overrides:
+- Dark color palette mapped to the same token names (e.g., --color-bg switches value, not name)
+- System preference detection via prefers-color-scheme media query
+- Manual toggle with user preference persisted to localStorage or equivalent
+- WCAG AA contrast compliance: 4.5:1 for normal text, 3:1 for large text and UI elements
+- Smooth theme transitions with no flash of wrong theme on page load (FOUC prevention)
+- Verify all semantic colors (success, warning, error, info) work in both themes
 
-IMPORTANT: Dark mode must be a theme variant, NOT separate overrides.
-Every color must come from a token. Fix any hardcoded colors. Commit changes.
+IMPORTANT: Find and fix every hardcoded color in the codebase — they all must reference tokens.
+
+Commit all dark mode changes.
 
 ============================================================
-PHASE 4: UX AUDIT  (/ux)
+PHASE 4: UX AUDIT (/ux)
 ============================================================
 
 Follow the instructions defined in the `/ux` skill exactly.
 
-Run a full UX audit on the result of Phases 1-3:
-- Nielsen's 10 usability heuristics
-- WCAG 2.1 AA accessibility (focus on contrast in both themes)
-- Responsive behavior across breakpoints
-- Dark mode consistency and readability
-- Interaction patterns and feedback
+Audit the result of Phases 1-3 against these criteria:
+- Nielsen's 10 usability heuristics applied to every screen
+- WCAG 2.1 AA accessibility: focus indicators, alt text, ARIA labels, contrast in both themes
+- Responsive behavior: test each breakpoint for layout breaks, text overflow, touch target overlap
+- Dark mode consistency: verify every component renders correctly in both themes
+- Interaction patterns: hover/focus/active states, loading indicators, error feedback, empty states
 
-Fix all issues found and commit the fixes. This is the quality gate
-for the entire design implementation.
+Fix all issues found during the audit. Commit the fixes. This phase is the quality gate for the entire design implementation.
 
 ============================================================
 OUTPUT

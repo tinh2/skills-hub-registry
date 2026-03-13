@@ -1,6 +1,6 @@
 ---
 name: dns
-description: "Configure DNS records, SSL/TLS certificates, subdomains, email authentication, and health check routing"
+description: "Set up DNS records, SSL/TLS certificates, subdomains, SPF/DKIM/DMARC email authentication, and health-check failover routing for Route53, Cloudflare, or GCP Cloud DNS — with optional Terraform output"
 version: "1.0.0"
 category: deploy
 platforms:
@@ -67,8 +67,8 @@ Generate DNS records for all required domains. Organize by record type:
 
 **Root domain** (`example.com`):
 ```
-A     example.com    →  {load balancer IP or CDN}
-AAAA  example.com    →  {IPv6 address if available}
+A     example.com    ->  {load balancer IP or CDN}
+AAAA  example.com    ->  {IPv6 address if available}
 ```
 - For AWS: use ALIAS record to CloudFront or ALB
 - For Cloudflare: use proxied A/CNAME record (orange cloud)
@@ -88,74 +88,20 @@ AAAA  example.com    →  {IPv6 address if available}
 | `mail` | MX/CNAME | Email provider | Mail routing |
 
 **Terraform format** (if `--terraform`):
-```hcl
-resource "aws_route53_zone" "main" {
-  name = var.domain
-  tags = {
-    Project     = var.project_name
-    Environment = "shared"
-    ManagedBy   = "terraform"
-  }
-}
 
-resource "aws_route53_record" "root" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = var.domain
-  type    = "A"
+Generate Route53, Cloudflare, or GCP Cloud DNS resources based on detected provider. Include:
+- Zone resource with proper tagging (`Project`, `Environment`, `ManagedBy`)
+- A/ALIAS record for root domain pointing to CDN or load balancer
+- CNAME records for each subdomain
+- Variable references for all environment-specific values (no hardcoded IPs)
 
-  alias {
-    name                   = aws_cloudfront_distribution.main.domain_name
-    zone_id                = aws_cloudfront_distribution.main.hosted_zone_id
-    evaluate_target_health = true
-  }
-}
+**Cloudflare specifics**:
+- Set `proxied = true` for A/CNAME records behind Cloudflare proxy
+- Set `ttl = 1` (auto) for proxied records
 
-resource "aws_route53_record" "www" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "www.${var.domain}"
-  type    = "CNAME"
-  ttl     = 300
-  records = [var.domain]
-}
-
-resource "aws_route53_record" "api" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "api.${var.domain}"
-  type    = "CNAME"
-  ttl     = 300
-  records = [aws_lb.api.dns_name]
-}
-```
-
-**Cloudflare format**:
-```hcl
-resource "cloudflare_zone" "main" {
-  account_id = var.cloudflare_account_id
-  zone       = var.domain
-  plan       = "free"
-}
-
-resource "cloudflare_record" "root" {
-  zone_id = cloudflare_zone.main.id
-  name    = "@"
-  content = var.origin_ip
-  type    = "A"
-  proxied = true
-  ttl     = 1  # Auto when proxied
-}
-```
-
-**GCP Cloud DNS format**:
-```hcl
-resource "google_dns_managed_zone" "main" {
-  name     = "${var.project_name}-zone"
-  dns_name = "${var.domain}."
-
-  dnssec_config {
-    state = "on"
-  }
-}
-```
+**GCP Cloud DNS specifics**:
+- Enable DNSSEC with `state = "on"`
+- Append trailing dot to `dns_name`
 
 ============================================================
 PHASE 3 — SSL/TLS CERTIFICATE SETUP
@@ -163,43 +109,11 @@ PHASE 3 — SSL/TLS CERTIFICATE SETUP
 
 Configure SSL certificates for all domains:
 
-**AWS ACM** (for CloudFront and ALB):
-```hcl
-resource "aws_acm_certificate" "main" {
-  domain_name               = var.domain
-  subject_alternative_names = [
-    "*.${var.domain}",  # Wildcard for all subdomains
-  ]
-  validation_method = "DNS"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-}
-
-resource "aws_route53_record" "cert_validation" {
-  for_each = {
-    for dvo in aws_acm_certificate.main.domain_validation_options : dvo.domain_name => {
-      name   = dvo.resource_record_name
-      record = dvo.resource_record_value
-      type   = dvo.resource_record_type
-    }
-  }
-
-  zone_id = aws_route53_zone.main.zone_id
-  name    = each.value.name
-  type    = each.value.type
-  ttl     = 60
-  records = [each.value.record]
-}
-
-resource "aws_acm_certificate_validation" "main" {
-  certificate_arn         = aws_acm_certificate.main.arn
-  validation_record_fqdns = [for record in aws_route53_record.cert_validation : record.fqdn]
-}
-```
-- Note: CloudFront certificates MUST be in us-east-1
-- Use wildcard certificate to cover all subdomains
+**AWS ACM**:
+- Wildcard certificate covering `*.{domain}` and root domain
+- DNS validation with Route53 records (auto-validated via Terraform)
+- CloudFront certificates MUST be in `us-east-1` — use a separate provider alias
+- `create_before_destroy = true` lifecycle for zero-downtime renewal
 
 **Cloudflare**:
 - SSL mode: Full (strict) — origin must have valid certificate
@@ -221,15 +135,11 @@ Configure email authentication records to prevent spoofing:
 ```
 TXT  example.com  "v=spf1 include:_spf.google.com include:amazonses.com ~all"
 ```
-- Adjust `include:` based on detected email provider
-- Common: Google Workspace, Microsoft 365, AWS SES, SendGrid, Postmark
+- Adjust `include:` based on detected email provider (Google Workspace, Microsoft 365, AWS SES, SendGrid, Postmark)
 - Always end with `~all` (soft fail) or `-all` (hard fail)
 
 **DKIM** (DomainKeys Identified Mail):
-```
-CNAME  google._domainkey.example.com  →  google._domainkey.{value}.gappssmtp.com
-```
-- Provider-specific DKIM records
+- Provider-specific DKIM CNAME records
 - Multiple DKIM records for multiple senders (transactional + marketing)
 
 **DMARC** (Domain-based Message Authentication):
@@ -240,38 +150,13 @@ TXT  _dmarc.example.com  "v=DMARC1; p=quarantine; rua=mailto:dmarc@example.com; 
 - `rua` for aggregate reports, `ruf` for forensic reports
 
 **MX records** (mail routing):
-```
-MX  example.com  10  aspmx.l.google.com      (Google Workspace)
-MX  example.com  20  alt1.aspmx.l.google.com
-```
-or
-```
-MX  example.com  0   mail.example.com         (Self-hosted)
-```
+- Google Workspace: `aspmx.l.google.com` priority 10 + alternates
+- Microsoft 365: `{tenant}.mail.protection.outlook.com`
+- Self-hosted: `mail.example.com`
 
 **Additional email records**:
-- `TXT _domainkey.example.com` — DKIM policy
-- `CNAME autodiscover.example.com` — Outlook auto-configuration
-- `SRV _imaps._tcp.example.com` — IMAP service discovery
-
-Terraform for email DNS:
-```hcl
-resource "aws_route53_record" "spf" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = var.domain
-  type    = "TXT"
-  ttl     = 3600
-  records = ["v=spf1 include:_spf.google.com ~all"]
-}
-
-resource "aws_route53_record" "dmarc" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "_dmarc.${var.domain}"
-  type    = "TXT"
-  ttl     = 3600
-  records = ["v=DMARC1; p=quarantine; rua=mailto:dmarc@${var.domain}; pct=100"]
-}
-```
+- `autodiscover` CNAME for Outlook auto-configuration
+- `_imaps._tcp` SRV for IMAP service discovery
 
 ============================================================
 PHASE 5 — HEALTH CHECK ROUTING (if --health-check)
@@ -280,49 +165,9 @@ PHASE 5 — HEALTH CHECK ROUTING (if --health-check)
 Set up DNS-level health checks for failover or latency-based routing:
 
 **AWS Route53 health checks**:
-```hcl
-resource "aws_route53_health_check" "primary" {
-  fqdn              = "api.${var.domain}"
-  port              = 443
-  type              = "HTTPS"
-  resource_path     = "/health"
-  failure_threshold = 3
-  request_interval  = 30
-
-  tags = {
-    Name = "${var.project_name}-primary-health"
-  }
-}
-
-resource "aws_route53_record" "api_failover_primary" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "api.${var.domain}"
-  type    = "CNAME"
-  ttl     = 60
-
-  failover_routing_policy {
-    type = "PRIMARY"
-  }
-
-  health_check_id = aws_route53_health_check.primary.id
-  set_identifier  = "primary"
-  records         = [var.primary_origin]
-}
-
-resource "aws_route53_record" "api_failover_secondary" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "api.${var.domain}"
-  type    = "CNAME"
-  ttl     = 60
-
-  failover_routing_policy {
-    type = "SECONDARY"
-  }
-
-  set_identifier = "secondary"
-  records        = [var.secondary_origin]
-}
-```
+- HTTPS health check on `/health` endpoint, 30s interval, 3 failure threshold
+- Failover routing policy with PRIMARY and SECONDARY targets
+- Low TTL (60s) on failover records for fast switchover
 
 **Cloudflare load balancing**:
 - Configure origin pools (primary + fallback)
@@ -330,21 +175,8 @@ resource "aws_route53_record" "api_failover_secondary" {
 - Steering policy: failover, round-robin, or latency-based
 
 **Latency-based routing** (multi-region):
-```hcl
-resource "aws_route53_record" "api_latency_us" {
-  zone_id = aws_route53_zone.main.zone_id
-  name    = "api.${var.domain}"
-  type    = "CNAME"
-  ttl     = 60
-
-  latency_routing_policy {
-    region = "us-east-1"
-  }
-
-  set_identifier = "us-east-1"
-  records        = [var.us_east_origin]
-}
-```
+- Separate Route53 records per region with `latency_routing_policy`
+- Each record pointed to the regional origin
 
 ============================================================
 PHASE 6 — VALIDATION

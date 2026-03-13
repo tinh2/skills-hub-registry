@@ -1,6 +1,6 @@
 ---
 name: permit-compliance
-description: Reviews construction and property software for permit tracking, building code compliance, environmental regulations, inspection workflows, and compliance reporting.
+description: Audit construction permit tracking, building code compliance, and inspection management software. Reviews permit lifecycle workflows (building, electrical, plumbing, mechanical, demolition, zoning, certificate of occupancy), IBC code reference systems, ADA and Fair Housing accessibility checks, fire and life safety compliance, NEPA and CWA environmental review, stormwater NPDES/SWPPP tracking, LEED and ENERGY STAR sustainability, plan review and RFI management, submittal workflows, inspector scheduling and coordination, and jurisdiction-specific regulatory reporting. Supports Procore, PlanGrid, e-Builder, Accela, Tyler Technologies, and custom platforms.
 version: "1.0.0"
 category: review
 platforms:
@@ -16,6 +16,8 @@ $ARGUMENTS
 
 If arguments are provided, use them to focus the review (e.g., specific permit types,
 code domains, or jurisdictions). If no arguments, review everything.
+
+IMPORTANT: For every finding, cite the exact file path and line number. Score each compliance area on a 1-10 scale with specific justification. When a workflow is incomplete, describe what is missing and provide a concrete implementation recommendation with the expected compliance improvement.
 
 ============================================================
 PHASE 1: COMPLIANCE SYSTEM DISCOVERY

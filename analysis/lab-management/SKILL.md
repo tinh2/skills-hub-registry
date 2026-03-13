@@ -1,6 +1,6 @@
 ---
 name: lab-management
-description: Analyzes laboratory management systems for inventory tracking, equipment scheduling, safety compliance, chemical management, and protocol standardization per OSHA laboratory standards, EH&S requirements, and chemical hygiene plan mandates.
+description: Audit laboratory management systems -- chemical inventory (SDS, GHS, CAS tracking), equipment lifecycle and calibration scheduling, safety compliance (OSHA 29 CFR 1910.1450, Chemical Hygiene Plans, biosafety levels), hazardous waste management (EPA 40 CFR 260-270), training record enforcement, and SOP/protocol version control. Use when reviewing university, corporate, or government lab software handling reagent tracking, instrument reservations, EH&S inspections, or waste stream classification.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -12,11 +12,11 @@ Read the actual codebase, evaluate inventory systems, equipment management, safe
 compliance, chemical tracking, and protocol standardization, then produce a comprehensive
 lab management analysis.
 
-TARGET:
+SCOPE:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., specific lab types,
-safety domains, or equipment categories). If no arguments, run the full analysis.
+If arguments are provided, use them to narrow the audit (e.g., a specific lab type,
+safety domain, equipment category, or waste stream). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: LABORATORY SYSTEM DISCOVERY

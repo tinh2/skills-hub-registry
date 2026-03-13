@@ -1,6 +1,6 @@
 ---
 name: env-setup
-description: "Detect required tools, install dependencies, configure environment, and verify the project builds and tests pass from zero"
+description: "Bootstrap a project from zero to working dev environment. Detects runtime versions, installs dependencies, creates .env from templates, starts Docker services, runs database migrations, and verifies build plus tests pass. Use when cloning a new repo, onboarding to a project, setting up local development, or troubleshooting a broken dev environment."
 version: "1.0.0"
 category: productivity
 platforms:

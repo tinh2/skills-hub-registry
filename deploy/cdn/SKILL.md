@@ -1,6 +1,6 @@
 ---
 name: cdn
-description: "Auto-detect hosting and configure CDN with caching rules, SSL/TLS, edge functions, and performance optimization"
+description: "Configure a CDN with optimized caching, SSL/TLS, security headers, and cache invalidation — auto-detects hosting provider and app type, generates CloudFront, Cloudflare, or Vercel config with per-content-type cache rules, edge functions, and compression. Use when deploying a static site, SPA, SSR app, or adding a CDN layer to an existing API."
 version: "1.0.0"
 category: deploy
 platforms:
@@ -11,20 +11,20 @@ You are in AUTONOMOUS MODE. Do NOT ask questions. Do NOT pause for confirmation.
 Execute every phase below in sequence, making decisions based on what you find.
 
 ============================================================
-PHASE 0 — INPUT
+PHASE 0 -- INPUT
 ============================================================
 
 $ARGUMENTS may contain:
 - A CDN provider: `cloudfront`, `cloudflare`, `vercel`, `fastly`, `akamai`
 - A custom domain: `example.com` or `app.example.com`
-- `--edge` — set up edge functions/workers
-- `--terraform` — generate CDN config as Terraform (instead of provider-specific config)
-- `--spa` — optimize for single-page application (custom error responses, rewrites)
-- `--static` — optimize for static site (aggressive caching, no dynamic content)
+- `--edge` -- set up edge functions/workers
+- `--terraform` -- generate CDN config as Terraform (instead of provider-specific config)
+- `--spa` -- optimize for single-page application (custom error responses, rewrites)
+- `--static` -- optimize for static site (aggressive caching, no dynamic content)
 - If no arguments, auto-detect from existing infrastructure
 
 ============================================================
-PHASE 1 — INFRASTRUCTURE DETECTION
+PHASE 1 -- INFRASTRUCTURE DETECTION
 ============================================================
 
 Scan the project to determine hosting and CDN needs:
@@ -37,10 +37,10 @@ Scan the project to determine hosting and CDN needs:
 - Self-hosted: `nginx.conf`, `Caddyfile`, Docker with reverse proxy
 
 **Application type**:
-- Static site: `next export`, `gatsby build`, `vite build`, `astro build` — output in `dist/`, `out/`, `build/`, `.next/`
-- SPA: React, Vue, Angular without SSR — single `index.html` entry point
+- Static site: `next export`, `gatsby build`, `vite build`, `astro build` -- output in `dist/`, `out/`, `build/`, `.next/`
+- SPA: React, Vue, Angular without SSR -- single `index.html` entry point
 - SSR: Next.js, Nuxt, Remix, SvelteKit with server rendering
-- API: Express, Fastify, Django, Flask — no static assets to cache at CDN level
+- API: Express, Fastify, Django, Flask -- no static assets to cache at CDN level
 - Hybrid: both static assets and API routes
 
 **Asset analysis**:
@@ -55,12 +55,12 @@ Scan the project to determine hosting and CDN needs:
 - Check response headers for `x-cache`, `cf-cache-status`, `x-amz-cf-id`
 
 ============================================================
-PHASE 2 — CACHING STRATEGY
+PHASE 2 -- CACHING STRATEGY
 ============================================================
 
 Define cache rules based on content type:
 
-**Immutable assets** (hashed filenames — `main.a1b2c3.js`):
+**Immutable assets** (hashed filenames -- `main.a1b2c3.js`):
 ```
 Cache-Control: public, max-age=31536000, immutable
 ```
@@ -68,7 +68,7 @@ Cache-Control: public, max-age=31536000, immutable
 - Maximum cache duration (1 year)
 - Never needs revalidation
 
-**Static assets** (non-hashed — `/favicon.ico`, `/robots.txt`):
+**Static assets** (non-hashed -- `/favicon.ico`, `/robots.txt`):
 ```
 Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 ```
@@ -98,7 +98,7 @@ Cache-Control: public, max-age=604800
 - User-uploaded content: 1 day with revalidation
 
 ============================================================
-PHASE 3 — CDN CONFIGURATION
+PHASE 3 -- CDN CONFIGURATION
 ============================================================
 
 Generate configuration for the detected/specified provider:
@@ -222,7 +222,7 @@ Generate Cloudflare page rules or cache rules:
 Generate middleware to set Cache-Control headers in the application code.
 
 ============================================================
-PHASE 4 — SSL/TLS CONFIGURATION
+PHASE 4 -- SSL/TLS CONFIGURATION
 ============================================================
 
 Ensure HTTPS is properly configured:
@@ -254,7 +254,7 @@ Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'
 ```
 
 ============================================================
-PHASE 5 — EDGE FUNCTIONS (if --edge)
+PHASE 5 -- EDGE FUNCTIONS (if --edge)
 ============================================================
 
 Generate edge function/worker for common patterns:
@@ -279,7 +279,7 @@ Generate edge function/worker for common patterns:
 - Resize/format images at edge using Cloudflare Images or CloudFront Functions
 
 ============================================================
-PHASE 6 — CACHE INVALIDATION
+PHASE 6 -- CACHE INVALIDATION
 ============================================================
 
 Set up cache invalidation for deployments:
@@ -305,7 +305,7 @@ curl -X POST "https://api.cloudflare.com/client/v4/zones/$ZONE_ID/purge_cache" \
 Generate CI/CD step for invalidation after deploy.
 
 ============================================================
-PHASE 7 — PERFORMANCE OPTIMIZATION
+PHASE 7 -- PERFORMANCE OPTIMIZATION
 ============================================================
 
 Configure additional optimizations:
@@ -335,8 +335,8 @@ OUTPUT
 | Hashed assets (JS/CSS) | 1 year | Immutable |
 | Static assets | 1 day | 7 day stale-while-revalidate |
 | HTML pages | 5 minutes | 1 hour stale-while-revalidate |
-| API responses | No cache | — |
-| Media files | 7 days | — |
+| API responses | No cache | -- |
+| Media files | 7 days | -- |
 
 ### Security Headers
 {list of security headers configured}
@@ -356,7 +356,7 @@ NEXT STEPS
 
 1. Point DNS to CDN (CNAME or alias record)
 2. Verify SSL certificate is valid and serving correctly
-3. Test cache behavior: `curl -I https://yourdomain.com/asset.js` — check Cache-Control header
+3. Test cache behavior: `curl -I https://yourdomain.com/asset.js` -- check Cache-Control header
 4. Monitor cache hit rate in CDN dashboard (target: >90% for static assets)
 5. Set up Real User Monitoring (RUM) to track performance impact
 6. Run Lighthouse/WebPageTest before and after to measure improvement
@@ -368,9 +368,9 @@ DO NOT
 - Do NOT cache authenticated API responses at the CDN
 - Do NOT set long TTLs on HTML without a cache invalidation strategy
 - Do NOT use `Cache-Control: no-cache` when you mean `no-store` (no-cache still caches, just revalidates)
-- Do NOT bypass CDN for static assets — that defeats the purpose
+- Do NOT bypass CDN for static assets -- that defeats the purpose
 - Do NOT configure TLS below version 1.2
 - Do NOT serve mixed content (HTTP resources on HTTPS pages)
-- Do NOT invalidate entire cache on every deploy — target specific paths
+- Do NOT invalidate entire cache on every deploy -- target specific paths
 - Do NOT overwrite existing CDN configuration without reading it first
-- Do NOT store CDN API tokens in source code — use CI/CD secrets
+- Do NOT store CDN API tokens in source code -- use CI/CD secrets

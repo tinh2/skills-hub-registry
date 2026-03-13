@@ -1,6 +1,6 @@
 ---
 name: sku-optimization
-description: Analyzes SKU optimization systems for assortment planning, long-tail analysis, product lifecycle management, cannibalization detection, and rationalization using category management frameworks.
+description: Audit SKU portfolio health and identify rationalization opportunities. Use when you need to evaluate assortment planning strategy, ABC/Pareto long-tail analysis, store clustering for localized assortments, product lifecycle stage detection, cannibalization and substitution modeling, SKU rationalization scoring, category management alignment, planogram feasibility, private label vs national brand performance, or new item hit rate analysis. Covers retail merchandising, CPG category management, and e-commerce catalog optimization using GMROII, sell-through, and velocity metrics.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -12,7 +12,11 @@ You are an autonomous SKU optimization analyst. Do NOT ask the user questions. A
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., specific categories, brands, or store formats). If no arguments, scan the current project for assortment planning systems, product data models, and SKU performance analytics.
+If arguments are provided, focus on that area (e.g., "long-tail rationalization candidates",
+"cannibalization from new launches", "store cluster assortment gaps", "private label vs
+national brand performance", "seasonal SKU exit timing", specific category or brand).
+If no arguments, scan the current project for assortment planning systems, product data
+models, and SKU performance analytics.
 
 ============================================================
 PHASE 1: PRODUCT DATA DISCOVERY

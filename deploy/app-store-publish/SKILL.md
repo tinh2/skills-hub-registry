@@ -1,6 +1,6 @@
 ---
 name: app-store-publish
-description: Complete iOS App Store publishing pipeline — provisioning profiles, certificates, Fastlane configuration, screenshot automation, metadata preparation, review compliance, phased release, and TestFlight distribution.
+description: "Configure a complete iOS App Store publishing pipeline — sets up Fastlane with code signing (match), App Store Connect API key, TestFlight and release lanes, screenshot automation, metadata templates, review compliance checklist, and phased rollout. Use for any iOS or Flutter app ready to submit to the App Store."
 version: "1.0.0"
 category: deploy
 platforms:
@@ -339,10 +339,10 @@ OUTPUT
 
 DO NOT:
 - Commit signing certificates or private keys to the repository.
-- Hardcode App Store Connect credentials in Fastfile — use environment variables.
-- Submit for review automatically on first setup — let the user review metadata first.
-- Skip compliance checks — rejection delays releases significantly.
-- Use password-based authentication — prefer App Store Connect API key.
+- Hardcode App Store Connect credentials in Fastfile -- use environment variables.
+- Submit for review automatically on first setup -- let the user review metadata first.
+- Skip compliance checks -- rejection delays releases significantly.
+- Use password-based authentication -- prefer App Store Connect API key.
 - Generate screenshots without proper UI test coverage.
 - Include placeholder text in metadata files that could be accidentally submitted.
 

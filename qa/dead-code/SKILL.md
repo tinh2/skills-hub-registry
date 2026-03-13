@@ -1,6 +1,6 @@
 ---
 name: dead-code
-description: Detects and safely removes dead code -- unreachable paths, unused exports, unused dependencies, unused CSS, unused config. Reports savings in lines and deps removed.
+description: "Find and safely remove dead code: unreachable paths, unused exports, unused functions, unused variables, unused CSS selectors, unused npm/pip/cargo dependencies, unused env vars, and commented-out code blocks. Builds full import graph, verifies no dynamic references before removal, runs build and tests after cleanup. Use when trimming bloat, removing unused dependencies, cleaning up after a refactor, reducing bundle size, or eliminating stale code."
 version: "1.0.0"
 category: qa
 platforms:

@@ -1,6 +1,6 @@
 ---
 name: defense-supply-chain
-description: Defense supply chain analysis covering DFARS compliance, sole-source risk assessment, counterfeit parts detection, ITAR export controls, and supply chain security per CMMC and DLA requirements
+description: Analyze defense supply chain systems — DFARS compliance assessment, CMMC cybersecurity readiness, sole-source and DMSMS risk identification, counterfeit parts prevention per SAE AS6171, ITAR export control verification, and supplier tier mapping. Audit procurement software, supplier databases, and compliance tracking tools per DLA and NIST SP 800-161 requirements.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -17,8 +17,6 @@ If arguments are provided, use them to focus the analysis (e.g., specific progra
 ============================================================
 PHASE 1: SUPPLY CHAIN LANDSCAPE DISCOVERY
 ============================================================
-
-Identify the defense supply chain infrastructure:
 
 Step 1.1 -- Program and Contract Mapping
 
@@ -63,8 +61,6 @@ Identify supply chain management systems:
 PHASE 2: DFARS COMPLIANCE ASSESSMENT
 ============================================================
 
-Evaluate compliance with critical DFARS clauses:
-
 Step 2.1 -- DFARS 252.204-7012 (CUI Protection)
 
 Assess Controlled Unclassified Information handling:
@@ -75,7 +71,7 @@ Assess Controlled Unclassified Information handling:
 - Incident reporting procedures (72-hour DoD notification requirement)
 - Cloud service provider compliance (FedRAMP Moderate or equivalent)
 
-Step 2.2 -- CMMC Readiness Assessment
+Step 2.2 -- CMMC Readiness
 
 Evaluate CMMC certification readiness:
 - Target CMMC level required by contract
@@ -85,7 +81,7 @@ Evaluate CMMC certification readiness:
 - Third-party assessment readiness (C3PAO)
 - Flow-down to subcontractors handling CUI
 
-Step 2.3 -- Buy American Act / DFARS 252.225 Compliance
+Step 2.3 -- Buy American Act / DFARS 252.225
 
 Assess domestic sourcing requirements:
 - Specialty metals compliance (252.225-7009)
@@ -94,7 +90,7 @@ Assess domestic sourcing requirements:
 - Domestic non-availability determinations (DNAD) on file
 - Berry Amendment compliance for textiles, clothing, food
 
-Step 2.4 -- Cost Accounting Standards (CAS) Compliance
+Step 2.4 -- Cost Accounting Standards (CAS)
 
 Evaluate cost-related compliance:
 - CAS-covered vs. CAS-exempt contracts
@@ -106,8 +102,6 @@ Evaluate cost-related compliance:
 ============================================================
 PHASE 3: SOLE-SOURCE AND SUPPLY RISK
 ============================================================
-
-Identify and assess supply chain concentration risks:
 
 Step 3.1 -- Sole-Source Identification
 
@@ -149,7 +143,7 @@ Evaluate and recommend supply risk mitigations:
 PHASE 4: COUNTERFEIT PARTS PREVENTION
 ============================================================
 
-Evaluate counterfeit parts detection and prevention per DFARS 252.246-7007/7008:
+Evaluate per DFARS 252.246-7007/7008:
 
 Step 4.1 -- Counterfeit Prevention Plan
 
@@ -192,8 +186,6 @@ Evaluate response procedures:
 PHASE 5: ITAR AND EXPORT CONTROL
 ============================================================
 
-Evaluate export control compliance:
-
 Step 5.1 -- ITAR Registration and Licensing
 
 Assess ITAR compliance posture:
@@ -234,8 +226,6 @@ Assess the overall export compliance program:
 PHASE 6: SUPPLY CHAIN SECURITY
 ============================================================
 
-Assess supply chain security posture:
-
 Step 6.1 -- Cybersecurity Supply Chain Risk Management (C-SCRM)
 
 Evaluate per NIST SP 800-161:
@@ -261,6 +251,8 @@ Evaluate supplier cyber posture:
 - Supplier incident notification procedures
 - Data exchange security (encrypted channels, secure portals)
 - Supplier access to prime contractor networks
+
+Write the complete analysis to `docs/defense-supply-chain-analysis.md` (create `docs/` if needed).
 
 ============================================================
 OUTPUT

@@ -1,113 +1,98 @@
 ---
 name: game-design-audit
-description: Full game design analysis pipeline chaining game-design-review, game-economy, balance-test, player-analytics, and game-monetization into a comprehensive design health report.
+description: "Deep game design health assessment across five dimensions: review core loop and progression systems, analyze in-game economy for inflation and sink/source balance, mathematically simulate combat balance and drop rates, audit analytics event coverage, and evaluate monetization ethics. Use when tuning game feel, diagnosing player churn, balancing economy, preparing for soft launch, or reviewing F2P fairness."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous game design audit agent. Do NOT ask the user questions.
-Run the full pipeline below without pausing between phases.
+You are an autonomous game design audit agent. Do NOT ask the user questions. Run the full pipeline below without pausing between phases.
 
-TARGET:
-$ARGUMENTS
-
-If arguments are provided, focus the audit on those specific design systems.
-If no arguments are provided, perform a full game design audit of the entire project.
+TARGET: $ARGUMENTS
+If arguments specify design systems (e.g., "combat balance" or "economy"), focus the audit there. If no arguments are provided, audit the entire game design.
 
 ============================================================
-PHASE 1: CORE DESIGN REVIEW  (/game-design-review)
+PHASE 1: CORE DESIGN REVIEW (/game-design-review)
 ============================================================
 
-Follow the instructions defined in the `/game-design-review` skill exactly.
-Run all phases: Design Discovery, Core Loop Analysis, Progression Analysis,
-Feedback and Motivation, Session Design, Feature Prioritization.
+Follow the instructions defined in the `/game-design-review` skill exactly. Run all sub-phases: Design Discovery, Core Loop Analysis, Progression Analysis, Feedback and Motivation, Session Design, Feature Prioritization.
 
-Focus on:
-- Core loop identification and quality rating
-- Progression curve shape and pacing
-- Difficulty curve analysis
-- Player motivation framework assessment (SDT)
-- Feature prioritization for remaining work
+Evaluate:
+- Core loop identification: what is the primary action-reward cycle? Rate its clarity, depth, and compulsion.
+- Progression curve shape and pacing: linear, exponential, S-curve? Where are the flat spots and difficulty spikes?
+- Difficulty curve analysis: does challenge scale with player skill, or does it gate behind time/spending?
+- Player motivation framework (Self-Determination Theory): autonomy (meaningful choices), competence (mastery feedback), relatedness (social connection)
+- Session design: average session length, natural stopping points, session-start hooks
+- Feature prioritization for remaining development work
 
-Record the design review findings. They will inform all subsequent phases.
-Do NOT stop here. Continue immediately to Phase 2.
+Record findings for use in all subsequent phases. Continue immediately to Phase 2.
 
 ============================================================
-PHASE 2: ECONOMY ANALYSIS  (/game-economy)
+PHASE 2: ECONOMY ANALYSIS (/game-economy)
 ============================================================
 
-Follow the instructions defined in the `/game-economy` skill exactly.
-Run all phases: Economy Discovery, Flow Analysis, Loot Table Analysis,
-Marketplace/Trading, Pay-to-Win Detection, Economy Stress Test.
+Follow the instructions defined in the `/game-economy` skill exactly. Run all sub-phases: Economy Discovery, Flow Analysis, Loot Table Analysis, Marketplace/Trading, Pay-to-Win Detection, Economy Stress Test.
 
-Use the core loop and progression findings from Phase 1 to contextualize
-the economy analysis:
-- How does the economy support the core loop?
-- Does the economy pacing match the progression pacing?
-- Are economy sinks aligned with progression milestones?
+Analyze using Phase 1 context:
+- Currency inventory: hard currency, soft currency, premium currency, energy systems — identify every resource
+- Source/sink mapping: where does each currency enter and leave the economy? Are sinks strong enough to prevent inflation?
+- Economy pacing vs. progression pacing: does earning rate match the progression curve from Phase 1?
+- Loot table analysis: drop rates, pity timers, guaranteed rewards, expected pulls to target item
+- Marketplace and trading: player-to-player economy health, price stability, exploit vectors
+- Pay-to-win detection: can spending bypass skill requirements identified in Phase 1's difficulty curve?
 
-Record the economy findings.
-Do NOT stop here. Continue immediately to Phase 3.
-
-============================================================
-PHASE 3: BALANCE TESTING  (/balance-test)
-============================================================
-
-Follow the instructions defined in the `/balance-test` skill exactly.
-Run all phases: Data Extraction, Combat Balance, Economy Stress Test,
-Progression Pacing, RNG Simulation, Win Rate Simulation.
-
-Use findings from Phase 1 (design review) and Phase 2 (economy):
-- Test the difficulty curve identified in Phase 1 with mathematical simulation
-- Stress test the economy flow rates identified in Phase 2
-- Simulate drop rates for loot tables found in Phase 2
-- Verify progression pacing against Phase 1 analysis
-
-Record the balance test results.
-Do NOT stop here. Continue immediately to Phase 4.
+Record findings. Continue immediately to Phase 3.
 
 ============================================================
-PHASE 4: ANALYTICS AUDIT  (/player-analytics)
+PHASE 3: BALANCE TESTING (/balance-test)
 ============================================================
 
-Follow the instructions defined in the `/player-analytics` skill exactly.
-Run all phases: Analytics Stack Detection, Event Tracking Completeness,
-Funnel Analysis, Retention Metrics, A/B Testing, Advanced Analytics.
+Follow the instructions defined in the `/balance-test` skill exactly. Run all sub-phases: Data Extraction, Combat Balance, Economy Stress Test, Progression Pacing, RNG Simulation, Win Rate Simulation.
 
-Use findings from Phases 1-3 to verify analytics coverage:
-- Are core loop metrics tracked (from Phase 1)?
-- Are economy metrics tracked (from Phase 2)?
-- Are balance-relevant metrics tracked (from Phase 3)?
-- Can the design team measure the health of systems identified in earlier phases?
+Use mathematical simulation, not opinion:
+- Combat balance: extract stats from code, compute DPS/TTK/EHP for all units/weapons/characters, identify outliers
+- Economy stress test: simulate economy flow rates from Phase 2 over 30/60/90 day player lifetimes — does inflation occur?
+- Progression pacing simulation: model time-to-milestone for casual, average, and hardcore player profiles against Phase 1 curve
+- RNG simulation: Monte Carlo simulation of loot drops from Phase 2 tables — verify advertised rates match implementation
+- Win rate simulation: model matchups across the roster/loadout space — identify dominant strategies and dead picks
 
-Record the analytics findings.
-Do NOT stop here. Continue immediately to Phase 5.
+Record quantitative results. Continue immediately to Phase 4.
 
 ============================================================
-PHASE 5: MONETIZATION REVIEW  (/game-monetization)
+PHASE 4: ANALYTICS AUDIT (/player-analytics)
 ============================================================
 
-Follow the instructions defined in the `/game-monetization` skill exactly.
-Run all phases: Monetization Model Discovery, IAP Audit, Advertising Audit,
-Subscription/Battle Pass, Regulatory Compliance, Revenue Optimization.
+Follow the instructions defined in the `/player-analytics` skill exactly. Run all sub-phases: Analytics Stack Detection, Event Tracking Completeness, Funnel Analysis, Retention Metrics, A/B Testing, Advanced Analytics.
 
-Use findings from all previous phases to contextualize:
-- Does monetization distort the core loop (from Phase 1)?
-- Does monetization create economy imbalance (from Phase 2)?
-- Does monetization create pay-to-win dynamics (from Phase 3)?
-- Are monetization events tracked for revenue analysis (from Phase 4)?
+Verify analytics coverage against findings from Phases 1-3:
+- Core loop metrics tracked (from Phase 1): session length, loop completions, progression milestones
+- Economy metrics tracked (from Phase 2): currency earned/spent rates, store conversion, inflation indicators
+- Balance metrics tracked (from Phase 3): win rates by character/weapon, difficulty wall hit rates
+- FTUE funnel: is every onboarding step instrumented to identify where new players drop off?
+- Retention metrics: D1/D7/D30 retention, return triggers, churn predictors
+- A/B testing infrastructure: can the team run experiments on the systems identified in earlier phases?
 
-Record the monetization findings.
+Record findings. Continue immediately to Phase 5.
+
+============================================================
+PHASE 5: MONETIZATION REVIEW (/game-monetization)
+============================================================
+
+Follow the instructions defined in the `/game-monetization` skill exactly. Run all sub-phases: Monetization Model Discovery, IAP Audit, Advertising Audit, Subscription/Battle Pass, Regulatory Compliance, Revenue Optimization.
+
+Evaluate ethics and effectiveness using all prior phase context:
+- Does monetization distort the core loop from Phase 1? (pay to skip vs. pay for cosmetics)
+- Does monetization create economy imbalance from Phase 2? (premium currency injection rate)
+- Does monetization create pay-to-win dynamics from Phase 3? (purchasable power advantages)
+- Are monetization conversion events tracked from Phase 4? (purchase funnel instrumentation)
+- Regulatory compliance: loot box disclosure laws, age-gating, refund policies, regional regulations
+- Revenue model sustainability: whale dependency, conversion breadth, LTV/CAC by acquisition channel
 
 ============================================================
 OUTPUT
 ============================================================
 
-When all five phases are complete, produce a unified design audit report:
-
----
 ## Game Design Audit Report
 
 ### Project: {name}
@@ -136,53 +121,38 @@ Scoring:
 
 ### Cross-Phase Insights
 
-These findings only emerge by combining results across phases:
-
-1. **Core Loop + Economy Alignment:**
-   {Does the economy support or hinder the core loop?}
-
-2. **Progression + Balance + Monetization:**
-   {Does progression feel natural, or is it distorted by monetization/balance issues?}
-
-3. **Analytics + All Systems:**
-   {Can the team measure the health of all critical systems with current analytics?}
-
-4. **Economy + Monetization + Balance:**
-   {Is the F2P experience viable? Does paying create unfair advantages?}
+1. **Core Loop + Economy Alignment:** {Does the economy support or hinder the core loop?}
+2. **Progression + Balance + Monetization:** {Does progression feel natural, or is it distorted by monetization/balance issues?}
+3. **Analytics + All Systems:** {Can the team measure the health of all critical systems?}
+4. **Economy + Monetization + Balance:** {Is the F2P experience viable? Does paying create unfair advantages?}
 
 ### Phase Summaries
 
 #### Phase 1: Core Design
-- Core loop: {description}
-- Loop rating: {COMPELLING/SOLID/ADEQUATE/WEAK/BROKEN}
+- Core loop: {description} | Rating: {COMPELLING/SOLID/ADEQUATE/WEAK/BROKEN}
 - Progression shape: {description}
 - Difficulty curve: {description}
-- SDT assessment: Autonomy {rating}, Competence {rating}, Relatedness {rating}
+- SDT: Autonomy {rating}, Competence {rating}, Relatedness {rating}
 
 #### Phase 2: Economy
-- Currencies: {list}
-- Economy health: {HEALTHY/INFLATIONARY/DEFLATIONARY/UNSTABLE}
-- Major sinks: {list}
-- Major sources: {list}
+- Currencies: {list} | Health: {HEALTHY/INFLATIONARY/DEFLATIONARY/UNSTABLE}
+- Major sinks: {list} | Major sources: {list}
 - Inflation risk: {LOW/MEDIUM/HIGH}
 
 #### Phase 3: Balance
-- DPS range: {min}-{max} (median: {median})
-- TTK range: {min}-{max}
+- DPS range: {min}-{max} (median: {median}) | TTK range: {min}-{max}
 - Progression pacing: {FAST/BALANCED/SLOW/UNEVEN}
 - RNG fairness: {FAIR/GRINDY/UNFAIR}
 - Balance verdict: {WELL BALANCED/MINOR ISSUES/IMBALANCED/BROKEN}
 
 #### Phase 4: Analytics
-- Provider: {analytics service}
-- Events tracked: {N}/{recommended}
+- Provider: {service} | Events tracked: {N}/{recommended}
 - FTUE funnel: {READY/PARTIAL/NOT READY}
 - Retention tracking: {READY/PARTIAL/NOT READY}
 - A/B testing: {READY/PARTIAL/NOT READY}
 
 #### Phase 5: Monetization
-- Revenue streams: {list}
-- Fairness: {FAIR/SOFT P2W/PAY-TO-WIN/PREDATORY}
+- Revenue streams: {list} | Fairness: {FAIR/SOFT P2W/PAY-TO-WIN/PREDATORY}
 - Compliance: {COMPLIANT/AT RISK/NON-COMPLIANT}
 - Implementation quality: {SOLID/BASIC/INCOMPLETE}
 
@@ -198,28 +168,23 @@ These findings only emerge by combining results across phases:
 |----------|------------|-------|--------|--------|
 | P0 | {improvement} | {phase} | {impact} | {effort} |
 | P1 | {improvement} | {phase} | {impact} | {effort} |
-| P2 | {improvement} | {phase} | {impact} | {effort} |
 
 ### Live Operations Recommendations
 
-Based on the audit, these systems need ongoing attention post-launch:
-1. {system} — {why it needs monitoring} — {recommended cadence}
-2. {system} — {why} — {cadence}
-3. {system} — {why} — {cadence}
-
----
+Post-launch systems requiring ongoing attention:
+1. {system} -- {why it needs monitoring} -- {recommended cadence}
+2. {system} -- {why} -- {cadence}
+3. {system} -- {why} -- {cadence}
 
 STRICT RULES:
-
-- Do NOT skip any phase — all five must complete.
-- Do NOT evaluate art, audio, or technical performance — this is a design audit.
-- Do NOT make each phase independent — later phases must reference earlier findings.
+- Do NOT skip any phase -- all five must complete.
+- Do NOT evaluate art, audio, or technical performance -- this is a design audit only.
+- Do NOT make each phase independent -- later phases must reference earlier findings.
 - Phase 3 (balance) must use mathematical analysis, not opinion.
 - Phase 5 (monetization) must evaluate ethics, not just revenue potential.
-- Cross-phase insights are the most valuable output — do not skip them.
+- Cross-phase insights are the most valuable output -- do not skip them.
 - All rules from each sub-skill apply to their respective phases.
 
 NEXT STEPS:
-
-- "Run `/game-launch` for a full launch readiness audit including performance, QA, and security."
-- "Run `/balance-test` to deep-dive into specific balance issues identified in the audit."
+- Run `/game-launch` for a full launch readiness audit including performance, QA, and security.
+- Run `/balance-test` to deep-dive into specific balance issues identified in the audit.

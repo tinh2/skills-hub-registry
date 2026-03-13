@@ -1,6 +1,6 @@
 ---
 name: devcontainer
-description: "Auto-detect stack and generate a production-grade dev container configuration with Codespaces compatibility"
+description: "Generate a dev container for my project — auto-detect language, framework, and services like PostgreSQL or Redis, create devcontainer.json with VS Code extensions, port forwarding, post-create commands, Docker Compose for multi-service setups, and GitHub Codespaces compatibility"
 version: "1.0.0"
 category: productivity
 platforms:

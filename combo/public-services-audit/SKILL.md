@@ -1,6 +1,6 @@
 ---
 name: public-services-audit
-description: Full government services compliance and fraud detection audit pipeline chaining benefits processing, fraud detection, compliance review, and security audit.
+description: "Audit a government or public services system for compliance, fraud risk, and security — chains benefits processing review, fraud detection analysis, regulatory compliance check (ADA, Section 508, FISMA, Privacy Act), and PII-focused security audit. Use for benefits platforms, eligibility engines, enrollment portals, or inter-agency data systems."
 version: "1.0.0"
 category: combo
 platforms:

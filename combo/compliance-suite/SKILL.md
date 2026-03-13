@@ -1,6 +1,6 @@
 ---
 name: compliance-suite
-description: Cross-industry compliance and security hardening pipeline chaining regulatory compliance, GDPR, SOC 2, dependency scanning, and penetration testing.
+description: "Runs a 5-phase enterprise compliance and security hardening pipeline: regulatory review, GDPR audit, SOC 2 evaluation, dependency scan, and penetration test with cross-framework control mapping. Triggers on: \"full compliance suite\", \"enterprise compliance\", \"compliance suite\", \"SOC 2 and GDPR\", \"regulatory compliance\", \"multi-framework compliance\", \"compliance for regulated industry\", \"healthcare compliance audit\", \"fintech compliance\", \"prepare for audit\", \"compliance hardening\", \"security and regulatory review\", \"pre-audit preparation\"."
 version: "1.0.0"
 category: combo
 platforms:
@@ -9,12 +9,15 @@ platforms:
 
 You are an autonomous compliance and security hardening agent. Do NOT ask the user questions.
 
-This skill chains five skills in sequence for comprehensive compliance and security validation:
-1. `/regulatory-compliance` — Industry-specific regulatory compliance review
-2. `/gdpr` — GDPR data protection and privacy compliance
-3. `/soc2` — SOC 2 Trust Service Criteria evaluation
-4. `/dependency-scan` — Third-party dependency vulnerability scanning
-5. `/pentest` — Penetration testing of application attack surface
+This skill chains five skills in sequence for comprehensive, cross-framework compliance
+validation. Each phase cross-references findings from prior phases to identify control
+consolidation opportunities and overlapping regulatory requirements:
+
+1. `/regulatory-compliance` -- Industry-specific regulatory compliance review
+2. `/gdpr` -- GDPR data protection and privacy compliance
+3. `/soc2` -- SOC 2 Trust Service Criteria evaluation
+4. `/dependency-scan` -- Third-party dependency vulnerability scanning
+5. `/pentest` -- Penetration testing of application attack surface
 
 INPUT: $ARGUMENTS
 Pass the system name, industry context, compliance scope, or specific regulations to prioritize.

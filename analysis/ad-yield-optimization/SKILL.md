@@ -1,6 +1,23 @@
 ---
 name: ad-yield-optimization
-description: Analyzes advertising yield across programmatic and direct-sold inventory including CPM/CPC/CPA performance, header bidding efficiency, fill rate optimization, inventory monetization strategies, and compliance with IAB standards and OpenRTB protocols.
+description: >
+  Analyzes advertising yield across programmatic and direct-sold inventory including CPM/CPC/CPA
+  performance, header bidding efficiency, fill rate optimization, inventory monetization strategies,
+  and compliance with IAB standards and OpenRTB protocols.
+
+  USE THIS SKILL WHEN:
+  - You need to audit ad revenue performance or diagnose yield drops
+  - Someone asks about header bidding configuration or Prebid.js optimization
+  - You are analyzing fill rates, eCPM trends, or ad unit performance
+  - A project involves programmatic advertising, SSP integration, or ad serving
+  - You need to verify ads.txt, sellers.json, or supply chain compliance
+  - Someone mentions CPM floors, bid density, or auction dynamics
+  - You are evaluating ad quality controls, viewability, or ad-related UX impact
+  - A codebase integrates Google Ad Manager, AdMob, Prebid, or any SSP
+
+  TRIGGER PHRASES: "ad yield", "eCPM", "fill rate", "header bidding", "Prebid",
+  "programmatic ads", "ad monetization", "CPM optimization", "ad revenue",
+  "ads.txt", "ad serving", "SSP", "ad unit performance", "viewability"
 version: "1.0.0"
 category: analysis
 platforms:
@@ -23,7 +40,7 @@ PHASE 1: AD STACK DISCOVERY
 
 Step 1.1 -- Ad Server and SSP Configuration
 
-Scan for advertising technology stack:
+Scan the codebase for advertising technology stack. For each component found, record its version and configuration:
 - Primary ad server (Google Ad Manager/DFP, FreeWheel, Xandr)
 - Supply-side platforms (SSPs): Google AdX, Magnite, PubMatic, Index Exchange, OpenX
 - Header bidding wrapper (Prebid.js, Amazon TAM/UAM, proprietary)
@@ -33,7 +50,7 @@ Scan for advertising technology stack:
 
 Step 1.2 -- Inventory Architecture
 
-Map the ad inventory structure:
+Map the full ad inventory structure. Produce a hierarchy diagram:
 - Ad unit definitions (display sizes, video placements, native formats)
 - Placement hierarchy (site/app > section > page > position)
 - Ad slot configurations (lazy loading, refresh intervals, viewability thresholds)
@@ -43,7 +60,7 @@ Map the ad inventory structure:
 
 Step 1.3 -- Demand Source Mapping
 
-Identify all demand sources and their priority:
+Identify all demand sources and their priority order. Flag any gaps:
 - Direct-sold campaigns (guaranteed, sponsorship, preferred deals)
 - Programmatic guaranteed (PG) deals
 - Private marketplace (PMP) deals
@@ -54,14 +71,14 @@ Identify all demand sources and their priority:
 
 Step 1.4 -- Compliance and Standards
 
-Check for ads.txt, app-ads.txt, sellers.json compliance:
-- ads.txt file presence and accuracy (authorized sellers, resellers)
-- sellers.json publisher identity declarations
-- supply-chain object (schain) implementation in bid requests
-- OpenRTB bid request/response compliance (version 2.5/2.6, 3.0)
+Check compliance status for each item -- mark as PASS, FAIL, or NOT APPLICABLE:
+- ads.txt file: present, accurate, lists all authorized sellers and resellers
+- sellers.json: publisher identity declarations match
+- supply-chain object (schain): implemented in bid requests
+- OpenRTB bid request/response: version compliance (2.5/2.6 or 3.0)
 - IAB Tech Lab standards: TCF 2.0, US Privacy (CCPA), GPP
-- VAST/VPAID/SIMID compliance for video ad serving
-- COPPA compliance for child-directed content
+- VAST/VPAID/SIMID: compliance for video ad serving
+- COPPA: compliance for child-directed content
 
 ============================================================
 PHASE 2: YIELD PERFORMANCE ANALYSIS
@@ -69,7 +86,7 @@ PHASE 2: YIELD PERFORMANCE ANALYSIS
 
 Step 2.1 -- Revenue Metrics Evaluation
 
-Analyze core yield metrics:
+Analyze core yield metrics. For each metric, compare against industry benchmarks:
 - eCPM (effective CPM) by ad unit, placement, device, geo
 - Fill rate by demand source and ad unit
 - Win rate and bid density (bids per impression)
@@ -79,20 +96,20 @@ Analyze core yield metrics:
 
 Step 2.2 -- CPM/CPC/CPA Performance
 
-Evaluate pricing model performance:
-- CPM floors and their impact on fill rate vs yield tradeoff
-- Dynamic floor pricing implementation and effectiveness
-- CPC campaigns: click-through rates by placement and format
-- CPA campaigns: conversion tracking, attribution accuracy
-- Viewable CPM (vCPM) pricing and viewability rates
-- Cost per completed view (CPCV) for video inventory
+Evaluate pricing model performance and identify optimization opportunities:
+- CPM floors: current levels and their impact on fill rate vs. yield tradeoff
+- Dynamic floor pricing: is it implemented? If so, assess effectiveness
+- CPC campaigns: click-through rates by placement and format -- flag underperformers
+- CPA campaigns: conversion tracking accuracy and attribution methodology
+- Viewable CPM (vCPM): pricing premiums and viewability rates
+- Cost per completed view (CPCV): for video inventory
 
 Step 2.3 -- Demand Source Yield Comparison
 
-Compare performance across demand sources:
+Compare performance across demand sources. Produce a ranked table:
 - SSP-level eCPM, fill rate, and latency
-- Direct vs programmatic revenue split and trend
-- Deal type performance (PG vs PMP vs open auction)
+- Direct vs. programmatic revenue split and trend direction
+- Deal type performance (PG vs. PMP vs. open auction)
 - Bid landscape analysis (bid distribution, floor proximity)
 - Time-of-day and day-of-week yield patterns
 - Seasonal yield fluctuation (Q4 premium, summer dip)
@@ -103,30 +120,30 @@ PHASE 3: HEADER BIDDING OPTIMIZATION
 
 Step 3.1 -- Prebid Configuration Analysis
 
-If Prebid.js or equivalent is used:
-- Bidder adapter inventory (which SSPs are connected)
-- Timeout settings (prebid timeout vs ad server timeout)
-- Price granularity configuration (dense, medium, custom buckets)
-- S2S (server-to-server) vs client-side bidder allocation
-- User ID module configuration (Unified ID 2.0, LiveRamp, ID5)
-- Consent management platform (CMP) integration
+If Prebid.js or equivalent is used, audit the configuration:
+- Bidder adapter inventory: list which SSPs are connected, flag missing high-value bidders
+- Timeout settings: compare prebid timeout vs. ad server timeout -- flag misalignment
+- Price granularity: verify bucket configuration (dense, medium, custom) matches revenue goals
+- S2S vs. client-side: assess bidder allocation strategy
+- User ID module: check configuration (Unified ID 2.0, LiveRamp, ID5)
+- CMP integration: verify consent management platform handshake
 
 Step 3.2 -- Auction Dynamics
 
-Evaluate header bidding auction efficiency:
-- Bid response rates by SSP (timeouts, no-bids, errors)
-- Bid latency impact on page load and user experience
-- Bid density trends (are enough bidders competing?)
-- Price floor optimization (unified vs bidder-specific floors)
-- First-price auction bid shading detection
-- Line item/order targeting overlap with programmatic
+Evaluate header bidding auction efficiency. Flag issues:
+- Bid response rates by SSP: flag any with > 20% timeout rate
+- Bid latency impact: measure page load degradation from header bidding
+- Bid density trends: flag ad units with fewer than 3 competing bidders
+- Price floor optimization: compare unified vs. bidder-specific floors
+- First-price auction bid shading: detect and quantify impact
+- Line item/order targeting overlap with programmatic: flag conflicts
 
 Step 3.3 -- Server-Side Optimization
 
 Check server-side bidding configuration:
-- Prebid Server or equivalent deployment
-- Cookie sync and user matching rates by SSP
-- Server-side timeout vs client-side timeout alignment
+- Prebid Server deployment and health
+- Cookie sync and user matching rates by SSP -- flag any below 50%
+- Server-side timeout vs. client-side timeout alignment
 - Bid caching and request deduplication
 - Amazon TAM/UAM integration specifics
 - OpenBidding/Exchange Bidding (EBDA) configuration
@@ -137,28 +154,28 @@ PHASE 4: FILL RATE OPTIMIZATION
 
 Step 4.1 -- Unfilled Impression Analysis
 
-Diagnose unfilled inventory:
-- Overall fill rate and unfilled impression volume
+Diagnose unfilled inventory. Quantify each cause:
+- Overall fill rate and unfilled impression volume (daily/monthly)
 - Unfilled reasons breakdown (no bid, below floor, timeout, blocked)
-- Geographic fill rate disparities (US/UK/Tier 1 vs emerging markets)
-- Device-level fill rates (desktop vs mobile web vs in-app)
+- Geographic fill rate disparities (US/UK/Tier 1 vs. emerging markets)
+- Device-level fill rates (desktop vs. mobile web vs. in-app)
 - Time-based fill rate patterns (off-peak unfilled inventory)
-- Ad unit-level fill rate comparison
+- Ad unit-level fill rate comparison -- flag units below 70% fill
 
 Step 4.2 -- Backfill Strategy
 
 Evaluate backfill and remnant monetization:
 - Backfill waterfall configuration and passback chains
 - House ad and cross-promotion utilization of unfilled slots
-- eCPM of backfill sources vs primary demand
+- eCPM of backfill sources vs. primary demand -- flag if ratio < 0.3
 - Lazy loading impact on fill (ads below fold never requested)
 - Ad refresh policies (time-based, engagement-based, viewability-based)
-- Unfilled inventory recovery through alternative formats (native, content rec)
+- Alternative format recovery (native, content rec for unfilled display)
 
 Step 4.3 -- Inventory Expansion Opportunities
 
-Identify new monetization surface area:
-- In-content advertising opportunities (contextual native, sponsored content)
+Identify new monetization surface area. Estimate revenue potential for each:
+- In-content advertising (contextual native, sponsored content)
 - New ad format adoption (sticky, interstitial, rewarded, shoppable)
 - Newsletter and email ad monetization
 - Push notification ad inventory
@@ -171,32 +188,32 @@ PHASE 5: AD QUALITY AND USER EXPERIENCE
 
 Step 5.1 -- Ad Quality Controls
 
-Evaluate ad quality safeguards:
+Evaluate ad quality safeguards. Flag any missing controls:
 - Malvertising detection and blocking (malware, phishing, redirect)
 - Category blocking rules (competitive separation, sensitive categories)
 - Creative quality standards (resolution, file size, animation rules)
-- Frequency capping implementation (per session, per day, per campaign)
-- Ad density limits (ads.txt, Coalition for Better Ads standards)
+- Frequency capping (per session, per day, per campaign) -- flag if absent
+- Ad density limits (Coalition for Better Ads standards compliance)
 - MRAID compliance for rich media in mobile
 
 Step 5.2 -- Viewability and Attention
 
-Analyze viewability performance:
-- Viewability rate by ad unit and placement (MRC standard: 50% pixels, 1s display / 2s video)
-- Active view vs measured impressions ratio
+Analyze viewability performance against MRC standards:
+- Viewability rate by ad unit (MRC: 50% pixels, 1s display / 2s video)
+- Active view vs. measured impressions ratio
 - Attention metrics (if available): dwell time, interaction rate
-- Viewability optimization tactics (sticky, in-view refresh, lazy load)
-- Impact of viewability on programmatic bid prices
+- Viewability optimization tactics in use (sticky, in-view refresh, lazy load)
+- Impact of viewability on programmatic bid prices -- quantify the premium
 
 Step 5.3 -- Page Performance Impact
 
-Check ad impact on user experience:
+Check ad impact on user experience. Flag any violations:
 - Core Web Vitals impact (LCP, CLS, INP from ad loading)
-- Ad-related layout shift measurement
+- Ad-related layout shift measurement -- flag CLS > 0.1
 - Total ad script payload and execution time
 - Consent banner impact on ad load sequence
 - Ad blocker detection and recovery strategies
-- Revenue vs UX tradeoff analysis (more ads = more revenue but more churn)
+- Revenue vs. UX tradeoff analysis (more ads = more revenue but more churn)
 
 ============================================================
 PHASE 6: WRITE REPORT
@@ -204,8 +221,15 @@ PHASE 6: WRITE REPORT
 
 Write analysis to `docs/ad-yield-optimization-analysis.md` (create `docs/` if needed).
 
-Include: Executive Summary, Ad Stack Assessment, Yield Performance Analysis, Header Bidding
-Optimization, Fill Rate Diagnosis, Ad Quality Assessment, and Prioritized Revenue Opportunities.
+Structure the report as:
+1. **Executive Summary** -- top 3 revenue opportunities with estimated impact
+2. **Ad Stack Assessment** -- technology inventory and configuration status
+3. **Yield Performance Analysis** -- metrics with benchmarks and trends
+4. **Header Bidding Optimization** -- configuration issues and recommendations
+5. **Fill Rate Diagnosis** -- unfilled causes and recovery strategies
+6. **Ad Quality Assessment** -- controls status and compliance gaps
+7. **Yield Opportunity Matrix** -- prioritized by estimated revenue lift and effort
+8. **Implementation Roadmap** -- phased plan with expected timeline
 
 ============================================================
 OUTPUT

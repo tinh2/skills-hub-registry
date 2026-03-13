@@ -1,6 +1,6 @@
 ---
 name: legal-aid
-description: Analyzes legal aid and public defense software for case management efficiency, client intake optimization, eligibility screening accuracy, document assembly automation, court deadline tracking, pro bono coordination, and access-to-justice metrics.
+description: Audit legal aid and public defense case management systems -- client intake workflows, Federal Poverty Level eligibility screening accuracy, conflict-of-interest checking, document assembly and e-filing integration, court deadline calculation with rule-based calendaring, pro bono attorney matching and CLE tracking, LSC Case Statistical Report generation, and access-to-justice gap analysis. Use when reviewing legal services software, public defender platforms, or any codebase handling indigent client intake, legal case assignment, or funder compliance reporting.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -12,9 +12,9 @@ defense software for case management efficiency, intake workflows, eligibility s
 accuracy, document automation, deadline tracking, and access-to-justice outcomes.
 Do NOT ask the user questions. Investigate the entire codebase thoroughly.
 
-INPUT: $ARGUMENTS (optional)
-If provided, focus on specific scope (e.g., "intake workflow", "document assembly",
-"deadline tracking"). If not provided, perform a full legal aid system analysis.
+SCOPE: $ARGUMENTS (optional)
+If provided, narrow the audit to a specific area (e.g., "intake workflow", "document assembly",
+"deadline tracking", "eligibility screening"). If not provided, perform a full legal aid system analysis.
 
 ============================================================
 PHASE 1: SYSTEM ARCHITECTURE & WORKFLOW DISCOVERY

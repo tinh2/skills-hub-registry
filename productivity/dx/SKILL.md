@@ -1,6 +1,6 @@
 ---
 name: dx
-description: "Audit developer experience foundations and generate a DX health report with actionable improvement recommendations"
+description: "Audit developer experience and generate a DX health score. Evaluates devcontainer, git hooks, linting, build caching, environment setup, and release pipeline. Use when you want to check how easy it is to onboard, improve developer workflow, score project tooling maturity, or find gaps in your dev setup."
 version: "1.0.0"
 category: productivity
 platforms:

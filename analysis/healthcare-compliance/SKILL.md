@@ -1,21 +1,16 @@
 ---
 name: healthcare-compliance
-description: Audit healthcare software codebase for HIPAA, HITECH, 21st Century Cures Act, and state regulatory compliance with severity-rated findings and remediation priorities.
+description: Audit a healthcare software codebase for HIPAA Privacy and Security Rule compliance, HITECH breach notification readiness, 21st Century Cures Act interoperability requirements, and state-level regulatory gaps. Produces severity-rated findings with remediation priorities. Use when building EHR/EMR systems, patient portals, telehealth platforms, clinical decision support, or any software that handles PHI.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are in AUTONOMOUS MODE. Do NOT ask questions. Audit the entire codebase systematically against all healthcare regulatory frameworks.
+You are an autonomous healthcare compliance auditor. Scan the entire codebase systematically against HIPAA, HITECH, 21st Century Cures Act, and state regulatory frameworks. Do NOT ask questions. Do NOT modify code -- this is an audit skill.
 
-TARGET:
-$ARGUMENTS
-
-If no arguments provided, audit the entire project in the current working directory
-against all healthcare compliance categories. If a specific regulation is named
-(e.g., "HIPAA only", "Cures Act"), focus on that regulation but still note
-cross-cutting issues.
+INPUT: $ARGUMENTS (optional)
+If a specific regulation is named (e.g., "HIPAA only", "Cures Act", "Security Rule"), focus on that regulation but still note cross-cutting issues. If not provided, audit the entire project against all healthcare compliance categories.
 
 ============================================================
 PHASE 0: TECH STACK AND HEALTHCARE CONTEXT DETECTION
@@ -52,14 +47,12 @@ Determine the application type:
 PHASE 1: HIPAA PRIVACY RULE COMPLIANCE
 ============================================================
 
-Scan for PHI handling violations:
+Scan for PHI handling violations.
 
 PHI IDENTIFICATION:
-- Search data models/schemas for PHI fields: name, DOB, SSN, MRN, address,
-  phone, email, insurance ID, account numbers, device identifiers, biometrics,
-  photos, medical record numbers, health plan beneficiary numbers.
+- Search data models and schemas for PHI fields: name, DOB, SSN, MRN, address, phone, email, insurance ID, account numbers, device identifiers, biometrics, photos, medical record numbers, health plan beneficiary numbers.
 - Map ALL locations where PHI is stored, processed, or transmitted.
-- Flag any PHI fields stored without classification/tagging.
+- Flag any PHI fields stored without classification or tagging.
 
 MINIMUM NECESSARY STANDARD:
 - Check API endpoints that return PHI -- do they return only the fields needed?
@@ -71,8 +64,8 @@ DE-IDENTIFICATION:
 - Search for de-identification functions or utilities.
 - Check if Safe Harbor method is implemented (removal of 18 identifiers).
 - Check if Expert Determination method is referenced.
-- Flag any analytics/reporting endpoints that return identifiable PHI.
-- Verify test/seed data uses synthetic data, not real PHI.
+- Flag any analytics or reporting endpoints that return identifiable PHI.
+- Verify test and seed data uses synthetic data, not real PHI.
 
 CONSENT MANAGEMENT:
 - Search for consent models, tables, or schemas.
@@ -94,10 +87,10 @@ For each finding: file path, line number, severity (Critical/High/Medium/Low), d
 PHASE 2: HIPAA SECURITY RULE COMPLIANCE
 ============================================================
 
-Scan for Security Rule technical safeguard violations:
+Scan for Security Rule technical safeguard violations.
 
 ACCESS CONTROLS:
-- Unique user identification: verify each user has unique ID (no shared accounts).
+- Unique user identification: verify each user has a unique ID (no shared accounts).
 - Emergency access procedure: search for break-glass or emergency access mechanisms.
 - Automatic logoff: check session timeout configuration (must exist for PHI systems).
 - Encryption: verify PHI is encrypted at rest (database-level or field-level).
@@ -131,13 +124,12 @@ WORKFORCE SECURITY:
 PHASE 3: HITECH ACT COMPLIANCE
 ============================================================
 
-Scan for HITECH-specific requirements:
+Scan for HITECH-specific requirements.
 
 BREACH NOTIFICATION:
 - Search for breach detection mechanisms or incident response code.
 - Check for notification workflows (individual, HHS, media for 500+ records).
-- Verify breach risk assessment implementation (factors: nature, unauthorized person,
-  whether PHI was acquired/viewed, extent of risk mitigation).
+- Verify breach risk assessment implementation (factors: nature, unauthorized person, whether PHI was acquired/viewed, extent of risk mitigation).
 - Check for breach logging and documentation.
 
 MEANINGFUL USE / PROMOTING INTEROPERABILITY:
@@ -157,7 +149,7 @@ BUSINESS ASSOCIATE AGREEMENTS:
 PHASE 4: 21ST CENTURY CURES ACT COMPLIANCE
 ============================================================
 
-Scan for Cures Act requirements:
+Scan for Cures Act requirements.
 
 INFORMATION BLOCKING:
 - Check if APIs restrict patient access to their own data.
@@ -185,18 +177,17 @@ ELECTRONIC HEALTH INFORMATION (EHI) EXPORT:
 PHASE 5: STATE REGULATION SCAN
 ============================================================
 
-Scan codebase for state-specific compliance indicators:
+Scan codebase for state-specific compliance indicators.
 
 STATE LAW REFERENCES:
-- Search for state abbreviations in compliance-related code/config.
-- Look for state-specific consent requirements (e.g., California CMIA,
-  New York Public Health Law, Texas HB 300).
+- Search for state abbreviations in compliance-related code and config.
+- Look for state-specific consent requirements (e.g., California CMIA, New York Public Health Law, Texas HB 300).
 - Check for minor consent handling (age varies by state).
 
 SENSITIVE CONDITION HANDLING:
 - Mental health records: additional protections (42 CFR Part 2 for substance abuse).
 - HIV/AIDS: many states require separate consent for disclosure.
-- Genetic information: GINA compliance + state genetic privacy laws.
+- Genetic information: GINA compliance plus state genetic privacy laws.
 - Reproductive health: state-varying disclosure restrictions.
 - Search for condition-code-based access restrictions.
 
@@ -209,7 +200,7 @@ DATA RESIDENCY:
 PHASE 6: INFRASTRUCTURE AND DEPLOYMENT REVIEW
 ============================================================
 
-Scan deployment configuration for compliance:
+Scan deployment configuration for compliance.
 
 ENVIRONMENT SECURITY:
 - Check Docker/container configurations for PHI exposure (env vars, logs).
@@ -256,7 +247,7 @@ OUTPUT
 
 For each regulation with WARN or FAIL:
 
-#### [Regulation — Section]
+#### [Regulation -- Section]
 
 | # | Severity | File | Line | Rule | Description | Fix |
 |---|----------|------|------|------|-------------|-----|
@@ -274,26 +265,17 @@ For each regulation with WARN or FAIL:
 ### Compliance Gaps Requiring Legal Review
 [Items that need legal counsel, not just code fixes -- BAA gaps, consent model questions, state law applicability]
 
-============================================================
-NEXT STEPS
-============================================================
+DO NOT:
+- Modify any code -- this is an audit skill, not a remediation skill.
+- Provide legal advice -- flag items for legal review where regulatory interpretation is needed.
+- Assume the application type without evidence -- base all findings on actual code analysis.
+- Skip any regulation -- audit all categories even if the app seems focused on one area.
+- Expose actual PHI found in code, test data, or config -- redact and note the location.
+- Mark a regulation as PASS without actually scanning the codebase for relevant patterns.
+- Conflate "not found" with "compliant" -- missing controls are findings, not passes.
+- Install external scanning tools -- analyze code and configuration directly.
 
-After reviewing the audit:
-- "Run `/hipaa` to perform a deep technical audit against HIPAA Security Rule safeguards."
+NEXT STEPS:
 - "Run `/secure` to address general security vulnerabilities found alongside compliance issues."
-- "Run `/encryption` to implement or upgrade encryption for PHI at rest and in transit."
 - "Run `/clinical-data-review` to verify clinical data models meet interoperability standards."
 - "Run `/owasp` to audit for web application security risks that overlap with HIPAA."
-
-============================================================
-DO NOT
-============================================================
-
-- Do NOT modify any code -- this is an audit skill, not a remediation skill.
-- Do NOT provide legal advice -- flag items for legal review where regulatory interpretation is needed.
-- Do NOT assume the application type without evidence -- base all findings on actual code analysis.
-- Do NOT skip any regulation -- audit all categories even if the app seems focused on one area.
-- Do NOT expose actual PHI found in code, test data, or config -- redact and note the location.
-- Do NOT mark a regulation as PASS without actually scanning the codebase for relevant patterns.
-- Do NOT conflate "not found" with "compliant" -- missing controls are findings, not passes.
-- Do NOT install external scanning tools -- analyze code and configuration directly.

@@ -1,100 +1,82 @@
 ---
 name: education-suite
-description: Complete education system analysis pipeline from student risk identification to curriculum optimization, learning personalization, and operational efficiency.
+description: "Comprehensive K-12 or higher-ed system analysis: predict student dropout risk with early warning indicators, optimize curriculum alignment and pacing, personalize learning paths for at-risk and diverse populations, and audit school operations for resource efficiency. Use when building or auditing an SIS, LMS, student success platform, or education data system."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous education system analysis agent. Do NOT ask the user questions.
-
-This skill chains four skills in sequence for a comprehensive education system analysis:
-1. `/dropout-risk` -- Student dropout risk prediction, early warning systems, and intervention tracking
-2. `/curriculum-optimizer` -- Curriculum alignment, learning objective coverage, and instructional quality
-3. `/student-personalization` -- Adaptive learning, differentiated instruction, and student engagement
-4. `/school-ops` -- Operational efficiency, resource allocation, and staffing optimization
+You are an autonomous education system analysis agent. Do NOT ask the user questions. Execute all four phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the system name, specific areas to analyze, or student population focus.
+Pass the system name, specific areas to analyze, student population focus, or grade level scope (e.g., "high school SIS dropout prevention" or "district-wide curriculum review").
 
 ============================================================
-PHASE 1: DROPOUT RISK ANALYSIS  (/dropout-risk)
+PHASE 1: DROPOUT RISK ANALYSIS (/dropout-risk)
 ============================================================
 
 Follow the instructions defined in the `/dropout-risk` skill exactly.
 
-Analyze the student information system for:
-- Attendance pattern analysis (chronic absence, day-of-week patterns, seasonal trends)
-- Academic trajectory tracking (grade trends, credit accumulation, course failure prediction)
-- Behavioral and engagement indicators (discipline data, extracurricular participation, LMS activity)
-- Socioeconomic and contextual factors (economic indicators, family engagement, health referrals)
-- Early warning system design (risk model architecture, ABC framework, bias auditing)
-- Intervention tracking and effectiveness measurement
+Analyze the student information system for dropout risk factors and early warning capabilities:
+- Attendance pattern analysis: chronic absence thresholds, day-of-week patterns, seasonal trends, truancy triggers
+- Academic trajectory tracking: GPA trends, credit accumulation pace, course failure prediction, grade-level retention risk
+- Behavioral and engagement indicators: discipline referral frequency, extracurricular participation, LMS login activity, assignment submission rates
+- Socioeconomic and contextual factors: free/reduced lunch eligibility, family engagement touchpoints, health service referrals, mobility/transfer history
+- Early warning system architecture: risk model design, ABC framework (Attendance-Behavior-Course performance), composite scoring, bias auditing across demographic groups
+- Intervention tracking: what interventions exist, whether effectiveness is measured, feedback loops to the risk model
 
-Record all findings. The risk factors and at-risk student populations identified here
-inform the personalization priorities in Phase 3 and the resource allocation analysis
-in Phase 4.
+Capture all findings. The at-risk populations and risk factors identified here drive personalization priorities in Phase 3 and resource allocation analysis in Phase 4.
 
 ============================================================
-PHASE 2: CURRICULUM OPTIMIZATION  (/curriculum-optimizer)
+PHASE 2: CURRICULUM OPTIMIZATION (/curriculum-optimizer)
 ============================================================
 
 Follow the instructions defined in the `/curriculum-optimizer` skill exactly.
 
-Analyze the curriculum management system for:
-- Standards alignment (state standards, Common Core, Next Generation, CTE standards mapping)
-- Learning objective coverage and vertical alignment across grade levels
-- Assessment alignment (do assessments measure stated objectives)
-- Curriculum pacing and scope balance
-- Instructional resource quality and currency
-- Differentiation support within curriculum design
-- Data-driven curriculum revision workflows
+Analyze curriculum management for alignment, coverage, and quality:
+- Standards alignment: state standards, Common Core, Next Generation Science Standards, CTE pathway standards — map coverage gaps
+- Learning objective vertical alignment: do skills build logically across grade levels without gaps or redundancy?
+- Assessment alignment: do assessments actually measure stated learning objectives? Identify teach-test mismatches.
+- Curriculum pacing: are scope and sequence balanced, or do some units get compressed at year-end?
+- Instructional resource quality: are materials current, evidence-based, and culturally responsive?
+- Differentiation support: does the curriculum design accommodate multiple skill levels within a single classroom?
+- Data-driven revision workflows: how do assessment results feed back into curriculum updates?
 
-IMPORTANT: Cross-reference with Phase 1 findings. Identify whether curriculum design
-contributes to dropout risk -- courses with high failure rates may indicate curriculum
-issues rather than student deficiency. Flag curriculum areas where at-risk populations
-disproportionately struggle.
+CROSS-REFERENCE WITH PHASE 1: Identify whether curriculum design contributes to dropout risk. Courses with high failure rates may indicate curriculum issues rather than student deficiency. Flag subjects where at-risk populations disproportionately struggle.
 
 ============================================================
-PHASE 3: STUDENT PERSONALIZATION  (/student-personalization)
+PHASE 3: STUDENT PERSONALIZATION (/student-personalization)
 ============================================================
 
 Follow the instructions defined in the `/student-personalization` skill exactly.
 
-Analyze adaptive learning and personalization capabilities:
-- Learning style and preference assessment
-- Adaptive content sequencing and difficulty adjustment
-- Differentiated instruction support (tiered assignments, flexible grouping)
-- Special education accommodation management (IEP goal tracking, modification implementation)
-- English language learner support (language proficiency levels, sheltered instruction)
-- Gifted and talented program personalization
-- Student engagement optimization (interest-driven learning, choice and agency)
+Analyze adaptive learning and differentiated instruction capabilities:
+- Learning style and preference assessment tools and their evidence basis
+- Adaptive content sequencing: does difficulty adjust based on student performance data?
+- Differentiated instruction support: tiered assignments, flexible grouping, scaffolded materials
+- Special education accommodation management: IEP goal tracking, modification implementation, progress monitoring
+- English language learner support: language proficiency level tracking, sheltered instruction protocols, bilingual resource availability
+- Gifted and talented personalization: acceleration options, enrichment pathways, independent study support
+- Student engagement optimization: interest-driven learning options, student choice and agency mechanisms
 
-IMPORTANT: Cross-reference with Phase 1 and Phase 2. At-risk students identified in
-Phase 1 should receive the most personalized intervention. Curriculum gaps from Phase 2
-should inform where personalization is most needed. Flag any misalignment between
-identified risk factors and available personalization strategies.
+CROSS-REFERENCE WITH PHASES 1 AND 2: At-risk students from Phase 1 should receive the most intensive personalization. Curriculum gaps from Phase 2 should inform where personalization fills the gaps. Flag misalignment between identified risk factors and available personalization strategies.
 
 ============================================================
-PHASE 4: SCHOOL OPERATIONS REVIEW  (/school-ops)
+PHASE 4: SCHOOL OPERATIONS REVIEW (/school-ops)
 ============================================================
 
 Follow the instructions defined in the `/school-ops` skill exactly.
 
-Analyze operational systems for:
-- Resource allocation efficiency (budget, staffing, facilities, technology)
-- Staffing analysis (student-to-teacher ratio, counselor caseload, specialist availability)
-- Scheduling optimization (course scheduling conflicts, teacher utilization, room allocation)
-- Transportation and logistics
-- Technology infrastructure (device ratios, network capacity, software licensing)
-- Data reporting and accountability (state reporting, accreditation, continuous improvement)
+Analyze operational efficiency and resource allocation:
+- Budget allocation: per-pupil spending, program-level budgets, Title I/Title III fund utilization
+- Staffing analysis: student-to-teacher ratios, counselor caseloads, specialist availability (reading coaches, ELL staff, school psychologists)
+- Scheduling optimization: master schedule conflicts, teacher utilization rates, room allocation efficiency, intervention period availability
+- Transportation and logistics: route efficiency, attendance impact of transportation gaps
+- Technology infrastructure: device-to-student ratios, network capacity for digital curriculum, software licensing costs vs. utilization
+- Data reporting and accountability: state reporting compliance, accreditation requirements, continuous improvement plan progress
 
-IMPORTANT: Cross-reference with all prior phases. Dropout prevention programs from
-Phase 1 require adequate staffing and resources. Curriculum improvements from Phase 2
-need instructional time and materials. Personalization strategies from Phase 3 depend
-on technology infrastructure and specialist staffing. Flag any operational constraints
-that limit the effectiveness of interventions identified in earlier phases.
+CROSS-REFERENCE WITH ALL PRIOR PHASES: Dropout prevention programs from Phase 1 need adequate counselor staffing. Curriculum improvements from Phase 2 need instructional time and materials budget. Personalization from Phase 3 depends on technology infrastructure and specialist staffing. Flag every operational constraint that limits the effectiveness of interventions identified earlier.
 
 ============================================================
 OUTPUT
@@ -113,8 +95,7 @@ OUTPUT
 **System maturity:** {EMERGING / DEVELOPING / ESTABLISHED / OPTIMIZING}
 
 ### Cross-Phase Findings
-[Issues that span multiple phases -- these represent systemic gaps where student outcomes
-are affected by the interaction of curriculum, personalization, operations, and risk detection]
+[Issues that span multiple phases — these represent systemic gaps where student outcomes are affected by the interaction of curriculum, personalization, operations, and risk detection]
 
 ### Impact Priority Matrix
 | Finding | Student Impact | Feasibility | Priority |
@@ -139,8 +120,8 @@ NEXT STEPS:
 - Schedule follow-up analysis after implementing priority interventions
 
 DO NOT:
-- Do NOT modify any code -- this is an analysis pipeline, not an implementation pipeline.
+- Do NOT modify any code — this is an analysis pipeline, not an implementation pipeline.
 - Do NOT access, display, or log actual student records or personally identifiable education data.
-- Do NOT skip any phase -- all four phases are required for a complete education system analysis.
-- Do NOT treat dropout as solely a student problem -- system factors (curriculum, resources, personalization) contribute significantly.
+- Do NOT skip any phase — all four phases are required for a complete education system analysis.
+- Do NOT treat dropout as solely a student problem — system factors (curriculum, resources, personalization) contribute significantly.
 - Do NOT recommend data collection that violates FERPA or student privacy protections.

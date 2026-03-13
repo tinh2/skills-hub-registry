@@ -1,6 +1,6 @@
 ---
 name: franchise-inventory
-description: Franchise inventory management analysis covering par level optimization, waste tracking, food cost analysis, vendor compliance monitoring, and cooperative purchasing evaluation for multi-unit operations
+description: Analyze franchise inventory management for par level optimization, waste tracking and root cause analysis, theoretical vs. actual food cost variance, menu engineering profitability, vendor scorecard performance, and cooperative purchasing ROI. Covers FIFO shelf life constraints, safety stock calculations, inventory turn benchmarking, and supply chain risk identification for multi-unit restaurant operations.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -47,7 +47,7 @@ Map the inventory landscape:
 Step 1.3 -- Vendor Landscape
 
 Map the supplier base:
-- Approved vendor list (franchisor-mandated vs. operator-selected)
+- Approved vendor list: franchisor-mandated vs. operator-selected
 - Broadline distributors: Sysco, US Foods, PFG, local/regional
 - Specialty suppliers: bakery, seafood, produce, beverage
 - Cooperative purchasing group membership
@@ -73,8 +73,8 @@ Step 2.1 -- Demand Analysis
 
 Analyze usage patterns for each inventory item:
 - Average daily usage by item (units and cost)
-- Usage variability (standard deviation, coefficient of variation)
-- Seasonal demand patterns (holiday, weather, school schedule)
+- Usage variability: standard deviation, coefficient of variation
+- Seasonal demand patterns: holiday, weather, school schedule
 - Day-of-week demand patterns
 - Promotional and LTO demand spikes
 - Trend analysis: growing, stable, or declining demand items
@@ -82,9 +82,9 @@ Analyze usage patterns for each inventory item:
 Step 2.2 -- Current Par Assessment
 
 Evaluate existing par levels:
-- Current par levels vs. actual usage (are they evidence-based?)
-- Frequency of stockouts (items unavailable for sale)
-- Frequency of overstock (items expiring before use)
+- Current par levels vs. actual usage: are they evidence-based?
+- Frequency of stockouts: items unavailable for sale
+- Frequency of overstock: items expiring before use
 - Order frequency and delivery schedule by vendor
 - Lead time analysis: order-to-delivery by vendor and item
 
@@ -104,18 +104,18 @@ Where Z-score corresponds to desired service level:
 - 99% service level: Z = 2.33
 
 Adjust for:
-- Shelf life constraints (perishables may not sustain high par)
+- Shelf life constraints: perishables may not sustain high par
 - Storage capacity limitations
 - Minimum order quantities and case pack sizes
-- Volume discount thresholds (break-even analysis for buying larger quantities)
+- Volume discount thresholds: break-even analysis for buying larger quantities
 
 Step 2.4 -- Inventory Turn Optimization
 
 Analyze inventory turnover rates:
 - Inventory turns by category: (annual COGS for category / average inventory value)
 - Industry benchmarks: QSR target 25-35 turns, casual dining 15-25 turns
-- Slow-moving inventory identification (turns < 12 = concern)
-- Dead stock identification (no movement in 30+ days)
+- Slow-moving inventory identification: turns < 12 = concern
+- Dead stock identification: no movement in 30+ days
 - Carrying cost calculation: insurance, shrinkage, spoilage, opportunity cost
 
 ============================================================
@@ -165,10 +165,10 @@ Design waste reduction initiatives:
 Common initiatives:
 - Prep list optimization based on demand forecast
 - Batch cooking intervals aligned with daypart demand
-- Portion control tools (scales, scoops, portion cups)
+- Portion control tools: scales, scoops, portion cups
 - FIFO enforcement and shelf life labeling
 - Menu engineering to use common ingredients across items
-- Donation programs for surplus (tax benefit + reduced disposal cost)
+- Donation programs for surplus: tax benefit + reduced disposal cost
 
 ============================================================
 PHASE 4: FOOD COST ANALYSIS
@@ -206,19 +206,19 @@ Step 4.3 -- Pricing Analysis
 Evaluate menu pricing effectiveness:
 - Price vs. food cost ratio by item (target varies by category)
 - Price elasticity indicators: sales volume change after price increases
-- Competitive pricing comparison (market basket analysis)
+- Competitive pricing comparison: market basket analysis
 - Price anchoring and bundling opportunities
-- Delivery menu pricing (typically 15-25% premium to offset commissions)
+- Delivery menu pricing: typically 15-25% premium to offset commissions
 
 Step 4.4 -- Vendor Cost Management
 
 Analyze purchasing cost optimization:
-- Price trend by commodity (proteins, dairy, produce, oil)
+- Price trend by commodity: proteins, dairy, produce, oil
 - Contract vs. market pricing comparison
 - Vendor rebate and credit tracking
-- Substitute product opportunities (same quality, lower cost)
-- Order frequency optimization (fewer deliveries = lower delivery costs)
-- Invoice accuracy audit (overcharges, wrong pricing tier)
+- Substitute product opportunities: same quality, lower cost
+- Order frequency optimization: fewer deliveries = lower delivery costs
+- Invoice accuracy audit: overcharges, wrong pricing tier
 
 ============================================================
 PHASE 5: VENDOR AND COOPERATIVE PURCHASING
@@ -237,7 +237,7 @@ Step 5.2 -- Vendor Compliance Monitoring
 
 Assess vendor compliance with agreements:
 - Delivery window adherence
-- Product specification compliance (temperature, weight, quality)
+- Product specification compliance: temperature, weight, quality
 - Invoice accuracy rate
 - Product recall response capability
 - Insurance and food safety certification currency
@@ -258,7 +258,7 @@ Step 5.4 -- Supply Chain Risk
 Identify procurement vulnerabilities:
 - Single-source items with no approved alternative
 - Long lead time items vulnerable to disruption
-- Commodity price volatility exposure (unhedged)
+- Commodity price volatility exposure: unhedged
 - Local vs. national supplier dependency
 - Seasonal availability gaps for fresh products
 
@@ -271,7 +271,7 @@ Write the complete analysis to `docs/franchise-inventory-analysis.md`.
 Step 6.1 -- Inventory Health Dashboard
 
 Produce an inventory management scorecard:
-- Food cost variance (theoretical vs. actual)
+- Food cost variance: theoretical vs. actual
 - Waste percentage and trending
 - Inventory turn rates by category
 - Stockout frequency

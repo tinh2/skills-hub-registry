@@ -1,6 +1,6 @@
 ---
 name: emergency-resource
-description: Analyzes emergency resource management systems for inventory tracking, deployment optimization, logistics coordination, supply chain resilience, staging area management, resource sharing between agencies, and real-time capacity dashboards.
+description: Audit an emergency resource management system for inventory tracking accuracy, deployment allocation optimization, logistics and staging area coordination, inter-agency NIMS resource sharing, supply chain resilience under crisis surge, and real-time capacity dashboards. Use when reviewing disaster preparedness platforms, FEMA resource tracking tools, EOC logistics systems, or humanitarian supply chain software.
 version: "1.0.0"
 category: analysis
 platforms:

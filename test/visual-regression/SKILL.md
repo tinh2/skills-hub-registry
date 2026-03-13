@@ -1,6 +1,6 @@
 ---
 name: visual-regression
-description: Auto-detects frontend framework, sets up visual regression testing with baseline screenshots across breakpoints, configures comparison, and reports diffs.
+description: Set up visual regression testing with baseline screenshots across breakpoints. Auto-detects frontend framework (Next.js, React, Vue, Angular, Flutter, Storybook), configures Playwright screenshot comparison, BackstopJS, or Flutter golden tests, captures every page at mobile/tablet/desktop/wide viewports plus interactive states (hover, focus, error, empty, loading), stabilizes dynamic content to prevent false positives, and reports pixel-level diffs. Use when you need to catch unintended UI changes, set up screenshot baselines, prevent CSS regressions, or verify layouts across screen sizes after refactoring.
 version: "1.0.0"
 category: test
 platforms:
@@ -57,9 +57,7 @@ If no visual testing tool exists, select based on stack:
 
 Step 1.3 -- Discover All Pages and Routes
 
-Use the same route discovery method as `/e2e` Phase 0, Step 0.2.
-
-Build the page inventory:
+Build the page inventory by scanning route definitions, page components, and navigation config.
 
 | # | Route | Page Name | Auth Required | Dynamic Content | Priority |
 |---|-------|-----------|--------------|----------------|----------|

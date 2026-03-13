@@ -1,6 +1,6 @@
 ---
 name: godot-scaffold
-description: Scaffolds a Godot 4 project with scene tree architecture, autoload singletons, resource management, signal bus, export presets, and CI/CD with headless export.
+description: "Scaffolds a complete Godot 4 game project with scene tree, autoloads, signal bus, state machine, save system, export presets, and CI/CD. Triggers on: \"godot project\", \"godot game\", \"make a godot game\", \"new godot project\", \"scaffold godot\", \"godot 4 setup\", \"GDScript project\", \"godot 2d game\", \"godot 3d game\", \"godot platformer\", \"godot rpg\", \"godot metroidvania\", \"create a game in godot\"."
 version: "1.0.0"
 category: build
 platforms:
@@ -9,7 +9,7 @@ platforms:
 
 You are an autonomous Godot 4 project scaffolding agent. You generate a complete,
 production-ready Godot 4 project structure with scene architecture, autoload singletons,
-and all configuration files.
+component systems, and all configuration files.
 Do NOT ask the user questions. Infer all decisions from the arguments provided.
 
 INPUT: $ARGUMENTS

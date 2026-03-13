@@ -1,6 +1,6 @@
 ---
 name: franchise-benchmarking
-description: Franchise benchmarking analysis covering top and bottom quartile comparison, KPI standardization, same-store sales analysis, operational audit scoring, and brand standards compliance using IFA benchmarks
+description: Benchmark franchise locations by comparing top and bottom quartile performance across revenue, profitability, and operational scores. Covers same-store sales decomposition into traffic vs. ticket, KPI standardization across peer groups, operational audit correlation with financial results, NPS and online review analysis, mystery shop scoring, and brand standards compliance gaps.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -23,12 +23,12 @@ Identify franchise benchmarking data sources:
 Step 1.1 -- System Performance Data
 
 Search for franchise system reporting:
-- Franchisor reporting portal exports (FranConnect, Naranga, BrandONE)
+- Franchisor reporting portal exports: FranConnect, Naranga, BrandONE
 - POS system aggregate data across locations
-- Financial reporting submissions (P&L, balance sheet)
+- Financial reporting submissions: P&L, balance sheet
 - Operational audit results and scores
 - Mystery shop / guest satisfaction reports
-- Online review aggregation (Google, Yelp, platform-specific)
+- Online review aggregation: Google, Yelp, platform-specific
 - Employee satisfaction / engagement survey data
 
 Step 1.2 -- KPI Framework
@@ -44,19 +44,19 @@ Step 1.3 -- Comparison Group Definition
 
 Define peer groups for meaningful comparison:
 - System-wide average (all locations)
-- Market-type peers (urban vs. suburban vs. rural)
-- Vintage peers (same year opened)
-- Volume-tier peers (similar revenue levels)
-- Geographic peers (same region or DMA)
-- Format peers (drive-thru vs. non-drive-thru, mall vs. inline)
-- Ownership peers (single-unit vs. multi-unit operators)
+- Market-type peers: urban vs. suburban vs. rural
+- Vintage peers: same year opened
+- Volume-tier peers: similar revenue levels
+- Geographic peers: same region or DMA
+- Format peers: drive-thru vs. non-drive-thru, mall vs. inline
+- Ownership peers: single-unit vs. multi-unit operators
 
 Step 1.4 -- Data Quality Assessment
 
 Evaluate data comparability:
-- Consistent accounting methods across locations (cash vs. accrual)
+- Consistent accounting methods across locations: cash vs. accrual
 - Standardized chart of accounts compliance
-- POS configuration consistency (menu categories, modifiers, discounts)
+- POS configuration consistency: menu categories, modifiers, discounts
 - Reporting period alignment and completeness
 - Self-reported vs. audited data reliability
 
@@ -85,7 +85,7 @@ Step 2.2 -- Profitability Quartile Distribution
 Rank by four-wall EBITDA margin:
 - Q1 operators: what do they do differently? (lower COGS? Better labor scheduling?)
 - Q4 operators: what are the profit drags? (high occupancy? High waste? Overtime?)
-- Revenue quartile vs. profitability quartile correlation (are high-revenue units also high-profit?)
+- Revenue quartile vs. profitability quartile correlation: are high-revenue units also high-profit?
 - Identify "efficient" operators: lower revenue but higher margins
 
 Step 2.3 -- Operational Score Quartile
@@ -180,8 +180,8 @@ Analyze audit results across the system:
 Step 4.3 -- Audit-to-Performance Correlation
 
 Quantify the relationship between audit scores and business outcomes:
-- Audit score vs. SSS growth (higher scores = higher growth?)
-- Audit score vs. guest satisfaction (NPS, online reviews)
+- Audit score vs. SSS growth: higher scores = higher growth?
+- Audit score vs. guest satisfaction: NPS, online reviews
 - Audit score vs. employee turnover
 - Audit score vs. EBITDA margin
 - Regression analysis: which audit categories most predict financial performance?
@@ -207,7 +207,7 @@ Evaluate guest satisfaction scores:
 - Net Promoter Score (NPS) by location, market, and trend
 - Customer Satisfaction (CSAT) survey results
 - Guest comment analysis: top positive and negative themes
-- Response rate analysis (low response rate = biased sample)
+- Response rate analysis: low response rate = biased sample
 - NPS distribution: promoters, passives, detractors by location
 
 Step 5.2 -- Online Reputation
@@ -215,9 +215,9 @@ Step 5.2 -- Online Reputation
 Analyze digital presence and reviews:
 - Google review average rating and count by location
 - Yelp rating and review volume
-- Platform-specific ratings (DoorDash, UberEats, GrubHub)
+- Platform-specific ratings: DoorDash, UberEats, GrubHub
 - Review sentiment analysis: common praise and complaint themes
-- Review response rate and quality (brand reputation management)
+- Review response rate and quality: brand reputation management
 - Star rating correlation with revenue performance
 
 Step 5.3 -- Mystery Shop Results

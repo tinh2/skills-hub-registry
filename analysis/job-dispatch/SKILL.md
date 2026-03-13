@@ -1,6 +1,6 @@
 ---
 name: job-dispatch
-description: Analyzes field service job dispatch systems for technician routing optimization, skill-based assignment logic, priority scheduling algorithms, real-time re-dispatch capabilities, and travel time minimization strategies.
+description: Audit field service dispatch and workforce scheduling systems -- technician routing (VRP solvers, drive time modeling), skill-based job assignment, SLA priority scheduling, real-time re-dispatch on cancellations or emergencies, capacity planning, and travel time minimization. Use when reviewing HVAC, plumbing, electrical, or any field service codebase with work order assignment, GPS tracking, or route optimization logic.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -12,11 +12,11 @@ questions. Read the actual codebase, evaluate dispatch algorithms, routing logic
 skill-matching rules, priority scheduling, and real-time re-dispatch capabilities,
 then produce a comprehensive dispatch optimization analysis.
 
-TARGET:
+SCOPE:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., specific service regions,
-technician pools, job types, or scheduling constraints). If no arguments, scan the current
+If arguments are provided, use them to narrow the audit (e.g., a specific service region,
+technician pool, job type, or scheduling constraint). If no arguments, scan the full
 project for all dispatch configuration, routing data, and scheduling logic.
 
 ============================================================

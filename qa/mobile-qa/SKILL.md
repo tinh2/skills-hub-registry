@@ -1,6 +1,6 @@
 ---
 name: mobile-qa
-description: Comprehensive mobile QA — permission flows, deep link verification, push notification testing, offline mode, background transitions, memory leak detection, network simulation, accessibility audit, and platform edge cases.
+description: Run a comprehensive mobile app QA audit covering permission flows, deep link verification, push notification delivery, offline mode resilience, background/foreground state preservation, memory leak detection, network condition simulation, accessibility compliance, and iOS/Android platform edge cases. Supports Flutter, React Native, and native iOS/Android. Use when you need to QA test a mobile app, find mobile-specific bugs, test offline behavior, audit mobile accessibility, check permission handling, or validate deep links and push notifications.
 version: "1.0.0"
 category: qa
 platforms:
@@ -21,7 +21,7 @@ PHASE 1: APP INVENTORY & SETUP
 ============================================================
 
 1. Detect the mobile framework:
-   - Flutter, React Native, Native iOS, Native Android.
+   - Flutter, React Native, Native iOS (Swift/ObjC), Native Android (Kotlin/Java).
    - Both platforms or single platform.
 
 2. Build the app in release mode:
@@ -208,7 +208,7 @@ LEAK DETECTION FLOW:
 1. Launch app, record baseline memory.
 2. Navigate through all screens in sequence.
 3. Return to home screen.
-4. Record memory — should be close to baseline.
+4. Record memory -- should be close to baseline.
 5. Repeat navigation cycle 5 times.
 6. Memory should not grow significantly each cycle.
 
@@ -358,13 +358,13 @@ OUTPUT
 
 DO NOT:
 - Mark items as passing without actually testing them.
-- Skip accessibility testing — it is a release requirement.
-- Test only on the latest devices — older devices reveal real issues.
-- Ignore offline mode — mobile users frequently lose connectivity.
-- Skip background/foreground testing — the most common source of mobile bugs.
+- Skip accessibility testing -- it is a release requirement.
+- Test only on the latest devices -- older devices reveal real issues.
+- Ignore offline mode -- mobile users frequently lose connectivity.
+- Skip background/foreground testing -- the most common source of mobile bugs.
 - Report issues without clear reproduction steps.
-- Test only in debug mode — release builds have different characteristics.
-- Skip push notification testing — notification issues are invisible to automated tests.
+- Test only in debug mode -- release builds have different characteristics.
+- Skip push notification testing -- notification issues are invisible to automated tests.
 
 NEXT STEPS:
 - "Fix all critical and high issues before release."

@@ -1,6 +1,6 @@
 ---
 name: sustainability-metrics
-description: Analyzes sustainability reporting and ESG (Environmental, Social, Governance) software for metric collection accuracy, benchmark comparison, materiality assessment, stakeholder reporting, SDG (Sustainable Development Goals) alignment, and greenwashing detection.
+description: Audit ESG reporting software and sustainability metric accuracy. Analyzes Environmental (Scope 1/2/3 emissions, water, waste, biodiversity), Social (workforce diversity, pay equity, human rights due diligence), and Governance (board composition, ethics, risk) data collection against GRI, SASB, TCFD, CDP, CSRD/ESRS, ISSB, and UN SDG frameworks. Detects greenwashing risk through claim verification, cherry-picking detection, net-zero integrity checks, and base year consistency analysis. Evaluates double materiality assessment and ESG rating alignment (MSCI, Sustainalytics, S&P CSA).
 version: "1.0.0"
 category: analysis
 platforms:

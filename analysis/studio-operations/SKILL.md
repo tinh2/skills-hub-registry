@@ -1,6 +1,6 @@
 ---
 name: studio-operations
-description: Analyzes studio and production facility operations including facility scheduling, equipment tracking, post-production workflows, digital asset management, and talent coordination using SMPTE standards and MXF/IMF format compliance.
+description: Audit a media production studio or post-production facility. Analyzes facility scheduling and utilization, equipment lifecycle tracking, editorial and VFX pipelines, color grading and finishing workflows, digital asset management (MAM/DAM), IMF/MXF format compliance, SMPTE standards adherence, content security posture (TPN readiness), and talent/crew coordination systems.
 version: "1.0.0"
 category: analysis
 platforms:

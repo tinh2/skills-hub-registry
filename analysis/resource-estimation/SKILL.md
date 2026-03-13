@@ -1,6 +1,6 @@
 ---
 name: resource-estimation
-description: Mineral resource estimation analysis covering geological modeling, reserve classification, grade interpolation methods, economic cutoff analysis, and depletion tracking per JORC, NI 43-101, CIM, and SAMREC standards
+description: Audit a mineral resource estimation system -- evaluate drillhole database integrity and QA/QC (CRMs, blanks, duplicates, umpire checks), geological and domain modeling quality, variogram analysis and grade interpolation methods (ordinary kriging, indicator kriging, IDW, conditional simulation), resource classification criteria (Measured, Indicated, Inferred), economic cut-off grade calculation, reserve conversion with modifying factors, pit/stope optimization, and depletion reconciliation. Reports against JORC 2012, NI 43-101, CIM 2014, SAMREC, S-K 1300, and PERC codes for any commodity (Au, Cu, Fe, Li, REE, coal).
 version: "1.0.0"
 category: analysis
 platforms:

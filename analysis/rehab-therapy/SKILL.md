@@ -1,6 +1,6 @@
 ---
 name: rehab-therapy
-description: Analyzes rehabilitation and physical therapy software for recovery metrics tracking, exercise personalization, setback prediction, therapist scheduling, insurance authorization, and outcome-based care measurement.
+description: Audit a rehabilitation or physical therapy platform end-to-end -- evaluate recovery metrics tracking (ROM, strength, balance, gait), patient-reported outcomes (DASH, LEFS, NDI, ODI, PROMIS), home exercise program personalization and compliance tracking, setback prediction with risk stratification and plateau detection, therapist scheduling and caseload balancing, insurance authorization and 8-minute rule CPT billing, and outcome-based care measurement with MIPS quality reporting. Covers outpatient orthopedic, inpatient rehab, sports medicine, neuro rehab, and telerehab settings.
 version: "1.0.0"
 category: analysis
 platforms:

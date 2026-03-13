@@ -1,6 +1,6 @@
 ---
 name: monorepo
-description: "Set up or migrate to a monorepo with workspaces, build pipeline, task graph, and local plus remote caching"
+description: "Set up or migrate to a monorepo with Turborepo, Nx, or pnpm workspaces. Scaffolds apps and packages directory structure, configures task pipeline with dependency graph, enables local and remote build caching, and generates affected-only CI workflows. Use when splitting a project into packages, merging multiple repos, adding workspace-aware builds, or optimizing monorepo CI performance."
 version: "1.0.0"
 category: productivity
 platforms:

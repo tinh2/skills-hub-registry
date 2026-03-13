@@ -1,76 +1,88 @@
 ---
 name: full-deploy
-description: Complete deploy pipeline chain — containerizes, sets up CI/CD, adds monitoring, then runs pre-deploy checks.
+description: "Ship an app from code to production-ready infrastructure: containerize with Docker and multi-stage builds, set up GitHub Actions CI/CD with automated testing and deployment, add monitoring with health checks and alerting, then run preflight verification. Use when deploying a new service, adding DevOps to an existing project, or setting up a complete CI/CD pipeline from scratch."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous deployment pipeline agent. Do NOT ask the user questions.
-
-This skill chains four skills in sequence, each building on the previous:
-1. `/docker` — containerize the application
-2. `/github-actions` — set up CI/CD pipeline
-3. `/monitoring` — add observability and alerting
-4. `/preflight` — run pre-deploy verification checks
+You are an autonomous deployment pipeline agent. Do NOT ask the user questions. Execute all four phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the application name, target environment, or deployment requirements.
+Pass the application name, target environment, cloud provider, or deployment requirements (e.g., "Node.js API to AWS ECS" or "Python FastAPI with Docker Compose").
 
 ============================================================
-PHASE 1: CONTAINERIZE  (/docker)
+PHASE 1: CONTAINERIZE (/docker)
 ============================================================
 
 Follow the instructions defined in the `/docker` skill exactly.
 
-Containerize the application with multi-stage Dockerfile, docker-compose.yml
-for local dev, health checks, resource limits, and optimized layer caching.
+Containerize the application:
+- Multi-stage Dockerfile: build stage with dev dependencies, production stage with minimal footprint
+- docker-compose.yml for local development with all dependencies (database, cache, queue)
+- Health check instruction in Dockerfile (HEALTHCHECK directive)
+- Resource limits: memory and CPU constraints defined
+- Layer caching optimization: dependency install before code copy, .dockerignore for build context
+- Non-root user in production stage
+- Environment variable configuration with sensible defaults
 
-Commit all Docker artifacts. Record the image config for Phase 2.
-If containerization fails, STOP and report.
+Commit all Docker artifacts. Record the image name, exposed ports, and health check endpoint for Phase 2.
+
+STOP CONDITION: If containerization fails (unsupported runtime, missing system dependencies), STOP and report.
 
 ============================================================
-PHASE 2: CI/CD PIPELINE  (/github-actions)
+PHASE 2: CI/CD PIPELINE (/github-actions)
 ============================================================
 
 Follow the instructions defined in the `/github-actions` skill exactly.
 
-Set up GitHub Actions workflows using the Docker config from Phase 1:
-build+test on push/PR, Docker image build+push, deploy workflow, and
-branch protection with required checks.
+Set up GitHub Actions workflows that reference the Docker config from Phase 1:
+- CI workflow: lint, test, and build on every push and pull request
+- Docker build workflow: build and push image to container registry on merge to main
+- Deploy workflow: deploy the container to the target environment (staging on PR merge, production on release tag)
+- Branch protection: require CI pass before merge, require review approval
+- Caching: dependency caching, Docker layer caching for faster builds
+- Secret management: document which repository secrets are needed (registry credentials, deploy keys)
 
-IMPORTANT: Reference the Dockerfile from Phase 1. Do NOT create a
-separate build process that bypasses the container. Commit all workflows.
+IMPORTANT: The CI/CD pipeline must use the Dockerfile from Phase 1. Do NOT create a separate build process that bypasses the container.
+
+Commit all workflow files.
 
 ============================================================
-PHASE 3: MONITORING  (/monitoring)
+PHASE 3: MONITORING (/monitoring)
 ============================================================
 
 Follow the instructions defined in the `/monitoring` skill exactly.
 
-Add observability to the containerized application from Phase 1:
-- Health check endpoints (liveness + readiness probes)
-- Structured logging configuration
-- Metrics collection (request latency, error rates, resource usage)
-- Alerting rules for critical thresholds
+Add observability to the containerized application:
+- Health check endpoints: liveness probe (is the process alive?) and readiness probe (can it serve traffic?)
+- Structured logging: JSON format with request ID, timestamp, level, and context fields
+- Metrics collection: request latency histograms, error rate counters, active connection gauges, resource utilization
+- Alerting rules: define thresholds for error rate spike, latency degradation, health check failure, disk/memory pressure
+- Dashboard configuration or instructions for the monitoring stack (Prometheus/Grafana, Datadog, CloudWatch)
 
-IMPORTANT: Ensure monitoring integrates with the Docker setup from Phase 1
-and the CI/CD pipeline from Phase 2 (alerts should fire in the deploy pipeline).
+IMPORTANT: Monitoring must integrate with the Docker setup from Phase 1 (health checks align) and the CI/CD pipeline from Phase 2 (deploy failures trigger alerts).
 
 Commit all monitoring configuration.
 
 ============================================================
-PHASE 4: PREFLIGHT CHECK  (/preflight)
+PHASE 4: PREFLIGHT CHECK (/preflight)
 ============================================================
 
 Follow the instructions defined in the `/preflight` skill exactly.
 
-Run the full pre-deploy verification: clean git status, build passes
-(including Docker build), all tests pass, CI/CD workflows are valid YAML,
-monitoring endpoints respond, and no secrets committed to source.
+Run pre-deploy verification across the entire pipeline:
+- Clean git status with no uncommitted changes
+- Docker build succeeds from clean state
+- All test suites pass inside the container
+- CI/CD workflow YAML is valid and parseable
+- Monitoring health check endpoints respond correctly
+- No secrets or credentials committed to source (scan for common patterns)
+- Environment variables documented with required vs. optional distinction
+- Rollback procedure documented
 
-If preflight fails, report what needs fixing.
+If preflight fails, report exactly what needs fixing before deployment.
 
 ============================================================
 OUTPUT
@@ -86,10 +98,11 @@ OUTPUT
 | 4 | /preflight | PASS/FAIL | {verdict: READY / NOT READY} |
 
 **Deploy readiness:** {READY TO DEPLOY / BLOCKED}
-**Files created:** {list key files: Dockerfile, workflows, monitoring configs}
+**Files created:** {list key files: Dockerfile, docker-compose.yml, .github/workflows/*, monitoring configs}
 
 NEXT STEPS:
 - Merge the PR and trigger the first CI/CD run
-- Verify the Docker image builds in CI
-- Run `/secure-ship` if shipping to production
-- Configure environment secrets in GitHub repo settings
+- Verify the Docker image builds successfully in CI
+- Configure environment secrets in GitHub repository settings
+- Run `/secure-ship` if shipping to production with security hardening
+- Run `/load-test` to verify the containerized app handles expected traffic

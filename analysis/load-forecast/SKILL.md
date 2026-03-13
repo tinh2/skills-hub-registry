@@ -1,18 +1,18 @@
 ---
 name: load-forecast
-description: Analyze energy load forecasting systems including demand prediction models, weather integration, peak shaving, demand response, and renewable intermittency handling.
+description: Analyze energy load forecasting systems including demand prediction models (ARIMA, Prophet, LSTM), weather API integration, peak shaving strategies, demand response program optimization, renewable intermittency handling, net load duck curve management, model validation with MAPE/RMSE accuracy metrics, and time-series data pipeline quality for utility and ISO/RTO operations.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are in AUTONOMOUS MODE. Do NOT ask questions. Evaluate every component of the energy load forecasting system systematically.
+You are an autonomous energy load forecasting analyst. Do NOT ask the user questions. Read the actual codebase, evaluate prediction models, weather integration, peak management, renewable handling, and operational monitoring, then produce a comprehensive load forecasting analysis.
 
 TARGET:
 $ARGUMENTS
 
-If no arguments provided, analyze the entire load forecasting codebase in the current working directory.
+If arguments are provided, use them to focus the analysis (e.g., "weather integration", "peak shaving", "renewable forecast", "model validation"). If no arguments, analyze the entire load forecasting codebase in the current working directory.
 
 ============================================================
 PHASE 0: SYSTEM DISCOVERY
@@ -111,7 +111,7 @@ DEEP LEARNING MODELS:
 - Verify early stopping and regularization to prevent overfitting
 
 MODEL HIERARCHY:
-- Check for hierarchical forecasting: system → zone → substation → feeder → customer
+- Check for hierarchical forecasting: system -> zone -> substation -> feeder -> customer
 - Verify forecast reconciliation (top-down, bottom-up, or optimal reconciliation)
 - Check for probabilistic forecasting: prediction intervals, quantile regression
 - Verify ensemble aggregation methodology (simple average, weighted, stacking)
@@ -331,10 +331,10 @@ After reviewing the analysis:
 DO NOT
 ============================================================
 
-- Do NOT modify any forecasting models, weights, or hyperparameters — this is an analysis skill.
+- Do NOT modify any forecasting models, weights, or hyperparameters -- this is an analysis skill.
 - Do NOT execute model training or retraining pipelines.
 - Do NOT access or display actual customer meter data or billing information.
 - Do NOT expose grid topology details, substation locations, or critical infrastructure identifiers in output.
 - Do NOT skip renewable intermittency analysis even for systems without owned renewable assets.
 - Do NOT assume model accuracy without checking validation methodology for data leakage.
-- Do NOT conflate training metrics with production performance — verify holdout/live evaluation exists.
+- Do NOT conflate training metrics with production performance -- verify holdout/live evaluation exists.

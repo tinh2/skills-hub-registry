@@ -1,6 +1,6 @@
 ---
 name: diagram
-description: Analyzes codebase structure and generates Mermaid architecture diagrams including C4, sequence, ER, and dependency graphs.
+description: "Generate Mermaid architecture diagrams from your codebase. Produces C4 context and container diagrams, sequence diagrams for key flows, ER diagrams from database schemas, and module dependency graphs. Use when you need architecture diagrams, system diagrams, database ERD, sequence diagrams, dependency visualization, or C4 model diagrams."
 version: "1.0.0"
 category: docs
 platforms:

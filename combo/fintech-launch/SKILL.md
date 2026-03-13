@@ -1,114 +1,103 @@
 ---
 name: fintech-launch
-description: Complete fintech application launch readiness pipeline chaining PCI DSS, fintech API review, fraud detection, credit risk analysis, and preflight checks.
+description: "Pre-launch compliance and security gate for fintech apps: audit PCI DSS payment card handling, review financial API integrations for idempotency and error handling, evaluate fraud detection coverage, validate credit risk models for fairness, then run preflight checks. Use before launching a payments app, neobank, lending platform, BNPL product, or any money-movement system."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous fintech launch readiness agent. Do NOT ask the user questions.
-
-This skill chains five skills in sequence for complete fintech launch verification:
-1. `/pci-dss` — Payment Card Industry Data Security Standard compliance
-2. `/fintech-api` — Fintech API design and integration review
-3. `/fraud-detection` — Fraud detection system evaluation
-4. `/credit-risk` — Credit risk model and decisioning review
-5. `/preflight` — Pre-launch verification checks
+You are an autonomous fintech launch readiness agent. Do NOT ask the user questions. Execute all five phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the application name, launch scope, or specific compliance requirements.
+Pass the application name, launch scope, payment processor, or specific compliance requirements (e.g., "Stripe payments app PCI SAQ-A" or "BNPL lending platform full review").
 
 ============================================================
-PHASE 1: PCI DSS COMPLIANCE  (/pci-dss)
+PHASE 1: PCI DSS COMPLIANCE (/pci-dss)
 ============================================================
 
 Follow the instructions defined in the `/pci-dss` skill exactly.
 
 Review payment card data handling against PCI DSS requirements:
-- Cardholder data environment (CDE) scoping and network segmentation
-- Data storage: no prohibited data (CVV, full track, PIN), encryption at rest
-- Transmission security: TLS 1.2+, no insecure protocols
-- Access controls: role-based, unique IDs, MFA for admin access
-- Vulnerability management: patching, secure development, code reviews
-- Monitoring and logging: audit trails, log management, intrusion detection
-- Third-party payment processor integration security (tokenization, PCI scope reduction)
+- Cardholder data environment (CDE) scoping: identify every system that touches, processes, stores, or transmits card data
+- Network segmentation: verify CDE is isolated from general-purpose networks
+- Data storage: confirm no prohibited data stored (CVV, full track data, PIN blocks); verify encryption at rest (AES-256 or equivalent)
+- Transmission security: TLS 1.2+ enforced on all card data paths, no fallback to insecure protocols
+- Access controls: role-based access with unique IDs, MFA on all admin and CDE access, least-privilege enforcement
+- Vulnerability management: patch cadence, secure SDLC evidence, code review practices
+- Monitoring and logging: audit trail for all CDE access, log retention policy, intrusion detection/prevention
+- Third-party scope reduction: tokenization via payment processor, PCI scope implications of each integration
 
-**CRITICAL GATE:** If PCI DSS review finds cardholder data stored in plaintext
-or transmitted without encryption, this is a BLOCKING finding. Document for
-the final report but note that launch CANNOT proceed until resolved.
+BLOCKING GATE: If cardholder data is stored in plaintext or transmitted without encryption, this is a BLOCKING finding. Document it and note that launch CANNOT proceed until resolved.
 
 ============================================================
-PHASE 2: FINTECH API REVIEW  (/fintech-api)
+PHASE 2: FINTECH API REVIEW (/fintech-api)
 ============================================================
 
 Follow the instructions defined in the `/fintech-api` skill exactly.
 
-Review fintech-specific API design and integration patterns:
-- Banking API integration: Plaid, MX, Yodlee connectivity and error handling
-- Payment API integration: Stripe, Adyen, Square — idempotency, webhook verification
-- API versioning and deprecation strategy for financial endpoints
-- Rate limiting and throttling on money-movement endpoints
-- Idempotency key implementation for all state-changing financial operations
-- Retry logic with exponential backoff on payment processing
-- API response sanitization (no internal financial data leakage)
+Review financial API design and integration patterns:
+- Banking API integration: Plaid, MX, Yodlee — connection error handling, token refresh, rate limit resilience
+- Payment API integration: Stripe, Adyen, Square — idempotency keys on every mutation, webhook signature verification, reconciliation
+- API versioning strategy: how are breaking changes handled on financial endpoints?
+- Rate limiting on money-movement endpoints: per-user and global limits to prevent abuse
+- Idempotency key implementation: verify all state-changing financial operations are safely retryable
+- Retry logic: exponential backoff with jitter on payment processing, dead-letter handling for failed webhooks
+- Response sanitization: no internal financial data, account numbers, or system details leaked in error responses
 
-IMPORTANT: Cross-reference with Phase 1 PCI findings. Any API endpoint
-handling card data must be within the validated CDE scope.
+CROSS-REFERENCE WITH PHASE 1: Every API endpoint handling card data must fall within the validated CDE scope. Flag any endpoint that touches card data but was not identified in Phase 1 scoping.
 
 ============================================================
-PHASE 3: FRAUD DETECTION  (/fraud-detection)
+PHASE 3: FRAUD DETECTION (/fraud-detection)
 ============================================================
 
 Follow the instructions defined in the `/fraud-detection` skill exactly.
 
 Evaluate fraud detection and prevention systems:
-- Transaction velocity and amount threshold rules
-- Device fingerprinting and behavioral analytics integration
-- ML model evaluation: feature engineering, model validation, false positive rates
-- Real-time scoring pipeline latency and reliability
-- Alert routing and investigation workflow
-- Sanctions screening and watchlist integration
-- Account takeover detection and prevention
+- Transaction velocity rules: per-user and per-card limits on transaction count and amount within time windows
+- Device fingerprinting and behavioral analytics: integration quality, false positive rates
+- ML model evaluation: feature engineering review, model validation methodology, precision/recall tradeoffs, false positive impact on legitimate users
+- Real-time scoring pipeline: latency budget (must not add >200ms to transaction flow), reliability and fallback behavior
+- Alert routing: investigation workflow, escalation paths, SLA for fraud review
+- Sanctions screening: OFAC, EU sanctions lists, PEP screening — integration and update frequency
+- Account takeover prevention: credential stuffing detection, device trust, step-up authentication triggers
 
-IMPORTANT: Verify fraud detection coverage spans all money-movement
-endpoints identified in Phase 2. Flag any financial API endpoint that
-bypasses fraud screening.
+CROSS-REFERENCE WITH PHASE 2: Verify fraud detection covers every money-movement endpoint identified in Phase 2. Flag any financial API path that bypasses fraud screening.
 
 ============================================================
-PHASE 4: CREDIT RISK  (/credit-risk)
+PHASE 4: CREDIT RISK (/credit-risk)
 ============================================================
 
 Follow the instructions defined in the `/credit-risk` skill exactly.
 
-Review credit risk models and decisioning (if applicable — skip if the application
-does not involve lending, BNPL, or credit issuance):
-- Credit scoring model validation and fairness testing
-- Adverse action notice generation (ECOA/Reg B compliance)
-- Fair lending analysis: disparate impact testing across protected classes
-- Underwriting rule documentation and auditability
-- Credit bureau integration and data handling
-- Model risk management: challenger models, performance monitoring
+Review credit risk models and decisioning. Skip this phase if the application does not involve lending, BNPL, or credit issuance — note "SKIPPED: no credit decisioning" in the output.
 
-IMPORTANT: If credit decisioning exists, verify it integrates with fraud
-detection from Phase 3 (fraud flags should influence credit decisions).
+If applicable:
+- Credit scoring model validation: accuracy metrics, calibration, out-of-time testing
+- Adverse action notices: ECOA/Regulation B compliance, specific reasons for denial, delivery mechanism
+- Fair lending analysis: disparate impact testing across race, gender, age, and other protected classes
+- Underwriting rule documentation: are rules auditable, versioned, and explainable?
+- Credit bureau integration: data handling, dispute workflow, accuracy obligations under FCRA
+- Model risk management: challenger model framework, performance monitoring, model decay detection
+
+CROSS-REFERENCE WITH PHASE 3: Fraud flags should influence credit decisions. Verify the integration exists and flag gaps.
 
 ============================================================
-PHASE 5: PREFLIGHT  (/preflight)
+PHASE 5: PREFLIGHT (/preflight)
 ============================================================
 
 Follow the instructions defined in the `/preflight` skill exactly.
 
 Run pre-launch verification:
-- Clean git status and build verification
-- All tests pass (unit, integration, e2e)
-- Environment configuration validated for production
-- Secrets management verified (no hardcoded credentials)
-- Monitoring and alerting configured for financial transactions
-- Rollback plan documented and tested
-- Compliance documentation complete for all prior phases
+- Clean git status and successful production build
+- All test suites pass (unit, integration, e2e)
+- Production environment configuration validated (database, cache, queues, payment processor credentials)
+- Secrets management verified: no hardcoded credentials, API keys rotated, vault integration working
+- Financial transaction monitoring and alerting configured (anomaly detection, failed payment spikes)
+- Rollback plan documented with tested procedure
+- Compliance documentation complete and archived for all prior phases
 
-If preflight fails, report what needs fixing before launch.
+If preflight fails, report exactly what needs fixing before launch.
 
 ============================================================
 OUTPUT
@@ -124,19 +113,19 @@ OUTPUT
 | 4 | /credit-risk | PASS/FAIL/SKIPPED | {N} model issues, {N} fairness concerns |
 | 5 | /preflight | PASS/FAIL | {verdict: READY / NOT READY} |
 
-**Launch verdict:** {READY TO LAUNCH / BLOCKED — requires remediation}
+**Launch verdict:** {READY TO LAUNCH / BLOCKED -- requires remediation}
 **Blocking items:** {list any critical findings that prevent launch}
 **Regulatory risk:** {LOW / MEDIUM / HIGH}
 **Financial risk:** {LOW / MEDIUM / HIGH}
 
 ### Cross-Phase Findings
-[Issues spanning multiple phases — highest priority for remediation]
+[Issues spanning multiple phases -- highest priority for remediation]
 
 ### Launch Checklist
 - [ ] All PCI DSS critical findings resolved
-- [ ] Financial API idempotency verified
-- [ ] Fraud detection covers all money-movement paths
-- [ ] Credit risk models validated (if applicable)
+- [ ] Financial API idempotency verified on every money-movement endpoint
+- [ ] Fraud detection covers all payment and transfer paths
+- [ ] Credit risk models validated for fairness (if applicable)
 - [ ] Preflight checks pass
 - [ ] Compliance documentation archived
 

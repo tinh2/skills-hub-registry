@@ -1,6 +1,6 @@
 ---
 name: facilities-energy
-description: Analyzes building energy management systems for energy modeling, utility cost optimization, BMS/BAS performance, demand response participation, and sustainability reporting using ENERGY STAR, LEED, and ASHRAE 90.1 standards.
+description: Audit commercial building energy performance including HVAC optimization, ENERGY STAR scoring, utility cost analysis, demand response readiness, and sustainability compliance. Covers BMS/BAS systems, EUI benchmarking against CBECS and ASHRAE 90.1, lighting and plug load efficiency, on-site renewables, and local building performance standards like NYC LL97, Boston BERDO, and DC BEPS.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -24,10 +24,10 @@ PHASE 1: ENERGY SYSTEM DISCOVERY
 Step 1.1 -- Building Management System Architecture
 
 Scan for energy management infrastructure:
-- BMS/BAS platform (Siemens, Honeywell, Johnson Controls, Schneider, Tridium Niagara)
+- BMS/BAS platform: Siemens, Honeywell, Johnson Controls, Schneider, Tridium Niagara
 - Energy management information system (EMIS)
-- Utility metering infrastructure (main meters, submeters, interval data)
-- IoT sensors (temperature, humidity, CO2, occupancy, light level)
+- Utility metering infrastructure: main meters, submeters, interval data
+- IoT sensors: temperature, humidity, CO2, occupancy, light level
 - Weather station or weather data feed integration
 - ENERGY STAR Portfolio Manager integration
 - Fault detection and diagnostics (FDD) platform
@@ -39,20 +39,20 @@ Map the building inventory:
 - Year built and major renovation dates
 - Climate zone (ASHRAE/IECC climate zone)
 - Operating hours and occupancy patterns
-- Primary HVAC system types (VAV, chilled water, DX, geothermal, district)
-- Lighting system types (LED, fluorescent, controls/daylight harvesting)
-- Building envelope characteristics (insulation, glazing, air barrier)
+- Primary HVAC system types: VAV, chilled water, DX, geothermal, district
+- Lighting system types: LED, fluorescent, controls/daylight harvesting
+- Building envelope characteristics: insulation, glazing, air barrier
 
 Step 1.3 -- Utility Account Mapping
 
 Identify utility data sources:
-- Electric utility accounts (rate schedule, demand charges, TOU periods)
-- Natural gas accounts (volumetric vs demand, interruptible vs firm)
+- Electric utility accounts: rate schedule, demand charges, TOU periods
+- Natural gas accounts: volumetric vs demand, interruptible vs firm
 - Water and sewer accounts
 - District steam, chilled water, or hot water (if applicable)
-- On-site generation (solar PV, CHP, fuel cell, wind)
-- Utility bill data import method (manual, EDI, Green Button, utility API)
-- Interval meter data availability (15-min, hourly, daily)
+- On-site generation: solar PV, CHP, fuel cell, wind
+- Utility bill data import method: manual, EDI, Green Button, utility API
+- Interval meter data availability: 15-min, hourly, daily
 
 ============================================================
 PHASE 2: ENERGY PERFORMANCE BENCHMARKING
@@ -62,9 +62,9 @@ Step 2.1 -- ENERGY STAR Scoring
 
 Evaluate ENERGY STAR benchmarking:
 - Portfolio Manager account setup and building registration
-- Required data inputs (gross floor area, operating hours, occupancy, weather)
+- Required data inputs: gross floor area, operating hours, occupancy, weather
 - ENERGY STAR score calculation (1-100 scale, 50 = median)
-- Score trend over time (improving, stable, declining)
+- Score trend over time: improving, stable, declining
 - Certification eligibility (score >= 75 for ENERGY STAR certification)
 - Data quality and completeness for valid scoring
 
@@ -74,9 +74,9 @@ Analyze energy consumption patterns:
 - Site EUI (kBtu/sf/year) by building
 - Source EUI (accounts for grid losses and fuel conversion)
 - EUI benchmarking against CBECS, ENERGY STAR medians, and peer buildings
-- EUI decomposition by end use (HVAC, lighting, plug load, DHW, process)
+- EUI decomposition by end use: HVAC, lighting, plug load, DHW, process
 - Weather-normalized EUI (degree-day normalization)
-- EUI target setting (ASHRAE 90.1 baseline, stretch targets, net-zero goals)
+- EUI target setting: ASHRAE 90.1 baseline, stretch targets, net-zero goals
 
 Step 2.3 -- Utility Cost Analysis
 
@@ -84,8 +84,8 @@ Evaluate utility cost optimization:
 - Cost per square foot by utility type
 - Blended electric rate ($/kWh including demand charges, riders, taxes)
 - Demand charge impact analysis (peak demand contribution to total bill)
-- Rate schedule optimization (is the building on the best available tariff?)
-- Ratchet clause impact (minimum demand charges from historical peaks)
+- Rate schedule optimization: is the building on the best available tariff?
+- Ratchet clause impact: minimum demand charges from historical peaks
 - Power factor penalties and correction opportunities
 - Cost benchmarking against similar buildings
 
@@ -97,19 +97,19 @@ Step 3.1 -- HVAC Scheduling and Setpoints
 
 Analyze HVAC control strategies:
 - Occupied/unoccupied schedule alignment with actual building use
-- Temperature setpoints (cooling: typically 72-76F, heating: 68-72F)
+- Temperature setpoints: cooling typically 72-76F, heating 68-72F
 - Setback and setup temperatures during unoccupied periods
-- Optimal start/stop algorithms (pre-conditioning based on mass and weather)
+- Optimal start/stop algorithms: pre-conditioning based on mass and weather
 - Holiday and special schedule handling
 - Zone-level override tracking and duration limits
 
 Step 3.2 -- Air-Side Optimization
 
 Evaluate air handling system efficiency:
-- Economizer operation (dry-bulb, enthalpy, or differential control)
+- Economizer operation: dry-bulb, enthalpy, or differential control
 - Supply air temperature reset (SAT reset based on zone demand)
 - Static pressure reset (duct static pressure optimization)
-- Demand-controlled ventilation (CO2-based outside air modulation)
+- Demand-controlled ventilation: CO2-based outside air modulation
 - Minimum outside air settings vs ASHRAE 62.1 requirements
 - Fan VFD utilization and speed distribution
 - Simultaneous heating and cooling detection
@@ -137,17 +137,17 @@ Evaluate lighting energy use:
 - Lighting controls: occupancy sensors, daylight harvesting, scheduling
 - Exterior and parking lighting controls and efficiency
 - Emergency and egress lighting maintenance
-- Lighting upgrade ROI analysis (payback and energy savings)
+- Lighting upgrade ROI analysis: payback and energy savings
 
 Step 4.2 -- Plug Load and Process Load
 
 Analyze non-HVAC energy consumption:
 - Plug load density by space type (W/sf)
-- IT equipment energy (server rooms, network closets, data centers)
+- IT equipment energy: server rooms, network closets, data centers
 - Elevator and escalator energy consumption
 - Kitchen and food service equipment efficiency
-- Plug load management strategies (smart strips, scheduled outlets)
-- Process loads specific to building type (lab equipment, medical imaging)
+- Plug load management strategies: smart strips, scheduled outlets
+- Process loads specific to building type: lab equipment, medical imaging
 
 ============================================================
 PHASE 5: DEMAND RESPONSE AND GRID INTERACTION
@@ -156,18 +156,18 @@ PHASE 5: DEMAND RESPONSE AND GRID INTERACTION
 Step 5.1 -- Demand Response Participation
 
 Evaluate demand response capabilities:
-- DR program enrollment (utility DR, ISO/RTO capacity, third-party aggregator)
+- DR program enrollment: utility DR, ISO/RTO capacity, third-party aggregator
 - DR strategy: load curtailment, load shifting, on-site generation
 - Automated DR (OpenADR) implementation status
 - Pre-cooling and thermal storage strategies
-- DR event performance history (did the building meet its commitment?)
+- DR event performance history: did the building meet its commitment?
 - DR revenue and incentive tracking
 
 Step 5.2 -- On-Site Generation and Storage
 
 If renewable or distributed energy exists:
-- Solar PV system (capacity, production, net metering, degradation tracking)
-- Battery energy storage (capacity, dispatch strategy, peak shaving)
+- Solar PV system: capacity, production, net metering, degradation tracking
+- Battery energy storage: capacity, dispatch strategy, peak shaving
 - Combined heat and power (CHP) operation and efficiency
 - Electric vehicle charging load management
 - Microgrid capabilities and islanding readiness
@@ -177,7 +177,7 @@ Step 5.3 -- Utility Rate Optimization
 
 Check rate and tariff optimization:
 - Time-of-use (TOU) rate period alignment with building operations
-- Peak demand management strategies (demand limiting, load shedding)
+- Peak demand management strategies: demand limiting, load shedding
 - Real-time pricing (RTP) response capabilities
 - Renewable energy credit (REC) procurement
 - Green power purchasing agreements (PPA)
@@ -190,9 +190,9 @@ PHASE 6: SUSTAINABILITY REPORTING AND COMPLIANCE
 Step 6.1 -- Sustainability Metrics
 
 Evaluate sustainability tracking:
-- Greenhouse gas emissions (Scope 1 direct, Scope 2 electricity, Scope 3 other)
-- Carbon intensity (kgCO2e per square foot)
-- Water use intensity (gallons per square foot)
+- Greenhouse gas emissions: Scope 1 direct, Scope 2 electricity, Scope 3 other
+- Carbon intensity: kgCO2e per square foot
+- Water use intensity: gallons per square foot
 - Waste diversion rate and recycling metrics
 - Renewable energy percentage of total consumption
 - Year-over-year improvement tracking
@@ -200,10 +200,10 @@ Evaluate sustainability tracking:
 Step 6.2 -- Certification and Compliance
 
 Check sustainability certifications:
-- LEED certification (existing building O+M, new construction)
+- LEED certification: existing building O+M, new construction
 - LEED performance score maintenance requirements
 - ENERGY STAR certification status and renewal
-- Local building performance standards (NYC LL97, Boston BERDO, DC BEPS)
+- Local building performance standards: NYC LL97, Boston BERDO, DC BEPS
 - State and local energy benchmarking disclosure requirements
 - Climate Action Plan alignment and carbon reduction targets
 

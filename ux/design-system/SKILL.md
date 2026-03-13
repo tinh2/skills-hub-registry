@@ -1,6 +1,6 @@
 ---
 name: design-system
-description: Extract or create a design system from existing UI code — tokens, component inventory, and usage guidelines
+description: Extract and formalize a design system from existing UI code. Scans for every hardcoded color, font size, spacing value, border radius, and shadow across the codebase, deduplicates near-identical values, generates framework-appropriate tokens (CSS custom properties, Tailwind config, Flutter ThemeData, SCSS variables), builds a component inventory with token coverage ratings, and replaces all hardcoded values with token references. Use when you need to create design tokens, consolidate inconsistent styles, audit component consistency, replace magic numbers with named values, or set up a shared design language across a project.
 version: "1.0.0"
 category: ux
 platforms:
@@ -20,13 +20,13 @@ INPUT:
 $ARGUMENTS
 
 The user may specify:
-1. A scope — specific directories or files to focus on.
+1. A scope -- specific directories or files to focus on.
 2. A token format preference (CSS custom properties, Tailwind config, Flutter ThemeData, SCSS variables).
 3. An existing design system to extend rather than create from scratch.
 If no arguments, scan the entire project and auto-detect the best token format.
 
 ============================================================
-PHASE 1 — FRAMEWORK DETECTION
+PHASE 1 -- FRAMEWORK DETECTION
 ============================================================
 
 Detect the frontend framework and determine the appropriate token format:
@@ -49,13 +49,13 @@ Otherwise, tokens go into CSS custom properties in a root stylesheet.
 Record: FRAMEWORK, TOKEN_FORMAT, SRC_DIR, STYLE_DIR
 
 ============================================================
-PHASE 2 — EXTRACTION SCAN
+PHASE 2 -- EXTRACTION SCAN
 ============================================================
 
 Scan the entire source tree for raw design values. Record every occurrence with file
 path, line number, and the value found.
 
-Step 2.1 — Colors
+Step 2.1 -- Colors
 
 Search for hardcoded color values:
 - **Hex:** `#fff`, `#ffffff`, `#RRGGBB`, `#RRGGBBAA`
@@ -71,7 +71,7 @@ For each color found, record:
 - File and line number
 - Whether it already references a token/variable
 
-Step 2.2 — Typography
+Step 2.2 -- Typography
 
 Search for hardcoded typography values:
 - `font-size`, `fontSize`, `TextStyle(fontSize:`
@@ -84,7 +84,7 @@ For each typography value, record:
 - Property, value, usage context
 - Whether it references a theme text style or is hardcoded
 
-Step 2.3 — Spacing
+Step 2.3 -- Spacing
 
 Search for hardcoded spacing values:
 - `padding`, `margin`, `gap`, `space-x-`, `space-y-`
@@ -92,19 +92,19 @@ Search for hardcoded spacing values:
 - Pixel/dp values used for layout gaps
 - Identify the spacing scale pattern (4px grid, 8px grid, irregular)
 
-Step 2.4 — Border Radius
+Step 2.4 -- Border Radius
 
 Search for radius values:
 - `border-radius`, `borderRadius`, `BorderRadius.circular(`
 - `rounded-`, `rounded-[`
 
-Step 2.5 — Shadows and Elevation
+Step 2.5 -- Shadows and Elevation
 
 Search for shadow definitions:
 - `box-shadow`, `boxShadow`, `BoxShadow(`
 - `elevation:`, `shadow-`, `drop-shadow`
 
-Step 2.6 — Breakpoints
+Step 2.6 -- Breakpoints
 
 Search for responsive breakpoint values:
 - `@media (min-width:`, `@media (max-width:`
@@ -113,15 +113,15 @@ Search for responsive breakpoint values:
 - Any custom breakpoint constants
 
 ============================================================
-PHASE 3 — DEDUPLICATION AND TOKENIZATION
+PHASE 3 -- DEDUPLICATION AND TOKENIZATION
 ============================================================
 
-Step 3.1 — Color Palette
+Step 3.1 -- Color Palette
 
 Group extracted colors by visual similarity (within 10% hue/lightness):
 1. Identify distinct color families (primary, secondary, neutral, semantic).
 2. Within each family, identify the scale (50-900 or light/base/dark).
-3. Merge near-duplicates — if two hex values differ by less than 5 units in any
+3. Merge near-duplicates -- if two hex values differ by less than 5 units in any
    RGB channel, propose consolidating to one token.
 4. Map each unique color to a semantic token name:
    - `--color-primary-500`, `--color-neutral-100`, `--color-error`
@@ -131,7 +131,7 @@ Produce a color palette table:
 | Token Name | Hex Value | Used In (count) | Replaces |
 |-----------|-----------|-----------------|----------|
 
-Step 3.2 — Typography Scale
+Step 3.2 -- Typography Scale
 
 Group extracted typography into a type scale:
 1. Sort font sizes ascending and identify the scale (e.g., 12/14/16/18/20/24/32/48).
@@ -142,26 +142,26 @@ Produce a typography scale table:
 | Token Name | Size | Weight | Line Height | Letter Spacing | Used In |
 |-----------|------|--------|-------------|----------------|---------|
 
-Step 3.3 — Spacing Scale
+Step 3.3 -- Spacing Scale
 
 Derive the spacing scale:
 1. Sort all spacing values and identify the base unit (typically 4px or 8px).
 2. Map to a scale: xs(4), sm(8), md(16), lg(24), xl(32), 2xl(48), 3xl(64).
-3. Flag values that do not fit the grid — they need normalization.
+3. Flag values that do not fit the grid -- they need normalization.
 
-Step 3.4 — Radius Scale
+Step 3.4 -- Radius Scale
 
 Derive the border-radius scale:
 - none(0), sm(4), md(8), lg(12), xl(16), 2xl(24), full(9999)
 - Flag inconsistent values.
 
-Step 3.5 — Shadow Scale
+Step 3.5 -- Shadow Scale
 
 Derive the shadow/elevation scale:
-- sm, md, lg, xl — ordered by blur radius and offset.
+- sm, md, lg, xl -- ordered by blur radius and offset.
 
 ============================================================
-PHASE 4 — TOKEN FILE GENERATION
+PHASE 4 -- TOKEN FILE GENERATION
 ============================================================
 
 Generate the token files based on FRAMEWORK and TOKEN_FORMAT:
@@ -202,7 +202,7 @@ Create `src/styles/_tokens.scss` with variables and maps.
 Commit: "feat(design): generate design system tokens from codebase extraction"
 
 ============================================================
-PHASE 5 — COMPONENT INVENTORY
+PHASE 5 -- COMPONENT INVENTORY
 ============================================================
 
 Catalog every reusable UI component in the codebase:
@@ -218,11 +218,11 @@ For each component, note:
 3. Whether it has variants (primary/secondary, sm/md/lg).
 4. Whether similar components exist that should be consolidated.
 
-Flag components that are duplicated or near-duplicated across the codebase —
+Flag components that are duplicated or near-duplicated across the codebase --
 these should be extracted into the shared component library.
 
 ============================================================
-PHASE 6 — HARDCODED VALUE REMEDIATION
+PHASE 6 -- HARDCODED VALUE REMEDIATION
 ============================================================
 
 Replace all hardcoded values with token references:
@@ -243,18 +243,18 @@ Commit per batch of related changes:
 - "fix(design): replace hardcoded radii and shadows with tokens"
 
 ============================================================
-PHASE 7 — VERIFICATION
+PHASE 7 -- VERIFICATION
 ============================================================
 
-Step 7.1 — Static Analysis
+Step 7.1 -- Static Analysis
 
 Run the appropriate linter/analyzer:
-- Flutter: `flutter analyze` — fix all errors and warnings
-- TypeScript: `tsc --noEmit` — fix type errors
+- Flutter: `flutter analyze` -- fix all errors and warnings
+- TypeScript: `tsc --noEmit` -- fix type errors
 - CSS/SCSS: stylelint if configured
 - ESLint if configured
 
-Step 7.2 — Token Coverage Audit
+Step 7.2 -- Token Coverage Audit
 
 Re-scan the codebase for any remaining hardcoded values that were missed.
 Report coverage:
@@ -312,10 +312,10 @@ After design system extraction:
 DO NOT
 ============================================================
 
-- Do NOT invent colors or values that do not exist in the codebase — extract only what is there.
+- Do NOT invent colors or values that do not exist in the codebase -- extract only what is there.
 - Do NOT remove one-off values used for third-party brand integration (e.g., social login button colors).
-- Do NOT change semantic meaning when consolidating near-duplicate colors — if two similar blues are used for different purposes, keep both as separate tokens.
-- Do NOT modify component behavior or logic — only change how design values are referenced.
+- Do NOT change semantic meaning when consolidating near-duplicate colors -- if two similar blues are used for different purposes, keep both as separate tokens.
+- Do NOT modify component behavior or logic -- only change how design values are referenced.
 - Do NOT overwrite an existing theme/token file without reading it first and preserving custom configuration.
-- Do NOT generate tokens for values that appear only once in test files or storybook — focus on production code.
-- Do NOT skip the verification phase — a broken build after token replacement is worse than hardcoded values.
+- Do NOT generate tokens for values that appear only once in test files or storybook -- focus on production code.
+- Do NOT skip the verification phase -- a broken build after token replacement is worse than hardcoded values.

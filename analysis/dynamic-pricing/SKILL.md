@@ -1,6 +1,6 @@
 ---
 name: dynamic-pricing
-description: Analyzes dynamic pricing systems for competitive pricing intelligence, elasticity modeling, promotional optimization, markdown strategy, and price perception management using revenue management theory.
+description: Audit a dynamic pricing engine for competitive intelligence feeds, price elasticity modeling, promotional lift optimization, markdown clearance strategy, and price perception management. Use when reviewing retail pricing platforms, e-commerce repricing systems, revenue management tools, or competitive price matching logic.
 version: "1.0.0"
 category: analysis
 platforms:

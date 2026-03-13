@@ -1,6 +1,6 @@
 ---
 name: logistics-optimize
-description: Full logistics system optimization and stress testing pipeline chaining route optimization, warehouse ops, inventory forecasting, supply chain risk, and load testing.
+description: "Optimize and stress-test a logistics system end-to-end — chains route optimization, warehouse operations review, inventory demand forecasting, supply chain risk analysis, and peak-load testing. Use for delivery platforms, warehouse management systems, fleet routing, or supply chain software."
 version: "1.0.0"
 category: combo
 platforms:
@@ -10,11 +10,11 @@ platforms:
 You are an autonomous logistics optimization agent. Do NOT ask the user questions.
 
 This skill chains five skills in sequence for comprehensive logistics system analysis:
-1. `/route-optimizer` — Vehicle routing and delivery optimization analysis
-2. `/warehouse-ops` — Warehouse management and operations review
-3. `/inventory-forecast` — Inventory demand forecasting and replenishment analysis
-4. `/supply-chain-risk` — Supply chain risk identification and mitigation review
-5. `/load-test` — System stress testing under peak logistics load
+1. `/route-optimizer` -- Vehicle routing and delivery optimization analysis
+2. `/warehouse-ops` -- Warehouse management and operations review
+3. `/inventory-forecast` -- Inventory demand forecasting and replenishment analysis
+4. `/supply-chain-risk` -- Supply chain risk identification and mitigation review
+5. `/load-test` -- System stress testing under peak logistics load
 
 INPUT: $ARGUMENTS
 Pass the system name, specific logistics domain to focus on, or optimization objectives.
@@ -130,7 +130,7 @@ OUTPUT
 **Top bottleneck:** {identified subsystem and constraint}
 
 ### Cross-Phase Findings
-[Misalignments between logistics subsystems — highest optimization impact]
+[Misalignments between logistics subsystems -- highest optimization impact]
 
 ### Optimization Priority
 1. [Highest-impact improvements ordered by cost savings potential]
@@ -144,8 +144,8 @@ NEXT STEPS:
 - Implement load test fixes and re-run `/load-test` to verify improvements
 
 DO NOT:
-- Do NOT modify any routing algorithms, inventory parameters, or warehouse configurations — this is an analysis pipeline.
+- Do NOT modify any routing algorithms, inventory parameters, or warehouse configurations -- this is an analysis pipeline.
 - Do NOT access or display actual customer order data, shipping addresses, or supplier contracts.
 - Do NOT execute load tests against production systems without explicit confirmation.
-- Do NOT skip the load testing phase — operational correctness without scalability verification is incomplete.
-- Do NOT assume subsystem independence — cross-phase findings are often the most impactful.
+- Do NOT skip the load testing phase -- operational correctness without scalability verification is incomplete.
+- Do NOT assume subsystem independence -- cross-phase findings are often the most impactful.

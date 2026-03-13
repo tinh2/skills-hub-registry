@@ -1,6 +1,6 @@
 ---
 name: route-optimizer
-description: Analyzes routing and delivery software for algorithm quality, constraint handling, real-time adaptation, multi-modal support, and cost modeling efficiency.
+description: Audit routing and delivery optimization software for algorithm quality, constraint handling, real-time traffic adaptation, multi-modal transport support, and cost modeling accuracy. Use when reviewing fleet management systems, last-mile delivery platforms, VRP solvers, logistics route planners, dispatch engines, or supply chain transportation tools.
 version: "1.0.0"
 category: analysis
 platforms:

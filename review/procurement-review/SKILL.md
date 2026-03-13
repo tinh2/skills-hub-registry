@@ -1,6 +1,6 @@
 ---
 name: procurement-review
-description: Reviews procurement software for sourcing workflows, purchase order management, vendor scorecards, spend analytics, and system integration completeness.
+description: Audit procurement and procure-to-pay software for sourcing, purchasing, and vendor management. Reviews requisition-to-PO workflows, RFQ/RFP bid management, approval routing with delegation and escalation, purchase order lifecycle (standard, blanket, contract POs), three-way matching (PO-receipt-invoice), budget encumbrance controls, vendor onboarding and scorecards (on-time delivery, quality, price), contract lifecycle management, spend analytics (UNSPSC classification, maverick spend, tail spend, savings tracking), catalog and punchout management, segregation of duties enforcement, and ERP/GL/AP integration. Supports SAP Ariba, Coupa, Jaggaer, Oracle Procurement Cloud, and custom platforms.
 version: "1.0.0"
 category: review
 platforms:
@@ -16,6 +16,8 @@ $ARGUMENTS
 
 If arguments are provided, use them to focus the review (e.g., specific procurement
 modules, vendor workflows, or spend categories). If no arguments, review everything.
+
+IMPORTANT: For every finding, cite the exact file path and line number. Rate each procurement domain on a 1-10 maturity scale. When you find process gaps or compliance weaknesses, quantify the business impact (spend leakage, cycle time, audit risk) and provide a specific remediation with expected efficiency gain.
 
 ============================================================
 PHASE 1: PROCUREMENT SYSTEM DISCOVERY

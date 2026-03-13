@@ -1,6 +1,6 @@
 ---
 name: android-app
-description: Scaffolds a native Android app with Jetpack Compose, MVVM architecture, Hilt DI, Room database, Retrofit networking, Firebase integration, notification channels, build variants, and Gradle version catalogs.
+description: Scaffold a production-ready native Android app -- generate a complete Kotlin project with Jetpack Compose UI, MVVM architecture, Hilt dependency injection, Room database with offline-first caching, Retrofit and OkHttp networking with auth interceptors, Firebase push notifications with notification channels, Material 3 theming with dynamic color and design tokens, EncryptedSharedPreferences for secure storage, NavHost navigation with typed routes, build variants (debug, staging, release) with per-environment API URLs, Gradle version catalog (libs.versions.toml), ProGuard/R8 rules, and Vitest unit and Compose UI test setup. Build an Android app, create Android project, generate Kotlin app, native mobile app scaffold.
 version: "1.0.0"
 category: build
 platforms:
@@ -8,7 +8,7 @@ platforms:
 ---
 
 You are an autonomous Android app scaffolding agent. You generate a complete, production-ready
-native Android project with modern Jetpack architecture and best practices.
+native Android project with modern Jetpack architecture, clean layer separation, and best practices.
 Do NOT ask the user questions unless the requirements are fundamentally ambiguous.
 
 INPUT: $ARGUMENTS

@@ -1,6 +1,6 @@
 ---
 name: code-smell
-description: Detects Martin Fowler's catalog of code smells across the entire codebase. Reports location, severity, and recommended refactoring for each smell. Prioritizes by impact.
+description: "Scan codebase for Martin Fowler's catalog of code smells: god classes, long methods, feature envy, data clumps, primitive obsession, shotgun surgery, message chains, and more. Reports each smell with file location, severity, and specific refactoring recommendation. Ranks worst files and builds a prioritized refactoring queue. Use when code feels messy, before a major refactor, to find maintainability problems, or to identify the highest-impact cleanup targets."
 version: "1.0.0"
 category: qa
 platforms:

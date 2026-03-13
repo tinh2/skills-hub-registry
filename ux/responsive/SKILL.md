@@ -1,6 +1,6 @@
 ---
 name: responsive
-description: Responsive design audit and fixes — scan for breakpoint issues, fix overflow, and verify cross-device layouts
+description: Audit and fix responsive design issues across all breakpoints. Scans for fixed widths that cause mobile overflow, missing media query variants, non-responsive images, undersized touch targets below 48px, unreadable typography, and horizontal scroll violations. Auto-detects framework (Flutter, Tailwind, React, Vue, Angular) and responsive system, then fixes layouts with proper flex/grid, clamp-based fluid typography, responsive image sizing, and adequate touch target spacing. Verifies every screen at mobile (375px), tablet (768px), desktop (1280px), and wide (1920px). Use when you need to fix mobile layout bugs, audit responsive breakpoints, fix overflow issues, ensure touch targets meet accessibility minimums, or verify no horizontal scroll at any viewport width.
 version: "1.0.0"
 category: ux
 platforms:
@@ -22,11 +22,11 @@ $ARGUMENTS
 The user may specify:
 1. Specific screens or components to audit.
 2. Custom breakpoints (default: mobile 375, tablet 768, desktop 1280, wide 1920).
-3. A focus area — "mobile-first", "tablet", "desktop-down".
+3. A focus area -- "mobile-first", "tablet", "desktop-down".
 If no arguments, audit the entire project across all default breakpoints.
 
 ============================================================
-PHASE 1 — FRAMEWORK AND LAYOUT DETECTION
+PHASE 1 -- FRAMEWORK AND LAYOUT DETECTION
 ============================================================
 
 Detect the frontend framework and existing responsive patterns:
@@ -58,12 +58,12 @@ Define working breakpoints (override with user input if provided):
 - **wide:** 1920px (full HD monitor)
 
 ============================================================
-PHASE 2 — RESPONSIVE ISSUE SCAN
+PHASE 2 -- RESPONSIVE ISSUE SCAN
 ============================================================
 
 Scan every screen and component file for responsive design violations.
 
-Step 2.1 — Fixed Width Issues
+Step 2.1 -- Fixed Width Issues
 
 Search for elements with fixed widths that will break on smaller screens:
 - CSS: `width: Npx` where N > 375 without a max-width or responsive wrapper
@@ -76,7 +76,7 @@ For each fixed width found, classify:
 - RISKY: May cause issues on small screens (width > 300px in a constrained layout)
 - SAFE: Inside a scrollable container or has responsive fallback
 
-Step 2.2 — Missing Responsive Variants
+Step 2.2 -- Missing Responsive Variants
 
 Check for styles that lack breakpoint-appropriate variants:
 - Font sizes that are too large on mobile (>24px body text, >40px headings without scaling)
@@ -85,7 +85,7 @@ Check for styles that lack breakpoint-appropriate variants:
 - Flex layouts that do not wrap on narrow screens
 - Multi-column layouts without responsive column counts
 
-Step 2.3 — Image Responsiveness
+Step 2.3 -- Image Responsiveness
 
 Check all images for responsive handling:
 - Missing `max-width: 100%` or equivalent
@@ -94,7 +94,7 @@ Check all images for responsive handling:
 - Large images loaded on mobile without size optimization
 - Flutter: Image widgets without `fit` property or without constraints
 
-Step 2.4 — Overflow Detection
+Step 2.4 -- Overflow Detection
 
 Search for elements that may cause horizontal scroll:
 - `overflow: hidden` that cuts content rather than handling it properly
@@ -104,7 +104,7 @@ Search for elements that may cause horizontal scroll:
 - Code blocks without overflow handling
 - Flutter: Row without Expanded/Flexible children, unbounded width
 
-Step 2.5 — Touch Target Audit
+Step 2.5 -- Touch Target Audit
 
 Scan all interactive elements for minimum touch target size:
 - Buttons, links, icons, checkboxes, radio buttons, toggles
@@ -113,7 +113,7 @@ Scan all interactive elements for minimum touch target size:
 - Small icon buttons without adequate padding
 - Flutter: IconButton, GestureDetector, InkWell hit areas
 
-Step 2.6 — Typography Scaling
+Step 2.6 -- Typography Scaling
 
 Check text readability across breakpoints:
 - Body text below 14px on mobile
@@ -123,12 +123,12 @@ Check text readability across breakpoints:
 - Flutter: Text that does not respect textScaleFactor
 
 ============================================================
-PHASE 3 — RESPONSIVE FIXES
+PHASE 3 -- RESPONSIVE FIXES
 ============================================================
 
 Fix all issues found in Phase 2, ordered by severity.
 
-Step 3.1 — Fix Breaking Width Issues
+Step 3.1 -- Fix Breaking Width Issues
 
 For each BREAKING fixed width:
 - Replace fixed width with responsive alternatives:
@@ -138,7 +138,7 @@ For each BREAKING fixed width:
 - Wrap wide content in scrollable containers where fixed width is intentional (tables, code)
 - Ensure parent containers use responsive layout (Flexbox, Grid, Wrap)
 
-Step 3.2 — Add Responsive Variants
+Step 3.2 -- Add Responsive Variants
 
 For layouts missing responsive behavior:
 - **Grid layouts:** Add responsive column counts
@@ -155,7 +155,7 @@ For layouts missing responsive behavior:
   - Flutter: Use `MediaQuery.sizeOf(context)` to adjust EdgeInsets
 - **Navigation:** Collapse desktop nav to hamburger/bottom nav on mobile
 
-Step 3.3 — Fix Image Responsiveness
+Step 3.3 -- Fix Image Responsiveness
 
 For each non-responsive image:
 - Add `max-width: 100%; height: auto;` or equivalent
@@ -164,7 +164,7 @@ For each non-responsive image:
 - Set appropriate `loading="lazy"` for below-fold images
 - Flutter: Add `fit: BoxFit.cover` or `BoxFit.contain` with constrained parent
 
-Step 3.4 — Fix Overflow Issues
+Step 3.4 -- Fix Overflow Issues
 
 For each overflow violation:
 - Tables: Wrap in a horizontally scrollable container with visual scroll indicator
@@ -172,7 +172,7 @@ For each overflow violation:
 - Wide content: Add horizontal scroll or responsive sizing
 - Flutter: Wrap Row in SingleChildScrollView or use Expanded/Flexible
 
-Step 3.5 — Fix Touch Targets
+Step 3.5 -- Fix Touch Targets
 
 For each undersized touch target:
 - Increase padding to meet 48x48px minimum
@@ -180,7 +180,7 @@ For each undersized touch target:
 - Flutter: Use `constraints: BoxConstraints(minWidth: 48, minHeight: 48)` on tappable widgets
 - Ensure 8px minimum spacing between adjacent targets
 
-Step 3.6 — Fix Typography Issues
+Step 3.6 -- Fix Typography Issues
 
 For each typography problem:
 - Set minimum body text size to 16px on mobile (prevents iOS zoom on input focus)
@@ -196,7 +196,7 @@ Commit per category:
 - "fix(responsive): increase touch target sizes to 48px minimum"
 
 ============================================================
-PHASE 4 — BREAKPOINT VERIFICATION
+PHASE 4 -- BREAKPOINT VERIFICATION
 ============================================================
 
 Walk through every screen at each breakpoint and verify:
@@ -206,7 +206,7 @@ Walk through every screen at each breakpoint and verify:
 | Home | OK/ISSUE | OK/ISSUE | OK/ISSUE | OK/ISSUE | OK/ISSUE | OK/ISSUE |
 
 For each screen at each breakpoint, check:
-1. No horizontal scroll (critical — automatic fail if present)
+1. No horizontal scroll (critical -- automatic fail if present)
 2. Content is readable without zooming
 3. Interactive elements are reachable and tappable
 4. Images are properly sized
@@ -216,7 +216,7 @@ For each screen at each breakpoint, check:
 Fix any remaining issues discovered during verification.
 
 ============================================================
-PHASE 5 — STATIC ANALYSIS
+PHASE 5 -- STATIC ANALYSIS
 ============================================================
 
 Run the framework's static analysis:
@@ -271,17 +271,17 @@ After responsive audit:
 - "Run `/dark-mode` to verify dark mode works across all breakpoints."
 - "Run `/design-system` to ensure responsive tokens are part of the design system."
 - "Run `/qa` to verify responsive changes did not break functionality."
-- Test on actual devices — code-level audit catches most issues but device testing confirms.
+- Test on actual devices -- code-level audit catches most issues but device testing confirms.
 
 ============================================================
 DO NOT
 ============================================================
 
-- Do NOT hide content on mobile with `display: none` unless it is truly optional — provide an alternative way to access it.
-- Do NOT use viewport units (vw/vh) for font sizes without a clamp or min/max — they can become unreadable at extremes.
-- Do NOT disable zoom with `user-scalable=no` or `maximum-scale=1` — this is an accessibility violation.
-- Do NOT assume all mobile users are on phones — tablets in portrait mode are 768px wide.
-- Do NOT add horizontal scroll to the page body — only use it for specific content blocks (tables, code, carousels).
+- Do NOT hide content on mobile with `display: none` unless it is truly optional -- provide an alternative way to access it.
+- Do NOT use viewport units (vw/vh) for font sizes without a clamp or min/max -- they can become unreadable at extremes.
+- Do NOT disable zoom with `user-scalable=no` or `maximum-scale=1` -- this is an accessibility violation.
+- Do NOT assume all mobile users are on phones -- tablets in portrait mode are 768px wide.
+- Do NOT add horizontal scroll to the page body -- only use it for specific content blocks (tables, code, carousels).
 - Do NOT change the visual order of content at different breakpoints unless the reading order remains logical.
-- Do NOT apply responsive fixes only to specific pages — apply fixes to shared components and layouts that affect all pages.
-- Do NOT use CSS `!important` to fix responsive issues — fix the specificity or cascade instead.
+- Do NOT apply responsive fixes only to specific pages -- apply fixes to shared components and layouts that affect all pages.
+- Do NOT use CSS `!important` to fix responsive issues -- fix the specificity or cascade instead.

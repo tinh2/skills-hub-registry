@@ -1,6 +1,6 @@
 ---
 name: returns-optimization
-description: Analyzes product return systems for return rate reduction, reverse logistics efficiency, refurbishment routing, fraud detection in returns, and return reason analytics.
+description: Audit e-commerce and retail product return systems for return rate reduction strategies, reverse logistics efficiency, refurbishment routing, fraud detection in returns, and return reason analytics. Use when reviewing order management systems, RMA workflows, warehouse return processing, disposition engines, or retail loss prevention tools.
 version: "1.0.0"
 category: analysis
 platforms:

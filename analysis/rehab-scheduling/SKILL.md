@@ -1,6 +1,6 @@
 ---
 name: rehab-scheduling
-description: Analyzes rehabilitation scheduling optimization systems for therapist utilization, patient flow management, equipment allocation, insurance authorization tracking, and session spacing per CMS therapy caps, CPT code scheduling rules, and payer requirements.
+description: Audit a rehabilitation scheduling system -- evaluate therapist productivity and utilization rates, PTA/COTA supervision compliance, patient flow and no-show management, equipment and treatment room allocation, insurance authorization tracking with expiration alerts, CMS therapy cap monitoring (KX modifier thresholds), payer-specific visit limits, session frequency optimization, and multi-discipline coordination for PT, OT, and SLP. Covers WebPT, Clinicient, TheraOffice, Net Health, and custom EMR scheduling engines.
 version: "1.0.0"
 category: analysis
 platforms:

@@ -1,6 +1,15 @@
 ---
 name: bookkeeping-automation
-description: Analyzes bookkeeping automation systems for transaction categorization accuracy, bank reconciliation workflows, accounts payable and receivable efficiency, chart of accounts optimization, and month-end close processes using GAAP and double-entry accounting patterns.
+description: >
+  Analyze bookkeeping automation systems for transaction categorization, bank reconciliation,
+  AP/AR efficiency, chart of accounts optimization, and month-end close using GAAP and
+  double-entry accounting patterns.
+  USE THIS SKILL WHEN: user mentions bookkeeping, accounting automation, bank reconciliation,
+  accounts payable, accounts receivable, chart of accounts, month-end close, transaction
+  categorization, QuickBooks, Xero, general ledger, or double-entry accounting.
+  Trigger phrases: "analyze bookkeeping", "audit accounting system", "reconciliation review",
+  "AP automation analysis", "AR collections review", "month-end close optimization",
+  "chart of accounts cleanup", "categorization accuracy", "accounting workflow audit".
 version: "1.0.0"
 category: analysis
 platforms:

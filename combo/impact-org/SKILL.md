@@ -1,109 +1,88 @@
 ---
 name: impact-org
-description: Complete nonprofit operational optimization pipeline chaining impact measurement, fundraising optimization, grant writing analysis, and donor retention strategy assessment.
+description: "Full nonprofit operational health analysis: validate impact measurement methodology and theory of change, optimize fundraising channels and campaign ROI, audit grant management for compliance and proposal quality, and assess donor retention with churn prediction and stewardship workflows. Use when building or auditing a nonprofit CRM, donor management platform, grant tracking system, or impact reporting tool."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous nonprofit operational optimization agent. Do NOT ask the user questions.
-
-This skill chains four skills in sequence for a comprehensive nonprofit system analysis:
-1. `/impact-measurement` -- Program outcome tracking, theory of change validation, and social ROI
-2. `/fundraising-optimizer` -- Campaign analysis, channel optimization, and revenue forecasting
-3. `/grant-writer` -- Grant management, proposal quality, compliance tracking, and reporting
-4. `/donor-retention` -- Donor lifecycle management, churn prediction, stewardship, and engagement
+You are an autonomous nonprofit operational optimization agent. Do NOT ask the user questions. Execute all four phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the organization name, specific program areas, or operational focus.
+Pass the organization name, specific program areas to analyze, or operational focus (e.g., "youth education nonprofit fundraising review" or "environmental org full operational audit").
 
 ============================================================
-PHASE 1: IMPACT MEASUREMENT  (/impact-measurement)
+PHASE 1: IMPACT MEASUREMENT (/impact-measurement)
 ============================================================
 
 Follow the instructions defined in the `/impact-measurement` skill exactly.
 
-Analyze the impact measurement system for:
-- Theory of change documentation and logic model quality
-- Output and outcome indicator definition (SMART indicators)
-- Data collection methodology and measurement validity
-- Baseline and target setting practices
-- Beneficiary tracking and demographic disaggregation
-- Attribution and counterfactual considerations
-- Social return on investment (SROI) calculation methodology
-- Impact reporting for stakeholders (board, funders, public)
+Analyze the impact measurement system:
+- Theory of change: is it documented? Does the logic model show clear causal links from inputs to activities to outputs to outcomes to impact?
+- Indicators: are output and outcome indicators SMART (Specific, Measurable, Achievable, Relevant, Time-bound)? Do they measure what matters, not just what is easy to count?
+- Data collection: methodology validity, measurement tools, collection frequency, data quality controls, missing data handling
+- Baselines and targets: are baselines established before program start? Are targets evidence-based or aspirational?
+- Beneficiary tracking: unique identification, demographic disaggregation (gender, age, geography, income), longitudinal tracking across programs
+- Attribution: does the measurement approach account for what would have happened without the program (counterfactual)?
+- SROI methodology: social return on investment calculation — inputs, monetized outcomes, discount rate, sensitivity analysis
+- Impact reporting: board reports, funder reports, public communications — are claims supported by the data?
 
-Record all findings. Impact data quality directly affects fundraising effectiveness
-in Phase 2 (donors want evidence of impact), grant competitiveness in Phase 3
-(funders require outcome data), and donor retention in Phase 4 (impact stories
-drive continued giving).
+Record all findings. Impact data quality drives fundraising effectiveness (Phase 2), grant competitiveness (Phase 3), and donor retention (Phase 4).
 
 ============================================================
-PHASE 2: FUNDRAISING OPTIMIZATION  (/fundraising-optimizer)
+PHASE 2: FUNDRAISING OPTIMIZATION (/fundraising-optimizer)
 ============================================================
 
 Follow the instructions defined in the `/fundraising-optimizer` skill exactly.
 
-Analyze the fundraising system for:
-- Revenue diversification analysis (individual, institutional, corporate, earned, government)
-- Campaign management and performance tracking
-- Channel effectiveness (direct mail, email, events, online, major gifts, planned giving)
-- Donor acquisition cost and lifetime value calculation
-- Fundraising pipeline management and forecasting
-- Peer-to-peer and crowdfunding capabilities
-- Board giving and engagement tracking
-- Fundraising ROI by campaign and channel
+Analyze fundraising strategy and execution:
+- Revenue diversification: percentage breakdown across individual giving, institutional grants, corporate partnerships, earned revenue, government contracts — concentration risk assessment
+- Campaign management: goal setting, timeline tracking, milestone monitoring, post-campaign analysis
+- Channel effectiveness: direct mail response rates, email open/click/convert rates, event net revenue, online giving trends, major gift pipeline, planned giving program maturity
+- Donor economics: acquisition cost by channel, average gift size, donor lifetime value calculation, cost-to-raise-a-dollar by source
+- Pipeline management: prospect identification, qualification, cultivation, solicitation, stewardship — stage conversion rates
+- Peer-to-peer and crowdfunding: platform selection, campaign structure, ambassador recruitment, social amplification
+- Board giving: 100% participation tracking, give-or-get policy, board member fundraising engagement
+- ROI analysis: net revenue by campaign and channel, overhead ratio context (not just percentage)
 
-IMPORTANT: Cross-reference with Phase 1. Fundraising materials should reference
-validated impact data. Flag any disconnect between claimed impact in fundraising
-collateral and actual measured outcomes from Phase 1. Impact measurement gaps
-identified in Phase 1 weaken fundraising effectiveness -- quantify this connection.
+CROSS-REFERENCE WITH PHASE 1: Fundraising materials should cite validated impact data. Flag disconnect between claimed impact in appeals and actual measured outcomes. Quantify how impact measurement gaps weaken fundraising effectiveness.
 
 ============================================================
-PHASE 3: GRANT MANAGEMENT  (/grant-writer)
+PHASE 3: GRANT MANAGEMENT (/grant-writer)
 ============================================================
 
 Follow the instructions defined in the `/grant-writer` skill exactly.
 
-Analyze the grant management system for:
-- Grant prospect research and pipeline management
-- Proposal development workflow and quality
-- Budget development and cost allocation methodology
-- Compliance tracking (restricted fund management, allowable costs)
-- Grant reporting accuracy and timeliness
-- Funder relationship management
-- Grant renewal and continuation strategy
-- Indirect cost rate documentation and application
+Analyze grant operations:
+- Prospect research: funder identification methodology, alignment scoring, deadline tracking, research database usage
+- Proposal development: workflow from concept to submission, quality review process, boilerplate maintenance, budget template accuracy
+- Budget development: cost allocation methodology (direct vs. indirect), match/leverage documentation, budget narrative alignment with proposal narrative
+- Compliance tracking: restricted fund management, allowable cost verification, time-and-effort reporting, subrecipient monitoring
+- Grant reporting: report accuracy vs. impact measurement data (Phase 1), timeliness tracking, narrative quality, financial reconciliation
+- Funder relationships: communication cadence, site visit preparation, program officer engagement, multi-year strategy
+- Renewal strategy: renewal rate tracking, competitive re-application preparation, relationship continuity during staff turnover
+- Indirect cost rate: federally negotiated rate documentation, de minimis rate usage, rate application consistency
 
-IMPORTANT: Cross-reference with Phase 1 and Phase 2. Grant proposals require
-outcome data from the impact measurement system (Phase 1). Grant revenue should
-be integrated into the overall fundraising strategy (Phase 2). Flag any cases
-where grant reporting claims differ from impact measurement data, or where grant
-revenue is not coordinated with other fundraising channels.
+CROSS-REFERENCE WITH PHASES 1 AND 2: Grant proposals require outcome data from impact measurement (Phase 1). Grant revenue should be coordinated with other fundraising channels (Phase 2). Flag cases where grant reports claim outcomes that differ from impact measurement data, or where grant fundraising is siloed from individual giving strategy.
 
 ============================================================
-PHASE 4: DONOR RETENTION  (/donor-retention)
+PHASE 4: DONOR RETENTION (/donor-retention)
 ============================================================
 
 Follow the instructions defined in the `/donor-retention` skill exactly.
 
-Analyze the donor retention system for:
-- Donor lifecycle stage tracking (prospect, first-time, repeat, major, lapsed, legacy)
-- Retention rate calculation by segment and gift level
-- Churn prediction model quality and accuracy
-- Stewardship workflow automation and personalization
-- Donor communication cadence and channel preferences
-- Upgrade and downgrade path management
-- Lapsed donor reactivation strategies
-- Donor satisfaction and engagement measurement
+Analyze donor lifecycle management:
+- Lifecycle stage tracking: prospect, first-time donor, repeat donor, major donor, lapsed donor, legacy/planned giving — are stages defined with clear criteria?
+- Retention rates: overall and segmented by gift level, acquisition source, giving frequency, tenure — benchmark against sector averages (45% overall, 80%+ for major donors)
+- Churn prediction: model inputs (recency, frequency, monetary, engagement signals), prediction accuracy, actionable trigger points
+- Stewardship workflows: thank-you timing and personalization, impact reporting cadence, recognition programs, milestone acknowledgments
+- Communication strategy: cadence by segment, channel preferences, content relevance, unsubscribe/opt-out rates
+- Upgrade paths: systematic ask ladder, mid-level donor program, major gift qualification criteria, planned giving identification
+- Lapsed donor reactivation: win-back campaigns, reactivation offer testing, lapse prevention triggers
+- Donor satisfaction: survey methodology, NPS or equivalent metric, feedback integration into operations
 
-IMPORTANT: Cross-reference with all prior phases. Impact evidence (Phase 1) is
-the foundation of donor stewardship. Fundraising campaigns (Phase 2) drive donor
-acquisition, but retention determines long-term sustainability. Grant funders
-(Phase 3) are also donors requiring relationship management. Flag any disconnect
-between donor communication and actual program impact, or where acquisition
-costs exceed projected donor lifetime value.
+CROSS-REFERENCE WITH ALL PRIOR PHASES: Impact evidence (Phase 1) is the foundation of donor stewardship — donors who see their impact stay. Fundraising campaigns (Phase 2) drive acquisition, but retention determines sustainability. Grant funders (Phase 3) are institutional donors requiring relationship management. Flag where acquisition costs exceed projected lifetime value, or where donor communication ignores actual program results.
 
 ============================================================
 OUTPUT
@@ -123,8 +102,7 @@ OUTPUT
 **Revenue health:** {DIVERSIFIED / CONCENTRATED / FRAGILE}
 
 ### Cross-Phase Findings
-[Issues spanning multiple phases -- impact data gaps weakening fundraising, grant claims
-inconsistent with measured outcomes, donor stewardship disconnected from program results]
+[Issues spanning multiple phases -- impact data gaps weakening fundraising, grant claims inconsistent with measured outcomes, donor stewardship disconnected from program results]
 
 ### Revenue Sustainability Assessment
 | Revenue Source | Current % | Health | Risk Factor |

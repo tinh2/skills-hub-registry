@@ -1,6 +1,6 @@
 ---
 name: game-ux
-description: Game UX audit covering HUD clarity, menu navigation, tutorial effectiveness, control responsiveness, camera systems, feedback systems, loading screens, and settings completeness.
+description: Audit game user experience across HUD clarity, menu navigation, tutorial effectiveness, control responsiveness, camera systems, feedback loops, loading screens, and settings completeness. Detects game engine (Unity UGUI/UI Toolkit, Unreal UMG, Godot Control, web-based), maps all UI screens and input contexts, evaluates information hierarchy, visual noise, touch target sizes, menu depth, tutorial pacing, input latency patterns, camera comfort settings, and produces rated findings per category with prioritized fixes. Use when you need to evaluate game UI usability, audit HUD readability, check settings menu completeness, review tutorial onboarding flow, assess control feel and feedback, or prepare for playtesting.
 version: "1.0.0"
 category: ux
 platforms:
@@ -300,7 +300,7 @@ Evaluate camera implementation:
 Step 6.2 -- Camera Comfort
 
 Evaluate camera comfort:
-- Field of view (FOV) setting available? (3D games — motion sickness)
+- Field of view (FOV) setting available? (3D games -- motion sickness)
 - Camera bob/sway with disable option
 - Motion blur with disable option
 - Camera shake intensity setting
@@ -359,16 +359,16 @@ OUTPUT
 ### Menu Navigation Map
 ```
 Main Menu
-  ├── Play
-  │   ├── New Game
-  │   ├── Continue
-  │   └── Level Select
-  ├── Settings
-  │   ├── Audio
-  │   ├── Display
-  │   ├── Gameplay
-  │   └── Accessibility
-  └── Quit
+  |- Play
+  |   |- New Game
+  |   |- Continue
+  |   `- Level Select
+  |- Settings
+  |   |- Audio
+  |   |- Display
+  |   |- Gameplay
+  |   `- Accessibility
+  `- Quit
 ```
 - Max depth: {N} levels
 - Orphan screens: {list or none}
@@ -404,9 +404,9 @@ NEXT STEPS:
 - "Run `/game-launch` for complete launch readiness assessment."
 
 DO NOT:
-- Do NOT evaluate game design or balance — focus on UX implementation.
-- Do NOT evaluate art quality or aesthetic choices — focus on clarity and usability.
-- Do NOT assume a specific genre's UX conventions — evaluate against the game's own goals.
+- Do NOT evaluate game design or balance -- focus on UX implementation.
+- Do NOT evaluate art quality or aesthetic choices -- focus on clarity and usability.
+- Do NOT assume a specific genre's UX conventions -- evaluate against the game's own goals.
 - Do NOT recommend adding features outside UX scope (new gameplay mechanics).
 - Do NOT ignore mobile or console UX if those are target platforms.
-- Do NOT modify code — this is an audit skill. Report findings only.
+- Do NOT modify code -- this is an audit skill. Report findings only.

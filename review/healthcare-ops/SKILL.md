@@ -1,6 +1,6 @@
 ---
 name: healthcare-ops
-description: Review healthcare software from a hospital operations perspective -- scheduling, workflows, integrations, patient flow, reporting, and staff management optimization.
+description: "Review healthcare software for operational efficiency: appointment scheduling and resource allocation, clinical workflow burden (order entry clicks, documentation templates, alert fatigue), EHR/LIS/pharmacy/PACS integrations (HL7v2, FHIR, NCPDP SCRIPT, EDI 837/835), patient flow (ADT, bed management, wait times, throughput), quality reporting (CMS, HEDIS, MIPS), staff credentialing and workload balancing, and revenue cycle optimization. Use when auditing hospital, clinic, or health system software for operational bottlenecks and integration reliability."
 version: "1.0.0"
 category: review
 platforms:

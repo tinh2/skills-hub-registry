@@ -1,6 +1,6 @@
 ---
 name: extraction-optimization
-description: Mining extraction optimization covering ore grade management, processing throughput analysis, recovery rate optimization, energy consumption reduction, and water management per mine planning and metallurgical accounting principles
+description: Optimize mining extraction operations by analyzing ore grade control, processing plant throughput, metallurgical recovery rates, energy consumption, and water balance. Covers mine-to-mill reconciliation, comminution circuit tuning, flotation and leach kinetics, cut-off grade strategy, OEE analysis, and produces a prioritized improvement roadmap for mine operations teams.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -60,11 +60,11 @@ Map the mine-to-product value chain:
 8. Refining / smelting (if applicable)
 9. Product handling and shipping
 
-For each stage: throughput, operating hours, utilization, and key performance parameters.
+For each stage: record throughput, operating hours, utilization, and key performance parameters.
 
 Step 1.4 -- Constraint Identification
 
-Identify current operational bottleneck:
+Identify the current operational bottleneck:
 - Theory of Constraints (TOC) analysis: which stage limits total throughput?
 - Equipment utilization by stage
 - Planned vs. unplanned downtime by stage
@@ -92,7 +92,7 @@ Step 2.2 -- Mine-to-Mill Reconciliation
 Assess reconciliation across the value chain:
 
 | Reconciliation Point | Model Grade | Mine Grade | Plant Feed Grade | Variance | Factor |
-|---------------------|------------ |-----------|-----------------|----------|--------|
+|---------------------|------------|-----------|-----------------|----------|--------|
 
 - Resource model to mine production (F1 factor)
 - Mine production to plant feed (F2 factor)

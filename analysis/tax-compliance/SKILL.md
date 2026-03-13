@@ -1,6 +1,6 @@
 ---
 name: tax-compliance
-description: Analyzes tax compliance systems for multi-jurisdiction tax calculation, nexus determination, filing requirement tracking, tax provision automation, and transfer pricing documentation using Internal Revenue Code and OECD guidelines.
+description: Audit corporate tax compliance systems across jurisdictions. Analyzes tax engine configuration (Avalara, Vertex, ONESOURCE), nexus determination and Wayfair economic nexus tracking, sales/use tax calculation accuracy, federal and state income tax compliance (book-to-tax adjustments, NOL, R&D credits, apportionment), ASC 740 tax provision automation (ETR, deferred tax, uncertain tax positions), transfer pricing documentation (OECD BEPS Pillar One/Two, GloBE rules, CbCR), and filing calendar management.
 version: "1.0.0"
 category: analysis
 platforms:

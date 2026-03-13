@@ -1,6 +1,6 @@
 ---
 name: therapy-personalization
-description: Analyzes physical therapy personalization systems for exercise recommendation algorithms, difficulty progression logic, patient compliance prediction, home exercise program generation, video/image exercise libraries, and treatment plan adaptation based on outcomes.
+description: Evaluate physical therapy personalization and adaptive treatment systems. Analyzes exercise recommendation algorithms (rules-based, collaborative filtering, protocol-driven), contraindication enforcement and safety checks, difficulty progression logic (multi-parameter advancement with regression pathways), patient compliance prediction models, home exercise program (HEP) generation and delivery workflows, video/image exercise library quality and accessibility, and outcome-driven treatment plan adaptation using clinical practice guidelines and evidence-based protocols.
 version: "1.0.0"
 category: analysis
 platforms:

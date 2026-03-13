@@ -1,6 +1,6 @@
 ---
 name: security-review
-description: Security-focused code review. Scans for auth bypasses, injection vectors, data exposure, hardcoded secrets, session issues, and IDOR vulnerabilities. Rates each finding Critical/High/Medium/Low.
+description: Security audit and vulnerability assessment for any codebase. Scans for authentication bypasses, missing auth middleware, broken JWT validation (algorithm confusion, weak secrets, missing expiry), OAuth state and PKCE flaws, IDOR and horizontal privilege escalation, vertical privilege escalation via role manipulation, SQL injection, NoSQL injection, XSS (stored, reflected, DOM), command injection, path traversal, SSRF, CSRF, hardcoded secrets and API keys (sk_live_, AKIA, ghp_), .env and credential file exposure, PII leaking in logs and error responses, overfetching sensitive fields, CORS misconfiguration, session fixation, missing secure/httpOnly/sameSite cookie flags, and Firebase/Firestore rule weaknesses. Produces a severity-ranked findings report with exploit scenarios and fix recommendations. Covers OWASP Top 10.
 version: "1.0.0"
 category: review
 platforms:
@@ -15,6 +15,8 @@ Do NOT ask the user questions. Investigate the entire codebase thoroughly.
 INPUT: $ARGUMENTS (optional)
 If provided, focus on specific scope (e.g., "changed files only", "auth module", "API layer").
 If not provided, audit the entire codebase.
+
+IMPORTANT: For every finding, include the exact file path and line number. Do not report theoretical vulnerabilities without evidence in the code. For each vulnerability, describe a concrete exploit scenario showing how an attacker would leverage it, then provide the specific code change required to fix it. Score the overall security posture on a 0-100 scale. Produce a complete auth coverage matrix showing every endpoint with its auth status.
 
 ============================================================
 PHASE 1: STACK DETECTION & ATTACK SURFACE MAPPING

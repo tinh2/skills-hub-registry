@@ -1,6 +1,6 @@
 ---
 name: runbook
-description: Scans deployment config, Docker/K8s manifests, CI/CD, and monitoring to generate actionable operations runbooks.
+description: "Generate an operations runbook from your deployment config, Docker/K8s manifests, CI/CD pipelines, and monitoring setup. Produces copy-pasteable procedures for deployment, rollback, scaling, database maintenance, incident response, and troubleshooting. Use when you need a runbook, ops playbook, deployment guide, incident response plan, or production operations documentation."
 version: "1.0.0"
 category: docs
 platforms:

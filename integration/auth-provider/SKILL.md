@@ -1,6 +1,6 @@
 ---
 name: auth-provider
-description: Sets up complete OAuth/SSO authentication with provider configuration, session management, token refresh, and login UI components for any framework.
+description: "Set up complete OAuth/SSO authentication with Google, GitHub, Apple, or SAML providers. Auto-detects your framework and configures the best auth library (NextAuth, Passport, Firebase Auth, Supabase, Clerk, Lucia, django-allauth). Includes session management, JWT token refresh, login/logout UI components, route protection middleware, and database schema updates. Use when you need OAuth login, social sign-in, SSO integration, authentication setup, login page, or user authentication."
 version: "1.0.0"
 category: integration
 platforms:
@@ -26,7 +26,7 @@ If no arguments, default to Google + GitHub providers with the best-fit auth lib
 
 === PHASE 1: PROJECT DETECTION ===
 
-Step 1.1 — Detect Framework and Existing Auth
+Step 1.1 -- Detect Framework and Existing Auth
 
 Scan for project files to determine the tech stack:
 
@@ -54,54 +54,54 @@ Record: FRAMEWORK, AUTH_LIBRARY (user-specified or auto-detected), EXISTING_AUTH
 If a complete auth system already exists, report it and exit.
 If partial auth exists, identify gaps and extend it.
 
-Step 1.2 — Parse Provider Requirements
+Step 1.2 -- Parse Provider Requirements
 
 From $ARGUMENTS, extract which providers to configure:
-- "google" → Google OAuth 2.0
-- "github" → GitHub OAuth
-- "apple" → Apple Sign-In (requires additional setup)
-- "saml" → SAML SSO (enterprise, requires identity provider configuration)
+- "google" -> Google OAuth 2.0
+- "github" -> GitHub OAuth
+- "apple" -> Apple Sign-In (requires additional setup)
+- "saml" -> SAML SSO (enterprise, requires identity provider configuration)
 - Default if none specified: Google + GitHub
 
 Record: PROVIDERS list
 
 === PHASE 2: AUTH LIBRARY INSTALLATION ===
 
-Step 2.1 — Install Auth Library
+Step 2.1 -- Install Auth Library
 
 Based on the detected or specified auth library:
 
-**NextAuth.js (Auth.js v5) — for Next.js:**
+**NextAuth.js (Auth.js v5) -- for Next.js:**
 ```
 npm install next-auth@beta @auth/prisma-adapter  (if using Prisma)
 npm install next-auth@beta @auth/drizzle-adapter  (if using Drizzle)
 ```
 
-**Passport.js — for Express/Fastify/NestJS:**
+**Passport.js -- for Express/Fastify/NestJS:**
 ```
 npm install passport passport-google-oauth20 passport-github2
 npm install express-session connect-pg-simple  (for database sessions)
 npm install jsonwebtoken @types/jsonwebtoken  (for JWT strategy)
 ```
 
-**Firebase Auth — for Flutter or web apps using Firebase:**
+**Firebase Auth -- for Flutter or web apps using Firebase:**
 ```
 flutter pub add firebase_auth google_sign_in  (Flutter)
 npm install firebase-admin  (backend verification)
 ```
 
-**Supabase Auth — for Supabase projects:**
+**Supabase Auth -- for Supabase projects:**
 ```
 npm install @supabase/supabase-js @supabase/auth-helpers-nextjs
 flutter pub add supabase_flutter  (Flutter)
 ```
 
-**django-allauth — for Django:**
+**django-allauth -- for Django:**
 ```
 pip install django-allauth
 ```
 
-**Lucia — for any Node.js framework:**
+**Lucia -- for any Node.js framework:**
 ```
 npm install lucia @lucia-auth/adapter-prisma  (or appropriate adapter)
 npm install arctic  (for OAuth helpers)
@@ -109,7 +109,7 @@ npm install arctic  (for OAuth helpers)
 
 Install only the packages needed for the detected framework and requested providers.
 
-Step 2.2 — Configure Environment Variables
+Step 2.2 -- Configure Environment Variables
 
 Add to .env.example:
 ```
@@ -136,7 +136,7 @@ If the project has a config validation system, update it with the new variables.
 
 === PHASE 3: AUTH CONFIGURATION ===
 
-Step 3.1 — Create Auth Configuration Module
+Step 3.1 -- Create Auth Configuration Module
 
 Create the central auth configuration at the framework-appropriate location:
 
@@ -166,7 +166,7 @@ For EACH requested provider, configure:
 3. Requested scopes (email, profile as minimum; additional based on needs)
 4. Profile mapping (map provider profile to your User model)
 
-Step 3.2 — Database Schema Updates
+Step 3.2 -- Database Schema Updates
 
 If the project uses a database, create or update the auth-related tables:
 
@@ -213,9 +213,9 @@ Run the migration after schema changes: `npx prisma migrate dev --name add-auth-
 
 For other ORMs, create equivalent migrations.
 
-If the project is Flutter + Firebase, skip database schema — Firebase Auth manages this.
+If the project is Flutter + Firebase, skip database schema -- Firebase Auth manages this.
 
-Step 3.3 — Session Management
+Step 3.3 -- Session Management
 
 Configure session handling based on the strategy:
 
@@ -238,7 +238,7 @@ Configure session handling based on the strategy:
 
 === PHASE 4: AUTH MIDDLEWARE ===
 
-Step 4.1 — Create Auth Middleware
+Step 4.1 -- Create Auth Middleware
 
 Create middleware that can protect routes/pages:
 
@@ -259,7 +259,7 @@ Create middleware that can protect routes/pages:
 - Create a route guard that redirects to login when unauthenticated
 - Persist auth tokens in secure storage (flutter_secure_storage)
 
-Step 4.2 — Create Auth Helper Functions
+Step 4.2 -- Create Auth Helper Functions
 
 Create utility functions:
 ```
@@ -275,12 +275,12 @@ requireRole(request, role):
   - Throws 403 if insufficient permissions
 
 isAuthenticated(request):
-  - Returns boolean — does not throw
+  - Returns boolean -- does not throw
 ```
 
 === PHASE 5: LOGIN/LOGOUT UI ===
 
-Step 5.1 — Create Login Page/Screen
+Step 5.1 -- Create Login Page/Screen
 
 **For Next.js / React:**
 Create a login page with:
@@ -305,7 +305,7 @@ Create a login screen with:
 - Document the OAuth flow endpoints
 - Create a simple test HTML page (optional) for manual testing
 
-Step 5.2 — Create Logout Flow
+Step 5.2 -- Create Logout Flow
 
 Create logout functionality:
 - Clear the session/token on the server side
@@ -313,7 +313,7 @@ Create logout functionality:
 - Redirect to login page or home page
 - Revoke provider tokens if applicable (optional but recommended)
 
-Step 5.3 — Create Auth State UI Components
+Step 5.3 -- Create Auth State UI Components
 
 Create reusable auth-aware components:
 - **UserAvatar:** Displays user's profile image from the OAuth provider
@@ -322,7 +322,7 @@ Create reusable auth-aware components:
 
 === PHASE 6: ROUTE PROTECTION ===
 
-Step 6.1 — Protect Existing Routes
+Step 6.1 -- Protect Existing Routes
 
 Scan the project for routes/pages that should be protected:
 - Any route under /dashboard, /settings, /profile, /account
@@ -331,7 +331,7 @@ Scan the project for routes/pages that should be protected:
 
 Apply the auth middleware to these routes.
 
-Step 6.2 — Create Auth Callback Routes
+Step 6.2 -- Create Auth Callback Routes
 
 For each provider, ensure the callback route is configured:
 - Google: /api/auth/callback/google
@@ -342,14 +342,14 @@ These must match the redirect URIs configured in the provider's developer consol
 
 === PHASE 7: VERIFICATION ===
 
-Step 7.1 — Static Verification
+Step 7.1 -- Static Verification
 
 Run the project's type checker and linter:
 - Fix all errors introduced by the auth integration
 - Ensure all imports resolve
 - Verify database migrations apply cleanly
 
-Step 7.2 — Auth Flow Checklist
+Step 7.2 -- Auth Flow Checklist
 
 Verify and report:
 - [ ] Auth library installed and configured
@@ -424,15 +424,15 @@ After auth integration:
 
 === DO NOT ===
 
-- Do NOT store passwords in plaintext — this skill uses OAuth only, not password auth.
-- Do NOT skip token verification in the auth middleware — always verify signatures.
-- Do NOT store access tokens in localStorage — use httpOnly cookies or secure storage.
-- Do NOT use symmetric JWT signing (HS256) with a weak secret — generate a strong random key.
-- Do NOT trust the client to send user identity — always verify on the server.
-- Do NOT skip CSRF protection on auth endpoints — use state parameters in OAuth flow.
-- Do NOT hardcode OAuth credentials in source code — always use environment variables.
+- Do NOT store passwords in plaintext -- this skill uses OAuth only, not password auth.
+- Do NOT skip token verification in the auth middleware -- always verify signatures.
+- Do NOT store access tokens in localStorage -- use httpOnly cookies or secure storage.
+- Do NOT use symmetric JWT signing (HS256) with a weak secret -- generate a strong random key.
+- Do NOT trust the client to send user identity -- always verify on the server.
+- Do NOT skip CSRF protection on auth endpoints -- use state parameters in OAuth flow.
+- Do NOT hardcode OAuth credentials in source code -- always use environment variables.
 - Do NOT implement custom OAuth flows when a well-maintained library exists for the framework.
-- Do NOT skip the token refresh flow — expired tokens cause poor UX if users must re-login.
-- Do NOT expose internal auth errors to the client — return generic "authentication failed" messages.
-- Do NOT ignore the email verification state from providers — check emailVerified before granting access.
-- Do NOT create a User model that conflicts with an existing one — extend the existing model.
+- Do NOT skip the token refresh flow -- expired tokens cause poor UX if users must re-login.
+- Do NOT expose internal auth errors to the client -- return generic "authentication failed" messages.
+- Do NOT ignore the email verification state from providers -- check emailVerified before granting access.
+- Do NOT create a User model that conflicts with an existing one -- extend the existing model.

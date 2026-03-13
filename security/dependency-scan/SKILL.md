@@ -1,6 +1,6 @@
 ---
 name: dependency-scan
-description: Auto-detect package manager, scan for vulnerable dependencies, auto-fix where possible, and generate SBOM.
+description: Scan project dependencies for known vulnerabilities (CVEs), auto-fix safe patches, and generate SBOM. Auto-detects all package managers in monorepos — npm (npm audit), yarn (yarn audit), pnpm (pnpm audit), pip/poetry (pip-audit), Cargo (cargo audit), Go modules (govulncheck), Maven (dependency-check), Gradle, Bundler (bundle audit), and Composer. Categorizes findings by severity (Critical/High/Medium/Low), dependency type (direct vs transitive), and fix availability. Applies safe patch-level fixes automatically, adds npm overrides or yarn resolutions for transitive vulnerabilities, flags major version bumps for manual review, and generates CycloneDX SBOM with license compliance checks (GPL, AGPL, LGPL flagging). Verifies fixes by re-scanning and running tests before committing.
 version: "1.0.0"
 category: security
 platforms:
@@ -15,6 +15,8 @@ $ARGUMENTS
 If arguments contain "sbom" or "SBOM", generate a Software Bill of Materials in
 addition to the vulnerability scan. If no arguments provided, scan the entire
 project in the current working directory.
+
+IMPORTANT: Scan ALL detected package managers — monorepos often have multiple (e.g., npm frontend + Python backend). For each vulnerability, record: package name, current version, patched version, severity, CVE/advisory URL, and whether it is direct or transitive. Apply safe fixes (patch-level bumps) automatically, but never apply major version bumps without flagging them. After applying fixes, always re-run the scan to verify resolution and run the project test suite to check for regressions. Do not commit if tests fail.
 
 ============================================================
 PHASE 0: PACKAGE MANAGER DETECTION

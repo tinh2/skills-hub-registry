@@ -1,6 +1,6 @@
 ---
 name: cpo-review
-description: CPO-perspective product strategy review. Evaluates feature completeness against core value proposition, user journey gaps, retention architecture, growth levers, competitive moat, analytics foundation, and platform extensibility. Produces a product strategy brief with gap analysis and roadmap recommendations.
+description: Conduct a CPO-perspective product strategy review of a codebase. Evaluates feature completeness against core value proposition, time-to-value for new users, user journey quality, retention architecture (notifications, personalization, network effects), growth levers (viral mechanics, SEO, onboarding optimization), competitive moat strength, analytics measurement foundation, and platform extensibility. Produces a product scorecard with gap analysis and a prioritized 90-day roadmap. Use when you need a product strategy review, feature completeness audit, retention analysis, growth opportunity assessment, competitive positioning evaluation, or product roadmap planning.
 version: "1.0.0"
 category: review
 platforms:
@@ -99,7 +99,7 @@ Map and evaluate every critical user journey.
 
    | Journey | Steps | Friction Points | Dead Ends | Missing States | Score |
    |---------|-------|----------------|-----------|---------------|-------|
-   | Signup → First Value | {n} | {n} | {n} | {n} | {A-F} |
+   | Signup -> First Value | {n} | {n} | {n} | {n} | {A-F} |
    | Core Task | {n} | {n} | {n} | {n} | {A-F} |
    | Return Visit | {n} | {n} | {n} | {n} | {A-F} |
    | Upgrade Flow | {n} | {n} | {n} | {n} | {A-F} |
@@ -224,7 +224,7 @@ Analytics readiness scorecard:
 
 | Metric | Trackable? | Currently Tracked? | Quality |
 |--------|-----------|-------------------|---------|
-| Signup → Activation | Yes/No | Yes/No | {assessment} |
+| Signup -> Activation | Yes/No | Yes/No | {assessment} |
 | Daily Active Users | Yes/No | Yes/No | {assessment} |
 | Core Action Completion | Yes/No | Yes/No | {assessment} |
 | Retention (D1/D7/D30) | Yes/No | Yes/No | {assessment} |

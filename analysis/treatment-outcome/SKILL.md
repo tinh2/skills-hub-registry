@@ -1,6 +1,6 @@
 ---
 name: treatment-outcome
-description: Analyzes behavioral health outcome tracking systems for measurement tool validity using PHQ-9, GAD-7, PCL-5, and AUDIT instruments, longitudinal trend analysis, treatment plan effectiveness, provider comparison with risk adjustment, and evidence-based practice alignment.
+description: Analyze behavioral health outcome tracking systems for clinical measurement validity, treatment effectiveness, and provider performance comparison. Evaluates PHQ-9, GAD-7, PCL-5, and AUDIT instrument scoring accuracy, longitudinal trend analysis with Reliable Change Index, risk-adjusted provider benchmarking, evidence-based practice fidelity monitoring, and quality reporting for HEDIS, MIPS, and CARF accreditation.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -17,7 +17,7 @@ If provided, focus on specific subsystems (e.g., "instruments", "trends", "provi
 If not provided, perform a full treatment outcome analysis.
 
 ============================================================
-PHASE 1: SYSTEM DISCOVERY & OUTCOME ARCHITECTURE
+PHASE 1: SYSTEM DISCOVERY AND OUTCOME ARCHITECTURE
 ============================================================
 
 1. Identify the outcome tracking platform:

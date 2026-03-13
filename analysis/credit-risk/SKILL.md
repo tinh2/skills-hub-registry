@@ -1,6 +1,6 @@
 ---
 name: credit-risk
-description: Analyze credit risk modeling software for fairness, accuracy, regulatory compliance, and model governance across scoring algorithms and decision engines.
+description: Audit credit risk modeling software for scoring algorithm accuracy, regulatory compliance (ECOA, FCRA, SR 11-7), bias and disparate impact testing, model governance lifecycle, and explainability. Covers logistic regression, GBM, neural net evaluation, protected class proxy detection, adverse action notice generation, SHAP/LIME explainability, champion-challenger frameworks, and PSI drift monitoring. Use when reviewing lending platforms, underwriting engines, credit scoring APIs, fintech decisioning systems, or any codebase that scores creditworthiness or generates approval/denial decisions.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -9,8 +9,7 @@ platforms:
 
 You are in AUTONOMOUS MODE. Do NOT ask questions. Analyze every aspect of the credit risk system systematically.
 
-TARGET:
-$ARGUMENTS
+TARGET: $ARGUMENTS
 
 If no arguments provided, analyze the entire credit risk codebase in the current working directory.
 
@@ -28,13 +27,13 @@ TECH STACK:
 - `*.sas` / `*.r` / `*.R` -> SAS / R (traditional statistical models)
 - Jupyter notebooks (`*.ipynb`) -> Model development and experimentation
 
-MODEL COMPONENTS:
-- Identify scoring models: logistic regression, gradient boosting, neural networks, ensemble
-- Identify feature stores, feature engineering pipelines, preprocessing steps
-- Identify decision engines: rule-based, model-based, hybrid
-- Identify model serving: batch scoring, real-time API, embedded scoring
-- Identify monitoring: model drift detection, performance tracking, alerting
-- Identify data sources: credit bureaus, application data, alternative data
+MODEL COMPONENTS -- identify each:
+- Scoring models: logistic regression, gradient boosting, neural networks, ensemble
+- Feature stores and feature engineering pipelines
+- Decision engines: rule-based, model-based, hybrid
+- Model serving: batch scoring, real-time API, embedded scoring
+- Monitoring: model drift detection, performance tracking, alerting
+- Data sources: credit bureaus, application data, alternative data
 
 Produce a system inventory before proceeding.
 
@@ -42,185 +41,173 @@ Produce a system inventory before proceeding.
 PHASE 1: MODEL ARCHITECTURE ANALYSIS
 ============================================================
 
-Evaluate the scoring model architecture:
-
 ALGORITHM REVIEW:
-- Identify all scoring algorithms in use (logistic regression, GBM, neural net, etc.)
-- Check model complexity vs interpretability tradeoff
-- Verify model selection rationale is documented
-- Check for ensemble methods and how sub-models are combined
-- Verify hyperparameter tuning process (grid search, Bayesian optimization, cross-validation)
+- Identify all scoring algorithms in use (logistic regression, GBM, neural net, etc.).
+- Assess model complexity vs interpretability tradeoff.
+- Verify model selection rationale is documented.
+- Check ensemble methods and sub-model combination strategy.
+- Verify hyperparameter tuning process (grid search, Bayesian optimization, cross-validation).
 
 FEATURE SELECTION:
-- List all input features used in scoring models
-- Check for feature importance ranking (Gini, information value, chi-square)
-- Identify correlated features that may cause multicollinearity
-- Verify feature stability analysis across time periods
-- Check for feature drift monitoring between training and production
+- List all input features used in scoring models.
+- Check for feature importance ranking (Gini, information value, chi-square).
+- Identify correlated features that may cause multicollinearity.
+- Verify feature stability analysis across time periods.
+- Check for feature drift monitoring between training and production.
 
 MODEL VALIDATION:
-- Verify out-of-sample testing methodology (train/test split, k-fold, time-based)
-- Check model discrimination metrics: AUC-ROC, Gini coefficient, KS statistic
-- Check calibration metrics: Hosmer-Lemeshow, calibration curves
-- Verify population stability index (PSI) monitoring
-- Check for stress testing and sensitivity analysis
-- Verify backtesting against historical default data
+- Verify out-of-sample testing methodology (train/test split, k-fold, time-based).
+- Check discrimination metrics: AUC-ROC, Gini coefficient, KS statistic.
+- Check calibration metrics: Hosmer-Lemeshow, calibration curves.
+- Verify PSI (Population Stability Index) monitoring.
+- Check for stress testing and sensitivity analysis.
+- Verify backtesting against historical default data.
 
-For each finding: file path, model component, severity, description, recommendation.
+For each finding: record file path, model component, severity, description, recommendation.
 
 ============================================================
 PHASE 2: DATA QUALITY ASSESSMENT
 ============================================================
 
-Evaluate data pipelines feeding the credit risk models:
-
 INPUT DATA VALIDATION:
-- Check for schema validation on incoming data (bureau data, application data)
-- Verify data type enforcement (numeric fields not accepting strings, date formats)
-- Check for range validation (age > 0, income > 0, credit score 300-850)
-- Verify referential integrity checks across data sources
+- Schema validation on incoming data (bureau data, application data).
+- Data type enforcement (numeric fields not accepting strings, date formats).
+- Range validation (age > 0, income > 0, credit score 300-850).
+- Referential integrity checks across data sources.
 
 MISSING VALUE HANDLING:
-- Identify how missing values are detected and flagged
-- Check imputation strategies (mean, median, model-based, flag-and-fill)
-- Verify missing value rates are monitored and alerted on
-- Check if missing-at-random assumption is validated
-- Flag hardcoded magic values used as missing indicators (-999, 9999, etc.)
+- Detection and flagging of missing values.
+- Imputation strategies (mean, median, model-based, flag-and-fill).
+- Missing value rate monitoring and alerting.
+- Missing-at-random assumption validation.
+- Flag hardcoded magic values used as missing indicators (-999, 9999, etc.).
 
 OUTLIER DETECTION:
-- Check for outlier detection in continuous features
-- Verify outlier treatment strategy (winsorization, capping, exclusion)
-- Check if outlier thresholds are documented and justified
-- Verify extreme value handling in production scoring
+- Outlier detection in continuous features.
+- Treatment strategy (winsorization, capping, exclusion).
+- Documented and justified outlier thresholds.
+- Extreme value handling in production scoring.
 
 DATA LINEAGE:
-- Verify data source documentation exists
-- Check for data transformation audit trail
-- Verify data versioning for model reproducibility
-- Check that training data snapshots are archived
+- Data source documentation.
+- Data transformation audit trail.
+- Data versioning for model reproducibility.
+- Training data snapshot archival.
 
 ============================================================
 PHASE 3: REGULATORY COMPLIANCE
 ============================================================
 
-Audit against fair lending and consumer protection regulations:
+Audit against fair lending and consumer protection regulations.
 
 FAIR LENDING (ECOA / Regulation B / FHA):
-- Check if protected class variables are excluded from models:
-  race, color, religion, national origin, sex, marital status, age (except as permitted)
-- Scan for proxy variables that correlate with protected classes:
-  zip code (race proxy), first name (ethnicity proxy), university attended (race proxy)
-- Check if disparate impact analysis is performed and documented
-- Verify adverse action notice generation meets Regulation B requirements
-- Check that specific reasons for denial are provided (not generic)
-- Verify adverse action reason codes map to FCRA/ECOA requirements
+- Verify protected class variables are excluded from models: race, color, religion, national origin, sex, marital status, age (except as permitted).
+- Scan for proxy variables that correlate with protected classes: zip code (race proxy), first name (ethnicity proxy), university attended (race proxy).
+- Check disparate impact analysis documentation.
+- Verify adverse action notice generation meets Regulation B requirements.
+- Check that specific denial reasons are provided (not generic).
+- Verify adverse action reason codes map to FCRA/ECOA requirements.
 
 ADVERSE ACTION NOTICES:
-- Verify the system generates specific reason codes for each denial
-- Check that reason codes are ordered by impact (most impactful first)
-- Verify reason code descriptions are consumer-friendly
-- Check that up to 4 principal reasons are provided per ECOA requirements
-- Verify adverse action notice templates include all required disclosures
+- Verify specific reason codes generated for each denial.
+- Check reason codes are ordered by impact (most impactful first).
+- Verify reason code descriptions are consumer-friendly.
+- Check that up to 4 principal reasons are provided per ECOA requirements.
+- Verify adverse action notice templates include all required disclosures.
 
 MODEL DOCUMENTATION (SR 11-7 / OCC 2011-12):
-- Check for model development documentation (methodology, assumptions, limitations)
-- Verify model validation is performed by independent team
-- Check for ongoing monitoring plan documentation
-- Verify model inventory/registry exists with version tracking
-- Check that model risk tier classification is documented
+- Model development documentation (methodology, assumptions, limitations).
+- Independent model validation.
+- Ongoing monitoring plan documentation.
+- Model inventory/registry with version tracking.
+- Model risk tier classification documentation.
 
 FCRA COMPLIANCE:
-- Verify permissible purpose checks before pulling credit reports
-- Check that furnishing logic accurately reports to credit bureaus
-- Verify dispute resolution workflow exists
-- Check consumer disclosure mechanisms
+- Permissible purpose checks before pulling credit reports.
+- Accurate furnishing logic for credit bureau reporting.
+- Dispute resolution workflow.
+- Consumer disclosure mechanisms.
 
 ============================================================
 PHASE 4: BIAS DETECTION AND FAIRNESS
 ============================================================
 
-Analyze for discriminatory patterns:
-
 PROTECTED CLASS PROXY ANALYSIS:
-- Compute correlation between each input feature and known protected attributes
-- Flag features with correlation > 0.3 to race, gender, age, or national origin
-- Check if zip code, education institution, or employer are used (common proxies)
-- Verify alternative data sources (rent payments, utility data) are tested for bias
+- Compute correlation between each input feature and known protected attributes.
+- Flag features with correlation > 0.3 to race, gender, age, or national origin.
+- Check if zip code, education institution, or employer are used (common proxies).
+- Verify alternative data sources (rent payments, utility data) are tested for bias.
 
 DISPARATE IMPACT TESTING:
-- Check if approval rates are compared across demographic groups
-- Verify four-fifths (80%) rule analysis is performed
-- Check for marginal effect analysis on protected classes
-- Verify statistical significance testing on outcome differences
-- Check if disparate impact is tested at multiple score thresholds
+- Approval rate comparison across demographic groups.
+- Four-fifths (80%) rule analysis.
+- Marginal effect analysis on protected classes.
+- Statistical significance testing on outcome differences.
+- Disparate impact testing at multiple score thresholds.
 
 FAIRNESS METRICS:
-- Check for demographic parity measurement
-- Verify equalized odds / equal opportunity metrics
-- Check predictive parity across groups
-- Verify calibration fairness (equal calibration across groups)
-- Check if fairness-accuracy tradeoff is documented
+- Demographic parity measurement.
+- Equalized odds / equal opportunity metrics.
+- Predictive parity across groups.
+- Calibration fairness (equal calibration across groups).
+- Fairness-accuracy tradeoff documentation.
 
 BIAS MITIGATION:
-- Check for pre-processing bias mitigation (reweighting, resampling)
-- Verify in-processing techniques (adversarial debiasing, fairness constraints)
-- Check post-processing adjustments (threshold optimization per group)
-- Verify that mitigation steps are documented with impact analysis
+- Pre-processing techniques (reweighting, resampling).
+- In-processing techniques (adversarial debiasing, fairness constraints).
+- Post-processing adjustments (threshold optimization per group).
+- Mitigation step documentation with impact analysis.
 
 ============================================================
 PHASE 5: MODEL GOVERNANCE
 ============================================================
 
-Evaluate the model lifecycle and governance framework:
-
 VERSION CONTROL:
-- Check if models are version-controlled with reproducibility artifacts
-- Verify training data, code, hyperparameters, and outputs are versioned together
-- Check for model registry (MLflow, Weights & Biases, custom)
-- Verify rollback capability to previous model versions
+- Model version control with reproducibility artifacts.
+- Training data, code, hyperparameters, and outputs versioned together.
+- Model registry (MLflow, Weights & Biases, custom).
+- Rollback capability to previous model versions.
 
 CHAMPION-CHALLENGER FRAMEWORK:
-- Check if challenger models are tested alongside production champion
-- Verify A/B testing or shadow scoring infrastructure exists
-- Check that champion replacement criteria are defined and documented
-- Verify performance comparison methodology
+- Challenger models tested alongside production champion.
+- A/B testing or shadow scoring infrastructure.
+- Defined and documented champion replacement criteria.
+- Performance comparison methodology.
 
 MONITORING AND ALERTING:
-- Check for model performance degradation detection
-- Verify PSI (Population Stability Index) monitoring on input features
-- Check for concept drift detection on target variable
-- Verify automated alerting when metrics breach thresholds
-- Check for regular model performance reporting cadence
+- Model performance degradation detection.
+- PSI monitoring on input features.
+- Concept drift detection on target variable.
+- Automated alerting when metrics breach thresholds.
+- Regular model performance reporting cadence.
 
 APPROVAL AND AUDIT:
-- Verify model approval workflow exists (development -> validation -> approval -> deployment)
-- Check for audit trail on model changes and approvals
-- Verify segregation of duties between model developers and validators
-- Check that model risk assessments are documented
+- Model approval workflow (development -> validation -> approval -> deployment).
+- Audit trail on model changes and approvals.
+- Segregation of duties between model developers and validators.
+- Documented model risk assessments.
 
 ============================================================
 PHASE 6: EXPLAINABILITY AND TRANSPARENCY
 ============================================================
 
-Evaluate model interpretability:
-
 GLOBAL EXPLAINABILITY:
-- Check for feature importance calculations (Gini, permutation, SHAP)
-- Verify partial dependence plots or accumulated local effects
-- Check for global surrogate model documentation
-- Verify model behavior documentation for edge cases
+- Feature importance calculations (Gini, permutation, SHAP).
+- Partial dependence plots or accumulated local effects.
+- Global surrogate model documentation.
+- Model behavior documentation for edge cases.
 
 LOCAL EXPLAINABILITY:
-- Check for individual prediction explanations (SHAP values, LIME)
-- Verify reason code generation from model explanations
-- Check that explanation magnitudes map to adverse action reasons
-- Verify explanations are consistent across similar applicants
+- Individual prediction explanations (SHAP values, LIME).
+- Reason code generation from model explanations.
+- Explanation magnitudes mapped to adverse action reasons.
+- Explanation consistency across similar applicants.
 
 DOCUMENTATION:
-- Check for model cards or model factsheets
-- Verify intended use and limitations are documented
-- Check that performance metrics are broken down by relevant segments
-- Verify that known failure modes are documented
+- Model cards or model factsheets.
+- Intended use and limitations documented.
+- Performance metrics broken down by relevant segments.
+- Known failure modes documented.
 
 ============================================================
 OUTPUT
@@ -269,13 +256,12 @@ For each category with WARN or FAIL:
 - **Fairness metric results:** [summary table]
 
 ### Remediation Priority
-[Ordered list by regulatory risk and severity — compliance issues first]
+[Ordered list by regulatory risk and severity -- compliance issues first]
 
 ============================================================
 NEXT STEPS
 ============================================================
 
-After reviewing the analysis:
 - "Run `/fraud-detection` to analyze fraud detection components in the lending pipeline."
 - "Run `/financial-compliance` to review broader regulatory compliance (KYC/AML, BSA)."
 - "Run `/owasp` to audit the scoring API for security vulnerabilities."
@@ -285,10 +271,10 @@ After reviewing the analysis:
 DO NOT
 ============================================================
 
-- Do NOT modify any model code or scoring logic — this is an analysis skill.
+- Do NOT modify any model code or scoring logic -- this is an analysis skill.
 - Do NOT retrain or re-score any models.
 - Do NOT access or display actual customer PII from training data or production.
-- Do NOT make definitive legal conclusions — flag issues for legal/compliance review.
+- Do NOT make definitive legal conclusions -- flag issues for legal/compliance review.
 - Do NOT skip regulatory compliance phases even if the system appears small.
-- Do NOT assume fair lending compliance without testing — always check for proxy variables.
-- Do NOT conflate statistical correlation with confirmed disparate impact — note confidence levels.
+- Do NOT assume fair lending compliance without testing -- always check for proxy variables.
+- Do NOT conflate statistical correlation with confirmed disparate impact -- note confidence levels.

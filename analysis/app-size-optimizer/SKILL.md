@@ -1,6 +1,23 @@
 ---
 name: app-size-optimizer
-description: Analyzes mobile app binary size — asset audit for unused images and font subsetting, code stripping with ProGuard and tree-shaking, on-demand resources, dynamic feature modules, and app thinning strategies.
+description: >
+  Analyzes mobile app binary size -- asset audit for unused images and font subsetting, code stripping
+  with ProGuard and tree-shaking, on-demand resources, dynamic feature modules, and app thinning strategies.
+
+  USE THIS SKILL WHEN:
+  - Your app's download size is too large or growing unexpectedly
+  - Someone asks "why is our app so big?" or "how do we reduce app size?"
+  - You need to audit assets (images, fonts, videos) for waste or optimization
+  - App store reviewers flag your app for exceeding cellular download limits (200MB)
+  - You want to check if ProGuard/R8, tree-shaking, or resource shrinking is properly configured
+  - Someone mentions ABI splits, dynamic feature modules, or on-demand resources
+  - You are preparing for a release and want to minimize download size
+  - Users are complaining about storage space or download times
+  - You need to audit dependencies for size bloat or lighter alternatives
+
+  TRIGGER PHRASES: "app size", "binary size", "reduce app size", "APK size", "IPA size",
+  "unused assets", "font subsetting", "ProGuard", "tree shaking", "app thinning",
+  "download size", "install size", "ABI splits", "dynamic feature", "asset optimization"
 version: "1.0.0"
 category: analysis
 platforms:
@@ -19,128 +36,139 @@ If not provided, run the complete app size analysis.
 PHASE 1: BUILD & MEASURE
 ============================================================
 
-1. Detect the framework and build the release artifact:
-   - Flutter: `flutter build apk --release --analyze-size` and `flutter build ipa --release --analyze-size`.
-   - React Native: `npx react-native build-android --mode=release` or Gradle task.
-   - Native iOS: `xcodebuild archive` then check .xcarchive size.
-   - Native Android: `./gradlew bundleRelease` for AAB.
+Step 1.1 -- Detect Framework and Build Release Artifact
 
-2. Measure baseline sizes:
-   - Download size (compressed — what the user downloads).
-   - Install size (uncompressed — what it takes on device).
-   - For AAB: use bundletool to get device-specific sizes.
-   - For iOS: use App Store Connect size estimates or `xcrun altool --validate-app`.
+Identify the framework and trigger a release build:
+- Flutter: `flutter build apk --release --analyze-size` and `flutter build ipa --release --analyze-size`
+- React Native: `npx react-native build-android --mode=release` or Gradle task
+- Native iOS: `xcodebuild archive` then check .xcarchive size
+- Native Android: `./gradlew bundleRelease` for AAB
 
-3. Decompose the binary:
-   - Flutter: use `--analyze-size` output or `apkanalyzer`.
-   - Android: `apkanalyzer` from Android SDK or `jadx` for APK analysis.
-   - iOS: Xcode Organizer app size report.
-   - React Native: Metro bundle analysis + native size.
+Step 1.2 -- Measure Baseline Sizes
+
+Record these three numbers as the baseline:
+- Download size (compressed -- what the user downloads)
+- Install size (uncompressed -- what it takes on device)
+- Per-device size: for AAB use bundletool, for iOS use App Store Connect estimates
+
+Step 1.3 -- Decompose the Binary
+
+Break down the binary into categories:
+- Flutter: use `--analyze-size` output or `apkanalyzer`
+- Android: `apkanalyzer` from Android SDK or `jadx` for APK analysis
+- iOS: Xcode Organizer app size report
+- React Native: Metro bundle analysis + native size
+
+Produce a size breakdown table before proceeding to optimization phases.
 
 ============================================================
 PHASE 2: ASSET AUDIT
 ============================================================
 
-IMAGE ASSETS:
+Step 2.1 -- Image Assets
 
-Scan all image files in the project:
-```
-assets/, res/, Resources/, images/, public/
-*.png, *.jpg, *.jpeg, *.gif, *.webp, *.svg, *.pdf (vector)
-```
+Scan all image directories (`assets/`, `res/`, `Resources/`, `images/`, `public/`)
+for files matching: `*.png, *.jpg, *.jpeg, *.gif, *.webp, *.svg, *.pdf`.
 
-For each image:
+For each image, record:
 | File | Format | Resolution | File Size | Used In Code | Optimizable |
 |------|--------|-----------|-----------|-------------|-------------|
 
-CHECKS:
-- [ ] Unused images (not referenced in any source file or asset manifest).
-- [ ] PNG files that should be WebP (photos and complex images — 25-34% smaller).
-- [ ] Uncompressed PNGs (can be losslessly recompressed with pngquant/optipng).
-- [ ] Oversized images (resolution much larger than display size — e.g., 4000px for a 200pt icon).
-- [ ] Duplicate images (same image at different paths or slight variations).
-- [ ] Raster images that could be vectors (simple icons, logos).
-- [ ] Images in multiple densities that could use a single vector (Android: use VectorDrawable).
-- [ ] Large animated GIFs that could be Lottie animations or video.
+Run these checks and flag violations:
+- [ ] Unused images (not referenced in any source file or asset manifest)
+- [ ] PNG files that should be WebP (photos and complex images -- 25-34% smaller)
+- [ ] Uncompressed PNGs (can be losslessly recompressed with pngquant/optipng)
+- [ ] Oversized images (resolution much larger than display size -- e.g., 4000px for a 200pt icon)
+- [ ] Duplicate images (same image at different paths or slight variations)
+- [ ] Raster images that could be vectors (simple icons, logos)
+- [ ] Multiple density rasters that could use a single VectorDrawable (Android)
+- [ ] Large animated GIFs that could be Lottie animations or video
 
-FONT ASSETS:
+Step 2.2 -- Font Assets
 
-Scan all font files:
-```
-fonts/, assets/fonts/
-*.ttf, *.otf, *.woff, *.woff2
-```
+Scan font directories (`fonts/`, `assets/fonts/`) for: `*.ttf, *.otf, *.woff, *.woff2`.
 
-For each font:
+For each font, record:
 | Font Family | Weights Included | File Size | Characters Used | Subsettable |
 |-------------|-----------------|-----------|----------------|-------------|
 
-CHECKS:
-- [ ] Font files include unused weights (e.g., 9 weights when only regular and bold are used).
-- [ ] Full Unicode font when only Latin characters needed (can be subsetted to save 70%+).
-- [ ] TTF/OTF when WOFF2 is supported (React Native web targets).
-- [ ] Google Fonts bundled locally when they could be loaded from CDN (web targets only).
-- [ ] System font available as alternative (San Francisco, Roboto — zero download cost).
+Run these checks:
+- [ ] Font files include unused weights (e.g., 9 weights when only regular and bold are used)
+- [ ] Full Unicode font when only Latin characters needed (can be subsetted to save 70%+)
+- [ ] TTF/OTF when WOFF2 is supported (React Native web targets)
+- [ ] Google Fonts bundled locally when CDN is available (web targets only)
+- [ ] System font available as zero-cost alternative (San Francisco, Roboto)
 
-OTHER ASSETS:
-- [ ] Audio files: compressed formats used? (AAC/MP3 vs WAV).
-- [ ] Video files: bundled vs streamed? (bundled video is very expensive for size).
-- [ ] JSON/data files: minified? (remove whitespace, comments).
-- [ ] Lottie animations: optimized? (bodymovin export settings).
+Step 2.3 -- Other Assets
+
+Check for oversized non-image assets:
+- [ ] Audio files: compressed formats used? (AAC/MP3 vs. WAV)
+- [ ] Video files: bundled vs. streamed? (bundled video is very expensive)
+- [ ] JSON/data files: minified? (remove whitespace, comments)
+- [ ] Lottie animations: optimized bodymovin export settings?
 
 ============================================================
 PHASE 3: CODE SIZE ANALYSIS
 ============================================================
 
-NATIVE CODE:
+Step 3.1 -- Native Code Optimization
 
-Flutter:
-- Dart AOT compilation output size by package.
-- Run: `flutter build apk --release --analyze-size --target-platform android-arm64`.
-- Identify largest Dart packages by compiled code size.
+**Flutter:**
+- Analyze Dart AOT compilation output size by package
+- Run: `flutter build apk --release --analyze-size --target-platform android-arm64`
+- Identify the 10 largest Dart packages by compiled code size
 
-Android (ProGuard/R8):
-- [ ] R8 enabled for release builds (`isMinifyEnabled = true`).
-- [ ] Resource shrinking enabled (`isShrinkResources = true`).
-- [ ] ProGuard rules not keeping too much (overly broad `-keep` rules).
-- [ ] Unused R8/ProGuard rules (keeping classes that do not exist).
-- [ ] Debug symbols stripped from release builds.
+**Android (ProGuard/R8):**
+- [ ] R8 enabled for release builds (`isMinifyEnabled = true`) -- CRITICAL if missing
+- [ ] Resource shrinking enabled (`isShrinkResources = true`)
+- [ ] ProGuard rules not overly broad (check for `-keep class **` patterns)
+- [ ] No unused R8/ProGuard rules keeping nonexistent classes
+- [ ] Debug symbols stripped from release builds
 
-iOS:
-- [ ] Dead code stripping enabled in Xcode build settings.
-- [ ] Bitcode no longer needed (removed in Xcode 14).
-- [ ] dSYM files uploaded to crash reporter, not bundled in app.
-- [ ] Debug information format: DWARF with dSYM, not DWARF.
+**iOS:**
+- [ ] Dead code stripping enabled in Xcode build settings
+- [ ] Bitcode removed (deprecated in Xcode 14)
+- [ ] dSYM files uploaded to crash reporter, not bundled in app
+- [ ] Debug information format: DWARF with dSYM, not DWARF
 
-DEAD CODE DETECTION:
-- Unused classes, methods, and functions.
-- Unused imports.
-- Unreachable code paths.
-- Feature-flagged code that was never enabled (stale flags).
+Step 3.2 -- Dead Code Detection
 
-DEPENDENCY AUDIT:
+Scan for dead code that inflates binary size:
+- Unused classes, methods, and functions
+- Unused imports
+- Unreachable code paths
+- Feature-flagged code that was never enabled (stale flags)
+
+Step 3.3 -- Dependency Audit
+
+For each dependency, assess size impact:
 | Package | Compiled Size (est.) | Used Features | Lighter Alternative |
 |---------|---------------------|---------------|-------------------|
 
-CHECKS:
-- [ ] Dependencies used for only 1-2 functions (could inline instead of importing).
-- [ ] Heavy dependencies with lighter alternatives.
-- [ ] Development-only dependencies included in release build.
-- [ ] Transitive dependencies pulling in unnecessary code.
+Flag these issues:
+- [ ] Dependencies used for only 1-2 functions (could inline instead)
+- [ ] Heavy dependencies with lighter alternatives available
+- [ ] Development-only dependencies included in release build
+- [ ] Transitive dependencies pulling in unnecessary code
 
 ============================================================
 PHASE 4: NATIVE LIBRARY ANALYSIS
 ============================================================
 
-SHARED LIBRARIES (.so / .dylib / .framework):
+Step 4.1 -- Shared Libraries Inventory
+
+List all native libraries:
 | Library | Size | Platform | Purpose | Required |
 |---------|------|----------|---------|----------|
 
-Android ABI splits:
-- [ ] Only necessary ABIs included (arm64-v8a is sufficient for most modern devices).
-- [ ] Remove armeabi-v7a if minSdk >= 23 (most Play Store installs are arm64).
-- [ ] Remove x86/x86_64 unless targeting emulators in production.
+Step 4.2 -- Android ABI Optimization
 
+Check ABI configuration -- this is often the single largest win:
+- [ ] Only necessary ABIs included (arm64-v8a is sufficient for most modern devices)
+- [ ] Remove armeabi-v7a if minSdk >= 23 (most Play Store installs are arm64)
+- [ ] Remove x86/x86_64 unless targeting emulators in production
+
+Recommended configuration:
 ```kotlin
 // build.gradle.kts
 android {
@@ -150,65 +178,59 @@ android {
 }
 ```
 
-iOS architectures:
-- [ ] Only arm64 in release (remove armv7 for iOS 11+ targets).
-- [ ] Simulator architectures (x86_64, arm64-simulator) excluded from release.
+Step 4.3 -- iOS Architecture Check
+
+- [ ] Only arm64 in release (remove armv7 for iOS 11+ targets)
+- [ ] Simulator architectures (x86_64, arm64-simulator) excluded from release build
 
 ============================================================
 PHASE 5: ON-DEMAND RESOURCES & DYNAMIC FEATURES
 ============================================================
 
-iOS — ON-DEMAND RESOURCES:
-- Identify assets that are not needed on first launch.
-- Categories: initial install, pre-fetched, on-demand.
-- Candidate assets: level-specific game data, regional content, tutorial videos.
+Step 5.1 -- iOS On-Demand Resources
 
-Android — DYNAMIC FEATURE MODULES:
-- Identify features that are optional or used by subset of users.
-- Each dynamic feature module can be downloaded on demand.
-- Candidates: camera features, AR features, admin tools, analytics dashboards.
+Identify assets NOT needed on first launch that can be downloaded later:
+- Categories: initial install, pre-fetched, on-demand
+- Candidates: level-specific game data, regional content, tutorial videos, large media
 
-```kotlin
-// build.gradle.kts for dynamic feature module
-plugins {
-    id("com.android.dynamic-feature")
-}
-android {
-    // ... configuration
-}
-dependencies {
-    implementation(project(":app"))
-}
-```
+Step 5.2 -- Android Dynamic Feature Modules
 
-Android — APP BUNDLE SPLITS:
-- Language splits: only download user's language resources.
-- Density splits: only download device's screen density assets.
-- ABI splits: only download device's architecture native libs.
+Identify features used by a subset of users that can be split into dynamic modules:
+- Candidates: camera features, AR features, admin tools, analytics dashboards
+- Each module can be downloaded on demand via Play Feature Delivery
+
+Step 5.3 -- App Bundle Splits (Android)
+
+Verify these splits are enabled in the AAB:
+- Language splits: only download user's language resources
+- Density splits: only download device's screen density assets
+- ABI splits: only download device's architecture native libs
 
 ============================================================
-PHASE 6: OPTIMIZATION RECOMMENDATIONS
+PHASE 6: OPTIMIZATION PLAN
 ============================================================
 
-Generate prioritized optimization plan:
+Generate a prioritized optimization plan sorted by savings:
 
 | # | Optimization | Current Size | After | Savings | Effort | Priority |
 |---|-------------|-------------|-------|---------|--------|----------|
-| 1 | {action} | {MB} | {MB} | {MB (%)} | {low/medium/high} | {P0/P1/P2} |
+| 1 | {action} | {MB} | {MB} | {MB (%)} | {Low/Med/High} | {P0/P1/P2} |
 
-Common high-impact optimizations:
-1. Convert PNG -> WebP for photos (25-34% savings per image).
-2. Remove unused assets (0 effort, immediate savings).
-3. Subset fonts (50-80% savings per font file).
-4. Enable R8/ProGuard if not already (10-30% code size reduction).
-5. Remove unnecessary ABI architectures (50%+ native lib savings).
-6. Enable resource shrinking (removes unused Android resources).
-7. Replace heavy dependencies with lighter alternatives.
-8. Move large optional assets to on-demand resources.
+Top optimizations by typical impact:
+1. Remove unused assets (0 effort, immediate savings)
+2. Remove unnecessary ABI architectures (50%+ native lib savings)
+3. Enable R8/ProGuard if not already (10-30% code size reduction)
+4. Convert PNG -> WebP for photos (25-34% savings per image)
+5. Subset fonts (50-80% savings per font file)
+6. Enable resource shrinking (removes unused Android resources)
+7. Replace heavy dependencies with lighter alternatives
+8. Move large optional assets to on-demand resources
 
 ============================================================
 OUTPUT
 ============================================================
+
+Write the full report to `docs/app-size-optimization-report.md` (create `docs/` if needed).
 
 ## App Size Optimization Report
 
@@ -230,7 +252,7 @@ OUTPUT
 | Resources | {MB} | {%} | {MB potential savings} |
 | **Total** | **{MB}** | **100%** | **{MB total potential}** |
 
-### Asset Audit
+### Asset Audit Results
 | Issue | Files Affected | Current Size | Potential Savings |
 |-------|---------------|-------------|-------------------|
 | Unused images | {N} files | {MB} | {MB} (100%) |
@@ -251,9 +273,6 @@ OUTPUT
 |---------|------------------|--------|--------|
 | {name} | {MB} | {%} | {keep/replace/remove} |
 
-### Optimization Plan (by estimated savings)
-{Prioritized table from Phase 6}
-
 ### Projected Size After Optimization
 | Metric | Current | After All Optimizations | Reduction |
 |--------|---------|------------------------|-----------|
@@ -261,8 +280,8 @@ OUTPUT
 | Install | {MB} | {MB} | {%} |
 
 DO NOT:
-- Recommend removing features to reduce size — find ways to deliver them efficiently.
-- Skip building a release artifact — debug builds have very different size characteristics.
+- Recommend removing features to reduce size -- find ways to deliver them efficiently.
+- Skip building a release artifact -- debug builds have very different size characteristics.
 - Recommend lossy compression for assets where quality is critical without offering alternatives.
 - Ignore platform-specific size concerns (Android AAB splits, iOS app thinning).
 - Report theoretical savings without verifiable measurements.

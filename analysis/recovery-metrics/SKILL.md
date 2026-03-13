@@ -1,6 +1,6 @@
 ---
 name: recovery-metrics
-description: Analyzes rehabilitation and recovery tracking systems for outcome measurement validity, functional assessment accuracy (FIM, Barthel Index), progress milestone tracking, regression detection, pain scale calibration, and return-to-activity readiness scoring.
+description: Audit a rehabilitation recovery tracking system -- evaluate standardized outcome instruments (FIM, Barthel Index, SF-36, DASH, LEFS, PROMIS), functional assessment scoring accuracy, SMART goal and milestone tracking, regression detection with alert workflows, pain scale calibration (NRS, VAS, McGill), pain-function correlation, and return-to-activity readiness scoring. Validates minimal detectable change thresholds, inter-rater reliability, and recovery trajectory modeling for orthopedic, neurological, and cardiac rehab.
 version: "1.0.0"
 category: analysis
 platforms:

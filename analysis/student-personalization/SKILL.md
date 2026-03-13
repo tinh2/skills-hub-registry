@@ -1,6 +1,6 @@
 ---
 name: student-personalization
-description: Analyzes adaptive learning and student personalization systems for learning path algorithms, mastery detection, knowledge graph quality, recommendation engines, accessibility compliance, and learning analytics dashboards.
+description: Audit adaptive learning and student personalization systems for pedagogical quality. Use when you need to evaluate learning path algorithms (branching, remediation, acceleration), mastery detection models (Bayesian, IRT, threshold-based), knowledge graph prerequisite accuracy, recommendation engine fairness and bias, spaced repetition and interleaving, WCAG 2.1 AA and Section 508 accessibility compliance, IEP/504 accommodation implementation, xAPI/SCORM/LTI data integration, or teacher/student/admin analytics dashboards. Covers platforms like Knewton, DreamBox, ALEKS, IXL, Khan Academy, and custom adaptive systems.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -15,8 +15,10 @@ dashboards, then produce a comprehensive analysis.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., "mastery detection"
-or "knowledge graph"). If no arguments, run the full analysis.
+If arguments are provided, focus on that area (e.g., "mastery detection false positive rate",
+"knowledge graph prerequisite validation", "recommendation bias by demographics",
+"WCAG accessibility for interactive content", "adaptive item selection (CAT)",
+"teacher dashboard intervention alerts"). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: ADAPTIVE LEARNING PLATFORM DISCOVERY

@@ -1,6 +1,6 @@
 ---
 name: benefits-fraud
-description: Analyzes benefits and entitlement systems for fraud detection capabilities including identity verification, duplicate detection, cross-program matching, anomaly detection, overpayment recovery, and whistleblower reporting integration.
+description: Audit government benefits and entitlement systems for fraud prevention, detection, and recovery capabilities. Assesses identity proofing (document verification, SSA cross-match, biometrics, NIST 800-63 IAL levels), synthetic and stolen identity detection, deceased and incarcerated person checks, duplicate applicant matching (fuzzy, probabilistic, Soundex/metaphone), cross-program and cross-jurisdiction benefit matching, income verification (state wages, IRS 1075, new hire reporting), anomaly detection (statistical outliers, behavioral analytics, geographic clustering, ML model bias testing), rule-based fraud scoring, EBT usage pattern analysis, provider and vendor billing fraud, overpayment calculation and recovery (recoupment, Treasury offset, hardship waivers), investigation case management, whistleblower hotline integration, and due process safeguards (notice, hearing rights, demographic bias analysis). Covers cash assistance, SNAP, Medicaid, housing, energy, and childcare programs.
 version: "1.0.0"
 category: security
 platforms:
@@ -16,6 +16,8 @@ $ARGUMENTS
 
 If arguments are provided, focus on specific areas (e.g., "identity verification",
 "duplicate detection", "anomaly models"). If no arguments, run the full analysis.
+
+IMPORTANT: For every finding, cite the exact file path and line number. Rate each fraud prevention area as STRONG, ADEQUATE, or WEAK with specific justification. Map the full fraud risk surface for each benefit program (application intake, verification checkpoints, payment channels, recertification gaps). Never include real applicant data or case details in output. Always assess due process and demographic fairness alongside fraud detection effectiveness — detection without fairness safeguards creates legal liability.
 
 ============================================================
 PHASE 1: SYSTEM DISCOVERY

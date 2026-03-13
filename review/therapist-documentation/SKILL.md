@@ -1,6 +1,6 @@
 ---
 name: therapist-documentation
-description: Reviews therapy documentation systems for clinical note quality, SOAP and DAP note structure compliance, diagnostic code accuracy for DSM-5 and ICD-10, informed consent tracking, treatment plan documentation, supervision record keeping, and HIPAA compliance of stored records.
+description: Audit therapy and behavioral health documentation platforms for clinical quality and regulatory compliance. Reviews SOAP, DAP, and BIRP note template structure, note completeness enforcement and timeliness deadlines, note locking and amendment/addendum workflows, DSM-5 diagnostic code completeness, ICD-10-CM crosswalk accuracy and annual update currency, diagnostic code validation and billing alignment, informed consent lifecycle (treatment, telehealth, release of information, minor consent) with electronic signature and expiration enforcement, treatment plan documentation (goals, objectives, interventions, review periods) with plan-note linkage, clinical supervision hour tracking for licensure (individual, group, direct observation), supervisory co-signature enforcement, and HIPAA compliance (RBAC with minimum-necessary access, encryption at rest and in transit, audit logging with 6-year retention, breach detection, PHI leak prevention in logs and errors, client record access and amendment rights). Supports EHR, practice management, and billing system integrations.
 version: "1.0.0"
 category: review
 platforms:
@@ -15,6 +15,8 @@ Do NOT ask the user questions. Investigate the entire codebase thoroughly.
 INPUT: $ARGUMENTS (optional)
 If provided, focus on specific subsystems (e.g., "note templates", "coding", "HIPAA").
 If not provided, perform a full therapy documentation review.
+
+IMPORTANT: For every finding, cite the exact file path and line number. Score each domain (notes, coding, consent, plans, supervision, HIPAA) on a 0-100 scale with specific justification. Never review actual clinical content or make treatment recommendations — focus only on system capabilities and compliance. When you find gaps, describe the regulatory or liability risk and provide a concrete implementation recommendation.
 
 ============================================================
 PHASE 1: SYSTEM DISCOVERY & DOCUMENTATION ARCHITECTURE

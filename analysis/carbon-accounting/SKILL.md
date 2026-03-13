@@ -1,6 +1,16 @@
 ---
 name: carbon-accounting
-description: Analyzes carbon accounting and emissions tracking software for Scope 1/2/3 calculation accuracy, GHG Protocol compliance, offset verification, supply chain emissions, reporting standards (CDP, TCFD, GRI, SASB), reduction target tracking, and audit trail completeness.
+description: >
+  Analyze carbon accounting and emissions tracking software for Scope 1/2/3 calculation
+  accuracy, GHG Protocol compliance, offset verification, supply chain emissions, reporting
+  standards (CDP, TCFD, GRI, SASB, SEC), reduction target tracking, and audit trail integrity.
+  USE THIS SKILL WHEN: user mentions carbon accounting, emissions tracking, GHG Protocol,
+  Scope 1/2/3 emissions, carbon offsets, CDP reporting, TCFD, sustainability reporting,
+  carbon footprint calculation, science-based targets, or ESG emissions data.
+  Trigger phrases: "analyze carbon accounting", "emissions calculation review", "GHG Protocol
+  compliance check", "Scope 3 analysis", "offset verification audit", "CDP reporting readiness",
+  "TCFD alignment review", "carbon reduction target tracking", "emissions audit trail",
+  "sustainability reporting gap analysis".
 version: "1.0.0"
 category: analysis
 platforms:

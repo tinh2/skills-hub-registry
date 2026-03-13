@@ -1,6 +1,6 @@
 ---
 name: unit-test
-description: Auto-detects test framework, scans for untested functions, generates unit tests with edge cases and error paths, runs them, and self-heals failures.
+description: Generate comprehensive unit tests with edge cases, error paths, and boundary values. Auto-detects test framework (Vitest, Jest, pytest, go test, flutter_test, RSpec, cargo test, JUnit), scans for untested functions by priority, adopts existing test conventions, generates tests with proper mocks, runs them, and self-heals failures in up to 3 iterations. Measures coverage before and after. Use when you need to add unit tests, increase code coverage, test edge cases, or verify error handling paths.
 version: "1.0.0"
 category: test
 platforms:

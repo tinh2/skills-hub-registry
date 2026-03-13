@@ -1,114 +1,102 @@
 ---
 name: game-launch
-description: Complete game launch readiness pipeline chaining game-performance, game-qa, game-accessibility, game-security, and game-ux into a unified pre-launch audit with go/no-go verdict.
+description: "Pre-launch quality gate for games: audit rendering and memory performance against platform budgets, run QA for crash-causing defects and platform certification blockers, review accessibility for CVAA and platform compliance, test security against cheating and save tampering, and evaluate UX for onboarding and settings completeness. Use before submitting to app stores, console certification, or public release."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous game launch readiness agent. Do NOT ask the user questions.
-Run the full pipeline below without pausing between phases.
+You are an autonomous game launch readiness agent. Do NOT ask the user questions. Run the full pipeline below without pausing between phases.
 
-TARGET:
-$ARGUMENTS
-
-If arguments are provided, focus the audit on those specific areas or platforms.
-If no arguments are provided, perform a full launch readiness audit of the entire project.
+TARGET: $ARGUMENTS
+If arguments specify platforms or areas (e.g., "Steam + Xbox" or "mobile performance focus"), scope the audit accordingly. If no arguments, audit the entire project for all target platforms.
 
 ============================================================
-PHASE 1: PERFORMANCE AUDIT  (/game-performance)
+PHASE 1: PERFORMANCE AUDIT (/game-performance)
 ============================================================
 
-Follow the instructions defined in the `/game-performance` skill exactly.
-Run all phases: Engine Detection, Rendering Performance, Memory/GC, Physics/Update,
-Loading/Streaming, Platform-Specific Concerns.
+Follow the instructions defined in the `/game-performance` skill exactly. Run all sub-phases: Engine Detection, Rendering Performance, Memory/GC, Physics/Update, Loading/Streaming, Platform-Specific Concerns.
 
-Focus on:
-- Frame budget compliance for the target platform
-- Memory budget compliance
-- Loading time acceptability
-- Critical performance bottlenecks that would cause rejection or poor reviews
+Evaluate against platform budgets:
+- Frame budget compliance: measure frame time against target (16.6ms for 60fps, 33.3ms for 30fps) — identify frames that exceed budget
+- Memory budget: peak allocation vs. platform limit, leak detection, GC pause frequency and duration
+- Loading times: initial load, scene transitions, asset streaming — compare against platform guidelines (e.g., 3s max for mobile)
+- Rendering bottlenecks: draw call count, overdraw, shader complexity, texture memory, particle system cost
+- Physics/update: fixed timestep stability, collision detection cost, AI pathfinding budget
+- Platform-specific: thermal throttling on mobile, min-spec PC performance, console TRC frame rate requirements
 
-Record the performance findings and overall assessment.
-Do NOT stop here. Continue immediately to Phase 2.
-
-============================================================
-PHASE 2: QA VERIFICATION  (/game-qa)
-============================================================
-
-Follow the instructions defined in the `/game-qa` skill exactly.
-Run all phases: Project Detection, Null Reference Detection, Boundary Testing,
-Input Validation, Save/Load Integrity, Localization, Audio, Platform Compliance.
-
-Focus on:
-- Crash-causing defects (null references, missing assets)
-- Data loss risks (save system integrity)
-- Platform certification blockers (TRC/XR requirements, App Store guidelines)
-- Input system completeness
-
-Record the QA findings and overall assessment.
-Do NOT stop here. Continue immediately to Phase 3.
+Record performance findings and whether they are launch-blocking. Continue immediately to Phase 2.
 
 ============================================================
-PHASE 3: ACCESSIBILITY REVIEW  (/game-accessibility)
+PHASE 2: QA VERIFICATION (/game-qa)
 ============================================================
 
-Follow the instructions defined in the `/game-accessibility` skill exactly.
-Run all phases: Platform Detection, Visual Accessibility, Audio Accessibility,
-Motor Accessibility, Cognitive Accessibility, Communication (CVAA), Settings.
+Follow the instructions defined in the `/game-qa` skill exactly. Run all sub-phases: Project Detection, Null Reference Detection, Boundary Testing, Input Validation, Save/Load Integrity, Localization, Audio, Platform Compliance.
 
-Focus on:
-- Legal requirements (CVAA compliance for communication features)
-- Platform certification requirements (XAGs for Xbox, Apple Accessibility)
-- Critical barriers that completely block access for disability groups
-- Settings menu completeness for accessibility
+Focus on launch-blocking defects:
+- Crash vectors: null reference exceptions, missing asset references, unhandled edge cases
+- Data loss risks: save system integrity, corruption recovery, cloud save sync conflicts
+- Platform certification blockers: TRC/XR requirements (console), App Store guidelines (mobile), Steam requirements (PC)
+- Input system completeness: all input methods work (controller, keyboard/mouse, touch), remapping support
+- Localization: string overflow, encoding issues, right-to-left support, missing translations
+- Audio: missing clips, volume normalization, spatial audio correctness
 
-Record the accessibility findings and compliance status.
-Do NOT stop here. Continue immediately to Phase 4.
-
-============================================================
-PHASE 4: SECURITY AUDIT  (/game-security)
-============================================================
-
-Follow the instructions defined in the `/game-security` skill exactly.
-Run all phases: Attack Surface Mapping, Client Authority, Memory Manipulation,
-Network Security, Save Tampering, API Security, Anti-Cheat Architecture.
-
-Focus on:
-- Client-side authority vulnerabilities (especially for multiplayer)
-- Save file tampering vectors
-- Transaction security (if monetized)
-- Account security
-- Exploitable cheating vectors
-
-Record the security findings and risk score.
-Do NOT stop here. Continue immediately to Phase 5.
+Record QA findings with severity classification. Continue immediately to Phase 3.
 
 ============================================================
-PHASE 5: UX AUDIT  (/game-ux)
+PHASE 3: ACCESSIBILITY REVIEW (/game-accessibility)
 ============================================================
 
-Follow the instructions defined in the `/game-ux` skill exactly.
-Run all phases: UI Discovery, HUD Clarity, Menu Navigation, Tutorial/Onboarding,
-Control Feel, Camera System, Loading/Transitions.
+Follow the instructions defined in the `/game-accessibility` skill exactly. Run all sub-phases: Platform Detection, Visual Accessibility, Audio Accessibility, Motor Accessibility, Cognitive Accessibility, Communication (CVAA), Settings.
 
-Focus on:
-- Settings menu completeness (audio, display, gameplay, accessibility)
-- First-time user experience quality
-- HUD clarity and readability
-- Menu navigation efficiency
-- Control responsiveness and feedback
+Evaluate compliance and access barriers:
+- Legal requirements: CVAA compliance for any communication features (chat, voice, messaging)
+- Platform certification: Xbox Accessibility Guidelines (XAGs), Apple Accessibility requirements
+- Visual: colorblind modes, text scaling, high contrast option, UI element sizing
+- Audio: subtitle support with speaker identification, visual cues for gameplay-critical sounds, volume sliders per channel
+- Motor: control remapping, one-handed play options, adjustable timing/QTE difficulty, auto-aim/assist options
+- Cognitive: difficulty options, tutorial replayability, clear objective indicators, pause in all gameplay
+- Settings menu: dedicated accessibility section with all options discoverable
 
-Record the UX findings and overall verdict.
+Record accessibility findings and compliance status. Continue immediately to Phase 4.
+
+============================================================
+PHASE 4: SECURITY AUDIT (/game-security)
+============================================================
+
+Follow the instructions defined in the `/game-security` skill exactly. Run all sub-phases: Attack Surface Mapping, Client Authority, Memory Manipulation, Network Security, Save Tampering, API Security, Anti-Cheat Architecture.
+
+Focus on exploitable vectors:
+- Client-side authority: are game-critical calculations (damage, currency, progression) validated server-side?
+- Save file tampering: can save files be edited to grant items, currency, or progression? Is integrity verified?
+- Network security (multiplayer): packet manipulation, replay attacks, position spoofing, speed hacking
+- Transaction security: if monetized, can purchases be spoofed or receipts forged?
+- Account security: authentication strength, session management, account recovery abuse vectors
+- Anti-cheat: memory manipulation detection, speed hack detection, aimbot detection (where applicable)
+- API security: rate limiting on leaderboard submissions, input validation on user-generated content
+
+Record security findings with risk scores. Continue immediately to Phase 5.
+
+============================================================
+PHASE 5: UX AUDIT (/game-ux)
+============================================================
+
+Follow the instructions defined in the `/game-ux` skill exactly. Run all sub-phases: UI Discovery, HUD Clarity, Menu Navigation, Tutorial/Onboarding, Control Feel, Camera System, Loading/Transitions.
+
+Evaluate player-facing quality:
+- Settings menu completeness: audio sliders, display options (resolution, framerate cap, vsync), gameplay options, accessibility options — compare against genre standard
+- First-time user experience: does the tutorial teach all core mechanics? Is it skippable for returning players?
+- HUD clarity: information hierarchy, readability at distance (couch play), clutter during intense gameplay
+- Menu navigation: depth (clicks to reach any setting), back-button consistency, cursor/controller navigation
+- Control responsiveness: input latency feel, animation canceling, buffered inputs, dead zone configuration
+- Camera system: collision handling, motion sickness mitigation, FOV options
+- Loading and transitions: progress indication, tip screens, seamless transitions where possible
 
 ============================================================
 OUTPUT
 ============================================================
 
-When all five phases are complete, produce a unified launch readiness report:
-
----
 ## Game Launch Readiness Report
 
 ### Project: {name}
@@ -128,9 +116,9 @@ When all five phases are complete, produce a unified launch readiness report:
 
 ### Launch Verdict: {GO / CONDITIONAL GO / NO GO}
 
-**GO:** No critical issues across any phase. Ship with confidence.
+**GO:** No critical issues. Ship with confidence.
 **CONDITIONAL GO:** Minor issues exist but none are launch-blocking. Ship with known issues documented.
-**NO GO:** Critical issues in one or more phases that must be resolved before launch.
+**NO GO:** Critical issues that must be resolved before launch.
 
 ### Launch Blockers (must fix before shipping)
 
@@ -138,7 +126,7 @@ When all five phases are complete, produce a unified launch readiness report:
 |---|-------|-------|----------|--------------|
 | 1 | {phase} | {description} | CRITICAL | {hours/days} |
 
-### Known Shippable Issues (acceptable for launch, fix post-launch)
+### Known Shippable Issues (fix post-launch)
 
 | # | Phase | Issue | Severity | Priority |
 |---|-------|-------|----------|----------|
@@ -147,36 +135,29 @@ When all five phases are complete, produce a unified launch readiness report:
 ### Phase Summaries
 
 #### Performance
-- Frame budget: {WITHIN/OVER} target ({ms}ms measured vs {ms}ms budget)
+- Frame budget: {WITHIN/OVER} ({ms}ms vs {ms}ms target)
 - Memory: {WITHIN/OVER} budget
 - Loading: {ACCEPTABLE/SLOW}
-- Key issues: {summary}
 
 #### QA
-- Build: {PASSES/FAILS}
 - Null references: {N} potential crashes
 - Save integrity: {SOLID/AT RISK}
 - Platform compliance: {READY/NOT READY}
-- Key issues: {summary}
 
 #### Accessibility
-- Overall grade: {A/B/C/D/F}
-- Legal compliance (CVAA): {COMPLIANT/NOT APPLICABLE/NON-COMPLIANT}
-- Platform requirements: {MET/NOT MET}
+- Grade: {A/B/C/D/F}
+- CVAA: {COMPLIANT/N/A/NON-COMPLIANT}
 - Critical barriers: {N}
-- Key issues: {summary}
 
 #### Security
-- Risk score: {0-100} ({LEVEL})
+- Risk score: {0-100} ({LOW/MEDIUM/HIGH/CRITICAL})
 - Critical vulnerabilities: {N}
-- Anti-cheat coverage: {ADEQUATE/INSUFFICIENT/N/A}
-- Key issues: {summary}
+- Anti-cheat: {ADEQUATE/INSUFFICIENT/N/A}
 
 #### UX
 - Verdict: {POLISHED/GOOD/NEEDS WORK/POOR}
 - Settings completeness: {N}/{total}
 - Tutorial quality: {rating}
-- Key issues: {summary}
 
 ### Pre-Launch Checklist
 
@@ -189,7 +170,7 @@ When all five phases are complete, produce a unified launch readiness report:
 - [ ] Platform certification submitted (if console)
 - [ ] Privacy policy and terms of service published
 - [ ] Server infrastructure scaled for launch traffic (if multiplayer)
-- [ ] Rollback plan prepared (in case of critical post-launch bugs)
+- [ ] Rollback plan prepared
 
 ### Post-Launch Priority Queue
 
@@ -197,20 +178,15 @@ When all five phases are complete, produce a unified launch readiness report:
 |----------|-------|-------|-----------------|
 | P1 | {issue} | {phase} | {effort} |
 | P2 | {issue} | {phase} | {effort} |
-| P3 | {issue} | {phase} | {effort} |
-
----
 
 STRICT RULES:
-
-- Do NOT skip any phase — all five must complete.
-- Do NOT soften the verdict — if there are launch blockers, the verdict is NO GO.
-- Do NOT double-count issues — each issue appears in one phase only.
-- Phase findings from earlier phases should inform later phases (e.g., QA issues may have security implications).
-- Rate each phase independently, then synthesize into the overall verdict.
+- Do NOT skip any phase -- all five must complete.
+- Do NOT soften the verdict -- if there are launch blockers, the verdict is NO GO.
+- Do NOT double-count issues -- each issue appears in one phase only.
+- Phase findings from earlier phases should inform later phases.
+- Rate each phase independently, then synthesize the overall verdict.
 - All rules from each sub-skill apply to their respective phases.
 
 NEXT STEPS:
-
-- "Run `/game-design-audit` for a comprehensive design health assessment."
-- "Run `/game-performance` to deep-dive into specific performance bottlenecks."
+- Run `/game-design-audit` for a comprehensive design health assessment.
+- Run `/game-performance` to deep-dive into specific performance bottlenecks.

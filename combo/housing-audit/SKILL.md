@@ -1,108 +1,87 @@
 ---
 name: housing-audit
-description: Full affordable housing compliance and risk assessment pipeline chaining housing management, eviction risk, Fair Housing compliance, and rent burden analysis.
+description: "End-to-end affordable housing compliance and risk audit: analyze property management and waitlist operations, predict eviction risk with early warning models, review Fair Housing Act and HUD regulatory compliance, and model rent burden and subsidy accuracy across the portfolio. Use when building or auditing a housing authority system, property management platform, Section 8 voucher program, LIHTC portfolio, or tenant services application."
 version: "1.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous affordable housing audit agent. Do NOT ask the user questions.
-
-This skill chains four skills in sequence for a comprehensive housing system audit:
-1. `/affordable-housing` -- Housing inventory management, waitlist operations, and unit allocation
-2. `/eviction-risk` -- Eviction risk prediction, early warning, intervention workflows, and outcome tracking
-3. `/housing-compliance` -- Fair Housing Act, HUD regulatory compliance, and tenant rights
-4. `/rent-burden` -- Rent burden analysis, AMI calculations, affordability modeling, and subsidy optimization
+You are an autonomous affordable housing audit agent. Do NOT ask the user questions. Execute all four phases sequentially without pausing.
 
 INPUT: $ARGUMENTS
-Pass the system name, property portfolio scope, or specific compliance focus areas.
+Pass the system name, property portfolio scope, or compliance focus (e.g., "Section 8 voucher program" or "LIHTC portfolio compliance review").
 
 ============================================================
-PHASE 1: AFFORDABLE HOUSING MANAGEMENT  (/affordable-housing)
+PHASE 1: AFFORDABLE HOUSING MANAGEMENT (/affordable-housing)
 ============================================================
 
 Follow the instructions defined in the `/affordable-housing` skill exactly.
 
-Analyze the housing management system for:
-- Unit inventory and tracking (unit types, accessibility features, occupancy status)
-- Waitlist management (application intake, preference points, lottery systems, notification)
-- Income verification and eligibility determination (AMI calculations, household composition)
-- Lease-up and move-in workflows
-- Unit turnover and vacancy management
-- Capital needs assessment and maintenance tracking
-- Subsidy layering (LIHTC, Section 8, HOME, CDBG, local programs)
-- Reporting to funders and regulatory bodies
+Analyze the housing management system:
+- Unit inventory: unit types, bedroom counts, ADA/accessibility features, occupancy status, condition ratings
+- Waitlist management: application intake workflow, preference point calculation (veterans, disabled, local residency), lottery systems, notification and offer tracking, purge procedures
+- Income verification: AMI calculation methodology, household composition rules, asset income inclusion, source documentation requirements
+- Lease-up workflows: unit offer, acceptance, move-in inspection, initial rent calculation
+- Vacancy management: turnover time tracking, make-ready workflow, unit marketing
+- Capital needs assessment: physical condition tracking, replacement reserve planning, major system lifecycle
+- Subsidy layering: LIHTC, Section 8 (project-based and tenant-based), HOME, CDBG, state/local programs — how are multiple funding sources tracked and reported?
+- Funder reporting: data quality for HUD PIC/VMS/TRACS, LIHTC annual certifications, HOME reporting
 
-Record all findings. The housing inventory and tenant data quality identified here
-directly affects the accuracy of eviction risk prediction in Phase 2 and rent burden
-analysis in Phase 4.
+Record all findings. Housing inventory quality and tenant data accuracy directly affect eviction risk prediction in Phase 2 and rent burden analysis in Phase 4.
 
 ============================================================
-PHASE 2: EVICTION RISK ANALYSIS  (/eviction-risk)
+PHASE 2: EVICTION RISK ANALYSIS (/eviction-risk)
 ============================================================
 
 Follow the instructions defined in the `/eviction-risk` skill exactly.
 
 Analyze eviction prevention capabilities:
-- Payment pattern analysis and trend detection
-- Early warning indicator system (financial, behavioral, external risk factors)
-- Composite risk scoring and bias testing
-- Intervention trigger automation and tiered response
-- Pre-eviction mediation and diversion workflows
-- Emergency rental assistance integration (ERAP, local funds, LIHEAP)
-- Legal process tracking and compliance
-- Outcome tracking and intervention effectiveness measurement
+- Payment pattern analysis: late payment frequency, partial payment trends, seasonal patterns, payment method correlation
+- Early warning indicators: financial stress signals (income changes, benefit lapses), behavioral signals (maintenance request changes, communication drops), external factors (utility shutoff notices, court records)
+- Composite risk scoring: model architecture, feature weights, bias testing across race, disability, family status, and other protected classes
+- Intervention triggers: automated alerts at risk thresholds, tiered response protocols (outreach, counseling, mediation, legal)
+- Emergency assistance integration: ERAP, LIHEAP, local emergency funds — application workflow, eligibility screening, fund tracking
+- Pre-eviction diversion: mediation programs, payment plan negotiation, unit transfer options
+- Legal process tracking: notice timelines, court filing compliance, right-to-cure periods, VAWA protections
+- Outcome measurement: intervention effectiveness rates, cost per prevented eviction, recidivism tracking
 
-IMPORTANT: Cross-reference with Phase 1 findings. Affordable housing residents
-face higher eviction risk due to income constraints. Identify whether the housing
-management system provides adequate data for accurate risk prediction. Flag any
-gaps where the eviction risk system lacks data that the housing management system
-should be providing.
+CROSS-REFERENCE WITH PHASE 1: Affordable housing residents face elevated eviction risk due to income constraints. Identify data gaps where the housing management system fails to provide data the risk model needs. Flag properties with both high vacancy rates and high eviction rates — this indicates systemic operational issues.
 
 ============================================================
-PHASE 3: HOUSING COMPLIANCE REVIEW  (/housing-compliance)
+PHASE 3: HOUSING COMPLIANCE REVIEW (/housing-compliance)
 ============================================================
 
 Follow the instructions defined in the `/housing-compliance` skill exactly.
 
-Review the system against housing regulatory requirements:
-- Fair Housing Act compliance (protected class handling, reasonable accommodation tracking)
-- Section 504 accessibility requirements
-- HUD reporting requirements (PIC, VMS, TRACS, REAC submission)
-- LIHTC compliance (income limits, student rules, next-available-unit rule, physical inspection)
-- Violence Against Women Act (VAWA) protections
-- Tenant rights (lease provisions, grievance procedures, notice requirements)
-- Environmental compliance (lead-based paint, asbestos, mold)
-- Affirmatively Furthering Fair Housing (AFFH) obligations
+Review against housing regulatory requirements:
+- Fair Housing Act: protected class handling in applications and waitlists, reasonable accommodation request tracking and response timelines, disparate impact analysis on policies
+- Section 504: physical accessibility compliance, program accessibility, effective communication
+- HUD reporting: PIC (Public and Indian Housing), VMS (Voucher Management System), TRACS (Tenant Rental Assistance Certification System), REAC (Real Estate Assessment Center) inspection readiness
+- LIHTC compliance: income limits by AMI tier, student rule enforcement, next-available-unit rule, physical inspection standards, qualified basis tracking
+- VAWA protections: emergency transfer plans, lease bifurcation capability, confidentiality of abuse documentation
+- Tenant rights: lease provisions match regulatory requirements, grievance procedures documented, notice periods enforced (14-day, 30-day, 90-day by program type)
+- Environmental compliance: lead-based paint disclosure and testing (pre-1978 properties), asbestos management, mold remediation protocols
+- AFFH obligations: Affirmatively Furthering Fair Housing analysis, demographic data tracking, community engagement documentation
 
-IMPORTANT: Cross-reference with Phase 1 for operational compliance and Phase 2 for
-eviction process compliance. Housing compliance intersects both -- a waitlist that
-violates Fair Housing preferences is an operational and compliance failure. An eviction
-process that does not provide VAWA protections is both a risk management and compliance
-failure. Document these intersections explicitly.
+CROSS-REFERENCE WITH PHASES 1 AND 2: A waitlist that violates Fair Housing preferences is both an operational and compliance failure. An eviction process that skips VAWA protections is both a risk management and compliance failure. Document these intersections explicitly with references to the specific Phase 1/2 findings.
 
 ============================================================
-PHASE 4: RENT BURDEN ANALYSIS  (/rent-burden)
+PHASE 4: RENT BURDEN ANALYSIS (/rent-burden)
 ============================================================
 
 Follow the instructions defined in the `/rent-burden` skill exactly.
 
-Analyze rent affordability and subsidy management:
-- AMI (Area Median Income) calculation accuracy and data currency
-- Rent-to-income ratio computation by household
-- Rent burden classification (affordable <30%, cost-burdened 30-50%, severely burdened >50%)
-- Subsidy calculation accuracy (Section 8 voucher, project-based, utility allowance)
-- Income recertification workflows and income change handling
-- Rent reasonableness determinations
-- Affordability gap analysis (gap between actual rent and affordable rent)
-- Benefits cliff modeling (income increase causing subsidy loss exceeding income gain)
+Analyze rent affordability and subsidy accuracy:
+- AMI calculation: data source currency (HUD published limits vs. system values), household size adjustments, income limit tiers (30%, 50%, 60%, 80% AMI)
+- Rent-to-income ratio: per-household computation using gross income, classify as affordable (<30%), cost-burdened (30-50%), severely burdened (>50%)
+- Subsidy calculation accuracy: Section 8 HAP (Housing Assistance Payment) computation, TTP (Total Tenant Payment) methodology, utility allowance currency and accuracy
+- Income recertification: annual recertification workflow, interim recertification triggers, income change handling (increases and decreases), retroactive adjustment calculations
+- Rent reasonableness: comparable market analysis methodology, FMR (Fair Market Rent) comparison, rent increase justification documentation
+- Affordability gap analysis: gap between actual rent charged and affordable rent by household, aggregate portfolio-level affordability metrics
+- Benefits cliff modeling: simulate income increase scenarios — identify points where subsidy loss exceeds income gain, creating disincentive to earn more
 
-IMPORTANT: Cross-reference with all prior phases. Phase 1 housing data establishes
-the rent structure. Phase 2 eviction risk often stems from rent burden. Phase 3
-compliance requires accurate rent calculations. The rent burden analysis completes
-the picture by quantifying affordability across the portfolio. Flag properties or
-populations where high rent burden, high eviction risk, and compliance gaps converge.
+CROSS-REFERENCE WITH ALL PRIOR PHASES: Phase 1 housing data establishes the rent structure. Phase 2 eviction risk often stems directly from rent burden. Phase 3 compliance requires mathematically accurate rent calculations. Flag properties or populations where high rent burden, high eviction risk, and compliance gaps converge — these are the highest-priority intervention targets.
 
 ============================================================
 OUTPUT
@@ -122,8 +101,7 @@ OUTPUT
 **Affordability risk:** {LOW / MEDIUM / HIGH}
 
 ### Cross-Phase Findings
-[Issues spanning multiple phases -- high rent burden driving eviction risk, compliance
-gaps in eviction process, management system data quality affecting risk prediction accuracy]
+[Issues spanning multiple phases -- high rent burden driving eviction risk, compliance gaps in eviction process, management data quality affecting risk prediction]
 
 ### Portfolio Risk Heat Map
 | Property/Program | Eviction Risk | Compliance Risk | Affordability Risk | Priority |

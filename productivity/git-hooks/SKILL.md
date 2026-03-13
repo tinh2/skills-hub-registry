@@ -1,6 +1,6 @@
 ---
 name: git-hooks
-description: "Auto-detect stack and set up pre-commit and commit-msg hooks with conventional commit enforcement"
+description: "Set up pre-commit hooks for linting, formatting, and type-checking with commit message enforcement using conventional commits. Auto-detects stack and configures husky, lefthook, or pre-commit framework with lint-staged. Use when you want to enforce code quality on every commit, add conventional commits, prevent bad code from being committed, or set up CI-mirrored hook checks."
 version: "1.0.0"
 category: productivity
 platforms:

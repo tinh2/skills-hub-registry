@@ -1,6 +1,6 @@
 ---
 name: linter
-description: "Auto-detect stack and configure linting, formatting, and editor integration with auto-fix for existing violations"
+description: "Configure linting, formatting, and editor integration for any stack. Sets up ESLint 9 or Biome for JS/TS, Ruff for Python, golangci-lint for Go, Clippy for Rust, RuboCop for Ruby, or dart analyze for Flutter. Adds Prettier or equivalent formatter, .editorconfig, and VS Code format-on-save. Use when you need to add a linter, fix formatting inconsistencies, migrate from legacy lint tools, or set up code style enforcement."
 version: "1.0.0"
 category: productivity
 platforms:

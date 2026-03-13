@@ -1,6 +1,6 @@
 ---
 name: device-matrix
-description: Sets up device matrix testing — Firebase Test Lab, AWS Device Farm, or BrowserStack configuration with device selection strategy, test sharding, result aggregation, flaky test detection, and performance benchmarking across devices.
+description: Configure device matrix testing across real phones, tablets, and emulators. Sets up Firebase Test Lab, AWS Device Farm, or BrowserStack with smart device selection covering flagships to budget phones, test sharding for parallel execution, flaky test quarantine, and cross-device performance benchmarking. Use when you need to test on multiple devices, validate across screen sizes, catch device-specific bugs, or benchmark performance on low-end hardware.
 version: "1.0.0"
 category: test
 platforms:
@@ -356,12 +356,12 @@ OUTPUT
 
 DO NOT:
 - Run unit tests on the device matrix (waste of device time and money).
-- Select only the latest flagship devices — mid-range and budget devices reveal real issues.
+- Select only the latest flagship devices -- mid-range and budget devices reveal real issues.
 - Skip iOS testing when the app targets both platforms.
-- Ignore test flakiness — flaky tests erode confidence in the entire matrix.
-- Run the full matrix on every PR (expensive) — run on merge to main or nightly.
+- Ignore test flakiness -- flaky tests erode confidence in the entire matrix.
+- Run the full matrix on every PR (expensive) -- run on merge to main or nightly.
 - Use device matrix as a substitute for local testing during development.
-- Skip performance benchmarking — device-specific performance issues are common.
+- Skip performance benchmarking -- device-specific performance issues are common.
 
 NEXT STEPS:
 - "Run the first device matrix test to establish baseline results."

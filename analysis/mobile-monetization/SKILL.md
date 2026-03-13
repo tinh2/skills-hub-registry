@@ -1,98 +1,95 @@
 ---
 name: mobile-monetization
-description: Analyzes mobile app monetization — IAP implementation with StoreKit 2 and Google Play Billing, subscription management, ad SDK integration, paywall design, trial conversion, revenue analytics, and store billing policy compliance.
+description: Audit mobile app revenue implementation -- in-app purchases, subscriptions, ad SDKs, paywall design, trial conversion funnels, and store billing compliance. Covers StoreKit 2, Google Play Billing, RevenueCat, AdMob, Unity Ads, receipt validation, entitlement sync, and pricing localization. Use when reviewing IAP flows, optimizing subscription conversion, checking ad mediation setup, or preparing for App Store / Play Store review.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous mobile monetization analysis agent. You audit a mobile app's
-revenue implementation for correctness, optimization, and store compliance.
-Do NOT ask the user questions. Investigate the codebase thoroughly.
+You are an autonomous mobile monetization analysis agent. Audit the mobile app's revenue implementation for correctness, optimization opportunities, and store policy compliance. Do NOT ask the user questions. Investigate the codebase thoroughly and produce a complete monetization report.
 
 INPUT: $ARGUMENTS (optional)
-If provided, focus on specific monetization areas (e.g., "subscriptions", "ads",
-"paywall", "compliance").
-If not provided, run the complete monetization analysis.
+If provided, focus on the specified monetization area (e.g., "subscriptions", "ads", "paywall", "compliance"). If not provided, run the complete analysis across all phases.
 
 ============================================================
 PHASE 1: MONETIZATION MODEL DETECTION
 ============================================================
 
-1. Identify the monetization model:
-   - In-App Purchases (IAP): consumables, non-consumables, subscriptions.
-   - Advertising: banner, interstitial, rewarded, native ads.
-   - Freemium: free with premium upgrade.
-   - Subscription: recurring payments.
-   - One-time purchase: paid app or single IAP unlock.
-   - Hybrid: combination of above.
+1. Classify the revenue model by scanning the codebase:
+   - In-App Purchases: consumables, non-consumables, auto-renewable subscriptions, non-renewing subscriptions.
+   - Advertising: banner, interstitial, rewarded video, native ad placements.
+   - Freemium: free tier with premium upgrade path.
+   - Subscription-first: recurring revenue as primary model.
+   - One-time purchase: paid app or single unlock IAP.
+   - Hybrid: combination of IAP + ads or subscription + consumables.
 
-2. Detect payment SDKs:
+2. Detect payment SDKs by searching dependency manifests and import statements:
    - StoreKit 2 / StoreKit 1 (iOS native).
    - Google Play Billing Library (Android native).
-   - RevenueCat (cross-platform IAP wrapper).
-   - in_app_purchase (Flutter).
+   - RevenueCat (cross-platform IAP abstraction).
+   - in_app_purchase or flutter_inapp_purchase (Flutter).
    - react-native-iap (React Native).
-   - Adapty, Qonversion, or other subscription platforms.
+   - Adapty, Qonversion, Glassfy, or Superwall.
 
-3. Detect ad SDKs:
-   - Google AdMob (google_mobile_ads).
-   - Unity Ads.
-   - AppLovin / MAX mediation.
+3. Detect ad SDKs in dependency files and initialization code:
+   - Google AdMob / google_mobile_ads.
+   - Unity Ads / Unity Mediation.
+   - AppLovin MAX mediation.
    - Meta Audience Network.
-   - ironSource.
-   - Ad mediation layer.
+   - ironSource / LevelPlay.
+   - Custom mediation layers.
 
-4. Detect analytics for revenue:
-   - Firebase Analytics revenue events.
-   - Amplitude revenue tracking.
-   - RevenueCat analytics dashboard.
-   - Custom revenue event tracking.
+4. Detect revenue analytics instrumentation:
+   - Firebase Analytics revenue events (purchase, ad_impression).
+   - Amplitude / Mixpanel revenue tracking.
+   - RevenueCat webhook or SDK analytics.
+   - Custom revenue event pipelines.
 
 ============================================================
 PHASE 2: IN-APP PURCHASE IMPLEMENTATION AUDIT
 ============================================================
 
-PRODUCT CONFIGURATION:
-- [ ] Products defined with correct identifiers matching store configuration.
-- [ ] Product types correct (consumable, non-consumable, auto-renewable, non-renewing).
-- [ ] Pricing tiers set and localized.
-- [ ] Introductory offers configured (free trial, pay-up-front, pay-as-you-go).
-- [ ] Promotional offers configured for win-back campaigns.
+PRODUCT CONFIGURATION -- verify in code and config files:
+- [ ] Product identifiers match store console configuration (no hardcoded test IDs in release).
+- [ ] Product types correctly declared (consumable vs non-consumable vs subscription).
+- [ ] Pricing tiers configured with localization support.
+- [ ] Introductory offers set up (free trial, pay-up-front, pay-as-you-go).
+- [ ] Promotional offers configured for win-back (requires server-signed offers on iOS).
 
-PURCHASE FLOW:
-- [ ] Products fetched from store (not hardcoded prices).
-- [ ] Localized pricing displayed (from store, not string formatting).
-- [ ] Purchase initiated correctly via store API.
-- [ ] Transaction observer set up at app launch (not on purchase screen).
-- [ ] Pending transactions handled (Ask to Buy, interrupted purchases).
-- [ ] Transaction finished after entitlement is delivered.
-- [ ] Deferred transactions handled (parental approval flow).
+PURCHASE FLOW -- trace the complete purchase code path:
+- [ ] Products fetched from store at runtime (prices never hardcoded).
+- [ ] Localized pricing displayed using store-provided formatters (not manual string formatting).
+- [ ] Purchase initiated through correct store API call.
+- [ ] Transaction observer registered at app launch (not lazily on purchase screen).
+- [ ] Pending transactions handled (Ask to Buy, interrupted purchases, deferred transactions).
+- [ ] Transaction finished/acknowledged only after entitlement is delivered.
+- [ ] Purchase deduplication prevents double-granting on retry.
 
-RECEIPT VALIDATION:
-- [ ] Server-side receipt validation implemented (not client-only).
-- [ ] Receipt validated against store API (App Store Server API v2 / Google Play Developer API).
-- [ ] Receipt fraud detection (replayed receipts, jailbreak receipts).
-- [ ] Validation endpoint secured with authentication.
+RECEIPT VALIDATION -- check server-side implementation:
+- [ ] Server-side receipt validation implemented (client-only validation is bypassable).
+- [ ] Validation calls App Store Server API v2 or Google Play Developer API.
+- [ ] Receipt replay and jailbreak receipt detection logic present.
+- [ ] Validation endpoint requires authentication (not publicly callable).
+- [ ] Validation failure handling does not silently grant entitlements.
 
-ENTITLEMENT MANAGEMENT:
+ENTITLEMENT MANAGEMENT -- trace entitlement lifecycle:
 - [ ] Purchase state persisted locally for offline access.
-- [ ] Entitlements synced from server on app launch.
-- [ ] Grace period handling (subscription expired but in grace period).
-- [ ] Restore purchases button present and functional.
-- [ ] Cross-platform entitlement sync (if app is on both platforms).
+- [ ] Entitlements re-synced from server on app launch and foreground.
+- [ ] Grace period handled (subscription expired but still in billing retry grace period).
+- [ ] Restore purchases button present, functional, and accessible.
+- [ ] Cross-platform entitlement sync via account-based system (if multi-platform).
 
-SUBSCRIPTION-SPECIFIC:
-- [ ] Auto-renewal status checked correctly.
-- [ ] Expiration date tracked and UI updated accordingly.
-- [ ] Billing retry period handled (subscriber still has access).
-- [ ] Voluntary churn: cancellation detected, retention offer shown.
-- [ ] Involuntary churn: billing retry failed, grace period ended.
-- [ ] Upgrade/downgrade/crossgrade handled correctly.
-- [ ] Subscription offer codes supported.
+SUBSCRIPTION LIFECYCLE -- verify all subscription states are handled:
+- [ ] Auto-renewal status checked and displayed correctly.
+- [ ] Expiration date tracked; UI reflects current subscription state.
+- [ ] Billing retry period: subscriber retains access during Apple/Google retry window.
+- [ ] Voluntary churn: cancellation detected, retention offer or feedback prompt shown.
+- [ ] Involuntary churn: billing retry exhausted, access revoked, win-back flow triggered.
+- [ ] Upgrade/downgrade/crossgrade transitions handled with correct proration.
+- [ ] Subscription offer codes supported (iOS) / promo codes (Android).
 
-Generate IAP audit table:
+Generate an IAP audit table:
 | Check | Status | Implementation | Issue |
 |-------|--------|---------------|-------|
 
@@ -100,114 +97,118 @@ Generate IAP audit table:
 PHASE 3: PAYWALL DESIGN ANALYSIS
 ============================================================
 
-PAYWALL PLACEMENT:
-- When is the paywall shown? (Feature gate, usage limit, onboarding).
-- Is the free experience sufficient to demonstrate value?
-- Is the paywall shown too early (before value) or too late (after value exhausted)?
+PAYWALL PLACEMENT -- evaluate when and where the paywall appears:
+- When is the paywall triggered? (feature gate, usage limit, onboarding step, time-based)
+- Does the free experience demonstrate enough value before the paywall?
+- Is the paywall shown too early (before user understands value) or too late (after value exhausted)?
+- Are there multiple paywall entry points (soft paywall on features, hard paywall on limits)?
 
-PAYWALL UI:
-- [ ] Clear value proposition visible above the fold.
+PAYWALL UI -- audit the paywall screen implementation:
+- [ ] Clear value proposition visible above the fold without scrolling.
 - [ ] Feature comparison between free and premium tiers.
-- [ ] Pricing displayed prominently with localized currency.
-- [ ] Trial terms clearly stated (duration, what happens after).
-- [ ] Subscription terms visible (billing cycle, auto-renewal notice).
-- [ ] Close/dismiss button easily accessible (not hidden to force purchase).
-- [ ] Legal text present (Terms of Service, Privacy Policy links).
-- [ ] Restore purchases button present.
+- [ ] Pricing displayed with store-localized currency (not manual formatting).
+- [ ] Trial terms explicitly stated: duration, billing date, cancellation method.
+- [ ] Subscription terms visible: billing cycle, auto-renewal disclosure.
+- [ ] Close/dismiss button visible and tappable (not hidden or delayed to force conversion).
+- [ ] Legal links present: Terms of Service, Privacy Policy.
+- [ ] Restore purchases button present (required by Apple).
 
-PAYWALL OPTIMIZATION:
-- [ ] Multiple plan options (monthly vs annual — anchor pricing).
-- [ ] Recommended plan highlighted (usually annual for best value).
-- [ ] Savings percentage shown for longer plans.
-- [ ] Social proof (user count, rating, testimonials).
-- [ ] Urgency/scarcity used ethically (limited-time offer if genuine).
+PAYWALL OPTIMIZATION -- check for conversion best practices:
+- [ ] Multiple plan options displayed (monthly vs annual with anchor pricing).
+- [ ] Recommended plan visually highlighted (typically annual for best value).
+- [ ] Savings percentage calculated and displayed for longer plans.
+- [ ] Social proof elements (user count, rating, testimonials) if available.
+- [ ] Urgency/scarcity only used for genuine limited-time offers (no fake urgency).
 
-TRIAL CONVERSION:
-- [ ] Trial start tracked as analytics event.
-- [ ] Trial end reminder sent before billing starts.
-- [ ] In-trial engagement tracked (feature usage during trial).
-- [ ] Trial-to-paid conversion funnel measurable.
-- [ ] A/B testing framework for paywall variants.
+TRIAL CONVERSION -- verify trial instrumentation:
+- [ ] trial_started event tracked with analytics.
+- [ ] Pre-expiration reminder notification scheduled before first billing.
+- [ ] In-trial engagement tracked (feature usage during trial period).
+- [ ] Trial-to-paid conversion funnel measurable end-to-end.
+- [ ] A/B testing framework integrated for paywall variant testing.
 
 ============================================================
 PHASE 4: AD SDK INTEGRATION AUDIT
 ============================================================
 
-If ad SDKs are detected:
+Skip this phase if no ad SDKs are detected. Otherwise:
 
-AD IMPLEMENTATION:
-- [ ] Ad SDK initialized at appropriate time (not blocking startup).
-- [ ] Ad units configured per placement (banner, interstitial, rewarded).
-- [ ] Test mode enabled in debug builds, real ads in release.
-- [ ] Ad frequency capping configured (not showing ads too frequently).
-- [ ] Rewarded ads grant reward only after completion verification.
-- [ ] Interstitial ads shown at natural transition points (not interrupting tasks).
-- [ ] Banner ads placed in non-disruptive positions.
+AD IMPLEMENTATION -- verify each ad placement:
+- [ ] Ad SDK initialized after first frame (not blocking app startup).
+- [ ] Ad units configured per placement with correct ad unit IDs.
+- [ ] Test mode enabled in debug builds; production IDs in release builds only.
+- [ ] Ad frequency capping configured (prevent ad fatigue from over-exposure).
+- [ ] Rewarded ads grant reward only after verified completion callback.
+- [ ] Interstitial ads shown at natural transition points (not mid-task).
+- [ ] Banner ads positioned in non-disruptive locations.
 
-AD MEDIATION:
-- [ ] Mediation configured for maximum fill rate (multiple ad networks).
-- [ ] Waterfall or bidding configured correctly.
-- [ ] Fallback ads when primary network has no fill.
-- [ ] Ad revenue reporting integrated with analytics.
+AD MEDIATION -- if mediation layer is present:
+- [ ] Multiple ad networks configured for maximum fill rate.
+- [ ] Waterfall or in-app bidding configured and prioritized correctly.
+- [ ] Fallback ad source for zero-fill scenarios.
+- [ ] Per-network revenue reporting integrated with analytics dashboard.
 
-AD EXPERIENCE:
-- [ ] Ads do not block core app functionality.
-- [ ] Premium users see no ads (entitlement check before ad load).
-- [ ] Ad loading does not impact app performance.
-- [ ] Ad errors handled gracefully (no crash if ad fails to load).
-- [ ] GDPR/CCPA consent collected before personalized ads.
-- [ ] ATT prompt shown before IDFA-dependent ad targeting.
+AD EXPERIENCE -- verify ad quality controls:
+- [ ] Ads never block core app functionality or navigation.
+- [ ] Premium/subscribed users see zero ads (entitlement check before ad load).
+- [ ] Ad loading is asynchronous and does not freeze the UI.
+- [ ] Ad load failures handled gracefully (no crash, no blank space).
+- [ ] GDPR/CCPA consent collected before serving personalized ads.
+- [ ] ATT (App Tracking Transparency) prompt shown before IDFA access on iOS 14.5+.
 
 ============================================================
-PHASE 5: REVENUE ANALYTICS
+PHASE 5: REVENUE ANALYTICS COVERAGE
 ============================================================
 
-REVENUE EVENT TRACKING:
-- [ ] purchase event with revenue, currency, product_id.
-- [ ] trial_started event.
-- [ ] trial_converted event (trial -> paid).
-- [ ] subscription_renewed event.
-- [ ] subscription_cancelled event.
-- [ ] subscription_expired event.
-- [ ] refund event.
-- [ ] ad_impression event with ad_unit, revenue.
-- [ ] ad_clicked event.
+Verify these revenue events are instrumented in the analytics layer:
 
-KEY METRICS TRACKABILITY:
-- [ ] Monthly Recurring Revenue (MRR) calculable from events.
-- [ ] Average Revenue Per User (ARPU) calculable.
-- [ ] Lifetime Value (LTV) estimable from cohort data.
+PURCHASE EVENTS:
+- [ ] purchase_completed with revenue, currency, product_id, transaction_id.
+- [ ] purchase_failed with product_id, error_code, error_message.
+- [ ] trial_started with product_id, trial_duration.
+- [ ] trial_converted (trial transitioned to paid).
+- [ ] subscription_renewed with product_id, revenue, period.
+- [ ] subscription_cancelled with product_id, cancellation_reason.
+- [ ] subscription_expired with product_id, churn_type (voluntary/involuntary).
+- [ ] refund_processed with product_id, amount, reason.
+
+AD REVENUE EVENTS:
+- [ ] ad_impression with ad_unit, ad_type, placement, estimated_revenue.
+- [ ] ad_clicked with ad_unit, ad_type, placement.
+- [ ] ad_reward_granted with reward_type, reward_amount.
+
+KEY METRICS CALCULABILITY -- confirm data supports:
+- [ ] MRR (Monthly Recurring Revenue) derivable from subscription events.
+- [ ] ARPU (Average Revenue Per User) calculable from revenue + user events.
+- [ ] LTV (Lifetime Value) estimable from cohort revenue data.
 - [ ] Trial-to-paid conversion rate measurable.
-- [ ] Churn rate calculable (voluntary + involuntary).
-- [ ] Paywall conversion rate measurable (views -> purchases).
+- [ ] Churn rate calculable (voluntary + involuntary separately).
+- [ ] Paywall conversion rate measurable (paywall_viewed -> purchase_completed).
 
 ============================================================
 PHASE 6: STORE BILLING POLICY COMPLIANCE
 ============================================================
 
-APPLE APP STORE:
-- [ ] All digital goods/services purchased via In-App Purchase.
-- [ ] No links or buttons directing to external purchase methods for digital goods.
-- [ ] Subscription terms clearly displayed before purchase.
-- [ ] Auto-renewal terms shown per Apple guidelines.
-- [ ] Restore purchases available.
-- [ ] No manipulation of App Store reviews for in-app benefits.
-- [ ] Reader app exemption applied correctly (if applicable — Spotify, Netflix model).
-- [ ] External Purchase Link Entitlement (if applicable in authorized regions).
+APPLE APP STORE compliance checks:
+- [ ] All digital goods and services purchased exclusively via In-App Purchase.
+- [ ] No external purchase links for digital goods (unless External Purchase Link Entitlement granted).
+- [ ] Subscription auto-renewal terms displayed per Apple review guidelines.
+- [ ] Restore purchases mechanism available and functional.
+- [ ] No review manipulation for in-app benefits.
+- [ ] Reader app exemption applied correctly if applicable.
 
-GOOGLE PLAY STORE:
-- [ ] Digital goods purchased via Google Play Billing.
-- [ ] Physical goods/services may use alternative payment methods.
-- [ ] Subscription management accessible in app.
-- [ ] Users can manage subscriptions from Play Store subscription center.
-- [ ] Cancellation flow clear and accessible.
-- [ ] User Choice Billing (if enrolled — alternative billing with reduced commission).
-- [ ] No dark patterns forcing purchase.
+GOOGLE PLAY STORE compliance checks:
+- [ ] Digital goods purchased via Google Play Billing (not third-party processors).
+- [ ] Physical goods and services may use alternative payment methods.
+- [ ] In-app subscription management accessible to users.
+- [ ] Cancellation flow clear, accessible, and not obstructed.
+- [ ] User Choice Billing implemented if enrolled in alternative billing program.
+- [ ] No dark patterns forcing or tricking users into purchases.
 
-CROSS-PLATFORM COMPLIANCE:
-- [ ] Pricing consistent across platforms (or justified differences).
-- [ ] Entitlements portable across platforms (same subscription works on both).
-- [ ] Account-based entitlement (not device-based).
+CROSS-PLATFORM compliance:
+- [ ] Pricing consistent across platforms (or differences are justified by commission rates).
+- [ ] Entitlements portable across platforms via account-based sync.
+- [ ] Account-based entitlement (not device-locked).
 
 ============================================================
 OUTPUT
@@ -239,31 +240,28 @@ OUTPUT
 ### Revenue Analytics Coverage
 | Event | Tracked | Platform | Issue |
 |-------|---------|----------|-------|
-| {event} | {yes/no} | {iOS/Android/both} | {issue} |
 
 ### Store Policy Compliance
 | Policy | iOS | Android | Status |
 |--------|-----|---------|--------|
-| {policy} | {PASS/FAIL} | {PASS/FAIL} | {details} |
 
 ### Monetization Score: {score}/100
 
 ### Revenue Optimization Recommendations
-1. **{Recommendation}** — Est. impact: {revenue impact estimate}
-2. **{Recommendation}** — Est. impact: {revenue impact estimate}
-3. **{Recommendation}** — Est. impact: {revenue impact estimate}
+1. **{Recommendation}** -- Est. impact: {revenue impact estimate}
+2. **{Recommendation}** -- Est. impact: {revenue impact estimate}
+3. **{Recommendation}** -- Est. impact: {revenue impact estimate}
 
 DO NOT:
-- Recommend dark patterns or manipulative purchase flows.
+- Recommend dark patterns, manipulative purchase flows, or hidden cancellation paths.
 - Suggest bypassing store billing requirements for digital goods.
-- Recommend hiding subscription terms or cancellation options.
-- Suggest ad placements that degrade core app experience.
-- Ignore receipt validation — client-only validation is trivially bypassable.
+- Recommend hiding subscription terms or auto-renewal disclosures.
+- Suggest ad placements that interrupt core app tasks.
+- Accept client-only receipt validation as sufficient -- it is trivially bypassable.
 - Recommend pricing without considering regional purchasing power parity.
-- Skip compliance checks — policy violations result in app removal.
+- Skip compliance checks -- policy violations result in app rejection or removal.
 
 NEXT STEPS:
-- "Implement server-side receipt validation if not already present."
-- "Run `/store-compliance` to verify billing policy compliance in detail."
-- "Run `/mobile-analytics` to ensure revenue events are tracked correctly."
-- "Set up A/B testing for paywall variants to optimize conversion."
+- "Run `/mobile-performance` to verify ad SDK initialization does not degrade startup time."
+- "Run `/mobile-ux-patterns` to audit paywall UX and purchase flow usability."
+- "Run `/mobile-analytics` to verify revenue event tracking completeness."

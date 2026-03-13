@@ -1,6 +1,6 @@
 ---
 name: real-estate-market
-description: Analyzes real estate analytics software for market data quality, demographic analysis, economic indicator integration, predictive models, and visualization depth.
+description: Audit a real estate analytics platform -- evaluate comparable sales and rental engines, automated valuation models (AVM), demographic and economic indicator pipelines, submarket scoring, gentrification detection, price forecasting accuracy, market cycle analysis, and risk modeling. Covers MLS, CoStar, Zillow, ATTOM, CoreLogic, Census/ACS, and BLS data integrations with spatial visualization and predictive model backtesting.
 version: "1.0.0"
 category: analysis
 platforms:

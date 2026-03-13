@@ -1,6 +1,6 @@
 ---
 name: terraform
-description: "Generate modular multi-cloud Terraform configurations with VPC, compute, database, cache, CDN, and remote state"
+description: "Generate Terraform infrastructure-as-code for AWS, GCP, or Azure. Creates modular VPC, compute, database, cache, CDN, and monitoring configs with per-environment sizing, remote state, cost estimates, and security best practices. Use when you need to set up cloud infrastructure, provision servers, create IaC, deploy to AWS/GCP/Azure, or scaffold a Terraform project."
 version: "1.0.0"
 category: deploy
 platforms:

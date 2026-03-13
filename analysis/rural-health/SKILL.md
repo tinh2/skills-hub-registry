@@ -1,6 +1,6 @@
 ---
 name: rural-health
-description: Analyzes rural health network software for telehealth readiness, provider coverage mapping, patient transportation, referral optimization, critical access hospital compliance, mobile clinic scheduling, and health equity metrics.
+description: Audit rural health network software for telehealth readiness, provider coverage mapping, patient transportation coordination, referral network optimization, Critical Access Hospital compliance, mobile clinic scheduling, and health equity metrics. Use when reviewing rural EHR systems, FQHC platforms, telehealth infrastructure, community health worker tools, HRSA-funded health systems, or remote care delivery networks.
 version: "1.0.0"
 category: analysis
 platforms:

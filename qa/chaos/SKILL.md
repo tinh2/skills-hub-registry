@@ -1,6 +1,6 @@
 ---
 name: chaos
-description: Chaos engineering for application resilience. Identifies failure points, generates chaos tests, validates graceful degradation, and reports which failures are handled vs crash the app.
+description: "Chaos engineering analysis that maps every external dependency and I/O boundary, then generates tests for timeouts, connection failures, corrupt responses, disk errors, OOM, partial failures, and rate limiting. Runs the tests and reports which failures crash the app vs degrade gracefully. Use when hardening error handling, testing resilience before launch, finding missing timeouts or retries, validating circuit breakers, or stress-testing third-party API failures."
 version: "1.0.0"
 category: qa
 platforms:

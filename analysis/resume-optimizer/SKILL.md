@@ -1,6 +1,6 @@
 ---
 name: resume-optimizer
-description: Analyzes resume building and optimization tools for ATS (Applicant Tracking System) compatibility, keyword matching algorithms, formatting standards, achievement quantification, skill extraction accuracy, and job-description alignment scoring.
+description: Audit a resume builder or optimization tool for ATS compatibility, keyword matching accuracy, formatting standards, achievement quantification, skill extraction, and job-description alignment scoring. Use when reviewing resume software, career platforms, applicant tracking integrations, CV generators, or job application tools.
 version: "1.0.0"
 category: analysis
 platforms:
