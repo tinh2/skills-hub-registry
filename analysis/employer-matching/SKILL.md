@@ -1,6 +1,6 @@
 ---
 name: employer-matching
-description: Audit a job matching platform for matching algorithm precision and recall, skill taxonomy normalization quality, culture fit modeling without demographic bias, algorithmic fairness testing per EEOC and NYC Local Law 144, remote/hybrid geographic handling, salary range accuracy, and candidate experience optimization. Use when reviewing job boards, ATS matching engines, workforce marketplaces, internal mobility platforms, or AI-powered recruitment tools.
+description: Audit a job matching platform for relevance, fairness, and candidate experience. Evaluates matching algorithm precision and recall, skill taxonomy and NLP extraction, culture fit modeling risks, algorithmic bias detection (EEOC, NYC Local Law 144, EU AI Act), geographic and remote work handling, salary range accuracy, and feedback loop quality. Use when building or reviewing job boards, ATS matching engines, internal mobility platforms, or workforce marketplaces.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -15,8 +15,8 @@ experience, then produce a comprehensive analysis.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., "matching algorithm"
-or "bias detection"). If no arguments, run the full analysis.
+If arguments are provided, focus on that area (e.g., "matching algorithm",
+"bias detection", "salary accuracy"). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: SYSTEM DISCOVERY
@@ -24,29 +24,34 @@ PHASE 1: SYSTEM DISCOVERY
 
 Step 1.1 -- Technology Stack
 
-Identify from package manifests: platform type (job board, staffing platform, ATS
-integration, workforce marketplace, internal mobility), backend framework, database
-engine, search engine (Elasticsearch, Algolia, Solr), ML/NLP libraries, recommendation
-engine, geospatial libraries, salary data providers, communication tools (messaging,
-email, scheduling), analytics and reporting.
+Scan package manifests and config. Identify:
+- Platform type: job board, staffing platform, ATS integration, workforce marketplace, internal mobility.
+- Backend framework and database engine.
+- Search engine: Elasticsearch, Algolia, Solr.
+- ML/NLP libraries.
+- Recommendation engine.
+- Geospatial libraries.
+- Salary data providers.
+- Communication tools: messaging, email, scheduling.
+- Analytics and reporting.
 
 Step 1.2 -- Matching Data Model
 
-Read core data structures: candidate profiles (skills, experience, education,
-certifications, preferences -- location, salary, remote/hybrid/onsite, industry,
-company size, role type), job postings (title, description, requirements -- required
-vs. preferred, skills, experience level, education, location, salary range, benefits,
-company culture attributes), employer profiles (industry, size, culture values,
-benefits, growth stage, tech stack), match records (candidate, job, match score,
-match components, status, interaction history).
+Read core data structures:
+- Candidate profiles: skills, experience, education, certifications, preferences (location, salary, remote/hybrid/onsite, industry, company size, role type).
+- Job postings: title, description, requirements (required vs. preferred), skills, experience level, education, location, salary range, benefits, company culture attributes.
+- Employer profiles: industry, size, culture values, benefits, growth stage, tech stack.
+- Match records: candidate, job, match score, match components, status, interaction history.
 
 Step 1.3 -- Data Pipeline
 
-Map the matching data flow: candidate profile creation and enrichment, job posting
-ingestion (direct entry, ATS import, job board scraping), data normalization (skill
-standardization, title normalization, location geocoding), matching engine invocation
-(batch vs. real-time), result ranking and presentation, feedback loop (accept/reject
-signals back to model).
+Map the end-to-end matching flow:
+- Candidate profile creation and enrichment.
+- Job posting ingestion: direct entry, ATS import, job board scraping.
+- Data normalization: skill standardization, title normalization, location geocoding.
+- Matching engine invocation: batch vs. real-time.
+- Result ranking and presentation.
+- Feedback loop: accept/reject signals back to model.
 
 ============================================================
 PHASE 2: MATCHING ALGORITHM QUALITY
@@ -54,29 +59,34 @@ PHASE 2: MATCHING ALGORITHM QUALITY
 
 Step 2.1 -- Algorithm Architecture
 
-Evaluate: matching approach (rule-based filters, weighted scoring, collaborative
-filtering, content-based filtering, hybrid), feature engineering (what signals feed
-the match), weighting methodology (fixed weights, learned weights, user-adjustable),
-threshold configuration (minimum score to show match), scoring transparency (can
-users understand why they were matched), algorithm versioning and A/B testing.
+Evaluate matching approach:
+- Method: rule-based filters, weighted scoring, collaborative filtering, content-based filtering, hybrid.
+- Feature engineering: what signals feed the match.
+- Weighting methodology: fixed weights, learned weights, user-adjustable.
+- Threshold configuration: minimum score to show match.
+- Scoring transparency: can users understand why they were matched.
+- Algorithm versioning and A/B testing.
 
 Step 2.2 -- Match Precision and Recall
 
-Evaluate: precision (are shown matches relevant), recall (are good matches being
-missed), ranking quality (best matches ranked highest), match volume per candidate
-(too few is frustrating, too many is overwhelming), match freshness (how quickly
-new postings appear in matches, how quickly closed postings are removed), duplicate
-match handling (same role posted multiple times), reciprocal matching (does the
-candidate also match the job requirements).
+Evaluate match quality:
+- Precision: are shown matches relevant.
+- Recall: are good matches being missed.
+- Ranking quality: best matches ranked highest.
+- Match volume per candidate: too few is frustrating, too many is overwhelming.
+- Match freshness: how quickly new postings appear, how quickly closed postings are removed.
+- Duplicate match handling.
+- Reciprocal matching: does the candidate also match the job requirements.
 
 Step 2.3 -- Match Signal Processing
 
-Evaluate: hard requirement filtering (must-have vs. nice-to-have), deal-breaker
-handling (candidate excludes certain industries, employer requires specific
-certification), partial match handling (meets 7 of 10 requirements), overqualification
-detection (senior candidate matched to junior role), underqualification detection
-with growth potential scoring, experience equivalency (years of experience vs.
-demonstrated competency).
+Evaluate edge case handling:
+- Hard requirement filtering: must-have vs. nice-to-have.
+- Deal-breaker handling: candidate excludes certain industries, employer requires specific certification.
+- Partial match handling: meets 7 of 10 requirements.
+- Overqualification detection: senior candidate matched to junior role.
+- Underqualification detection with growth potential scoring.
+- Experience equivalency: years of experience vs. demonstrated competency.
 
 ============================================================
 PHASE 3: SKILL-TO-REQUIREMENT ALIGNMENT
@@ -84,27 +94,32 @@ PHASE 3: SKILL-TO-REQUIREMENT ALIGNMENT
 
 Step 3.1 -- Skill Normalization
 
-Evaluate: skill taxonomy used (proprietary, O*NET, LinkedIn Skills, custom), synonym
-resolution quality ("JavaScript" = "JS" = "ECMAScript"), skill hierarchy handling
-(knows React implies knows JavaScript), skill versioning (Python 2 vs. Python 3),
-skill ambiguity resolution (context-dependent skill meanings), skill inference from
-work history (worked at company X using technology Y).
+Evaluate taxonomy quality:
+- Skill taxonomy used: proprietary, O*NET, LinkedIn Skills, custom.
+- Synonym resolution: "JavaScript" = "JS" = "ECMAScript".
+- Skill hierarchy: knows React implies knows JavaScript.
+- Skill versioning: Python 2 vs. Python 3.
+- Skill ambiguity resolution: context-dependent skill meanings.
+- Skill inference from work history.
 
 Step 3.2 -- Requirement Parsing
 
-Evaluate: NLP extraction from job descriptions (required skills, preferred skills,
-experience level, education), requirement classification (must-have, nice-to-have,
-bonus), requirement contradiction detection (entry-level role requiring 5 years
-experience), implicit requirement identification (skills commonly expected but
-not listed), requirement weighting by mention position and frequency.
+Evaluate NLP extraction quality:
+- NLP extraction from job descriptions: required skills, preferred skills, experience level, education.
+- Requirement classification: must-have, nice-to-have, bonus.
+- Requirement contradiction detection: entry-level role requiring 5 years experience.
+- Implicit requirement identification.
+- Requirement weighting by mention position and frequency.
 
 Step 3.3 -- Alignment Scoring
 
-Evaluate: skill match scoring (exact match, partial match, related skill, no match),
-experience level alignment (years and seniority), education alignment (degree level,
-field relevance), certification alignment, tool and technology match, soft skill
-assessment (how are soft skills matched when they are inherently subjective),
-overall alignment score composition and transparency.
+Evaluate scoring methodology:
+- Skill match scoring: exact match, partial match, related skill, no match.
+- Experience level alignment: years and seniority.
+- Education alignment: degree level, field relevance.
+- Certification and tool/technology match.
+- Soft skill assessment: how are inherently subjective skills matched.
+- Overall alignment score composition and transparency.
 
 ============================================================
 PHASE 4: CULTURE FIT MODELING
@@ -112,26 +127,28 @@ PHASE 4: CULTURE FIT MODELING
 
 Step 4.1 -- Culture Data Collection
 
-Evaluate: how employer culture is captured (questionnaire, free text, predefined
-values, employee reviews), culture dimensions modeled (work-life balance, innovation
-vs. stability, collaboration vs. autonomy, hierarchy vs. flat, mission-driven vs.
-profit-driven), culture data validation (is self-reported culture accurate), culture
-attribute standardization across employers.
+Evaluate data collection quality:
+- How employer culture is captured: questionnaire, free text, predefined values, employee reviews.
+- Culture dimensions modeled: work-life balance, innovation vs. stability, collaboration vs. autonomy, hierarchy vs. flat, mission-driven vs. profit-driven.
+- Culture data validation: is self-reported culture accurate.
+- Culture attribute standardization across employers.
 
 Step 4.2 -- Culture Matching
 
-Evaluate: how candidate culture preferences are captured, matching methodology
-(dimensional scoring, overall compatibility), culture match weight in overall
-match score, culture match transparency (can candidates see why they were matched
-on culture), culture vs. skills trade-off (high culture fit but lower skill match),
-culture match without proxying for demographic similarity (critical bias concern).
+Evaluate matching methodology:
+- How candidate culture preferences are captured.
+- Matching methodology: dimensional scoring, overall compatibility.
+- Culture match weight in overall match score.
+- Culture match transparency: can candidates see why they were matched on culture.
+- Culture vs. skills trade-off: high culture fit but lower skill match.
 
 Step 4.3 -- Culture Fit Risks
 
-Evaluate: whether culture fit is defined in a way that excludes diverse candidates,
-whether "culture fit" proxies for demographic homogeneity, whether "culture add"
-(what the candidate brings) is valued alongside "culture fit" (how the candidate
-conforms), whether culture matching is optional and transparent to candidates.
+Culture fit is the most common vector for bias in hiring technology. Evaluate:
+- Whether culture fit is defined in a way that excludes diverse candidates.
+- Whether "culture fit" proxies for demographic homogeneity.
+- Whether "culture add" is valued alongside "culture fit".
+- Whether culture matching is optional and transparent to candidates.
 
 ============================================================
 PHASE 5: BIAS DETECTION IN MATCHING
@@ -139,28 +156,31 @@ PHASE 5: BIAS DETECTION IN MATCHING
 
 Step 5.1 -- Algorithmic Bias Audit
 
-Evaluate: whether the matching algorithm has been tested for disparate impact by
-protected class (race, gender, age, disability, veteran status), bias testing
-methodology (adverse impact ratio, 4/5ths rule, statistical parity), bias in
-training data (if ML-based -- historical hiring data encodes historical biases),
-feature audit (are proxy variables for protected classes used -- zip code, school
-name, graduation year), regular bias re-assessment schedule.
+Evaluate bias testing:
+- Whether the algorithm has been tested for disparate impact by protected class (race, gender, age, disability, veteran status).
+- Bias testing methodology: adverse impact ratio, 4/5ths rule, statistical parity.
+- Bias in training data: historical hiring data encodes historical biases.
+- Feature audit: are proxy variables for protected classes used (zip code, school name, graduation year).
+- Regular bias re-assessment schedule.
 
 Step 5.2 -- Bias Mitigation
 
-Evaluate: bias mitigation techniques implemented (blind matching -- name/photo
-removed, debiased embeddings, fairness constraints in optimization, calibrated
-scoring across demographic groups), diversity-aware matching (can employers request
-diverse candidate slates without violating discrimination law), inclusion of
-non-traditional candidates (career changers, employment gaps, non-degree holders).
+Evaluate mitigation techniques:
+- Blind matching: name/photo removed.
+- Debiased embeddings.
+- Fairness constraints in optimization.
+- Calibrated scoring across demographic groups.
+- Diversity-aware matching without violating discrimination law.
+- Inclusion of non-traditional candidates: career changers, employment gaps, non-degree holders.
 
 Step 5.3 -- Bias Monitoring
 
-Evaluate: ongoing bias monitoring dashboards, outcome tracking by demographic group
-(match rates, interview rates, hire rates), candidate feedback on match relevance
-by group, third-party bias audit facilitation (can an external auditor access the
-needed data), regulatory compliance (EEOC, NYC Local Law 144 for automated
-employment decision tools, EU AI Act high-risk classification).
+Evaluate ongoing monitoring:
+- Bias monitoring dashboards.
+- Outcome tracking by demographic group: match rates, interview rates, hire rates.
+- Candidate feedback on match relevance by group.
+- Third-party bias audit facilitation.
+- Regulatory compliance: EEOC, NYC Local Law 144 for automated employment decision tools, EU AI Act high-risk classification.
 
 ============================================================
 PHASE 6: GEOGRAPHIC AND REMOTE HANDLING
@@ -168,27 +188,33 @@ PHASE 6: GEOGRAPHIC AND REMOTE HANDLING
 
 Step 6.1 -- Location Matching
 
-Evaluate: geocoding accuracy for candidate and job locations, commute time/distance
-calculation (not just radius -- actual travel time), public transit vs. driving
-considerations, relocation willingness handling, multi-location job support (remote
-with quarterly on-site), international location and time zone handling, cost-of-living
-adjustment awareness.
+Evaluate geographic matching quality:
+- Geocoding accuracy for candidate and job locations.
+- Commute time/distance calculation: actual travel time, not just radius.
+- Public transit vs. driving considerations.
+- Relocation willingness handling.
+- Multi-location job support: remote with quarterly on-site.
+- International location and time zone handling.
+- Cost-of-living adjustment awareness.
 
 Step 6.2 -- Remote Work Classification
 
-Evaluate: remote category granularity (fully remote, hybrid with specific days,
-remote with travel, temporarily remote), remote policy accuracy (verified vs.
-self-reported), time zone compatibility matching for remote roles, remote work
-equipment and infrastructure requirements, state/country work authorization for
-remote (tax and legal implications), remote-first company identification.
+Evaluate remote work model:
+- Remote category granularity: fully remote, hybrid with specific days, remote with travel, temporarily remote.
+- Remote policy accuracy: verified vs. self-reported.
+- Time zone compatibility matching for remote roles.
+- Remote work equipment and infrastructure requirements.
+- State/country work authorization for remote: tax and legal implications.
+- Remote-first company identification.
 
 Step 6.3 -- Geographic Preferences
 
-Evaluate: candidate location preference flexibility (willing to relocate for the
-right role), employer geographic requirement flexibility, geographic expansion
-recommendations (wider search area yields better matches), location-based salary
-adjustment (same role, different compensation by location), geographic diversity in
-match results (not over-indexing on local candidates for remote roles).
+Evaluate preference handling:
+- Candidate location preference flexibility: willing to relocate for the right role.
+- Employer geographic requirement flexibility.
+- Geographic expansion recommendations: wider search yields better matches.
+- Location-based salary adjustment: same role, different compensation by location.
+- Geographic diversity in match results: not over-indexing on local candidates for remote roles.
 
 ============================================================
 PHASE 7: SALARY RANGE ACCURACY
@@ -196,25 +222,30 @@ PHASE 7: SALARY RANGE ACCURACY
 
 Step 7.1 -- Salary Data Sources
 
-Evaluate: salary data origin (employer-provided, market data integration -- BLS,
-Glassdoor, Levels.fyi, Payscale, proprietary surveys), salary data freshness and
-update frequency, geographic adjustment methodology, industry and company size
-adjustments, role level calibration (what "senior" means varies by company).
+Evaluate data quality:
+- Salary data origin: employer-provided, market data integration (BLS, Glassdoor, Levels.fyi, Payscale, proprietary surveys).
+- Salary data freshness and update frequency.
+- Geographic adjustment methodology.
+- Industry and company size adjustments.
+- Role level calibration: what "senior" means varies by company.
 
 Step 7.2 -- Salary Matching
 
-Evaluate: candidate salary expectation handling (range vs. single number, base vs.
-total compensation), employer budget range accuracy (does posted range match actual
-offers), salary match tolerance (how far apart can expectations and budget be),
-total compensation modeling (base, bonus, equity, benefits valuation), salary
-negotiation range estimation (likely offer within budget range).
+Evaluate matching accuracy:
+- Candidate salary expectation handling: range vs. single number, base vs. total compensation.
+- Employer budget range accuracy: does posted range match actual offers.
+- Salary match tolerance: how far apart can expectations and budget be.
+- Total compensation modeling: base, bonus, equity, benefits valuation.
+- Salary negotiation range estimation.
 
 Step 7.3 -- Salary Transparency
 
-Evaluate: pay transparency compliance (state and local laws requiring salary ranges),
-salary range display to candidates, salary comparison tools (how does this range
-compare to market), salary equity analysis (same role, different pay -- pay gap
-detection), salary progression estimation (where does this role lead financially).
+Evaluate compliance and fairness:
+- Pay transparency compliance: state and local laws requiring salary ranges.
+- Salary range display to candidates.
+- Salary comparison tools: how does this range compare to market.
+- Salary equity analysis: same role, different pay (pay gap detection).
+- Salary progression estimation: where does this role lead financially.
 
 ============================================================
 PHASE 8: CANDIDATE EXPERIENCE
@@ -222,24 +253,34 @@ PHASE 8: CANDIDATE EXPERIENCE
 
 Step 8.1 -- Match Presentation
 
-Evaluate: match result display (score visibility, match reason explanation, job
-detail summary, company information), result sorting and filtering options, saved
-searches and alerts, match notification channels (email, push, in-app), match
-volume management (not overwhelming candidates), expired or filled job handling.
+Evaluate the candidate-facing experience:
+- Match result display: score visibility, match reason explanation, job detail summary, company information.
+- Result sorting and filtering options.
+- Saved searches and alerts.
+- Match notification channels: email, push, in-app.
+- Match volume management: not overwhelming candidates.
+- Expired or filled job handling.
 
 Step 8.2 -- Application Workflow
 
-Evaluate: one-click apply functionality, application tracking dashboard, application
-status visibility, employer response rate and time tracking, application withdrawal
-capability, resume tailoring per application, cover letter generation support,
-interview scheduling integration.
+Evaluate application flow:
+- One-click apply functionality.
+- Application tracking dashboard.
+- Application status visibility.
+- Employer response rate and time tracking.
+- Application withdrawal capability.
+- Resume tailoring and cover letter generation support.
+- Interview scheduling integration.
 
 Step 8.3 -- Feedback Loop
 
-Evaluate: match relevance feedback mechanism (thumbs up/down, not interested reasons),
-feedback incorporation into future matching (does the algorithm learn), candidate
-satisfaction measurement, match-to-hire conversion tracking, time-to-hire measurement,
-candidate drop-off analysis (where in the process do candidates abandon).
+A matching algorithm that cannot learn from outcomes will not improve. Evaluate:
+- Match relevance feedback mechanism: thumbs up/down, not interested reasons.
+- Feedback incorporation into future matching.
+- Candidate satisfaction measurement.
+- Match-to-hire conversion tracking.
+- Time-to-hire measurement.
+- Candidate drop-off analysis: where in the process do candidates abandon.
 
 Write analysis to `docs/employer-matching-analysis.md` (create `docs/` if needed).
 

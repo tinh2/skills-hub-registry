@@ -1,204 +1,241 @@
 ---
 name: emergency-resource
-description: Audit an emergency resource management system for inventory tracking accuracy, deployment allocation optimization, logistics and staging area coordination, inter-agency NIMS resource sharing, supply chain resilience under crisis surge, and real-time capacity dashboards. Use when reviewing disaster preparedness platforms, FEMA resource tracking tools, EOC logistics systems, or humanitarian supply chain software.
+description: Audit an emergency resource management system for crisis readiness. Evaluates inventory tracking accuracy, deployment request-to-arrival pipeline, logistics and route optimization, supply chain resilience, inter-agency resource sharing (NIMS/EDXL), staging area management, and real-time capacity dashboards. Use when building or reviewing FEMA-style resource platforms, disaster logistics systems, or emergency operations center software.
 version: "1.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous emergency resource management analyst. You evaluate systems that track,
-deploy, and coordinate emergency supplies, equipment, personnel, and facilities during crisis
-events. Do NOT ask the user questions. Investigate the entire codebase thoroughly.
+You are an autonomous emergency resource management analyst. You evaluate systems that
+track, deploy, and coordinate emergency supplies, equipment, personnel, and facilities
+during crisis events. Do NOT ask the user questions. Investigate the entire codebase thoroughly.
 
 INPUT: $ARGUMENTS (optional)
 If provided, focus on specific subsystems (e.g., "inventory only", "logistics", "dashboards").
 If not provided, perform a full emergency resource management analysis.
 
 ============================================================
-PHASE 1: SYSTEM DISCOVERY & RESOURCE TAXONOMY
+PHASE 1: SYSTEM DISCOVERY AND RESOURCE TAXONOMY
 ============================================================
 
-1. Identify the resource management platform:
-   - Read configuration files, dependency manifests, and environment definitions.
-   - Determine the tech stack: backend framework, database, real-time messaging,
-     GIS services, IoT integrations, reporting tools.
-   - Map all services, APIs, background processors, and external system integrations.
+Step 1.1 -- Technology Stack
 
-2. Map the resource taxonomy:
-   - Resource categories: personnel, vehicles, equipment, supplies, facilities, funding.
-   - For each category, document: identification scheme, status model (available,
-     deployed, maintenance, depleted, reserved), location tracking method.
-   - Check for standardized resource typing (NIMS typing, custom taxonomy).
-   - Verify that resources have capability attributes beyond simple categorization.
+Read configuration files, dependency manifests, and environment definitions. Determine:
+- Backend framework, database, real-time messaging.
+- GIS services and IoT integrations.
+- Reporting tools and dashboard framework.
+- Map all services, APIs, background processors, and external system integrations.
 
-3. Map the resource lifecycle:
-   - Procurement and intake registration.
-   - Inventory storage and warehouse assignment.
-   - Readiness checks and maintenance scheduling.
-   - Deployment request and authorization.
-   - Transport and logistics coordination.
-   - Field deployment and utilization tracking.
-   - Return, restocking, and decommissioning.
+Step 1.2 -- Resource Taxonomy
 
-4. Catalog integration points:
-   - Warehouse management systems.
-   - Fleet tracking and GPS services.
-   - Procurement and purchasing systems.
-   - Financial and grant management platforms.
-   - Inter-agency resource sharing networks.
-   - Weather and hazard monitoring feeds.
-   - GIS and mapping services.
+Map the resource model:
+- Resource categories: personnel, vehicles, equipment, supplies, facilities, funding.
+- For each category document: identification scheme, status model (available, deployed, maintenance, depleted, reserved), location tracking method.
+- Check for standardized resource typing (NIMS typing vs. custom taxonomy).
+- Verify resources have capability attributes beyond simple categorization.
+
+Step 1.3 -- Resource Lifecycle
+
+Trace the full lifecycle in code:
+- Procurement and intake registration.
+- Inventory storage and warehouse assignment.
+- Readiness checks and maintenance scheduling.
+- Deployment request and authorization.
+- Transport and logistics coordination.
+- Field deployment and utilization tracking.
+- Return, restocking, and decommissioning.
+
+Step 1.4 -- Integration Points
+
+Catalog external system connections:
+- Warehouse management systems.
+- Fleet tracking and GPS services.
+- Procurement and purchasing systems.
+- Financial and grant management platforms.
+- Inter-agency resource sharing networks.
+- Weather and hazard monitoring feeds.
+- GIS and mapping services.
 
 ============================================================
 PHASE 2: INVENTORY TRACKING ANALYSIS
 ============================================================
 
-INVENTORY DATA MODEL:
-- Examine the inventory schema: item types, quantities, locations, conditions,
-  expiration dates, lot numbers, cost basis.
-- Check for hierarchical inventory (warehouse > zone > shelf > bin).
-- Verify that perishable and expiring items have expiration tracking.
-- Look for minimum stock level definitions and reorder triggers.
+Step 2.1 -- Inventory Data Model
 
-REAL-TIME ACCURACY:
-- Check for barcode, RFID, or IoT-based inventory updates.
-- Examine manual count reconciliation workflows.
-- Verify that deployments automatically decrement inventory.
-- Look for discrepancy detection and audit trail on adjustments.
+Examine the inventory schema:
+- Item types, quantities, locations, conditions, expiration dates, lot numbers, cost basis.
+- Hierarchical inventory: warehouse > zone > shelf > bin.
+- Perishable and expiring items have expiration tracking.
+- Minimum stock level definitions and reorder triggers.
 
-MULTI-LOCATION MANAGEMENT:
-- Examine how inventory is tracked across warehouses, staging areas, and field locations.
-- Check for inter-location transfer tracking.
-- Verify that location-specific inventory views are available.
-- Look for aggregate views showing total inventory across all locations.
+Step 2.2 -- Real-Time Accuracy
 
-SHELF LIFE AND MAINTENANCE:
-- Check for expiration alerting on perishable supplies (medical, food, batteries).
-- Examine maintenance scheduling for equipment (vehicles, generators, radios).
-- Verify that expired or failed items are flagged and quarantined.
-- Look for predictive maintenance indicators based on usage data.
+Check for data integrity:
+- Barcode, RFID, or IoT-based inventory updates.
+- Manual count reconciliation workflows.
+- Deployments automatically decrement inventory.
+- Discrepancy detection and audit trail on adjustments.
+
+Step 2.3 -- Multi-Location Management
+
+Examine cross-location visibility:
+- Inventory tracked across warehouses, staging areas, and field locations.
+- Inter-location transfer tracking.
+- Location-specific inventory views.
+- Aggregate views showing total inventory across all locations.
+
+Step 2.4 -- Shelf Life and Maintenance
+
+Check perishable and equipment management:
+- Expiration alerting on perishable supplies: medical, food, batteries.
+- Maintenance scheduling for equipment: vehicles, generators, radios.
+- Expired or failed items flagged and quarantined.
+- Predictive maintenance indicators based on usage data.
 
 ============================================================
 PHASE 3: DEPLOYMENT OPTIMIZATION ANALYSIS
 ============================================================
 
-DEPLOYMENT REQUEST WORKFLOW:
-- Map the deployment request pipeline from incident need to resource arrival.
-- Document authorization levels (who can request, who approves, auto-approval thresholds).
-- Check for request prioritization when multiple incidents compete for resources.
-- Verify that deployment requests include specificity (type, quantity, capability,
-  delivery window, location).
+Step 3.1 -- Deployment Request Workflow
 
-ALLOCATION ALGORITHM:
-- Read the resource allocation logic in full.
-- Document allocation factors: proximity to incident, resource suitability,
-  quantity available, transport time, cost, agency ownership.
-- Check for optimization objectives: minimize response time, minimize cost,
-  maximize capability match, balance depletion across locations.
-- Verify that allocation handles partial fulfillment (allocate what is available,
-  backorder the rest).
+Map the full pipeline from incident need to resource arrival:
+- Authorization levels: who can request, who approves, auto-approval thresholds.
+- Request prioritization when multiple incidents compete for resources.
+- Request specificity: type, quantity, capability, delivery window, location.
 
-DEPLOYMENT TRACKING:
-- Check for real-time deployment status (requested, approved, in transit,
-  on scene, returned).
-- Verify that GPS or checkpoint-based tracking follows resources in transit.
-- Look for estimated time of arrival calculations.
-- Examine exception handling for delayed, rerouted, or damaged deployments.
+Step 3.2 -- Allocation Algorithm
 
-DEMOBILIZATION:
-- Check for return and restocking workflows after incident resolution.
-- Verify that returned resources are inspected and status-updated.
-- Look for automated inventory replenishment after significant deployments.
-- Examine cost reconciliation for deployed resources.
+Read the resource allocation logic in full. Document:
+- Allocation factors: proximity to incident, resource suitability, quantity available, transport time, cost, agency ownership.
+- Optimization objectives: minimize response time, minimize cost, maximize capability match, balance depletion across locations.
+- Partial fulfillment handling: allocate what is available, backorder the rest.
+
+Step 3.3 -- Deployment Tracking
+
+Check real-time visibility:
+- Deployment status tracking: requested, approved, in transit, on scene, returned.
+- GPS or checkpoint-based tracking of resources in transit.
+- Estimated time of arrival calculations.
+- Exception handling for delayed, rerouted, or damaged deployments.
+
+Step 3.4 -- Demobilization
+
+Check return workflows:
+- Return and restocking workflows after incident resolution.
+- Returned resources inspected and status-updated.
+- Automated inventory replenishment after significant deployments.
+- Cost reconciliation for deployed resources.
 
 ============================================================
 PHASE 4: LOGISTICS COORDINATION ANALYSIS
 ============================================================
 
-TRANSPORT MANAGEMENT:
-- Examine transport request and scheduling capabilities.
-- Check for route optimization considering road conditions, closures, and hazards.
-- Verify that vehicle capacity and loading constraints are respected.
-- Look for multi-modal transport support (ground, air, water).
+Step 4.1 -- Transport Management
 
-STAGING AREA MANAGEMENT:
-- Check for staging area definition and activation workflows.
-- Examine capacity tracking at staging areas (space, power, water, security).
-- Verify that resources at staging areas are visible in the inventory system.
-- Look for staging area selection algorithms based on incident location and type.
+Examine transport capabilities:
+- Transport request and scheduling.
+- Route optimization considering road conditions, closures, and hazards.
+- Vehicle capacity and loading constraints respected.
+- Multi-modal transport support: ground, air, water.
 
-SUPPLY CHAIN COORDINATION:
-- Check for vendor and supplier management capabilities.
-- Examine emergency procurement workflows (expedited purchasing, emergency contracts).
-- Verify that supply chain disruption alerts exist (supplier unable to fulfill).
-- Look for alternative supplier routing when primary sources are unavailable.
+Step 4.2 -- Staging Area Management
 
-LOGISTICS COMMUNICATION:
-- Examine communication channels between logistics coordinators, transport operators,
-  and field personnel.
-- Check for automated status update notifications as resources move through the pipeline.
-- Verify that logistics bottlenecks trigger alerts to coordinators.
-- Look for dashboards showing pipeline status (ordered, in transit, staged, deployed).
+Check staging operations:
+- Staging area definition and activation workflows.
+- Capacity tracking at staging areas: space, power, water, security.
+- Resources at staging areas visible in the inventory system.
+- Staging area selection algorithms based on incident location and type.
+
+Step 4.3 -- Supply Chain Coordination
+
+Check procurement resilience:
+- Vendor and supplier management capabilities.
+- Emergency procurement workflows: expedited purchasing, emergency contracts.
+- Supply chain disruption alerts: supplier unable to fulfill.
+- Alternative supplier routing when primary sources are unavailable.
+
+Step 4.4 -- Logistics Communication
+
+Examine communication effectiveness:
+- Communication channels between logistics coordinators, transport operators, and field personnel.
+- Automated status update notifications as resources move through the pipeline.
+- Logistics bottleneck alerts to coordinators.
+- Dashboards showing pipeline status: ordered, in transit, staged, deployed.
 
 ============================================================
 PHASE 5: INTER-AGENCY RESOURCE SHARING
 ============================================================
 
-SHARING ARCHITECTURE:
-- Locate resource sharing configurations and partner agency definitions.
-- Document sharing agreements: what resources are shareable, under what conditions,
-  cost-sharing arrangements, liability terms.
-- Check for automated resource visibility across agency boundaries.
-- Verify that shared resources maintain clear ownership and return obligations.
+Step 5.1 -- Sharing Architecture
 
-REQUEST AND FULFILLMENT:
-- Examine the inter-agency request workflow (request, review, approve, deploy, return).
-- Check for credential and authorization verification for cross-agency requests.
-- Verify that fulfillment tracking spans agency boundaries.
-- Look for escalation paths when partner agencies cannot fulfill requests.
+Locate resource sharing configurations and partner agency definitions:
+- Sharing agreements: what resources are shareable, conditions, cost-sharing, liability.
+- Automated resource visibility across agency boundaries.
+- Shared resources maintain clear ownership and return obligations.
 
-ACCOUNTABILITY:
-- Check for usage tracking on shared resources (hours used, condition on return).
-- Examine cost allocation and reimbursement workflows.
-- Verify that audit trails span the full sharing lifecycle.
-- Look for after-event reconciliation processes.
+Step 5.2 -- Request and Fulfillment
 
-INTEROPERABILITY:
-- Examine data exchange formats for resource sharing (NIMS, EDXL, custom APIs).
-- Check for resource type translation between agency taxonomies.
-- Verify that communication protocols work across agency radio and messaging systems.
-- Look for joint training or exercise support capabilities.
+Examine cross-agency workflows:
+- Inter-agency request workflow: request, review, approve, deploy, return.
+- Credential and authorization verification for cross-agency requests.
+- Fulfillment tracking spanning agency boundaries.
+- Escalation paths when partner agencies cannot fulfill requests.
+
+Step 5.3 -- Accountability
+
+Check audit and cost tracking:
+- Usage tracking on shared resources: hours used, condition on return.
+- Cost allocation and reimbursement workflows.
+- Audit trails spanning the full sharing lifecycle.
+- After-event reconciliation processes.
+
+Step 5.4 -- Interoperability
+
+Examine data exchange standards:
+- Data exchange formats: NIMS, EDXL, custom APIs.
+- Resource type translation between agency taxonomies.
+- Communication protocols across agency radio and messaging systems.
+- Joint training or exercise support capabilities.
 
 ============================================================
 PHASE 6: REAL-TIME CAPACITY DASHBOARDS
 ============================================================
 
-DASHBOARD ARCHITECTURE:
-- Identify all dashboard and reporting components.
-- Document data refresh mechanisms: real-time streaming, polling interval, manual refresh.
-- Check for role-based dashboard views (incident commander, logistics chief, EOC director).
-- Verify that dashboards work on both desktop and mobile/tablet for field use.
+Step 6.1 -- Dashboard Architecture
 
-KEY METRICS DISPLAYED:
-- Check for: total available inventory by category, deployment utilization rate,
-  response time from request to delivery, burn rate of consumable supplies,
-  geographic distribution of resources, unmet demand queue.
-- Verify that dashboards show both current state and trend indicators.
-- Look for alert thresholds that trigger visual indicators when metrics cross boundaries.
+Identify all dashboard and reporting components:
+- Data refresh mechanisms: real-time streaming, polling interval, manual refresh.
+- Role-based dashboard views: incident commander, logistics chief, EOC director.
+- Desktop and mobile/tablet support for field use.
 
-MAP-BASED VISUALIZATION:
-- Check for GIS-based resource mapping showing locations of warehouses, staging areas,
-  deployed resources, and active incidents.
-- Verify that map layers can be toggled (resource types, transport routes, hazard zones).
-- Look for distance and travel time calculations from resource to incident.
-- Check for coverage gap visualization.
+Step 6.2 -- Key Metrics Displayed
 
-HISTORICAL AND PREDICTIVE:
-- Check for historical dashboards showing resource usage patterns over time.
-- Look for predictive burn rate calculations (at current usage, when will supplies run out).
-- Examine scenario modeling capabilities (what-if analysis for large-scale events).
-- Verify that dashboard data can be exported for after-action reporting.
+Verify essential metrics are present:
+- Total available inventory by category.
+- Deployment utilization rate.
+- Response time from request to delivery.
+- Burn rate of consumable supplies.
+- Geographic distribution of resources.
+- Unmet demand queue.
+- Both current state and trend indicators.
+- Alert thresholds triggering visual indicators.
+
+Step 6.3 -- Map-Based Visualization
+
+Check GIS capabilities:
+- GIS-based resource mapping: warehouses, staging areas, deployed resources, active incidents.
+- Map layers toggleable: resource types, transport routes, hazard zones.
+- Distance and travel time calculations from resource to incident.
+- Coverage gap visualization.
+
+Step 6.4 -- Historical and Predictive
+
+Check forward-looking capabilities:
+- Historical dashboards showing resource usage patterns over time.
+- Predictive burn rate calculations: at current usage, when will supplies run out.
+- Scenario modeling capabilities: what-if analysis for large-scale events.
+- Dashboard data exportable for after-action reporting.
 
 ============================================================
 OUTPUT
@@ -264,10 +301,10 @@ OUTPUT
 DO NOT:
 - Recommend specific vendor products or proprietary resource management platforms.
 - Make assumptions about resource quantities without evidence in the codebase.
-- Evaluate field operations or response tactics (this skill covers system/software analysis only).
+- Evaluate field operations or response tactics -- this skill covers system/software analysis only.
 - Ignore inter-agency sharing even if the system appears single-agency.
-- Skip dashboard analysis as situational awareness is critical during emergencies.
-- Assess the adequacy of actual resource stockpiles (focus on system capabilities).
+- Skip dashboard analysis -- situational awareness is critical during emergencies.
+- Assess the adequacy of actual resource stockpiles -- focus on system capabilities.
 
 NEXT STEPS:
 - "Run `/crisis-triage` to analyze the dispatch system that triggers resource deployment."

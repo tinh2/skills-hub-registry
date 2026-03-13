@@ -1,6 +1,6 @@
 ---
 name: eviction-risk
-description: Analyzes tenant management systems for eviction risk prediction including payment pattern analysis, early warning indicators, intervention trigger points, legal process tracking, mediation workflow, emergency assistance referral integration, and outcome tracking.
+description: Audit a tenant management system for eviction prevention and risk prediction. Evaluates payment pattern analysis and arrears tracking, early warning indicators (financial, behavioral, external), intervention trigger automation, pre-filing mediation workflows, emergency rental assistance integration (ERAP, LIHEAP), legal process tracking with jurisdiction-specific compliance (VAWA, SCRA), and outcome measurement. Use when building or reviewing property management platforms, affordable housing systems, or tenant services applications.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -14,123 +14,273 @@ intervention workflows, and outcome tracking, then produce a comprehensive asses
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, focus on specific areas (e.g., "payment patterns",
+If arguments are provided, focus on that area (e.g., "payment patterns",
 "early warning model", "legal tracking"). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: SYSTEM DISCOVERY
 ============================================================
 
-Step 1.1 -- Read project configuration to identify tech stack: backend, database,
-ML/analytics libraries, reporting/visualization, payment processing, legal case
-management integration, referral service APIs, communication tools (SMS, email).
+Step 1.1 -- Technology Stack
 
-Step 1.2 -- Scan for tenant management capabilities: account/ledger management,
-rent collection, lease management, maintenance requests, compliance, communication.
+Read project configuration to identify:
+- Backend framework and database.
+- ML/analytics libraries.
+- Reporting/visualization tools.
+- Payment processing integrations.
+- Legal case management integration.
+- Referral service APIs.
+- Communication tools: SMS, email.
 
-Step 1.3 -- Map eviction-relevant data model: payment history, late payment
-records, notice/legal records, household composition, income data, lease
-violations, maintenance requests, communication logs, referral/assistance records.
+Step 1.2 -- Tenant Management Capabilities
+
+Scan for core features:
+- Account/ledger management.
+- Rent collection and payment tracking.
+- Lease management.
+- Maintenance requests.
+- Compliance tracking.
+- Communication logs.
+
+Step 1.3 -- Eviction-Relevant Data Model
+
+Map all data structures related to eviction risk:
+- Payment history: dates, amounts, methods, late fees.
+- Notice/legal records.
+- Household composition.
+- Income data and subsidy information.
+- Lease violations.
+- Maintenance requests.
+- Communication logs.
+- Referral/assistance records.
 
 ============================================================
 PHASE 2: PAYMENT PATTERN ANALYSIS
 ============================================================
 
-Step 2.1 -- Evaluate payment tracking: date, amount, method recording, partial
-payments, late fees, payment source identification (tenant, subsidy, third party),
-payment plans, NSF tracking, credits and adjustments.
+Step 2.1 -- Payment Tracking
 
-Step 2.2 -- Assess pattern detection: on-time rate, amount trends (declining),
-timing shifts (increasingly late), seasonal patterns, partial payment frequency,
-third-party payment changes, arrears accumulation rate.
+Evaluate payment data quality:
+- Date, amount, method recording.
+- Partial payments handled.
+- Late fees tracked.
+- Payment source identification: tenant, subsidy, third party.
+- Payment plans tracked.
+- NSF tracking.
+- Credits and adjustments.
 
-Step 2.3 -- If predictive models exist, evaluate: features, historical accuracy,
-lead time, model type, calibration, performance by demographic and property type,
-update frequency.
+Step 2.2 -- Pattern Detection
+
+Assess what patterns the system can detect:
+- On-time payment rate trending.
+- Amount trends: declining payment amounts.
+- Timing shifts: increasingly late payments.
+- Seasonal patterns.
+- Partial payment frequency.
+- Third-party payment changes: subsidy disruptions.
+- Arrears accumulation rate.
+
+Step 2.3 -- Predictive Models
+
+If predictive models exist, evaluate:
+- Feature set and feature importance.
+- Historical accuracy and lead time.
+- Model type and calibration.
+- Performance by demographic group and property type.
+- Update frequency and retraining schedule.
 
 ============================================================
 PHASE 3: EARLY WARNING SYSTEM
 ============================================================
 
-Step 3.1 -- Check financial indicators: first late payment after on-time period,
-consecutive late payments, arrears exceeding one month, partial payments becoming
-norm, subsidy errors, income decrease at recertification, employment changes.
+Step 3.1 -- Financial Indicators
 
-Step 3.2 -- Check behavioral indicators: maintenance request cessation (tenant
-disengagement), communication non-response, lease violation increases, household
-composition changes, utility disconnection notices.
+Check detection of:
+- First late payment after on-time period.
+- Consecutive late payments.
+- Arrears exceeding one month's rent.
+- Partial payments becoming the norm.
+- Subsidy errors or disruptions.
+- Income decrease at recertification.
+- Employment changes.
 
-Step 3.3 -- Evaluate external risk factors: local unemployment trends, seasonal
-employment, emergency events, utility rate increases, benefits program changes.
+Step 3.2 -- Behavioral Indicators
 
-Step 3.4 -- If composite risk score exists: components and weights, thresholds
-for intervention, update frequency, visualization for staff, accuracy validation,
-demographic bias testing, explainability.
+Check detection of non-financial warning signs:
+- Maintenance request cessation: tenant disengagement signal.
+- Communication non-response.
+- Lease violation increases.
+- Household composition changes.
+- Utility disconnection notices.
+
+Step 3.3 -- External Risk Factors
+
+Evaluate contextual awareness:
+- Local unemployment trends.
+- Seasonal employment patterns.
+- Emergency events: natural disasters, pandemics.
+- Utility rate increases.
+- Benefits program changes.
+
+Step 3.4 -- Composite Risk Score
+
+If a risk score exists, evaluate:
+- Components and weights.
+- Thresholds for triggering intervention.
+- Update frequency.
+- Visualization for staff.
+- Accuracy validation methodology.
+- Demographic bias testing -- this is critical.
+- Explainability: can staff understand why a tenant is flagged.
 
 ============================================================
 PHASE 4: INTERVENTION AND LEGAL PROCESS
 ============================================================
 
-Step 4.1 -- Check automated triggers: conditions (days late, amount owed, risk
-score), actions (notification, case assignment, referral), escalation levels,
-timing, suppression to avoid over-notification, multi-factor triggers.
+Step 4.1 -- Automated Triggers
 
-Step 4.2 -- Evaluate intervention menu: payment reminders, case manager outreach,
-payment plan negotiation, financial counseling referral, emergency rental
-assistance, utility assistance, employment services, legal aid, mediation,
-lease modification.
+Check trigger configuration:
+- Conditions: days late, amount owed, risk score threshold.
+- Actions: notification, case assignment, referral.
+- Escalation levels.
+- Timing and suppression to avoid over-notification.
+- Multi-factor triggers: combining indicators.
 
-Step 4.3 -- Check intervention tracking: which intervention, when, who performed
-it, tenant response, outcome, follow-up scheduling, effectiveness measurement.
+Step 4.2 -- Intervention Menu
 
-Step 4.4 -- Check pre-eviction process: notice generation (pay-or-quit, cure-or-quit),
-delivery method tracking, response period tracking, cure compliance, intervention
-verification before filing.
+Evaluate available interventions:
+- Payment reminders and case manager outreach.
+- Payment plan negotiation tools.
+- Financial counseling referral.
+- Emergency rental assistance.
+- Utility assistance.
+- Employment services.
+- Legal aid referral.
+- Mediation.
+- Lease modification.
 
-Step 4.5 -- Evaluate court process: filing preparation, court date scheduling,
-service tracking, hearing outcome, judgment entry, stay/continuance tracking,
-writ of possession timeline.
+Step 4.3 -- Intervention Tracking
 
-Step 4.6 -- Verify legal compliance: state/local moratorium awareness, just cause
-requirements, source of income protections, domestic violence protections (VAWA),
-SCRA military protections, retaliatory eviction safeguards, proper notice periods.
+Check closed-loop tracking:
+- Which intervention, when, who performed it.
+- Tenant response recorded.
+- Outcome documented.
+- Follow-up scheduling.
+- Effectiveness measurement.
+
+Step 4.4 -- Pre-Eviction Process
+
+Check legal notice workflows:
+- Notice generation: pay-or-quit, cure-or-quit.
+- Delivery method tracking.
+- Response period tracking.
+- Cure compliance verification.
+- Intervention verification before filing.
+
+Step 4.5 -- Court Process
+
+Evaluate legal tracking:
+- Filing preparation.
+- Court date scheduling.
+- Service tracking.
+- Hearing outcome recording.
+- Judgment entry.
+- Stay/continuance tracking.
+- Writ of possession timeline.
+
+Step 4.6 -- Legal Compliance
+
+Verify jurisdiction-specific compliance:
+- State/local moratorium awareness.
+- Just cause requirements.
+- Source of income protections.
+- Domestic violence protections (VAWA).
+- SCRA military protections.
+- Retaliatory eviction safeguards.
+- Proper notice periods by jurisdiction.
 
 ============================================================
 PHASE 5: MEDIATION AND ASSISTANCE
 ============================================================
 
-Step 5.1 -- Check pre-filing mediation: diversion offer, program referral,
-mediator scheduling, virtual support, agreement documentation, compliance
-monitoring, outcome recording.
+Step 5.1 -- Pre-Filing Mediation
 
-Step 5.2 -- Evaluate assistance integration: ERAP, local emergency funds,
-LIHEAP utility assistance, 211 resource directory. Check application facilitation:
-pre-populated data, status tracking, funding disbursement, direct landlord
-payment, eligibility pre-screening.
+Check diversion programs:
+- Diversion offer workflow.
+- Program referral process.
+- Mediator scheduling.
+- Virtual mediation support.
+- Agreement documentation.
+- Compliance monitoring.
+- Outcome recording.
 
-Step 5.3 -- Check referral quality: active (warm handoff) vs. passive (phone
-number only), tracking, cross-organization coordination, consent management,
-outcome tracking, gap identification.
+Step 5.2 -- Assistance Integration
+
+Evaluate assistance program connections:
+- ERAP (Emergency Rental Assistance Program).
+- Local emergency funds.
+- LIHEAP utility assistance.
+- 211 resource directory.
+- Application facilitation: pre-populated data, status tracking, funding disbursement.
+- Direct landlord payment support.
+- Eligibility pre-screening.
+
+Step 5.3 -- Referral Quality
+
+Check referral effectiveness:
+- Active (warm handoff) vs. passive (phone number only).
+- Referral tracking end-to-end.
+- Cross-organization coordination.
+- Consent management.
+- Outcome tracking.
+- Gap identification: services needed but unavailable.
 
 ============================================================
 PHASE 6: OUTCOME TRACKING
 ============================================================
 
-Step 6.1 -- Check eviction outcomes tracked: resolved before filing (diversion),
-resolved before judgment, judgment, physical eviction, voluntary move-out, total
-time to resolution, total process cost (legal, admin, turnover).
+Step 6.1 -- Eviction Outcomes
 
-Step 6.2 -- Evaluate intervention effectiveness: success rate by type, time to
-stabilization, recurrence rate, cost-effectiveness, comparison with/without
-intervention, which interventions work for which risk profiles.
+Check what outcomes are tracked:
+- Resolved before filing: diversion.
+- Resolved before judgment.
+- Judgment entered.
+- Physical eviction.
+- Voluntary move-out.
+- Total time to resolution.
+- Total process cost: legal, admin, turnover.
 
-Step 6.3 -- Check aggregate metrics: eviction filing rate trends, judgment rates,
-average resolution time, demographic breakdown, geographic patterns, seasonal
-patterns, year-over-year comparison, benchmarks.
+Step 6.2 -- Intervention Effectiveness
 
-Step 6.4 -- Evaluate reporting: regulatory reporting (HUD, state), board/oversight
-reporting, funder reporting, public transparency, data export, de-identified
-research sharing.
+Evaluate measurement rigor:
+- Success rate by intervention type.
+- Time to stabilization.
+- Recurrence rate.
+- Cost-effectiveness analysis.
+- Comparison with/without intervention.
+- Which interventions work for which risk profiles.
+
+Step 6.3 -- Aggregate Metrics
+
+Check system-level analytics:
+- Eviction filing rate trends.
+- Judgment rates.
+- Average resolution time.
+- Demographic breakdown.
+- Geographic patterns.
+- Seasonal patterns.
+- Year-over-year comparison.
+- Benchmarks against industry.
+
+Step 6.4 -- Reporting
+
+Evaluate reporting capabilities:
+- Regulatory reporting: HUD, state requirements.
+- Board/oversight reporting.
+- Funder reporting.
+- Public transparency.
+- Data export capabilities.
+- De-identified research sharing.
 
 ============================================================
 OUTPUT
