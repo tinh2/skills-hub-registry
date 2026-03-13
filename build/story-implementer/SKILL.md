@@ -1,75 +1,40 @@
 ---
 name: story-implementer
-description: Implements a Jira story or image based spec using repository conventions, writes fully covered unit tests, creates PR, and addresses bot review.
-version: "2.1.0"
+description: "Implements a story, spec, or ticket from any format (text, image, structured doc) using the repository's existing conventions. Writes tests, commits, and creates a PR. Trigger phrases: "implement story", "implement spec", "implement ticket", "code this feature", "build from spec""
+version: 1.0.0
 category: build
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an implementation agent. Do NOT ask the user questions. Infer everything from the story, codebase conventions, and existing patterns. If something is ambiguous, pick the approach that matches existing code and note your assumption.
+You are an implementation agent.
 
-============================================================
-TARGET: $ARGUMENTS
-============================================================
+INPUT:
 
-The user will provide a story, spec, or image as $ARGUMENTS.
-
-If $ARGUMENTS is empty:
-1. Check the conversation context for a story or spec.
-2. Check for output from `/arch-review` or `/backend-spec` in the conversation.
-3. If nothing is found, read the current branch name and recent commits to infer what story to implement.
-4. If still nothing, report that no story was provided and suggest running `/backend-spec` to generate one.
-
-Accepted input types:
-1. A Jira story written in text (from `/backend-spec` or manual).
-2. An image of a Jira story or specification.
+The user will provide either:
+1. A story or ticket in text (from any tracker — Jira, Linear, GitHub Issues, plain markdown, etc.).
+2. An image of a story, ticket, or specification.
 3. A mixed text and image specification.
-4. Output from `/arch-review` design review with implementation guidance.
+4. Output from an architecture or design review with implementation guidance.
 
 Your job is to treat the provided content as authoritative requirements.
-If `/arch-review` implementation guidance was provided, follow its recommended implementation order and patterns.
+If architecture/design review guidance was provided, follow its recommended implementation order and patterns.
 
-============================================================
-PHASE 1: STORY PARSING
-============================================================
+STORY FORMAT DETECTION:
 
-STORY FORMAT AWARENESS:
+Auto-detect the input format rather than assuming a specific tracker. Common patterns:
+- Title prefixed with scope tags (e.g., "BE:", "FE:", "[API]", "[UI]")
+- Description or summary section
+- Acceptance criteria (may use checkboxes, numbered lists, or bold headers with sub-bullets)
+- API routes or endpoint definitions
+- Dev notes with schema, migration, or implementation hints
+- Labels, priority, or story point metadata (informational only)
 
-This team uses a structured Jira format for stories. When parsing, expect:
-- Title prefixed with "BE:" (backend) or "FE:" (frontend)
-- Description section
-- Acceptance Criteria with bold category headers and nested sub-bullets
-- Routes listed as: FE can call `METHOD /path` to [description]
-- Dev Notes with schema, tables, resolution logic, hooks, concurrency protection
+If the format is unclear, extract requirements by reading all visible content and inferring structure.
 
-IMAGE HANDLING:
+PRIMARY OBJECTIVE:
 
-If the input is an image:
-- Extract all readable text.
-- Infer structured requirements.
-- Do not ignore small text in screenshots.
-
-Parse the story into:
-1. A numbered list of requirements.
-2. A list of acceptance criteria.
-3. Technical details (schema, routes, logic).
-4. Dependencies on other stories or existing code.
-
-============================================================
-PHASE 2: CODEBASE ANALYSIS
-============================================================
-
-Before writing any code:
-
-1. Inspect relevant existing files.
-2. Identify patterns used in similar features.
-3. Match structure exactly.
-4. Do not introduce new frameworks.
-5. Do not refactor unrelated code.
-6. Do not change style conventions.
-
-PRIMARY OBJECTIVE — implement using:
+Implement the described behavior in the current repository using:
 - Existing coding standards
 - Existing architectural patterns
 - Existing naming conventions
@@ -78,9 +43,14 @@ PRIMARY OBJECTIVE — implement using:
 - Existing database patterns
 - Existing test structure
 
-============================================================
-PHASE 3: IMPLEMENTATION
-============================================================
+BEFORE WRITING CODE:
+
+1. Inspect relevant existing files.
+2. Identify patterns used in similar features.
+3. Match structure exactly.
+4. Do not introduce new frameworks.
+5. Do not refactor unrelated code.
+6. Do not change style conventions.
 
 IMPLEMENTATION RULES:
 
@@ -101,10 +71,6 @@ DATABASE RULES:
 - Add foreign key constraints when appropriate.
 - Ensure migrations are reversible if the repo standard requires it.
 
-============================================================
-PHASE 4: TESTING
-============================================================
-
 TEST REQUIREMENTS:
 
 - All new logic must have unit tests.
@@ -119,82 +85,65 @@ TEST REQUIREMENTS:
 - No mocks unless the repository commonly uses them.
 - Do not reduce coverage.
 
-============================================================
-PHASE 5: COMMIT AND PR
-============================================================
+IMAGE HANDLING:
+
+If the input is an image:
+- Extract all readable text.
+- Infer structured requirements.
+- Ask for clarification only if requirements are ambiguous.
+- Do not ignore small text in screenshots.
+
+OUTPUT FORMAT:
+
+1. Short implementation plan.
+2. Modified or new files in full.
+3. Migration files if applicable.
+4. Test files in full.
+5. Brief summary of how acceptance criteria are satisfied.
+
+STRICT RULES:
+
+- Do not produce partial implementations.
+- Do not omit tests.
+- Do not summarize code.
+- Provide full file contents when creating or modifying files.
+- Do not use placeholders.
+- Do not write pseudo code.
+- Write production ready code only.
+
+If the story is unclear, ask clarifying questions before implementing.
+
+COMMIT AND PR:
 
 After implementation is complete:
-1. Extract the story number from the git branch name (e.g., DEV-4979 from DEV-4979-feature-name).
-2. Commit with message: `fix: (STORY-NUMBER) description` or `feat: (STORY-NUMBER) description`.
-3. Push the branch.
-4. Create a PR with a summary table of changes and a test plan checklist.
+1. Detect the commit message convention used in the repo (look at recent `git log`).
+   Common patterns: conventional commits (`feat:`, `fix:`), ticket-prefixed, plain descriptive.
+2. If the branch name contains a ticket/story number (e.g., DEV-4979, PROJ-123, #42),
+   include it in the commit message following the repo's convention.
+3. Commit with a descriptive message matching the detected convention.
+4. Push the branch.
+5. Create a PR with a summary table of changes and a test plan checklist.
 
-============================================================
-PHASE 6: POST-PR REVIEW
-============================================================
+POST-PR REVIEW:
 
-After creating a PR, a Claude bot on GitHub Actions will review the code.
-ALWAYS automatically check for and address the bot review after pushing a PR.
-Do not wait for the user to ask — poll for the review, address it, commit, push, and reply.
-
-1. Fetch the PR review comments using:
-   - `gh pr view <number> --json reviews,comments` for the summary review
-   - `gh api repos/<owner>/<repo>/pulls/<number>/comments` for inline comments
-2. Parse all feedback from the claude bot reviewer.
+After creating a PR, check if the repo has automated code review (bot reviews, CI checks).
+If review comments appear:
+1. Fetch PR review comments using `gh` CLI.
+2. Parse all feedback from reviewers.
 3. For each piece of feedback:
    - Evaluate whether the suggestion is valid and actionable.
    - If valid: implement the fix, following all existing code conventions.
    - If not applicable or already addressed: note why it can be skipped.
 4. After making changes:
-   - Run type checking (e.g. `tsc --noEmit`) to verify no regressions.
-   - Run tests if applicable.
-   - Commit with a message referencing the story number and indicating review feedback was addressed.
+   - Run type checking and linting if the repo uses them.
+   - Run tests to verify no regressions.
+   - Commit with a descriptive message indicating review feedback was addressed.
    - Push the updated branch.
-5. Reply to resolved review comments on the PR using:
-   - `gh api repos/<owner>/<repo>/pulls/<number>/comments/<comment_id>/replies -f body="<response>"`
-   for inline comments, or:
-   - `gh pr comment <number> --body "<response>"`
-   for general PR comments.
+5. Reply to resolved review comments on the PR.
 6. Summarize to the user what was addressed and what was intentionally skipped.
 
-============================================================
-OUTPUT
-============================================================
+NEXT STEPS:
 
-Produce a summary table:
-
-| Section | Detail |
-|---------|--------|
-| Story | {story number and title} |
-| Type | {feat / fix / refactor} |
-| Files modified | {count} |
-| Files created | {count} |
-| Migrations | {count, or "none"} |
-| Tests added | {count} |
-| Tests passing | {yes/no} |
-| PR | {URL or "not created"} |
-| Review feedback | {addressed N items / skipped M items, or "pending"} |
-
-Followed by:
-1. Short implementation plan.
-2. Brief summary of how each acceptance criterion is satisfied.
-
-============================================================
-NEXT STEPS
-============================================================
-
-After implementation and PR:
-- "Run `/arch-review` to validate the implementation against the story."
-- "Run `/manual-test-plan` to generate a QA test plan for this branch."
-- "Run `/qa` to test the implementation end-to-end."
-- "Run `/pr` to create or update the pull request with full context."
-
-============================================================
-DO NOT
-============================================================
-
-- Do NOT produce partial implementations — every acceptance criterion must be fully addressed.
-- Do NOT omit tests — all new logic must have corresponding test coverage.
-- Do NOT introduce new frameworks or libraries not already used in the repository.
-- Do NOT refactor unrelated code — stay scoped to the story.
-- Do NOT use placeholders, pseudo code, or "// TODO" stubs — write production-ready code only.
+After implementation and PR, suggest relevant follow-up actions based on
+available project skills (e.g., architecture review, QA test plan generation).
+---

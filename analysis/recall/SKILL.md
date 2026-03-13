@@ -1,7 +1,7 @@
 ---
 name: recall
-description: Reconstructs the development cycle from git history, distills sequential/parallel patterns, and produces actionable insights for improving future iterations.
-version: "1.0.0"
+description: "Reconstructs the development cycle from git history, distills sequential/parallel patterns, and produces actionable insights for improving future iterations. Triggers: recall, retrospective, development analysis, what happened, dev cycle analysis."
+version: 1.0.0
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -49,14 +49,14 @@ SKILL USAGE DETECTION:
 - Parse commit messages for skill signatures:
   - `/build` pipeline: Look for phase markers ("Phase 1:", "PHASE 2:", "scaffold", "story backlog")
   - `/iterate`: "iteration N" pattern in commit messages (feat: iteration 1, iteration 2, etc.)
-  - `/ship`: "initial implementation", "harden", "domain analysis", "final cleanup" sequence
+  - `/iterate --fast`: "initial implementation", "harden", "domain analysis", "final cleanup" sequence
   - `/iterate-review`: fix commits referencing review findings, domain analysis
   - `/analyze`: "domain analysis", "consistency", "self-healing" references
   - `/arch-review`: "design review", "implementation review" references
   - `/qa`: "qa fixes", "endpoint fixes", "screen fixes" references
   - `/ux`: "ux fixes", "accessibility", "design system", "a11y" references
   - `/story-implementer`: story-numbered commits (STORY-XXX, DEV-XXXX)
-  - `/backend-spec`: spec/story file creation
+  - `/spec`: spec/story file creation
   - `/mvp`: analysis document creation
 - Map each commit to the most likely skill that produced it.
 - If no skill signature is detected, classify as "manual" work.
@@ -64,13 +64,13 @@ SKILL USAGE DETECTION:
 SEQUENCE ANALYSIS:
 - Identify the order in which skills were invoked.
 - Map the actual pipeline execution vs the canonical pipeline order:
-  Canonical: /mvp → /backend-spec → /arch-review → /story-implementer → /ux → /qa → /analyze
+  Canonical: /mvp -> /spec -> /arch-review -> /story-implementer -> /ux -> /qa -> /analyze
 - Note any deviations: skipped steps, reordered steps, repeated steps.
 - Identify which steps were done in sequence (one after another on same branch).
 - Identify which steps could have been parallelized (independent features on separate branches).
 
 ITERATION ANALYSIS:
-- For each iterative skill (/iterate, /ship, /iterate-review):
+- For each iterative skill (/iterate, /iterate-review):
   - How many iterations were actually run?
   - What triggered extra iterations? (test failures, domain analysis issues, review feedback)
   - How much rework happened per iteration? (lines changed in fix commits vs initial commits)
@@ -89,6 +89,40 @@ TIMING ANALYSIS:
   - Burst patterns (lots of commits in short periods, then nothing)
 - Estimate total active development time vs total wall-clock time.
 - Identify the longest single stretch of automated work.
+
+============================================================
+PHASE 2.5: CI/CD AND PR ANALYSIS
+============================================================
+
+If `.github/workflows/` exists, analyze CI/CD patterns:
+
+CI/CD PIPELINE ANALYSIS:
+1. Read all workflow files in `.github/workflows/` to understand the CI/CD setup.
+2. Use `gh run list --limit 100` to pull recent workflow run history (if `gh` is available).
+3. Identify:
+   - Which workflows exist and what they do (build, test, lint, deploy, etc.).
+   - Failure rate: how often do CI runs fail vs pass?
+   - Flaky tests: runs that fail then pass on retry without code changes.
+   - Average time-to-green: how long from push to passing CI.
+   - Which workflows are bottlenecks (longest run times).
+   - Whether CI catches real issues or mostly false positives.
+
+PR REVIEW CYCLE ANALYSIS:
+1. Use `gh pr list --state all --limit 50` and `gh pr view <number>` to examine PR history.
+2. For each PR, analyze:
+   - Time from PR open to merge (review turnaround).
+   - Number of review rounds (requested changes, re-reviews).
+   - Size of PRs (files changed, lines changed) -- flag oversized PRs.
+   - Whether PRs have descriptions and linked issues.
+   - Review comment density: how many comments per PR.
+3. Identify patterns:
+   - PRs that were merged without review.
+   - PRs with excessive back-and-forth (3+ review rounds).
+   - PRs that sat open for extended periods.
+   - Correlation between PR size and review time/quality.
+
+If `gh` CLI is not available or not authenticated, note this in the output and skip
+the API-dependent analysis. Still analyze the workflow YAML files for pipeline structure.
 
 ============================================================
 PHASE 3: DEPENDENCY MAPPING
@@ -154,7 +188,7 @@ OUTPUT
 ### Scope
 - Repository: [name]
 - Branch(es): [branches analyzed]
-- Period: [first commit date] → [last commit date]
+- Period: [first commit date] -> [last commit date]
 - Total commits: N
 - Total files changed: N
 - Lines added/removed: +N / -N
@@ -165,8 +199,8 @@ A condensed chronological view of the development cycle, showing major phases
 and milestones with timestamps. Group rapid-fire commits into phases:
 
 ```
-[timestamp] Phase/Skill — what happened (N commits, ±N lines)
-[timestamp] Phase/Skill — what happened (N commits, ±N lines)
+[timestamp] Phase/Skill -- what happened (N commits, +/-N lines)
+[timestamp] Phase/Skill -- what happened (N commits, +/-N lines)
 ...
 ```
 
@@ -175,11 +209,27 @@ and milestones with timestamps. Group rapid-fire commits into phases:
 Show the actual skill execution sequence vs the canonical pipeline:
 
 ```
-Canonical:  /mvp → /backend-spec → /arch-review → /story-implementer → /ux → /qa → /analyze
+Canonical:  /mvp -> /spec -> /arch-review -> /story-implementer -> /ux -> /qa -> /analyze
 Actual:     [actual sequence with arrows, loops, and skips marked]
 ```
 
-Mark: ✓ executed as expected, ⟳ repeated/looped back, ⊘ skipped, ⇅ reordered
+Mark each step: [ok] executed as expected, [loop] repeated/looped back, [skip] skipped, [reorder] reordered
+
+### CI/CD Summary (if applicable)
+
+| Workflow | Runs Analyzed | Pass Rate | Avg Duration | Flaky? |
+|----------|--------------|-----------|-------------|--------|
+
+### PR Review Summary (if applicable)
+
+| Metric | Value |
+|--------|-------|
+| Total PRs analyzed | N |
+| Avg time to merge | Xh / Xd |
+| Avg review rounds | N |
+| Median PR size (lines) | N |
+| PRs merged without review | N |
+| PRs with 3+ review rounds | N |
 
 ### Sequential vs Parallel Analysis
 
@@ -211,23 +261,23 @@ Files or areas that were modified most frequently due to fixes:
 ### Key Insights
 
 **What worked:**
-1. [pattern that produced good results — be specific]
+1. [pattern that produced good results -- be specific]
 2. ...
 
 **What caused unnecessary rework:**
-1. [specific pattern → specific consequence → specific recommendation]
+1. [specific pattern -> specific consequence -> specific recommendation]
 2. ...
 
 **Bottlenecks identified:**
-1. [what slowed things down — be specific about which phase/skill/area]
+1. [what slowed things down -- be specific about which phase/skill/area]
 2. ...
 
 ### Recommendations for Next Iteration
 
 Prioritized list of concrete, actionable changes:
 
-1. **[Recommendation]** — [Why: data from this analysis] → [Expected impact]
-2. **[Recommendation]** — [Why: data from this analysis] → [Expected impact]
+1. **[Recommendation]** -- [Why: data from this analysis] -> [Expected impact]
+2. **[Recommendation]** -- [Why: data from this analysis] -> [Expected impact]
 3. ...
 
 ### Suggested Pipeline for Next Build
@@ -242,6 +292,7 @@ Based on the analysis, the optimized pipeline for this type of project:
 
 NEXT STEPS:
 
-- "Run `/iterate` or `/ship` with the optimized pipeline suggestions above."
+- "Run `/iterate` with the optimized pipeline suggestions above."
 - "Run `/build` for a full pipeline build incorporating these learnings."
 - "Run `/analyze` to verify the current state of the codebase is consistent."
+---

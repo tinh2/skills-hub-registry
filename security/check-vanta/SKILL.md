@@ -1,59 +1,70 @@
 ---
 name: check-vanta
-description: Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs for each affected repo.
-version: "2.1.0"
+description: "Fetches dependency vulnerabilities from Vanta, Snyk, Dependabot, or GitHub Security Advisories, creates a tracking issue in Jira/Linear/GitHub Issues, then fixes, commits, pushes, and opens PRs for each affected repo. Trigger on: vulnerabilities, security scan, Vanta, CVE, dependency audit, Snyk, Dependabot."
+version: 1.0.0
 category: security
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous security remediation agent. You fetch vulnerabilities from Vanta, create a Jira tracking story, and then fix every vulnerability across all affected repos.
+You are an autonomous security remediation agent. You fetch dependency vulnerabilities, create a tracking issue, and fix every vulnerability across all affected repos.
 
 IMPORTANT: Do NOT ask the user questions. Run autonomously from start to finish.
 
-TARGET: $ARGUMENTS
+## PREREQUISITES & CONFIG
 
-If arguments are provided, interpret them as:
-- A repo name or comma-separated list of repos to limit remediation scope (e.g., "marketplace-app" or "marketplace-app,firebase-lambdas")
-- A severity filter (e.g., "CRITICAL" to only fix critical vulns)
-- A CVE ID to target a specific vulnerability
+Load config from `~/.claude/skills/check-vanta/config.json`. It contains:
 
-If no arguments are provided, fetch all open vulnerabilities across all configured repos and remediate everything due within 90 days.
-
-============================================================
-PHASE 1: PREREQUISITES & CONFIG
-============================================================
-
-Load config from `./config.json`. It contains:
+- `vulnerability_source` — one of: `vanta`, `snyk`, `dependabot`, `github_advisories` (default: `vanta`)
+- `issue_tracker` — one of: `jira`, `linear`, `github`, `markdown` (default: `jira`)
+- `commit_suffix` — string appended to commit messages (e.g. `deploy:username`). Optional, omit if not set.
 - `vanta.token_file` / `vanta.token_env` — where to find the Vanta API token
-- `jira.url`, `jira.project_key`, `jira.issue_type` — Jira settings
+- `vanta.api_base` — Vanta API base URL
+- `snyk.token_file` / `snyk.token_env` — Snyk API token location
+- `snyk.org_id` — Snyk organization ID
+- `jira.url` — full Jira instance URL (e.g. `https://myteam.atlassian.net`)
+- `jira.project_key`, `jira.issue_type` — Jira project settings
 - `jira.credentials_file` — path to file containing `EMAIL:API_TOKEN` for Jira Basic auth
-- `github.org` — GitHub organization name
-- `repos` — map of Vanta asset name → `{ path, package_manager, package_json_path? }`
+- `linear.token_file` / `linear.token_env` — Linear API token
+- `linear.team_id` — Linear team ID
+- `github.org` — GitHub organization name (used for GitHub Issues tracker and PR creation)
+- `github.repo` — GitHub repo for issue tracking when `issue_tracker` is `github`
+- `repos` — map of asset/repo name to `{ path, package_manager, package_json_path?, default_branch? }`
+  - `package_manager`: one of `npm`, `yarn`, `pnpm`, `pip`, `cargo`, `go`, `bundler`, `composer`
+  - `default_branch`: branch to base work on (default: `main`)
 
 **Required credential files** (stop with setup instructions if missing):
-1. **Vanta token**: `~/.vanta-token` — contains the Vanta API bearer token
-   - Setup: Go to https://app.vanta.com → Settings → API → Generate Token
-   - Save it: `echo "YOUR_TOKEN" > ~/.vanta-token && chmod 600 ~/.vanta-token`
-2. **Jira credentials**: `~/.jira-credentials` — contains `email@example.com:API_TOKEN` (single line)
-   - Setup: Go to https://id.atlassian.com/manage-profile/security/api-tokens → Create API token
-   - Save it: `echo "you@company.com:TOKEN" > ~/.jira-credentials && chmod 600 ~/.jira-credentials`
 
-============================================================
-PHASE 2: FETCH VULNERABILITIES FROM VANTA
-============================================================
+1. **Vulnerability source token**: Location depends on `vulnerability_source`:
+   - Vanta: file at `vanta.token_file` (default `~/.vanta-token`)
+     - Setup: Go to https://app.vanta.com -> Settings -> API -> Generate Token
+     - Save it: `echo "YOUR_TOKEN" > ~/.vanta-token && chmod 600 ~/.vanta-token`
+   - Snyk: file at `snyk.token_file` (default `~/.snyk-token`)
+     - Setup: Go to https://app.snyk.io/account -> General -> Auth Token
+   - Dependabot / GitHub Advisories: uses `gh` CLI authentication (no extra token needed)
+
+2. **Issue tracker credentials** (depends on `issue_tracker`):
+   - Jira: file at `jira.credentials_file` (default `~/.jira-credentials`) containing `email@example.com:API_TOKEN`
+     - Setup: Go to https://id.atlassian.com/manage-profile/security/api-tokens -> Create API token
+     - Save it: `echo "you@company.com:TOKEN" > ~/.jira-credentials && chmod 600 ~/.jira-credentials`
+   - Linear: file at `linear.token_file` (default `~/.linear-token`)
+   - GitHub Issues: uses `gh` CLI authentication
+   - Markdown: no credentials needed (writes to `~/.claude/logs/vanta-checks/`)
+
+## STEP 1: FETCH VULNERABILITIES
+
+### Vanta (default)
 
 Load the Vanta API token:
 ```bash
-VANTA_TOKEN=$(cat ~/.vanta-token 2>/dev/null || echo "$VANTA_API_TOKEN")
+VANTA_TOKEN=$(cat <token_file> 2>/dev/null || echo "$VANTA_API_TOKEN")
 ```
 
 Fetch ALL open vulnerabilities with SLA deadlines up to 90 days from now. Use cursor-based pagination:
 ```bash
-# First page
 curl -s -H "Authorization: Bearer $VANTA_TOKEN" \
   -H "Accept: application/json" \
-  "https://api.vanta.com/v1/vulnerabilities?pageSize=100&slaDeadlineBeforeDate=$(date -u -v+90d '+%Y-%m-%dT%H:%M:%SZ')"
+  "<api_base>/vulnerabilities?pageSize=100&slaDeadlineBeforeDate=$(date -u -d '+90 days' '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date -u -v+90d '+%Y-%m-%dT%H:%M:%SZ')"
 ```
 
 Response schema:
@@ -85,47 +96,76 @@ Response schema:
 
 If `hasNextPage` is true, fetch the next page with `&pageCursor=<endCursor>`. Repeat until all pages are fetched.
 
-Also fetch vulnerable assets to map `targetId` → asset name:
+Also fetch vulnerable assets to map `targetId` to asset name:
 ```bash
 curl -s -H "Authorization: Bearer $VANTA_TOKEN" \
   -H "Accept: application/json" \
-  "https://api.vanta.com/v1/vulnerable-assets?pageSize=100"
+  "<api_base>/vulnerable-assets?pageSize=100"
 ```
 
 Each asset has `id`, `name` (the repo name), and `assetType`.
 
-============================================================
-PHASE 3: GROUP & ANALYZE VULNERABILITIES
-============================================================
+### Snyk
 
-Using the asset map, group vulnerabilities by repo name. For each vulnerability, extract:
-- **Package name** and **vulnerable version range** from `packageIdentifier` (format: `npm-<package> <range>`)
-- **CVE ID** from `name`
-- **Severity** and **CVSS score**
-- **Due date** from `remediateByDate`
+```bash
+SNYK_TOKEN=$(cat <token_file> 2>/dev/null || echo "$SNYK_TOKEN")
+curl -s -H "Authorization: token $SNYK_TOKEN" \
+  "https://api.snyk.io/rest/orgs/<org_id>/issues?version=2024-01-23&type=package_vulnerability&status=open"
+```
+
+Map Snyk project names to repo names in the config.
+
+### Dependabot
+
+```bash
+gh api repos/<org>/<repo>/dependabot/alerts --jq '.[] | select(.state == "open")'
+```
+
+Run for each repo in the config.
+
+### GitHub Security Advisories
+
+```bash
+gh api repos/<org>/<repo>/vulnerability-alerts
+gh api graphql -f query='{ repository(owner:"<org>", name:"<repo>") { vulnerabilityAlerts(first:100, states:OPEN) { nodes { securityVulnerability { package { name ecosystem } vulnerableVersionRange firstPatchedVersion { identifier } severity } } } } }'
+```
+
+## STEP 2: GROUP & ANALYZE VULNERABILITIES
+
+Using the asset/repo map, group vulnerabilities by repo name. For each vulnerability, extract:
+- **Package name** and **vulnerable version range**
+- **CVE ID** from the vulnerability name/identifier
+- **Severity** and **CVSS score** (if available)
+- **Due date** (SLA deadline for Vanta, or detection date for others)
 - **Days until due** (calculate from today)
 
 Only include repos that exist in the `repos` config map. Skip unknown assets.
 Sort by severity (CRITICAL first) then by due date (soonest first).
 
-For each affected package, determine the **fix version** by:
-1. Parsing the vulnerable range from `packageIdentifier` (e.g., `>= 4.1.3, < 5.3.5` means fix is `>= 5.3.5`)
-2. Running `npm view <package> version` to get the latest version and confirm it's beyond the vulnerable range
+For each affected package, determine the **fix version** using the appropriate package manager:
 
-============================================================
-PHASE 4: CREATE JIRA STORY
-============================================================
+| Package Manager | Check latest version |
+|----------------|---------------------|
+| npm/yarn/pnpm  | `npm view <package> version` |
+| pip            | `pip index versions <package> 2>/dev/null \|\| pip install <package>== 2>&1 \| grep -oP 'versions: \K.*'` |
+| cargo          | `cargo search <package> --limit 1` |
+| go             | `go list -m -versions <module>@latest` |
+| bundler        | `gem search <package> --remote --exact` |
+| composer       | `composer show <package> --all \| grep versions` |
 
-Create a Jira story to track the work:
+## STEP 3: CREATE TRACKING ISSUE
+
+### Jira
+
 ```bash
-JIRA_CREDS=$(cat ~/.jira-credentials)
+JIRA_CREDS=$(cat <credentials_file>)
 JIRA_AUTH=$(echo -n "$JIRA_CREDS" | base64)
 
 curl -s -X POST \
   -H "Authorization: Basic $JIRA_AUTH" \
   -H "Content-Type: application/json" \
   -d '<payload>' \
-  "https://{org}.atlassian.net/rest/api/3/issue"
+  "<jira_url>/rest/api/3/issue"
 ```
 
 The Jira payload should use Atlassian Document Format (ADF) for the description:
@@ -133,7 +173,7 @@ The Jira payload should use Atlassian Document Format (ADF) for the description:
 {
   "fields": {
     "project": { "key": "<project_key from config>" },
-    "summary": "Vanta: Vulnerabilities",
+    "summary": "Security: Dependency vulnerabilities remediation",
     "issuetype": { "name": "<issue_type from config>" },
     "description": {
       "version": 1,
@@ -143,71 +183,98 @@ The Jira payload should use Atlassian Document Format (ADF) for the description:
           "type": "heading",
           "attrs": { "level": 2 },
           "content": [{ "type": "text", "text": "AC" }]
-        },
-        ... for each repo with vulns, add a heading and bullet list of vulns ...
+        }
       ]
     }
   }
 }
 ```
 
+For each repo with vulns, add a heading and bullet list of vulns to the ADF content.
+
+### Linear
+
+```bash
+LINEAR_TOKEN=$(cat <token_file>)
+curl -s -X POST https://api.linear.app/graphql \
+  -H "Authorization: $LINEAR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{ "query": "mutation { issueCreate(input: { teamId: \"<team_id>\", title: \"Security: Dependency vulnerabilities\", description: \"<markdown body>\" }) { success issue { id identifier url } } }" }'
+```
+
+### GitHub Issues
+
+```bash
+gh issue create --repo <org>/<repo> \
+  --title "Security: Dependency vulnerabilities remediation" \
+  --body "<markdown body>"
+```
+
+### Markdown (no tracker)
+
+Write the issue content to `~/.claude/logs/vanta-checks/issue-YYYY-MM-DD.md` instead of creating a remote issue. Use `LOCAL` as the issue key for branch naming.
+
+---
+
 The description body should list each affected repo as a heading, with its vulnerabilities as bullet points:
 
 ```
 ## AC
 
-### marketplace-app
-- axios >= 1.0.0, <= 1.13.4 — CVE-XXXX-XXXXX (High) — Due: YYYY-MM-DD
-- minimatch < 3.1.3 — CVE-XXXX-XXXXX (High) — Due: YYYY-MM-DD
+### repo-name
+- package >= x.y.z, < a.b.c -- CVE-XXXX-XXXXX (High) -- Due: YYYY-MM-DD
 
-### firebase-lambdas
-- fast-xml-parser >= 4.1.3, < 5.3.5 — CVE-XXXX-XXXXX (Critical) — Due: YYYY-MM-DD
-
-### firebase-utilities
-...
-
-### subscription-job
-...
+### another-repo
+- other-package < 2.0.0 -- CVE-XXXX-XXXXX (Critical) -- Due: YYYY-MM-DD
 ```
 
-Extract the created issue key (e.g., `DEV-5001`) from the Jira API response `key` field. This will be used for the branch name.
+Extract the created issue key (e.g., `DEV-5001`, `ENG-123`, `#42`, or `LOCAL`) from the response. This will be used for the branch name.
 
-============================================================
-PHASE 5: FIX VULNERABILITIES IN EACH REPO
-============================================================
+## STEP 4: FIX VULNERABILITIES IN EACH REPO
 
 For each repo in the config that has vulnerabilities, run the following steps.
 Use the Task tool to run repos IN PARALLEL where possible for speed.
 
-### 5a. Prepare the branch
+### 4a. Prepare the branch
 
 ```bash
 cd <repo_path>
-git checkout main && git pull
-git checkout -b <JIRA_KEY>-vanta-vulnerabilities
+git checkout <default_branch> && git pull
+git checkout -b <ISSUE_KEY>-dependency-vulnerabilities
 ```
 
-### 5b. Identify direct vs transitive dependencies
+Use `default_branch` from the repo config (falls back to `main`).
 
-For the repo's package directory (use `package_json_path` from config if set, otherwise repo root):
-- Read `package.json` to find direct dependencies
-- Check the lock file (`package-lock.json` or `yarn.lock`) to find transitive dependency versions
+### 4b. Identify direct vs transitive dependencies
 
-### 5c. Apply fixes
+Based on the repo's `package_manager`:
 
-**For direct dependencies:**
-Update the version in `package.json` to the latest safe version (use `npm view <pkg> version`).
+| Package Manager | Manifest file | Lock file | Direct deps location |
+|----------------|---------------|-----------|---------------------|
+| npm            | package.json  | package-lock.json | dependencies + devDependencies in package.json |
+| yarn           | package.json  | yarn.lock | dependencies + devDependencies in package.json |
+| pnpm           | package.json  | pnpm-lock.yaml | dependencies + devDependencies in package.json |
+| pip            | requirements.txt or pyproject.toml | requirements.txt (pinned) | Listed packages |
+| cargo          | Cargo.toml    | Cargo.lock | [dependencies] in Cargo.toml |
+| go             | go.mod        | go.sum | require directives in go.mod |
+| bundler        | Gemfile       | Gemfile.lock | Gems listed in Gemfile |
+| composer       | composer.json | composer.lock | require + require-dev in composer.json |
 
-**For transitive dependencies (npm repos):**
+For npm/yarn/pnpm: use `package_json_path` from config if set, otherwise repo root.
+
+### 4c. Apply fixes
+
+**npm — direct dependencies:**
+Update the version in `package.json` to the latest safe version.
+
+**npm — transitive dependencies:**
 Add or update the `"overrides"` section in `package.json`:
 ```json
-"overrides": {
-  "<package>": "<fixed_version>"
-}
+"overrides": { "<package>": "<fixed_version>" }
 ```
 
-**For transitive dependencies (yarn repos):**
-Add or update the `"resolutions"` section in `package.json`. IMPORTANT: Yarn resolutions match the exact spec string from dependency declarations. Check `yarn.lock` for the actual spec patterns being used (e.g., `^3.0.4`, `^5.0.1`) and create a resolution entry for EACH spec:
+**yarn — transitive dependencies:**
+Add or update the `"resolutions"` section in `package.json`. Check `yarn.lock` for actual spec patterns and create a resolution entry for EACH spec:
 ```json
 "resolutions": {
   "<package>@<spec1>": "<fixed_version>",
@@ -215,37 +282,71 @@ Add or update the `"resolutions"` section in `package.json`. IMPORTANT: Yarn res
 }
 ```
 
-Also check for any existing `resolutions` entries for the same package (like a pinned version) and update those too.
-
-### 5d. Regenerate the lock file
-
-**npm repos:**
-```bash
-rm -rf node_modules package-lock.json && npm install
+**pnpm — transitive dependencies:**
+Add or update `pnpm.overrides` in `package.json`:
+```json
+"pnpm": { "overrides": { "<package>": "<fixed_version>" } }
 ```
 
-**yarn repos:**
-Check if yarn needs any environment variables (look at `.yarnrc.yml` for `${VAR}` references).
-If a token variable is needed but not set, use a dummy value if the affected packages don't come from that registry:
+**pip:**
+Update the version pin in `requirements.txt` or the dependency spec in `pyproject.toml`.
+For transitive deps, add a constraint in `constraints.txt` and install with `pip install -c constraints.txt -r requirements.txt`.
+
+**cargo:**
+Update the version in `Cargo.toml` under `[dependencies]`.
+For transitive deps, add a `[patch.crates-io]` section or update the direct dependency that pulls it in.
+
+**go:**
 ```bash
-MISSING_VAR=dummy yarn install
+go get <module>@<fixed_version>
+go mod tidy
 ```
 
-### 5e. Verify fixes
+**bundler:**
+Update the version in `Gemfile`, or run `bundle update <gem> --conservative`.
+
+**composer:**
+Update the version constraint in `composer.json`, then `composer update <package>`.
+
+### 4d. Regenerate the lock file
+
+| Package Manager | Command |
+|----------------|---------|
+| npm            | `rm -rf node_modules package-lock.json && npm install` |
+| yarn           | Check `.yarnrc.yml` for env var references. If a token var is needed but not set, use a dummy value if the affected packages do not come from that registry: `MISSING_VAR=dummy yarn install` |
+| pnpm           | `rm -rf node_modules pnpm-lock.yaml && pnpm install` |
+| pip            | `pip install -r requirements.txt` (or `pip install -e .` for pyproject.toml projects) |
+| cargo          | `cargo update` |
+| go             | `go mod tidy` |
+| bundler        | `bundle install` |
+| composer       | `composer install` |
+
+### 4e. Verify fixes
 
 After install, verify the vulnerable versions are gone:
-- **npm**: Check `package-lock.json` for the package versions
-- **yarn**: Check `yarn.lock` for the package resolution entries
 
-If a vulnerable version persists, investigate what's still pulling it in and add additional overrides/resolutions.
+| Package Manager | Verification |
+|----------------|-------------|
+| npm            | Check `package-lock.json` for the package versions |
+| yarn           | Check `yarn.lock` for the package resolution entries |
+| pnpm           | Check `pnpm-lock.yaml` for the package versions |
+| pip            | `pip show <package>` to confirm version |
+| cargo          | Check `Cargo.lock` for the package version |
+| go             | `go list -m all \| grep <module>` |
+| bundler        | `bundle list \| grep <gem>` |
+| composer       | `composer show <package>` |
 
-### 5f. Commit and push
+If a vulnerable version persists, investigate what is still pulling it in and add additional overrides/resolutions/patches.
 
-Stage only `package.json` and the lock file(s). Commit with this format:
+### 4f. Commit and push
+
+Stage only the manifest and lock file(s). Commit with this format:
 ```
-fix: resolve Vanta vulnerabilities for <package-list>
+fix(security): resolve dependency vulnerabilities for <package-list>
 
 <Brief description of what was updated/overridden and which CVEs are fixed>
+
+<commit_suffix from config, if set>
 ```
 
 IMPORTANT: Do NOT include Co-Authored-By lines. Do NOT mention Claude or AI.
@@ -255,88 +356,50 @@ Then push:
 git push -u origin <branch_name>
 ```
 
-### 5g. Create Pull Request
+### 4g. Create Pull Request
 
 ```bash
-gh pr create --title "fix: Resolve Vanta vulnerabilities (<JIRA_KEY>)" --body "$(cat <<'EOF'
+gh pr create --title "fix(security): Resolve dependency vulnerabilities (<ISSUE_KEY>)" --body "$(cat <<'EOF'
 ## Summary
 - <bullet points listing each package fix>
 
 ## Test plan
 - [ ] Verify install succeeds cleanly
 - [ ] Run existing tests to confirm no regressions
-- [ ] Confirm Vanta rescans and clears flagged vulnerabilities
+- [ ] Confirm vulnerability scanner rescans and clears flagged vulnerabilities
 
-Jira: <JIRA_KEY>
+Tracking: <ISSUE_KEY>
 EOF
 )"
 ```
 
 IMPORTANT: Do NOT include any AI/Claude attribution in the PR body.
 
-============================================================
-PHASE 6: SUMMARY & REPORT
-============================================================
+## STEP 5: DISPLAY SUMMARY
 
 After all repos are processed, display a summary table:
 
 ```
-## Vanta Remediation Complete
+## Dependency Vulnerability Remediation Complete
 
-**Jira:** <JIRA_KEY> — <link to Jira ticket>
+**Tracking issue:** <ISSUE_KEY> -- <link to issue>
 
 | Repo | Branch | PR | Vulns Fixed |
 |------|--------|----|-------------|
-| subscription-job | DEV-XXXX-vanta-vulnerabilities | #XX | 5 |
-| firebase-lambdas | DEV-XXXX-vanta-vulnerabilities | #XX | 2 |
+| repo-name | KEY-vanta-vulnerabilities | #XX | 5 |
 | ... | ... | ... | ... |
 ```
 
 Also save a report to `~/.claude/logs/vanta-checks/vanta-YYYY-MM-DD.md`.
 
-============================================================
-OUTPUT
-============================================================
+## STRICT RULES
 
-## Vanta Remediation Summary
-
-| Metric | Value |
-|--------|-------|
-| Repos scanned | N |
-| Repos with vulns | N |
-| Total vulns found | N |
-| Vulns fixed | N |
-| PRs opened | N |
-| Jira ticket | DEV-XXXX |
-
-### Per-Repo Breakdown
-
-| Repo | Vulns | Fixed | PR | Branch |
-|------|-------|-------|----|--------|
-| ... | N | N | #XX | DEV-XXXX-vanta-vulnerabilities |
-
-### Unfixed Items
-| Repo | Package | CVE | Reason |
-|------|---------|-----|--------|
-| ... | ... | ... | (e.g., no fix available, major version break) |
-
-============================================================
-DO NOT
-============================================================
-
-- Do NOT hardcode or log API tokens in reports, commits, or PR descriptions.
-- Do NOT include Co-Authored-By lines in commits.
-- Do NOT mention Claude, AI, or automation tools in commits or PRs.
-- Do NOT modify any Vanta settings or dismiss vulnerabilities — Vanta access is read-only.
-- Do NOT force-push or rewrite git history on any repo.
-
-============================================================
-NEXT STEPS
-============================================================
-
-After remediation:
-- "Run `/preflight` on each repo to verify the branches are ready to merge."
-- "Review the PRs, merge them, and monitor Vanta for rescans clearing the vulns."
-- "Run `/check-vanta` again in 1-2 weeks to catch newly reported vulnerabilities."
-- "Run `/qa` on affected repos if the dependency changes are significant."
-- "Check the Jira ticket to confirm all acceptance criteria are met."
+- NEVER hardcode or log API tokens in reports, commits, or PR descriptions.
+- NEVER include Co-Authored-By lines in commits.
+- NEVER mention Claude, AI, or automation tools in commits or PRs.
+- If `commit_suffix` is set in config, ALWAYS append it to commit messages.
+- ALWAYS push after committing.
+- If the vulnerability source API call fails, show the error and suggest troubleshooting steps.
+- If a repo's install fails, report the error and continue to the next repo.
+- Do NOT modify any vulnerability scanner settings or dismiss vulnerabilities -- access is read-only.
+- If no vulnerabilities are due, report that and skip issue creation/fix steps.

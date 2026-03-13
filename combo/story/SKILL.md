@@ -1,7 +1,7 @@
 ---
 name: story
-description: Full story lifecycle — chains /arch-review then /story-implementer then /pr. Takes a story from design review through implementation to PR creation.
-version: "1.0.0"
+description: "Full story lifecycle — review, implement, and PR. Takes a story from architecture review through implementation to pull request creation."
+version: 1.0.0
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -15,7 +15,7 @@ This skill chains three skills in sequence:
 3. `/pr` — create a convention-compliant pull request
 
 INPUT: $ARGUMENTS
-The Jira story (text, image, or URL), or a description of what to build.
+A story description — text, image, URL, ticket reference, or plain description of what to build.
 
 ============================================================
 PHASE 1: ARCHITECTURE REVIEW
@@ -46,8 +46,8 @@ Pass the original story PLUS any adjustments from the architecture review.
 The story-implementer skill will:
 - Implement the story following repository conventions
 - Write unit tests with full coverage
-- Follow the Resource → Service → Repository pattern
-- Commit with conventional commit format
+- Follow the codebase's established patterns and architecture
+- Commit with conventional commit format per project conventions
 - Push after committing
 
 ============================================================
@@ -57,10 +57,10 @@ PHASE 3: CREATE PR
 Follow the instructions defined in the `/pr` skill.
 
 The pr skill will:
-- Extract the story number from the branch name
+- Extract the story/ticket reference from the branch name if available
 - Generate a summary from the commits and changes
-- Create a PR with test plan and Jira link
-- Enforce all CLAUDE.md conventions (no AI attribution, etc.)
+- Create a PR with a test plan and relevant links
+- Enforce all CLAUDE.md conventions
 
 ============================================================
 OUTPUT
@@ -79,7 +79,7 @@ OUTPUT
 
 ### Pull Request
 - **PR:** {URL}
-- **Story:** {story number}
+- **Story:** {story/ticket reference if available}
 - **Title:** {PR title}
 
 NEXT STEPS:

@@ -1,206 +1,319 @@
 ---
 name: iterate
-description: Self-iterating build loop — implements, tests, reviews, analyzes, and refines autonomously up to 6 iterations until all validation and domain analysis passes.
-version: "4.0.0"
+description: Autonomous build loop -- build iteratively, implement features, add capabilities. Default 6 iterations (thorough) or --fast for 4 iterations (ship it quick).
+version: 1.0.0
 category: build
+instructions: |
+  You are in FULLY AUTONOMOUS MODE. Zero questions. Just build.
+
+  TASK:
+  $ARGUMENTS
+
+  MODE DETECTION:
+  - If $ARGUMENTS starts with "--fast" (e.g., "/iterate --fast add search bar"):
+    MAX_ITERATIONS = 4 (fast mode -- build it, harden it, analyze it, ship it)
+    Remove "--fast" from the task description before proceeding.
+  - Otherwise: MAX_ITERATIONS = 6 (thorough mode -- full iterative refinement)
+
+  RULES:
+  - Do NOT ask the user anything. Decide and move.
+  - If you're unsure between two approaches, pick the simpler one.
+  - If a dependency is missing, install it.
+  - If tests don't exist, write them.
+  - If something breaks, fix it -- don't report it, fix it.
+
+  === PRE-BUILD: VALIDATION GATE ===
+
+  Before writing any feature code, validate the project foundation.
+  This prevents wasting iterations on lint, platform, and config issues.
+
+  1. DETECT PROJECT TYPE:
+     Identify the tech stack from project files (package.json, pubspec.yaml,
+     Cargo.toml, go.mod, requirements.txt, pom.xml, Gemfile, etc.).
+     Adapt all subsequent checks to the detected stack.
+
+  2. STATIC ANALYSIS:
+     - Run the project's type checker (tsc --noEmit, flutter analyze, mypy, cargo check, etc.).
+     - Run the project's linter if configured (eslint, dart fix --apply, ruff, clippy, etc.).
+     - Fix all errors and warnings.
+
+  3. DEPENDENCY CHECK:
+     - Run the project's dependency installer (npm install, flutter pub get, pip install, cargo build, etc.).
+     - Fix version conflicts or missing packages.
+
+  4. PLATFORM/CONFIG CHECK:
+     - If the project has platform-specific code, verify guards are in place (e.g., web vs native,
+       OS-specific imports, conditional compilation).
+     - If the project has database rules/migrations, cross-check them against code usage.
+     - If the project has config files (env templates, schema files), verify they match code expectations.
+
+  5. DOCKER/INFRASTRUCTURE CHECK (if docker-compose.yml or Dockerfile exists):
+     - Verify image references use full registry paths where needed.
+     - Verify volume mounts: target paths exist in container, writable dirs have correct permissions.
+     - Verify config files are mounted where the application actually reads them.
+     - Run `bash -n` on all .sh scripts to catch syntax errors.
+     - Check for cross-platform portability issues (sed, readlink, date flags, etc.).
+
+  Fix everything found. Commit: "chore: pre-build validation fixes"
+  If clean, skip the commit and proceed.
+
+  === PER-COMPONENT QUALITY CHECKLIST ===
+
+  Every component (screen, page, module, endpoint) you create or modify MUST
+  satisfy these before committing. Applying these at creation time prevents
+  dozens of retrofit commits later.
+
+  a) ACCESSIBILITY:
+     - Web: ARIA labels on interactive elements, focus management, keyboard navigation.
+     - Mobile (Flutter): semanticLabel on icons/images, Semantics wrappers, 48dp touch targets.
+     - Mobile (native): accessibilityLabel, accessibilityHint on interactive elements.
+     - All: meaningful alt text, sufficient color contrast, screen-reader-friendly structure.
+
+  b) DESIGN TOKENS:
+     - Web: CSS custom properties or theme variables -- zero hardcoded hex colors or magic numbers.
+     - Flutter: Colors from ColorScheme, TextStyles from TextTheme, spacing from constants.
+     - Native: Style resources, design system tokens -- not inline literal values.
+     - All: configurable values (rates, limits, feature flags) from config, not hardcoded.
+
+  c) ASYNC SAFETY:
+     - React: cleanup in useEffect return, abort controllers for fetch, check component mounted state.
+     - Flutter: `if (!mounted) return;` before setState after every await.
+     - General: cancellation tokens for long-running operations, cleanup on component unmount/dispose.
+     - All: proper error handling on every async call, timeout on network requests.
+
+  d) SCALABILITY:
+     - Database queries have limits and pagination (no unbounded fetches).
+     - Batch operations for multi-record writes.
+     - Idempotent background jobs and event handlers.
+     - Index coverage for compound/filtered queries.
+
+  e) STRUCTURAL HEALTH: If any file exceeds 500 lines, decompose it into
+     domain-specific modules. Do not let monolithic files grow across iterations.
+
+  MONOLITH DECOMPOSITION GATE:
+
+  Before adding ANY feature code to a file that exceeds 500 lines:
+  1. STOP. Do not add the feature to the monolithic file.
+  2. Extract the relevant section into its own file first (component, service, module, utility).
+  3. Verify the extraction works (tests pass, build succeeds).
+  4. Commit the extraction: "refactor: extract [component] from [monolith]"
+  5. THEN implement the feature in the newly extracted file.
+
+  This is NOT optional. Flagging a file for future decomposition does not work --
+  monoliths that get flagged but not split accumulate modifications and high fix-commit
+  rates. Decompose BEFORE building, not after.
+
+  MINIMUM TEST REQUIREMENT:
+
+  Every iteration that adds new functionality must include:
+  - Backend: At least 2 tests per new endpoint/function (happy path + error case).
+  - Frontend: At least 1 component/integration test per new screen or major component.
+  - If ZERO tests exist: set up test framework + 3-5 smoke tests first.
+  A feature is not complete until its tests exist and pass.
+
+  === CO-COMMIT RULES ===
+
+  These rules apply to EVERY iteration. Violating them is the #1 source of rework:
+
+  a) SCHEMA/RULES: When adding or modifying a data model, update corresponding
+     database rules, migrations, or schemas in the SAME commit. Never commit
+     feature code without its schema changes.
+  b) SERVER-SIDE VALIDATION: When adding client-side business logic (permission
+     checks, eligibility, rate limits), wire up server-side enforcement in the
+     SAME iteration. Client-only validation is not validation.
+  c) SERIALIZATION: When backend code writes new fields, update the client model
+     (fields, serialization, deserialization) in the SAME commit.
+  d) EVENT HANDLERS: When changing data structures, verify triggers, webhooks,
+     and event handlers still match in the same commit.
+  e) SHARED CONFIGURATION: When 2+ files reference the same configurable value
+     (model name, base URL, API key, timeout, port), extract to a shared config
+     module. Never hardcode the same default in multiple files. Duplicated config
+     is the #1 source of co-change rework in backend projects.
+
+  ============================================================
+  PROCESS: ITERATION LOOP (max MAX_ITERATIONS iterations)
+  ============================================================
+
+  Run this loop up to MAX_ITERATIONS iterations. Stop early ONLY when ALL exit
+  criteria are met.
+
+  === PRE-IMPLEMENTATION: EXTERNAL SERVICE CONTRACT VERIFICATION ===
+
+  Before writing ANY code that integrates with an external service, STOP and verify:
+
+  1. API/TEMPLATE CONTRACTS: If integrating with any external API (payment, email,
+     auth, etc.) -- read the actual API field names, webhook payload shapes, and
+     response formats FIRST. List them explicitly. Do NOT guess from memory.
+  2. PLATFORM REQUIREMENTS: If adding CI/CD workflows, deploy pipelines, or
+     platform-specific config -- verify platform constraints before committing
+     (plan tier requirements, signing identities, required environment variables).
+  3. TIMEOUT/LIMITS: When adding test steps or CI jobs, set timeouts to 2-3x the
+     expected duration from the start. Never use the default.
+
+  If you cannot verify locally, document the assumptions explicitly in a code
+  comment and flag them for manual verification.
+
+  === ITERATION 1: MAKE IT EXIST ===
+
+  - Build the simplest version that works. No polish, just function.
+  - Co-commit schema changes, server validation, and model fields with features.
+  - Run tests/build to verify.
+  - Fix anything broken.
+  - Keep commits incremental -- if touching 15+ files, split into logical commits.
+  - Commit: "feat: initial implementation"
+
+  === ITERATION 2: MAKE IT SOLID ===
+
+  - Add error handling for real failure modes (not hypotheticals).
+  - Add or fix tests for core behavior.
+  - Verify all server-side validation is wired (not just client-side checks).
+  - Run full validation -- fix until green.
+  - Run domain analysis (see DOMAIN ANALYSIS section below).
+  - Commit: "fix: harden implementation"
+
+  === ITERATION 3: DOMAIN ANALYSIS GATE ===
+
+  Run the `/analyze` skill scoped to everything you built or changed.
+  Include all analysis phases: consistency audit, validation wiring,
+  schema completeness, and platform compatibility.
+
+  Scope: All features/files touched across iterations 1-2.
+  Depth: Full analysis (all phases of /analyze).
+  Action: FIX everything rated Critical or Warning. Re-run affected checks to confirm.
+  Commit: "fix: resolve domain analysis issues"
+
+  === ITERATION 4: CLEANUP / FINAL PASS (fast mode stops here) ===
+
+  - Re-validate everything -- tests, build, re-check analysis.
+  - Clean up code quality, naming, structure. Address remaining warnings.
+  - If fast mode (4 iterations): this is the final pass. Ship it.
+  - Commit: "refactor: cleanup"
+
+  === ITERATION 5 (thorough mode only): HARDENING ===
+
+  - Only run if analysis still finds issues or self-review scores < 4.
+  - Re-run domain analysis to confirm previous fixes.
+  - Address any remaining warnings.
+  - Commit: "fix: hardening pass"
+
+  === ITERATION 6 (thorough mode only): FINAL PASS ===
+
+  - Only run if something still isn't right.
+  - Final validation and polish.
+  - Commit: "refactor: final pass"
+
+  === SELF-REVIEW (run at end of each iteration) ===
+
+  Score the current state on these dimensions (1-5):
+  - Works: Does it run without errors? Do tests pass?
+  - Correct: Does it actually do what was asked?
+  - Clean: Is the code readable and maintainable?
+  - Robust: Are edge cases handled? Is error handling adequate?
+  - Wired: Are all layers connected? (schemas, server validation, serialization)
+
+  Output the scores and a brief assessment of what to improve next iteration:
+
+    ## Iteration N Self-Review
+    - Works: X/5
+    - Correct: X/5
+    - Clean: X/5
+    - Robust: X/5
+    - Wired: X/5
+    - Next focus: [what to improve]
+
+  === DOMAIN ANALYSIS (runs on iteration 2 and on the final iteration) ===
+
+  Run the `/analyze` skill scoped to the features you built or changed.
+  Include all analysis phases: consistency audit, validation wiring,
+  schema completeness, and platform compatibility.
+
+  Scope: Only the features/files touched -- not the full project.
+  Depth: Full analysis (all phases of /analyze).
+  Action: If analysis finds Critical or Warning issues, feed them into the NEXT
+  iteration's improvements as top-priority targets.
+
+  === INTERMEDIATE QUALITY GATE ===
+
+  When implementing MULTIPLE features (e.g., a list from a spec or backlog):
+  - After every 3-4 features, run a mini domain analysis even if it's
+    not iteration 2 yet. This catches cross-feature issues early.
+  - Do NOT batch 8+ features into one iteration without a quality check.
+  - If implementing 5+ features, split into batches of 3-4 and run validation
+    between batches. This prevents mega-fix-commits later.
+
+  === EXIT CRITERIA (ALL must be true to stop early) ===
+
+  - All tests pass
+  - Build succeeds (if applicable)
+  - No lint errors (if linter exists)
+  - Self-review scores are all 4+
+  - Domain analysis shows zero Critical issues and zero Warning issues
+  - Server-side validation is wired for all security-critical client logic
+  - Schema/rules exist for all data the app reads/writes
+  - The feature does what was requested
+
+  === SCREEN/COMPONENT SIGN-OFF TABLE ===
+
+  Before committing ANY screen or major component (new or modified), fill out
+  this sign-off table:
+
+  | Component | A11y | Tokens | Async | Scale | Structure | PASS? |
+  |-----------|------|--------|-------|-------|-----------|-------|
+  | {name}    | Y/N  | Y/N    | Y/N   | Y/N   | Y/N       | ALL Y |
+
+  Rules:
+  - Every column must be Y before committing. Any N = fix first, then re-check.
+  - Include the checklist in commit messages: "feat: add profile page [A11y:Y Tokens:Y Async:Y Scale:Y Structure:Y]"
+  - If implementing multiple components in one iteration, each gets its own row.
+  - Do NOT batch components and "come back to fix a11y/tokens later" -- this is
+    the #1 source of rework. Fix at creation time, not as a retrofit pass.
+
+  Column definitions (quick reference):
+  - A11y: ARIA/semantic labels, touch/click targets, keyboard navigation
+  - Tokens: zero hardcoded colors or styles -- all from theme/design system
+  - Async: cleanup on unmount, error handling on all async calls, timeouts
+  - Scale: query limits, pagination, batch operations
+  - Structure: file under 500 LOC, domain-split modules
+
+  === COMMIT DISCIPLINE ===
+
+  - Commit after each iteration with descriptive messages.
+  - Keep commits focused. If an iteration touches 20+ files, split into logical commits.
+  - NEVER batch all fixes into a single mega-commit like "lots of bug fixes".
+    Each fix should be independently reviewable and revertable.
+  - NEVER commit feature code without its corresponding schema/rules update.
+  - Use conventional commits: feat:, fix:, chore:, test:, docs:
+
+  === POST-LOOP: DOCUMENTATION ===
+
+  After all iterations complete and validation passes:
+  - Run `/readme` to generate or update the project's README.md.
+
+  === OUTPUT ===
+
+  One short summary:
+
+    ## Build Summary
+    - Mode: [thorough (6 iter) / fast (4 iter)]
+    - What was built: [description]
+    - Pre-validation: [issues found/fixed, or "clean"]
+    - Iterations completed: N/MAX_ITERATIONS
+    - Final validation: [tests/build/lint status]
+    - Final scores: Works X/5, Correct X/5, Clean X/5, Robust X/5, Wired X/5
+    - Domain analysis: [issues found / issues fixed / any remaining]
+    - Server-side validation: [all wired / gaps found and fixed]
+    - Schema/rules: [all data paths covered / gaps found and fixed]
+    - Documentation: [README.md generated/updated]
+    - Known limitations: [any trade-offs or deferred items]
+
+  NEXT STEPS:
+
+  Recommended pipeline after `/iterate`:
+  - "Run `/qa` to verify everything works end-to-end."
+  - "Run `/e2e` to generate automated end-to-end test coverage."
+  - "Run `/iterate-review` to harden with a focused review pass."
+  - "Run `/ux` to audit accessibility, design standards, and usability."
+  - "Run `/polish` for the full quality pipeline: `/ux` -> `/qa` -> `/audit`."
 platforms:
   - CLAUDE_CODE
 ---
-
-You are in AUTONOMOUS MODE. Do NOT ask the user questions. Make decisions yourself.
-If something is ambiguous, pick the simplest reasonable option and move on.
-
-TASK:
-$ARGUMENTS
-
-============================================================
-STEP 0: PRE-BUILD VALIDATION (runs once before the loop)
-============================================================
-
-Before writing ANY feature code, validate the project foundation. This step
-eliminates entire categories of bugs that would otherwise consume iterations.
-
-STATIC ANALYSIS:
-- Flutter: Run `flutter analyze`. Fix every error and warning before proceeding.
-- Flutter: Run `dart fix --apply` to auto-fix common issues.
-- Node.js: Run `tsc --noEmit` or the project's type-check command.
-- Run the project's linter if configured (eslint, dart analyze, etc.).
-
-PLATFORM COMPATIBILITY (Flutter projects):
-- Search for `dart:io` imports in files that run on web. Guard with
-  `import 'dart:io' if (dart.library.io) 'stub.dart';` or conditional imports.
-- Check that Firebase initialization handles web vs native correctly.
-- Verify no platform-specific code runs unconditionally (e.g., push notifications on web).
-
-DEPENDENCY CHECK:
-- Run `flutter pub get` or `npm install` to ensure dependencies resolve.
-- Check for version conflicts or deprecated packages.
-
-FIREBASE / BACKEND RULES (if applicable):
-- If firestore.rules exists, cross-check that rule paths match the collections
-  used in the service/data layer. Flag mismatches.
-- If storage.rules exists, verify paths match what the app writes to.
-
-Fix ALL issues found. Commit: "chore: pre-build validation fixes"
-
-If no issues found, proceed without committing.
-
-============================================================
-PROCESS: ITERATION LOOP (max 6 iterations)
-============================================================
-
-Run this loop up to 6 iterations. Stop early ONLY when ALL exit criteria are met.
-
-=== EACH ITERATION ===
-
-STEP 1: IMPLEMENT / IMPROVE
-
-- Iteration 1: Build the MVP — simplest working version. No polish, just function.
-- Iteration 2+: Improve based on issues found in the previous review AND analysis steps.
-  Analysis findings take priority over self-review improvements.
-
-CO-COMMIT RULES (CRITICAL — learned from recall analysis):
-When implementing features, you MUST co-commit related changes together.
-Failing to do this is the #1 source of rework:
-
-a) FIRESTORE RULES: When adding or modifying a Firestore collection, update
-   firestore.rules in the SAME commit. Never commit feature code that reads/writes
-   a collection without ensuring rules exist for that collection. Check
-   firestore.indexes.json for any new compound queries.
-b) STORAGE RULES: When adding file upload paths, update storage.rules in the
-   same commit.
-c) SERVER-SIDE VALIDATION: When adding client-side business logic (credit checks,
-   eligibility, permissions), wire up the corresponding server-side validation
-   (Cloud Functions, callable functions) in the SAME iteration. Never rely on
-   client-side-only enforcement for security-critical logic.
-d) MODEL SERIALIZATION: When a Cloud Function writes new fields to a document,
-   update the client-side model class (fields, constructor, copyWith, fromJson/
-   fromMap, toJson/toMap) in the SAME commit. Missing fields are invisible bugs.
-e) CLOUD FUNCTION TRIGGERS: When creating new collections or changing document
-   structure, verify Cloud Function triggers still match. Update triggers in the
-   same commit if needed.
-
-STEP 2: VALIDATE
-
-- Run the project's test suite. If no tests exist, write basic tests first.
-- Run the build/compile step if applicable.
-- Run the linter if configured.
-- Record what passed and what failed.
-
-STEP 3: FIX
-
-- If anything from Step 2 failed, fix it NOW before moving on.
-- Re-run validation until it passes.
-- If stuck after 3 fix attempts on the same issue, note it and move on.
-
-STEP 4: SELF-REVIEW
-
-Score the current state on these dimensions (1-5):
-- Works: Does it run without errors? Do tests pass?
-- Correct: Does it actually do what was asked?
-- Clean: Is the code readable and maintainable?
-- Robust: Are edge cases handled? Is error handling adequate?
-- Wired: Are all layers connected? (rules, server validation, model serialization)
-
-Output the scores and a brief assessment of what to improve next iteration:
-
-  ## Iteration N Self-Review
-  - Works: X/5
-  - Correct: X/5
-  - Clean: X/5
-  - Robust: X/5
-  - Wired: X/5
-  - Next focus: [what to improve]
-
-STEP 5: DOMAIN ANALYSIS (runs on iteration 2 and on the final iteration)
-
-Run the `/analyze` skill scoped to the features you built or changed in this iteration.
-Include all analysis phases: consistency audit, server-side validation wiring,
-model-to-Cloud-Function field completeness, Firebase rules, and platform compatibility.
-
-Scope: Only the features/files touched in this iteration — not the full project.
-Depth: Full analysis (all phases of /analyze).
-Action: If analysis finds Critical or Warning issues, feed them into the NEXT
-iteration's Step 1 as the top-priority improvement targets.
-
-=== INTERMEDIATE QUALITY GATE (learned from recall) ===
-
-When implementing MULTIPLE features (e.g., a list from docs/NewFeatures.md):
-- After every 3-4 features, run a mini domain analysis (Step 5) even if it's
-  not iteration 2 yet. This catches cross-feature issues early.
-- Do NOT batch 8+ features into one iteration without a quality check.
-- If implementing 5+ features, split into batches of 3-4 and run validation
-  between batches. This prevents "lots of bug fixes" mega-commits later.
-
-=== EXIT CRITERIA (ALL must be true to stop early) ===
-
-- All tests pass
-- Build succeeds (if applicable)
-- No lint errors (if linter exists)
-- Self-review scores are all 4+
-- Domain analysis shows zero Critical issues and zero Warning issues
-- Server-side validation is wired for all security-critical client logic
-- Firestore rules exist for all collections the app reads/writes
-- The feature does what was requested
-
-=== ITERATION FOCUS ===
-
-- Iteration 1: Focus ONLY on making it work. Ugly code is fine. But DO co-commit
-  rules, server validation, and model fields — these are not polish, they are wiring.
-- Iteration 2: Run domain analysis. Fix consistency issues + error handling + tests.
-- Iteration 3: Clean up code quality, naming, structure. Address remaining warnings.
-- Iteration 4: Re-run analysis to confirm. Polish if needed.
-- Iteration 5: Only if analysis still finds issues.
-- Iteration 6: Final pass — only if something still isn't right.
-
-=== COMMIT DISCIPLINE ===
-
-- Commit after each iteration: "feat: iteration N — [what changed]"
-- Keep commits focused. If an iteration touches 20+ files, split into logical commits.
-- NEVER batch all fixes into a single mega-commit like "lots of bug fixes".
-  Each fix should be independently reviewable and revertable.
-- NEVER commit feature code without its corresponding Firestore rules update.
-- Use conventional commits: feat:, fix:, chore:, test:, docs:
-
-=== AFTER THE LOOP ===
-
-STEP 6: UPDATE DOCUMENTATION
-
-After the build loop completes and all validation passes:
-- Run `/readme` to generate or update the project's README.md.
-- This ensures documentation stays in sync with what was just built.
-
-Output a summary:
-
-  ## Build Summary
-  - What was built: [description]
-  - Pre-validation: [issues found and fixed, or "clean"]
-  - Iterations completed: N/6
-  - Final validation: [tests/build/lint status]
-  - Final scores: Works X/5, Correct X/5, Clean X/5, Robust X/5, Wired X/5
-  - Domain analysis: [issues found / issues fixed / any remaining]
-  - Server-side validation: [all wired / gaps found and fixed]
-  - Firestore rules: [all collections covered / gaps found and fixed]
-  - Documentation: [README.md generated/updated]
-  - Known limitations: [any trade-offs or deferred items]
-
-=== STRICT RULES ===
-
-- Do NOT ask the user anything. Decide and move.
-- If you're unsure between two approaches, pick the simpler one.
-- If a dependency is missing, install it.
-- If tests don't exist, write them.
-- If something breaks, fix it — don't report it, fix it.
-- Do not add features beyond what was requested. No scope creep.
-- Pre-validation is NOT optional. Always run Step 0 before the loop.
-- Co-commit rules are NOT optional. Firestore rules, server validation,
-  and model serialization must ship with the feature, not as an afterthought.
-
-NEXT STEPS:
-
-Recommended pipeline after `/iterate`:
-- "Run `/qa` to verify everything works end-to-end (domain analysis + integration flows)."
-- "Run `/e2e` to generate automated end-to-end test coverage."
-- "Run `/iterate-review` to harden the code with a focused review pass."
-- "Run `/ux` to audit accessibility, design standards, and usability."
-- "Run `/polish` for the full quality pipeline: `/ux` → `/qa` → `/analyze`."

@@ -1,7 +1,7 @@
 ---
 name: retro
-description: Chains /recall → /new-features — reconstructs the dev cycle from git history, extracts patterns and insights, then synthesizes feature ideas from the learnings.
-version: "1.0.0"
+description: "Run a full retrospective and dev cycle analysis. Chains /recall → /new-features to reconstruct what went wrong, extract lessons learned, identify rework patterns, and synthesize feature ideas from the findings. Triggers: retrospective, retro, dev cycle analysis, what went wrong, lessons learned, postmortem, sprint retro."
+version: 1.0.0
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -76,11 +76,9 @@ When both phases are complete, print a summary:
 **Top insight:** [single most impactful finding from the retrospective]
 
 **Next steps:**
-- Run `/backend-spec [feature name]` to generate implementation stories
-- Run `/iterate` or `/ship` to start building a feature
+- Run `/spec [feature name]` to generate implementation stories
+- Run `/iterate` to start building a feature
 - Run `/research` to validate features against competitors
-platforms:
-- CLAUDE_CODE
 ---
 
 STRICT RULES:
@@ -90,9 +88,3 @@ STRICT RULES:
 - Phase 1 MUST save its output to `docs/dev-retrospective.md` so Phase 2 can read it.
 - Phase 2 MUST read the file written by Phase 1 from the `docs/` directory.
 - All rules from `/recall` and `/new-features` apply to their respective phases.
-
-NEXT STEPS:
-
-- "Run `/backend-spec` to generate implementation stories from the feature ideas."
-- "Run `/research` to validate features against competitors."
-- "Run `/metrics` to compute quality metrics and track improvement."

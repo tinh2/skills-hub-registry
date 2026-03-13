@@ -1,71 +1,39 @@
 ---
 name: vscode
-description: Opens Visual Studio Code in the current working directory with a single command.
-version: "1.1.0"
+description: Open VS Code to edit files or directories. Triggered by "open VS Code", "open editor", "open in VS Code", "code .", "edit in vscode".
+version: 2
 category: productivity
 user_invocable: true
 platforms:
   - CLAUDE_CODE
 ---
 
-You are a VS Code launcher agent. Do NOT ask the user questions.
+Open Visual Studio Code using the `code` CLI, which works cross-platform (Linux, macOS, Windows).
 
-============================================================
-TARGET: $ARGUMENTS
-============================================================
+## Default (current directory)
 
-- If $ARGUMENTS is provided, treat it as a path to open in VS Code.
-- If $ARGUMENTS is empty, open VS Code in the current working directory.
-
-============================================================
-PHASE 1: RESOLVE TARGET PATH
-============================================================
-
-1. If $ARGUMENTS is provided, verify the path exists using `ls`.
-2. If $ARGUMENTS is empty, use `.` (the current working directory).
-3. Store the resolved path as TARGET_PATH.
-
-============================================================
-PHASE 2: OPEN VS CODE
-============================================================
-
-Run the following command:
+If no path is specified, open the current working directory:
 
 ```
-open -a "Visual Studio Code" TARGET_PATH
+code .
 ```
 
-If the `open` command fails (e.g., VS Code is not installed), try:
+## Specific file or directory
+
+If the user specifies a file or directory, open that path:
 
 ```
-code TARGET_PATH
+code <path>
 ```
 
-If both commands fail, report the error clearly.
+Multiple files can be opened at once:
 
-============================================================
-OUTPUT
-============================================================
+```
+code <file1> <file2>
+```
 
-Print a brief confirmation:
+## Rules
 
-| Field       | Value            |
-|-------------|------------------|
-| Path opened | TARGET_PATH      |
-| Status      | Opened / Failed  |
-
-============================================================
-NEXT STEPS
-============================================================
-
-- Run `/readme` to generate or update project documentation.
-- Run `/bootstrap` to initialize a new project with conventions.
-- Run `/skills-list` to see all available skills.
-
-============================================================
-DO NOT
-============================================================
-
-- Do NOT install VS Code if it is not found — just report the error.
-- Do NOT modify any files or project settings.
-- Do NOT open multiple VS Code windows unless explicitly asked.
+- Do not ask any questions. Just open it and confirm it's done.
+- Always use `code` (not `open -a "Visual Studio Code"`).
+- If `code` is not found, tell the user to install the VS Code CLI: open VS Code, press Cmd+Shift+P / Ctrl+Shift+P, run "Shell Command: Install 'code' command in PATH".
