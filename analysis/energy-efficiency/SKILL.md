@@ -1,6 +1,6 @@
 ---
 name: energy-efficiency
-description: Reviews energy management and efficiency systems including power monitoring, ISO 50001 compliance, peak demand management, renewable integration, carbon footprint tracking, and energy cost optimization for manufacturing operations.
+description: Audit a manufacturing energy management system for monitoring quality, cost optimization, and compliance. Evaluates power metering infrastructure, energy baseline and EnPI calculations, peak demand management and load shifting, renewable energy and battery storage integration, GHG Protocol carbon footprint tracking (Scope 1/2/3), energy cost optimization, and ISO 50001 compliance. Use when building or reviewing industrial energy platforms, building management systems, or sustainability reporting tools.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -18,265 +18,286 @@ If provided, focus on specific areas (e.g., "power monitoring", "carbon tracking
 "peak demand", "ISO 50001"). If not provided, perform a full analysis.
 
 ============================================================
-PHASE 1: STACK DETECTION & ENERGY SYSTEM MAPPING
+PHASE 1: STACK DETECTION AND ENERGY SYSTEM MAPPING
 ============================================================
 
-1. Identify the tech stack:
-   - Read package.json, requirements.txt, pyproject.toml, go.mod, pom.xml, or equivalent.
-   - Identify languages, frameworks, data processing libraries (pandas, NumPy, Apache Spark),
-     time-series databases (InfluxDB, TimescaleDB, Prometheus), visualization tools
-     (Grafana, Plotly, Power BI connectors), and IoT platforms.
-   - Identify meter data protocols (Modbus, BACnet, MQTT, OPC-UA, IEC 61850).
-   - Identify energy-specific integrations (utility APIs, weather APIs, grid APIs,
-     building management systems).
+Step 1.1 -- Technology Stack
 
-2. Map the energy management architecture:
-   - Metering and data collection layer (smart meters, submeters, CT sensors).
-   - Data storage and aggregation layer (time-series DB, data warehouse).
-   - Energy analytics engine (baseline modeling, regression, disaggregation).
-   - Demand management system (peak shaving, load shifting, demand response).
-   - Renewable energy integration (solar, wind, battery storage management).
-   - Carbon footprint and emissions tracking.
-   - Cost calculation and billing integration.
-   - Reporting and compliance layer (ISO 50001, regulatory reports).
-   - Dashboard and alerting layer.
+Scan package manifests and config files. Identify:
+- Languages, frameworks, data processing libraries (pandas, NumPy, Apache Spark).
+- Time-series databases: InfluxDB, TimescaleDB, Prometheus.
+- Visualization tools: Grafana, Plotly, Power BI connectors.
+- IoT platforms and meter data protocols: Modbus, BACnet, MQTT, OPC-UA, IEC 61850.
+- Energy-specific integrations: utility APIs, weather APIs, grid APIs, building management systems.
 
-3. Build the energy monitoring inventory from code:
+Step 1.2 -- Energy Management Architecture
 
-   | Meter/Point | Energy Type | Location | Frequency | Unit | Monitored Equipment |
-   |------------|-----------|----------|-----------|------|-------------------|
+Map the full system:
+- Metering and data collection layer: smart meters, submeters, CT sensors.
+- Data storage and aggregation layer: time-series DB, data warehouse.
+- Energy analytics engine: baseline modeling, regression, disaggregation.
+- Demand management system: peak shaving, load shifting, demand response.
+- Renewable energy integration: solar, wind, battery storage management.
+- Carbon footprint and emissions tracking.
+- Cost calculation and billing integration.
+- Reporting and compliance layer: ISO 50001, regulatory reports.
+- Dashboard and alerting layer.
+
+Step 1.3 -- Energy Monitoring Inventory
+
+Build from code:
+
+| Meter/Point | Energy Type | Location | Frequency | Unit | Monitored Equipment |
+|------------|-----------|----------|-----------|------|-------------------|
 
 ============================================================
 PHASE 2: POWER MONITORING ANALYSIS
 ============================================================
 
-METERING INFRASTRUCTURE:
-- Identify all meter data collection points in the code.
-- Check for metering hierarchy (facility -> building -> floor -> line -> machine).
-- Verify submetering granularity (can energy be attributed to specific processes?).
-- Check for meter data validation at collection:
-  - Range checks (negative values, unrealistic spikes).
-  - Gap detection (missing readings).
-  - Timestamp validation and synchronization.
-  - Meter rollover handling (counter resets).
+Step 2.1 -- Metering Infrastructure
+
+Identify all meter data collection points:
+- Metering hierarchy: facility > building > floor > line > machine.
+- Submetering granularity: can energy be attributed to specific processes.
+- Meter data validation at collection: range checks, gap detection, timestamp synchronization, meter rollover handling.
 - Flag meter data ingested without validation.
 
-DATA QUALITY:
-- Check for missing data handling (interpolation, flagging, gap-filling strategy).
-- Verify outlier detection on energy data (equipment malfunction vs real peak).
-- Check for meter calibration tracking and correction factors.
-- Verify data resolution matches analysis needs (15-min for demand, hourly for trends).
+Step 2.2 -- Data Quality
+
+Check data integrity:
+- Missing data handling: interpolation, flagging, gap-filling strategy.
+- Outlier detection on energy data: equipment malfunction vs. real peak.
+- Meter calibration tracking and correction factors.
+- Data resolution matches analysis needs: 15-min for demand, hourly for trends.
 - Flag energy calculations performed on gapped or unvalidated data.
 
-ENERGY DISAGGREGATION:
-- Check for energy disaggregation by:
-  - Process/production line.
-  - Equipment type (HVAC, compressed air, lighting, process equipment).
-  - Product (energy per unit produced).
-  - Shift/time period.
-- Verify disaggregation method:
-  - Submetering (direct measurement -- most accurate).
-  - NILM (Non-Intrusive Load Monitoring -- algorithmic).
-  - Engineering estimates (calculation-based).
-  - Proportional allocation (least accurate).
+Step 2.3 -- Energy Disaggregation
+
+Check attribution capability:
+- Disaggregation by: process/production line, equipment type (HVAC, compressed air, lighting, process equipment), product (energy per unit produced), shift/time period.
+- Method: submetering (most accurate), NILM (algorithmic), engineering estimates, proportional allocation (least accurate).
 - Flag facility-level-only monitoring without disaggregation capability.
 
-REAL-TIME MONITORING:
-- Check for real-time energy dashboard implementation.
-- Verify alert thresholds for abnormal consumption.
-- Check for equipment-level power monitoring (idle detection, standby waste).
-- Verify monitoring covers all significant energy consumers (80/20 rule).
-- Check for power quality monitoring (power factor, harmonics, voltage sags).
+Step 2.4 -- Real-Time Monitoring
+
+Check operational monitoring:
+- Real-time energy dashboard implementation.
+- Alert thresholds for abnormal consumption.
+- Equipment-level power monitoring: idle detection, standby waste.
+- Coverage of all significant energy consumers (80/20 rule).
+- Power quality monitoring: power factor, harmonics, voltage sags.
 
 ============================================================
 PHASE 3: BASELINE AND BENCHMARKING ANALYSIS
 ============================================================
 
-ENERGY BASELINE:
-- Check for energy baseline model implementation.
-- Verify baseline methodology:
-  - Regression models (energy vs production volume, weather, occupancy).
-  - Degree-day models (heating/cooling degree days for HVAC).
-  - Production-normalized baselines (kWh per unit, per ton, per batch).
-  - Multi-variable regression (IPMVP Option C/D).
-- Verify baseline period selection (12+ months recommended for seasonality).
-- Check for baseline adjustment when conditions change (new equipment, expansion).
+Step 3.1 -- Energy Baseline
+
+Check baseline model implementation:
+- Methodology: regression (energy vs. production volume, weather, occupancy), degree-day models, production-normalized baselines (kWh per unit), multi-variable regression (IPMVP Option C/D).
+- Baseline period: 12+ months recommended for seasonality.
+- Baseline adjustment when conditions change: new equipment, expansion.
 - Flag baselines that do not account for production volume changes.
 
-ENERGY PERFORMANCE INDICATORS (EnPIs):
-- Identify all EnPI calculations in the code.
-- Verify EnPIs include:
-  - Specific Energy Consumption (SEC): energy per unit of production.
-  - Energy intensity: energy per unit area, per employee, per revenue.
-  - Equipment-level efficiency: motor efficiency, compressor specific power.
-  - HVAC efficiency: kW/ton for chillers, COP for heat pumps.
-- Check that EnPIs are normalized for relevant variables (weather, production volume).
-- Verify EnPI trending and target tracking.
-- Flag EnPIs that use absolute energy values without normalization.
+Step 3.2 -- Energy Performance Indicators (EnPIs)
 
-BENCHMARKING:
-- Check for internal benchmarking (compare similar lines, facilities).
-- Check for external benchmarking (industry averages, best practices).
-- Verify benchmark data sources are documented and current.
-- Check for peer comparison and ranking functionality.
+Identify all EnPI calculations:
+- SEC (Specific Energy Consumption): energy per unit of production.
+- Energy intensity: energy per unit area, per employee, per revenue.
+- Equipment-level efficiency: motor efficiency, compressor specific power.
+- HVAC efficiency: kW/ton for chillers, COP for heat pumps.
+- Check that EnPIs are normalized for relevant variables.
+- Verify EnPI trending and target tracking.
+- Flag EnPIs using absolute energy values without normalization.
+
+Step 3.3 -- Benchmarking
+
+Check comparison capabilities:
+- Internal benchmarking: compare similar lines, facilities.
+- External benchmarking: industry averages, best practices.
+- Benchmark data sources documented and current.
+- Peer comparison and ranking functionality.
 
 ============================================================
 PHASE 4: PEAK DEMAND MANAGEMENT
 ============================================================
 
-DEMAND MONITORING:
-- Check for real-time demand monitoring (kW, not just kWh).
-- Verify demand interval tracking matches utility billing interval (typically 15 min).
-- Check for demand prediction (forecast next interval based on current trajectory).
-- Verify demand alert thresholds are set below contracted/historical peaks.
-- Flag systems that only track energy consumption (kWh) without demand (kW).
+Step 4.1 -- Demand Monitoring
 
-DEMAND RESPONSE:
-- Check for automated demand response capabilities:
-  - Load shedding sequences (prioritized equipment shutdown).
-  - Load shifting schedules (move flexible loads to off-peak).
-  - Pre-cooling/pre-heating strategies.
-  - Battery discharge during peaks.
-  - Generator start for peak shaving.
-- Verify demand response sequences respect production constraints.
-- Check for demand response event participation (utility DR programs).
+Demand charges often represent 30-50% of industrial electricity bills. Check:
+- Real-time demand monitoring (kW, not just kWh).
+- Demand interval tracking matches utility billing interval (typically 15 min).
+- Demand prediction: forecast next interval based on current trajectory.
+- Demand alert thresholds set below contracted/historical peaks.
+- Flag systems that only track kWh without kW.
+
+Step 4.2 -- Demand Response
+
+Check automated demand response:
+- Load shedding sequences: prioritized equipment shutdown.
+- Load shifting schedules: move flexible loads to off-peak.
+- Pre-cooling/pre-heating strategies.
+- Battery discharge during peaks.
+- Generator start for peak shaving.
+- Demand response sequences respect production constraints.
+- Demand response event participation: utility DR programs.
 - Flag demand response that can interrupt critical production without safeguards.
 
-LOAD MANAGEMENT:
-- Check for staggered start sequences (prevent simultaneous equipment startup).
-- Verify power factor correction implementation and monitoring.
-- Check for load scheduling to avoid coincident peaks.
-- Verify interlock or soft-start controls for large motors.
-- Check for standby/idle power management (shut down idle equipment).
+Step 4.3 -- Load Management
 
-UTILITY RATE OPTIMIZATION:
-- Check for time-of-use (TOU) rate awareness in scheduling.
-- Verify demand charge tracking and optimization.
-- Check for rate structure modeling (calculate cost under different tariffs).
-- Verify ratchet clause awareness (peak demand sets minimum for N months).
+Check load optimization:
+- Staggered start sequences: prevent simultaneous equipment startup.
+- Power factor correction implementation and monitoring.
+- Load scheduling to avoid coincident peaks.
+- Interlock or soft-start controls for large motors.
+- Standby/idle power management: shut down idle equipment.
+
+Step 4.4 -- Utility Rate Optimization
+
+Check rate awareness:
+- Time-of-use (TOU) rate awareness in scheduling.
+- Demand charge tracking and optimization.
+- Rate structure modeling: calculate cost under different tariffs.
+- Ratchet clause awareness: peak demand sets minimum for N months.
 - Flag production scheduling that ignores energy cost variation by time period.
 
 ============================================================
 PHASE 5: RENEWABLE ENERGY INTEGRATION
 ============================================================
 
-RENEWABLE GENERATION:
-- Check for on-site renewable generation monitoring:
-  - Solar PV: production tracking, inverter monitoring, panel-level data.
-  - Wind: turbine output, availability tracking.
-  - Other: CHP, biomass, waste heat recovery.
-- Verify generation forecasting (weather-based prediction for solar/wind).
-- Check for generation vs consumption comparison and self-consumption ratio.
+Step 5.1 -- Renewable Generation
 
-BATTERY STORAGE:
-- Check for battery energy storage system (BESS) management:
-  - State of charge (SOC) monitoring.
-  - Charge/discharge scheduling optimization.
-  - Battery health and degradation tracking.
-  - Round-trip efficiency tracking.
-- Verify battery dispatch strategy (peak shaving, self-consumption, arbitrage).
-- Check for battery operating constraints (min/max SOC, C-rate limits).
+Check on-site generation monitoring:
+- Solar PV: production tracking, inverter monitoring, panel-level data.
+- Wind: turbine output, availability tracking.
+- Other: CHP, biomass, waste heat recovery.
+- Generation forecasting: weather-based prediction for solar/wind.
+- Generation vs. consumption comparison and self-consumption ratio.
+
+Step 5.2 -- Battery Storage
+
+Check BESS management:
+- State of charge (SOC) monitoring.
+- Charge/discharge scheduling optimization.
+- Battery health and degradation tracking.
+- Round-trip efficiency tracking.
+- Dispatch strategy: peak shaving, self-consumption, arbitrage.
+- Operating constraints: min/max SOC, C-rate limits.
 - Flag battery systems operated without degradation awareness.
 
-GRID INTERACTION:
-- Check for net metering or feed-in tracking.
-- Verify grid import/export measurement and billing calculation.
-- Check for grid carbon intensity awareness (charge battery when grid is clean).
-- Verify behind-the-meter optimization (maximize self-consumption of renewables).
+Step 5.3 -- Grid Interaction
 
-RENEWABLE ENERGY CERTIFICATES:
-- Check for REC/GO (Guarantee of Origin) tracking.
-- Verify PPA (Power Purchase Agreement) volume tracking.
-- Check for Scope 2 market-based emissions calculation using RECs.
+Check grid integration:
+- Net metering or feed-in tracking.
+- Grid import/export measurement and billing calculation.
+- Grid carbon intensity awareness: charge battery when grid is clean.
+- Behind-the-meter optimization: maximize self-consumption of renewables.
+
+Step 5.4 -- Renewable Energy Certificates
+
+Check certificate tracking:
+- REC/GO (Guarantee of Origin) tracking.
+- PPA (Power Purchase Agreement) volume tracking.
+- Scope 2 market-based emissions calculation using RECs.
 
 ============================================================
 PHASE 6: CARBON FOOTPRINT TRACKING
 ============================================================
 
-EMISSIONS CALCULATION:
-- Check for greenhouse gas emissions calculation implementation.
-- Verify GHG Protocol scope coverage:
-  - Scope 1: Direct emissions (on-site combustion, process emissions, fleet).
-  - Scope 2: Indirect emissions from purchased electricity, heat, steam.
-  - Scope 3: Value chain emissions (if tracked).
-- Verify emission factor sources:
-  - Grid electricity: location-based (grid average) and market-based (supplier-specific).
-  - Natural gas: combustion emission factor.
-  - Other fuels: fuel-specific factors.
-- Check emission factor currency (factors update annually -- verify they are not stale).
+Step 6.1 -- Emissions Calculation
+
+Check GHG implementation:
+- GHG Protocol scope coverage:
+  - Scope 1: direct emissions (on-site combustion, process emissions, fleet).
+  - Scope 2: indirect emissions from purchased electricity, heat, steam.
+  - Scope 3: value chain emissions (if tracked).
+- Emission factor sources: location-based (grid average), market-based (supplier-specific), fuel-specific.
+- Emission factor currency: factors update annually, verify not stale.
 - Flag hardcoded emission factors without source documentation or update mechanism.
 
-CARBON ACCOUNTING:
-- Check for CO2e calculation (converting CH4, N2O, etc. using GWP factors).
-- Verify accounting period alignment (calendar year, fiscal year).
-- Check for carbon intensity metrics (tCO2e per unit produced, per revenue).
-- Verify organizational boundary definition (equity share, operational control).
-- Check for emissions trending and reduction target tracking.
+Step 6.2 -- Carbon Accounting
 
-REPORTING:
-- Check for regulatory emissions reporting support (CDP, SEC climate disclosure,
-  EU ETS, national reporting).
-- Verify data audit trail for reported emissions (traceable to meter data).
-- Check for Science-Based Target (SBTi) tracking if applicable.
-- Verify third-party verification readiness (data quality, documentation).
+Check accounting rigor:
+- CO2e calculation: converting CH4, N2O using GWP factors.
+- Accounting period alignment: calendar year, fiscal year.
+- Carbon intensity metrics: tCO2e per unit produced, per revenue.
+- Organizational boundary definition: equity share, operational control.
+- Emissions trending and reduction target tracking.
+
+Step 6.3 -- Reporting
+
+Check external reporting readiness:
+- Regulatory emissions reporting support: CDP, SEC climate disclosure, EU ETS, national reporting.
+- Data audit trail for reported emissions: traceable to meter data.
+- Science-Based Target (SBTi) tracking if applicable.
+- Third-party verification readiness: data quality, documentation.
 
 ============================================================
 PHASE 7: ENERGY COST OPTIMIZATION
 ============================================================
 
-COST CALCULATION:
-- Check for energy cost calculation accuracy:
-  - Consumption charges (kWh x rate, with TOU differentiation).
-  - Demand charges (peak kW x demand rate, with ratchet).
-  - Power factor penalties or credits.
-  - Taxes, surcharges, and regulatory fees.
-  - Renewable energy credits or incentives.
-- Verify rate structure modeling matches actual utility bills.
-- Check for bill validation (calculated cost vs actual bill comparison).
+Step 7.1 -- Cost Calculation
+
+Check cost calculation accuracy:
+- Consumption charges: kWh x rate, with TOU differentiation.
+- Demand charges: peak kW x demand rate, with ratchet.
+- Power factor penalties or credits.
+- Taxes, surcharges, and regulatory fees.
+- Renewable energy credits or incentives.
+- Rate structure modeling matches actual utility bills.
+- Bill validation: calculated cost vs. actual bill comparison.
 - Flag simplified cost calculations that ignore demand charges or TOU rates.
 
-OPTIMIZATION OPPORTUNITIES:
-- Check for energy waste identification:
-  - Base load analysis (energy consumption during non-production hours).
-  - Compressed air leak estimation.
-  - Steam trap monitoring.
-  - HVAC setpoint optimization.
-  - Lighting schedule optimization.
-  - Variable speed drive opportunities.
-- Verify energy savings calculations use appropriate methodology (IPMVP).
-- Check for ROI and payback period calculations for efficiency projects.
+Step 7.2 -- Optimization Opportunities
 
-PROJECT TRACKING:
-- Check for energy efficiency project portfolio management.
-- Verify M&V (Measurement and Verification) implementation for completed projects.
-- Check for savings persistence tracking (do savings sustain over time?).
-- Verify avoided cost calculations account for rate changes.
+Check waste identification:
+- Base load analysis: energy consumption during non-production hours.
+- Compressed air leak estimation.
+- Steam trap monitoring.
+- HVAC setpoint optimization.
+- Lighting schedule optimization.
+- Variable speed drive opportunities.
+- Energy savings calculations use appropriate methodology (IPMVP).
+- ROI and payback period calculations for efficiency projects.
+
+Step 7.3 -- Project Tracking
+
+Check project management:
+- Energy efficiency project portfolio management.
+- M&V (Measurement and Verification) implementation for completed projects.
+- Savings persistence tracking: do savings sustain over time.
+- Avoided cost calculations account for rate changes.
 
 ============================================================
 PHASE 8: ISO 50001 COMPLIANCE ANALYSIS
 ============================================================
 
-ENERGY MANAGEMENT SYSTEM:
-- Check for ISO 50001 Energy Management System (EnMS) structure:
-  - Energy policy documentation.
-  - Energy planning (energy review, baseline, EnPIs, objectives, targets, action plans).
-  - Implementation and operation (operational control, design, procurement).
-  - Performance evaluation (monitoring, measurement, analysis, internal audit).
-  - Management review and continual improvement.
-- Verify the Plan-Do-Check-Act cycle is implemented in code.
+Step 8.1 -- Energy Management System
 
-SIGNIFICANT ENERGY USES (SEUs):
-- Check for SEU identification and documentation.
-- Verify SEUs account for a substantial share of total energy consumption.
-- Check for SEU-specific monitoring, baselines, and EnPIs.
-- Verify SEU operational controls are implemented.
+Check ISO 50001 EnMS structure:
+- Energy policy documentation.
+- Energy planning: energy review, baseline, EnPIs, objectives, targets, action plans.
+- Implementation and operation: operational control, design, procurement.
+- Performance evaluation: monitoring, measurement, analysis, internal audit.
+- Management review and continual improvement.
+- Plan-Do-Check-Act cycle implemented in code.
+
+Step 8.2 -- Significant Energy Uses (SEUs)
+
+Check SEU management:
+- SEU identification and documentation.
+- SEUs account for a substantial share of total energy consumption.
+- SEU-specific monitoring, baselines, and EnPIs.
+- SEU operational controls implemented.
 - Flag energy management without SEU identification.
 
-CONTINUAL IMPROVEMENT:
-- Check for energy performance improvement tracking over time.
-- Verify energy objectives and targets are documented and tracked.
-- Check for action plan management (assigned, scheduled, tracked to completion).
-- Verify internal audit capability and nonconformance tracking.
+Step 8.3 -- Continual Improvement
+
+Check improvement tracking:
+- Energy performance improvement tracking over time.
+- Energy objectives and targets documented and tracked.
+- Action plan management: assigned, scheduled, tracked to completion.
+- Internal audit capability and nonconformance tracking.
 
 ============================================================
 OUTPUT

@@ -1,6 +1,6 @@
 ---
 name: emergency-response
-description: Audit a 911 dispatch or CAD system for call routing optimization, closest-unit resource deployment, incident prioritization logic, mutual aid coordination, NG911 integration, NFPA response time benchmarking, and ICS/NIMS compliance. Use when reviewing PSAP dispatch platforms, fire/EMS CAD systems, law enforcement dispatch, or emergency operations center software.
+description: Audit a 911 dispatch or emergency response system for operational reliability and compliance. Evaluates call routing and intake (E911/NG911), unit recommendation algorithms, AVL and response time tracking, mutual aid coordination, GIS integration, ICS/NIMS compliance, and mass casualty incident capabilities. Use when building or reviewing CAD systems, PSAP software, dispatch platforms, or emergency operations center tools.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -14,113 +14,216 @@ compliance features, then produce a comprehensive assessment.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, focus on specific areas (e.g., "call routing",
+If arguments are provided, focus on that area (e.g., "call routing",
 "resource deployment", "mutual aid"). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: SYSTEM ARCHITECTURE DISCOVERY
 ============================================================
 
-Step 1.1 -- Read project configuration to identify tech stack: backend framework,
-real-time database, WebSocket/SSE protocols, GIS/mapping services, CAD
-integration, mobile data terminal support, telephony/VoIP, message queuing.
+Step 1.1 -- Technology Stack
 
-Step 1.2 -- Identify emergency services covered: law enforcement, fire/rescue,
-EMS, consolidated PSAP, emergency management (EOC), non-emergency (311).
-Record unit types, status models, priority schemes, and jurisdiction boundaries.
+Read project configuration to identify:
+- Backend framework and real-time database.
+- WebSocket/SSE protocols for live updates.
+- GIS/mapping services and CAD integration.
+- Mobile data terminal support.
+- Telephony/VoIP and message queuing.
 
-Step 1.3 -- Identify integrations: E911 ALI/ANI databases, NG911 i3 components,
-RMS, mobile data terminals, AVL feeds, hospital status systems, weather alerts
-(NWS), traffic systems, mutual aid partner CADs, federal reporting (NFIRS,
-NIBRS, NEMSIS).
+Step 1.2 -- Service Domain Coverage
+
+Identify emergency services covered:
+- Law enforcement, fire/rescue, EMS, consolidated PSAP, emergency management (EOC), non-emergency (311).
+- Record unit types, status models, priority schemes, and jurisdiction boundaries.
+
+Step 1.3 -- System Integrations
+
+Map all external system connections:
+- E911 ALI/ANI databases and NG911 i3 components.
+- RMS (Records Management Systems).
+- Mobile data terminals and AVL feeds.
+- Hospital status systems.
+- Weather alerts (NWS) and traffic systems.
+- Mutual aid partner CADs.
+- Federal reporting: NFIRS, NIBRS, NEMSIS.
 
 ============================================================
 PHASE 2: CALL ROUTING AND INTAKE
 ============================================================
 
-Step 2.1 -- Evaluate call classification: type taxonomy, priority assignment
-logic, EMD/fire/law dispatch protocol integration, text-to-911 handling,
-language line integration, TTY/TDD accessibility.
+Step 2.1 -- Call Classification
 
-Step 2.2 -- Analyze routing: geographic PSAP determination, overflow routing,
-transfer protocols, abandoned call callback, duplicate detection and
-consolidation, multi-caller incident linking.
+Evaluate call processing:
+- Type taxonomy and priority assignment logic.
+- EMD/fire/law dispatch protocol integration.
+- Text-to-911 handling.
+- Language line integration.
+- TTY/TDD accessibility.
 
-Step 2.3 -- Assess location determination: wireline ALI lookup, wireless Phase
-I/II, VoIP handling, location confidence display, indoor location, RapidSOS
-integration, manual override for inaccurate fixes.
+Step 2.2 -- Routing Logic
+
+Analyze call routing:
+- Geographic PSAP determination.
+- Overflow routing for high-volume periods.
+- Transfer protocols between agencies.
+- Abandoned call callback.
+- Duplicate detection and consolidation.
+- Multi-caller incident linking.
+
+Step 2.3 -- Location Determination
+
+Assess location accuracy -- seconds matter:
+- Wireline ALI lookup.
+- Wireless Phase I/II.
+- VoIP handling and location confidence display.
+- Indoor location capabilities.
+- RapidSOS integration.
+- Manual override for inaccurate fixes.
 
 ============================================================
 PHASE 3: RESOURCE DEPLOYMENT
 ============================================================
 
-Step 3.1 -- Evaluate unit recommendation: closest unit method (Euclidean,
-network distance, travel time), capability matching, workload balancing,
-cross-boundary recommendations, specialty unit identification (SWAT, hazmat,
-K-9, technical rescue), multi-unit response packaging.
+Step 3.1 -- Unit Recommendation
 
-Step 3.2 -- Assess AVL: GPS update frequency, map display, unit tracking,
-geofence alerts, status integration, ETA calculation, dead reckoning fallback.
+Evaluate dispatch algorithm quality:
+- Closest unit method: Euclidean, network distance, or travel time.
+- Capability matching for incident type.
+- Workload balancing across units.
+- Cross-boundary recommendations.
+- Specialty unit identification: SWAT, hazmat, K-9, technical rescue.
+- Multi-unit response packaging.
 
-Step 3.3 -- Check dynamic redeployment: move-up/cover algorithms, coverage gap
-detection, demand-based positioning, automatic coverage alerts, system status
-management (SSM) for EMS.
+Step 3.2 -- Automatic Vehicle Location (AVL)
 
-Step 3.4 -- Evaluate response time tracking: timestamp capture (received,
-dispatched, en route, on scene), benchmark comparison (NFPA 1710/1720),
-geographic mapping, trend analysis, fractile reporting (90th percentile),
-contributing factor analysis.
+Assess real-time unit tracking:
+- GPS update frequency.
+- Map display and unit tracking.
+- Geofence alerts.
+- Status integration.
+- ETA calculation.
+- Dead reckoning fallback for GPS loss.
+
+Step 3.3 -- Dynamic Redeployment
+
+Check coverage optimization:
+- Move-up/cover algorithms.
+- Coverage gap detection.
+- Demand-based positioning.
+- Automatic coverage alerts.
+- System status management (SSM) for EMS.
+
+Step 3.4 -- Response Time Tracking
+
+Evaluate timestamp capture and benchmarking:
+- Timestamps: received, dispatched, en route, on scene.
+- Benchmark comparison: NFPA 1710/1720.
+- Geographic response time mapping.
+- Trend analysis and fractile reporting (90th percentile).
+- Contributing factor analysis for slow responses.
 
 ============================================================
 PHASE 4: INCIDENT MANAGEMENT
 ============================================================
 
-Step 4.1 -- Review priority system: levels and definitions, auto-assignment
-rules, upgrade/downgrade capability, priority-based timers, stacking logic
-when calls exceed units, pending call re-prioritization.
+Step 4.1 -- Priority System
 
-Step 4.2 -- Evaluate multi-agency coordination: multi-discipline response,
-unified command workflow, NIMS resource typing, staging area management,
-escalation triggers, ICS structure tracking.
+Review priority management:
+- Priority levels and definitions.
+- Auto-assignment rules and upgrade/downgrade capability.
+- Priority-based timers.
+- Stacking logic when calls exceed units.
+- Pending call re-prioritization.
 
-Step 4.3 -- Check mass event capabilities: MCI protocol activation, patient
-triage (START/JumpSTART), hospital load balancing, mutual aid request workflow,
-resource request tracking (ICS 213RR), situation reports, demobilization.
+Step 4.2 -- Multi-Agency Coordination
+
+Evaluate coordination capabilities:
+- Multi-discipline response.
+- Unified command workflow.
+- NIMS resource typing.
+- Staging area management.
+- Escalation triggers.
+- ICS structure tracking.
+
+Step 4.3 -- Mass Casualty Incident (MCI) Capabilities
+
+Check large-scale event readiness:
+- MCI protocol activation.
+- Patient triage: START/JumpSTART.
+- Hospital load balancing.
+- Mutual aid request workflow.
+- Resource request tracking (ICS 213RR).
+- Situation reports and demobilization.
 
 ============================================================
 PHASE 5: MUTUAL AID AND INTEROPERABILITY
 ============================================================
 
-Step 5.1 -- Check mutual aid: agreement tracking, auto vs. requested triggers,
-resource sharing protocols, cost/reimbursement tracking, cross-jurisdictional
-dispatch capability.
+Step 5.1 -- Mutual Aid
 
-Step 5.2 -- Evaluate interoperability: CAD-to-CAD exchange (NIEM standards),
-shared incident views, common operating picture, radio interoperability,
-cross-agency unit visibility.
+Check mutual aid management:
+- Agreement tracking.
+- Auto vs. requested triggers.
+- Resource sharing protocols.
+- Cost/reimbursement tracking.
+- Cross-jurisdictional dispatch capability.
 
-Step 5.3 -- Assess regional coordination: regional dispatch support, consolidated
-views, state emergency management integration, EMAC support, disaster
-declaration workflow.
+Step 5.2 -- Interoperability
+
+Evaluate cross-system communication:
+- CAD-to-CAD exchange: NIEM standards.
+- Shared incident views.
+- Common operating picture.
+- Radio interoperability.
+- Cross-agency unit visibility.
+
+Step 5.3 -- Regional Coordination
+
+Assess regional capabilities:
+- Regional dispatch support.
+- Consolidated views.
+- State emergency management integration.
+- EMAC support.
+- Disaster declaration workflow.
 
 ============================================================
 PHASE 6: GIS AND ICS COMPLIANCE
 ============================================================
 
-Step 6.1 -- Assess GIS data: road centerlines, address points, hydrant/hazmat
-locations, pre-plan building data, flood zones, evacuation routes. Evaluate
-geocoding accuracy, routing algorithms, road closure awareness.
+Step 6.1 -- GIS Data Quality
 
-Step 6.2 -- Check spatial analytics: hot spot analysis, isochrone mapping,
-demand density, station location analysis, beat/district optimization.
+Assess geographic data:
+- Road centerlines, address points, hydrant/hazmat locations.
+- Pre-plan building data, flood zones, evacuation routes.
+- Geocoding accuracy.
+- Routing algorithms and road closure awareness.
 
-Step 6.3 -- Verify ICS: organizational chart management, position tracking,
-span of control monitoring, ICS form generation (201, 202, 204, 205, 214),
-resource status tracking, incident action plan assembly.
+Step 6.2 -- Spatial Analytics
 
-Step 6.4 -- Check NIMS compliance: resource typing, common terminology,
-modular organization, unified command, accountability (check-in/out),
-after-action reports, lessons learned tracking.
+Check analytical capabilities:
+- Hot spot analysis and isochrone mapping.
+- Demand density mapping.
+- Station location analysis.
+- Beat/district optimization.
+
+Step 6.3 -- ICS Compliance
+
+Verify Incident Command System support:
+- Organizational chart management.
+- Position tracking and span of control monitoring.
+- ICS form generation: 201, 202, 204, 205, 214.
+- Resource status tracking.
+- Incident action plan assembly.
+
+Step 6.4 -- NIMS Compliance
+
+Check National Incident Management System compliance:
+- Resource typing.
+- Common terminology.
+- Modular organization.
+- Unified command.
+- Accountability: check-in/out.
+- After-action reports and lessons learned tracking.
 
 ============================================================
 OUTPUT

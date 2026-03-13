@@ -1,6 +1,6 @@
 ---
 name: ethical-sourcing
-description: Analyzes ethical sourcing compliance systems for supply chain transparency, labor conditions auditing, environmental impact tracking, certification management, and supplier audits per WRAP, SA8000, OEKO-TEX, and Higg Index standards.
+description: Audit a supply chain compliance system for ethical sourcing and labor rights. Evaluates supplier audit programs (SMETA, BSCI), forced labor due diligence (UFLPA, Modern Slavery Act), environmental impact tracking (ZDHC, GHG Protocol), certification management (WRAP, SA8000, OEKO-TEX, GOTS, GRS, Higg Index), corrective action workflows, and multi-tier supply chain transparency. Use when building or reviewing supply chain compliance platforms, ESG reporting systems, or textile/garment sourcing tools.
 version: "1.0.0"
 category: analysis
 platforms:
@@ -15,8 +15,8 @@ ethical sourcing analysis.
 TARGET:
 $ARGUMENTS
 
-If arguments are provided, use them to focus the analysis (e.g., specific supply chain tiers,
-geographic regions, or compliance domains). If no arguments, run the full analysis.
+If arguments are provided, focus on that area (e.g., "forced labor due diligence",
+"certification tracking", "environmental impact"). If no arguments, run the full analysis.
 
 ============================================================
 PHASE 1: ETHICAL SOURCING SYSTEM DISCOVERY
@@ -24,34 +24,47 @@ PHASE 1: ETHICAL SOURCING SYSTEM DISCOVERY
 
 Step 1.1 -- Compliance Platform Architecture
 
-Read system configuration and data structures. Identify: supply chain compliance platform
-(Sedex, EcoVadis, SAC Higg, FRDM, SupplyShift, Sourcemap, TrusTrace, custom), audit
-management module, certification tracking, corrective action workflow, supplier engagement
-portal, reporting and analytics engine.
+Read system configuration and data structures. Identify:
+- Supply chain compliance platform: Sedex, EcoVadis, SAC Higg, FRDM, SupplyShift, Sourcemap, TrusTrace, or custom.
+- Audit management module.
+- Certification tracking.
+- Corrective action workflow.
+- Supplier engagement portal.
+- Reporting and analytics engine.
 
 Step 1.2 -- Supplier Data Model
 
-Map supplier data structures: supplier master (name, location, tier, relationship type,
-product categories), factory/facility records (address, coordinates, worker count, production
-type, sub-contracting status), compliance status (approved, conditional, suspended, blacklisted),
-audit history (dates, auditors, findings, CAPs), certification records (type, issue date,
-expiry date, scope, certifying body), risk classification.
+Map supplier data structures:
+- Supplier master: name, location, tier, relationship type, product categories.
+- Factory/facility records: address, coordinates, worker count, production type, sub-contracting status.
+- Compliance status: approved, conditional, suspended, blacklisted.
+- Audit history: dates, auditors, findings, CAPs.
+- Certification records: type, issue date, expiry date, scope, certifying body.
+- Risk classification.
 
-Step 1.3 -- Regulatory & Standards Framework
+Step 1.3 -- Regulatory and Standards Framework
 
-Identify standards and regulations implemented: International Labour Organization (ILO)
-core conventions, WRAP (Worldwide Responsible Accredited Production) 12 principles, SA8000
-(Social Accountability), OEKO-TEX Standard 100/STeP, Higg Facility Environmental Module
-(FEM) and Facility Social & Labor Module (FSLM), BSCI (Business Social Compliance Initiative),
-US Uyghur Forced Labor Prevention Act (UFLPA), UK Modern Slavery Act, EU Corporate
-Sustainability Due Diligence Directive (CSDDD), California Transparency in Supply Chains Act.
+Identify all standards and regulations implemented:
+- ILO core conventions.
+- WRAP 12 principles.
+- SA8000 (Social Accountability).
+- OEKO-TEX Standard 100/STeP.
+- Higg FEM and FSLM.
+- BSCI (Business Social Compliance Initiative).
+- UFLPA (US Uyghur Forced Labor Prevention Act).
+- UK Modern Slavery Act.
+- EU Corporate Sustainability Due Diligence Directive (CSDDD).
+- California Transparency in Supply Chains Act.
 
 Step 1.4 -- Supply Chain Mapping
 
-Assess: supply chain tier visibility (Tier 1 cut-and-sew, Tier 2 fabric mills, Tier 3 yarn/
-fiber, Tier 4 raw materials), facility disclosure and public transparency, sub-contractor
-identification and authorization, supply chain mapping completeness by product category,
-geographic risk mapping, critical path identification.
+Assess supply chain visibility depth:
+- Tier visibility: Tier 1 cut-and-sew, Tier 2 fabric mills, Tier 3 yarn/fiber, Tier 4 raw materials.
+- Facility disclosure and public transparency.
+- Sub-contractor identification and authorization.
+- Supply chain mapping completeness by product category.
+- Geographic risk mapping.
+- Critical path identification.
 
 ============================================================
 PHASE 2: LABOR CONDITIONS AUDITING
@@ -59,35 +72,47 @@ PHASE 2: LABOR CONDITIONS AUDITING
 
 Step 2.1 -- Audit Program Structure
 
-Evaluate: audit types (announced, semi-announced, unannounced), audit frequency by risk
-level (annual, biennial, event-triggered), audit scope (social, environmental, combined),
-audit standards used (SMETA, BSCI, WRAP, SA8000, custom protocol), auditor qualifications
-and accreditation, third-party vs. internal audit balance.
+Evaluate program design:
+- Audit types: announced, semi-announced, unannounced.
+- Audit frequency by risk level: annual, biennial, event-triggered.
+- Audit scope: social, environmental, combined.
+- Audit standards used: SMETA, BSCI, WRAP, SA8000, custom protocol.
+- Auditor qualifications and accreditation.
+- Third-party vs. internal audit balance.
 
 Step 2.2 -- Labor Standards Coverage
 
-Check for assessment of: child labor prevention (age verification, young worker protections),
-forced labor indicators (freedom of movement, document retention, debt bondage, voluntary
-overtime, freedom to resign), working hours (maximum weekly hours, overtime limits, rest
-days per ILO and local law), wages and benefits (minimum wage compliance, overtime premium,
-deductions, living wage benchmarking), freedom of association and collective bargaining,
-non-discrimination and harassment prevention, health and safety.
+Check for assessment of each ILO core standard:
+- Child labor prevention: age verification, young worker protections.
+- Forced labor indicators: freedom of movement, document retention, debt bondage, voluntary overtime, freedom to resign.
+- Working hours: maximum weekly hours, overtime limits, rest days per ILO and local law.
+- Wages and benefits: minimum wage compliance, overtime premium, deductions, living wage benchmarking.
+- Freedom of association and collective bargaining.
+- Non-discrimination and harassment prevention.
+- Health and safety.
 
 Step 2.3 -- Forced Labor Due Diligence
 
-Evaluate UFLPA and modern slavery compliance: high-risk region identification (Xinjiang,
-other forced labor hotspots), supply chain tracing to raw material origin, forced labor
-risk indicators (ILO 11 indicators), cotton and polyester origin verification, import
-declaration requirements, Customs and Border Protection (CBP) withhold release order (WRO)
-monitoring, reasonable care documentation.
+This is critical for UFLPA and modern slavery compliance. Evaluate:
+- High-risk region identification: Xinjiang, other forced labor hotspots.
+- Supply chain tracing to raw material origin.
+- Forced labor risk indicators: ILO 11 indicators.
+- Cotton and polyester origin verification.
+- Import declaration requirements.
+- CBP withhold release order (WRO) monitoring.
+- Reasonable care documentation.
 
 Step 2.4 -- Corrective Action Management
 
-Assess: finding classification (zero tolerance, critical, major, minor, observation),
-corrective action plan (CAP) creation and assignment, CAP timeline management (30, 60,
-90-day deadlines), evidence of remediation collection, verification audit scheduling,
-escalation for non-remediation (business consequence), root cause analysis requirements,
-repeat finding tracking.
+Assess remediation quality:
+- Finding classification: zero tolerance, critical, major, minor, observation.
+- CAP creation and assignment.
+- CAP timeline management: 30, 60, 90-day deadlines.
+- Evidence of remediation collection.
+- Verification audit scheduling.
+- Escalation for non-remediation: business consequence.
+- Root cause analysis requirements.
+- Repeat finding tracking.
 
 ============================================================
 PHASE 3: ENVIRONMENTAL IMPACT
@@ -95,31 +120,41 @@ PHASE 3: ENVIRONMENTAL IMPACT
 
 Step 3.1 -- Environmental Data Collection
 
-Evaluate: environmental metrics tracked (energy consumption, water usage, wastewater
-discharge, air emissions, waste generation, chemical management), data collection method
-(self-reported, utility bills, metered, third-party verified), data granularity (facility-
-level, production-line level, per-unit), reporting period and frequency.
+Evaluate data coverage:
+- Environmental metrics tracked: energy consumption, water usage, wastewater discharge, air emissions, waste generation, chemical management.
+- Data collection method: self-reported, utility bills, metered, third-party verified.
+- Data granularity: facility-level, production-line level, per-unit.
+- Reporting period and frequency.
 
-Step 3.2 -- Carbon & Climate
+Step 3.2 -- Carbon and Climate
 
-Check for: greenhouse gas emissions tracking (Scope 1, 2, 3 per GHG Protocol), science-
-based target setting (SBTi alignment), carbon footprint per product/unit, renewable energy
-tracking and RE100 progress, energy efficiency improvement measurement, supplier climate
-action requirements and scoring.
+Check climate tracking:
+- GHG emissions tracking: Scope 1, 2, 3 per GHG Protocol.
+- Science-based target setting: SBTi alignment.
+- Carbon footprint per product/unit.
+- Renewable energy tracking and RE100 progress.
+- Energy efficiency improvement measurement.
+- Supplier climate action requirements and scoring.
 
-Step 3.3 -- Water & Chemical Management
+Step 3.3 -- Water and Chemical Management
 
-Assess: water consumption tracking and reduction targets, wastewater treatment and discharge
-compliance (Zero Discharge of Hazardous Chemicals -- ZDHC), Restricted Substances List
-(RSL) and Manufacturing RSL (MRSL) implementation, chemical inventory management per ZDHC
-gateway, wet processing facility monitoring, water risk assessment (WRI Aqueduct or similar).
+Assess water and chemical compliance:
+- Water consumption tracking and reduction targets.
+- Wastewater treatment and discharge compliance: ZDHC.
+- RSL and MRSL implementation.
+- Chemical inventory management per ZDHC gateway.
+- Wet processing facility monitoring.
+- Water risk assessment: WRI Aqueduct or similar.
 
 Step 3.4 -- Higg Index Integration
 
-Evaluate: Higg Facility Environmental Module (FEM) participation rate, Higg FEM scoring
-and benchmarking, verified vs. self-assessed modules, Higg Facility Social & Labor Module
-(FSLM) adoption, Higg MSI (Materials Sustainability Index) for material selection, Higg
-BRM (Brand and Retail Module) for corporate-level performance.
+Evaluate Higg adoption:
+- Higg FEM participation rate.
+- Higg FEM scoring and benchmarking.
+- Verified vs. self-assessed modules.
+- Higg FSLM adoption.
+- Higg MSI for material selection.
+- Higg BRM for corporate-level performance.
 
 ============================================================
 PHASE 4: CERTIFICATION TRACKING
@@ -127,67 +162,85 @@ PHASE 4: CERTIFICATION TRACKING
 
 Step 4.1 -- Certification Management
 
-Evaluate: certification types tracked (WRAP, SA8000, OEKO-TEX, GOTS, GRS, OCS, BCI/Better
-Cotton, FSC, Fair Trade, bluesign, Cradle to Cradle), certification validity monitoring
-(expiration alerts, renewal tracking), scope management (which products/processes are
-certified), certification verification (certificate authenticity, scope matching).
+Evaluate certification lifecycle tracking:
+- Certification types: WRAP, SA8000, OEKO-TEX, GOTS, GRS, OCS, BCI/Better Cotton, FSC, Fair Trade, bluesign, Cradle to Cradle.
+- Certification validity monitoring: expiration alerts, renewal tracking.
+- Scope management: which products/processes are certified.
+- Certification verification: certificate authenticity, scope matching.
 
 Step 4.2 -- Material Certifications
 
-Check for: organic cotton certification chain (GOTS, OCS -- transaction certificates),
-recycled content certification (GRS -- mass balance and transaction tracking), OEKO-TEX
-Standard 100 (product safety testing), OEKO-TEX STeP (sustainable textile production),
-chain of custody documentation, material traceability from raw material to finished product.
+Check chain of custody:
+- Organic cotton certification chain: GOTS, OCS transaction certificates.
+- Recycled content certification: GRS mass balance and transaction tracking.
+- OEKO-TEX Standard 100: product safety testing.
+- OEKO-TEX STeP: sustainable textile production.
+- Chain of custody documentation.
+- Material traceability from raw material to finished product.
 
 Step 4.3 -- Certification Impact
 
-Assess: certification coverage (% of supply chain certified), certification cost tracking,
-certification as procurement criteria (preferred vendor selection), customer-facing
-certification claims (marketing and labeling accuracy), certification gap analysis by
-product line and supplier.
+Assess certification effectiveness:
+- Certification coverage: % of supply chain certified.
+- Certification cost tracking.
+- Certification as procurement criteria: preferred vendor selection.
+- Customer-facing certification claims: marketing and labeling accuracy.
+- Certification gap analysis by product line and supplier.
 
 ============================================================
-PHASE 5: SUPPLIER AUDITS & ENGAGEMENT
+PHASE 5: SUPPLIER AUDITS AND ENGAGEMENT
 ============================================================
 
 Step 5.1 -- Supplier Risk Assessment
 
-Evaluate: inherent risk scoring (country risk, industry risk, commodity risk, previous
-performance), risk-based audit frequency determination, new supplier onboarding due diligence,
-risk dashboard and heat maps, emerging risk monitoring (political instability, natural
-disaster, regulatory change), risk aggregation across the supply chain.
+Evaluate risk model:
+- Inherent risk scoring: country risk, industry risk, commodity risk, previous performance.
+- Risk-based audit frequency determination.
+- New supplier onboarding due diligence.
+- Risk dashboard and heat maps.
+- Emerging risk monitoring: political instability, natural disaster, regulatory change.
+- Risk aggregation across the supply chain.
 
 Step 5.2 -- Supplier Development
 
-Check for: capacity building programs (training, technical assistance), remediation support
-(helping suppliers fix issues, not just flagging them), supplier recognition programs
-(rewarding high performers), preferred supplier programs linked to compliance performance,
-long-term relationship incentives (volume commitment for compliance investment).
+Check capacity building:
+- Capacity building programs: training, technical assistance.
+- Remediation support: helping suppliers fix issues, not just flagging them.
+- Supplier recognition programs: rewarding high performers.
+- Preferred supplier programs linked to compliance performance.
+- Long-term relationship incentives: volume commitment for compliance investment.
 
-Step 5.3 -- Transparency & Disclosure
+Step 5.3 -- Transparency and Disclosure
 
-Assess: public supplier list publication (factory disclosure), transparency reporting
-(Modern Slavery Act statements, California SB 657, CSDDD reporting), Fashion Transparency
-Index participation, stakeholder engagement (worker voice mechanisms, grievance channels,
-community engagement), public reporting of audit findings and progress.
+Assess public transparency:
+- Public supplier list publication: factory disclosure.
+- Transparency reporting: Modern Slavery Act statements, California SB 657, CSDDD reporting.
+- Fashion Transparency Index participation.
+- Stakeholder engagement: worker voice mechanisms, grievance channels, community engagement.
+- Public reporting of audit findings and progress.
 
 ============================================================
-PHASE 6: REPORTING & GOVERNANCE
+PHASE 6: REPORTING AND GOVERNANCE
 ============================================================
 
 Step 6.1 -- Compliance Reporting
 
-Evaluate: internal compliance dashboards (audit status, CAP progress, certification
-currency), management reporting (compliance KPIs, trend analysis, risk profiles), board-
-level ESG reporting, external reporting (sustainability reports, annual reports, CDP
-disclosure), regulatory filing support (UFLPA import declarations, Modern Slavery statements).
+Evaluate reporting capabilities:
+- Internal compliance dashboards: audit status, CAP progress, certification currency.
+- Management reporting: compliance KPIs, trend analysis, risk profiles.
+- Board-level ESG reporting.
+- External reporting: sustainability reports, annual reports, CDP disclosure.
+- Regulatory filing support: UFLPA import declarations, Modern Slavery statements.
 
 Step 6.2 -- Governance Structure
 
-Check for: ethical sourcing policy documentation, code of conduct for suppliers, governance
-committee (sustainability committee, supply chain ethics board), escalation procedures
-for severe findings, whistleblower and grievance mechanisms, due diligence process
-documentation and evidence.
+Check governance rigor:
+- Ethical sourcing policy documentation.
+- Code of conduct for suppliers.
+- Governance committee: sustainability committee, supply chain ethics board.
+- Escalation procedures for severe findings.
+- Whistleblower and grievance mechanisms.
+- Due diligence process documentation and evidence.
 
 ============================================================
 PHASE 7: WRITE REPORT
