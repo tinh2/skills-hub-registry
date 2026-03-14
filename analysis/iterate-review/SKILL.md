@@ -1,140 +1,131 @@
----
 name: iterate-review
-description: "Autonomously review and improve code through iterative analysis, wiring verification, fixing, and validation. Works with any tech stack."
-version: 1.0.0
-category: analysis
-platforms:
-  - CLAUDE_CODE
----
+description: Autonomously review and improve existing code through up to 5 iterations of analysis, domain verification, fixing, and validation.
+version: 5
+category: quality
+instructions: |
+  You are in AUTONOMOUS MODE. Do NOT ask questions. Analyze and fix.
 
-You are in AUTONOMOUS MODE. Do NOT ask questions. Analyze and fix.
+  TARGET:
+  $ARGUMENTS
 
-TARGET:
-$ARGUMENTS
+  ============================================================
+  PRE-REVIEW: STATIC VALIDATION
+  ============================================================
 
-============================================================
-PRE-REVIEW: STATIC VALIDATION
-============================================================
+  Before reviewing code, run automated checks to clear the noise:
 
-Before reviewing code, run automated checks to clear the noise.
-Detect the project's tech stack and run the appropriate checks:
+  1. Flutter (if pubspec.yaml exists):
+     - Run `flutter analyze`. Fix all errors and warnings.
+     - Run `dart fix --apply`.
+  2. Node.js (if package.json exists):
+     - Run `tsc --noEmit`. Fix type errors.
+  3. Platform checks (Flutter):
+     - Scan for unguarded `dart:io` imports in web-reachable code.
+     - Fix platform compatibility issues.
+  4. Firebase (if applicable):
+     - Cross-check firestore.rules paths against code.
+     - Verify compound queries have matching indexes.
+  5. Shell scripts & infrastructure (learned from OpenClaw recall — stray syntax,
+     sed portability, path breakage after reorg):
+     - Run `bash -n` on all .sh files to catch syntax errors (stray `fi`, unmatched brackets).
+     - Check `sed -i` usage — needs `''` arg on macOS, not on Linux. Flag unportable usage.
+     - Verify docker-compose.yml image refs use full registry paths (not bare names).
+     - Verify volume mount targets match where the app actually reads config/data.
+     - After any directory reorganization, verify `$SCRIPT_DIR`, `../`, `./` path references
+       still resolve correctly.
+     - Check variable names reference the correct entity (e.g., `$CALLER_ID` vs `$AGENT_ID`).
 
-1. Language/framework linting:
-   - Detect the project type from config files (package.json, pubspec.yaml,
-     Cargo.toml, pyproject.toml, go.mod, Gemfile, pom.xml, etc.).
-   - Run the project's standard linter/analyzer (e.g., `npm run lint`,
-     `flutter analyze`, `cargo clippy`, `ruff check`, `go vet`).
-   - Run any available auto-fix tool (e.g., `dart fix --apply`, `eslint --fix`,
-     `ruff --fix`, `cargo fix`).
-   - If a Makefile or task runner defines a `lint` or `check` target, use it.
-2. Type checking (if applicable):
-   - Run type checker (`tsc --noEmit`, `mypy`, `pyright`, etc.).
-3. Shell scripts & infrastructure:
-   - Run `bash -n` on all .sh files to catch syntax errors.
-   - Check `sed -i` usage for portability (macOS vs Linux).
-   - Verify docker-compose.yml image refs and volume mount paths.
-   - After any directory reorganization, verify relative path references
-     still resolve correctly.
-4. Schema/config validation (if applicable):
-   - Cross-check database rules/policies against code.
-   - Verify queries have matching indexes if required.
+  Fix all issues. Commit: "fix: pre-review static validation"
+  If clean, skip commit.
 
-Fix all issues. Commit: "fix: pre-review static validation"
-If clean, skip commit.
+  ============================================================
+  PROCESS (max 5 iterations)
+  ============================================================
 
-============================================================
-PROCESS (max 5 iterations)
-============================================================
+  === EACH ITERATION ===
 
-=== EACH ITERATION ===
+  1. READ the target code thoroughly.
+  2. IDENTIFY the top 3 most impactful issues:
+     - Bugs or incorrect behavior
+     - Missing error handling that would cause real failures
+     - Code that's confusing or poorly structured
+  3. CHECK WIRING COMPLETENESS (learned from recall analysis):
+     - Server-side validation gaps: Are there callable Cloud Functions that exist
+       but are never called from the client? (e.g., validateCreditSpend exists but
+       client does client-only checks.) This is a CRITICAL issue.
+     - Model serialization gaps: Are there fields written by Cloud Functions that
+       are missing from the client model's fromMap/toMap? (e.g., Cloud Function
+       writes offPlatformWarningCount but model doesn't deserialize it.)
+     - Firestore rules lag: Are there collections the app reads/writes that have
+       no matching rule in firestore.rules? Or rules that are too permissive?
+     - Config propagation: Are admin-configurable settings (e.g., CSF monthly cap,
+       pending period) actually passed through to the functions that use them, or
+       are hardcoded defaults used instead?
+  4. CHECK STRUCTURAL HEALTH (learned from recall analysis):
+     - Monolithic files: Flag any single file modified in >20% of recent commits
+       or exceeding 600 lines. Recommend splitting into domain-specific modules.
+     - Error handling coverage: Every user-facing action that calls an async service
+       should be wrapped in try/catch with user-visible error feedback.
+  5. FIX all identified issues.
+  6. VALIDATE — run tests, build, lint. Fix until green.
+  7. DOMAIN ANALYSIS (runs on iteration 2 and on the final iteration):
+     Run the `/analyze` skill scoped to the code under review.
+     Include all analysis phases: consistency audit, server-side validation wiring,
+     model-to-Cloud-Function field completeness, Firebase rules, and platform compatibility.
+     If analysis finds Critical or Warning issues, add them to the fix list for the
+     next iteration. Critical issues take priority over code review issues.
+  8. REASSESS — stop if: all code issues resolved AND validation passes AND domain
+     analysis shows zero Critical/Warning issues.
 
-1. READ the target code thoroughly.
-2. IDENTIFY the top 3 most impactful issues:
-   - Bugs or incorrect behavior
-   - Missing error handling that would cause real failures
-   - Code that's confusing or poorly structured
-3. CHECK WIRING COMPLETENESS:
-   - API/service gaps: Are there endpoints, functions, or service methods that
-     are defined but never called from the client? Or client code that calls
-     endpoints that don't exist or have mismatched signatures?
-   - Model/schema gaps: Are there fields written by the backend that are missing
-     from the client-side model (serialization/deserialization)? Or vice versa?
-   - Auth/permission gaps: Are there routes or operations that should require
-     authentication or authorization but don't enforce it?
-   - Config propagation: Are configurable values (limits, thresholds, feature
-     flags) actually threaded through to where they're used, or are hardcoded
-     defaults silently overriding them?
-4. CHECK EXTERNAL SERVICE CONTRACTS:
-   - For each external service integration (APIs, email providers, payment
-     processors, CI/CD tools): verify that field names, payload shapes, and
-     config values in the code match the actual API contracts.
-   - Flag hardcoded assumptions about external service behavior that aren't
-     verified by tests or documented.
-   - Check for "yo-yo" patterns: values that were changed, reverted, then
-     changed again in recent history.
-5. CHECK STRUCTURAL HEALTH:
-   - Monolithic files: Flag any single file exceeding 500 lines or modified
-     in >20% of recent commits. Recommend splitting into domain-specific modules.
-   - Error handling coverage: Every user-facing action that calls an async
-     service should be wrapped in try/catch with user-visible error feedback.
-   - Dead code: Flag unreachable code, unused imports, and commented-out blocks.
-6. FIX all identified issues.
-7. VALIDATE — run tests, build, lint. Fix until green.
-8. DOMAIN ANALYSIS (runs on iteration 2 and on the final iteration):
-   Run the `/analyze` skill scoped to the code under review.
-   If analysis finds Critical or Warning issues, add them to the fix list for
-   the next iteration. Critical issues take priority over code review issues.
-9. REASSESS — stop if: all code issues resolved AND validation passes AND
-   domain analysis shows zero Critical/Warning issues.
+  === ITERATION FOCUS ===
 
-=== ITERATION FOCUS ===
+  - Iteration 1: Correctness bugs, missing tests, AND wiring completeness checks
+  - Iteration 2: Run domain analysis. Fix consistency issues + error handling + edge cases.
+  - Iteration 3: Address remaining analysis warnings + code clarity + structural health.
+  - Iteration 4: Re-run analysis to confirm. Polish if needed.
+  - Iteration 5: Only if analysis still finds issues.
 
-- Iteration 1: Correctness bugs, missing tests, AND wiring completeness checks
-- Iteration 2: Run domain analysis. Fix consistency issues + error handling + edge cases.
-- Iteration 3: Address remaining analysis warnings + code clarity + structural health.
-- Iteration 4: Re-run analysis to confirm. Polish if needed.
-- Iteration 5: Only if analysis still finds issues.
+  === DO NOT ===
 
-=== DO NOT ===
+  - Add features that weren't asked for
+  - Refactor code that works fine and is readable
+  - Add comments to obvious code
+  - Over-engineer simple logic
+  - Ask the user any questions — just decide and fix
 
-- Add features that weren't asked for
-- Refactor code that works fine and is readable
-- Add comments to obvious code
-- Over-engineer simple logic
-- Ask the user any questions — just decide and fix
+  === COMMIT DISCIPLINE (learned from recall analysis) ===
 
-=== COMMIT DISCIPLINE ===
+  - NEVER batch all fixes into a single "lots of bug fixes" mega-commit.
+  - Each commit should be focused and independently reviewable.
+  - When fixing Firestore rules gaps, include the rule fix in the same commit
+    as the related code fix.
 
-- NEVER batch all fixes into a single "lots of bug fixes" mega-commit.
-- Each commit should be focused and independently reviewable.
-- Tag fix commits with a category prefix (e.g., fix(auth), fix(wiring), fix(perf)).
-- When fixing schema/permission gaps, include the fix in the same commit
-  as the related code fix.
+  === OUTPUT ===
 
-=== OUTPUT ===
+  Brief summary after each iteration:
 
-Brief summary after each iteration:
+    ## Iteration N
+    - Found: [issues identified]
+    - Wiring: [server-side gaps / model gaps / rules gaps found, if any]
+    - Analysis: [Critical/Warning/Info counts, if analysis ran this iteration]
+    - Fixed: [what was changed]
+    - Validation: [pass/fail status]
 
-  ## Iteration N
-  - Found: [issues identified]
-  - Wiring: [API gaps / model gaps / auth gaps found, if any]
-  - Analysis: [Critical/Warning/Info counts, if analysis ran this iteration]
-  - Fixed: [what was changed]
-  - Validation: [pass/fail status]
+  Final summary:
 
-Final summary:
+    ## Review Complete
+    - Pre-validation: [issues found and fixed, or "clean"]
+    - Iterations completed: N/5
+    - Issues found and fixed: [total count]
+    - Wiring completeness: [server validation / model serialization / rules status]
+    - Domain analysis: [issues found / issues fixed / any remaining]
+    - Structural health: [monolithic files flagged, if any]
+    - Final validation: [tests/build/lint status]
+    - Remaining concerns: [any trade-offs, or "none"]
 
-  ## Review Complete
-  - Pre-validation: [issues found and fixed, or "clean"]
-  - Iterations completed: N/5
-  - Issues found and fixed: [total count]
-  - Wiring completeness: [API / model / auth / config status]
-  - Domain analysis: [issues found / issues fixed / any remaining]
-  - Structural health: [monolithic files flagged, if any]
-  - Final validation: [tests/build/lint status]
-  - Remaining concerns: [any trade-offs, or "none"]
+  NEXT STEPS:
 
-NEXT STEPS:
-
-- "Run `/qa` to verify everything works end-to-end."
-- "Run `/arch-review` for architect-level structural review."
+  - "Run `/qa` to verify everything works end-to-end."
+  - "Run `/arch-review` for architect-level structural review."
+  - "Run `/readme` to update project documentation with the current state."
+  - "Run `/ux` to audit accessibility and design standards."
