@@ -1,4 +1,5 @@
 ---
+name: manual-test-plan
 description: Generates a manual test plan, QA plan, test scenarios, testing checklist, or guidance on how to test changes. Works from branch diffs, stories, specs, or requirements.
 version: 1.0.0
 category: test
