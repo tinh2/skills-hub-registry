@@ -14,7 +14,7 @@
       --surface: #ffffff;
       --border: #e8e6dc;
       --text: #141413;
-      --text-muted: #b0aea5;
+      --text-muted: #706e64;
       --accent: #d97757;
       --accent-hover: #c4613f;
       --green: #788c5d;
@@ -251,7 +251,7 @@
     .feedback-textarea:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+      box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.4);
     }
     .feedback-status {
       font-size: 0.75rem;
@@ -345,6 +345,7 @@
       transition: all 0.15s;
     }
     .view-tab:hover { color: var(--text); }
+    .view-tab:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.4); border-radius: 2px; }
     .view-tab.active {
       color: var(--accent);
       border-bottom-color: var(--accent);
@@ -444,6 +445,10 @@
       background: var(--bg);
       border-color: var(--text-muted);
     }
+    .nav-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.4);
+    }
     .nav-btn:disabled {
       opacity: 0.4;
       cursor: not-allowed;
@@ -463,6 +468,10 @@
     .done-btn:hover {
       background: var(--bg);
       border-color: var(--text-muted);
+    }
+    .done-btn:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.4);
     }
     .done-btn.ready {
       border: none;
@@ -519,6 +528,10 @@
     .done-card button:hover {
       background: var(--bg);
     }
+    .done-card button:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.4);
+    }
     /* ---- Toast ---- */
     .toast {
       position: fixed;
@@ -541,13 +554,13 @@
   </style>
 </head>
 <body>
-  <div id="app" style="height:100vh; display:flex; flex-direction:column;">
+  <div id="app" role="main" style="height:100vh; display:flex; flex-direction:column;">
     <div class="header">
       <div>
         <h1>Eval Review: <span id="skill-name"></span></h1>
         <div class="instructions">Review each output and leave feedback below. Navigate with arrow keys or buttons. When done, copy feedback and paste into Claude Code.</div>
       </div>
-      <div class="progress" id="progress"></div>
+      <div class="progress" id="progress" aria-live="polite"></div>
     </div>
 
     <!-- View tabs (only shown when benchmark data exists) -->
@@ -604,9 +617,10 @@
           <textarea
             class="feedback-textarea"
             id="feedback"
+            aria-label="Your feedback on this output"
             placeholder="What do you think of this output? Any issues, suggestions, or things that look great?"
           ></textarea>
-          <div class="feedback-status" id="feedback-status"></div>
+          <div class="feedback-status" id="feedback-status" aria-live="polite"></div>
           <div class="prev-feedback" id="prev-feedback" style="display:none;">
             <div class="prev-feedback-label">Previous feedback</div>
             <div id="prev-feedback-text"></div>
@@ -631,12 +645,12 @@
   </div>
 
   <!-- Done overlay -->
-  <div class="done-overlay" id="done-overlay">
+  <div class="done-overlay" id="done-overlay" role="dialog" aria-modal="true" aria-labelledby="done-dialog-title">
     <div class="done-card">
-      <h2>Review Complete</h2>
+      <h2 id="done-dialog-title">Review Complete</h2>
       <p>Your feedback has been saved. Go back to your Claude Code session and tell Claude you're done reviewing.</p>
       <div class="btn-row">
-        <button onclick="closeDoneDialog()">OK</button>
+        <button id="done-ok-btn" onclick="closeDoneDialog()">OK</button>
       </div>
     </div>
   </div>
@@ -839,7 +853,7 @@
           if (wb.SheetNames.length > 1) {
             const sheetLabel = document.createElement("div");
             sheetLabel.style.cssText =
-              "font-weight:600; font-size:0.8rem; color:#b0aea5; margin-top:0.5rem; margin-bottom:0.25rem;";
+              "font-weight:600; font-size:0.8rem; color:var(--text-muted); margin-top:0.5rem; margin-bottom:0.25rem;";
             sheetLabel.textContent = "Sheet: " + sheetName;
             container.appendChild(sheetLabel);
           }
@@ -1047,6 +1061,7 @@
         body: payload,
       }).then(() => {
         document.getElementById("done-overlay").classList.add("visible");
+        document.getElementById("done-ok-btn").focus();
       }).catch(() => {
         // Server not available (static mode) — download as file
         const blob = new Blob([payload], { type: "application/json" });
@@ -1057,6 +1072,7 @@
         a.click();
         URL.revokeObjectURL(url);
         document.getElementById("done-overlay").classList.add("visible");
+        document.getElementById("done-ok-btn").focus();
       });
     }
 
@@ -1064,6 +1080,7 @@
       // Reset status back to in_progress
       saveCurrentFeedback();
       document.getElementById("done-overlay").classList.remove("visible");
+      document.getElementById("done-btn").focus();
     }
 
     // ---- Toast ----
@@ -1076,6 +1093,16 @@
 
     // ---- Keyboard nav ----
     document.addEventListener("keydown", (e) => {
+      // Close modal on Escape
+      if (e.key === "Escape") {
+        const overlay = document.getElementById("done-overlay");
+        if (overlay.classList.contains("visible")) {
+          e.preventDefault();
+          closeDoneDialog();
+          return;
+        }
+      }
+
       // Don't capture when typing in textarea
       if (e.target.tagName === "TEXTAREA") return;
 
