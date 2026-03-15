@@ -1,12 +1,8 @@
 ---
 name: free-keys
-description: >
+description: "Provision free LLM API keys from 20+ providers. Health-checks existing keys, opens signup pages, validates new keys, and saves them to your project."
 version: 1.0.0
 category: deploy
-  Provision free LLM API keys from 20+ providers. Health-checks existing keys, opens signup
-  pages, validates new keys, and saves them to your project. Optionally wires into LiteLLM
-  proxy and gateway configs. Triggers on "free LLM keys", "free API keys", "LLM providers",
-  "set up free AI models", "provision LLM keys", "free-keys".
 platforms:
   - CLAUDE_CODE
 ---

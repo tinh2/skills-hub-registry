@@ -1,11 +1,8 @@
 ---
 name: pr
-description: >
+description: "Create a convention-compliant pull request from the current branch."
 version: 1.0.0
 category: deploy
-  Create a convention-compliant pull request from the current branch.
-  Triggers: "create PR", "pull request", "open PR", "submit PR",
-  "make a PR", "PR for this branch".
 platforms:
   - CLAUDE_CODE
 ---

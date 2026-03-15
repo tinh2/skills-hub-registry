@@ -1,13 +1,8 @@
 ---
 name: cost-analysis
-description: >
+description: "Analyzes infrastructure costs at 1K-100K user scales by reading the actual codebase, auto-detecting cloud providers, modeling per-action costs, and projecting total monthly spend with optimization recommendations."
 version: 1.0.0
 category: deploy
-  Analyzes infrastructure costs at 1K-100K user scales by reading the actual codebase,
-  auto-detecting cloud providers, modeling per-action costs, and projecting total monthly
-  spend with optimization recommendations and provider comparison.
-  Triggers: cost, infrastructure cost, how much will this cost, pricing estimate,
-  cloud spend, monthly cost, cost analysis, cost projection, cloud cost
 platforms:
   - CLAUDE_CODE
 ---

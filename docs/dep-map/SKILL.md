@@ -1,14 +1,8 @@
 ---
 name: dep-map
-description: >
+description: "Maps dependencies between stories, code modules, tickets, or specs. Computes optimal implementation order with parallel batches, cycle detection, and critical path analysis."
 version: 1.0.0
 category: docs
-  Maps dependencies between stories, code modules, tickets, or specs.
-  Computes optimal implementation order with parallel batches, cycle detection,
-  and critical path analysis. Outputs ASCII and Mermaid diagrams.
-  Trigger: "dependencies", "dependency map", "implementation order",
-  "what order should I build", "dependency graph", "critical path",
-  "import graph", "package dependencies"
 platforms:
   - CLAUDE_CODE
 ---

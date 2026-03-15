@@ -1,13 +1,8 @@
 ---
 name: metrics
-description: >
+description: "Computes development quality and velocity metrics from git history and tracks improvement over time. Measures fix ratios, rework hotspots, test coverage, DORA metrics, and code churn."
 version: 1.0.0
 category: analysis
-  Development metrics, quality metrics, code metrics — computes quality and velocity
-  indicators from git history and tracks improvement over time. Measures fix ratios,
-  rework hotspots, test coverage, DORA metrics, code churn, and skill effectiveness.
-  Use to track improvement, measure quality, or compare against baselines. Run after
-  /recall for full pipeline insight.
 platforms:
   - CLAUDE_CODE
 ---

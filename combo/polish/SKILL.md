@@ -1,12 +1,8 @@
 ---
 name: polish
-description: >
+description: "Full quality pass -- chains parallel UX + scalability audit, then QA verification, then consistency gate. Fixes everything it finds. Works with any stack."
 version: 1.0.0
 category: combo
-  Full quality pass — chains parallel UX + scalability audit, then QA verification,
-  then consistency gate. Use as: "polish", "quality pass", "final review",
-  "pre-release check", or "make it production ready". Fixes everything it finds.
-  Works with any stack (Flutter, React, Vue, Angular, backend services, etc.).
 platforms:
   - CLAUDE_CODE
 ---
