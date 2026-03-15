@@ -2,25 +2,25 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-359 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development.
+385 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development.
 
 ## Directory Structure
 
 ```
 skills-hub-registry/
-├── build/              # 21 skills — Project scaffolding, game engines, mobile apps, industry API scaffolds
-├── test/               # 11 skills — Unit, E2E, integration, load, visual, contract, accessibility, mobile, device matrix
+├── build/              # 24 skills — Project scaffolding, game engines, mobile apps, industry API scaffolds
+├── test/               # 13 skills — Unit, E2E, integration, load, visual, contract, accessibility, mobile, device matrix
 ├── qa/                 # 13 skills — QA, performance, chaos, code smells, game QA, mobile QA, balance testing
 ├── review/             # 26 skills — Architecture, API, security, executive, industry, game, mobile, store compliance
-├── deploy/             # 15 skills — Docker, K8s, Terraform, CI/CD, app stores, mobile CI/CD, OTA updates
-├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook
+├── deploy/             # 21 skills — Docker, K8s, Terraform, CI/CD, app stores, mobile CI/CD, OTA updates
+├── docs/               # 13 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook, specs
 ├── security/           # 12 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, game security, benefits fraud
 ├── ux/                 #  6 skills — UX audit, design systems, dark mode, responsive, i18n, game UX
-├── analysis/           #193 skills — Domain analysis, research, 40 industry verticals, social impact, gaming, mobile
+├── analysis/           #201 skills — Domain analysis, research, 40 industry verticals, social impact, gaming, mobile
 ├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
-├── combo/              # 28 skills — Multi-skill chains and pipeline compositions
-└── meta/               #  7 skills — Skill creation, testing, evolution, templates, cross-project sync
+├── combo/              # 30 skills — Multi-skill chains and pipeline compositions
+└── meta/               #  9 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
 
 ## Architecture
@@ -50,7 +50,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 ## Skill Catalog
 
-### build -- Project Scaffolding & Build Pipelines (21 skills)
+### build -- Project Scaffolding & Build Pipelines (24 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -75,8 +75,11 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [ios-app](build/ios-app/) | 1.0.0 | Scaffold a native iOS app with SwiftUI, MVVM, Core Data/SwiftData, networking, push notifications, and multi-env config |
 | [android-app](build/android-app/) | 1.0.0 | Scaffold a native Android app with Jetpack Compose, Hilt DI, Room, Retrofit, build variants, and Gradle version catalogs |
 | [cross-platform-app](build/cross-platform-app/) | 1.0.0 | Scaffold a cross-platform mobile app -- auto-detects Flutter, React Native, KMP, or .NET MAUI |
+| [app-icon](build/app-icon/) | 1.0.0 | Generates professional app icons and applies them to any project -- supports Flutter, React Native, native iOS/Android, web apps |
+| [aws](build/aws/) | 1.0.0 | Generates production-ready infrastructure-as-code for AWS -- writes complete IaC files for any AWS architecture pattern |
+| [bootstrap](build/bootstrap/) | 1.0.0 | Scaffolds a new project with proven conventions, architecture gates, and a recommended build pipeline |
 
-### test -- Automated Testing (11 skills)
+### test -- Automated Testing (13 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -91,6 +94,8 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [manual-test-plan](test/manual-test-plan/) | 2.1.0 | Generates a manual QA test plan based on code changes on the current branch |
 | [mobile-test](test/mobile-test/) | 1.0.0 | Mobile test generation -- unit, widget/UI, integration, snapshot, and accessibility tests for any mobile framework |
 | [device-matrix](test/device-matrix/) | 1.0.0 | Device matrix testing -- Firebase Test Lab, AWS Device Farm, BrowserStack with device selection and result aggregation |
+| [full-test](test/full-test/) | 1.0.0 | Complete testing pipeline -- runs full automated test suite plus generates manual test plan |
+| [walkthrough](test/walkthrough/) | 1.0.0 | Run an app walkthrough -- launch a Flutter app on simulator/emulator, generate and run exhaustive integration tests |
 
 ### qa -- Quality Assurance (13 skills)
 
@@ -141,7 +146,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [mobile-security-review](review/mobile-security-review/) | 1.0.0 | Mobile security review -- OWASP Mobile Top 10, certificate pinning, Keychain/Keystore, root detection, obfuscation |
 | [store-compliance](review/store-compliance/) | 1.0.0 | App Store and Play Store compliance review -- review guidelines, privacy labels, data safety, COPPA/GDPR-K |
 
-### deploy -- Infrastructure & Deployment (15 skills)
+### deploy -- Infrastructure & Deployment (21 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -160,8 +165,14 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [play-store-publish](deploy/play-store-publish/) | 1.0.0 | Google Play Store publishing -- AAB config, Fastlane supply, data safety, content rating, staged rollout |
 | [mobile-ci-cd](deploy/mobile-ci-cd/) | 1.0.0 | Mobile CI/CD -- GitHub Actions / Bitrise / Codemagic for iOS+Android, code signing, beta distribution |
 | [ota-updates](deploy/ota-updates/) | 1.0.0 | Over-the-air updates -- CodePush, Shorebird, Play In-App Updates, rollback strategy, A/B testing |
+| [cost-analysis](deploy/cost-analysis/) | 1.0.0 | Analyzes infrastructure costs at 1K-100K user scales with auto-detection and optimization recommendations |
+| [fix-and-ship](deploy/fix-and-ship/) | 1.0.0 | Emergency fix-and-deploy pipeline -- diagnose, fix, verify, deploy, and confirm service health |
+| [free-keys](deploy/free-keys/) | 1.0.0 | Provision free LLM API keys from 20+ providers -- health-checks, validates, and saves to project |
+| [hotfix](deploy/hotfix/) | 1.0.0 | Emergency hotfix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
+| [image-storage-optimization](deploy/image-storage-optimization/) | 1.0.0 | Image optimization pipeline -- resize, compress to WebP/AVIF, generate responsive variants, integrate with CDN |
+| [pr](deploy/pr/) | 1.0.0 | Create a convention-compliant pull request from the current branch |
 
-### docs -- Documentation (10 skills)
+### docs -- Documentation (13 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -175,6 +186,9 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [runbook](docs/runbook/) | 1.0.0 | Scans deployment config, Docker/K8s manifests, CI/CD, and monitoring to generate actionable operations runbooks |
 | [gen-catalog](docs/gen-catalog/) | 1.1.0 | Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories |
 | [skills-list](docs/skills-list/) | 3.1.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
+| [backend-spec](docs/backend-spec/) | 1.0.0 | Generates structured engineering specs from feature descriptions, designs, or ticket references |
+| [dep-map](docs/dep-map/) | 1.0.0 | Maps dependencies between stories, code modules, tickets, or specs with optimal implementation order |
+| [spec](docs/spec/) | 1.0.0 | Generate an engineering spec from a feature description, design image, or conversation |
 
 ### security -- Security & Compliance (12 skills)
 
@@ -204,7 +218,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
 | [game-ux](ux/game-ux/) | 1.0.0 | Game UX audit -- HUD clarity, menu flow, tutorial effectiveness, control feel, camera system, feedback/juice |
 
-### analysis -- Domain Analysis, Research, 40 Industry Verticals (193 skills)
+### analysis -- Domain Analysis, Research, 40 Industry Verticals (201 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -401,6 +415,14 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [mobile-ux-patterns](analysis/mobile-ux-patterns/) | 1.0.0 | Mobile UX pattern analysis -- gestures, navigation, platform conventions (HIG vs Material), deep linking |
 | [mobile-monetization](analysis/mobile-monetization/) | 1.0.0 | Mobile monetization analysis -- StoreKit 2, Play Billing, subscriptions, ad SDKs, paywall design |
 | [app-size-optimizer](analysis/app-size-optimizer/) | 1.0.0 | App binary size analysis -- asset audit, code stripping, on-demand resources, APK splits, thinning |
+| [audit](analysis/audit/) | 1.0.0 | Fast quality gate -- detects stack, runs static analysis, checks cross-layer consistency, fixes issues |
+| [iterate-review](analysis/iterate-review/) | 5.0.0 | Autonomously review and improve existing code through up to 5 iterations of analysis and fixing |
+| [perf](analysis/perf/) | 1.0.0 | Performance profiler -- analyzes DB queries, API call chains, memory usage, bundle sizes, and network waterfalls |
+| [preflight](analysis/preflight/) | 1.0.0 | Pre-deploy verification gate -- checks git status, build, tests, migrations, secrets, and commit conventions |
+| [qa](analysis/qa/) | 1.0.0 | Automated QA agent -- walks every screen and API endpoint, verifies functionality, and fixes issues |
+| [seo](analysis/seo/) | 1.0.0 | SEO analysis -- technical SEO audit, meta tags, structured data, crawlability, and performance |
+| [skills-list](analysis/skills-list/) | 3.0.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
+| [ux](analysis/ux/) | 1.0.0 | UX audit -- heuristic evaluation, accessibility audit, WCAG compliance, and design system consistency |
 
 ### productivity -- Developer Experience (8 skills)
 
@@ -429,7 +451,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
 | [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
 
-### combo -- Multi-Skill Chains (28 skills)
+### combo -- Multi-Skill Chains (30 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -461,8 +483,10 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [game-design-audit](combo/game-design-audit/) | 1.0.0 | /game-design-review → /game-economy → /balance-test → /player-analytics → /game-monetization | Full game design analysis pipeline |
 | [mobile-launch](combo/mobile-launch/) | 1.0.0 | /mobile-performance → /mobile-qa → /mobile-security-review → /store-compliance → /app-store-optimization | Mobile app launch readiness pipeline |
 | [mobile-publish](combo/mobile-publish/) | 1.0.0 | /mobile-ci-cd → /app-store-publish → /play-store-publish → /mobile-analytics | Full mobile publishing pipeline |
+| [cleanup-sprint](combo/cleanup-sprint/) | 2.0.0 | /dead-code → /code-smell → /linter | Deep codebase cleanup -- kills dead code, fixes lint warnings, removes orphaned files |
+| [mvp-spec](combo/mvp-spec/) | 1.0.0 | /mvp → /spec | Analyzes app from video/screenshots, then generates implementation stories |
 
-### meta -- Skills About Skills (7 skills)
+### meta -- Skills About Skills (9 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -473,6 +497,8 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [skill-creator](meta/skill-creator/) | 1.0.0 | Creates new Claude Code skills following the marketplace SKILL.md format with proper frontmatter and quality scoring |
 | [skill-test](meta/skill-test/) | 1.0.0 | Validates a SKILL.md file against the marketplace quality rubric, checking schema, structure, and computing a score |
 | [registry-sync](meta/registry-sync/) | 1.0.0 | Scans and validates all SKILL.md files in the registry, checks category READMEs, detects duplicates, produces health report |
+| [load-context](meta/load-context/) | 1.0.0 | Load a saved conversation context to resume previous work -- supports local files, git repos, and URLs |
+| [save-context](meta/save-context/) | 1.0.0 | Save the current conversation context as a reloadable snapshot for later resumption |
 
 ## Industry Verticals
 
