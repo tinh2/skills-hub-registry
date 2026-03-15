@@ -1,13 +1,8 @@
 ---
 name: spec
-description: >
+description: "Generate an engineering spec from a feature description, design image, or conversation. Produces implementation-ready stories with acceptance criteria, API contracts, and manual test steps."
 version: 1.0.0
 category: docs
-  Generate an engineering spec from a feature description, design image, or conversation.
-  Produces implementation-ready stories with acceptance criteria, API contracts, and manual test steps.
-  Auto-detects full-stack, backend-only, or frontend-only scope.
-  Trigger phrases: "engineering spec", "write spec", "generate stories", "spec out a feature",
-  "create implementation spec", "write stories for", "spec this out".
 platforms:
   - CLAUDE_CODE
 ---

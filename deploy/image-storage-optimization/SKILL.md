@@ -1,12 +1,8 @@
 ---
 name: image-storage-optimization
-description: >
+description: "Scan codebase for image upload handlers, then implement a complete image optimization pipeline -- resize, compress to WebP/AVIF, generate responsive variants, strip metadata, and integrate with CDN."
 version: 1.0.0
 category: deploy
-  Scan codebase for image upload handlers, then implement a complete image optimization pipeline —
-  resize, compress to WebP/AVIF, generate responsive variants, strip metadata, and integrate with
-  CDN. Reduces storage costs by ~90%. Covers image optimization, image compression, image processing,
-  image pipeline, reduce storage costs, compress images, responsive images, srcset generation.
 platforms:
   - CLAUDE_CODE
 ---

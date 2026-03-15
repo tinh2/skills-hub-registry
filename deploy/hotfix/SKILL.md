@@ -1,11 +1,8 @@
 ---
 name: hotfix
-description: >
+description: "Emergency hotfix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max."
 version: 1.0.0
 category: deploy
-  Emergency hotfix pipeline — diagnose, fix, test, commit, push, and PR
-  in 2 iterations max. Triggers: "emergency fix", "hotfix", "quick bug fix",
-  "fix and push", "critical bug", "urgent fix".
 platforms:
   - CLAUDE_CODE
 ---

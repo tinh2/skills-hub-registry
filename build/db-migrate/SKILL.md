@@ -1,13 +1,8 @@
 ---
 name: db-migrate
-description: >
+description: "Generates database migrations, updates ORM models, and verifies compilation. Auto-detects migration system, ORM, database, and language from the codebase."
 version: 1.0.0
 category: build
-  Generates database migrations, updates ORM models, and verifies compilation.
-  Auto-detects migration system, ORM, database, and language from the codebase.
-  Trigger: "migration", "schema change", "add column", "create table",
-  "alter table", "database migration", "drop column", "rename column",
-  "add index", "add foreign key"
 platforms:
   - CLAUDE_CODE
 ---
