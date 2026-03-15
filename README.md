@@ -48,24 +48,30 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | `/arch-review` | review | Architect-level story review and implementation validation |
 | `/ux` | ux | Dual-mode UX quality audit (heuristics/a11y/motion) or design validation |
 
+### Duplicate Skill Names Across Categories
+
+19 skill names appear in multiple categories. This is by design -- each implementation is different and tailored to its category's context. For example, `hotfix` in `build/` focuses on emergency code fixes while `hotfix` in `deploy/` handles emergency deployment rollbacks. The full path (e.g., `build/hotfix` vs `deploy/hotfix`) disambiguates them.
+
+Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost-analysis`, `dep-map`, `fix-and-ship`, `full-test`, `hotfix`, `image-storage-optimization`, `iterate-review`, `perf`, `pr`, `preflight`, `qa`, `skills-list`, `spec`, `ux`.
+
 ## Skill Catalog
 
 ### build -- Project Scaffolding & Build Pipelines (24 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [build](build/build/) | 3.1.0 | Master orchestrator -- takes a competitor app and builds a better, cheaper, modern clone end-to-end with Node.js backend and Flutter frontend |
-| [ship](build/ship/) | 8.1.0 | Fast autonomous build loop -- 4 iterations max. Build it, make it work, analyze it, ship it |
-| [iterate](build/iterate/) | 4.0.0 | Self-iterating build loop -- implements, tests, reviews, analyzes, and refines up to 6 iterations |
-| [flutter](build/flutter/) | 2.1.0 | Analyzes a video or screenshots of an application and builds a Flutter mobile version |
+| [build](build/build/) | 1.0.0 | Master orchestrator -- takes a competitor app and builds a better, cheaper, modern clone end-to-end with Node.js backend and Flutter frontend |
+| [ship](build/ship/) | 8.0.0 | Fast autonomous build loop -- 4 iterations max. Build it, make it work, analyze it, ship it |
+| [iterate](build/iterate/) | 1.0.0 | Self-iterating build loop -- implements, tests, reviews, analyzes, and refines up to 6 iterations |
+| [flutter](build/flutter/) | 1.0.0 | Analyzes a video or screenshots of an application and builds a Flutter mobile version |
 | [nextjs](build/nextjs/) | 1.0.0 | Scaffolds a production-ready Next.js 15 application with App Router, auth, database, and dashboard UI |
 | [react-native](build/react-native/) | 1.0.0 | Builds a production-ready React Native mobile application from a design or specification |
 | [api-scaffold](build/api-scaffold/) | 1.0.0 | Scaffolds a production-ready backend API with routes, controllers, middleware, database, auth, validation, and OpenAPI spec |
 | [chrome-extension](build/chrome-extension/) | 1.0.0 | Builds a complete Chrome extension with Manifest V3, popup UI, content scripts, and background service worker |
 | [cli-tool](build/cli-tool/) | 1.0.0 | Generates a production-ready CLI tool with command parsing, interactive prompts, and config management |
 | [hotfix](build/hotfix/) | 1.1.0 | Emergency bug fix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
-| [story-implementer](build/story-implementer/) | 2.1.0 | Implements a Jira story using repo conventions, writes unit tests, creates PR, addresses bot review |
-| [db-migrate](build/db-migrate/) | 1.1.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
+| [story-implementer](build/story-implementer/) | 1.0.0 | Implements a Jira story using repo conventions, writes unit tests, creates PR, addresses bot review |
+| [db-migrate](build/db-migrate/) | 1.0.0 | Scaffolds Flyway migration files -- generates timestamped SQL, updates Slick table definitions and model case classes |
 | [healthcare-api](build/healthcare-api/) | 1.0.0 | Scaffold a FHIR R4-compliant healthcare API with resource models, SMART on FHIR auth, audit logging, and interoperability endpoints |
 | [fintech-api](build/fintech-api/) | 1.0.0 | Scaffold a production-ready financial services API with Plaid integration, payment processing, double-entry ledger, and KYC workflow |
 | [unity-scaffold](build/unity-scaffold/) | 1.0.0 | Scaffold a Unity game project with folder structure, assembly definitions, input system, CI/CD, and scriptable object architecture |
@@ -91,7 +97,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [contract-test](test/contract-test/) | 1.0.0 | Auto-detects API framework, generates consumer-driven contract tests using Pact or OpenAPI validation |
 | [accessibility-test](test/accessibility-test/) | 1.0.0 | Auto-detects frontend framework, sets up axe-core and Lighthouse CI for automated WCAG 2.1 AA testing |
 | [visual-regression](test/visual-regression/) | 1.0.0 | Auto-detects frontend framework, sets up visual regression testing with baseline screenshots across breakpoints |
-| [manual-test-plan](test/manual-test-plan/) | 2.1.0 | Generates a manual QA test plan based on code changes on the current branch |
+| [manual-test-plan](test/manual-test-plan/) | 1.0.0 | Generates a manual QA test plan based on code changes on the current branch |
 | [mobile-test](test/mobile-test/) | 1.0.0 | Mobile test generation -- unit, widget/UI, integration, snapshot, and accessibility tests for any mobile framework |
 | [device-matrix](test/device-matrix/) | 1.0.0 | Device matrix testing -- Firebase Test Lab, AWS Device Farm, BrowserStack with device selection and result aggregation |
 | [full-test](test/full-test/) | 1.0.0 | Complete testing pipeline -- runs full automated test suite plus generates manual test plan |
@@ -119,7 +125,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [arch-review](review/arch-review/) | 7.1.0 | Architect-level story review and implementation validation with domain consistency analysis |
+| [arch-review](review/arch-review/) | 7.0.0 | Architect-level story review and implementation validation with domain consistency analysis |
 | [api-review](review/api-review/) | 1.0.0 | API design review against REST best practices -- naming, HTTP semantics, status codes, pagination, error format, versioning |
 | [database-review](review/database-review/) | 1.0.0 | Database schema design review -- normalization, index coverage, constraints, naming, N+1 patterns, connection pooling |
 | [security-review](review/security-review/) | 1.0.0 | Security-focused code review -- auth bypasses, injection vectors, data exposure, hardcoded secrets, IDOR vulnerabilities |
@@ -184,7 +190,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [diagram](docs/diagram/) | 1.0.0 | Analyzes codebase structure and generates Mermaid architecture diagrams including C4, sequence, ER, and dependency graphs |
 | [onboarding](docs/onboarding/) | 1.0.0 | Analyzes codebase to generate a complete developer onboarding guide covering setup, architecture, conventions, and workflow |
 | [runbook](docs/runbook/) | 1.0.0 | Scans deployment config, Docker/K8s manifests, CI/CD, and monitoring to generate actionable operations runbooks |
-| [gen-catalog](docs/gen-catalog/) | 1.1.0 | Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories |
+| [gen-catalog](docs/gen-catalog/) | 1.0.0 | Auto-generates README.md and skills-list from SKILL.md frontmatter across all skill directories |
 | [skills-list](docs/skills-list/) | 3.1.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
 | [backend-spec](docs/backend-spec/) | 1.0.0 | Generates structured engineering specs from feature descriptions, designs, or ticket references |
 | [dep-map](docs/dep-map/) | 1.0.0 | Maps dependencies between stories, code modules, tickets, or specs with optimal implementation order |
@@ -201,7 +207,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [soc2](security/soc2/) | 1.0.0 | Evaluate codebase against SOC2 Trust Service Criteria -- security, availability, integrity, confidentiality, privacy |
 | [encryption](security/encryption/) | 1.0.0 | Audit and implement encryption -- data at rest, in transit, key management, password hashing, and token security |
 | [dependency-scan](security/dependency-scan/) | 1.0.0 | Auto-detect package manager, scan for vulnerable dependencies, auto-fix where possible, and generate SBOM |
-| [check-vanta](security/check-vanta/) | 2.1.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
+| [check-vanta](security/check-vanta/) | 1.0.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
 | [hipaa](security/hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
 | [pci-dss](security/pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
 | [benefits-fraud](security/benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
@@ -222,9 +228,9 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [analyze](analysis/analyze/) | 3.0.0 | End-to-end domain analysis -- traces every feature across all layers, verifies consistency, and fixes issues |
+| [analyze](analysis/analyze/) | 1.0.0 | End-to-end domain analysis -- traces every feature across all layers, verifies consistency, and fixes issues |
 | [compete](analysis/compete/) | 1.0.0 | Researches competing products, catalogs their features, and produces a prioritized feature gap analysis |
-| [mvp](analysis/mvp/) | 2.1.0 | Analyzes a video or screenshots of an application to decipher its MVP and suggest improvements |
+| [mvp](analysis/mvp/) | 1.0.0 | Analyzes a video or screenshots of an application to decipher its MVP and suggest improvements |
 | [backend-spec](analysis/backend-spec/) | 5.1.0 | Generates backend or frontend engineering specs in Jira format with acceptance criteria, routes, and table schemas |
 | [metrics](analysis/metrics/) | 1.0.0 | Computes development quality metrics from git history and tracks improvement over time |
 | [recall](analysis/recall/) | 1.0.0 | Reconstructs the development cycle from git history, distills patterns, and produces actionable insights |
@@ -435,7 +441,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | [linter](productivity/linter/) | 1.0.0 | Auto-detect stack and configure linting, formatting, and editor integration with auto-fix for existing violations |
 | [monorepo](productivity/monorepo/) | 1.0.0 | Set up or migrate to a monorepo with workspaces, build pipeline, task graph, and local plus remote caching |
 | [release](productivity/release/) | 1.0.0 | Set up automated release pipeline with semantic versioning, changelog generation, and publishing |
-| [vscode](productivity/vscode/) | 1.1.0 | Open VS Code in the current working directory |
+| [vscode](productivity/vscode/) | 1.0.0 | Open VS Code in the current working directory |
 
 ### integration -- Third-Party Service Connectors (9 skills)
 
@@ -455,7 +461,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
-| [polish](combo/polish/) | 3.0.0 | /ux ∥ /scale-audit → /qa → /analyze | Full quality pass with parallel UX + scalability audit |
+| [polish](combo/polish/) | 1.0.0 | /ux ∥ /scale-audit → /qa → /analyze | Full quality pass with parallel UX + scalability audit |
 | [research](combo/research/) | 1.0.0 | /compete → /new-features | Competitive gap analysis + feature ideation |
 | [spec](combo/spec/) | 1.0.0 | /mvp → /backend-spec | App analysis + story generation |
 | [story](combo/story/) | 1.0.0 | /arch-review → /story-implementer → /pr | Full story lifecycle from review to PR |
@@ -491,9 +497,9 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | Skill | Version | Description |
 |-------|---------|-------------|
 | [bootstrap](meta/bootstrap/) | 3.1.0 | Scaffolds a new project from a saved template -- creates CLAUDE.md, initial memory, and recommends first skill |
-| [evolve](meta/evolve/) | 1.1.0 | Self-improving skill that reads /recall and /metrics output, identifies which skills need patching, and applies fixes |
+| [evolve](meta/evolve/) | 1.0.0 | Self-improving skill that reads /recall and /metrics output, identifies which skills need patching, and applies fixes |
 | [extract-template](meta/extract-template/) | 1.0.0 | Extracts a reusable project template from a successful project -- captures pipeline, conventions, and pitfalls |
-| [promote](meta/promote/) | 1.1.0 | Cross-project pattern detection -- reads all project memories, finds recurring patterns, promotes to global conventions |
+| [promote](meta/promote/) | 1.0.0 | Cross-project pattern detection -- reads all project memories, finds recurring patterns, promotes to global conventions |
 | [skill-creator](meta/skill-creator/) | 1.0.0 | Creates new Claude Code skills following the marketplace SKILL.md format with proper frontmatter and quality scoring |
 | [skill-test](meta/skill-test/) | 1.0.0 | Validates a SKILL.md file against the marketplace quality rubric, checking schema, structure, and computing a score |
 | [registry-sync](meta/registry-sync/) | 1.0.0 | Scans and validates all SKILL.md files in the registry, checks category READMEs, detects duplicates, produces health report |
