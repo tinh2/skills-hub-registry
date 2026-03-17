@@ -1,0 +1,20 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate SKILL.md files
+        run: ./scripts/validate-skills.sh
+
+      - name: Cleanup build artifacts
+        if: always()
+        run: rm -rf build .dart_tool

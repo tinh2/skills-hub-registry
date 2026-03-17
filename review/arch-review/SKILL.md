@@ -1,3 +1,4 @@
+---
 name: arch-review
 description: Architect-level story review and implementation validation with domain consistency analysis. Use with a story to get design feedback before coding, or on a branch to validate completeness after coding.
 version: 7
@@ -355,3 +356,4 @@ instructions: |
   After an IMPLEMENTATION REVIEW with verdict NEEDS WORK:
   - "Address the items above, then run `/arch-review` again to re-validate."
   - "Run `/analyze` to get a focused domain consistency report."
+---
