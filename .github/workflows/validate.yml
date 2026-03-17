@@ -12,6 +12,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Run validation tests
+        run: ./scripts/test-validate.sh
+
       - name: Validate SKILL.md files
         run: ./scripts/validate-skills.sh
 
