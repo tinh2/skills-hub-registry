@@ -1,7 +1,7 @@
 ---
 name: preflight
-description: Pre-deploy verification gate — checks git status, build, tests, migrations, and commit conventions. Reports READY or NOT READY. Read-only, no changes.
-version: "1.1.0"
+description: "Pre-deploy verification gate. Checks git status, build, tests, migrations, secrets, and commit conventions. Reports READY or NOT READY. Read-only, no changes. Trigger words: preflight, pre-deploy check, ready to deploy, deployment checklist."
+version: 1.0.0
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -10,15 +10,18 @@ platforms:
 You are a pre-deploy verification agent. Check everything before deploying.
 Do NOT make any changes. Report only. Do NOT ask the user questions.
 
-TARGET: $ARGUMENTS
+============================================================
+CONFIGURATION
+============================================================
 
-If arguments are provided, interpret them as:
-- A branch name to check (e.g., "feature/auth-flow") — defaults to current branch
-- A base branch to compare against (e.g., "main", "develop") — defaults to origin/main
-- A check subset: "git-only", "build-only", "tests-only" to run specific checks
-- A project path if not running from the project root
+Deploy flag behavior is configurable. By default, no deploy flag is required.
+If the project's CLAUDE.md or package.json contains a `deployFlag` setting
+(e.g., `deploy:tho`, `deploy:prod`, `ship-it`), enforce that flag in the
+last commit message. Otherwise, skip the deploy flag check entirely.
 
-If no arguments are provided, run all checks on the current branch in the current directory, comparing against origin/main.
+To detect: look for `deployFlag` in the project's CLAUDE.md, or a
+`preflight.deployFlag` field in package.json / pyproject.toml. If found,
+use that value. If not found, mark deploy flag check as N/A.
 
 ============================================================
 CHECK 1: GIT STATUS
@@ -46,42 +49,95 @@ Run these checks and record pass/fail:
 CHECK 2: BUILD VERIFICATION
 ============================================================
 
-Auto-detect project type and run the appropriate build check:
+Auto-detect project type and run the appropriate build check.
+Check these in order (first match wins):
 
 **Scala/Play** (if `build.sbt` exists):
 - Run `sbt compile`
-- PASS if exit code 0, FAIL otherwise
 
-**Flutter** (if `pubspec.yaml` exists):
+**Flutter/Dart** (if `pubspec.yaml` exists):
 - Run `flutter analyze`
 - PASS if no issues, WARN if warnings only, FAIL if errors
 
-**Node.js** (if `package.json` exists):
-- Run `npx tsc --noEmit` (if TypeScript)
-- PASS if exit code 0, FAIL otherwise
+**Node.js / TypeScript** (if `package.json` exists):
+- If `tsconfig.json` exists: `npx tsc --noEmit`
+- Else if `scripts.build` in package.json: `npm run build`
+- Else: PASS (no build step)
+
+**Python** (if `pyproject.toml` or `setup.py` or `setup.cfg` exists):
+- If `pyproject.toml` has `[tool.mypy]`: `mypy .`
+- Else if `ruff` is available: `ruff check .`
+- Else: PASS (no static check configured)
+
+**Go** (if `go.mod` exists):
+- Run `go build ./...`
+
+**Rust** (if `Cargo.toml` exists):
+- Run `cargo check`
+
+**Ruby/Rails** (if `Gemfile` exists):
+- If Rails (`bin/rails` exists): `bin/rails db:prepare && bin/rails assets:precompile` (dry-run check only — skip if no DB)
+- Else: `bundle exec ruby -c` on changed files
+
+**Java/Kotlin** (if `pom.xml` exists):
+- Run `mvn compile -q`
+- Or if `gradlew` exists: `./gradlew compileJava`
+
+For all: PASS if exit code 0, FAIL otherwise (unless noted above).
 
 ============================================================
 CHECK 3: TEST SUITE
 ============================================================
 
+Auto-detect and run the appropriate test command:
+
 **Scala/Play:** `ENVIRONMENT=test sbt test`
 **Flutter:** `flutter test`
-**Node.js:** `npx vitest run` or `npm test`
+**Node.js:** Check package.json scripts — prefer `vitest run`, then `jest`, then `npm test`
+**Python:** `pytest` (or `python -m pytest`)
+**Go:** `go test ./...`
+**Rust:** `cargo test`
+**Ruby/Rails:** `bundle exec rspec` or `bundle exec rails test`
+**Java/Kotlin:** `mvn test -q` or `./gradlew test`
 
 - PASS if all tests pass
 - FAIL if any test fails — list failures
 
 ============================================================
-CHECK 4: MIGRATION STATUS (if Flyway project)
+CHECK 4: MIGRATION STATUS
 ============================================================
 
-If `src/main/resources/db/migration/` exists:
+Auto-detect which migration framework is in use and check for
+pending/unapplied migrations. Check all that match:
 
-1. List all migration files sorted by version.
-2. Check for migration files newer than the last commit on the base branch
-   (these are pending migrations that will run on deploy).
-3. PASS if no pending migrations or if pending migrations look correct.
-4. WARN if pending migrations exist — list them for review.
+**Flyway** (if `src/main/resources/db/migration/` exists):
+- List migration files sorted by version
+- Check for files newer than last commit on base branch
+
+**Prisma** (if `prisma/` dir or `prisma` in package.json):
+- Check `npx prisma migrate status` or list files in `prisma/migrations/`
+- WARN if unapplied migrations exist
+
+**Alembic** (if `alembic/` dir or `alembic.ini` exists):
+- List files in `alembic/versions/`
+- Check for uncommitted migration files
+
+**Django** (if `manage.py` exists and project uses Django):
+- Check for unapplied migrations: `python manage.py showmigrations --plan | grep '\[ \]'`
+
+**Rails** (if `db/migrate/` exists):
+- List migration files, check for pending ones
+
+**Knex** (if `knexfile` or `migrations/` with knex patterns):
+- List files in migrations directory
+
+**Sequelize** (if `migrations/` dir and sequelize in package.json):
+- List migration files
+
+For all frameworks:
+- PASS if no pending migrations
+- WARN if pending migrations exist — list them for review
+- N/A if no migration framework detected
 
 ============================================================
 CHECK 5: DEPENDENCY LOCK FILES
@@ -90,16 +146,38 @@ CHECK 5: DEPENDENCY LOCK FILES
 1. Check if lock files have uncommitted changes:
    - `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`
    - `pubspec.lock`
+   - `Gemfile.lock`
+   - `poetry.lock`, `uv.lock`, `Pipfile.lock`
+   - `Cargo.lock`
+   - `go.sum`
 2. PASS if lock files are committed or unchanged.
 3. WARN if lock files have uncommitted changes.
 
 ============================================================
-CHECK 6: CONVENTION COMPLIANCE
+CHECK 6: SECRETS SCAN
 ============================================================
 
-1. **Deploy tag:** Check if the last commit message contains a deploy tag.
-   - PASS if present
-   - FAIL if missing — deployment won't trigger
+Scan tracked files for accidentally committed secrets:
+
+1. Search for common secret patterns in staged/committed files:
+   - API keys: patterns like `AKIA[0-9A-Z]{16}`, `sk-[a-zA-Z0-9]{20,}`
+   - Private keys: `-----BEGIN (RSA |EC |DSA )?PRIVATE KEY-----`
+   - Tokens: `ghp_`, `gho_`, `github_pat_`, `xoxb-`, `xoxp-`
+   - Generic secrets: lines matching `(password|secret|token|api_key)\s*[:=]\s*['"][^'"]{8,}`
+     (skip if value is clearly a variable reference like `${}`, `process.env`, `os.environ`)
+   - .env files tracked in git: `git ls-files | grep '\.env'` (exclude `.env.example`, `.env.sample`)
+
+2. PASS if no secrets detected
+3. FAIL if any potential secrets found — list file and line number
+
+============================================================
+CHECK 7: CONVENTION COMPLIANCE
+============================================================
+
+1. **Deploy flag** (configurable — see CONFIGURATION above):
+   - If a deploy flag is configured, check if the last commit message contains it
+   - PASS if present, FAIL if missing
+   - N/A if no deploy flag configured
 
 2. **No Co-Authored-By:** Check all commits on this branch for Co-Authored-By lines.
    `git log {base}..HEAD --format="%b" | grep -i "co-authored-by"`
@@ -127,14 +205,15 @@ OUTPUT
 | 2 | Unpushed commits | {PASS/FAIL} | {details} |
 | 3 | Branch up to date | {PASS/WARN} | {details} |
 | 4 | Merge conflicts | {PASS/FAIL} | {details} |
-| 5 | Build | {PASS/FAIL} | {details} |
+| 5 | Build | {PASS/FAIL} | {framework detected} |
 | 6 | Tests | {PASS/FAIL} | {X passed, Y failed} |
-| 7 | Pending migrations | {PASS/WARN/N/A} | {details} |
+| 7 | Pending migrations | {PASS/WARN/N/A} | {framework: details} |
 | 8 | Lock files | {PASS/WARN} | {details} |
-| 9 | Deploy tag | {PASS/FAIL} | {details} |
-| 10 | No Co-Authored-By | {PASS/FAIL} | {details} |
-| 11 | No AI attribution | {PASS/FAIL} | {details} |
-| 12 | Branch pushed | {PASS/FAIL} | {details} |
+| 9 | Secrets scan | {PASS/FAIL} | {details} |
+| 10 | Deploy flag | {PASS/FAIL/N/A} | {details} |
+| 11 | No Co-Authored-By | {PASS/FAIL} | {details} |
+| 12 | No AI attribution | {PASS/FAIL} | {details} |
+| 13 | Branch pushed | {PASS/FAIL} | {details} |
 
 **VERDICT: {READY TO DEPLOY / NOT READY}**
 
@@ -142,22 +221,7 @@ If NOT READY, list exactly what needs to be fixed:
 1. {action needed}
 2. {action needed}
 
-============================================================
-DO NOT
-============================================================
-
-- Do NOT make any code changes — this skill is strictly read-only and diagnostic.
-- Do NOT push, commit, merge, or modify any git state.
-- Do NOT run deployment commands (terraform apply, docker push, etc.).
-- Do NOT fix failing tests or build errors — only report them.
-- Do NOT skip any check — run all checks even if early ones fail.
-
-============================================================
-NEXT STEPS
-============================================================
-
+NEXT STEPS:
 - If READY: "Safe to merge and deploy."
-- If NOT READY due to failing tests: "Run `/qa` to diagnose and fix test failures."
-- If NOT READY due to uncommitted changes: "Commit and push your changes, then re-run `/preflight`."
-- If NOT READY due to Co-Authored-By: "Amend the offending commits to remove attribution lines."
-- If NOT READY due to build errors: "Run `/iterate-review` to fix build issues."
+- If NOT READY: "Run `/hotfix` to fix failing tests" or "Commit and push your changes."
+---
