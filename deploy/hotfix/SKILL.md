@@ -1,22 +1,31 @@
 ---
 name: hotfix
-description: "Emergency hotfix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max."
-version: 1.0.0
+description: Emergency bug fix pipeline — diagnose, fix, test, commit, push, and PR in 2 iterations max. Speed over perfection.
+version: "1.1.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
 ---
 
-You are in EMERGENCY MODE. Fix the bug and ship. Do NOT ask questions.
+You are in EMERGENCY MODE. Fix the bug and ship. Do NOT ask the user questions. Infer everything from the error, stack trace, and codebase.
 
 Maximum 2 iterations. Do NOT refactor surrounding code. Do NOT improve anything
 beyond the bug. Apply the minimal correct fix.
 
-INPUT: $ARGUMENTS
-Bug description, error message, stack trace, or area that's broken.
+============================================================
+TARGET: $ARGUMENTS
+============================================================
+
+$ARGUMENTS contains the bug description, error message, stack trace, or area that is broken.
+
+If $ARGUMENTS is empty:
+1. Check conversation context for an error message or bug report.
+2. Check recent git log for revert commits or fix attempts.
+3. Run the project test suite to find failing tests.
+4. If nothing is found, report that no bug was identified and suggest running `/qa` to find issues.
 
 ============================================================
-BRANCH SAFETY
+PHASE 1: BRANCH SAFETY
 ============================================================
 
 Before making any changes:
@@ -27,20 +36,7 @@ Before making any changes:
 3. If already on a feature or hotfix branch: stay on it.
 
 ============================================================
-LOG ANALYSIS
-============================================================
-
-Before diving into code, check for recent evidence:
-1. Look for error/crash logs in common locations:
-   - `log/`, `logs/`, `tmp/`, `.log` files in the project root
-   - CI artifacts: check `gh run list --limit 3` for recent failures,
-     then `gh run view {id} --log-failed` for details
-   - Docker logs if applicable: `docker compose logs --tail=50`
-2. Parse any stack traces or error messages from logs to narrow the search.
-3. If the user provided a stack trace, skip this step and use that directly.
-
-============================================================
-ITERATION 1: DIAGNOSE AND FIX
+PHASE 2: DIAGNOSE AND FIX (Iteration 1)
 ============================================================
 
 1. DIAGNOSE:
@@ -52,70 +48,36 @@ ITERATION 1: DIAGNOSE AND FIX
 2. FIX:
    - Apply the minimal fix. Change as few lines as possible.
    - Do NOT refactor. Do NOT clean up. Do NOT add comments.
-   - If the fix requires a database change, create a migration following project conventions.
+   - If the fix requires a database change, create a migration (follow /db-migrate conventions).
 
 3. TEST:
-   Auto-detect the project type and run the appropriate test suite.
-   Check for these files in order and run the first match:
-
-   | Marker file          | Framework    | Command                                              |
-   |----------------------|--------------|------------------------------------------------------|
-   | `build.sbt`          | Scala/sbt    | `ENVIRONMENT=test sbt "testOnly *AffectedSpec*"` (or `sbt test` if no specific test) |
-   | `Cargo.toml`         | Rust         | `cargo test`                                         |
-   | `go.mod`             | Go           | `go test ./...`                                      |
-   | `pubspec.yaml`       | Flutter/Dart | `flutter test`                                       |
-   | `Gemfile`            | Ruby         | `bundle exec rspec` (or `bundle exec rake test`)     |
-   | `build.gradle*`      | Java/Kotlin  | `./gradlew test`                                     |
-   | `pom.xml`            | Java/Maven   | `mvn test`                                           |
-   | `pyproject.toml`     | Python       | `pytest` (or `python -m pytest`)                     |
-   | `setup.py`/`setup.cfg` | Python     | `pytest` (or `python -m pytest`)                     |
-   | `requirements.txt`   | Python       | `pytest`                                             |
-   | `Makefile`           | Make         | `make test`                                          |
-   | `package.json`       | Node.js      | Check scripts: prefer `vitest`, then `jest`, then `npm test` |
-   | `mix.exs`            | Elixir       | `mix test`                                           |
-   | `CMakeLists.txt`     | C/C++        | `cmake --build build && ctest --test-dir build`      |
-   | `*.sln` / `*.csproj` | .NET         | `dotnet test`                                        |
-   | `Package.swift`      | Swift        | `swift test`                                         |
-
-   If multiple markers exist, use the one most relevant to the changed files.
-   If no marker is found, check for a `Makefile` with a `test` target, or skip tests and warn.
-
-   - If tests pass -> go to SHIP.
-   - If tests fail -> go to ITERATION 2.
+   Auto-detect the project type and run the appropriate test suite:
+   - Scala (build.sbt): `ENVIRONMENT=test sbt "testOnly *AffectedSpec*"`
+     If no specific test identified: `ENVIRONMENT=test sbt test`
+   - Flutter (pubspec.yaml): `flutter test`
+   - Node.js (package.json): `npx vitest run` or `npm test`
+   - If tests pass -> go to PHASE 4 (SHIP).
+   - If tests fail -> go to PHASE 3.
 
 ============================================================
-ITERATION 2: REFINE (only if iteration 1 tests failed)
+PHASE 3: REFINE (Iteration 2 — only if iteration 1 tests failed)
 ============================================================
 
 1. Analyze the test failures from iteration 1.
 2. Adjust the fix based on what the tests revealed.
 3. Re-run the test suite.
 4. If still failing -> STOP. Report what you found and what you tried.
-   Include the ROLLBACK PLAN in your output.
 
 ============================================================
-ROLLBACK PLAN
-============================================================
-
-If the fix does not work after 2 iterations, provide a rollback plan:
-1. `git diff HEAD~1` — show exactly what changed.
-2. `git revert HEAD` — command to revert the fix commit.
-3. If a migration was created, provide the reverse migration or rollback command.
-4. Note any side effects (caches to clear, services to restart, etc.).
-
-============================================================
-SHIP
+PHASE 4: SHIP
 ============================================================
 
 1. Stage ONLY the files you changed (no unrelated files).
-2. Detect commit message conventions from the project:
-   - Run `git log --oneline -10` to check for patterns (conventional commits,
-     Jira ticket prefixes, deploy tags, etc.).
-   - Follow whatever convention the project uses.
-   - Default format if no convention detected:
-     ```
-     fix: {brief description of what was broken and fixed}
-     ```
+2. Commit:
+   ```
+   fix: {brief description of what was broken and fixed}
+   ```
+   Do NOT include Co-Authored-By lines.
 3. Push immediately.
 4. Create PR with `gh pr create`:
    - Title: `fix: {brief description}` (under 70 chars)
@@ -130,14 +92,39 @@ SHIP
      - [ ] {relevant test verification}
      - [ ] All existing tests pass
      ```
-   - Extract story/ticket number from branch name if present and link it.
+   - Do NOT reference Claude, AI, or include any AI attribution.
+   - Extract story number from branch name if present and link Jira.
 
-OUTPUT:
-## Hotfix Shipped
-- **Bug:** {what was broken}
-- **Cause:** {root cause}
-- **Fix:** {file:line — what changed}
-- **Tests:** {pass/fail, count}
-- **PR:** {URL}
-- **Iterations:** {1 or 2}/2
-- **Rollback:** `git revert {commit-sha}` if needed
+============================================================
+OUTPUT
+============================================================
+
+| Section | Detail |
+|---------|--------|
+| Bug | {what was broken} |
+| Cause | {root cause} |
+| Fix | {file:line — what changed} |
+| Tests | {pass/fail, count} |
+| PR | {URL} |
+| Iterations | {1 or 2}/2 |
+
+============================================================
+NEXT STEPS
+============================================================
+
+After the hotfix is shipped:
+- "Run `/qa` to verify the fix in context of the full application."
+- "Run `/arch-review` to validate the fix does not introduce architectural issues."
+- "Run `/analyze` to check for domain consistency after the change."
+- "Run `/manual-test-plan` to generate a targeted QA plan for the affected area."
+- "Run `/ship` if additional work is needed beyond the hotfix scope."
+
+============================================================
+DO NOT
+============================================================
+
+- Do NOT refactor surrounding code — fix only the bug, nothing else.
+- Do NOT add features or improvements — this is an emergency fix.
+- Do NOT spend more than 2 iterations — if it is not fixed after 2, stop and report.
+- Do NOT make sweeping changes — change as few lines as possible.
+- Do NOT skip creating the PR — every hotfix must be tracked and reviewable.
