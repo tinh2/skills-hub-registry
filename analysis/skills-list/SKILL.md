@@ -1,3 +1,4 @@
+---
 name: skills-list
 description: Display the full skills catalog — lists every available skill with descriptions and autonomous build chains.
 version: 3
@@ -191,3 +192,4 @@ instructions: |
   - 4 integration wiring passes (each touching 4-8 hub files)
   - Zero rework — all modifications extended rather than corrected
   - Peak burst: Feb 21 evening — 7 commits, 2,877 lines in 3h19m (40% of total lines)
+---

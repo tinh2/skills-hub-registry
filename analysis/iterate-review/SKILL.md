@@ -1,3 +1,4 @@
+---
 name: iterate-review
 description: Autonomously review and improve existing code through up to 5 iterations of analysis, domain verification, fixing, and validation.
 version: 5
@@ -129,3 +130,4 @@ instructions: |
   - "Run `/arch-review` for architect-level structural review."
   - "Run `/readme` to update project documentation with the current state."
   - "Run `/ux` to audit accessibility and design standards."
+---

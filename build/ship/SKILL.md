@@ -1,3 +1,4 @@
+---
 name: ship
 description: Fast autonomous build loop — 4 iterations max. Build it, make it work, analyze it, ship it.
 version: 8
@@ -169,3 +170,4 @@ instructions: |
   - "Run `/iterate-review` to harden with a focused review pass."
   - "Run `/ux` to audit accessibility, design standards, and usability."
   - "Run `/polish` for the full quality pipeline: `/ux` → `/qa` → `/analyze`."
+---
