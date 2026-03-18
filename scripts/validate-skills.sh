@@ -11,7 +11,7 @@
 #   0 — all skills valid
 #   1 — one or more violations found
 
-set -euo pipefail
+set -uo pipefail
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 ERRORS=0
@@ -19,12 +19,11 @@ TOTAL=0
 PASSED=0
 FAILED=0
 
-declare -A SEEN_NAMES
+SEEN_NAMES_FILE=$(mktemp)
+trap "rm -f $SEEN_NAMES_FILE" EXIT
 
-# Collect all SKILL.md files, excluding .claude worktrees
-mapfile -t SKILL_FILES < <(find "$REPO_ROOT" -name "SKILL.md" -not -path "*/.claude/*" | sort)
-
-for file in "${SKILL_FILES[@]}"; do
+# Collect all SKILL.md files, excluding .claude worktrees and scripts
+find "$REPO_ROOT" -name "SKILL.md" -not -path "*/.claude/*" -not -path "*/scripts/*" | sort | while IFS= read -r file; do
     TOTAL=$((TOTAL + 1))
     rel_path="${file#"$REPO_ROOT"/}"
     file_errors=0
@@ -37,7 +36,7 @@ for file in "${SKILL_FILES[@]}"; do
     fi
 
     # Check closing frontmatter delimiter (second occurrence of ---)
-    delimiter_count=$(grep -c "^---$" "$file" 2>/dev/null || true)
+    delimiter_count=$(grep -c "^---$" "$file" || true)
     if [[ "$delimiter_count" -lt 2 ]]; then
         echo "ERROR: $rel_path — missing closing frontmatter delimiter (---)"
         file_errors=$((file_errors + 1))
@@ -51,7 +50,7 @@ for file in "${SKILL_FILES[@]}"; do
 
     # Check required fields
     for field in name description version; do
-        if ! grep -q "^${field}:" <<< "$frontmatter"; then
+        if ! echo "$frontmatter" | grep -q "^${field}:"; then
             echo "ERROR: $rel_path — missing required field: $field"
             file_errors=$((file_errors + 1))
         fi
@@ -61,11 +60,12 @@ for file in "${SKILL_FILES[@]}"; do
     if [[ -n "$frontmatter" ]]; then
         skill_name=$(echo "$frontmatter" | grep "^name:" | head -1 | sed 's/^name:[[:space:]]*//')
         if [[ -n "$skill_name" ]]; then
-            if [[ -n "${SEEN_NAMES[$skill_name]+x}" ]]; then
-                echo "ERROR: $rel_path — duplicate skill name '$skill_name' (first seen in ${SEEN_NAMES[$skill_name]})"
+            prev=$(grep "^${skill_name}	" "$SEEN_NAMES_FILE" 2>/dev/null | head -1 | cut -f2 || true)
+            if [[ -n "$prev" ]]; then
+                echo "ERROR: $rel_path — duplicate skill name '$skill_name' (first seen in $prev)"
                 file_errors=$((file_errors + 1))
             else
-                SEEN_NAMES[$skill_name]="$rel_path"
+                printf '%s\t%s\n' "$skill_name" "$rel_path" >> "$SEEN_NAMES_FILE"
             fi
         fi
     fi
@@ -76,7 +76,16 @@ for file in "${SKILL_FILES[@]}"; do
     else
         PASSED=$((PASSED + 1))
     fi
+
+    # Write counters to temp files since we're in a subshell (pipe)
+    echo "$TOTAL $PASSED $FAILED $ERRORS" > "${SEEN_NAMES_FILE}.counts"
 done
+
+# Read counters back from subshell
+if [[ -f "${SEEN_NAMES_FILE}.counts" ]]; then
+    read TOTAL PASSED FAILED ERRORS < "${SEEN_NAMES_FILE}.counts"
+    rm -f "${SEEN_NAMES_FILE}.counts"
+fi
 
 echo ""
 echo "=== Validation Summary ==="
