@@ -1,7 +1,7 @@
 ---
 name: contract-test
 description: Generate consumer-driven contract tests for APIs. Auto-detects framework (Express, Fastify, NestJS, Django, FastAPI, Go), selects Pact, OpenAPI validation, or schema snapshots, verifies backward compatibility, catches breaking changes before deploy, and configures CI verification. Use when you need to validate API schemas, prevent breaking changes, verify backward compatibility, or set up consumer-driven contracts.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -362,3 +362,27 @@ DO NOT:
 - Do NOT generate contracts for internal implementation details (private methods, internal routes).
 - Do NOT skip error response contracts. Error shapes must be consistent and documented.
 - Do NOT update snapshots or baselines without verifying the change is intentional.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /contract-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

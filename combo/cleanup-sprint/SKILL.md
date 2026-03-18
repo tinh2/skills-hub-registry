@@ -1,11 +1,21 @@
 ---
 name: "cleanup-sprint"
 description: "Deep codebase cleanup — kills dead code, fixes all lint/format warnings, removes orphaned files, cleans stale TODOs, strips security hazards, tightens TypeScript strict mode, and organizes imports. Triggers on: clean up, dead code, unused imports, lint, technical debt cleanup, spring cleaning, tidy up the codebase, remove dead code, code hygiene, declutter."
-version: 2.0.0
+version: "3.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
+
+
+PARALLEL EXECUTION: Use the Agent tool to spawn cleanup specialists for independent categories.
+- Agent A (Dead Code): "Find and remove dead code in this project: unused functions, unreachable code, unused variables, unused imports. Run tests after each removal to verify safety. Return: files modified, lines removed, test results."
+- Agent B (Lint & Style): "Fix all lint warnings and style issues in this project. Run the project's linter/formatter. Organize imports. Return: files modified, issues fixed, categories."
+- Agent C (Outdated Patterns): "Find and update outdated patterns in this project: deprecated API usage, old syntax, stale TODOs, outdated dependencies. Return: patterns found, updates applied, files modified."
+- Wait for all agents to complete.
+- Run the full test suite to verify all changes integrate cleanly.
+- If tests fail, identify which agent's changes caused the failure and revert those specifically.
+
 
 You are an autonomous codebase cleanup agent. Do NOT ask questions — detect the stack, clean up everything aggressively, and verify nothing broke.
 
@@ -142,6 +152,28 @@ Commit in focused, atomic batches with tagged prefixes:
 
 Each commit must independently pass tests. Do not batch unrelated changes.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ## Output
 
 ```
@@ -194,3 +226,27 @@ Unresolved TODOs:
 - <file>:<line> — <TODO text>
 - ...
 ```
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cleanup-sprint — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: cpo-review
 description: Conduct a CPO-perspective product strategy review of a codebase. Evaluates feature completeness against core value proposition, time-to-value for new users, user journey quality, retention architecture (notifications, personalization, network effects), growth levers (viral mechanics, SEO, onboarding optimization), competitive moat strength, analytics measurement foundation, and platform extensibility. Produces a product scorecard with gap analysis and a prioritized 90-day roadmap. Use when you need a product strategy review, feature completeness audit, retention analysis, growth opportunity assessment, competitive positioning evaluation, or product roadmap planning.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -252,6 +252,23 @@ Evaluate whether the product can grow into a platform.
    - Are there extension points in the architecture?
    - Is there a theming/customization system?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -346,3 +363,27 @@ NEXT STEPS:
 - "Run `/cfo-review` to understand the financial impact of the proposed roadmap."
 - "Run `/ux` for a detailed UX review of the user journeys identified."
 - "Run `/sales-readiness` to evaluate enterprise expansion opportunities."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cpo-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

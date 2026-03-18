@@ -1,7 +1,7 @@
 ---
 name: skill-creator
 description: Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.
-version: 1.0.0
+version: "2.0.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -487,3 +487,43 @@ Repeating one more time the core loop here for emphasis:
 Please add steps to your TodoList, if you have such a thing, to make sure you don't forget. If you're in Cowork, please specifically put "Create evals JSON and run `eval-viewer/generate_review.py` so human can review test cases" in your TodoList to make sure it happens.
 
 Good luck!
+
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify the analysis consumed sufficient data.
+2. Verify all output sections have substantive content (not just headers).
+3. Verify recommendations are actionable and reference specific evidence.
+
+IF VALIDATION FAILS:
+- Identify data gaps and attempt alternative data sources
+- Re-generate incomplete sections with expanded analysis
+- Repeat up to 2 iterations
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /skill-creator — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: warehouse-ops
 description: Audit warehouse management system operations -- evaluate WMS platform architecture (Manhattan, Blue Yonder, SAP EWM, Korber, Infor), inbound receiving and ASN processing, putaway rules and cross-docking logic, picking strategy selection (discrete, batch, zone, wave, cluster, goods-to-person), inventory accuracy with cycle counting and RFID tracking, labor management with engineered standards and productivity KPIs, and automation readiness for AS/RS, AMR, AGV, and conveyor sortation. Covers barcode and license plating, order allocation with FIFO/FEFO, cartonization and pack verification, carrier rate shopping, RF and voice-directed workflows, and ERP/TMS/OMS integration analysis.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -141,6 +141,28 @@ Include: Executive Summary (platform, picking strategies, tracking tech, labor m
 automation level), Architecture Overview, Inbound Operations, Outbound Operations,
 Inventory Accuracy, Labor Management, Integration & Automation, Recommendations.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -175,3 +197,27 @@ DO NOT:
 - Skip integration analysis -- disconnected systems cause data lag and errors.
 - Overlook cross-docking opportunities that can eliminate putaway/pick steps.
 - Propose picking strategy changes without understanding order profile (lines/order, units/line).
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /warehouse-ops — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: web-game
 description: "Scaffolds a browser-based game with Phaser 3, PixiJS, or Three.js including game loop, asset pipeline, responsive canvas, input handling, audio, save/load, and deployment to itch.io or web. Triggers on: \"web game\", \"browser game\", \"html5 game\", \"phaser game\", \"pixi game\", \"three.js game\", \"javascript game\", \"typescript game\", \"make a game for the browser\", \"build a web game\", \"2d browser game\", \"3d web game\", \"itch.io game\", \"canvas game\", \"webgl game\"."
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -342,6 +342,25 @@ dist/
 coverage/
 ```
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -391,3 +410,27 @@ DO NOT:
 - Do NOT use `setInterval` for game loops — use requestAnimationFrame or framework ticker.
 - Do NOT hardcode canvas dimensions — use responsive scaling.
 - Do NOT skip audio context resume — browsers block autoplay without user gesture.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /web-game — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

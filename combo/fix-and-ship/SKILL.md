@@ -1,7 +1,7 @@
 ---
 name: fix-and-ship
 description: "Emergency fix-and-deploy pipeline — diagnose a bug, apply a minimal fix, verify safety, deploy to production, and confirm the service is healthy. Supports Vercel, AWS, Railway, Fly.io, Heroku, and Kubernetes. Tracks incident timeline and MTTR. Triggered by 'fix and deploy', 'hotfix and ship', 'emergency fix', 'fix this bug and deploy', 'patch and push', 'fix and ship'."
-version: 1.0.0
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -191,6 +191,28 @@ Notification payload (adapt to format):
 - Deploy status
 - MTTR
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -229,3 +251,27 @@ OUTPUT
 {If DEPLOYED BUT UNHEALTHY: "Deployed but health check failed. Rolled back to previous version. Investigate further."}
 {If ROLLED BACK: "Deployment failed. Rolled back. Previous version is serving."}
 {If BLOCKED: "Fix or preflight failed. See details above. No deployment attempted."}
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /fix-and-ship — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

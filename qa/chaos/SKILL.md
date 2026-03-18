@@ -1,7 +1,7 @@
 ---
 name: chaos
 description: "Chaos engineering analysis that maps every external dependency and I/O boundary, then generates tests for timeouts, connection failures, corrupt responses, disk errors, OOM, partial failures, and rate limiting. Runs the tests and reports which failures crash the app vs degrade gracefully. Use when hardening error handling, testing resilience before launch, finding missing timeouts or retries, validating circuit breakers, or stress-testing third-party API failures."
-version: "1.0.0"
+version: "2.0.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -174,6 +174,28 @@ NO ERROR BOUNDARY:
 - Add try/catch, error boundary component, or error middleware.
 - Ensure user sees friendly error, not stack trace.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -226,3 +248,27 @@ NEXT STEPS:
 - "Run `/perf` to profile performance bottlenecks in the same code paths."
 - "Run `/iterate` to implement the recommended resilience fixes."
 - "Run `/qa` to verify the app still works end-to-end after adding resilience."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /chaos — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

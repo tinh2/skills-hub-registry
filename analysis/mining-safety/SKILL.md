@@ -1,7 +1,7 @@
 ---
 name: mining-safety
 description: Analyze mining safety management systems including incident investigation quality (ICAM, TapRooT, BowTie analysis), hazard identification and risk register completeness, critical control verification per ICMM framework, occupational health exposure monitoring (respirable dust, silica, noise dosimetry), ground control and geotechnical safety (pit slope stability, underground support, tailings per GISTM), emergency preparedness and mine rescue capability, and regulatory compliance with MSHA 30 CFR, state WHS Acts, and ILO Convention 176.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -287,6 +287,28 @@ Assess mine rescue readiness (underground operations):
 - Refuge chamber provisioning and maintenance
 - Inertisation capability for fire/explosion scenarios
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -322,3 +344,27 @@ DO NOT:
 - Do NOT treat "retrain the worker" as an acceptable sole corrective action for significant incidents.
 - Do NOT assess ground control risk without considering the intersection of geology, water, and operational sequencing.
 - Do NOT downplay near-miss frequency -- high near-miss rates indicate future serious injury potential.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /mining-safety — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

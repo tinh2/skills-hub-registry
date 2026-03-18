@@ -1,7 +1,7 @@
 ---
 name: returns-optimization
 description: Audit e-commerce and retail product return systems for return rate reduction strategies, reverse logistics efficiency, refurbishment routing, fraud detection in returns, and return reason analytics. Use when reviewing order management systems, RMA workflows, warehouse return processing, disposition engines, or retail loss prevention tools.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -221,6 +221,28 @@ Reverse Logistics Assessment, Fraud Detection Capabilities, Financial Impact Ana
 Customer Experience Metrics, Sustainability Assessment, Prioritized Recommendations
 with estimated cost savings.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -258,3 +280,27 @@ DO NOT:
 - Do NOT block or flag individual customer accounts based on analysis findings.
 - Do NOT skip fraud analysis even for retailers with low perceived return fraud.
 - Do NOT assume return costs without accounting for all components (shipping, labor, write-down).
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /returns-optimization — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

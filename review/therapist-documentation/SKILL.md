@@ -1,7 +1,7 @@
 ---
 name: therapist-documentation
 description: Audit therapy and behavioral health documentation platforms for clinical quality and regulatory compliance. Reviews SOAP, DAP, and BIRP note template structure, note completeness enforcement and timeliness deadlines, note locking and amendment/addendum workflows, DSM-5 diagnostic code completeness, ICD-10-CM crosswalk accuracy and annual update currency, diagnostic code validation and billing alignment, informed consent lifecycle (treatment, telehealth, release of information, minor consent) with electronic signature and expiration enforcement, treatment plan documentation (goals, objectives, interventions, review periods) with plan-note linkage, clinical supervision hour tracking for licensure (individual, group, direct observation), supervisory co-signature enforcement, and HIPAA compliance (RBAC with minimum-necessary access, encryption at rest and in transit, audit logging with 6-year retention, breach detection, PHI leak prevention in logs and errors, client record access and amendment rights). Supports EHR, practice management, and billing system integrations.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -263,6 +263,23 @@ PHI HANDLING:
 - Verify that PHI is not present in log files, error messages, or analytics data.
 - Look for data minimization practices (collecting only what is needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -351,3 +368,27 @@ NEXT STEPS:
 - "Run `/treatment-outcome` to analyze how documentation supports outcome measurement."
 - "Run `/security-review` for a deep technical security audit of the documentation platform."
 - "Run `/care-plan-optimizer` to evaluate treatment plan quality and optimization features."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /therapist-documentation — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

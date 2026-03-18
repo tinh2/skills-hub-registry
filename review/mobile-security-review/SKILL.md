@@ -1,7 +1,7 @@
 ---
 name: mobile-security-review
 description: "Audit mobile apps against OWASP Mobile Top 10 (M1-M10): credential hardcoding, supply chain dependencies, insecure auth/token storage (Keychain/Keystore), input validation (deep links, WebView XSS), certificate pinning (OkHttp, TrustKit, Alamofire), privacy (PII in logs, clipboard, screenshots), binary protections (ProGuard/R8, obfuscation, anti-tampering), security misconfiguration (backup, exported components, permissions), data-at-rest encryption (SQLCipher, EncryptedSharedPreferences), root/jailbreak detection, and biometric authentication. Supports Flutter, React Native, native iOS, and native Android. Use when auditing mobile app security posture before release or pentest."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -241,6 +241,23 @@ PHASE 7: DATA-AT-REST ENCRYPTION
 - [ ] No sensitive data in app logs (check all log output).
 - [ ] No sensitive data in backups (exclude sensitive files from backup).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -310,3 +327,27 @@ NEXT STEPS:
 - "Run `/store-compliance` to ensure security measures meet store requirements."
 - "Run `/mobile-test` to add security-focused test cases."
 - "Run `/mobile-ci-cd` to add security scanning to the CI pipeline."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /mobile-security-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: env-setup
 description: "Bootstrap a project from zero to working dev environment. Detects runtime versions, installs dependencies, creates .env from templates, starts Docker services, runs database migrations, and verifies build plus tests pass. Use when cloning a new repo, onboarding to a project, setting up local development, or troubleshooting a broken dev environment."
-version: "1.0.0"
+version: "2.0.0"
 category: productivity
 platforms:
   - CLAUDE_CODE
@@ -204,6 +204,21 @@ Run verification checks to confirm the project is ready for development:
 
 Report results for each check: PASS / FAIL with error details.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing, validate the output was produced correctly:
+
+1. Verify generated files exist and are syntactically valid.
+2. Run any available validation (lint, type-check, dry-run).
+3. If the skill produces configuration, verify it parses without errors.
+
+IF VALIDATION FAILS:
+- Diagnose from error context and re-generate the failing artifact
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -247,6 +262,30 @@ NEXT STEPS
 2. Run `/git-hooks` to set up pre-commit hooks
 3. Run `/devcontainer` to containerize this setup for team consistency
 4. Share `.env.example` with the team (never commit `.env`)
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /env-setup — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

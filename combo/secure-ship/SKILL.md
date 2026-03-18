@@ -1,7 +1,7 @@
 ---
 name: secure-ship
 description: "Build and ship features with security baked in — runs OWASP Top 10 pre-scan, builds and ships with /ship, validates with post-build security review, then penetration tests the result. Use when shipping auth flows, payment logic, API endpoints, admin panels, or any security-sensitive code."
-version: "1.0.0"
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -21,6 +21,15 @@ Pass the feature description, build target, or area to ship.
 ============================================================
 PHASE 1: OWASP PRE-SCAN
 ============================================================
+
+
+
+PARALLEL EXECUTION: Use the Agent tool to run security audit and pre-deploy checks concurrently.
+- Agent A (Security Audit): "Run comprehensive security analysis on this project — OWASP Top 10, dependency scan, secrets check. Return findings with severity."
+- Agent B (Pre-deploy Gate): "Run pre-deploy verification — tests, build, migrations, commit conventions. Return READY or NOT READY with blockers."
+- Wait for both agents to complete.
+- If security findings are CRITICAL, block deployment regardless of pre-deploy gate.
+
 
 Follow the instructions defined in the `/owasp` skill exactly.
 
@@ -75,6 +84,28 @@ Run penetration testing against the application surface:
 
 Fix any vulnerabilities found and commit the fixes.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -95,3 +126,27 @@ NEXT STEPS:
 - Review the PR with attention to security fixes
 - Run `/preflight` for pre-deploy verification
 - Run `/compliance-gate` for full compliance pass if shipping to production
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /secure-ship — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

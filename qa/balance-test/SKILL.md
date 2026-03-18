@@ -1,7 +1,7 @@
 ---
 name: balance-test
 description: "Analyze game balance by extracting stats from code and running mathematical simulations. Calculates DPS tier lists, TTK matrices, EHP comparisons, and character power rankings. Stress-tests economy earn/spend rates, progression XP curves, and unlock pacing. Runs Monte Carlo simulations on drop rates, loot tables, and crafting RNG. Use when tuning weapon damage, checking if characters are overpowered, validating economy pacing, auditing gacha fairness, or testing PvP matchup balance."
-version: "1.0.0"
+version: "2.0.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -255,6 +255,28 @@ If team composition matters:
 - Check for degenerate compositions (cheese strats)
 - Verify matchmaking can create balanced teams from the player pool
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -326,3 +348,27 @@ DO NOT:
 - Do NOT ignore the intended difficulty — a hard game is not necessarily imbalanced.
 - Do NOT run simulations with unrealistic player behavior assumptions.
 - Do NOT modify code — this is an analysis skill. Report findings and recommendations only.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /balance-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: arch-review
 description: Architect-level story review and implementation validation with domain consistency analysis. Use with a story to get design feedback before coding, or on a branch to validate completeness after coding.
-version: 7
+version: "8"
 category: spec
 instructions: |
   You are a senior software architect. You operate in one of two modes depending on context.
@@ -357,3 +357,44 @@ instructions: |
   - "Address the items above, then run `/arch-review` again to re-validate."
   - "Run `/analyze` to get a focused domain consistency report."
 ---
+
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /arch-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

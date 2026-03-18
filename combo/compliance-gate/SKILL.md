@@ -1,7 +1,7 @@
 ---
 name: compliance-gate
 description: "Runs a 4-phase compliance pipeline: security scan, GDPR audit, dependency vulnerability check, and penetration test, producing a unified pass/fail compliance report. Triggers on: \"compliance check\", \"compliance gate\", \"run compliance\", \"pre-release compliance\", \"security and compliance\", \"compliance audit\", \"is this app compliant\", \"gdpr and security check\", \"full security audit\", \"compliance scan\", \"check compliance before release\", \"compliance review\"."
-version: "1.0.0"
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -78,6 +78,28 @@ Run penetration testing as the final validation:
 
 Fix any vulnerabilities discovered. This is the final compliance gate.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -100,3 +122,27 @@ NEXT STEPS:
 - Run `/soc2` if SOC 2 compliance is also required
 - Schedule re-scan after open risks are resolved
 - Archive this report for audit trail
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /compliance-gate — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

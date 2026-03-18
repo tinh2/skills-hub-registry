@@ -1,7 +1,7 @@
 ---
 name: terraform
 description: "Generate Terraform infrastructure-as-code for AWS, GCP, or Azure. Creates modular VPC, compute, database, cache, CDN, and monitoring configs with per-environment sizing, remote state, cost estimates, and security best practices. Use when you need to set up cloud infrastructure, provision servers, create IaC, deploy to AWS/GCP/Azure, or scaffold a Terraform project."
-version: "1.0.0"
+version: "2.0.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
@@ -407,6 +407,23 @@ Add cost estimate comments to each resource:
 resource "aws_db_instance" "main" { ... }
 ```
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing deployment/infrastructure changes, validate:
+
+1. Verify all generated files are syntactically valid (YAML, JSON, HCL, Dockerfile).
+2. Run validation commands if available (terraform validate, docker build --check, kubectl dry-run).
+3. Verify no secrets, credentials, or sensitive values are hardcoded.
+4. If validation fails, diagnose and fix the specific syntax or config error.
+5. Repeat up to 2 iterations.
+
+IF STILL FAILING after 2 iterations:
+- Document what failed and the exact error
+- Include partial output if available
+
 ============================================================
 OUTPUT
 ============================================================
@@ -446,6 +463,30 @@ NEXT STEPS
 3. Start with dev environment, validate, then promote to staging and prod
 4. Set up CI/CD to run `terraform plan` on PRs and `terraform apply` on merge
 5. Enable Terraform Cloud or Spacelift for team collaboration and state locking
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /terraform — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

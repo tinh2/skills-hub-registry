@@ -1,7 +1,7 @@
 ---
 name: dx
 description: "Audit developer experience and generate a DX health score. Evaluates devcontainer, git hooks, linting, build caching, environment setup, and release pipeline. Use when you want to check how easy it is to onboard, improve developer workflow, score project tooling maturity, or find gaps in your dev setup."
-version: "1.0.0"
+version: "2.0.0"
 category: productivity
 platforms:
   - CLAUDE_CODE
@@ -138,6 +138,21 @@ Sort recommendations by priority (critical first), then by effort (quick first).
 
 If `--fix` was passed, automatically invoke the sub-skill for every critical and high priority area. Run them in sequence since some depend on others (e.g., `/linter` before `/git-hooks`).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing, validate the output was produced correctly:
+
+1. Verify generated files exist and are syntactically valid.
+2. Run any available validation (lint, type-check, dry-run).
+3. If the skill produces configuration, verify it parses without errors.
+
+IF VALIDATION FAILS:
+- Diagnose from error context and re-generate the failing artifact
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -181,6 +196,30 @@ NEXT STEPS
    - `/release` — configure automated release pipeline
 2. Re-run `/dx` after fixes to verify score improvement
 3. Run `/dx --fix` to auto-apply all critical and high priority fixes
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /dx — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

@@ -1,7 +1,7 @@
 ---
 name: hipaa
 description: "Deep HIPAA Security Rule technical audit mapping code-level findings to 45 CFR sections. Covers administrative safeguards (164.308 -- risk analysis, workforce security, access management, incident procedures, contingency planning), physical safeguards (164.310 -- facility access, workstation security, session timeout, device controls, crypto-shredding), and technical safeguards (164.312 -- unique user IDs, emergency break-glass access, automatic logoff, AES-256 PHI encryption, audit controls with 6-year retention, data integrity checksums, MFA authentication, TLS transmission security, network segmentation). Traces PHI data flows through ingestion, processing, caching, storage, transmission, and disposal. Use when building or auditing healthcare apps, EHR integrations, FHIR APIs, telehealth platforms, or any system handling protected health information."
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -252,6 +252,23 @@ DISPOSAL:
 - Secure deletion (overwrite, not just delete)?
 - Backup data disposal aligned with retention?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -329,6 +346,30 @@ After reviewing the audit:
 - "Run `/pentest` to verify exploitability of access control and authentication findings."
 - "Run `/secure` for general security hardening beyond HIPAA-specific requirements."
 - "Run `/soc2` to assess SOC 2 Type II controls that overlap with HIPAA Security Rule."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /hipaa — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

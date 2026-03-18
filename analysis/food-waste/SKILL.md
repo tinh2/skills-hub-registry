@@ -1,7 +1,7 @@
 ---
 name: food-waste
 description: Analyze food supply chain systems for waste reduction opportunities including shelf life prediction models, FIFO and FEFO inventory rotation enforcement, demand forecasting accuracy and bias, donation logistics workflows, cold chain temperature monitoring, and sustainability reporting against EPA Food Recovery Hierarchy and UN SDG 12.3 targets.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -134,6 +134,28 @@ Step 6.3 -- Check reporting frameworks: GHG Protocol Scope 3, CDP, GRI, UN SDG
 Step 6.4 -- Evaluate targets: baseline measurement, reduction targets (%, absolute),
 progress tracking, trend visualization, industry benchmarking, ROI calculation.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -202,6 +224,30 @@ NEXT STEPS
 - "Run `/crop-yield` to analyze upstream production optimization."
 - "Run `/perf` to assess performance during peak season."
 - "Run `/security-review` to audit supply chain data access."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /food-waste — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

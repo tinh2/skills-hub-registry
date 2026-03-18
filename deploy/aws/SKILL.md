@@ -1,7 +1,7 @@
 ---
 name: aws
 description: Generates production-ready Terraform files for AWS infrastructure. Writes complete .tf files for any cloud architecture — no deployment, just file generation.
-version: "1.1.0"
+version: "2.1.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
@@ -264,6 +264,30 @@ Step-by-step guide to apply (init, plan, apply) — but do NOT run these command
 ### Architecture Diagram
 ASCII diagram showing the component relationships.
 
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /aws — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
+
 ============================================================
 DO NOT
 ============================================================
@@ -273,6 +297,23 @@ DO NOT
 - Do NOT use placeholder values for non-sensitive config — use realistic defaults.
 - Do NOT omit files or write partial modules — every file must be complete.
 - Do NOT create untagged resources — every resource must have Name, Environment, Project, ManagedBy tags.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing deployment/infrastructure changes, validate:
+
+1. Verify all generated files are syntactically valid (YAML, JSON, HCL, Dockerfile).
+2. Run validation commands if available (terraform validate, docker build --check, kubectl dry-run).
+3. Verify no secrets, credentials, or sensitive values are hardcoded.
+4. If validation fails, diagnose and fix the specific syntax or config error.
+5. Repeat up to 2 iterations.
+
+IF STILL FAILING after 2 iterations:
+- Document what failed and the exact error
+- Include partial output if available
 
 ============================================================
 NEXT STEPS

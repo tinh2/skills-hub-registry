@@ -1,7 +1,7 @@
 ---
 name: workplace-risk-scoring
 description: Audit workplace risk scoring systems and occupational safety programs -- evaluate job hazard analysis (JHA/JSA) methodology and task-level hazard identification, risk matrix calibration for likelihood and consequence scales, exposure assessment accuracy for chemical, noise, vibration, and heat stress monitoring, PPE adequacy under 29 CFR 1910.132(d) and respirator fit testing per 29 CFR 1910.134, and ergonomic risk factors using REBA, RULA, NIOSH Lifting Equation, and Strain Index. Covers NIOSH hierarchy of controls (elimination, substitution, engineering, administrative, PPE), ALARP risk tolerance criteria, musculoskeletal disorder prevention programs, OSHA PEL and ACGIH TLV compliance, inter-rater reliability for risk assessors, and management of change for safety-critical controls.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -206,6 +206,28 @@ Hierarchy of Controls Compliance, PPE Program Evaluation, Ergonomic Risk Assessm
 Maturity, Assessment Program Coverage and Currency, Prioritized Recommendations with
 estimated risk reduction impact.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -243,3 +265,27 @@ DO NOT:
 - Ignore ergonomic risk factors -- musculoskeletal disorders are the largest category of workplace injuries.
 - Treat risk assessment as a one-time activity -- currency and review cadence are critical to effectiveness.
 - Aggregate risk scores mathematically without validating that the underlying scales support arithmetic operations.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /workplace-risk-scoring — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

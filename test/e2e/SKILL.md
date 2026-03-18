@@ -1,7 +1,7 @@
 ---
 name: e2e
 description: Auto-detects any tech stack, generates and runs exhaustive end-to-end tests. Triggered by "end-to-end tests", "e2e tests", "integration tests", "test the whole app", "generate tests", "test coverage", "write e2e", "run e2e", "full test suite".
-version: 1.0.0
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -442,3 +442,27 @@ After the e2e run:
 - "Run `/analyze` to verify domain consistency across all layers."
 - "Run `/manual-test-plan` to generate a human-walkable QA plan complementing these automated tests."
 - "Run `/walkthrough` for Flutter-specific simulator-based exhaustive UI testing."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /e2e — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

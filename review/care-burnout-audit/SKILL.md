@@ -1,7 +1,7 @@
 ---
 name: care-burnout-audit
 description: Audit healthcare and caregiving software for provider burnout risk factors. Analyzes workload distribution fairness, scheduling equity, documentation burden, alert fatigue indicators, break and rest compliance, overtime patterns, and systemic contributors to staff burnout. Produces a burnout risk scorecard with actionable recommendations tied to patient safety outcomes. Use when you need to audit healthcare worker burnout, review caregiver scheduling fairness, assess clinical documentation burden, detect alert fatigue, check nurse staffing ratios, evaluate EHR workflow efficiency, or review care facility labor compliance.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -206,6 +206,23 @@ falls, readmissions vs. staffing ratios), provider satisfaction surveys.
 
 Write review to `docs/care-burnout-audit.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -256,3 +273,27 @@ DO NOT:
 - Overlook the connection between burnout and patient safety -- burned-out providers make more errors, communicate less, and leave the profession.
 - Skip overtime analysis -- chronic overtime is both a symptom and a cause of burnout, creating a destructive feedback loop.
 - Recommend increased staffing as the only solution without first identifying system inefficiencies that waste existing staff time.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /care-burnout-audit — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

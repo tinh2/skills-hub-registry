@@ -1,7 +1,7 @@
 ---
 name: secure
 description: "Full-stack security posture assessment with 0-100 risk scoring. Scans dependency vulnerabilities (npm audit, pip-audit, cargo audit, govulncheck), dangerous code patterns (SQL injection, eval, command injection, ReDoS, innerHTML, XSS vectors), authentication gaps (missing auth middleware, CSRF, hardcoded JWT secrets, insecure session flags), insecure crypto (MD5/SHA1 password hashing, Math.random for tokens, hardcoded encryption keys), configuration issues (exposed .env files, debug mode, permissive CORS, missing security headers CSP/HSTS, Docker root containers, default credentials), and data handling problems (PII in logs, missing input validation, file upload exploits, missing rate limiting). Produces a prioritized risk report and routes to specialized skills (pentest, owasp, gdpr, encryption, soc2). Use as a first-pass security triage before deeper audits or before shipping to production."
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -166,6 +166,23 @@ Based on findings, recommend specific sub-skills:
 - Encryption gaps → "Run `/encryption` to audit and implement proper encryption"
 - Enterprise/compliance needs → "Run `/soc2` for SOC2 readiness assessment"
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -218,6 +235,30 @@ After reviewing the posture report:
 - "Run `/gdpr` to assess privacy compliance."
 - "Run `/encryption` to audit encryption implementation."
 - "Run `/soc2` to evaluate SOC2 readiness."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /secure — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

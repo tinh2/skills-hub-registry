@@ -1,7 +1,7 @@
 ---
 name: procurement-review
 description: Audit procurement and procure-to-pay software for sourcing, purchasing, and vendor management. Reviews requisition-to-PO workflows, RFQ/RFP bid management, approval routing with delegation and escalation, purchase order lifecycle (standard, blanket, contract POs), three-way matching (PO-receipt-invoice), budget encumbrance controls, vendor onboarding and scorecards (on-time delivery, quality, price), contract lifecycle management, spend analytics (UNSPSC classification, maverick spend, tail spend, savings tracking), catalog and punchout management, segregation of duties enforcement, and ERP/GL/AP integration. Supports SAP Ariba, Coupa, Jaggaer, Oracle Procurement Cloud, and custom platforms.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -146,6 +146,23 @@ Executive Summary (platform, workflow maturity, vendor mgmt depth, spend analyti
 integration scores), Procure-to-Pay Workflow, PO Management, Vendor Management,
 Spend Analytics, Integration Assessment, Recommendations.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -180,3 +197,27 @@ DO NOT:
 - Skip spend analytics -- without visibility, savings opportunities remain hidden.
 - Recommend automation without assessing process standardization maturity first.
 - Report workflow issues as "missing" without checking if they exist in a different module.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /procurement-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

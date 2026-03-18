@@ -1,7 +1,7 @@
 ---
 name: devcontainer
 description: "Generate a dev container for my project — auto-detect language, framework, and services like PostgreSQL or Redis, create devcontainer.json with VS Code extensions, port forwarding, post-create commands, Docker Compose for multi-service setups, and GitHub Codespaces compatibility"
-version: "1.0.0"
+version: "2.0.0"
 category: productivity
 platforms:
   - CLAUDE_CODE
@@ -152,6 +152,21 @@ Ensure GitHub Codespaces compatibility:
 
 Verify the generated config is valid JSON (no trailing commas, proper escaping).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing, validate the output was produced correctly:
+
+1. Verify generated files exist and are syntactically valid.
+2. Run any available validation (lint, type-check, dry-run).
+3. If the skill produces configuration, verify it parses without errors.
+
+IF VALIDATION FAILS:
+- Diagnose from error context and re-generate the failing artifact
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -190,6 +205,30 @@ NEXT STEPS
 2. Or push to GitHub and open in Codespaces
 3. Run `/env-setup` to verify all dependencies and services are working
 4. Run `/git-hooks` to set up pre-commit hooks inside the container
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /devcontainer — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

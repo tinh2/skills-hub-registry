@@ -1,7 +1,7 @@
 ---
 name: customer-success-audit
 description: Audit any product from a Customer Success Manager perspective -- evaluate onboarding flow completeness, self-service help infrastructure, customer health signal tracking, support channel accessibility, expansion and retention triggers, and customer communication systems. Covers first-run experience, time-to-value measurement, tooltip and contextual help coverage, analytics event tracking (Mixpanel, Amplitude, Segment), error message quality, feedback collection (NPS/CSAT), plan-based feature gating, upgrade prompts, churn risk indicators, and email drip sequences. Use when assessing product-market fit signals, preparing for CS team onboarding, evaluating customer retention architecture, or auditing any B2B or B2C product for customer lifecycle completeness.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -250,6 +250,28 @@ PHASE 7: WRITE REPORT
 
 Write the complete analysis to `docs/customer-success-audit.md` in the project (create the `docs/` directory if it does not exist).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -289,6 +311,30 @@ Grading: 9-10 = A, 7-8 = B, 5-6 = C, 3-4 = D, 0-2 = F
 ### Report saved to: `docs/customer-success-audit.md`
 
 ============================================================
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /customer-success-audit — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
+
 STRICT RULES
 ============================================================
 

@@ -1,7 +1,7 @@
 ---
 name: monorepo
 description: "Set up or migrate to a monorepo with Turborepo, Nx, or pnpm workspaces. Scaffolds apps and packages directory structure, configures task pipeline with dependency graph, enables local and remote build caching, and generates affected-only CI workflows. Use when splitting a project into packages, merging multiple repos, adding workspace-aware builds, or optimizing monorepo CI performance."
-version: "1.0.0"
+version: "2.0.0"
 category: productivity
 platforms:
   - CLAUDE_CODE
@@ -307,6 +307,21 @@ PHASE 7 — VERIFY SETUP
 
 Fix any issues found during verification.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing, validate the output was produced correctly:
+
+1. Verify generated files exist and are syntactically valid.
+2. Run any available validation (lint, type-check, dry-run).
+3. If the skill produces configuration, verify it parses without errors.
+
+IF VALIDATION FAILS:
+- Diagnose from error context and re-generate the failing artifact
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -351,6 +366,30 @@ NEXT STEPS
 3. Run `/release --monorepo` to set up versioning with changesets
 4. Run `/linter` to set up shared lint config in `packages/config/`
 5. Enable remote caching: run with `--remote-cache` flag
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /monorepo — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

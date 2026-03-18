@@ -1,7 +1,7 @@
 ---
 name: permit-compliance
 description: Audit construction permit tracking, building code compliance, and inspection management software. Reviews permit lifecycle workflows (building, electrical, plumbing, mechanical, demolition, zoning, certificate of occupancy), IBC code reference systems, ADA and Fair Housing accessibility checks, fire and life safety compliance, NEPA and CWA environmental review, stormwater NPDES/SWPPP tracking, LEED and ENERGY STAR sustainability, plan review and RFI management, submittal workflows, inspector scheduling and coordination, and jurisdiction-specific regulatory reporting. Supports Procore, PlanGrid, e-Builder, Accela, Tyler Technologies, and custom platforms.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -154,6 +154,23 @@ compliance, inspection management, document management scores), Permit Coverage,
 Code Compliance, Environmental Compliance, Document & Submittal Management, Inspection
 Management, Recommendations.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -188,3 +205,27 @@ DO NOT:
 - Overlook inspection workflow gaps -- failed inspections without re-inspection tracking cause delays.
 - Report compliance features as "present" without verifying the workflow logic is complete.
 - Recommend compliance automation without considering jurisdiction-specific variation in requirements.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /permit-compliance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

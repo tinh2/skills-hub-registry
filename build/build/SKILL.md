@@ -1,7 +1,7 @@
 ---
 name: build
 description: "Full-stack app builder — takes a competitor app, idea, or spec and executes an 8-phase pipeline to produce a working application. Supports any tech stack. Trigger: build an app, clone this app, build a competitor, build from scratch, build me a [thing]."
-version: 1.0.0
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -588,6 +588,25 @@ After `/qa` completes, produce the Build Completion Report below.
   Every model change that adds/changes collection access must update rules in the same commit.
 - VALIDATION GATE (Phase 5) is NOT optional. It must pass before QA and UX phases.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ## NEXT STEPS
 
 After the build is complete:
@@ -596,3 +615,27 @@ After the build is complete:
 - Run `/aws` to generate infrastructure for deploying this project.
 - Run `/manual-test-plan` on a specific feature branch for targeted QA.
 - To add a new feature, run `/spec` to create the story, then `/story-implementer` to implement it.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /build — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

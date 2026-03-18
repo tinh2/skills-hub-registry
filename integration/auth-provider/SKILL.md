@@ -1,7 +1,7 @@
 ---
 name: auth-provider
 description: "Set up complete OAuth/SSO authentication with Google, GitHub, Apple, or SAML providers. Auto-detects your framework and configures the best auth library (NextAuth, Passport, Firebase Auth, Supabase, Clerk, Lucia, django-allauth). Includes session management, JWT token refresh, login/logout UI components, route protection middleware, and database schema updates. Use when you need OAuth login, social sign-in, SSO integration, authentication setup, login page, or user authentication."
-version: "1.0.0"
+version: "2.0.0"
 category: integration
 platforms:
   - CLAUDE_CODE
@@ -436,3 +436,44 @@ After auth integration:
 - Do NOT expose internal auth errors to the client -- return generic "authentication failed" messages.
 - Do NOT ignore the email verification state from providers -- check emailVerified before granting access.
 - Do NOT create a User model that conflicts with an existing one -- extend the existing model.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the integration, validate:
+
+1. Run the project's test suite to verify the integration works end-to-end.
+2. Run build/compile to confirm no breakage.
+3. Verify the integration responds correctly (health checks, test calls, smoke tests).
+4. If failures occur, diagnose from error output and apply minimal fixes.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Document the integration state and what's blocking
+- Include error output and attempted fixes
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /auth-provider — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

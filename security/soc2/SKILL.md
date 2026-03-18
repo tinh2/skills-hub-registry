@@ -1,7 +1,7 @@
 ---
 name: soc2
 description: "SOC 2 Type II readiness assessment against all five Trust Service Criteria. Evaluates Security controls (CC6/CC7 -- RBAC, access provisioning/removal, network segmentation, TLS enforcement, input validation, vulnerability management, incident detection and response), Availability controls (A1 -- capacity management, auto-scaling, backup frequency, disaster recovery, RTO/RPO, health checks, uptime monitoring), Processing Integrity (PI1 -- data validation, error handling, transaction logging, idempotency, race condition protection), Confidentiality (C1 -- data classification, encryption at rest and in transit, access logging, secure disposal, key rotation), and Privacy (P1-P8 -- notice, consent, collection limitation, retention/disposal, data access/export, third-party disclosure, data quality, privacy monitoring). Produces a control-by-control PASS/PARTIAL/FAIL matrix with evidence references, remediation roadmap, and evidence collection checklist. Use when preparing for a SOC 2 audit, evaluating enterprise readiness, or building compliance controls into your application."
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -246,6 +246,23 @@ P8.1 — MONITORING AND ENFORCEMENT:
 - Privacy impact assessments for new features
 - Regular privacy reviews scheduled
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -313,6 +330,30 @@ After reviewing the readiness report:
 - "Run `/pentest` to generate evidence for CC7.1 vulnerability management."
 - "Run `/secure` for a technical security baseline before SOC2 prep."
 - "Engage a SOC2 auditor once all P0 gaps are remediated."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /soc2 — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

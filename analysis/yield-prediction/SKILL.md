@@ -1,7 +1,7 @@
 ---
 name: yield-prediction
 description: Audit pharmaceutical yield prediction systems and process analytical technology -- evaluate critical process parameter (CPP) to critical quality attribute (CQA) relationships, design space characterization per ICH Q8(R2) Quality by Design, PAT sensor readiness (NIR, Raman, FBRM) for real-time release testing, scale-up modeling from lab to pilot to commercial with dimensional analysis, and raw material variability impact on batch yield. Covers multivariate analysis with PCA and PLS regression, golden batch trajectory profiling, Hotelling T-squared deviation detection, supplier lot-to-lot CMA variability, formulation robustness assessment, MES and historian data quality, and technology transfer risk assessment for multi-site manufacturing.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -247,6 +247,28 @@ Write complete analysis to `docs/yield-prediction-analysis.md`:
 - Raw material variability impact quantification
 - Predictive model specifications and implementation roadmap
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -281,3 +303,27 @@ DO NOT:
 - Do NOT build predictive models on data with known integrity issues -- flag data quality first.
 - Do NOT assume linear relationships for all CPP-CQA interactions without multivariate analysis.
 - Do NOT ignore raw material variability as a yield predictor -- it is often the dominant factor.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /yield-prediction — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

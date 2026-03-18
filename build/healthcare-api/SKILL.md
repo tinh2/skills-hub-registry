@@ -1,7 +1,7 @@
 ---
 name: healthcare-api
 description: "Scaffolds a FHIR R4-compliant healthcare API with clinical resource models, SMART on FHIR auth, HIPAA audit logging, PHI-safe error handling, and interoperability endpoints. Triggers on: \"healthcare api\", \"FHIR api\", \"medical api\", \"health api\", \"build a FHIR server\", \"clinical data api\", \"patient api\", \"EHR integration\", \"SMART on FHIR\", \"HIPAA compliant api\", \"healthcare backend\", \"HL7 api\", \"build a health platform\", \"medical records api\", \"telehealth backend\"."
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -308,6 +308,25 @@ PHASE 6: TESTING AND VERIFICATION
    - Run full test suite -- all tests must pass.
    - Verify server starts and /fhir/metadata returns CapabilityStatement.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -369,6 +388,30 @@ After scaffolding:
 - "Run `/owasp` to audit web application security."
 - "Run `/patient-engagement` to build patient-facing features on top of this API."
 - "Run `/medical-billing` to add revenue cycle endpoints."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /healthcare-api — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

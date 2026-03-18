@@ -1,7 +1,7 @@
 ---
 name: crop-yield
 description: Audit precision agriculture and crop management software for yield prediction model accuracy, soil analysis integration, irrigation optimization algorithms, pest and disease detection pipelines, satellite and drone imagery processing, weather data integration, and harvest timing optimization. Covers NDVI/EVI index computation, DSSAT/APSIM crop simulation, variable-rate prescription map generation, Penman-Monteith ET estimation, GDD-based maturity modeling, and field-level data pipeline evaluation. Use when reviewing ag-tech platforms, farm management software, remote sensing pipelines, IoT sensor systems, or any codebase that predicts crop yields, optimizes inputs, or processes agricultural data.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -75,6 +75,28 @@ Step 5.4 -- Evaluate harvest timing optimization: GDD-based maturity estimation,
 
 Step 5.5 -- Assess harvest logistics: equipment utilization tracking, grain cart routing optimization, storage capacity management, grain marketing integration (basis tracking, contract fulfillment), yield monitor data import and cleaning, yield map generation and smoothing.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -135,6 +157,30 @@ NEXT STEPS
 - "Run `/food-waste` to analyze post-harvest supply chain optimization."
 - "Run `/perf` to assess data pipeline performance under peak season."
 - "Run `/security-review` to audit access controls on proprietary farm data."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /crop-yield — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

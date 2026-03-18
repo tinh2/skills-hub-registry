@@ -1,7 +1,7 @@
 ---
 name: multiplayer-review
 description: Audit multiplayer netcode, online game networking, and real-time synchronization. Reviews client-server authority, lag compensation, client-side prediction, server reconciliation, entity interpolation, server rewind hit detection, tick rate tuning, delta compression, bandwidth budgets, matchmaking (ELO, Glicko-2, TrueSkill), lobby systems, reconnection flows, host migration, anti-cheat architecture, and input validation. Supports Unity Mirror/NGO/Photon/FishNet, Unreal replication, Godot ENet, WebSocket/WebRTC, Colyseus, Nakama, and custom UDP/TCP stacks.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -241,6 +241,23 @@ Evaluate behavior under poor conditions:
 - Bandwidth throttling adaptation
 - Connection quality indicator (shown to player)
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -310,3 +327,27 @@ DO NOT:
 - Do NOT skip bandwidth estimation — it is critical for mobile and console.
 - Do NOT assume all games need 128Hz tick rate — evaluate for the genre.
 - Do NOT modify code — this is a review skill. Report findings only.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /multiplayer-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

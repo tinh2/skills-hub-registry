@@ -1,7 +1,7 @@
 ---
 name: impact-org
 description: "Full nonprofit operational health analysis: validate impact measurement methodology and theory of change, optimize fundraising channels and campaign ROI, audit grant management for compliance and proposal quality, and assess donor retention with churn prediction and stewardship workflows. Use when building or auditing a nonprofit CRM, donor management platform, grant tracking system, or impact reporting tool."
-version: "1.0.0"
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -84,6 +84,28 @@ Analyze donor lifecycle management:
 
 CROSS-REFERENCE WITH ALL PRIOR PHASES: Impact evidence (Phase 1) is the foundation of donor stewardship — donors who see their impact stay. Fundraising campaigns (Phase 2) drive acquisition, but retention determines sustainability. Grant funders (Phase 3) are institutional donors requiring relationship management. Flag where acquisition costs exceed projected lifetime value, or where donor communication ignores actual program results.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -136,3 +158,27 @@ DO NOT:
 - Do NOT skip any phase -- all four phases are required for a complete nonprofit operational analysis.
 - Do NOT prioritize fundraising metrics over mission impact -- revenue is a means to mission, not the mission itself.
 - Do NOT evaluate grant compliance without understanding restricted fund accounting requirements.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /impact-org — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

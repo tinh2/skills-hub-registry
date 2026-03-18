@@ -1,7 +1,7 @@
 ---
 name: load-context
 description: "Load a saved conversation context to resume previous work. Supports local files, git repos, and URLs. Triggered by 'load context', 'resume previous work', 'pick up where I left off', 'load saved session', 'reload context'."
-version: 1.0.0
+version: "2.0.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -143,3 +143,43 @@ LOAD FROM FILE PATH OR SIMPLE NAME
 
 The goal is to prime the conversation so that subsequent messages can pick up
 exactly where the previous session left off, without the user needing to re-explain anything.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify the analysis consumed sufficient data.
+2. Verify all output sections have substantive content (not just headers).
+3. Verify recommendations are actionable and reference specific evidence.
+
+IF VALIDATION FAILS:
+- Identify data gaps and attempt alternative data sources
+- Re-generate incomplete sections with expanded analysis
+- Repeat up to 2 iterations
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /load-context — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

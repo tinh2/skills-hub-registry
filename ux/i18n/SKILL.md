@@ -1,7 +1,7 @@
 ---
 name: i18n
 description: Set up internationalization by extracting all hardcoded user-facing strings to locale files. Auto-detects framework (Flutter, Next.js, React, Vue, Angular, iOS, Android) and configures the appropriate i18n library (react-intl, next-intl, vue-i18n, flutter_localizations, NSLocalizedString, strings.xml), generates namespaced translation keys with dot notation, handles pluralization via ICU MessageFormat, sets up date/number/currency formatting per locale, adds RTL layout support for Arabic and Hebrew, and replaces every hardcoded string with translation function calls. Use when you need to add multi-language support, extract hardcoded strings, set up locale files, configure translation workflows, handle pluralization, or add RTL support.
-version: "1.0.0"
+version: "2.0.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -312,6 +312,26 @@ Verify locale files:
 - ICU message syntax is valid
 - Interpolation placeholders match between locales
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate:
+
+1. Re-run the specific UX/accessibility checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't break functionality.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat up to 3 iterations.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+
 ============================================================
 OUTPUT
 ============================================================
@@ -362,6 +382,30 @@ After i18n setup:
 - "Run `/responsive` to verify layouts do not break with longer translated strings."
 - "Run `/design-system` to ensure text styles accommodate variable-length translations."
 - For professional translations, export locale files to a translation management platform (Crowdin, Lokalise, Phrase).
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /i18n — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

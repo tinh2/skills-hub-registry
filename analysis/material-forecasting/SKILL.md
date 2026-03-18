@@ -1,7 +1,7 @@
 ---
 name: material-forecasting
 description: Analyze material forecasting and requirements planning systems including MRP/MRP II logic evaluation, BOM explosion accuracy, supplier lead time variability tracking, seasonal demand pattern detection, fabric yield and marker efficiency optimization, MOQ aggregation strategies, safety stock methodology, inventory turn analysis, and forecast accuracy measurement (MAPE, bias, tracking signal) for manufacturing and apparel supply chains.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -130,6 +130,28 @@ Write analysis to `docs/material-forecasting-analysis.md` (create `docs/` if nee
 
 Include: Executive Summary, MRP Planning Effectiveness, Supplier Lead Time Assessment, Demand Forecasting Accuracy, Yield Optimization Review, Order Quantity Analysis, Inventory Impact, Recommendations with forecast accuracy and inventory improvement targets.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -165,3 +187,27 @@ DO NOT:
 - Do NOT recommend reducing safety stock without quantifying the service level impact.
 - Do NOT skip yield analysis in textiles -- fabric is typically 60-70% of material cost.
 - Do NOT assume forecast accuracy without measuring it against actual consumption over time.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /material-forecasting — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

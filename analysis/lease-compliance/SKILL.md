@@ -1,7 +1,7 @@
 ---
 name: lease-compliance
 description: Audit commercial lease compliance systems -- CAM reconciliation accuracy (pro-rata share, caps, admin fees), lease abstraction completeness, critical date tracking and deadline alerting, clause compliance monitoring (insurance certificates, permitted use, co-tenancy), tenant obligation enforcement, and ASC 842/IFRS 16 lease accounting (ROU assets, lease liabilities, discount rates). Use when reviewing CRE property management software, lease administration platforms (Yardi, MRI, CoStar), or any codebase handling NNN leases, tenant billing, or lease portfolio analytics.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -199,6 +199,28 @@ Include: Executive Summary, Lease Portfolio Overview, CAM Reconciliation Assessm
 Critical Date Management Evaluation, Clause Compliance Status, ASC 842/IFRS 16 Compliance,
 and Prioritized Recommendations.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -245,3 +267,27 @@ DO NOT:
 - Do NOT skip ASC 842 compliance analysis -- restatement risk from lease accounting errors is significant.
 - Do NOT assume all leases are abstracted accurately -- spot-check abstractions against source documents.
 - Do NOT overlook co-tenancy and exclusive use clauses -- they can trigger rent reductions if violated.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /lease-compliance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

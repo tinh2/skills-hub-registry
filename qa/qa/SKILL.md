@@ -1,7 +1,7 @@
 ---
 name: qa
 description: Automated QA agent that starts the app, walks through every screen and API endpoint, verifies functionality, evaluates modern design and usability, runs domain analysis, and fixes issues found.
-version: "3.1.0"
+version: "4.1.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -353,6 +353,30 @@ After the QA run:
 - Optionally stop Docker containers: docker-compose down
 - Leave the database intact for manual testing.
 
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /qa — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
+
 ============================================================
 DO NOT
 ============================================================
@@ -362,6 +386,28 @@ DO NOT
 - Do NOT batch fixes into a single mega-commit — commit incrementally with descriptive messages.
 - Do NOT inflate screen ratings — rate honestly based on actual findings.
 - Do NOT use placeholder test data like "test123" or "foo bar" — use realistic data.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
 
 ============================================================
 NEXT STEPS

@@ -1,7 +1,7 @@
 ---
 name: walkthrough
 description: "Run an app walkthrough — launch a Flutter app on a simulator or emulator, generate and run exhaustive integration tests that exercise every screen, button, form, and user flow, then self-heal failures. Triggers: "app walkthrough", "integration test", "test on simulator", "exercise every screen", "Flutter integration tests"."
-version: 1.0.0
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -531,6 +531,30 @@ After the walkthrough:
 - Commit all generated tests: "test: add exhaustive integration tests from walkthrough"
 
 ============================================================
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /walkthrough — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
+
 STRICT RULES
 ============================================================
 

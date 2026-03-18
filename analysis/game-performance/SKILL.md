@@ -1,7 +1,7 @@
 ---
 name: game-performance
 description: Analyze game code for performance bottlenecks including draw call batching and overdraw, shader complexity and LOD strategy, per-frame GC allocation pressure, object pooling gaps, physics timestep and collision matrix tuning, spatial partitioning for entity queries, async scene loading and asset streaming, mobile thermal throttling, WebGL bundle size, and frame budget compliance for 30/60/90 FPS targets on Unity, Unreal, and Godot engines.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -227,6 +227,28 @@ Check for:
 - Loading time limits (platform TRC/XR requirements)
 - Storage I/O patterns (HDD vs SSD optimization)
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -292,3 +314,27 @@ DO NOT:
 - Do NOT ignore mobile/web constraints when those are target platforms.
 - Do NOT estimate exact frame times — use ranges and relative severity.
 - Do NOT modify code — this is an analysis skill. Report findings only.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /game-performance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

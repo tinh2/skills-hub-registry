@@ -1,7 +1,7 @@
 ---
 name: skills-list
 description: Displays the full skills catalog with descriptions, autonomous build chains, recommended pipelines, and parallelization rules.
-version: "3.1.0"
+version: "4.1.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -242,6 +242,30 @@ NEXT STEPS
 - Run `/build` to start the full autonomous build chain from scratch.
 - Run `/research` to begin with competitive analysis and feature ideation.
 - Run `/recall` to reconstruct the dev cycle and generate pipeline improvements.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /skills-list — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

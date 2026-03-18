@@ -1,7 +1,7 @@
 ---
 name: financial-compliance
 description: "Audit fintech and financial services code for KYC/AML (CIP, CDD, EDD, sanctions screening, transaction monitoring), BSA (SAR/CTR filing, FinCEN reporting, Travel Rule), Reg E (EFT error resolution, unauthorized transfer liability, provisional credit), SOX (audit trails, segregation of duties, financial controls), GLBA (privacy notices, Safeguards Rule, data sharing), and state money transmitter licensing. Use when reviewing banking, payments, lending, crypto, neobank, BNPL, or embedded finance codebases."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -248,6 +248,23 @@ STATE-SPECIFIC REQUIREMENTS:
 - Check for state-specific refund policies (California, New York have specific rules)
 - Verify state-specific record retention requirements
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -307,6 +324,30 @@ After reviewing the compliance findings:
 - "Run `/pci-dss` to audit payment card data handling."
 - "Run `/owasp` to check security posture of financial APIs."
 - "Run `/analyze` to trace regulatory workflows end-to-end across the system."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /financial-compliance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

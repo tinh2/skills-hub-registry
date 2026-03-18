@@ -1,7 +1,7 @@
 ---
 name: release
 description: "Set up automated releases with semantic versioning, changelog generation, and package publishing. Configures semantic-release, changesets, release-please, goreleaser, or cargo-release based on stack. Generates GitHub Actions CI workflow for automated version bumps, git tags, and npm/PyPI/crates.io publishing. Use when you want automated versioning, need to publish packages, want changelogs from conventional commits, or need release automation for a monorepo."
-version: "1.0.0"
+version: "2.0.0"
 category: productivity
 platforms:
   - CLAUDE_CODE
@@ -307,6 +307,21 @@ PHASE 4 — VERIFY CONFIGURATION
 4. Verify the CI workflow YAML is valid
 5. Check that required secrets are documented
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing, validate the output was produced correctly:
+
+1. Verify generated files exist and are syntactically valid.
+2. Run any available validation (lint, type-check, dry-run).
+3. If the skill produces configuration, verify it parses without errors.
+
+IF VALIDATION FAILS:
+- Diagnose from error context and re-generate the failing artifact
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -350,6 +365,30 @@ NEXT STEPS
 2. Run `/git-hooks` to enforce conventional commits locally if not already set up
 3. Make a `feat:` commit and push to main to trigger the first release
 4. For monorepos: run `npx changeset` before merging PRs to document changes
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /release — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

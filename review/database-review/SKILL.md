@@ -1,7 +1,7 @@
 ---
 name: database-review
 description: Review database schema design, query patterns, and data access layer for correctness and performance. Checks normalization balance, index coverage against actual queries, constraint completeness (NOT NULL, FK, unique, check, defaults), data type correctness (money as DECIMAL not FLOAT, timestamps with timezone), N+1 query detection, connection pooling configuration, transaction safety, and migration hygiene. Supports PostgreSQL, MySQL, SQLite, MongoDB, Firestore, DynamoDB, and all major ORMs. Use when you need to review a database schema, find missing indexes, detect N+1 queries, audit data types, check constraint coverage, optimize query patterns, or assess database scaling readiness.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -195,6 +195,23 @@ PHASE 7: MIGRATION SAFETY (brief check -- defer to /migration-verify for full an
 - Any destructive migrations without data backup?
 - Any migrations that would lock large tables?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -261,3 +278,27 @@ NEXT STEPS:
 - "Run `/perf` to profile actual query performance."
 - "Run `/security-review` to check for data exposure risks."
 - "Run `/iterate` to implement the recommended schema changes."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /database-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

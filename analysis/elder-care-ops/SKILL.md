@@ -1,7 +1,7 @@
 ---
 name: elder-care-ops
 description: Audit an assisted living or elder care platform for resident safety and operational quality. Evaluates vital sign monitoring, fall detection and prevention, medication administration (eMAR) safety, staff scheduling with continuity of care, ADL tracking and functional decline detection, family communication portals, and care plan optimization. Use when building or reviewing senior living software, nursing home management systems, or home health platforms.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -256,6 +256,28 @@ Analyze whether care plans respond to changing conditions:
 
 Write analysis to `docs/elder-care-ops-analysis.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -293,3 +315,27 @@ DO NOT:
 - Skip family communication review -- poor family communication is the top source of complaints and litigation.
 - Recommend technology changes without considering staff digital literacy and training requirements.
 - Assume all residents are in the same care level -- independent living, assisted living, memory care, and skilled nursing have vastly different requirements.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /elder-care-ops — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

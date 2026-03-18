@@ -1,7 +1,7 @@
 ---
 name: rural-health
 description: Audit rural health network software for telehealth readiness, provider coverage mapping, patient transportation coordination, referral network optimization, Critical Access Hospital compliance, mobile clinic scheduling, and health equity metrics. Use when reviewing rural EHR systems, FQHC platforms, telehealth infrastructure, community health worker tools, HRSA-funded health systems, or remote care delivery networks.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -202,6 +202,28 @@ visualization, grant reporting on equity outcomes.
 
 Write analysis to `docs/rural-health-analysis.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -239,3 +261,27 @@ DO NOT:
 - Assess quality without adjusting for case mix and transfer patterns -- rural facilities transfer sicker patients, skewing metrics.
 - Recommend technology solutions that require connectivity levels unavailable in the service area.
 - Skip health equity analysis -- rural health disparities are significant and measurable, and funders increasingly require this data.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /rural-health — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

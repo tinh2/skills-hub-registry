@@ -1,7 +1,7 @@
 ---
 name: check-vanta
 description: "Fetches dependency vulnerabilities from Vanta, Snyk, Dependabot, or GitHub Security Advisories, creates a tracking issue in Jira/Linear/GitHub Issues, then fixes, commits, pushes, and opens PRs for each affected repo. Trigger on: vulnerabilities, security scan, Vanta, CVE, dependency audit, Snyk, Dependabot."
-version: 1.0.0
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -403,3 +403,44 @@ Also save a report to `~/.claude/logs/vanta-checks/vanta-YYYY-MM-DD.md`.
 - If a repo's install fails, report the error and continue to the next repo.
 - Do NOT modify any vulnerability scanner settings or dismiss vulnerabilities -- access is read-only.
 - If no vulnerabilities are due, report that and skip issue creation/fix steps.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /check-vanta — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

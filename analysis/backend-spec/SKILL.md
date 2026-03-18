@@ -1,7 +1,7 @@
 ---
 name: backend-spec
 description: Generates backend or frontend engineering specs in structured Jira format with description, categorized acceptance criteria, routes, dev notes, and table schemas.
-version: "5.1.0"
+version: "6.1.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -142,6 +142,28 @@ Self-check the generated spec:
 5. The description is 2-4 sentences, no more.
 6. The title follows the BE:/FE: format with 8 words or fewer after the prefix.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -180,6 +202,30 @@ NEXT STEPS
 - Run `/story-implementer` to implement this story directly in the current repo.
 - Run `/review-implement` to chain architect review into implementation (combo skill).
 - Run `/manual-test-plan` to generate QA verification scenarios from the acceptance criteria.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /backend-spec — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

@@ -1,7 +1,7 @@
 ---
 name: store-compliance
 description: Pre-submission audit for Apple App Store and Google Play Store compliance. Checks App Store Review Guidelines (safety, performance, business, design, legal sections) and Google Play Developer Policies (user data, permissions, deceptive behavior, monetization, store listing, content). Reviews In-App Purchase and Play Billing requirements, privacy policy and data collection disclosure, App Tracking Transparency and PrivacyInfo.xcprivacy privacy manifests, iOS App Privacy nutrition labels, Android Data Safety section accuracy, COPPA and GDPR-K children's data protections, permission justification (camera, location, microphone, contacts, background location), iOS background modes and entitlement validation, foreground service types, content rating IARC verification, UGC moderation requirements, account deletion mandate, third-party SDK data collection disclosure, and metadata accuracy (screenshots, description, category).
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -281,6 +281,23 @@ Verify the IARC content rating matches app content:
 | In-app purchases | {none/present} | {rating} | {yes/no} |
 | Ads | {none/present} | {rating} | {yes/no} |
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -344,3 +361,27 @@ NEXT STEPS:
 - "Run `/app-store-publish` to prepare the submission package."
 - "Run `/play-store-publish` to prepare the Play Store submission."
 - "Run `/mobile-analytics` to verify privacy declarations match tracking implementation."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /store-compliance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

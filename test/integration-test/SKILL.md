@@ -1,7 +1,7 @@
 ---
 name: integration-test
 description: Generate integration tests for APIs, databases, and external services. Auto-detects backend stack (Express, Fastify, NestJS, Django, FastAPI, Rails, Go), ORM (Prisma, TypeORM, SQLAlchemy, GORM), and database (PostgreSQL, MongoDB, Firestore), then creates tests covering endpoint CRUD, auth flows, DB transactions, and external service failures with proper fixtures and mocks. Self-heals failing tests up to 3 iterations. Use when you need to test API endpoints end-to-end, verify database operations, test service interactions, or validate auth and error handling.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -381,3 +381,27 @@ DO NOT:
 - Do NOT generate tests for third-party library internals.
 - Do NOT weaken assertions to make tests pass. Fix the underlying issue.
 - Do NOT delete or modify existing tests.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /integration-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

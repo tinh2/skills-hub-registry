@@ -1,7 +1,7 @@
 ---
 name: device-matrix
 description: Configure device matrix testing across real phones, tablets, and emulators. Sets up Firebase Test Lab, AWS Device Farm, or BrowserStack with smart device selection covering flagships to budget phones, test sharding for parallel execution, flaky test quarantine, and cross-device performance benchmarking. Use when you need to test on multiple devices, validate across screen sizes, catch device-specific bugs, or benchmark performance on low-end hardware.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -322,6 +322,23 @@ Performance metrics per device:
 
 Flag performance regressions when metrics exceed thresholds on any device.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After generating and running tests, validate:
+
+1. All generated test files compile/parse without syntax errors.
+2. Run the generated tests — capture pass/fail results.
+3. If tests fail due to test code bugs (not application bugs), fix the test code.
+4. Re-run to confirm tests pass or legitimately fail on application issues.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Separate test failures into: test bugs vs application bugs
+- Fix test bugs, document application bugs
+
 ============================================================
 OUTPUT
 ============================================================
@@ -368,3 +385,27 @@ NEXT STEPS:
 - "Run `/mobile-test` if integration tests do not exist yet."
 - "Run `/mobile-ci-cd` to schedule device matrix runs in the CI pipeline."
 - "Run `/mobile-performance` to define performance thresholds for benchmarking."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /device-matrix — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

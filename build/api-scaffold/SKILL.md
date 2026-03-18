@@ -1,7 +1,7 @@
 ---
 name: api-scaffold
 description: Scaffold a production-ready backend REST API -- generate a complete server project with routes, controllers, service layer, repository pattern, database models with migrations, JWT authentication with RBAC, request validation, global error handling with custom error classes, structured JSON logging, rate limiting, CORS, health check endpoint, OpenAPI/Swagger documentation, multi-stage Dockerfile, and docker-compose with PostgreSQL and Redis. Supports Fastify 5, NestJS, Express, FastAPI, Django REST, Gin, Chi, Echo, and Rails -- auto-detects framework from context. Build a backend, create an API, generate server, scaffold REST service, new backend project.
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -333,6 +333,25 @@ PHASE 6: VERIFICATION
 4. Verify the server starts and health check responds.
 5. Verify OpenAPI spec loads at /api/docs.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -388,3 +407,27 @@ After scaffolding:
 - "Run `/arch-review` to validate architecture decisions."
 - "Run `/nextjs` or `/react-native` to build a frontend that consumes this API."
 - "Run `/aws` to generate deployment infrastructure."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /api-scaffold — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

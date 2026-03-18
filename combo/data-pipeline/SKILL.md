@@ -1,7 +1,7 @@
 ---
 name: data-pipeline
 description: "Build a production-ready data API from scratch: scaffold REST endpoints with models and validation, generate integration tests that verify every route, then load test for scalability. Use when you need an API backend, data service, CRUD layer, or microservice with verified correctness and performance."
-version: "1.0.0"
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -70,6 +70,28 @@ Target the same endpoints and use the same data shapes validated in Phase 2. Ide
 
 PERFORMANCE GATE: If p99 > 2s or error rate > 5%, document the bottleneck with a specific optimization recommendation (indexing, caching, query rewrite, connection pooling).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -90,3 +112,27 @@ NEXT STEPS:
 - Run `/security-review` to audit the API for vulnerabilities
 - Run `/full-deploy` to containerize and set up CI/CD
 - Add rate limiting and caching if load test showed high latency
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /data-pipeline — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

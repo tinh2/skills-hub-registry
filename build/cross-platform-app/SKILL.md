@@ -1,7 +1,7 @@
 ---
 name: cross-platform-app
 description: Scaffold a production-ready cross-platform mobile app -- auto-detect or select framework (Flutter with Riverpod and GoRouter, React Native with Redux Toolkit and React Navigation 7, Kotlin Multiplatform with Ktor and SQLDelight, or .NET MAUI with CommunityToolkit.Mvvm) and generate shared business logic, platform-adaptive UI with iOS Cupertino and Android Material conventions, deep link navigation, offline-first data layer with secure credential storage, environment configs for dev/staging/prod, CI/CD workflow stubs for both platforms, and test infrastructure. Build a mobile app, create cross-platform app, scaffold Flutter app, scaffold React Native app, new mobile project, iOS and Android app.
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -305,6 +305,25 @@ Generate test infrastructure for the selected framework:
 
 Generate at least 3 unit tests and 1 integration test per major feature.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -353,3 +372,27 @@ NEXT STEPS:
 - "Run `/mobile-ci-cd` to configure CI/CD building and testing for iOS and Android."
 - "Run `/mobile-performance` to analyze startup time, memory, and rendering performance."
 - "Run `/mobile-ux-patterns` to audit platform-specific UX conventions."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cross-platform-app — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

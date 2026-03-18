@@ -1,7 +1,7 @@
 ---
 name: adr
 description: "Create and manage Architecture Decision Records using the Michael Nygard format. Supports new ADR creation, retrospective analysis to document existing decisions, superseding, deprecating, and index generation. Use when you need to document architecture decisions, record technical choices, explain why a technology was chosen, or create decision logs."
-version: "1.0.0"
+version: "2.0.0"
 category: docs
 platforms:
   - CLAUDE_CODE
@@ -199,6 +199,23 @@ made along with its context and consequences.
 - **Superseded** -- Replaced by a newer decision (linked)
 ```
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing documentation, validate completeness:
+
+1. Verify all required sections are present and non-empty.
+2. Verify internal cross-references and links resolve correctly.
+3. Verify no placeholder text remains ("{TODO}", "[TBD]", "...", "etc.").
+4. Verify code examples are syntactically valid.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or contain placeholders
+- Re-generate only the deficient sections
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -221,6 +238,30 @@ OUTPUT
 ### Files Written
 - `docs/adr/NNNN-title.md` -- [description]
 - `docs/adr/README.md` -- Updated index
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /adr — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

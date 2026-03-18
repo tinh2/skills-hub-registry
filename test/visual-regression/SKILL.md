@@ -1,7 +1,7 @@
 ---
 name: visual-regression
 description: Set up visual regression testing with baseline screenshots across breakpoints. Auto-detects frontend framework (Next.js, React, Vue, Angular, Flutter, Storybook), configures Playwright screenshot comparison, BackstopJS, or Flutter golden tests, captures every page at mobile/tablet/desktop/wide viewports plus interactive states (hover, focus, error, empty, loading), stabilizes dynamic content to prevent false positives, and reports pixel-level diffs. Use when you need to catch unintended UI changes, set up screenshot baselines, prevent CSS regressions, or verify layouts across screen sizes after refactoring.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -236,6 +236,23 @@ FOR REGRESSIONS: Note the file and visual difference for the developer to fix.
 FOR FALSE POSITIVES: Improve stabilization (add masks, increase thresholds).
 FOR INTENTIONAL CHANGES: Update baselines.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After generating and running tests, validate:
+
+1. All generated test files compile/parse without syntax errors.
+2. Run the generated tests — capture pass/fail results.
+3. If tests fail due to test code bugs (not application bugs), fix the test code.
+4. Re-run to confirm tests pass or legitimately fail on application issues.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Separate test failures into: test bugs vs application bugs
+- Fix test bugs, document application bugs
+
 ============================================================
 OUTPUT
 ============================================================
@@ -297,3 +314,27 @@ DO NOT:
 - Do NOT include timestamps, live data, or user-specific content in screenshots.
 - Do NOT delete baseline images. They are the source of truth for comparison.
 - Do NOT generate visual tests for non-visual projects (CLIs, APIs, libraries).
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /visual-regression — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

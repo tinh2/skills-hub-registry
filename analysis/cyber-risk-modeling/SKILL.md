@@ -1,7 +1,7 @@
 ---
 name: cyber-risk-modeling
 description: Quantify cyber risk using FAIR methodology with Monte Carlo simulation, assess control effectiveness against NIST CSF/CIS/ISO 27001 frameworks, evaluate risk appetite alignment, and analyze cyber insurance coverage adequacy. Covers threat landscape mapping, asset valuation, loss event frequency and magnitude estimation, annualized loss expectancy calculation, control gap analysis with ROI ranking, residual risk assessment, and insurance policy gap modeling at 90th/95th/99th percentile loss scenarios. Use when building risk registers, preparing board-level risk dashboards, evaluating security investment priorities, assessing cyber insurance coverage, or auditing any organization's risk quantification maturity per NIST RMF, ISO 27005, or FAIR standards.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -254,6 +254,28 @@ Prioritize treatments by timeline:
 - Medium-term (3-12 months): control investments, architecture improvements
 - Long-term (12+ months): risk culture, governance maturity, emerging risk monitoring
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -288,3 +310,27 @@ DO NOT:
 - Do NOT model insurance as complete risk elimination -- coverage has limits, exclusions, and claims risk.
 - Do NOT ignore correlated risks -- aggregation risk can exceed the sum of individual risks.
 - Do NOT use fear-based language to inflate risk -- quantify objectively and let the numbers speak.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cyber-risk-modeling — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

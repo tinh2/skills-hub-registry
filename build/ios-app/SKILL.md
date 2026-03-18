@@ -1,7 +1,7 @@
 ---
 name: ios-app
 description: "Scaffolds a native iOS app with SwiftUI, MVVM architecture, dependency injection, persistence, networking, push notifications, keychain, App Clips, and multi-environment Xcode configuration. Triggers on: \"ios app\", \"iphone app\", \"build an ios app\", \"swift app\", \"swiftui app\", \"native ios\", \"apple app\", \"ipad app\", \"scaffold ios project\", \"xcode project\", \"build for iphone\", \"ios starter\", \"create an iphone app\", \"swift project setup\"."
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -361,6 +361,25 @@ UI tests:
 
 Generate at least 3 unit tests and 1 UI test per major feature.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -410,3 +429,27 @@ NEXT STEPS:
 - "Run `/mobile-security-review` to audit authentication, keychain, and data protection."
 - "Run `/app-store-publish` to set up Fastlane and App Store Connect publishing."
 - "Run `/mobile-ci-cd` to configure CI/CD with code signing and TestFlight distribution."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /ios-app — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

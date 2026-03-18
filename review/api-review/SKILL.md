@@ -1,7 +1,7 @@
 ---
 name: api-review
 description: Review API design against REST best practices and internal consistency. Audits naming conventions, HTTP method semantics, status code correctness, pagination and filtering patterns, error response format, versioning strategy, rate limiting, idempotency keys, HATEOAS links, and content negotiation. Works with Express, Fastify, Hono, Flask, Django REST, Spring, Rails, Gin, and any HTTP API framework. Use when you need to review an API, audit REST endpoints, check API consistency, fix HTTP status codes, add pagination, or prepare an API for public release.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -207,6 +207,23 @@ CONTENT NEGOTIATION:
 - Are Content-Type headers set correctly on responses?
 - Flag responses that return JSON without `application/json` Content-Type.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -264,3 +281,27 @@ NEXT STEPS:
 - "Run `/security-review` to check for auth and injection vulnerabilities."
 - "Run `/iterate` to implement the recommended fixes."
 - "Run `/api-docs` to generate or update API documentation."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /api-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: encryption
 description: "Audit and harden encryption across the full stack. Checks data-at-rest encryption (database TDE, field-level AES-256-GCM, file storage SSE, backup encryption), data-in-transit security (TLS 1.2+, HSTS, certificate pinning, mTLS, WebSocket WSS), key management (KMS, envelope encryption, key rotation, key separation), password hashing (argon2id, bcrypt, scrypt, PBKDF2 work factors, salt uniqueness, migration plans), token security (JWT signing algorithms, CSPRNG, refresh token rotation), and API key management (hashed storage, scoping, revocation). Use when you need to audit crypto, fix weak hashing, implement envelope encryption, rotate keys, upgrade TLS, or harden token generation."
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -228,6 +228,23 @@ Priority order for implementation:
 5. Missing security headers → add header middleware
 6. Key rotation → implement rotation strategy
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -276,6 +293,30 @@ After reviewing the encryption audit:
 - "Run `/gdpr` to verify PII encryption meets compliance requirements."
 - "Run `/pentest` to verify secrets are no longer exposed."
 - "Set up automated key rotation on the schedule recommended above."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /encryption — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

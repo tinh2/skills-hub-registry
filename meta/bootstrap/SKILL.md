@@ -1,7 +1,7 @@
 ---
 name: bootstrap
 description: Scaffolds a new project from a saved template with CLAUDE.md, initial memory, recommended pipeline, known pitfalls, and foundation validation.
-version: "3.1.0"
+version: "4.1.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -104,6 +104,22 @@ PHASE 4: DISPLAY RESULTS
    - List each foundation requirement with pass/fail/missing status
    - Flag any that must be addressed before feature development
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify the analysis consumed sufficient data.
+2. Verify all output sections have substantive content (not just headers).
+3. Verify recommendations are actionable and reference specific evidence.
+
+IF VALIDATION FAILS:
+- Identify data gaps and attempt alternative data sources
+- Re-generate incomplete sections with expanded analysis
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -153,6 +169,30 @@ NEXT STEPS
 - Run `/iterate` to begin feature development with co-commit discipline.
 - Run `/skills-list` to see all available skills and pipelines.
 - Run `/research` to analyze competitors before building.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /bootstrap — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

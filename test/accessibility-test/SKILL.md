@@ -1,7 +1,7 @@
 ---
 name: accessibility-test
 description: "Automated WCAG 2.1 AA accessibility testing with axe-core and Lighthouse CI. Auto-detects frontend framework (React, Next.js, Vue, Angular, Svelte, Astro, Flutter, React Native), discovers all routes and interactive components, installs Playwright + axe-core for page-level scanning and jest-axe/vitest-axe for component-level testing. Generates tests for color contrast (4.5:1), alt text, form labels, ARIA attributes, heading order, landmark regions, focus visibility, keyboard navigation (tab order, focus traps, modal focus management, skip-to-content), screen reader compatibility (aria-live regions, error announcements, toast notifications), and Flutter Semantics validation (48dp touch targets, semanticLabel). Reports violations by severity (critical, serious, moderate, minor) with WCAG criterion references. Use when adding a11y testing, auditing accessibility compliance, fixing contrast issues, or validating keyboard and screen reader support."
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -287,6 +287,23 @@ Step 4.4 -- Compile Violations
 Merge results from axe-core and Lighthouse into a unified violations list.
 Deduplicate violations that appear in both tools.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After generating and running tests, validate:
+
+1. All generated test files compile/parse without syntax errors.
+2. Run the generated tests — capture pass/fail results.
+3. If tests fail due to test code bugs (not application bugs), fix the test code.
+4. Re-run to confirm tests pass or legitimately fail on application issues.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Separate test failures into: test bugs vs application bugs
+- Fix test bugs, document application bugs
+
 ============================================================
 OUTPUT
 ============================================================
@@ -378,3 +395,27 @@ DO NOT:
 - Do NOT treat a passing Lighthouse score as complete a11y compliance. Automated tools catch ~30% of issues.
 - Do NOT add role="presentation" or role="none" to meaningful content.
 - Do NOT ignore color contrast. It is the most common a11y violation.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /accessibility-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

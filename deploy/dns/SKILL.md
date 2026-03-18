@@ -1,7 +1,7 @@
 ---
 name: dns
 description: "Set up DNS records, SSL/TLS certificates, subdomains, SPF/DKIM/DMARC email authentication, and health-check failover routing for Route53, Cloudflare, or GCP Cloud DNS — with optional Terraform output"
-version: "1.0.0"
+version: "2.0.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
@@ -190,6 +190,23 @@ After generating configuration, verify:
 4. **Missing records** — warn if www redirect, SSL validation records, or MX records are absent
 5. **DNSSEC** — recommend enabling if provider supports it
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing deployment/infrastructure changes, validate:
+
+1. Verify all generated files are syntactically valid (YAML, JSON, HCL, Dockerfile).
+2. Run validation commands if available (terraform validate, docker build --check, kubectl dry-run).
+3. Verify no secrets, credentials, or sensitive values are hardcoded.
+4. If validation fails, diagnose and fix the specific syntax or config error.
+5. Repeat up to 2 iterations.
+
+IF STILL FAILING after 2 iterations:
+- Document what failed and the exact error
+- Include partial output if available
+
 ============================================================
 OUTPUT
 ============================================================
@@ -232,6 +249,30 @@ NEXT STEPS
 5. Test email authentication: send test email and check headers for SPF/DKIM/DMARC pass
 6. Set up monitoring for DNS resolution and certificate expiration
 7. If using DMARC with `p=none`, monitor reports for 2 weeks then tighten to `p=quarantine`
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /dns — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

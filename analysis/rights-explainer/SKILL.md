@@ -1,7 +1,7 @@
 ---
 name: rights-explainer
 description: Audit legal information systems that explain rights to the public, evaluating plain-language accuracy, jurisdiction-specific content correctness, reading level appropriateness targeting 5th-8th grade, multilingual support, WCAG accessibility compliance, and content update workflows when laws change. Use when reviewing legal aid websites, self-help law portals, court information systems, tenant rights platforms, or government benefits explainers.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -237,6 +237,28 @@ USER FEEDBACK:
 - Check for comprehension assessment (quiz, confirmation prompts).
 - Validate that analytics track completion of action steps (not just page views).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -310,3 +332,27 @@ NEXT STEPS:
 - "Expand translation coverage to top community languages identified by demographic data."
 - "Address WCAG accessibility failures starting with critical and high-priority items."
 - "Establish law change monitoring to trigger content review when statutes are amended."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /rights-explainer — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

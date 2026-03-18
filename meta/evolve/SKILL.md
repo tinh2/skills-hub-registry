@@ -1,7 +1,7 @@
 ---
 name: evolve
 description: "Self-improving skill system. Reads /recall and /metrics output, identifies which skills need patching based on rework patterns and regression data, generates additive patches, and logs changes. Evolves skills based on learnings from any tech stack."
-version: 1.0.0
+version: "2.0.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -129,6 +129,22 @@ Skip this phase entirely if `--dry-run` was specified.
 3. If a sync/backup script exists at `~/.claude/scripts/sync-backup.sh`, run it.
    Otherwise, skip this step silently.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify the analysis consumed sufficient data.
+2. Verify all output sections have substantive content (not just headers).
+3. Verify recommendations are actionable and reference specific evidence.
+
+IF VALIDATION FAILS:
+- Identify data gaps and attempt alternative data sources
+- Re-generate incomplete sections with expanded analysis
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -155,3 +171,27 @@ NEXT STEPS:
 - "Run the patched skills on your next project to validate improvements."
 - "Run `/metrics` after the next project to measure impact."
 - "Run `/promote` to check if these patterns should be global."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /evolve — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

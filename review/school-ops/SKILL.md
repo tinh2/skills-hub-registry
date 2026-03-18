@@ -1,7 +1,7 @@
 ---
 name: school-ops
 description: Audit K-12 school operations, district management, and education administration software. Reviews master schedule building and constraint optimization, student course request scheduling with IEP service integration, staffing formula models and FTE allocation, class size management, Title I weighted per-pupil funding and comparability reporting, fund accounting and budget-to-actual variance, facility utilization and room capacity tracking, maintenance work order systems, transportation route optimization (multi-tier, special needs, McKinney-Vento), fleet and driver CDL compliance, enrollment forecasting (cohort survival, demographic analysis), IDEA special education IEP timeline management, Section 504 compliance, FERPA data privacy, and state and federal program reporting (Title I-III, Civil Rights Data Collection). Supports PowerSchool, Tyler Technologies, Frontline, and custom platforms.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -229,6 +229,23 @@ Collection readiness, Consolidated State Performance Report data preparation.
 
 Write review to `docs/school-ops-review.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -267,3 +284,27 @@ DO NOT:
 - Recommend operational efficiency improvements that shift burden to teachers -- operations should reduce teacher administrative load, not increase it.
 - Assume enrollment forecasting is a back-office function -- inaccurate projections cascade into staffing, budgeting, scheduling, and facility problems for the entire year.
 - Treat Title I compliance as checkbox reporting -- Title I requirements exist to ensure equitable resource distribution for students in poverty.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /school-ops — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

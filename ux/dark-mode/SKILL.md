@@ -1,7 +1,7 @@
 ---
 name: dark-mode
 description: Implement complete dark mode for any frontend project. Auto-detects theme system (Flutter ThemeData, Tailwind dark class, CSS variables, MUI, Chakra UI, styled-components), generates a dark color palette with proper surface elevation hierarchy and desaturated brand colors, creates a theme toggle with system preference detection and persistence, migrates all hardcoded colors to theme tokens, handles special cases like images, shadows, form inputs, and charts, then verifies WCAG AA contrast ratios for both modes. Use when you need to add dark mode, fix dark theme contrast issues, create a theme switcher, or migrate hardcoded colors to theme-aware tokens.
-version: "1.0.0"
+version: "2.0.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -333,6 +333,26 @@ Verify the complete theme switching flow:
 - No flash of wrong theme on load
 - All screens render correctly in both modes
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate:
+
+1. Re-run the specific UX/accessibility checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't break functionality.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat up to 3 iterations.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+
 ============================================================
 OUTPUT
 ============================================================
@@ -379,6 +399,30 @@ After dark mode implementation:
 - "Run `/design-system` to ensure dark tokens are part of the design system."
 - "Run `/qa` to verify dark mode did not break any functionality."
 - Test on actual devices -- OLED screens render true black differently than LCD.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /dark-mode — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

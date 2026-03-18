@@ -1,7 +1,7 @@
 ---
 name: load-test
 description: Generate and run load tests with k6, Locust, or Artillery. Auto-detects API framework, creates realistic user behavior flows (browsing, authenticated CRUD, search-heavy), runs ramp-up, sustained, spike, and stress test profiles with defined latency and error-rate thresholds, then produces a bottleneck analysis with optimization recommendations. Use when you need to benchmark API performance, find breaking points under traffic, test auto-scaling, validate SLAs, or identify slow endpoints before production deploy.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -267,6 +267,23 @@ Parse results from each test run and extract:
 - Virtual users at peak
 - Threshold pass/fail status
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After generating and running tests, validate:
+
+1. All generated test files compile/parse without syntax errors.
+2. Run the generated tests — capture pass/fail results.
+3. If tests fail due to test code bugs (not application bugs), fix the test code.
+4. Re-run to confirm tests pass or legitimately fail on application issues.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Separate test failures into: test bugs vs application bugs
+- Fix test bugs, document application bugs
+
 ============================================================
 OUTPUT
 ============================================================
@@ -341,3 +358,27 @@ DO NOT:
 - Do NOT skip the dry run. Script errors under load are hard to diagnose.
 - Do NOT ignore error responses. Investigate every non-2xx status code.
 - Do NOT report raw numbers without context. Always compare against thresholds.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /load-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

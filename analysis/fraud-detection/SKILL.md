@@ -1,7 +1,7 @@
 ---
 name: fraud-detection
 description: Analyze fraud detection systems including rule engines, ML scoring models, real-time transaction monitoring, alert triage workflows, false positive management, SAR/CTR regulatory reporting, adversarial robustness testing, and adaptive retraining pipelines for payment fraud, account takeover, identity theft, and AML compliance.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -242,6 +242,28 @@ REGULATORY REPORTING:
 - Check for report filing confirmation tracking
 - Verify compliance with jurisdiction-specific requirements
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -305,6 +327,30 @@ After reviewing the analysis:
 - "Run `/financial-compliance` to review KYC/AML regulatory compliance."
 - "Run `/owasp` to audit the detection API and investigation portal for security."
 - "Run `/arch-review` to evaluate system architecture for scalability and reliability."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /fraud-detection — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

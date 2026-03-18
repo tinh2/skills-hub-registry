@@ -1,7 +1,7 @@
 ---
 name: game-accessibility
 description: "Audit game projects for accessibility across visual (colorblind modes, contrast, font scaling, photosensitivity), audio (subtitles, captions, visual sound indicators, mono audio), motor (remappable controls, one-handed play, hold-to-toggle, QTE alternatives), cognitive (difficulty options, tutorials, quest logs, hint systems), and communication (CVAA text chat, voice-to-text). Checks Xbox Accessibility Guidelines (XAGs), WCAG 2.1, platform APIs (VoiceOver, TalkBack), and first-launch accessibility prompts. Use when reviewing Unity, Unreal, Godot, or web game projects for disability access."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -281,6 +281,23 @@ Step 7.2 -- First-Launch Experience
   - Colorblind filter
 - Does the game adapt to detected settings automatically?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -354,3 +371,27 @@ DO NOT:
 - Do NOT recommend only the minimum legal requirements — aim for best practices.
 - Do NOT assume the target audience excludes people with disabilities.
 - Do NOT modify code — this is a review skill. Report findings only.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /game-accessibility — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

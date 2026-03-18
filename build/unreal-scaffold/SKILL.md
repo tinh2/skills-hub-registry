@@ -1,7 +1,7 @@
 ---
 name: unreal-scaffold
 description: "Scaffolds an Unreal Engine 5 project with C++ module structure, Enhanced Input, Gameplay Ability System, subsystem architecture, .uproject config, and CI/CD via BuildGraph. Triggers on: \"unreal project\", \"unreal engine game\", \"UE5 project\", \"unreal game\", \"scaffold unreal\", \"new unreal project\", \"create an unreal game\", \"unreal fps\", \"unreal tps\", \"unreal rpg\", \"unreal C++ project\", \"blueprint project\", \"UE5 setup\", \"unreal engine starter\"."
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -326,6 +326,25 @@ Create custom log categories:
 - LogGameAudio (audio system)
 - LogGameUI (UI events)
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -375,3 +394,27 @@ DO NOT:
 - Do NOT put gameplay logic in the GameMode — use Components and Subsystems.
 - Do NOT hardcode asset paths — use soft references and the Asset Manager.
 - Do NOT skip the Editor module — it is required for custom editor tooling.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /unreal-scaffold — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

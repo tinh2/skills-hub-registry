@@ -1,7 +1,7 @@
 ---
 name: gdpr
 description: "GDPR and CCPA/CPRA privacy compliance audit for codebases. Inventories PII fields (email, phone, SSN, IP, device ID, geolocation, biometrics, behavioral data), maps data collection points (forms, APIs, cookies, analytics, error tracking), audits consent mechanisms (cookie banners, opt-in, pre-checked boxes, consent withdrawal), verifies data subject rights implementation (right to access, erasure, rectification, portability, opt-out, Do Not Sell), traces third-party data sharing (Google Analytics, Facebook Pixel, Stripe, SendGrid, Sentry), and checks data retention policies and automated purging. Use when auditing privacy compliance, building data export or deletion endpoints, reviewing cookie consent, or assessing DSAR readiness."
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -205,6 +205,23 @@ Check data retention practices:
 
 Flag any data that appears to be stored indefinitely without justification.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -274,6 +291,30 @@ After reviewing the compliance report:
 - "Run `/soc2` for broader compliance assessment."
 - "Run `/secure` for full security posture including data handling."
 - "Consult legal counsel for privacy policy and DPA review."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /gdpr — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

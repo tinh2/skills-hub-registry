@@ -1,7 +1,7 @@
 ---
 name: compliance-suite
 description: "Runs a 5-phase enterprise compliance and security hardening pipeline: regulatory review, GDPR audit, SOC 2 evaluation, dependency scan, and penetration test with cross-framework control mapping. Triggers on: \"full compliance suite\", \"enterprise compliance\", \"compliance suite\", \"SOC 2 and GDPR\", \"regulatory compliance\", \"multi-framework compliance\", \"compliance for regulated industry\", \"healthcare compliance audit\", \"fintech compliance\", \"prepare for audit\", \"compliance hardening\", \"security and regulatory review\", \"pre-audit preparation\"."
-version: "1.0.0"
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -25,6 +25,15 @@ Pass the system name, industry context, compliance scope, or specific regulation
 ============================================================
 PHASE 1: REGULATORY COMPLIANCE  (/regulatory-compliance)
 ============================================================
+
+
+
+PARALLEL EXECUTION: Use the Agent tool to run compliance checks concurrently.
+- Agent A (Security Compliance): "Run security compliance audit — check auth, encryption, access controls, audit logging."
+- Agent B (Regulatory Compliance): "Run regulatory compliance check — GDPR, HIPAA, SOC2, PCI-DSS as applicable."
+- Agent C (Code Quality): "Run code quality compliance — coding standards, documentation coverage, test coverage thresholds."
+- Wait for all agents to complete and merge into unified compliance report.
+
 
 Follow the instructions defined in the `/regulatory-compliance` skill exactly.
 
@@ -118,6 +127,28 @@ attack on these paths has both security and compliance consequences.
 
 Fix any vulnerabilities found and commit the fixes.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -164,3 +195,27 @@ DO NOT:
 - Do NOT skip any phase — partial compliance assessment creates false confidence.
 - Do NOT assume framework overlap eliminates the need for individual framework review.
 - Do NOT execute penetration tests against production without explicit authorization.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /compliance-suite — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

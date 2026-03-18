@@ -1,7 +1,7 @@
 ---
 name: housing-compliance
 description: "Audit affordable housing and property management software for Fair Housing Act (protected classes, disparate impact screening, AFFH), Section 504/ADA accessibility (5% mobility units, reasonable accommodations), HUD reporting (HUD-50058, PHAS, SEMAP), LIHTC compliance (IRS Section 42 income certification, rent calculation, 8823 noncompliance), lead paint disclosure (pre-1978, EPA RRP), VAWA protections (emergency transfer, lease bifurcation, confidentiality), HQS/NSPIRE inspections, and tenant rights. Use when reviewing PHA, multifamily, Section 8, or affordable housing management codebases."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -130,6 +130,23 @@ Step 6.4 -- Check data protection: tenant consent for sharing, EIV access
 controls, SSN encryption, retention schedules, Privacy Act compliance,
 VAWA information restrictions.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -194,6 +211,30 @@ NEXT STEPS
 - "Run `/eviction-risk` to analyze eviction prevention."
 - "Run `/accessibility-test` for automated WCAG testing."
 - "Run `/gdpr` for tenant data privacy assessment."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /housing-compliance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

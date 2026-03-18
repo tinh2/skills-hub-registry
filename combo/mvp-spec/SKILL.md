@@ -1,7 +1,7 @@
 ---
 name: mvp-spec
 description: "Chains /mvp → /spec — analyzes an app from video/screenshots/description, then generates implementation stories. Triggers: analyze and spec, product analysis to stories, app teardown to specs, full analysis pipeline, mvp to spec."
-version: 1.0.0
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -76,3 +76,49 @@ instructions: |
   - Do NOT ask the user for input between phases.
   - Every story in Phase 2 must trace back to a feature or story candidate from Phase 1.
   - All rules from `/mvp` and `/spec` apply to their respective phases.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /mvp-spec — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

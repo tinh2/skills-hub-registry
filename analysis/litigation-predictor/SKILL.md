@@ -1,7 +1,7 @@
 ---
 name: litigation-predictor
 description: Audit litigation analytics and case outcome prediction systems -- ML outcome models (logistic regression, gradient boosting, neural nets with temporal train/test splits), settlement range modeling (Monte Carlo simulation, comparable case matching, BATNA analysis), litigation cost forecasting by phase, judge profiling and venue analysis (win rates, motion grant rates, bias safeguards), precedent matching engines (semantic search, citation graph traversal, authority ranking), statute of limitations tracking with tolling rules, and damages calculators (present value, treble damages, fee-shifting). Use when reviewing legal tech platforms, case analytics tools, or any codebase predicting case outcomes, estimating settlement values, or calculating litigation budgets.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -297,6 +297,28 @@ STATISTICAL VALIDITY:
 | Integrity Check | Implemented | Tested | Monitoring |
 |----------------|-------------|--------|-----------|
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -376,3 +398,27 @@ NEXT STEPS:
 - "Run `/load-test` to verify prediction latency under concurrent user load."
 - "Run `/test-suite` to validate model accuracy against a held-out test set."
 - "Run `/database-review` to audit the case data schema and query performance."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /litigation-predictor — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

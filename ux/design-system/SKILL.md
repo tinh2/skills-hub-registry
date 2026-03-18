@@ -1,7 +1,7 @@
 ---
 name: design-system
 description: Extract and formalize a design system from existing UI code. Scans for every hardcoded color, font size, spacing value, border radius, and shadow across the codebase, deduplicates near-identical values, generates framework-appropriate tokens (CSS custom properties, Tailwind config, Flutter ThemeData, SCSS variables), builds a component inventory with token coverage ratings, and replaces all hardcoded values with token references. Use when you need to create design tokens, consolidate inconsistent styles, audit component consistency, replace magic numbers with named values, or set up a shared design language across a project.
-version: "1.0.0"
+version: "2.0.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -264,6 +264,26 @@ Report coverage:
 - Radius: X/Y references now use tokens (Z%)
 - Shadows: X/Y references now use tokens (Z%)
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate:
+
+1. Re-run the specific UX/accessibility checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't break functionality.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat up to 3 iterations.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+
 ============================================================
 OUTPUT
 ============================================================
@@ -307,6 +327,30 @@ After design system extraction:
 - "Run `/dark-mode` to generate a dark theme from the extracted token palette."
 - "Run `/responsive` to audit responsive behavior across breakpoints."
 - "Run `/i18n` to extract hardcoded strings alongside design tokens."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /design-system — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

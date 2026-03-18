@@ -1,7 +1,7 @@
 ---
 name: student-personalization
 description: Audit adaptive learning and student personalization systems for pedagogical quality. Use when you need to evaluate learning path algorithms (branching, remediation, acceleration), mastery detection models (Bayesian, IRT, threshold-based), knowledge graph prerequisite accuracy, recommendation engine fairness and bias, spaced repetition and interleaving, WCAG 2.1 AA and Section 508 accessibility compliance, IEP/504 accommodation implementation, xAPI/SCORM/LTI data integration, or teacher/student/admin analytics dashboards. Covers platforms like Knewton, DreamBox, ALEKS, IXL, Khan Academy, and custom adaptive systems.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -226,6 +226,28 @@ with district data warehouse.
 
 Write analysis to `docs/student-personalization-analysis.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -263,3 +285,27 @@ DO NOT:
 - Recommend more data collection without considering student privacy (FERPA, COPPA, state student data privacy laws).
 - Assume algorithmic recommendations are inherently better than teacher judgment -- the best systems combine both.
 - Skip bias analysis in recommendation engines -- algorithms can systematically under-serve students from underrepresented groups.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /student-personalization — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

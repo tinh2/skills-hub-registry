@@ -1,7 +1,7 @@
 ---
 name: play-store-publish
 description: "Configure the complete Google Play Store publishing pipeline — upload key generation, AAB bundle optimization, Fastlane supply lanes for internal/beta/production tracks, staged rollout strategy, store listing metadata, data safety form guidance, and content rating preparation"
-version: "1.0.0"
+version: "2.0.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
@@ -166,6 +166,23 @@ PHASE 9 — STAGED ROLLOUT STRATEGY
 
 Document how to: pause, resume, halt, and rollback a staged rollout.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing deployment/infrastructure changes, validate:
+
+1. Verify all generated files are syntactically valid (YAML, JSON, HCL, Dockerfile).
+2. Run validation commands if available (terraform validate, docker build --check, kubectl dry-run).
+3. Verify no secrets, credentials, or sensitive values are hardcoded.
+4. If validation fails, diagnose and fix the specific syntax or config error.
+5. Repeat up to 2 iterations.
+
+IF STILL FAILING after 2 iterations:
+- Document what failed and the exact error
+- Include partial output if available
+
 ============================================================
 OUTPUT
 ============================================================
@@ -212,6 +229,30 @@ NEXT STEPS
 2. Complete the data safety form in Play Console using the generated template
 3. Run `deploy/mobile-ci-cd` to automate builds and track promotion in CI
 4. Run `deploy/ota-updates` if you need over-the-air patching between releases
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /play-store-publish — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

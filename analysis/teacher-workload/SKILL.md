@@ -1,7 +1,7 @@
 ---
 name: teacher-workload
 description: Evaluate edtech tools for their real impact on teacher time and administrative burden. Analyzes grading automation (auto-scoring, rubric-based feedback, batch workflows), lesson planning efficiency (template reuse, standards auto-tagging, pacing guide integration), parent communication systems (automated notifications, translation, conference scheduling), administrative task reduction (single-entry data flow, IEP/504 accommodation surfacing, compliance documentation), report generation (report cards, progress reports, data dashboards), and time-on-task optimization across platforms like Canvas, Schoology, PowerSchool, and Google Classroom.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -221,6 +221,28 @@ create friction).
 
 Write analysis to `docs/teacher-workload-analysis.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -258,3 +280,27 @@ DO NOT:
 - Recommend additional data entry requirements without calculating the cumulative time impact across a teacher's full caseload.
 - Assess tools in isolation -- teachers use 5-10 platforms daily, and the total system experience matters more than any individual tool.
 - Assume teachers resist technology -- most teachers welcome tools that genuinely save time, but reject tools that add work under the guise of efficiency.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /teacher-workload — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

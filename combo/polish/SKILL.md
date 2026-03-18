@@ -1,7 +1,7 @@
 ---
 name: polish
 description: "Full quality pass -- chains parallel UX + scalability audit, then QA verification, then consistency gate. Fixes everything it finds. Works with any stack."
-version: 1.0.0
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -19,6 +19,16 @@ If no arguments are provided, polish the entire application.
 ============================================================
 PHASE 1 (PARALLEL): UX AUDIT ∥ SCALABILITY AUDIT
 ============================================================
+
+
+
+PARALLEL EXECUTION: Use the Agent tool to run both tracks simultaneously.
+- Agent A (UX Specialist): "Run /ux skill instructions on this project. Audit accessibility, design standards, and usability. Fix all issues found. Return a summary of changes made."
+- Agent B (Scale Analyst): "Run /scale-audit skill instructions on this project. Analyze scalability concerns. Return findings — do NOT modify code (read-only analysis)."
+- Wait for both agents to complete.
+- Merge Agent A's code changes (already applied) with Agent B's recommendations.
+- Apply any high-priority scalability fixes from Agent B that don't conflict with Agent A's changes.
+
 
 Run TWO skills in PARALLEL using the Task tool:
 
@@ -81,6 +91,28 @@ This Phase 3 is a lightweight verification that Phase 1 and Phase 2
 fixes didn't introduce new cross-layer issues. A full `/analyze` here
 would be redundant.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -115,6 +147,30 @@ When all phases are complete, print a summary:
 - Run `/manual-test-plan` for a pre-merge test checklist
 - Ship it with `/iterate --fast` if new features are needed
 ---
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /polish — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 STRICT RULES:
 

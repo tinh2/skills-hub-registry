@@ -1,7 +1,7 @@
 ---
 name: pharma-quality-control
 description: Audit pharmaceutical QC laboratory operations -- OOS/OOT investigations, stability program trending, analytical method validation status, release testing optimization, and specification compliance. Covers ICH Q1A-Q1E stability guidelines, ICH Q2(R2) method validation, USP compendial verification, ALCOA+ data integrity, Croston shelf life estimation, and LIMS/CDS system evaluation. Use when reviewing OOS investigation quality, trending stability data, auditing method validation coverage, optimizing release testing turnaround, or assessing data integrity in QC labs.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -224,6 +224,28 @@ Assess specification appropriateness:
 - Specifications harmonized across markets where feasible?
 - ICH Q6A (chemical) / Q6B (biological) decision trees applied for specification setting?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -268,3 +290,27 @@ NEXT STEPS:
 - "Run `/pharma-compliance` to assess overall regulatory inspection readiness."
 - "Run `/batch-optimization` to correlate yield issues with QC trend data."
 - "Run `/lab-automation` to evaluate opportunities for laboratory workflow automation."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /pharma-quality-control — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

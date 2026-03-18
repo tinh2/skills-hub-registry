@@ -1,7 +1,7 @@
 ---
 name: diagram
 description: "Generate Mermaid architecture diagrams from your codebase. Produces C4 context and container diagrams, sequence diagrams for key flows, ER diagrams from database schemas, and module dependency graphs. Use when you need architecture diagrams, system diagrams, database ERD, sequence diagrams, dependency visualization, or C4 model diagrams."
-version: "1.0.0"
+version: "2.0.0"
 category: docs
 platforms:
   - CLAUDE_CODE
@@ -117,6 +117,23 @@ simplifications. Skip diagram types with no data (no ER if no database).
 
 Generate `docs/diagrams/README.md` index linking all diagrams with descriptions.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing documentation, validate completeness:
+
+1. Verify all required sections are present and non-empty.
+2. Verify internal cross-references and links resolve correctly.
+3. Verify no placeholder text remains ("{TODO}", "[TBD]", "...", "etc.").
+4. Verify code examples are syntactically valid.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or contain placeholders
+- Re-generate only the deficient sections
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -143,6 +160,30 @@ OUTPUT
 - [Circular dependencies detected]
 - [Isolated modules with no connections]
 - [Missing relationships that could not be determined]
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /diagram — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

@@ -1,7 +1,7 @@
 ---
 name: technician-productivity
 description: Analyze field service technician productivity and workforce efficiency. Evaluates wrench time utilization rates (benchmark 55-65%), travel time optimization, first-time fix rate (FTFR) decomposition by root cause, callback pattern analysis, job duration accuracy (estimated vs actual), skill gap identification with certification matrix mapping, training ROI calculation, and performance tier distribution using field service KPI frameworks and wrench time study methodology.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -184,6 +184,28 @@ alignment), Training ROI Analysis, Performance Tier Distribution (top/middle/bot
 performer characteristics), Prioritized Recommendations with estimated productivity
 improvement and revenue impact.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -221,3 +243,27 @@ DO NOT:
 - Ignore survivorship bias -- analyze why technicians leave, not just those who stay.
 - Recommend reducing buffer time between jobs without accounting for variability in job duration.
 - Treat callbacks as purely negative -- some are legitimate follow-up for multi-phase work.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /technician-productivity — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

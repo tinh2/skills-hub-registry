@@ -1,7 +1,7 @@
 ---
 name: retro
 description: "Run a full retrospective and dev cycle analysis. Chains /recall → /new-features to reconstruct what went wrong, extract lessons learned, identify rework patterns, and synthesize feature ideas from the findings. Triggers: retrospective, retro, dev cycle analysis, what went wrong, lessons learned, postmortem, sprint retro."
-version: 1.0.0
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -19,6 +19,14 @@ If no arguments are provided, analyze the full git history.
 ============================================================
 PHASE 1: DEVELOPMENT RETROSPECTIVE  (/recall)
 ============================================================
+
+
+
+PARALLEL EXECUTION: After /recall completes and produces findings, use the Agent tool to run follow-up analyses concurrently.
+- Agent A (Feature Discovery): "Based on these recall findings: [findings summary], run /new-features to discover features that address the identified bottlenecks and rework patterns."
+- Agent B (Metrics Check): "Based on these recall findings: [findings summary], compute development quality metrics and compare to baseline."
+- Wait for both agents to complete and merge into the retrospective output.
+
 
 Follow the instructions defined in the `/recall` skill exactly.
 
@@ -55,6 +63,28 @@ inefficiencies discovered in the retrospective:
 - Late discoveries → features that catch issues earlier
 - Process gaps → features or tooling that fill them
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -80,6 +110,30 @@ When both phases are complete, print a summary:
 - Run `/iterate` to start building a feature
 - Run `/research` to validate features against competitors
 ---
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /retro — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 STRICT RULES:
 

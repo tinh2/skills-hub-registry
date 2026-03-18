@@ -1,7 +1,7 @@
 ---
 name: housing-audit
 description: "End-to-end affordable housing compliance and risk audit: analyze property management and waitlist operations, predict eviction risk with early warning models, review Fair Housing Act and HUD regulatory compliance, and model rent burden and subsidy accuracy across the portfolio. Use when building or auditing a housing authority system, property management platform, Section 8 voucher program, LIHTC portfolio, or tenant services application."
-version: "1.0.0"
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -83,6 +83,28 @@ Analyze rent affordability and subsidy accuracy:
 
 CROSS-REFERENCE WITH ALL PRIOR PHASES: Phase 1 housing data establishes the rent structure. Phase 2 eviction risk often stems directly from rent burden. Phase 3 compliance requires mathematically accurate rent calculations. Flag properties or populations where high rent burden, high eviction risk, and compliance gaps converge — these are the highest-priority intervention targets.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -126,3 +148,27 @@ DO NOT:
 - Do NOT skip any phase -- all four phases are required for a complete housing audit.
 - Do NOT prioritize property management efficiency over tenant protection -- housing is a human right.
 - Do NOT make definitive Fair Housing compliance determinations -- flag for fair housing counsel review.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /housing-audit — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

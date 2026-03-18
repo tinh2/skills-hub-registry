@@ -1,7 +1,7 @@
 ---
 name: dead-code
 description: "Find and safely remove dead code: unreachable paths, unused exports, unused functions, unused variables, unused CSS selectors, unused npm/pip/cargo dependencies, unused env vars, and commented-out code blocks. Builds full import graph, verifies no dynamic references before removal, runs build and tests after cleanup. Use when trimming bloat, removing unused dependencies, cleaning up after a refactor, reducing bundle size, or eliminating stale code."
-version: "1.0.0"
+version: "2.0.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -123,6 +123,28 @@ After removal:
 2. Run tests to verify no regressions.
 3. If build or tests fail, revert the specific removal that caused it and mark as REVIEW REQUIRED.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -179,3 +201,27 @@ NEXT STEPS:
 - "Run `/code-smell` to find structural issues in the remaining code."
 - "Run `/dependency-analysis` for a deeper look at dependency health."
 - "Run `/bundle-analysis` to measure the bundle size impact of removals."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /dead-code — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

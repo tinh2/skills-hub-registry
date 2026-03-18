@@ -1,7 +1,7 @@
 ---
 name: game-qa
 description: Run a full game QA audit on Unity, Unreal, Godot, or web game projects. Finds null reference bugs, missing asset references, broken scene transitions, physics edge cases, input binding conflicts, save/load corruption risks, localization gaps, audio issues, and platform certification blockers. Use when you need to QA test a game, audit game code quality, find game bugs, check game certification compliance, or validate game save systems.
-version: "1.0.0"
+version: "2.0.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -283,6 +283,28 @@ Check for web-specific issues:
 - Performance budget (total download size)
 - Local storage quota handling
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -355,3 +377,27 @@ DO NOT:
 - Do NOT ignore warnings -- they are often crash bugs waiting to happen.
 - Do NOT assume deprecated APIs will continue to work -- flag them.
 - Do NOT test gameplay balance -- that is the domain of `/balance-test`.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /game-qa — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

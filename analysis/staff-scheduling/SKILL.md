@@ -1,7 +1,7 @@
 ---
 name: staff-scheduling
 description: Audit workforce scheduling systems for labor optimization and compliance. Use when you need to evaluate labor demand forecasting accuracy, shift generation and optimization algorithms, skill-based staff routing, FLSA overtime compliance, predictive scheduling law compliance (OR, NYC, Chicago, Seattle), union CBA shift bidding rules, real-time schedule adjustments (call-outs, flex staffing, VTO), cross-training ROI, or labor cost as percentage of revenue. Covers UKG/Kronos, ADP, Workday, Deputy, HotSchedules, and custom WFM platforms across hospitality, healthcare, retail, and service industries.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -208,6 +208,28 @@ Write analysis to `docs/staff-scheduling-analysis.md` (create `docs/` if needed)
 Include: Executive Summary, System Assessment, Demand Forecasting Evaluation, Shift Optimization
 Analysis, Compliance Audit, Overtime Analysis, Cost Optimization Opportunities, and Recommendations.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -251,3 +273,27 @@ DO NOT:
 - Do NOT treat all overtime as waste -- some overtime is cost-effective vs hiring additional staff.
 - Do NOT skip union/CBA analysis if collective agreements exist -- violations trigger grievances.
 - Do NOT optimize purely for cost -- employee satisfaction and turnover costs must factor in.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /staff-scheduling — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

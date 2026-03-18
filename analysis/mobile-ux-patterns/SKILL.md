@@ -1,7 +1,7 @@
 ---
 name: mobile-ux-patterns
 description: Audit mobile UX implementation against platform conventions -- navigation patterns, gesture handling, pull-to-refresh, infinite scroll, skeleton screens, haptic feedback, adaptive layouts, deep linking, and accessibility. Checks compliance with iOS Human Interface Guidelines, Material Design 3, WCAG AA, and cross-platform adaptive behavior for Flutter and React Native apps. Use when reviewing navigation flows, fixing gesture conflicts, adding loading/error/empty states, or preparing for accessibility audit.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -223,6 +223,28 @@ ACCESSIBILITY (WCAG AA):
 - [ ] Custom components expose correct accessibility traits and roles.
 - [ ] Focus management correct on dynamic content changes (new content announced to screen reader).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -272,3 +294,27 @@ NEXT STEPS:
 - "Run `/mobile-performance` to verify UX patterns do not introduce rendering or memory regressions."
 - "Run `/mobile-monetization` to audit paywall and purchase flow UX."
 - "Run `/app-store-optimization` to ensure screenshots showcase polished UX."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /mobile-ux-patterns — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

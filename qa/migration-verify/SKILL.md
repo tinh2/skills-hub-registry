@@ -1,7 +1,7 @@
 ---
 name: migration-verify
 description: Verify database migrations are safe before running them. Checks that migrations apply cleanly, reverse cleanly, preserve data integrity, are idempotent, and will not lock tables or cause downtime on large datasets. Supports Prisma, Knex, Alembic, Django, ActiveRecord, Flyway, TypeORM, Sequelize, and raw SQL. Use when you need to review migrations, check migration safety, validate schema changes, assess migration performance impact, or plan zero-downtime deployments.
-version: "1.0.0"
+version: "2.0.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -158,6 +158,28 @@ PHASE 5: CROSS-REFERENCE VALIDATION
    - Must the migration run AFTER the code deploys? (flag as risky).
    - Does the migration require a multi-step deploy? (expand/contract pattern).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -217,3 +239,27 @@ NEXT STEPS:
 - "Run `/database-review` for a full schema design review."
 - "Run `/security-review` to check for data exposure risks in the new schema."
 - "Run `/iterate` to fix any issues found in the migration."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /migration-verify — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

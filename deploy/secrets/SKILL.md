@@ -1,7 +1,7 @@
 ---
 name: secrets
 description: "Audit codebases for leaked secrets and hardcoded credentials, generate .env templates, configure secrets management with AWS Secrets Manager, Vault, Doppler, or GCP Secret Manager, set up credential rotation, and integrate secrets into CI/CD pipelines via OIDC federation"
-version: "1.0.0"
+version: "2.0.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
@@ -165,6 +165,23 @@ If secrets were found in git history:
 - Recommend `git-filter-repo` to remove from history (document command but do NOT execute)
 - Recommend rotating ALL exposed credentials immediately
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing deployment/infrastructure changes, validate:
+
+1. Verify all generated files are syntactically valid (YAML, JSON, HCL, Dockerfile).
+2. Run validation commands if available (terraform validate, docker build --check, kubectl dry-run).
+3. Verify no secrets, credentials, or sensitive values are hardcoded.
+4. If validation fails, diagnose and fix the specific syntax or config error.
+5. Repeat up to 2 iterations.
+
+IF STILL FAILING after 2 iterations:
+- Document what failed and the exact error
+- Include partial output if available
+
 ============================================================
 OUTPUT
 ============================================================
@@ -205,6 +222,30 @@ NEXT STEPS
 4. Update deployment scripts to pull secrets from provider at runtime
 5. Enable GitHub secret scanning and push protection on the repository
 6. Schedule quarterly secret rotation reviews
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /secrets — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

@@ -1,7 +1,7 @@
 ---
 name: manufacturing-compliance
 description: "Audit manufacturing software for FDA 21 CFR Part 11 (electronic records, e-signatures, audit trails), ISO 9001/13485/14001/45001 quality management (document control, CAPA, nonconformance), GMP batch records and cleaning validation, lot/serial traceability (forward, backward, process, recall-ready), OSHA safety (incident tracking, LOTO, PPE), hazmat handling (SDS, chemical inventory, RCRA waste), ALCOA+ data integrity, and AS9100/IATF 16949/ITAR/EAR compliance. Use when reviewing MES, ERP, quality, or production management codebases for regulatory compliance."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -360,6 +360,23 @@ For each principle, check implementation across:
 
 Flag any data type where ALCOA+ principles are not enforced.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -442,3 +459,27 @@ NEXT STEPS:
 - "Run `/production-optimizer` to check if production scheduling respects regulatory constraints."
 - "Run `/energy-efficiency` to verify environmental compliance reporting."
 - "Run `/iterate` to implement remediation for critical compliance gaps."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /manufacturing-compliance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

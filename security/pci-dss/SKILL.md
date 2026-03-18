@@ -1,7 +1,7 @@
 ---
 name: pci-dss
 description: "PCI DSS v4.0 compliance audit for payment-handling codebases. Scans for PAN patterns (Visa, Mastercard, Amex, Discover), CVV storage violations, and track data retention. Audits all 12 requirements: network security controls (firewall rules, CDE segmentation, default-deny), secure configurations (default credentials, hardening), stored cardholder data protection (AES-256 encryption, masking first-6/last-4, tokenization, key rotation), transmission encryption (TLS 1.2+, certificate pinning, HSTS), vulnerability management (dependency scanning, container image scanning, web skimming detection per 6.4.3, SRI, CSP), access control (RBAC, least privilege, MFA for CDE per 8.4.2, 12-char passwords, session timeout), logging and monitoring (audit trails, immutable logs, SIEM, NTP sync), and security testing (SAST, DAST, file integrity monitoring). Estimates SAQ type (A, A-EP, D). Use when building or auditing payment flows, Stripe/Braintree/Adyen integrations, or any system processing credit card data."
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -268,6 +268,23 @@ Check for security policy artifacts in the codebase:
 - Verify risk assessment artifacts or references
 - Check for third-party service provider management (vendor security assessment references)
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -330,6 +347,30 @@ After reviewing the audit:
 - "Run `/secure` for the full security posture assessment beyond PCI."
 - "Run `/dependency-scan` to address vulnerable components (Req 6/11)."
 - "Run `/pentest` to validate exploitability of findings (Req 11)."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /pci-dss — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

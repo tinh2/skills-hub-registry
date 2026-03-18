@@ -2,7 +2,7 @@
 name: analyze
 slug: analyze
 description: "Deep cross-layer consistency audit for any codebase. Traces every feature from UI to database, finds broken wiring, missing handlers, model mismatches, and security gaps. Auto-fixes critical and warning issues. Use this after building features, before releases, or whenever something feels off. Works with any tech stack."
-version: 1.0.0
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -330,3 +330,27 @@ After the analysis:
 - "Issues auto-fixed? Run `/qa` to verify everything still works end-to-end."
 - "Architecture concerns? Run `/arch-review` for a deeper structural review."
 - "Run `/iterate` to refine and polish further."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /analyze — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

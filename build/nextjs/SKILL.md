@@ -1,7 +1,7 @@
 ---
 name: nextjs
 description: "Builds a production-ready Next.js 15 app with App Router, Server Components, authentication, Prisma database, and a full dashboard UI from a description or brief. Triggers on: \"next.js app\", \"nextjs app\", \"build a web app\", \"saas dashboard\", \"build a dashboard\", \"next.js project\", \"scaffold nextjs\", \"react web app with backend\", \"full-stack web app\", \"admin panel\", \"create a next app\", \"build a saas\", \"web application\", \"nextjs starter\"."
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -285,6 +285,25 @@ PHASE 6: QUALITY AND POLISH
    - Keyboard navigation works for all interactive elements.
    - Focus indicators visible on all focusable elements.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -336,3 +355,27 @@ After scaffolding:
 - "Run `/ship` to add a specific feature to the scaffolded app."
 - "Run `/api-scaffold` to generate a standalone API if you need a separate backend."
 - "Run `/ux` to audit accessibility and design consistency."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /nextjs — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

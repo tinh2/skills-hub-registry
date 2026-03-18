@@ -1,7 +1,7 @@
 ---
 name: mobile-monetization
 description: Audit mobile app revenue implementation -- in-app purchases, subscriptions, ad SDKs, paywall design, trial conversion funnels, and store billing compliance. Covers StoreKit 2, Google Play Billing, RevenueCat, AdMob, Unity Ads, receipt validation, entitlement sync, and pricing localization. Use when reviewing IAP flows, optimizing subscription conversion, checking ad mediation setup, or preparing for App Store / Play Store review.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -210,6 +210,28 @@ CROSS-PLATFORM compliance:
 - [ ] Entitlements portable across platforms via account-based sync.
 - [ ] Account-based entitlement (not device-locked).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -265,3 +287,27 @@ NEXT STEPS:
 - "Run `/mobile-performance` to verify ad SDK initialization does not degrade startup time."
 - "Run `/mobile-ux-patterns` to audit paywall UX and purchase flow usability."
 - "Run `/mobile-analytics` to verify revenue event tracking completeness."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /mobile-monetization — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

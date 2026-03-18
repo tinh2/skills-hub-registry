@@ -1,7 +1,7 @@
 ---
 name: dependency-scan
 description: Scan project dependencies for known vulnerabilities (CVEs), auto-fix safe patches, and generate SBOM. Auto-detects all package managers in monorepos — npm (npm audit), yarn (yarn audit), pnpm (pnpm audit), pip/poetry (pip-audit), Cargo (cargo audit), Go modules (govulncheck), Maven (dependency-check), Gradle, Bundler (bundle audit), and Composer. Categorizes findings by severity (Critical/High/Medium/Low), dependency type (direct vs transitive), and fix availability. Applies safe patch-level fixes automatically, adds npm overrides or yarn resolutions for transitive vulnerabilities, flags major version bumps for manual review, and generates CycloneDX SBOM with license compliance checks (GPL, AGPL, LGPL flagging). Verifies fixes by re-scanning and running tests before committing.
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -215,6 +215,23 @@ For other managers, generate a dependency tree and format as:
 Include license information where available. Flag any copyleft licenses
 (GPL, AGPL, LGPL) that may have compliance implications.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -258,6 +275,30 @@ After fixing dependencies:
 - "Run `/secure` for a full security posture assessment."
 - "Run `/owasp` to check A06 (Vulnerable Components) compliance."
 - "Schedule recurring dependency scans (weekly recommended)."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /dependency-scan — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

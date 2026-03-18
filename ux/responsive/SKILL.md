@@ -1,7 +1,7 @@
 ---
 name: responsive
 description: Audit and fix responsive design issues across all breakpoints. Scans for fixed widths that cause mobile overflow, missing media query variants, non-responsive images, undersized touch targets below 48px, unreadable typography, and horizontal scroll violations. Auto-detects framework (Flutter, Tailwind, React, Vue, Angular) and responsive system, then fixes layouts with proper flex/grid, clamp-based fluid typography, responsive image sizing, and adequate touch target spacing. Verifies every screen at mobile (375px), tablet (768px), desktop (1280px), and wide (1920px). Use when you need to fix mobile layout bugs, audit responsive breakpoints, fix overflow issues, ensure touch targets meet accessibility minimums, or verify no horizontal scroll at any viewport width.
-version: "1.0.0"
+version: "2.0.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -227,6 +227,26 @@ Run the framework's static analysis:
 
 Fix all errors and warnings introduced by responsive changes.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate:
+
+1. Re-run the specific UX/accessibility checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't break functionality.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat up to 3 iterations.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+
 ============================================================
 OUTPUT
 ============================================================
@@ -272,6 +292,30 @@ After responsive audit:
 - "Run `/design-system` to ensure responsive tokens are part of the design system."
 - "Run `/qa` to verify responsive changes did not break functionality."
 - Test on actual devices -- code-level audit catches most issues but device testing confirms.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /responsive — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

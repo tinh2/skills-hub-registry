@@ -1,7 +1,7 @@
 ---
 name: skill-test
 description: "Test a skill's quality before publishing — validate SKILL.md frontmatter schema, check instruction structure for phases and guardrails, score against the marketplace rubric out of 100, simulate a dry run to find failure points, and report a pass/fail verdict with specific fixes"
-version: "1.0.0"
+version: "2.0.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -116,6 +116,22 @@ Simulate what the skill would do if executed:
    - Does it have error recovery instructions?
 4. Estimate execution scope: light (< 5 files touched), medium (5-20), heavy (20+).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify the analysis consumed sufficient data.
+2. Verify all output sections have substantive content (not just headers).
+3. Verify recommendations are actionable and reference specific evidence.
+
+IF VALIDATION FAILS:
+- Identify data gaps and attempt alternative data sources
+- Re-generate incomplete sections with expanded analysis
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -194,3 +210,27 @@ After validation:
 - "Run `/skill-creator` to create a new skill that passes validation."
 - "Run `/registry-sync` to validate the entire registry and update READMEs."
 - "Fix issues flagged as ERROR, then re-run `/skill-test` to verify."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /skill-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

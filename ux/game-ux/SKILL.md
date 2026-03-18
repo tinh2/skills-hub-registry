@@ -1,7 +1,7 @@
 ---
 name: game-ux
 description: Audit game user experience across HUD clarity, menu navigation, tutorial effectiveness, control responsiveness, camera systems, feedback loops, loading screens, and settings completeness. Detects game engine (Unity UGUI/UI Toolkit, Unreal UMG, Godot Control, web-based), maps all UI screens and input contexts, evaluates information hierarchy, visual noise, touch target sizes, menu depth, tutorial pacing, input latency patterns, camera comfort settings, and produces rated findings per category with prioritized fixes. Use when you need to evaluate game UI usability, audit HUD readability, check settings menu completeness, review tutorial onboarding flow, assess control feel and feedback, or prepare for playtesting.
-version: "1.0.0"
+version: "2.0.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -327,6 +327,26 @@ Evaluate screen transitions:
 - Do transitions mask loading?
 - Are transitions consistent in style and timing?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate:
+
+1. Re-run the specific UX/accessibility checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't break functionality.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat up to 3 iterations.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+
 ============================================================
 OUTPUT
 ============================================================
@@ -410,3 +430,27 @@ DO NOT:
 - Do NOT recommend adding features outside UX scope (new gameplay mechanics).
 - Do NOT ignore mobile or console UX if those are target platforms.
 - Do NOT modify code -- this is an audit skill. Report findings only.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /game-ux — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: healthcare-ops
 description: "Review healthcare software for operational efficiency: appointment scheduling and resource allocation, clinical workflow burden (order entry clicks, documentation templates, alert fatigue), EHR/LIS/pharmacy/PACS integrations (HL7v2, FHIR, NCPDP SCRIPT, EDI 837/835), patient flow (ADT, bed management, wait times, throughput), quality reporting (CMS, HEDIS, MIPS), staff credentialing and workload balancing, and revenue cycle optimization. Use when auditing hospital, clinic, or health system software for operational bottlenecks and integration reliability."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -251,6 +251,23 @@ COMMUNICATION:
 - Check for team-based care coordination features.
 - Verify critical result notification workflows.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -309,6 +326,30 @@ After reviewing the findings:
 - "Run `/healthcare-compliance` to ensure operational changes maintain regulatory compliance."
 - "Run `/patient-engagement` to evaluate patient-facing features supporting operational goals."
 - "Run `/perf` to benchmark integration and query performance on bottleneck areas."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /healthcare-ops — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

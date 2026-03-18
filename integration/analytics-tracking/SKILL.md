@@ -1,7 +1,7 @@
 ---
 name: analytics-tracking
 description: "Set up production-ready event tracking with Amplitude, Mixpanel, PostHog, or GA4. Auto-detects your framework (React, Next.js, Vue, Flutter, Angular, Python, Go, Rails), installs the correct SDK, creates a provider-agnostic analytics service wrapper, defines a typed event taxonomy, instruments page views and key user flows, and adds privacy/consent controls. Use when you need analytics, event tracking, user tracking, product analytics, usage metrics, or telemetry."
-version: "1.0.0"
+version: "2.0.0"
 category: integration
 platforms:
   - CLAUDE_CODE
@@ -198,6 +198,30 @@ PHASE 6: VALIDATION
 3. Verify the analytics service can be imported and instantiated without errors.
 4. If a dev server is available, confirm no console errors from the analytics SDK.
 
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /analytics-tracking — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
+
 ============================================================
 DO NOT
 ============================================================
@@ -210,6 +234,23 @@ DO NOT
 - Do NOT create a second analytics wrapper if one already exists -- extend it.
 - Do NOT use deprecated SDK versions or legacy tracking APIs.
 - Do NOT track raw PII (emails, names, phone numbers) in event properties.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the integration, validate:
+
+1. Run the project's test suite to verify the integration works end-to-end.
+2. Run build/compile to confirm no breakage.
+3. Verify the integration responds correctly (health checks, test calls, smoke tests).
+4. If failures occur, diagnose from error output and apply minimal fixes.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Document the integration state and what's blocking
+- Include error output and attempted fixes
 
 ============================================================
 OUTPUT

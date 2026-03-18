@@ -1,7 +1,7 @@
 ---
 name: extract-template
 description: "Extracts a reusable project template from a mature project — captures architecture, pipeline, conventions, CI/CD, Docker, testing, linting, and pitfalls into a portable template. Trigger: extract template, save as template, capture conventions, reusable template, templatize project, snapshot conventions."
-version: 1.0.0
+version: "2.0.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -143,6 +143,22 @@ After extraction, verify the template is usable:
 
 Report any validation issues and fix them before finalizing.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify the analysis consumed sufficient data.
+2. Verify all output sections have substantive content (not just headers).
+3. Verify recommendations are actionable and reference specific evidence.
+
+IF VALIDATION FAILS:
+- Identify data gaps and attempt alternative data sources
+- Re-generate incomplete sections with expanded analysis
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -193,3 +209,27 @@ NEXT STEPS:
 - "Run `/bootstrap {template-name}` in a new project to use this template."
 - "Edit `{output_dir}/CLAUDE.md.template` to customize conventions."
 - "Commit the template to your backup repo with `/sync`."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /extract-template — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: spending-behavior
 description: Audit personal finance and budgeting app spending intelligence features. Use when you need to evaluate transaction categorization accuracy (MCC mapping, ML classification, merchant matching), budget adherence tracking and alerts, behavioral nudge effectiveness and fatigue, savings goal automation (round-ups, found money), subscription detection and cancellation workflows, financial health scoring models, bank aggregation pipeline quality (Plaid, Yodlee, MX), or variable income budget handling. Covers spending categorization edge cases like transfers, refunds, and P2P payments.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -208,6 +208,28 @@ financial behaviors, educational content tied to low-scoring areas.
 
 Write analysis to `docs/spending-behavior-analysis.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -246,3 +268,27 @@ DO NOT:
 - Do NOT overlook privacy implications of social comparison features -- peer benchmarking requires careful anonymization.
 - Do NOT treat all users as having stable, predictable income -- variable income users need different budget models.
 - Do NOT assume bank aggregation data is always accurate -- pending transactions, delayed postings, and merchant name variations cause errors.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /spending-behavior — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

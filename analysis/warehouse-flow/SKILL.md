@@ -1,7 +1,7 @@
 ---
 name: warehouse-flow
 description: Audit warehouse flow design and material movement -- evaluate pick path optimization algorithms, ABC velocity-based slotting compliance, zone configuration and boundary balancing, conveyor merge point and sortation system capacity, wave planning logic, and throughput bottleneck identification. Covers S-pattern and serpentine routing, golden zone placement, goods-to-person vs. pick-to-light vs. voice-directed picking, inbound-to-outbound flow path modeling, replenishment timing, Theory of Constraints drum-buffer-rope analysis, and labor planning with engineered standards for distribution centers and fulfillment operations.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -181,6 +181,28 @@ golden zone compliance), Pick Path Optimization Opportunities, Zone Configuratio
 Evaluation, Conveyor/Sortation Assessment, Wave Planning and Labor Analysis, Throughput
 Bottleneck Map, Prioritized Recommendations with estimated throughput improvement.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -217,3 +239,27 @@ DO NOT:
 - Optimize pick paths in isolation from replenishment timing -- empty pick faces waste travel.
 - Assume peak capacity equals sustained capacity -- factor in labor fatigue and system degradation.
 - Recommend zone changes without modeling the impact on conveyor merge point capacity.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /warehouse-flow — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

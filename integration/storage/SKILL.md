@@ -1,7 +1,7 @@
 ---
 name: storage
 description: "Add file uploads and object storage to my app — set up AWS S3, Google Cloud Storage, Cloudflare R2, or Supabase Storage with presigned URLs, direct browser uploads, multipart chunked uploads, file type validation, lifecycle policies, CORS configuration, and CDN integration"
-version: "1.0.0"
+version: "2.0.0"
 category: integration
 platforms:
   - CLAUDE_CODE
@@ -318,3 +318,44 @@ After storage is set up:
 - "Run `/search` to index stored documents for full-text search."
 - "Run `/perf` to benchmark upload speeds and optimize chunk sizes."
 - "Run `/check-vanta` to verify storage security meets compliance requirements."
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the integration, validate:
+
+1. Run the project's test suite to verify the integration works end-to-end.
+2. Run build/compile to confirm no breakage.
+3. Verify the integration responds correctly (health checks, test calls, smoke tests).
+4. If failures occur, diagnose from error output and apply minimal fixes.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Document the integration state and what's blocking
+- Include error output and attempted fixes
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /storage — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

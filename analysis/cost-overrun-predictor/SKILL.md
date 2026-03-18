@@ -1,7 +1,7 @@
 ---
 name: cost-overrun-predictor
 description: Audit construction project management software for budget tracking accuracy, earned value management (EVM) formula correctness, risk factor modeling, schedule-cost integration, change order workflow completeness, and early warning detection. Covers CPI/SPI trending, Monte Carlo risk simulation, WBS cost code analysis, and historical benchmarking. Use when reviewing Procore, Primavera P6, MS Project, Buildertrend, Sage 300 CRE integrations, or any construction PM platform that tracks budgets, schedules, and change orders.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -118,6 +118,28 @@ Check cross-project analysis: project database (completed projects with final co
 
 Write analysis to `docs/cost-overrun-analysis.md` (create `docs/` if needed). Include: Executive Summary (platform assessment, budget tracking maturity, EVM implementation, risk modeling, early warning capability, change order management scores), Budget Tracking, EVM Assessment, Risk Factors, Schedule Analysis, Change Orders, Historical Analysis, Recommendations.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -152,3 +174,27 @@ DO NOT:
 - Recommend predictive analytics without checking if sufficient historical data exists.
 - Overlook indirect cost impacts of change orders (extended general conditions, stacking).
 - Report risk factors as "not modeled" without checking if they exist in separate risk modules.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cost-overrun-predictor — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: recall
 description: "Reconstructs the development cycle from git history, distills sequential/parallel patterns, and produces actionable insights for improving future iterations. Triggers: recall, retrospective, development analysis, what happened, dev cycle analysis."
-version: 1.0.0
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -296,3 +296,27 @@ NEXT STEPS:
 - "Run `/build` for a full pipeline build incorporating these learnings."
 - "Run `/analyze` to verify the current state of the codebase is consistent."
 ---
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /recall — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: test-suite
 description: Analyze and score test coverage across all testing dimensions -- unit, integration, E2E, load, visual regression, contract, and accessibility. Auto-detects tech stack and test infrastructure, runs existing coverage tools, identifies gaps by category, scores each on a 0-10 scale with weighted overall health, and produces a prioritized remediation plan routing to the right testing sub-skill. Use when you need a test health overview, want to find coverage gaps, need to prioritize which tests to write next, or want to assess test quality before a release.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -219,6 +219,23 @@ For each identified gap, recommend which sub-skill to run:
 | No contract tests (API projects) | `/contract-test` | MEDIUM |
 | No a11y tests (frontend) | `/accessibility-test` | HIGH |
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After generating and running tests, validate:
+
+1. All generated test files compile/parse without syntax errors.
+2. Run the generated tests — capture pass/fail results.
+3. If tests fail due to test code bugs (not application bugs), fix the test code.
+4. Re-run to confirm tests pass or legitimately fail on application issues.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Separate test failures into: test bugs vs application bugs
+- Fix test bugs, document application bugs
+
 ============================================================
 OUTPUT
 ============================================================
@@ -287,3 +304,27 @@ DO NOT:
 - Do NOT skip any testing category in the analysis, even if it seems irrelevant.
 - Do NOT inflate scores. A category with zero tests gets a zero score.
 - Do NOT recommend skills that are irrelevant to the project type (e.g., no visual regression for a CLI tool, no load tests for a static library).
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /test-suite — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

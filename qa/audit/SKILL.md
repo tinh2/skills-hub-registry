@@ -1,7 +1,7 @@
 ---
 name: audit
 description: Fast quality gate — detects stack, runs static analysis, checks cross-layer consistency, fixes issues. Run between every pipeline phase, before every commit push, after every feature batch. Lighter than /analyze but catches the same critical issues.
-version: 1.0.0
+version: "2.0.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -157,6 +157,28 @@ Commit all fixes: "fix(audit): cross-layer consistency fixes"
 
 If fixes introduce new issues, fix those too (max 2 rounds).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -205,3 +227,27 @@ After PASS:
 After FAIL:
 - "Fix the remaining issues, then run `/audit` again."
 - "Run `/analyze` for a deeper investigation of the failing areas."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /audit — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: cto-review
 description: Conduct a CTO-perspective technical strategy review of a codebase. Evaluates architecture decisions and build-vs-buy trade-offs, scaling readiness at 10x and 100x, engineering velocity and developer experience, technical debt ratio and blast radius, security posture at executive level, team scalability for hiring, and infrastructure cost efficiency. Produces a strategic risk matrix, architecture scorecard, and ranked investment priorities. Use when you need a technical strategy review, architecture assessment, scaling readiness check, tech debt audit, engineering velocity evaluation, Series A technical due diligence, or CTO-level briefing before a board meeting or fundraise.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -240,6 +240,23 @@ OVER/UNDER INVESTMENT:
 - Are we under-investing in infrastructure that will cause outages?
 - Is there monitoring on spend (billing alerts, cost dashboards)?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -333,3 +350,27 @@ NEXT STEPS:
 - "Run `/security-review` for a deep-dive security audit on the high-risk areas identified."
 - "Run `/tech-debt` for a detailed technical debt inventory with remediation plan."
 - "Run `/cost-analysis` for precise infrastructure cost projections at scale."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cto-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

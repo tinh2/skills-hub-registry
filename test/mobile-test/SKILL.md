@@ -1,7 +1,7 @@
 ---
 name: mobile-test
 description: Generate a complete mobile test suite covering unit, widget, integration, snapshot, accessibility, and platform-specific tests. Auto-detects Flutter, React Native, native iOS (XCTest), or native Android (JUnit/Espresso), then produces tests for models, services, ViewModels, screens, navigation, forms, and pull-to-refresh with proper mocks and golden image comparisons. Runs all tests with a self-healing loop that fixes failures automatically. Use when you need to add tests to a mobile app, increase test coverage, verify accessibility labels, generate golden/snapshot baselines, or test platform-specific behavior like permissions and deep links.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -355,3 +355,27 @@ NEXT STEPS:
 - "Run `/mobile-ci-cd` to integrate the test suite into CI."
 - "Run `/mobile-qa` for functional QA testing beyond automated tests."
 - "Run `/mobile-performance` to add performance regression tests."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /mobile-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: game-code-review
 description: "Review game code architecture for component coupling, ECS vs OOP design, update loop organization (deltaTime, fixed timestep, frame budget), state machine quality (boolean soup, string states), save/load serialization (versioning, migration, corruption handling), input handling (action-based abstraction, buffering, remapping), and anti-patterns (god objects, find-in-update, tight loop allocation, missing object pooling, magic numbers). Supports Unity, Unreal, Godot, Phaser, and custom engines. Use when auditing game project code quality, architecture, or performance patterns."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -237,6 +237,23 @@ Evaluate input architecture:
 - Is input buffering implemented for action games (buffer jump during landing)?
 - Is input handled in a single system (not scattered across scripts)?
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -304,3 +321,27 @@ DO NOT:
 - Do NOT evaluate art, level design, or game design — focus on code architecture.
 - Do NOT modify code — this is a review skill. Report findings only.
 - Do NOT penalize small/jam projects for lacking systems appropriate to large productions.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /game-code-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

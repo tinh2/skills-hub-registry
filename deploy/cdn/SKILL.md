@@ -1,7 +1,7 @@
 ---
 name: cdn
 description: "Configure a CDN with optimized caching, SSL/TLS, security headers, and cache invalidation — auto-detects hosting provider and app type, generates CloudFront, Cloudflare, or Vercel config with per-content-type cache rules, edge functions, and compression. Use when deploying a static site, SPA, SSR app, or adding a CDN layer to an existing API."
-version: "1.0.0"
+version: "2.0.0"
 category: deploy
 platforms:
   - CLAUDE_CODE
@@ -316,6 +316,23 @@ Configure additional optimizations:
 - **Preconnect hints**: Add `Link: <https://cdn.example.com>; rel=preconnect` headers
 - **Image formats**: Serve WebP/AVIF via Accept header content negotiation
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing deployment/infrastructure changes, validate:
+
+1. Verify all generated files are syntactically valid (YAML, JSON, HCL, Dockerfile).
+2. Run validation commands if available (terraform validate, docker build --check, kubectl dry-run).
+3. Verify no secrets, credentials, or sensitive values are hardcoded.
+4. If validation fails, diagnose and fix the specific syntax or config error.
+5. Repeat up to 2 iterations.
+
+IF STILL FAILING after 2 iterations:
+- Document what failed and the exact error
+- Include partial output if available
+
 ============================================================
 OUTPUT
 ============================================================
@@ -360,6 +377,30 @@ NEXT STEPS
 4. Monitor cache hit rate in CDN dashboard (target: >90% for static assets)
 5. Set up Real User Monitoring (RUM) to track performance impact
 6. Run Lighthouse/WebPageTest before and after to measure improvement
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cdn — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

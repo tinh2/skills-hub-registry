@@ -1,7 +1,7 @@
 ---
 name: expansion-modeling
 description: Analyze franchise expansion plans, model new market entry, score site selection candidates, map territory density, assess cannibalization risk, and build multi-year growth scenarios. Covers market feasibility scoring, Huff gravity models, trade area overlap analysis, white space identification, and unit-level investment returns for franchise development teams.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -275,6 +275,28 @@ Create a phased expansion roadmap:
 - Phase 3 (Year 3-5): full buildout, new format testing
 - Milestone gates: performance triggers for advancing to next phase
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -309,3 +331,27 @@ DO NOT:
 - Do NOT ignore competitive density -- high demand is meaningless if competitors have saturated supply.
 - Do NOT project revenue without providing a range (conservative to optimistic) and key assumptions.
 - Do NOT recommend aggressive growth without assessing operator pipeline and operational readiness.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /expansion-modeling — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

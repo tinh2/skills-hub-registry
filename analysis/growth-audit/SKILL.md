@@ -1,7 +1,7 @@
 ---
 name: growth-audit
 description: Audit a product codebase for growth readiness using the AARRR pirate metrics framework. Scans actual code for SEO implementation, onboarding friction, retention hooks, monetization flows, and referral mechanics. Checks meta tags, notification systems, email triggers, sharing features, and conversion funnels against growth engineering best practices. Use when launching a new product, diagnosing low conversion, or planning a growth sprint.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -283,6 +283,28 @@ Referral scorecard:
 | Viral loops | {exists?} | {assessment} | Medium |
 | Network effects | {type} | {assessment} | High |
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -363,3 +385,27 @@ NEXT STEPS:
 - "Run `/ux` to audit the user journeys where friction was identified."
 - "Run `/iterate` to implement the P0 growth priorities."
 - "Run `/sales-readiness` if B2B growth and enterprise sales are relevant."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /growth-audit — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

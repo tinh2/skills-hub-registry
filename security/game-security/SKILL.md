@@ -1,7 +1,7 @@
 ---
 name: game-security
 description: "Game-specific security review covering cheat prevention, exploit surfaces, and server authority. Audits client-side authority vulnerabilities (damage, health, currency, cooldown, movement speed), memory manipulation risks (value scanning, anti-debug, DLL injection), network security (packet tampering, replay attacks, speed hacking, MITM, DDoS resilience), save file integrity (encryption, checksums, cloud save abuse, config tampering, wallhacks), API and backend security (auth bypass, receipt validation, double-spend, botting, user enumeration), and anti-cheat architecture (server authority, statistical anomaly detection, client integrity, ban systems, shadow banning). Use for multiplayer, competitive, F2P economy, leaderboard, or single-player games with progression systems."
-version: "1.0.0"
+version: "2.0.0"
 category: security
 platforms:
   - CLAUDE_CODE
@@ -248,6 +248,23 @@ Evaluate the ban architecture:
 - Ban evasion detection
 - Shadow ban capability (cheaters matched together)
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the security analysis, validate thoroughness:
+
+1. Verify every category in the audit was actually checked (not skipped).
+2. Verify every finding has a specific file:line location.
+3. Verify severity ratings are justified by impact assessment.
+4. Verify no false positives by re-reading flagged code in context.
+
+IF VALIDATION FAILS:
+- Re-audit skipped categories or vague findings
+- Verify or remove false positives
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -312,3 +329,27 @@ DO NOT:
 - Do NOT expose actual secrets, keys, or passwords found — redact them in output.
 - Do NOT skip the client authority analysis — it is the most common game security failure.
 - Do NOT modify code — this is a review skill. Report findings only.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /game-security — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

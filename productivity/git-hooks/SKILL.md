@@ -1,7 +1,7 @@
 ---
 name: git-hooks
 description: "Set up pre-commit hooks for linting, formatting, and type-checking with commit message enforcement using conventional commits. Auto-detects stack and configures husky, lefthook, or pre-commit framework with lint-staged. Use when you want to enforce code quality on every commit, add conventional commits, prevent bad code from being committed, or set up CI-mirrored hook checks."
-version: "1.0.0"
+version: "2.0.0"
 category: productivity
 platforms:
   - CLAUDE_CODE
@@ -226,6 +226,21 @@ jobs:
 
 This ensures hooks cannot be bypassed with `--no-verify`.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing, validate the output was produced correctly:
+
+1. Verify generated files exist and are syntactically valid.
+2. Run any available validation (lint, type-check, dry-run).
+3. If the skill produces configuration, verify it parses without errors.
+
+IF VALIDATION FAILS:
+- Diagnose from error context and re-generate the failing artifact
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -261,6 +276,30 @@ NEXT STEPS
 2. Run `/linter` if lint configuration needs improvement
 3. Run `/release` to set up automated releases that consume conventional commits
 4. Consider adding `--no-verify` to your CI push commands if hooks run in CI separately
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /git-hooks — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

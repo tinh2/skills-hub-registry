@@ -1,7 +1,7 @@
 ---
 name: impact-measurement
 description: Analyze program impact measurement software for logic model completeness, indicator tracking rigor, data collection methodology, causal attribution modeling, cost-effectiveness analysis, beneficiary feedback integration, and funder reporting accuracy. Use when building M&E platforms, evaluating nonprofit program software, designing outcome tracking systems, or auditing social impact reporting tools.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -251,6 +251,28 @@ DATA SHARING:
 - Check for research data use protocols if academic partnerships exist.
 - Validate that beneficiary data is not shared without authorization.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -325,3 +347,27 @@ NEXT STEPS:
 - "Run `/fundraising-optimizer` to connect impact evidence to donor communications."
 - "Implement beneficiary feedback loops if not currently systematic."
 - "Add cost-per-outcome tracking to enable cross-program comparison."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /impact-measurement — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

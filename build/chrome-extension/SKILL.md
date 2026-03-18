@@ -1,7 +1,7 @@
 ---
 name: chrome-extension
 description: Build a complete Chrome browser extension with Manifest V3 -- generate popup UI with React 19 and Tailwind CSS, content scripts with Shadow DOM isolation, background service worker with event-driven architecture, type-safe chrome.storage wrappers (sync and local), type-safe message passing between popup, content, and background contexts, options page with settings management, context menu integration, keyboard shortcuts, and minimum-permission manifest. Uses TypeScript strict mode, Vite with @crxjs/vite-plugin for hot reload, and Vitest for testing. Build a Chrome extension, create browser plugin, make Chrome addon, scaffold browser extension, new Chrome project.
-version: "1.0.0"
+version: "2.0.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -228,6 +228,25 @@ PHASE 5: BUILD AND VERIFY
 4. Verify `dist/manifest.json` is valid.
 5. Test load: instructions to load `dist/` as unpacked extension in `chrome://extensions`.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the main phases, validate your work:
+
+1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
+2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
+3. If either fails, diagnose the failure from error output.
+4. Apply a minimal targeted fix — do NOT refactor unrelated code.
+5. Re-run the failing validation.
+6. Repeat up to 3 iterations total.
+
+IF STILL FAILING after 3 iterations:
+- Document what was attempted and what failed
+- Include the error output in the final report
+- Flag for manual intervention
+
 ============================================================
 OUTPUT
 ============================================================
@@ -282,3 +301,27 @@ After building:
 - "Run `/qa` to test all extension interactions."
 - "Package for Chrome Web Store with `npm run build && zip -r extension.zip dist/`."
 - "Run `/ux` to audit the popup and options page UI."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /chrome-extension — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

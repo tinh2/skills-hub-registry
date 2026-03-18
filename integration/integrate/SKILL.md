@@ -1,7 +1,7 @@
 ---
 name: integrate
 description: "Audit my project's third-party integrations or set up multiple at once — scans for payments, auth, email, push, analytics, storage, search, and realtime, calculates a production-readiness health score, identifies gaps, and chains sub-skills to fill them"
-version: "1.0.0"
+version: "2.0.0"
 category: integration
 platforms:
   - CLAUDE_CODE
@@ -243,3 +243,44 @@ After the integration report:
 - Do NOT modify existing integration code — only add new integrations.
 - Do NOT hardcode API keys or secrets in source files — always use environment variables.
 - Do NOT recommend paid services without mentioning free tier limits.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the integration, validate:
+
+1. Run the project's test suite to verify the integration works end-to-end.
+2. Run build/compile to confirm no breakage.
+3. Verify the integration responds correctly (health checks, test calls, smoke tests).
+4. If failures occur, diagnose from error output and apply minimal fixes.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Document the integration state and what's blocking
+- Include error output and attempted fixes
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /integrate — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

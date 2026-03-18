@@ -1,7 +1,7 @@
 ---
 name: ux
 description: Dual-mode UX quality skill — runs a heuristic/accessibility/motion audit on the current codebase, or validates implementation against design mockups. Fixes all issues found and commits.
-version: "1.1.0"
+version: "2.1.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -629,6 +629,30 @@ RULES FOR BOTH MODES
 - If a design decision is ambiguous (the mockup is unclear, or the heuristic allows
   multiple valid approaches), note it as a remaining item rather than guessing.
 
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /ux — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
+
 ============================================================
 DO NOT
 ============================================================
@@ -638,6 +662,26 @@ DO NOT
 - Do NOT skip screens — audit every screen in the application without exception.
 - Do NOT inflate screen ratings — rate honestly based on findings.
 - Do NOT add new features or functionality — only improve UX quality of what exists.
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate:
+
+1. Re-run the specific UX/accessibility checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't break functionality.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat up to 3 iterations.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
 
 ============================================================
 NEXT STEPS

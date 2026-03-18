@@ -1,7 +1,7 @@
 ---
 name: engineering-spec
 description: Generates structured engineering specs (backend or frontend) from feature descriptions, designs, or ticket references. Triggers on "spec", "story", "ticket", "engineering spec", "write a story for", "write a spec for", "create a ticket for".
-version: 1.0.0
+version: "2.0.0"
 category: docs
 platforms:
   - CLAUDE_CODE
@@ -129,8 +129,49 @@ Technical implementation guidance for the developer.
 - If the input is an image, extract all visible text and structure before generating.
 - If requirements are ambiguous, ask clarifying questions before writing the spec.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing documentation, validate completeness:
+
+1. Verify all required sections are present and non-empty.
+2. Verify internal cross-references and links resolve correctly.
+3. Verify no placeholder text remains ("{TODO}", "[TBD]", "...", "etc.").
+4. Verify code examples are syntactically valid.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or contain placeholders
+- Re-generate only the deficient sections
+- Repeat up to 2 iterations
+
 ## Next Steps
 
 After delivering the spec, suggest:
 - "Run `/arch-review` with this spec to get architect-level feedback before implementation."
 - "Or run `/si` to implement this spec directly in the current repo."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /backend-spec — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

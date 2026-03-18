@@ -1,7 +1,7 @@
 ---
 name: research
 description: "Full-spectrum product research pipeline. Runs competitive analysis, technology trend scouting, user feedback analysis, and feature ideation. Trigger on: research, competitive research, market research, feature discovery, what should we build next, technology trends, user feedback, app store reviews, GitHub issues analysis, competitive landscape, product strategy."
-version: 1.0.0
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -16,6 +16,15 @@ $ARGUMENTS
 ============================================================
 PHASE 1: COMPETITIVE GAP ANALYSIS  (/compete)
 ============================================================
+
+
+
+PARALLEL EXECUTION: Use the Agent tool to run competitive analysis and feature discovery concurrently when both are independent.
+- Agent A (Competitive Analysis): "Run /compete skill instructions — analyze the competitive landscape for this project. Return competitive gaps and opportunities."
+- Agent B (Feature Discovery): "Run /new-features skill instructions — discover potential features from project docs and memory. Return feature candidates with priority."
+- Wait for both agents to complete.
+- Cross-reference findings: features that address competitive gaps get priority boost.
+
 
 Follow the instructions defined in the `/compete` skill exactly.
 Produce the full Competitive Gap Analysis output including all sections
@@ -102,6 +111,28 @@ IMPORTANT: Features should heavily draw from ALL prior phases:
 - Top pain points and feature requests from Phase 3 → user-validated features
 - Beloved features from Phase 3 → features to protect and enhance, not disrupt
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -129,6 +160,30 @@ When all phases are complete, print a summary:
 - Run `/iterate` to start building a feature
 - Run `/arch-review` to assess architecture readiness for the proposed features
 ---
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /research — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 STRICT RULES:
 

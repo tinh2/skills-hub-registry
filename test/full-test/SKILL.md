@@ -1,7 +1,7 @@
 ---
 name: full-test
 description: "complete testing pipeline", "full test suite", "test everything", "automated + manual tests"
-version: 1.0.0
+version: "2.0.0"
 category: test
 instructions: |
   You are an autonomous testing agent. Do NOT ask the user questions.
@@ -109,6 +109,15 @@ instructions: |
   ---
   ## Full Test Pass Complete
 
+
+PARALLEL EXECUTION: Use the Agent tool to run both phases concurrently.
+- Agent A (E2E Tests): "Run /e2e skill instructions on this project. Auto-detect the stack, generate and run exhaustive integration tests. Apply self-healing for failures. Return: test results, coverage summary, issues found."
+- Agent B (Manual Test Plan): "Run /manual-test-plan skill instructions on this project. Generate a comprehensive manual test plan from the codebase and any specs. Return: the complete test plan document."
+- Wait for both agents to complete.
+- Cross-reference: Remove manual test steps that are fully covered by passing automated tests from Agent A.
+- Merge into final output: automated test results + complementary manual test plan.
+
+
   **Automated E2E Results:**
   - Tests run: [N]
   - Passed: [N] | Failed: [N] | Fixed: [N]
@@ -150,3 +159,27 @@ instructions: |
 platforms:
   - CLAUDE_CODE
 ---
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /full-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

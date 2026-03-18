@@ -1,7 +1,7 @@
 ---
 name: changelog
 description: "Generate or update CHANGELOG.md from git history. Parses conventional commits, groups by version tags, categorizes into Added/Fixed/Changed/Breaking sections using keep-a-changelog format, and creates comparison links. Use when you need to create a changelog, update release notes, document version history, or prepare release documentation."
-version: "1.0.0"
+version: "2.0.0"
 category: docs
 platforms:
   - CLAUDE_CODE
@@ -170,6 +170,23 @@ Step 3.2 -- Verify
 - Confirm dates match tag dates
 - Confirm PR/issue links are properly formatted
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing documentation, validate completeness:
+
+1. Verify all required sections are present and non-empty.
+2. Verify internal cross-references and links resolve correctly.
+3. Verify no placeholder text remains ("{TODO}", "[TBD]", "...", "etc.").
+4. Verify code examples are syntactically valid.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or contain placeholders
+- Re-generate only the deficient sections
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -190,6 +207,30 @@ OUTPUT
 | Unreleased | -- | N | N | N | N |
 | vX.Y.Z | YYYY-MM-DD | N | N | N | N |
 | ... | ... | ... | ... | ... | ... |
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /changelog — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

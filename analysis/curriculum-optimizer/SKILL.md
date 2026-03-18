@@ -1,7 +1,7 @@
 ---
 name: curriculum-optimizer
 description: Audit curriculum management software for learning outcome alignment, pacing guide optimization, standards coverage mapping (Common Core, NGSS, state standards), differentiation support, assessment design quality, and content gap detection across grade levels and subjects. Covers vertical and horizontal alignment analysis, Bloom's/Webb's DOK taxonomy usage, tiered differentiation for IEP and gifted learners, item analysis and reliability metrics, and LMS integration (Canvas, Schoology, Google Classroom). Use when reviewing ed-tech platforms, curriculum planning tools, assessment management systems, standards-based gradebook software, or any system that maps learning objectives to instructional content and assessments.
-version: "1.0.0"
+version: "2.0.0"
 category: analysis
 platforms:
   - CLAUDE_CODE
@@ -116,6 +116,28 @@ Evaluate: 21st century skill integration (critical thinking, collaboration, comm
 
 Write analysis to `docs/curriculum-optimizer-analysis.md` (create `docs/` if needed).
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate data quality and completeness:
+
+1. Verify all output sections have substantive content (not just headers).
+2. Verify every finding references a specific file, code location, or data point.
+3. Verify recommendations are actionable and evidence-based.
+4. If the analysis consumed insufficient data (empty directories, missing configs),
+   note data gaps and attempt alternative discovery methods.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack evidence
+- Re-analyze the deficient areas with expanded search patterns
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Note what data would be needed to complete the analysis
+
 ============================================================
 OUTPUT
 ============================================================
@@ -152,3 +174,27 @@ DO NOT:
 - Recommend pacing rigidity -- pacing guides should be maps, not mandates; teachers need flexibility to respond to student needs.
 - Skip assessment quality review -- poor assessments produce poor data, which drives poor instructional decisions.
 - Assume standards alignment equals quality instruction -- alignment is necessary but not sufficient for effective curriculum.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /curriculum-optimizer — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

@@ -1,7 +1,7 @@
 ---
 name: cfo-review
 description: Conduct a CFO-perspective financial impact review of a codebase. Analyzes infrastructure costs and scaling projections, pricing model alignment with architecture, build-vs-buy economics, technical debt as financial liability, revenue system readiness, engineering burn rate efficiency, and compliance cost exposure. Produces a financial impact report with unit economics, cost projections at 10x/100x scale, and ROI-ranked investment recommendations. Use when you need a financial review of a tech product, cost analysis at scale, pricing model feasibility check, Series A due diligence prep, engineering ROI assessment, or compliance cost estimation.
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -237,6 +237,23 @@ Identify compliance requirements that affect the engineering budget.
    | SOC 2 Type II | {status} | {gap} | ${estimate} |
    | Data encryption | {status} | {gap} | ${estimate} |
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -329,3 +346,27 @@ NEXT STEPS:
 - "Run `/sales-readiness` to assess enterprise revenue opportunities."
 - "Run `/growth-audit` to evaluate customer acquisition and retention mechanics."
 - "Run `/security-review` to deep-dive on the security risks identified."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /cfo-review — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

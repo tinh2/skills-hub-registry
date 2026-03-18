@@ -1,7 +1,7 @@
 ---
 name: energy-compliance
 description: "Audit energy utility software for NERC CIP cybersecurity, FERC market and tariff compliance, EPA emissions and CEMS reporting, renewable portfolio standards (RPS/REC tracking), pipeline safety (49 CFR 192/195), SCADA security, carbon market compliance, and state PUC/ISO/RTO requirements. Use when reviewing power generation, transmission, distribution, pipeline, renewable, EV charging, or energy trading codebases."
-version: "1.0.0"
+version: "2.0.0"
 category: review
 platforms:
   - CLAUDE_CODE
@@ -247,6 +247,23 @@ REGIONAL MARKET COMPLIANCE:
 - Verify capacity market obligation tracking and reporting
 - Check for ancillary services compliance documentation
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing the review, validate completeness and consistency:
+
+1. Verify all required output sections are present and non-empty.
+2. Verify every finding references a specific file or code location.
+3. Verify recommendations are actionable (not vague).
+4. Verify severity ratings are justified by evidence.
+
+IF VALIDATION FAILS:
+- Identify which sections are incomplete or lack specificity
+- Re-analyze the deficient areas
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -306,6 +323,30 @@ After reviewing the compliance findings:
 - "Run `/commodity-pricing` to review energy trading compliance requirements."
 - "Run `/security-review` to audit SCADA and control system cybersecurity."
 - "Run `/pentest` to test critical infrastructure system defenses."
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /energy-compliance — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

@@ -1,7 +1,7 @@
 ---
 name: mobile-publish
 description: "Set up a complete mobile publishing pipeline — chains CI/CD workflow generation, iOS App Store publishing via Fastlane, Google Play Store publishing, and analytics verification into an end-to-end release automation. Use for Flutter, React Native, or native iOS/Android apps ready for store submission."
-version: "1.0.0"
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -108,6 +108,28 @@ Missing analytics cannot be backfilled -- the data is lost forever.
 Ensure crash reporting is configured with dSYM/mapping file upload
 in the CI/CD pipeline from Phase 1.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing all phases, validate the combined output:
+
+1. Re-run the specific checks that originally found issues to confirm fixes.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -171,3 +193,27 @@ NEXT STEPS:
 - Run `/mobile-launch` for the full pre-launch quality pipeline.
 - Create a version tag to trigger the first production release.
 - Monitor crash-free rate and analytics in the first 24 hours post-launch.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /mobile-publish — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

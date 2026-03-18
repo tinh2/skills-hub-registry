@@ -1,7 +1,7 @@
 ---
 name: preflight
 description: "Pre-deploy verification gate. Checks git status, build, tests, migrations, secrets, and commit conventions. Reports READY or NOT READY. Read-only, no changes. Trigger words: preflight, pre-deploy check, ready to deploy, deployment checklist."
-version: 1.0.0
+version: "2.0.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -193,6 +193,28 @@ CHECK 7: CONVENTION COMPLIANCE
    - PASS if pushed
    - FAIL if not pushed
 
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing fixes, re-validate your work:
+
+1. Re-run the specific checks that originally found issues.
+2. Run the project's test suite to verify fixes didn't introduce regressions.
+3. Run build/compile to confirm no breakage.
+4. If new issues surfaced from fixes, add them to the fix queue.
+5. Repeat the fix-validate cycle up to 3 iterations total.
+
+STOP when:
+- Zero Critical/High issues remain
+- Build and tests pass
+- No new issues introduced by fixes
+
+IF STILL FAILING after 3 iterations:
+- Document remaining issues with full context
+- Classify as requiring manual intervention or architectural changes
+
 ============================================================
 OUTPUT
 ============================================================
@@ -225,3 +247,27 @@ NEXT STEPS:
 - If READY: "Safe to merge and deploy."
 - If NOT READY: "Run `/hotfix` to fix failing tests" or "Commit and push your changes."
 ---
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /preflight — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

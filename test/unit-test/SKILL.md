@@ -1,7 +1,7 @@
 ---
 name: unit-test
 description: Generate comprehensive unit tests with edge cases, error paths, and boundary values. Auto-detects test framework (Vitest, Jest, pytest, go test, flutter_test, RSpec, cargo test, JUnit), scans for untested functions by priority, adopts existing test conventions, generates tests with proper mocks, runs them, and self-heals failures in up to 3 iterations. Measures coverage before and after. Use when you need to add unit tests, increase code coverage, test edge cases, or verify error handling paths.
-version: "1.0.0"
+version: "2.0.0"
 category: test
 platforms:
   - CLAUDE_CODE
@@ -326,3 +326,27 @@ DO NOT:
 - Do NOT generate tests that depend on execution order.
 - Do NOT install a different test framework if one is already configured.
 - Do NOT weaken assertions to make tests pass. Fix the code or fix the test logic.
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /unit-test — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.

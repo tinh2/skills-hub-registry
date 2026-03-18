@@ -1,7 +1,7 @@
 ---
 name: linter
 description: "Configure linting, formatting, and editor integration for any stack. Sets up ESLint 9 or Biome for JS/TS, Ruff for Python, golangci-lint for Go, Clippy for Rust, RuboCop for Ruby, or dart analyze for Flutter. Adds Prettier or equivalent formatter, .editorconfig, and VS Code format-on-save. Use when you need to add a linter, fix formatting inconsistencies, migrate from legacy lint tools, or set up code style enforcement."
-version: "1.0.0"
+version: "2.0.0"
 category: productivity
 platforms:
   - CLAUDE_CODE
@@ -319,6 +319,21 @@ If `--fix` was passed:
 
 If `--fix` was NOT passed, still report the violation count so the user knows the current state.
 
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After completing, validate the output was produced correctly:
+
+1. Verify generated files exist and are syntactically valid.
+2. Run any available validation (lint, type-check, dry-run).
+3. If the skill produces configuration, verify it parses without errors.
+
+IF VALIDATION FAILS:
+- Diagnose from error context and re-generate the failing artifact
+- Repeat up to 2 iterations
+
 ============================================================
 OUTPUT
 ============================================================
@@ -352,6 +367,30 @@ NEXT STEPS
 2. Run the linter to see remaining violations: `npm run lint` / `ruff check .`
 3. Add lint step to CI: run `/github-actions` to generate CI workflow
 4. Review and adjust rule severity in the config file as needed
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /linter — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
 
 ============================================================
 DO NOT

@@ -1,7 +1,7 @@
 ---
 name: realtime
 description: "Add realtime features to my app — set up WebSockets or SSE with Socket.io, Pusher, Ably, Supabase Realtime, or Firebase using channels, presence tracking, typing indicators, reconnection with exponential backoff, offline message queuing, and rate limiting"
-version: "1.0.0"
+version: "2.0.0"
 category: integration
 platforms:
   - CLAUDE_CODE
@@ -360,3 +360,44 @@ After realtime is set up:
 - "Run `/search` to add live search results that update in realtime."
 - "Run `/perf` to load-test WebSocket connections and measure message latency."
 - "Run `/check-vanta` to verify realtime auth and data handling meet compliance requirements."
+
+
+============================================================
+SELF-HEALING VALIDATION (max 3 iterations)
+============================================================
+
+After completing the integration, validate:
+
+1. Run the project's test suite to verify the integration works end-to-end.
+2. Run build/compile to confirm no breakage.
+3. Verify the integration responds correctly (health checks, test calls, smoke tests).
+4. If failures occur, diagnose from error output and apply minimal fixes.
+5. Repeat up to 3 iterations.
+
+IF STILL FAILING after 3 iterations:
+- Document the integration state and what's blocking
+- Include error output and attempted fixes
+
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /realtime — {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Self-healed: {{yes — what was healed | no}}
+- Iterations used: {{N}} / {{N max}}
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.
+Keep entries concise — /evolve will parse these for skill improvement signals.
