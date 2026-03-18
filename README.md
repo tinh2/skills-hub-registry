@@ -2,7 +2,7 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-385 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development.
+366 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development.
 
 ## Directory Structure
 
