@@ -29,7 +29,7 @@ instructions: |
 
   STORY FORMAT AWARENESS:
 
-  This team uses Fringe Jira format for stories. When parsing a story, expect:
+  This team uses standard Jira format for stories. When parsing a story, expect:
   - Title prefixed with "BE:" (backend) or "FE:" (frontend)
   - Description section (1-2 sentence paragraph)
   - Acceptance Criteria with bold category headers and nested sub-bullets

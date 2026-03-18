@@ -2,7 +2,7 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-366 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development.
+386 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0 with built-in self-healing validation and self-evolution telemetry.
 
 ## Directory Structure
 
@@ -15,11 +15,11 @@ skills-hub-registry/
 ├── deploy/             # 21 skills — Docker, K8s, Terraform, CI/CD, app stores, mobile CI/CD, OTA updates
 ├── docs/               # 13 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook, specs
 ├── security/           # 12 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, game security, benefits fraud
-├── ux/                 #  6 skills — UX audit, design systems, dark mode, responsive, i18n, game UX
+├── ux/                 # 26 skills — UX audit, design systems, dark mode, responsive, i18n, game UX, 20 design skills
 ├── analysis/           #201 skills — Domain analysis, research, 40 industry verticals, social impact, gaming, mobile
 ├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
-├── combo/              # 30 skills — Multi-skill chains and pipeline compositions
+├── combo/              # 32 skills — Multi-skill chains and pipeline compositions
 └── meta/               #  9 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
 
@@ -213,16 +213,34 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [benefits-fraud](security/benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
 | [game-security](security/game-security/) | 1.0.0 | Game security review -- client-side authority, memory manipulation, packet tampering, anti-cheat architecture |
 
-### ux -- User Experience & Design (6 skills)
+### ux -- User Experience & Design (26 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
-| [ux](ux/ux/) | 1.1.0 | **Main skill.** Dual-mode UX quality skill -- runs heuristic/accessibility/motion audit, or validates implementation against design mockups |
-| [design-system](ux/design-system/) | 1.0.0 | Extract or create a design system from existing UI code -- tokens, component inventory, and usage guidelines |
-| [dark-mode](ux/dark-mode/) | 1.0.0 | Dark mode implementation -- generate dark palette, create theme switching, and verify WCAG contrast for both modes |
-| [responsive](ux/responsive/) | 1.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
-| [i18n](ux/i18n/) | 1.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
-| [game-ux](ux/game-ux/) | 1.0.0 | Game UX audit -- HUD clarity, menu flow, tutorial effectiveness, control feel, camera system, feedback/juice |
+| [ux](ux/ux/) | 2.0.0 | **Main skill.** Dual-mode UX quality skill -- runs heuristic/accessibility/motion audit, or validates implementation against design mockups |
+| [design-system](ux/design-system/) | 2.0.0 | Extract or create a design system from existing UI code -- tokens, component inventory, and usage guidelines |
+| [dark-mode](ux/dark-mode/) | 2.0.0 | Dark mode implementation -- generate dark palette, create theme switching, and verify WCAG contrast for both modes |
+| [responsive](ux/responsive/) | 2.0.0 | Responsive design audit and fixes -- scan for breakpoint issues, fix overflow, and verify cross-device layouts |
+| [i18n](ux/i18n/) | 2.0.0 | Internationalization setup -- extract hardcoded strings, configure locale files, and wire up i18n library |
+| [game-ux](ux/game-ux/) | 2.0.0 | Game UX audit -- HUD clarity, menu flow, tutorial effectiveness, control feel, camera system, feedback/juice |
+| [design-setup](ux/design-setup/) | 2.0.0 | Initialize design infrastructure -- tokens, theme provider, breakpoints, and base component library for web or mobile |
+| [design-build](ux/design-build/) | 2.0.0 | Build production UI components from specs or mockups -- semantic HTML, modern CSS, responsive, accessible by default |
+| [design-audit](ux/design-audit/) | 2.0.0 | Comprehensive design audit -- visual consistency, spacing, typography, color usage, component reuse, and anti-patterns |
+| [design-animate](ux/design-animate/) | 2.0.0 | Add motion and animation -- scroll-driven animations, view transitions, micro-interactions, and loading states |
+| [design-adapt](ux/design-adapt/) | 2.0.0 | Adaptive layouts -- container queries, fluid typography, responsive images, and cross-device refinement |
+| [design-polish](ux/design-polish/) | 2.0.0 | Visual polish pass -- shadow refinement, border radius consistency, spacing rhythm, icon alignment, pixel-perfection |
+| [design-harden](ux/design-harden/) | 2.0.0 | Defensive design -- empty states, error boundaries, skeleton loaders, offline indicators, and edge-case UI |
+| [design-tokens](ux/design-tokens/) | 2.0.0 | Design token system -- extract, normalize, and distribute tokens across platforms (CSS, Flutter, SwiftUI, Compose) |
+| [design-optimize](ux/design-optimize/) | 2.0.0 | Design performance -- critical CSS, font subsetting, image optimization, layout shift elimination, paint reduction |
+| [design-normalize](ux/design-normalize/) | 2.0.0 | Cross-browser normalization -- reset inconsistencies, vendor prefix audit, fallback chains, progressive enhancement |
+| [design-copy](ux/design-copy/) | 2.0.0 | UX copy audit -- microcopy, button labels, error messages, empty states, onboarding text, and tone consistency |
+| [design-onboard](ux/design-onboard/) | 2.0.0 | Onboarding flow design -- progressive disclosure, tooltips, coachmarks, first-run experience, and activation funnels |
+| [design-delight](ux/design-delight/) | 2.0.0 | Delight and engagement -- celebration moments, easter eggs, personality touches, haptic feedback, sound design |
+| [design-critique](ux/design-critique/) | 2.0.0 | Design critique -- structured feedback against design principles, heuristics, and accessibility with severity ratings |
+| [design-simplify](ux/design-simplify/) | 2.0.0 | UI simplification -- reduce cognitive load, remove unnecessary elements, streamline flows, improve information hierarchy |
+| [design-amplify](ux/design-amplify/) | 2.0.0 | Visual amplification -- increase contrast, enlarge touch targets, bold CTAs, improve scannability, strengthen hierarchy |
+| [design-tone-down](ux/design-tone-down/) | 2.0.0 | Visual restraint -- reduce visual noise, mute colors, simplify decorations, create breathing room, refine density |
+| [design-color](ux/design-color/) | 2.0.0 | Color system design -- oklch palette generation, contrast verification, semantic color mapping, dark mode derivation |
 
 ### analysis -- Domain Analysis, Research, 40 Industry Verticals (201 skills)
 
@@ -457,7 +475,7 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
 | [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
 
-### combo -- Multi-Skill Chains (30 skills)
+### combo -- Multi-Skill Chains (32 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -491,6 +509,8 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [mobile-publish](combo/mobile-publish/) | 1.0.0 | /mobile-ci-cd → /app-store-publish → /play-store-publish → /mobile-analytics | Full mobile publishing pipeline |
 | [cleanup-sprint](combo/cleanup-sprint/) | 2.0.0 | /dead-code → /code-smell → /linter | Deep codebase cleanup -- kills dead code, fixes lint warnings, removes orphaned files |
 | [mvp-spec](combo/mvp-spec/) | 1.0.0 | /mvp → /spec | Analyzes app from video/screenshots, then generates implementation stories |
+| [design-pipeline](combo/design-pipeline/) | 2.0.0 | /design-setup → /design-build → /design-audit → /design-polish | Full design implementation pipeline -- tokens, components, audit, and polish in sequence |
+| [design-overhaul](combo/design-overhaul/) | 2.0.0 | /design-audit → /design-simplify → /design-tokens → /design-adapt → /design-polish | Complete design overhaul -- audit existing UI, simplify, normalize tokens, adapt layouts, and polish |
 
 ### meta -- Skills About Skills (9 skills)
 
@@ -642,6 +662,16 @@ Skills for high-impact domains focused on human welfare, equity, and public good
 /investor-ready  (runs: /cto-review → /cfo-review → /cpo-review → /sales-readiness → /codebase-health)
 ```
 
+### Design Implementation
+```
+/design-pipeline  (runs: /design-setup → /design-build → /design-audit → /design-polish)
+```
+
+### Design Overhaul
+```
+/design-overhaul  (runs: /design-audit → /design-simplify → /design-tokens → /design-adapt → /design-polish)
+```
+
 ### Retrospective
 ```
 /recall → /metrics → /evolve
@@ -745,6 +775,19 @@ Skills for high-impact domains focused on human welfare, equity, and public good
   ├── /sales-readiness
   └── /codebase-health
 
+/design-pipeline (design combo)
+  ├── /design-setup
+  ├── /design-build
+  ├── /design-audit
+  └── /design-polish
+
+/design-overhaul (design combo)
+  ├── /design-audit
+  ├── /design-simplify
+  ├── /design-tokens
+  ├── /design-adapt
+  └── /design-polish
+
 /evolve (meta)
   └── reads /recall + /metrics output
 ```
@@ -793,11 +836,14 @@ Skills are scored 0-100 on the marketplace:
 
 These patterns are validated across 7+ production projects:
 
-- **Self-healing loops:** Skills iterate up to N times, fixing issues found each pass
+- **Self-healing validation:** Every skill includes category-specific retry loops that detect failures and re-attempt with corrective action. Validation blocks are tailored per category (e.g., build skills verify compilation, test skills verify passing suites, deploy skills verify infrastructure state)
+- **Self-evolution telemetry:** Every skill logs execution metadata (duration, pass/fail, retry count, category) to project memory. The `/evolve` meta-skill reads this telemetry to identify underperforming skills and patch them automatically
 - **Pre-build validation:** Static analysis gate before feature work begins
 - **Co-commit rules:** Firestore rules, server validation, and model serialization ship with features
 - **Domain analysis feedback:** `/analyze` embedded as a quality gate in build loops
-- **Parallel execution:** Independent tracks run concurrently via Task tool subagents
+- **Subagent spawning:** 8 combo skills use parallel Agent tool spawning to run independent tracks concurrently -- `polish`, `full-test`, `cleanup-sprint`, `research`, `retro`, `review-implement`, `secure-ship`, and `compliance-suite`
 - **Wiring completeness:** Detect features that exist in one layer but are never connected
 - **Monolith decomposition:** Files exceeding 500 lines are split before adding features
 - **Orchestrator pattern:** Main skills scan for gaps and route to specialized sub-skills
+- **Modern CSS-first design:** Design skills use oklch color spaces, container queries, scroll-driven animations, view transitions, and anchor positioning. Cross-platform skills target web, Flutter, SwiftUI, and Compose
+- **Zero-question autonomy:** All skills run fully autonomously without prompting for user input -- they detect context, make decisions, and execute

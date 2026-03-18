@@ -1,37 +1,37 @@
 {
   "vulnerability_source": "vanta",
   "issue_tracker": "jira",
-  "commit_suffix": "deploy:tho",
+  "commit_suffix": "deploy:username",
   "vanta": {
     "token_file": "~/.vanta-token",
     "token_env": "VANTA_API_TOKEN",
     "api_base": "https://api.vanta.com/v1"
   },
   "jira": {
-    "url": "https://fringedev.atlassian.net",
+    "url": "https://your-org.atlassian.net",
     "project_key": "DEV",
     "issue_type": "Story",
     "credentials_file": "~/.jira-credentials"
   },
   "github": {
-    "org": "fringeus"
+    "org": "your-github-org"
   },
   "repos": {
-    "subscription-job": {
-      "path": "/Users/thole/git/subscription-job",
+    "example-api": {
+      "path": "/path/to/your/repo/example-api",
       "package_manager": "npm"
     },
-    "firebase-lambdas": {
-      "path": "/Users/thole/git/firebase-lambdas",
+    "example-lambdas": {
+      "path": "/path/to/your/repo/example-lambdas",
       "package_manager": "npm",
-      "package_json_path": "layers/firebaseUtil/nodejs"
+      "package_json_path": "layers/util/nodejs"
     },
-    "firebase-utilities": {
-      "path": "/Users/thole/git/firebase-utilities",
+    "example-utilities": {
+      "path": "/path/to/your/repo/example-utilities",
       "package_manager": "npm"
     },
-    "marketplace-app": {
-      "path": "/Users/thole/git/marketplace-app",
+    "example-app": {
+      "path": "/path/to/your/repo/example-app",
       "package_manager": "yarn"
     }
   }

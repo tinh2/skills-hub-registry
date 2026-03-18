@@ -16,7 +16,7 @@ CONFIGURATION
 
 Deploy flag behavior is configurable. By default, no deploy flag is required.
 If the project's CLAUDE.md or package.json contains a `deployFlag` setting
-(e.g., `deploy:tho`, `deploy:prod`, `ship-it`), enforce that flag in the
+(e.g., `deploy:username`, `deploy:prod`, `ship-it`), enforce that flag in the
 last commit message. Otherwise, skip the deploy flag check entirely.
 
 To detect: look for `deployFlag` in the project's CLAUDE.md, or a

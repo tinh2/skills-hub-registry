@@ -101,7 +101,7 @@ instructions: |
      client model (fields, fromMap/toMap, copyWith) in the SAME commit.
   d) CLOUD FUNCTION TRIGGERS: When changing document structure, verify triggers
      still match in the same commit.
-  e) SHARED CONFIGURATION (learned from ollama-server recall — 3 rework commits from
+  e) SHARED CONFIGURATION (learned from recall analysis — 3 rework commits from
      duplicated defaults): When 2+ files reference the same configurable value (model
      name, base URL, API key, timeout, port), extract to a shared config module.
      Never hardcode the same default in multiple files. Create `src/config.ts` (or
