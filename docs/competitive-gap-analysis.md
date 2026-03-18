@@ -1,302 +1,322 @@
-# Competitive Gap Analysis: skills-hub-registry vs Skill Collection Landscape
+# Competitive Gap Analysis: Skills Hub Registry
 
-**Date:** 2026-03-01
-**Scope:** Claude Code skill collections, curated skill registries, community skill aggregators, agent OS skill bundles
-**Context:** This analysis evaluates the skills-hub-registry (359 skills, 13 categories, 40 industry verticals) against competing skill collections and platforms to identify coverage gaps, quality advantages, and strategic opportunities.
-
----
-
-## 1. Product Identity
-
-**skills-hub-registry** is the official skill collection powering [skills-hub.ai](https://skills-hub.ai) — a marketplace for Claude Code skills. It's a **curated, production-quality skill library** organized around the complete software development lifecycle plus 40 industry verticals and social-impact sectors.
-
-**The strategic question:** Is this collection sufficiently differentiated from the growing number of free skill aggregators and competing curated collections to drive marketplace value?
+**Date:** 2026-03-17
+**Previous:** 2026-03-01
+**Scope:** AI coding agent skill/plugin marketplaces, curated registries, community aggregators
 
 ---
 
-## 2. Competitive Landscape
+## Our Product
 
-### 2.1 Curated Skill Collections (Direct Competitors)
-
-#### Antigravity Awesome Skills (github.com/sickn33/antigravity-awesome-skills)
-- **Scale:** 954+ agentic skills
-- **Categories:** 8 (Architecture, Business, Data & AI, Development, General, Infrastructure, Security, Testing)
-- **Format:** SKILL.md standard
-- **Platforms:** Claude Code, Antigravity, Cursor, Gemini CLI, Codex CLI, OpenCode, GitHub Copilot, AdaL
-- **Extras:** Role-based bundles (Web Wizard, Security Engineer), step-by-step workflow playbooks, interactive web app for browsing
-- **Quality control:** None beyond "battle-tested" claim. No scoring, no validation, no structural consistency enforcement
-- **Industry verticals:** None
-- **Strengths:**
-  - Largest single curated collection (954+ vs our 359)
-  - Includes official skills from Anthropic, OpenAI, Google, Microsoft, Supabase, Vercel
-  - Bundles and workflows add usability layer
-  - Cross-platform targeting (8+ tools)
-- **Weaknesses:**
-  - No industry-specific skills (generic dev-only)
-  - No quality scoring or behavioral testing
-  - No structural consistency (mixed formats, varying quality)
-  - No skill chaining/composition
-  - No meta/self-improvement skills
-  - No autonomous mode enforcement
-  - Aggregated from multiple sources — unclear provenance
-
-#### Everything Claude Code (github.com/affaan-m/everything-claude-code)
-- **Scale:** 56+ skills, 13 agents, 32+ commands, multiple hooks
-- **Categories:** Language-specific (6 languages), Development Practices, Infrastructure, Business/Content
-- **Format:** SKILL.md + agents + hooks + commands (broader scope than just skills)
-- **Origin:** Anthropic hackathon winner (Feb 2026)
-- **Strengths:**
-  - Holistic approach (skills + agents + hooks + commands + MCP configs)
-  - Language-specific depth (TypeScript, Python, Go, Java, C++, Swift, Rust)
-  - Battle-tested from 10+ months of daily use
-  - Security scanning built in
-  - Plugin marketplace installable
-- **Weaknesses:**
-  - Only 56+ skills (vs our 359)
-  - No industry verticals
-  - Personal collection — single developer's workflow
-  - No formal quality validation
-  - No autonomous mode enforcement
-
-#### Anthropic Official Skills (github.com/anthropics/skills)
-- **Scale:** ~10-20 example skills + document skills (docx, pdf, pptx, xlsx)
-- **Stars:** 79.7K GitHub stars
-- **Categories:** Creative & Design, Development & Technical, Enterprise & Communication, Document Skills
-- **Format:** SKILL.md standard (they defined it)
-- **Strengths:**
-  - Official Anthropic backing — enormous credibility
-  - Defines the SKILL.md standard
-  - Document skills power Claude's native document creation
-  - 79.7K stars — massive visibility
-  - Partner skills (Notion)
-- **Weaknesses:**
-  - Tiny collection (~20 skills)
-  - No industry verticals
-  - No autonomous mode
-  - Example/demo quality, not production pipelines
-  - No skill composition
-
-### 2.2 Skill Aggregators (Indirect Competitors)
-
-#### SkillsMP (skillsmp.com)
-- **Scale:** 270K+ indexed skills
-- **Model:** Aggregates from public GitHub repos automatically
-- **Quality:** Zero curation — indexes everything
-- **Strengths:** Largest catalog by volume, cross-platform (Claude, Codex, ChatGPT)
-- **Weaknesses:** No quality control, no reviews, massive noise-to-signal ratio
-
-#### SkillHub Club (skillhub.club)
-- **Scale:** 7K+ AI-evaluated skills
-- **Quality:** 5-dimension AI scoring (Practicality, Clarity, Automation, Quality, Impact)
-- **Extras:** Instant playground for trying skills, S/A rank scoring
-- **Platforms:** Claude Code, Cursor, OpenCode, Windsurf, Cline, Roo Code, Aide, Augment
-- **Strengths:** AI quality scoring is novel, playground testing, wide platform support
-- **Weaknesses:** No curation beyond AI scoring, no industry verticals, no composition
-
-### 2.3 Universal Installers (Distribution Competitors)
-
-#### OpenSkills (npmjs.com/package/openskills)
-- **Scale:** Installer, not a collection — pulls from CCPM registry and GitHub
-- **Model:** Universal SKILL.md loader via `npm i -g openskills`
-- **Platforms:** Claude Code, Cursor, Windsurf, Aider, Codex
-- **Strengths:** Universal installer, project-local and global install, private repo support
-- **Weaknesses:** No own content, depends on other collections
-
-#### CCPM (ccpm.dev)
-- **Scale:** Growing plugin marketplace
-- **Model:** CLI-first discovery and installation
-- **Strengths:** Official Claude Code plugin system integration
-- **Weaknesses:** Still early, limited catalog
-
-### 2.4 Agent OS Skill Bundles
-
-#### OpenFang (openfang.sh)
-- **Scale:** 60 bundled skills + 7 Hands (autonomous agents)
-- **Format:** SKILL.md parser + HAND.toml for autonomous agents
-- **Strengths:** True autonomous execution, 40 channel adapters, FangHub marketplace
-- **Weaknesses:** Small skill count, no industry verticals, self-hosted only
+- **What it does:** Skills Hub Registry is a curated, open-source marketplace of 366 autonomous Claude Code agents covering the complete SDLC plus 40 industry verticals, 11 social-impact sectors, and 30 multi-skill orchestration chains. It powers the skills-hub.ai marketplace.
+- **Target user:** Software engineers and development teams using Claude Code who need production-ready, autonomous workflow automation across build, test, deploy, security, compliance, and domain-specific operations.
+- **Core value prop:** Deepest industry vertical coverage (40 sectors), fully autonomous execution (no questions asked), composable multi-skill chains, and self-improving meta-skills — all free and open source.
+- **Tech stack:** YAML frontmatter + Markdown instructions (SKILL.md), Git distribution, GitHub Actions CI on self-hosted runners, validation scripts.
+- **Features implemented:** 366 skills across 13 categories.
 
 ---
 
-## 3. Feature Comparison Matrix
+## Competitive Landscape
 
-| Feature | skills-hub-registry | Antigravity | ECC | Anthropic | SkillsMP | SkillHub | OpenFang |
-|---------|-------------------|-------------|-----|-----------|----------|----------|----------|
-| **Total skills** | 359 | 954+ | 56+ | ~20 | 270K+ | 7K+ | 60 |
-| **Categories** | 13 | 8 | ~6 | 4 | N/A | N/A | N/A |
-| **Industry verticals** | 40 | 0 | 0 | 0 | 0 | 0 | 0 |
-| **Structural consistency** | 100% validated | Mixed | Mixed | Official format | Mixed | Mixed | Mixed |
-| **Autonomous mode** | 100% (359/359) | Partial | Partial | No | No | No | Yes (Hands) |
-| **Quality validation** | Schema + structural | None | None | None | None | AI 5-dim | None |
-| **Phased instructions** | 100% (359/359) | Some | Some | Some | Varies | Varies | Varies |
-| **NEXT STEPS** | 100% (359/359) | Rare | No | No | N/A | N/A | No |
-| **Guardrails (DO NOT)** | 100% (359/359) | Rare | Rare | No | N/A | N/A | No |
-| **$ARGUMENTS handling** | 100% (359/359) | Partial | Partial | No | N/A | N/A | No |
-| **Skill composition** | 28 combo chains | Bundle packs | Agent chains | No | No | No | Hand chains |
-| **Meta/self-improvement** | 7 skills | No | No | 1 (skill-creator) | No | No | No |
-| **Version management** | Semver on all | No | No | No | No | No | No |
-| **Persona advisors** | 10 role-based | No | No | No | No | No | No |
-| **Social impact** | 58 skills / 14 sectors | No | No | No | No | No | No |
-| **Cross-platform** | CLAUDE_CODE | 8+ tools | Claude Code | Claude + API | Multi | 8+ tools | OpenFang |
-| **Playground/try** | No | Web app | No | No | No | Yes | No |
-| **Installation CLI** | Manual | Manual | Plugin | Plugin | Manual | Manual | CLI |
+| Competitor | Positioning | Market Position | Skill/Plugin Count | Distribution |
+|-----------|-------------|-----------------|-------------------|--------------|
+| **Claude Code Plugins Plus** (BrightCoding/Intent Solutions) | Enterprise-grade plugin platform with CLI package manager and empirical validation | Challenger | 270+ plugins / 1,537 skills | CLI (`ccpi`), npm |
+| **OpenClaw ClawHub** | Largest open community skill marketplace for AI agents | Leader (volume) | 5,700+ skills (3,500 community) | CLI + web marketplace |
+| **Cursor Marketplace** | Curated enterprise plugin marketplace for Cursor IDE | Leader (enterprise) | 40+ curated plugins | One-click IDE install |
+| **Anthropic Official Plugins** | Official, vetted Claude Code plugins | Leader (authority) | ~50-100 production-ready | GitHub, `/plugin install` |
+| **MCP Server Directories** (mcp.so, mcpservers.org, mcpmarket.com) | Aggregated MCP server discovery | Adjacent/complementary | Tens of thousands | npm, Docker |
 
----
+### Competitor Profiles
 
-## 4. Critical Gaps (What We're Missing)
+**Claude Code Plugins Plus** — Most direct competitor. 270+ plugins organized into 42 SaaS skill packs with 1,537 embedded agent skills. Key differentiator: CLI package manager (`ccpi`) with search, install, update, validate operations. Includes 11 Jupyter notebooks for interactive tutorials, schema compliance validation, tool permission declarations, and sandboxing. Open-source with optional $5/mo sponsorship for priority support.
 
-### GAP 1: Raw Skill Count Deficit
-- **Antigravity** has 954+ skills vs our 359 (2.6x more)
-- **SkillsMP** indexes 270K+ (volume play, but low quality)
-- We have 193 analysis skills — heavily weighted toward industry verticals
-- **The gap:** Our core software development categories (build: 21, test: 11, deploy: 15) are smaller than Antigravity's equivalent coverage
-- **Impact:** Perception gap — "fewer skills" looks like less value in a marketplace listing
-- **Opportunity:** Add 100-150 more software development skills to reach 500+ while maintaining quality
+**OpenClaw ClawHub** — Largest skill volume (5,700+) but significant quality/security problems. Snyk's ToxicSkills report found 13.4% of skills have critical security issues; Bitdefender found 17-20% contain malicious code. No manual review before listing. Growing at 120-180 new skills/week from ~1,400 publishers. Star-based rating system (top skill: GitHub Actions at 2,890 stars).
 
-### GAP 2: Cross-Platform Compatibility
-- **Antigravity** targets 8+ tools (Claude Code, Cursor, Windsurf, Codex, Gemini CLI, etc.)
-- **SkillHub** supports 8+ tools
-- **OpenSkills** is universal
-- **We only target CLAUDE_CODE** — every skill has `platforms: [CLAUDE_CODE]`
-- **Impact:** Excludes the growing Cursor, Codex, Windsurf, and Gemini CLI user bases
-- **Opportunity:** Most SKILL.md skills work across tools without modification. Adding `platforms: [CLAUDE_CODE, CURSOR, CODEX_CLI, WINDSURF]` and testing compatibility would expand our addressable market significantly
+**Cursor Marketplace** — Enterprise-curated with major brand partners (AWS, Figma, Stripe, Linear, Datadog, Slack, GitLab, Amplitude). 40+ plugins bundling MCP servers, skills, subagents, hooks, and rules. One-click install in Cursor IDE. Team/Enterprise plans enable private marketplace distribution. Completely different ecosystem (Cursor, not Claude Code).
 
-### GAP 3: Language & Framework-Specific Skills
-- **Everything Claude Code** has language-specific skills for 6 languages (TypeScript, Python, Go, Java, C++, Swift, Rust)
-- **Antigravity** has framework-specific patterns
-- **We have zero language-specific skills** — our build skills scaffold projects but don't teach language patterns
-- **Impact:** Developers searching for "Python best practices" or "Go testing" won't find us
-- **Opportunity:** Add 20-30 language-specific skills (TypeScript, Python, Go, Java, Rust, Swift) covering coding standards, testing patterns, and framework best practices
+**Anthropic Official Plugins** — Small curated set from Anthropic themselves. Includes Code Review, Frontend Design, Context7 (live docs injection), Superpowers (TDD framework). High authority but limited scope. Distribution via official GitHub repo and `/plugin install` command.
 
-### GAP 4: Interactive Playground / Try Before Install
-- **SkillHub** offers an instant playground with free daily quota
-- **Antigravity** has a web app for browsing
-- **We have no interactive experience** — skills are static markdown files
-- **Impact:** Users can't evaluate skill quality before downloading
-- **Opportunity:** This is a skills-hub.ai (the app) feature, not a registry gap. But the registry should include sample inputs/outputs that the app's playground can use.
-
-### GAP 5: No Agent/Hook/Command Ecosystem
-- **Everything Claude Code** ships skills + 13 agents + 32 commands + hooks + MCP configs
-- Our skills are standalone SKILL.md files with no supporting automation
-- **The gap:** Modern Claude Code power users want the full stack (skills + agents + hooks + commands)
-- **Impact:** Power users may choose ECC's integrated approach over our skill-only approach
-- **Opportunity:** Add hooks, commands, and agent configurations that complement the skill collection
-
-### GAP 6: No Installation/Distribution Mechanism
-- **Antigravity** can be browsed via web app
-- **ECC** installable as Claude Code plugin
-- **OpenSkills** installable via npm
-- **We're a raw git repo** — `git clone` and manually copy
-- **Impact:** Higher friction to adopt
-- **Opportunity:** This is the skills-hub.ai marketplace's job — the registry feeds the app. But adding a simple install script or plugin manifest would reduce friction for early adopters.
+**MCP Server Directories** — Adjacent market. Provide external tool connections (databases, APIs, services) rather than autonomous skill execution. Complementary to skills — skills *use* MCP servers. Growing rapidly with the 2026 MCP roadmap (Server Cards, stateless streaming HTTP).
 
 ---
 
-## 5. Strategic Gaps (Deeper Analysis)
+## Pricing Comparison
 
-### STRATEGIC GAP 1: Enterprise Skill Partnerships
-- **Anthropic** partners with PwC for finance/healthcare enterprise skills
-- **Cursor** has enterprise partners (Figma, Stripe, AWS)
-- **Intuit** building industry-specific skills with Anthropic
-- We have 40 industry verticals but no enterprise partner backing
-- **Opportunity:** Position the registry's industry verticals as the foundation for enterprise marketplace partnerships
+| Tier / Profile | Us | Plugins Plus | OpenClaw ClawHub | Cursor Marketplace | Anthropic Official |
+|---------------|-----|-------------|-----------------|-------------------|-------------------|
+| Skills/plugins | Free | Free (OSS) | Free | Free (with plan) | Free |
+| Platform cost | Claude Pro $20/mo | Claude Pro $20/mo | API costs $5-30/mo | Cursor Pro $20/mo | Claude Pro $20/mo |
+| Premium support | None | $5/mo sponsor | Cloud $39/mo | Business $40/seat/mo | N/A |
+| Enterprise | None | Custom dev available | N/A | Enterprise (custom) | N/A |
+| Pricing model | Fully free/OSS | Freemium + sponsorship | Free + BYOK API | Bundled with IDE sub | Free |
 
-### STRATEGIC GAP 2: Official Anthropic Skill Standard Alignment
-- Anthropic's SKILL.md spec requires only `name` and `description` in frontmatter
-- Our spec adds `version`, `category`, and `platforms` — valid extensions but non-standard
-- If Anthropic enforces strict spec compliance, our extra fields could cause issues
-- **Opportunity:** Ensure all extra fields are compatible with the official spec (they currently are — YAML allows additional fields)
-
-### STRATEGIC GAP 3: No Data/AI/ML Skills Category
-- **Antigravity** has a full "Data & AI" category (LLM apps, RAG, agents, analytics)
-- We have zero data science, machine learning, or AI/ML-specific skills
-- **Impact:** Missing the fastest-growing skill demand segment
-- **Opportunity:** Add a `data` or `ai` category with 15-20 skills for ML pipelines, data engineering, prompt engineering, LLM evaluation, RAG systems
+**Key pricing insights:**
+- All skill registries are free — the cost is in the underlying AI platform subscription
+- We are price-competitive (free) but lack premium support or enterprise tiers that could generate revenue
+- Cursor's enterprise play (private marketplaces, team management) is a model we don't address
+- OpenClaw's managed cloud ($39/mo) shows demand for hosted skill execution
 
 ---
 
-## 6. Differentiators — Where skills-hub-registry Wins
+## Technology Stack Comparison
 
-| Differentiator | Why It Matters | Who It Beats |
-|----------------|----------------|-------------|
-| **40 industry verticals** | No other collection has ANY industry-specific skills. We have 193. | Everyone (nobody else does this) |
-| **100% structural consistency** | Every skill: autonomous mode, phased instructions, NEXT STEPS, DO NOT guardrails, $ARGUMENTS | Everyone (all others are mixed quality) |
-| **Validated quality baseline** | Schema + structural validation on 100% of skills. Zero validation failures. | Everyone (including SkillHub's AI scoring — ours is structural, not surface) |
-| **28 combo chains** | Skill composition as first-class content. /research chains /compete + /new-features. | Antigravity has bundles (static grouping), not chains (dynamic execution) |
-| **10 persona advisors** | Role-based advisory skills (CTO, DevOps Lead, etc.) | Nobody else has persona skills |
-| **58 social impact skills** | Climate, education, governance, agriculture, humanitarian, disability, housing | Nobody else covers social impact |
-| **7 meta skills** | Self-improvement: evolve, promote, recall, metrics, extract-template | Anthropic has 1 (skill-creator); nobody else has meta skills |
-| **Semver on every skill** | Version tracking enables update management in the marketplace | Nobody else versions skills |
-| **Autonomous mode** | "Do NOT ask the user questions. Analyze and act." on 100% of skills | Mixed enforcement elsewhere |
+| Component | Us | Plugins Plus | OpenClaw ClawHub | Cursor Marketplace | Anthropic Official |
+|----------|-----|-------------|-----------------|-------------------|-------------------|
+| Skill format | SKILL.md (YAML+MD) | SKILL.md (YAML+MD) | SKILL.md (YAML+MD) | Plugin manifest (JSON+MD) | Plugin manifest |
+| Distribution | Git clone | CLI (`ccpi`) + npm | CLI + web marketplace | One-click IDE install | GitHub + `/plugin install` |
+| Package manager | None | Yes (`ccpi`) | Yes (`openclaw skill`) | Built into Cursor | Built into Claude Code |
+| Search/discovery | Manual (README) | CLI search + web catalog | Semantic search + web | IDE marketplace UI | GitHub browse |
+| Validation | Shell script CI | Schema validation + empirical verification | Community reports | Curated review | Manual curation |
+| Quality assurance | YAML frontmatter checks | 4,300+ lines of issue detection | Auto-hide after 3 reports | Verified partners only | Anthropic review |
+| Sandboxing | None | Tool permission declarations | None (security issues) | IDE sandbox | Claude Code sandbox |
+| Tutorials | None | 11 Jupyter notebooks | None | Plugin docs | Official docs |
+| Ratings/metrics | None | None | Stars (community) | None visible | None |
+| Private/team distribution | None | None | None | Team marketplace (Enterprise) | None |
 
----
-
-## 7. Our Edges (Things Competitors Can't Easily Replicate)
-
-1. **Industry vertical depth** — 193 skills across 40 verticals with domain-specific regulatory standards (HIPAA, GAMP 5, 21 CFR Part 11, ACORD, IATA, OSHA, etc.). This took 4.3 hours of intensive parallel agent generation. Reproducing this with equivalent domain knowledge is non-trivial.
-
-2. **Consistent quality template** — Every skill follows the exact same structure: frontmatter → autonomous mode → TARGET: $ARGUMENTS → phased instructions → OUTPUT → NEXT STEPS → DO NOT. This consistency trains users to expect reliable behavior. Aggregators can't enforce this.
-
-3. **Skill composition architecture** — The main skill + sub-skill pattern (/integrate routes to /stripe, /auth-provider, etc.) is a design philosophy, not just content. This orchestration layer doesn't exist in any competitor.
-
-4. **Self-improving ecosystem** — /evolve reads recall data and patches skill instructions. /promote cross-pollinates patterns across projects. /metrics tracks quality over time. This feedback loop doesn't exist elsewhere.
-
-5. **Production-tested origin** — These skills were built and refined across 7 real projects (fringe-core, PawPass, Recipe AI, Confidence Coach, ollama-server, claude-config, OpenClaw). They're not hypothetical — they reflect actual rework patterns, failure modes, and optimizations.
+**Tech stack assessment:** Behind on distribution infrastructure. We have the deepest skill content but the weakest delivery mechanism. Every competitor except us has a CLI or one-click install path.
 
 ---
 
-## 8. Industry Trends
+## Feature Matrix
 
-1. **Skill format standardization is accelerating** — SKILL.md is now supported by Claude Code, Codex CLI, Cursor, OpenFang, AgentOS, SkillsMP, SkillHub, and OpenSkills. The format war is over. Distribution wins.
+### Distribution & Developer Experience
 
-2. **Quality > Quantity** — SkillsMP's 270K skills prove that volume alone doesn't win. Users search for quality. SkillHub's 5-dimension AI scoring is a direct response. Curated collections that guarantee quality will outperform aggregators.
+| Feature | Us | Plugins Plus | OpenClaw | Cursor Mkt | Pressure | Effort |
+|---------|-----|-------------|----------|------------|----------|--------|
+| CLI install command | N | Y | Y | Y (IDE) | CRITICAL | M |
+| Semantic search | N | N | Y | Y (IDE) | HIGH | L |
+| One-click install | N | N | N | Y | MEDIUM | L |
+| Web marketplace UI | N (separate) | Y | Y | Y | HIGH | XL |
+| Package versioning/pinning | ~ | Y | Y | Y | HIGH | M |
+| Hot-reload skills | N | N | Y | N | LOW | M |
+| Interactive tutorials | N | Y | N | N | LOW | M |
+| Private/team distribution | N | N | N | Y | MEDIUM | L |
+| Adoption metrics/ratings | N | N | Y | N | MEDIUM | M |
+| Schema validation | Y | Y | N | Y | — | — |
+| CI/CD validation pipeline | Y | Y | N | Y | — | — |
 
-3. **Enterprise is adopting Claude Code skills** — PwC, Intuit, and enterprise partners are building industry-specific skills. The market is moving from generic dev tools to domain-specific workflows. Our 40 industry verticals are ahead of this curve.
+### Content & Coverage
 
-4. **Cross-platform is table stakes** — Every new tool adopts SKILL.md. Collections that target only one platform will lose to universal collections.
+| Feature | Us | Plugins Plus | OpenClaw | Cursor Mkt | Pressure | Effort |
+|---------|-----|-------------|----------|------------|----------|--------|
+| Build/scaffold skills | Y (22) | Y | Y | ~ | — | — |
+| Test generation skills | Y (13) | Y | Y | N | — | — |
+| Security/compliance audit | Y (13) | ~ | N | ~ (Snyk, Semgrep) | — | — |
+| Industry verticals (40+) | Y (40) | N | N | N | — | — |
+| Social impact sectors | Y (11) | N | N | N | — | — |
+| Multi-skill chains | Y (30) | ~ | N | ~ | — | — |
+| Meta/self-improving skills | Y (9) | N | N | N | — | — |
+| Gaming skills | Y (15+) | N | ~ | N | — | — |
+| Mobile skills | Y (10+) | N | ~ | N | — | — |
+| UX/design skills | Y (6) | N | ~ | Y (Figma) | — | — |
+| Integration skills (auth, pay) | Y (9) | ~ | Y | Y (Stripe, etc.) | — | — |
+| External tool connections (MCP) | N | ~ | Y | Y | HIGH | M |
+| Third-party API plugins | N | Y | Y | Y | HIGH | L |
+| Community-contributed skills | N | ~ | Y | N | MEDIUM | M |
 
-5. **Composition is the next frontier** — Individual skills are commoditizing. Skill chains, workflows, and orchestrated pipelines are the value layer. Our 28 combo skills and main+sub-skill architecture are early-mover advantages.
+### Quality & Security
 
-6. **Agents > Skills** — OpenFang's Hands, ECC's 13 agents, and the "Deploy as Agent" trend suggest that standalone skills are evolving into autonomous agents. Skills that work in agent mode (autonomous, non-interactive) are better positioned for this transition.
+| Feature | Us | Plugins Plus | OpenClaw | Cursor Mkt | Pressure | Effort |
+|---------|-----|-------------|----------|------------|----------|--------|
+| Curated quality control | Y | Y | N (13-20% malicious) | Y | — | — |
+| Empirical verification | N | Y | N | N | MEDIUM | L |
+| Tool permission declarations | N | Y | N | Y | HIGH | M |
+| Security scanning of skills | N | ~ | N (community reports) | Y | HIGH | M |
+| Contribution guidelines | N | Y | Y | Y | HIGH | S |
+| Sandboxed execution | N | Y | N | Y | HIGH | L |
 
 ---
 
-## 9. Recommended Actions
+## Critical Gaps (Build Now)
 
-### Phase 1: Close Critical Gaps (Immediate)
-1. **Add cross-platform compatibility** — Update platforms field on all 359 skills to include CURSOR, CODEX_CLI, WINDSURF where compatible
-2. **Add language-specific skills** — 20-30 skills for TypeScript, Python, Go, Java, Rust, Swift (coding standards, testing, frameworks)
-3. **Add Data/AI category** — 15-20 skills for ML pipelines, RAG, prompt engineering, LLM evaluation, data engineering
+### 1. CLI Install / Package Manager
+- **Who has it:** Plugins Plus (`ccpi`), OpenClaw (`openclaw skill install`), Cursor (IDE-native)
+- **Why it matters:** Without a CLI, users must manually clone repos and copy files. This is the #1 friction point for adoption. Every other marketplace has solved this.
+- **Effort:** M
+- **Implementation hint:** Build a `skills-hub` CLI (Node.js or shell) that reads from a catalog index file, supports `search`, `install`, `update`, `list`. Publish to npm. Alternatively, integrate with Claude Code's native `/plugin install` mechanism.
 
-### Phase 2: Strengthen Advantages (Next Sprint)
-4. **Add sample inputs/outputs** — Each skill includes 2-3 example invocations with expected output (feeds marketplace playground)
-5. **Create plugin manifest** — Make the registry installable as a Claude Code plugin
-6. **Add DevOps/platform engineering depth** — More Kubernetes, Terraform, AWS/GCP/Azure skills to match Antigravity's Infrastructure category
+### 2. Contribution Guidelines (CONTRIBUTING.md)
+- **Who has it:** Plugins Plus, OpenClaw, Cursor, Anthropic Official
+- **Why it matters:** Without contribution docs, the registry appears closed/unmaintained. Community contribution is table stakes for any open-source marketplace.
+- **Effort:** S
+- **Implementation hint:** Add `CONTRIBUTING.md` with skill submission format, quality checklist, PR template, and review process.
 
-### Phase 3: Ecosystem Expansion (Future)
-7. **Add hooks and commands** — Complement skills with automation hooks (pre-commit, post-deploy)
-8. **Build a validation CI pipeline** — GitHub Actions that validate every SKILL.md on push
-9. **Create role-based bundles** — Package skills by developer role (Frontend Lead, DevOps Engineer, etc.)
+### 3. Tool Permission Declarations
+- **Who has it:** Plugins Plus, Cursor Marketplace
+- **Why it matters:** Users need to know what file/network/system access a skill requires before installing. Trust is the #1 concern (see OpenClaw's 13-20% malicious rate).
+- **Effort:** M
+- **Implementation hint:** Add `permissions` field to SKILL.md frontmatter (e.g., `permissions: [file_read, file_write, network, bash]`). Update validation script to enforce.
+
+### 4. MCP Server Integration
+- **Who has it:** OpenClaw (bridge pattern), Cursor (bundled), Plugins Plus (partial)
+- **Why it matters:** MCP is the emerging standard for connecting AI agents to external tools. Skills that can leverage MCP servers (databases, APIs, services) are far more powerful. The 2026 MCP roadmap is accelerating adoption.
+- **Effort:** M
+- **Implementation hint:** Add MCP bridge skills or document how to compose skills with MCP servers. Add `mcp_servers` field to SKILL.md for declaring MCP dependencies.
 
 ---
 
-## 10. Summary
+## Strategic Gaps (Plan & Schedule)
+
+### 1. Web Marketplace / Search API
+- **Pressure:** HIGH
+- **Effort:** XL
+- **Who has it:** OpenClaw (ClawHub), Cursor (IDE marketplace), Plugins Plus (web catalog)
+- **Why it matters:** Discovery is impossible without search. README browsing doesn't scale at 366 skills. The skills-hub.ai frontend exists separately but the registry itself has no search infrastructure.
+- **Implementation hint:** Generate a `catalog.json` index from SKILL.md frontmatter (name, description, category, tags, version). Serve via GitHub Pages or API. Frontend reads this index.
+
+### 2. Security Scanning / Sandboxing
+- **Pressure:** HIGH
+- **Effort:** L
+- **Who has it:** Plugins Plus (empirical verification), Cursor (partner vetting)
+- **Why it matters:** As the registry grows beyond curated content, trust becomes critical. OpenClaw's cautionary tale (13-20% malicious) shows what happens without quality gates.
+
+### 3. Package Versioning & Dependency Resolution
+- **Pressure:** HIGH
+- **Effort:** L
+- **Who has it:** Plugins Plus, OpenClaw (semver), Cursor
+- **Why it matters:** Skills reference sub-skills by name but not version. Breaking changes in a sub-skill can cascade through combo chains.
+
+---
+
+## Differentiator Opportunities
+
+### 1. Industry Vertical Depth (MEDIUM pressure, already built)
+No competitor comes close to 40 industry verticals + 11 social-impact sectors. This is unique positioning. Plugins Plus, OpenClaw, and Cursor focus on generic dev tools — none have healthcare compliance, fintech launch pipelines, or agricultural risk modeling.
+
+### 2. Multi-Skill Orchestration Chains (MEDIUM pressure, already built)
+30 combo chains that orchestrate 2-6 skills in sequence/parallel. No competitor has this level of workflow composition. Cursor plugins can bundle components but don't have pre-built orchestration pipelines.
+
+### 3. Self-Improving Meta Skills (LOW pressure, already built)
+`/evolve`, `/recall`, `/metrics`, `/promote` — no competitor has skills that analyze their own performance and patch themselves. This is genuinely novel.
+
+### 4. Compliance-Ready Industry Pipelines (MEDIUM pressure, already built)
+HIPAA, SOC2, GDPR, PCI-DSS, FDA, NERC CIP — pre-built compliance audit skills with regulatory section mappings. No competitor offers this depth.
+
+---
+
+## Our Competitive Edges
+
+| Edge | Description | Competitors With Similar |
+|------|-------------|------------------------|
+| **Industry vertical depth** | 40 sectors with domain-specific regulatory, operational, and analytical skills | 0/4 |
+| **Social impact coverage** | 11 sectors (education, housing, mental health, elder care, etc.) | 0/4 |
+| **Multi-skill chains** | 30 orchestrated pipelines (e.g., `/fintech-launch`, `/game-launch`, `/mobile-publish`) | 0/4 (Cursor has plugin bundles but no pre-built chains) |
+| **Self-improving system** | Meta skills that analyze performance and patch regressions | 0/4 |
+| **Compliance depth** | HIPAA, SOC2, GDPR, PCI-DSS, FDA with CFR-level mapping | 0/4 (some have basic security scans) |
+| **Fully autonomous execution** | Every skill runs without asking questions | 1/4 (some Plugins Plus skills) |
+| **Curated quality** | All 366 skills author-reviewed, no community-submitted malware risk | 2/4 (Cursor, Anthropic Official) |
+
+---
+
+## Market Positioning (Blue Ocean Analysis)
+
+| Strategy | Features | Rationale |
+|----------|----------|-----------|
+| **ELIMINATE** | Interactive tutorials, Jupyter notebooks | Not core to the value prop. Skills are self-documenting. Tutorials add maintenance burden for low user demand in a power-user market. |
+| **REDUCE** | Web marketplace complexity | Don't build a full marketplace platform. A searchable catalog index (`catalog.json` + static site) covers 90% of discovery needs at 10% of the cost. |
+| **RAISE** | Industry vertical depth, compliance rigor, orchestration chains | Go deeper where no competitor plays. Add more verticals, more compliance frameworks, more complex multi-skill pipelines. This is uncontested space. |
+| **CREATE** | "Compliance-as-Skills" positioning — pre-built regulatory audit pipelines that enterprises can drop into any codebase | No competitor offers domain-specific compliance automation at this depth. Position as the enterprise compliance automation layer for AI-assisted development. |
+
+**Recommended positioning:** *"The deepest AI coding automation library — 40 industry verticals, regulatory compliance built-in, and self-improving orchestration chains that no general-purpose plugin marketplace can match."*
+
+---
+
+## Industry Trends
+
+| Trend | Adoption Stage | Competitors With It | Our Status | Recommendation |
+|-------|---------------|---------------------|------------|----------------|
+| CLI package managers for skills | Mainstream | Plugins Plus, OpenClaw, Cursor | MISSING | **Build now** — table stakes |
+| MCP server integration | Early mainstream | OpenClaw, Cursor, Plugins Plus | MISSING | **Build now** — emerging standard |
+| Multi-agent orchestration | Early adopter | Cursor (subagents), Plugins Plus | PARTIAL (combo chains) | **Raise** — deepen our orchestration |
+| Skill permission/security declarations | Early mainstream | Plugins Plus, Cursor | MISSING | **Build now** — trust is critical |
+| Private/team skill distribution | Early adopter | Cursor (Enterprise) | MISSING | **Defer** — enterprise play, not our market yet |
+| AI-generated skills | Bleeding edge | None fully | PARTIAL (skill-creator) | **Watch** — our skill-creator meta-skill is ahead |
+| Skill analytics/telemetry | Early adopter | OpenClaw (stars) | MISSING | **Plan** — adoption data drives prioritization |
+| Cross-platform skills (Claude + Cursor + Copilot) | Bleeding edge | None | MISSING | **Watch** — standards not settled |
+
+---
+
+## Recommended Roadmap
+
+### Sprint 1 — Quick Wins (close critical gaps)
+
+1. **CONTRIBUTING.md + PR template** — CRITICAL pressure, S effort. Unblocks community contributions and signals project health. Half a day.
+2. **Permission declarations in SKILL.md** — HIGH pressure, M effort. Add `permissions` field to frontmatter, update validation script, update template. 1-2 days.
+3. **Catalog index generation** — HIGH pressure, M effort. Script to generate `catalog.json` from all SKILL.md files. Enables search, enables future CLI. 1 day.
+4. **MCP dependency declarations** — HIGH pressure, S effort. Add `mcp_servers` field to SKILL.md frontmatter for skills that should work with MCP servers. 1 day.
+
+### Next Quarter — Strategic
+
+5. **CLI package manager** — CRITICAL pressure, M-L effort. `npx skills-hub install <skill>` or `npx skills-hub search <query>`. Reads from catalog.json. 1-2 weeks.
+6. **Searchable web catalog** — HIGH pressure, L effort. Static site (GitHub Pages) reading catalog.json with category filters, keyword search, skill detail pages. 1 week.
+7. **Security scanning pipeline** — HIGH pressure, L effort. Static analysis of skill instructions for dangerous patterns (unrestricted bash, network access without declaration, credential handling). 1 week.
+8. **Versioned dependency resolution** — HIGH pressure, L effort. Combo chains reference sub-skills by name + version range. Breaking change detection. 1 week.
+
+### Future — Differentiators
+
+9. **More industry verticals** — Expand into education technology, legal technology, proptech, insurtech with deeper skill chains.
+10. **Cross-platform skill format** — Investigate compatibility with Cursor plugin format and OpenClaw skill format. Publish skills that work across platforms.
+11. **Skill analytics** — Track installs, usage patterns, and success rates to prioritize maintenance and evolution.
+12. **Enterprise private catalogs** — Allow teams to host internal skill registries with the same tooling.
+
+---
+
+## Summary
 
 | Metric | Value |
 |--------|-------|
-| Competitors analyzed | 10 |
-| Curated collections | 3 (Antigravity 954+, ECC 56+, Anthropic ~20) |
-| Aggregators | 2 (SkillsMP 270K+, SkillHub 7K+) |
-| Universal installers | 2 (OpenSkills, CCPM) |
-| Agent OS bundles | 1 (OpenFang 60) |
-| Critical gaps found | 6 |
-| Strategic gaps found | 3 |
-| Differentiators identified | 9 |
+| **Total features across competitors** | 28 (distribution, content, quality categories) |
+| **We have** | 14 (50%) |
+| **Partial** | 4 (14%) |
+| **Missing** | 10 (36%) |
+| **Our edges** | 7 (industry depth, social impact, chains, meta-skills, compliance, autonomous, curated quality) |
+| **Critical gaps to close** | 4 (CLI install, CONTRIBUTING.md, permissions, MCP integration) |
+| **Pricing position** | Competitive (free, same as most competitors) |
+| **Tech stack assessment** | Behind on distribution infrastructure, ahead on content depth |
+| **Biggest threat** | **Claude Code Plugins Plus** — same ecosystem, has CLI package manager, empirical validation, and growing fast. If they add industry verticals, our main differentiator narrows. |
+| **Biggest opportunity** | **"Compliance-as-Skills" positioning** — no competitor offers domain-specific regulatory automation. Enterprises need HIPAA, SOC2, GDPR, PCI-DSS compliance baked into their development workflow. We have 13 security/compliance skills + 40 industry verticals. Position as the enterprise compliance layer. |
 
-**Our position:** #2 by raw count (359 vs Antigravity's 954+) but #1 by quality, consistency, industry coverage, and composition depth. No other collection has industry verticals, validated structural consistency, combo chains, or meta skills.
+---
 
-**Biggest threat:** Antigravity reaching 1,000+ skills while maintaining cross-platform compatibility and adding quality controls. If they add industry verticals or composition, they become a direct threat.
+## New Entrants & Aggregators (identified 2026-03-17)
 
-**Biggest opportunity:** Being the curated, quality-first collection that powers the skills-hub.ai marketplace. Aggregators can't compete on quality. Our structural consistency and industry depth are moats.
+| Competitor | Positioning | Skill Count | Differentiator |
+|-----------|-------------|-------------|----------------|
+| **claude-skill-registry** (majiayu000) | Crawled skill aggregator | 82,569 deduplicated (162K+ crawled) | Volume play — auto-scraped SKILL.md files from GitHub. No curation or quality control. |
+| **SkillHub.club** | AI-evaluated skills marketplace | Unknown | AI quality ranking (S/A/B-rank system). Differentiating on automated skill scoring. |
+| **claudeskills.info** | Official-focused marketplace | Unknown | Focuses on Anthropic official skills. Curated, narrow scope. |
+| **SkillsMP.com** | Multi-agent skill marketplace | 500,000+ claimed | Cross-platform (Claude, Codex, ChatGPT, Gemini). Broadest agent coverage but quality unverified. |
 
-**Key insight:** Don't compete on quantity with SkillsMP (270K). Compete on quality with Antigravity (954). Close the count gap to 500+ while maintaining 100% validation, then let industry verticals and composition be the differentiators nobody else has.
+**Key signals:**
+- A HackerNoon article documents a developer building a "visual workbench" for managing Claude Code skills — discovery/management is a real pain point users are actively trying to solve.
+- Multiple editorial roundups exist (Medium, Composio, Firecrawl) covering "best Claude Code skills" — **Skills Hub Registry does not appear in any of them yet**.
+- The `github.com/topics/claude-skills-hub` topic exists on GitHub.
+- claude-skill-registry's 82K deduplicated entries dwarf our 366 but are uncurated scrapes with no quality assurance.
+
+**Action items:**
+1. Submit Skills Hub Registry to editorial roundup authors (Medium/@unicodeveloper, Composio, Firecrawl) for inclusion.
+2. Create a GitHub topic listing under `claude-skills-hub`.
+3. Consider publishing a `catalog.json` that aggregators and visual tools can consume.
+
+---
+
+## Sources
+
+- [Claude Code Plugins Plus (BrightCoding)](https://www.blog.brightcoding.dev/2026/02/07/claude-code-plugins-plus-270-ai-agent-tools-that-transform-development)
+- [OpenClaw Skills Guide (AI Tools Kit)](https://www.aitoolskit.io/agents/openclaw-plugins-extensions-guide-2026)
+- [Claude Code Plugins Review (AI Tool Analysis)](https://aitoolanalysis.com/claude-code-plugins/)
+- [Cursor Marketplace](https://cursor.com/marketplace)
+- [Cursor Marketplace Launch Blog](https://cursor.com/blog/marketplace)
+- [Anthropic Official Plugins (GitHub)](https://github.com/anthropics/claude-plugins-official)
+- [MCP Servers Directory](https://mcpservers.org/)
+- [MCP 2026 Roadmap](http://blog.modelcontextprotocol.io/posts/2026-mcp-roadmap/)
+- [Claude Code Alternatives (DigitalOcean)](https://www.digitalocean.com/resources/articles/claude-code-alternatives)
+- [OpenClaw vs Claude Code (DataCamp)](https://www.datacamp.com/blog/openclaw-vs-claude-code)
+- [Cursor vs GitHub Copilot 2026 (Morphllm)](https://www.morphllm.com/comparisons/cursor-vs-copilot)
+- [AI Agent Skills Boom 2026 (SoloBusinessHub)](https://www.solobusinesshub.com/trend-watch/ai-agent-skills-boom-2026/)
+- [claude-skill-registry (GitHub)](https://github.com/majiayu000/claude-skill-registry)
+- [SkillHub.club — AI Skills Marketplace](https://www.skillhub.club/)
+- [10 Must-Have Skills for Claude in 2026 (Medium)](https://medium.com/@unicodeveloper/10-must-have-skills-for-claude-and-any-coding-agent-in-2026-b5451b013051)
+- [Top 10 Claude Code Skills (Composio)](https://composio.dev/content/top-claude-skills)
+- [Best Claude Code Skills 2026 (Firecrawl)](https://www.firecrawl.dev/blog/best-claude-code-skills)
+- [Visual Workbench for Claude Code Skills (HackerNoon)](https://hackernoon.com/i-built-a-visual-workbench-because-managing-claude-code-skills-was-driving-me-crazy)
