@@ -1,7 +1,7 @@
 ---
 name: iterate
-description: Autonomous build loop -- build iteratively, implement features, add capabilities. Default 6 iterations (thorough) or --fast for 4 iterations (ship it quick).
-version: "2.0.0"
+description: Autonomous build loop — implements, tests, reviews, analyzes, and refines. Default 6 iterations (thorough) or --fast for 4 iterations (ship it quick).
+version: 11
 category: build
 instructions: |
   You are in FULLY AUTONOMOUS MODE. Zero questions. Just build.
@@ -21,6 +21,37 @@ instructions: |
   - If a dependency is missing, install it.
   - If tests don't exist, write them.
   - If something breaks, fix it -- don't report it, fix it.
+
+  === PRE-BUILD: BRANCH STRATEGY ===
+
+  CHECK the project's CLAUDE.md and global CLAUDE.md for branch conventions.
+
+  DEFAULT for solo/personal projects: commit directly to main. Do NOT create
+  feature branches unless the project's CLAUDE.md explicitly requires them or
+  the user asks for a branch. Solo projects use CI on main as the quality gate.
+
+  For TEAM projects (multiple contributors): use feature branches.
+  - Branch naming: `feat/{short-description}` for features, `fix/{short-description}` for fixes.
+  - Push the branch early: `git push -u origin {branch}` after the first commit.
+  - Merge via PR after validation.
+
+  IMPORTANT: Before committing and pushing, run the project's full validation
+  suite (format, lint, test) locally. Only push code that passes CI. This saves
+  compute time on self-hosted runners.
+
+  === PRE-BUILD: MIGRATION/FORK DETECTION ===
+
+  If the project was scaffolded from, forked from, or migrated from another
+  project (check git log for "migrate", "rename", "fork", or if early commits
+  reference a different app name):
+  1. Verify all references to the old project name are replaced (package names,
+     bundle IDs, import paths, string constants, test fixtures, CI config).
+  2. Verify models/services match the NEW domain, not the old one.
+  3. Run the full test suite — failures from stale references are cheaper to
+     fix now than after building features on a broken foundation.
+  4. Commit any fixes: "chore: clean up migration from [old project]"
+  Skipping this step causes downstream fix commits that tank First-Time-Right
+  rate (observed: 45.5% FTR when migration validation was skipped).
 
   === PRE-BUILD: VALIDATION GATE ===
 
@@ -90,6 +121,18 @@ instructions: |
   e) STRUCTURAL HEALTH: If any file exceeds 500 lines, decompose it into
      domain-specific modules. Do not let monolithic files grow across iterations.
 
+  f) SHARED WIDGET / COMPONENT EXTRACTION:
+     When 3+ screens/pages share visual patterns (cards, list items, dialogs,
+     form sections, stat displays), extract a shared widget/component BEFORE
+     building more screens. Cross-cutting changes (theme, a11y, responsive)
+     applied to shared widgets fix all consumers at once instead of requiring
+     per-screen modification waves.
+     - Before creating a new screen, scan existing screens for reusable patterns.
+     - If a pattern appears in 3+ places, extract it into a shared component first.
+     - Track shared components in commit messages: "refactor: extract [widget] shared by [screens]"
+     This prevents hotspot accumulation where the same screens are modified 5-9x
+     each due to cross-cutting concerns applied in separate passes.
+
   MONOLITH DECOMPOSITION GATE:
 
   Before adding ANY feature code to a file that exceeds 500 lines:
@@ -103,6 +146,28 @@ instructions: |
   monoliths that get flagged but not split accumulate modifications and high fix-commit
   rates. Decompose BEFORE building, not after.
 
+  HOTSPOT-AWARE DECOMPOSITION:
+
+  At the START of each /iterate session (before Iteration 1), run a hotspot scan:
+
+  ```
+  git log --format='' --name-only -- '*.dart' '*.ts' '*.tsx' '*.js' '*.py' '*.go' '*.rs' \
+    | sort | uniq -c | sort -rn | head -10
+  ```
+
+  Any file with 15+ modifications in the git history is a rework magnet. If you are
+  about to modify a file with 15+ historical touches:
+  1. DECOMPOSE IT FIRST — even if it is under 500 lines.
+  2. Extract the section you need to modify into its own file.
+  3. Then make your changes in the extracted file.
+
+  Why: Hotspot scores are climbing every /metrics run across all projects. PawPass
+  profile_screen.dart has 68 touches, Skills Hub skill.service.ts had 43 touches
+  before split, Recipe AI analyze_screen.dart has 44 touches and is STILL 804 lines
+  after 7 extraction attempts. The 500-line threshold is necessary but not sufficient
+  — files that attract frequent changes need splitting at a LOWER threshold (300
+  lines) or by domain concern, regardless of line count.
+
   MINIMUM TEST REQUIREMENT:
 
   Every iteration that adds new functionality must include:
@@ -110,6 +175,39 @@ instructions: |
   - Frontend: At least 1 component/integration test per new screen or major component.
   - If ZERO tests exist: set up test framework + 3-5 smoke tests first.
   A feature is not complete until its tests exist and pass.
+
+  TEST CO-COMMIT ENFORCEMENT:
+
+  Tests MUST be committed IN THE SAME COMMIT as the feature they test. Do NOT:
+  - Write all features first, then batch-write tests in a separate commit/session.
+  - Create a "test: add tests" commit that covers 5+ features at once.
+  - Defer tests to "the next iteration" or "after the feature is stable."
+
+  The commit pattern must be: `feat: add X [includes tests]` — not `feat: add X`
+  followed later by `test: add tests for X, Y, Z, W`.
+
+  Why this is non-negotiable: Test co-commit ratio (M8) is 0.00-0.32 across ALL 6
+  projects. Batch-written tests discover stale interfaces (Recipe AI TS2345 errors),
+  miss wiring bugs, and inflate rework. PawPass M8=0.28, Recipe AI M8=0.04,
+  DealWorthy M8=58% batch-written, Confidence Coach tests written 12 days after
+  features. Tests written alongside features catch issues at creation time when the
+  cost to fix is near zero.
+
+  INTEGRATION TEST REQUIREMENT (for multi-layer projects):
+
+  If the project has a cross-layer pipeline (e.g., client → API → service → response,
+  or record → transcribe → analyze → enhance), at least ONE integration test must
+  cover the end-to-end flow through 2+ layers:
+  - Flutter: integration_test/ directory with a flow that exercises the real pipeline.
+  - Node.js: supertest or similar hitting actual endpoints with real middleware.
+  - General: a test that wires real components together (not mocked) to verify data
+    flows correctly across boundaries.
+
+  When to add: after Iteration 2 (MAKE IT SOLID), before domain analysis.
+  Why: Confidence Coach had 27 unit/widget test files but ZERO integration tests.
+  Unit tests verify individual components work; integration tests verify they work
+  TOGETHER. Wiring bugs between layers are invisible to unit tests and are the most
+  expensive to fix post-ship.
 
   === CO-COMMIT RULES ===
 
@@ -153,10 +251,42 @@ instructions: |
   If you cannot verify locally, document the assumptions explicitly in a code
   comment and flag them for manual verification.
 
+  === PRE-ITERATION: SECURITY-BY-DEFAULT CHECKLIST ===
+
+  Before writing the FIRST line of feature code in Iteration 1, apply these
+  defensive defaults to every new service, endpoint, or screen. Do NOT defer
+  these to a later "security hardening" pass — that pattern caused 5-38 reactive
+  security fix commits across every project.
+
+  For EVERY new API endpoint/Cloud Function/route:
+  - [ ] Rate limiting applied (or confirm existing global rate limiter covers it)
+  - [ ] Input validation via schema (Zod, Joi, class-validator, etc.) — not manual checks
+  - [ ] Error responses sanitized — no stack traces, internal paths, or DB errors leaked to client
+  - [ ] Auth/ownership check — user can only access/modify their own resources (prevent IDOR)
+  - [ ] Timeouts on all external calls (HTTP, DB, third-party APIs) — 30s default
+
+  For EVERY new database query/Firestore operation:
+  - [ ] Uses select/projection (not include/fetch-all) — only retrieve needed fields
+  - [ ] Has pagination/limit — no unbounded result sets
+  - [ ] Has appropriate index coverage for compound queries
+
+  For EVERY new screen/component that handles user data:
+  - [ ] Error states show user-friendly messages (no raw error objects)
+  - [ ] Loading states prevent double-submission
+  - [ ] Sensitive data (tokens, keys) not logged or exposed in error handlers
+
+  Why: Security was discovered reactively across 3-5 separate passes in every
+  project. Skills Hub had 38 security fix commits, DealWorthy had 5 IDOR/scoping
+  fixes across 4 phases, Recipe AI had 3 separate security hardening passes,
+  Confidence Coach had error leaking fixed twice. A single upfront checklist
+  prevents all of these.
+
   === ITERATION 1: MAKE IT EXIST ===
 
   - Build the simplest version that works. No polish, just function.
+  - Apply the SECURITY-BY-DEFAULT CHECKLIST to every new endpoint/service/screen.
   - Co-commit schema changes, server validation, and model fields with features.
+  - Co-commit tests with each feature (see TEST CO-COMMIT ENFORCEMENT above).
   - Run tests/build to verify.
   - Fix anything broken.
   - Keep commits incremental -- if touching 15+ files, split into logical commits.
@@ -275,6 +405,28 @@ instructions: |
   - Scale: query limits, pagination, batch operations
   - Structure: file under 500 LOC, domain-split modules
 
+  === PRE-COMMIT LOCAL VALIDATION ===
+
+  Before EVERY commit (not just the pre-build gate), run the project's local
+  validation suite. This catches format/lint/test failures BEFORE they hit CI,
+  preventing fix chains like "fix: dart format" or "fix: eslint" that inflate
+  the fix:feat ratio.
+
+  1. DETECT & RUN the project's format/lint/test commands:
+     - Flutter: `dart format --set-exit-if-changed . && flutter analyze && flutter test`
+     - Node.js: `npm run lint && npm run format:check && npm test` (or equivalent)
+     - Python: `ruff check . && ruff format --check . && pytest`
+     - Go: `gofmt -l . && go vet ./... && go test ./...`
+     - Rust: `cargo fmt --check && cargo clippy && cargo test`
+     - Adapt to whatever stack is detected. Use the project's existing scripts.
+
+  2. If ANY check fails: fix the issue BEFORE committing. Do NOT commit with
+     the intent to "fix formatting in the next commit."
+
+  3. This is NON-NEGOTIABLE. CI failure rates of 43-57% across projects are
+     caused by skipping this step. Every format/lint fix commit pushed to CI
+     is a wasted commit that degrades metrics.
+
   === COMMIT DISCIPLINE ===
 
   - Commit after each iteration with descriptive messages.
@@ -283,6 +435,46 @@ instructions: |
     Each fix should be independently reviewable and revertable.
   - NEVER commit feature code without its corresponding schema/rules update.
   - Use conventional commits: feat:, fix:, chore:, test:, docs:
+  - TAG EVERY FIX COMMIT WITH A SCOPE. Use `fix(category):` not bare `fix:`.
+    Required categories: a11y, ux, scale, security, ci, test, perf, data, auth.
+    Example: `fix(a11y): add semantic labels to profile screen`
+    Unscoped fix commits (bare `fix:`) make root cause analysis impossible —
+    53-86% of fix commits across projects are currently uncategorized, blocking
+    data-driven rework reduction. If unsure of category, use the closest match.
+
+  === POST-LOOP: RELEASE TAGGING ===
+
+  After all iterations complete and validation passes, create a release tag.
+
+  1. Check existing tags: `git tag --sort=-v:refname | head -5`
+  2. Determine next version:
+     - If no tags exist: use `v0.1.0`
+     - If tags exist: bump the patch version (e.g., v0.2.1 → v0.2.2)
+     - If a new feature was added: bump the minor version (e.g., v0.2.2 → v0.3.0)
+  3. Create the tag: `git tag -a v{X.Y.Z} -m "feat: {short description of what was built}"`
+  4. Push the tag: `git push origin v{X.Y.Z}`
+
+  Why: D1 (Deployment Frequency) is 0/week across ALL projects — zero release tags
+  in 500+ commits across 6 apps. Without tags, DORA metrics are unmeasurable, rollback
+  is impossible, and there's no changelog anchor. /preflight checks for tags but no build
+  skill was creating them.
+
+  === POST-LOOP: DEAD CODE CLEANUP ===
+
+  Before documenting, scan for dead code introduced or exposed during this build:
+
+  1. If you REPLACED a file (new implementation supersedes old): delete the old file in
+     the same commit or immediately after. Do not leave it "for reference."
+  2. If you RENAMED a file: verify no imports reference the old name. Delete the old file.
+  3. If you EXTRACTED code from a monolith: verify the extracted functions/classes are
+     removed from the original file after extraction.
+  4. Run: `git diff --name-status HEAD~{N}..HEAD` (where N = commits in this session)
+     to review all Added/Deleted/Modified files. Flag any file that was Added then later
+     superseded but not Deleted.
+
+  Why: Dotfiles bootstrap-vps.sh survived 13 commits after being replaced. PawPass
+  accumulated dead screens and superseded services. Dead files create confusion about
+  what is canonical and pollute grep/search results.
 
   === POST-LOOP: DOCUMENTATION ===
 
@@ -313,50 +505,4 @@ instructions: |
   - "Run `/e2e` to generate automated end-to-end test coverage."
   - "Run `/iterate-review` to harden with a focused review pass."
   - "Run `/ux` to audit accessibility, design standards, and usability."
-  - "Run `/polish` for the full quality pipeline: `/ux` -> `/qa` -> `/audit`."
-platforms:
-  - CLAUDE_CODE
----
-
-
-============================================================
-SELF-HEALING VALIDATION (max 3 iterations)
-============================================================
-
-After completing the main phases, validate your work:
-
-1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
-2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
-3. If either fails, diagnose the failure from error output.
-4. Apply a minimal targeted fix — do NOT refactor unrelated code.
-5. Re-run the failing validation.
-6. Repeat up to 3 iterations total.
-
-IF STILL FAILING after 3 iterations:
-- Document what was attempted and what failed
-- Include the error output in the final report
-- Flag for manual intervention
-
-
-============================================================
-SELF-EVOLUTION TELEMETRY
-============================================================
-
-After producing output, record execution metadata for the /evolve pipeline.
-
-Check if a project memory directory exists:
-- Look for the project path in `~/.claude/projects/`
-- If found, append to `skill-telemetry.md` in that memory directory
-
-Entry format:
-```
-### /iterate — {{YYYY-MM-DD}}
-- Outcome: {{SUCCESS | PARTIAL | FAILED}}
-- Self-healed: {{yes — what was healed | no}}
-- Iterations used: {{N}} / {{N max}}
-- Bottleneck: {{phase that struggled or "none"}}
-- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
-```
-
-Only log if the memory directory exists. Skip silently if not found.
-Keep entries concise — /evolve will parse these for skill improvement signals.
+  - "Run `/polish` for the full quality pipeline: `/ux` → `/qa` → `/audit`."
