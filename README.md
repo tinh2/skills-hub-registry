@@ -2,24 +2,24 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-386 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0 with built-in self-healing validation and self-evolution telemetry.
+387 production-tested skills organized into 13 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0 with built-in self-healing validation and self-evolution telemetry.
 
 ## Directory Structure
 
 ```
 skills-hub-registry/
-├── build/              # 24 skills — Project scaffolding, game engines, mobile apps, industry API scaffolds
+├── build/              # 21 skills — Project scaffolding, game engines, mobile apps, industry API scaffolds
 ├── test/               # 13 skills — Unit, E2E, integration, load, visual, contract, accessibility, mobile, device matrix
 ├── qa/                 # 13 skills — QA, performance, chaos, code smells, game QA, mobile QA, balance testing
 ├── review/             # 26 skills — Architecture, API, security, executive, industry, game, mobile, store compliance
-├── deploy/             # 21 skills — Docker, K8s, Terraform, CI/CD, app stores, mobile CI/CD, OTA updates
-├── docs/               # 13 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook, specs
+├── deploy/             # 17 skills — Docker, K8s, Terraform, CI/CD, app stores, mobile CI/CD, OTA updates
+├── docs/               # 10 skills — README, API docs, ADR, changelog, diagrams, onboarding, runbook, specs
 ├── security/           # 12 skills — OWASP, pentest, GDPR, SOC2, HIPAA, PCI-DSS, game security, benefits fraud
-├── ux/                 # 26 skills — UX audit, design systems, dark mode, responsive, i18n, game UX, 20 design skills
-├── analysis/           #201 skills — Domain analysis, research, 40 industry verticals, social impact, gaming, mobile
-├── productivity/       #  8 skills — Dev containers, linting, git hooks, monorepo, release, env setup
+├── ux/                 # 24 skills — UX audit, design systems, dark mode, responsive, i18n, game UX, 20 design skills
+├── analysis/           #195 skills — Domain analysis, research, 40 industry verticals, social impact, gaming, mobile
+├── productivity/       #  7 skills — Dev containers, linting, git hooks, monorepo, release, env setup
 ├── integration/        #  9 skills — Stripe, auth, email, push notifications, search, storage, realtime
-├── combo/              # 32 skills — Multi-skill chains and pipeline compositions
+├── combo/              # 31 skills — Multi-skill chains and pipeline compositions
 └── meta/               #  9 skills — Skill creation, testing, evolution, templates, cross-project sync
 ```
 
@@ -56,7 +56,7 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 
 ## Skill Catalog
 
-### build -- Project Scaffolding & Build Pipelines (24 skills)
+### build -- Project Scaffolding & Build Pipelines (21 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -152,7 +152,7 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [mobile-security-review](review/mobile-security-review/) | 1.0.0 | Mobile security review -- OWASP Mobile Top 10, certificate pinning, Keychain/Keystore, root detection, obfuscation |
 | [store-compliance](review/store-compliance/) | 1.0.0 | App Store and Play Store compliance review -- review guidelines, privacy labels, data safety, COPPA/GDPR-K |
 
-### deploy -- Infrastructure & Deployment (21 skills)
+### deploy -- Infrastructure & Deployment (17 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -166,19 +166,15 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [dns](deploy/dns/) | 1.0.0 | Configure DNS records, SSL/TLS certificates, subdomains, email authentication, and health check routing |
 | [monitoring](deploy/monitoring/) | 1.0.0 | Auto-detect infrastructure and set up observability with dashboards, alerting rules, and application instrumentation |
 | [secrets](deploy/secrets/) | 1.0.0 | Audit secret handling, set up secrets management with rotation, and configure CI/CD secrets integration |
-| [app-icon](deploy/app-icon/) | 1.1.0 | Generates a polished app icon and applies it as the launcher icon for iOS and Android |
 | [app-store-publish](deploy/app-store-publish/) | 1.0.0 | iOS App Store publishing -- Fastlane, provisioning, screenshots, metadata, review compliance, TestFlight |
 | [play-store-publish](deploy/play-store-publish/) | 1.0.0 | Google Play Store publishing -- AAB config, Fastlane supply, data safety, content rating, staged rollout |
 | [mobile-ci-cd](deploy/mobile-ci-cd/) | 1.0.0 | Mobile CI/CD -- GitHub Actions / Bitrise / Codemagic for iOS+Android, code signing, beta distribution |
 | [ota-updates](deploy/ota-updates/) | 1.0.0 | Over-the-air updates -- CodePush, Shorebird, Play In-App Updates, rollback strategy, A/B testing |
-| [cost-analysis](deploy/cost-analysis/) | 1.0.0 | Analyzes infrastructure costs at 1K-100K user scales with auto-detection and optimization recommendations |
-| [fix-and-ship](deploy/fix-and-ship/) | 1.0.0 | Emergency fix-and-deploy pipeline -- diagnose, fix, verify, deploy, and confirm service health |
+| [flutter-deploy](deploy/flutter-deploy/) | 1.0.0 | Build and deploy Flutter apps to App Store and Google Play -- auto-detects project, pulls signing secrets, runs Fastlane |
 | [free-keys](deploy/free-keys/) | 1.0.0 | Provision free LLM API keys from 20+ providers -- health-checks, validates, and saves to project |
 | [hotfix](deploy/hotfix/) | 1.0.0 | Emergency hotfix pipeline -- diagnose, fix, test, commit, push, and PR in 2 iterations max |
-| [image-storage-optimization](deploy/image-storage-optimization/) | 1.0.0 | Image optimization pipeline -- resize, compress to WebP/AVIF, generate responsive variants, integrate with CDN |
-| [pr](deploy/pr/) | 1.0.0 | Create a convention-compliant pull request from the current branch |
 
-### docs -- Documentation (13 skills)
+### docs -- Documentation (10 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -213,7 +209,7 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [benefits-fraud](security/benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
 | [game-security](security/game-security/) | 1.0.0 | Game security review -- client-side authority, memory manipulation, packet tampering, anti-cheat architecture |
 
-### ux -- User Experience & Design (26 skills)
+### ux -- User Experience & Design (24 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -242,7 +238,7 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [design-tone-down](ux/design-tone-down/) | 2.0.0 | Visual restraint -- reduce visual noise, mute colors, simplify decorations, create breathing room, refine density |
 | [design-color](ux/design-color/) | 2.0.0 | Color system design -- oklch palette generation, contrast verification, semantic color mapping, dark mode derivation |
 
-### analysis -- Domain Analysis, Research, 40 Industry Verticals (201 skills)
+### analysis -- Domain Analysis, Research, 40 Industry Verticals (195 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -448,7 +444,7 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [skills-list](analysis/skills-list/) | 3.0.0 | Display the full skills catalog -- lists every available skill with descriptions and autonomous build chains |
 | [ux](analysis/ux/) | 1.0.0 | UX audit -- heuristic evaluation, accessibility audit, WCAG compliance, and design system consistency |
 
-### productivity -- Developer Experience (8 skills)
+### productivity -- Developer Experience (7 skills)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -475,7 +471,7 @@ Duplicated names: `app-icon`, `audit`, `aws`, `backend-spec`, `bootstrap`, `cost
 | [realtime](integration/realtime/) | 1.0.0 | Sets up WebSocket or SSE-based realtime communication with channels, presence, and offline handling |
 | [analytics-tracking](integration/analytics-tracking/) | 1.0.0 | Sets up event tracking with analytics providers -- auto-detects framework, installs SDK, and instruments key flows |
 
-### combo -- Multi-Skill Chains (32 skills)
+### combo -- Multi-Skill Chains (31 skills)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
