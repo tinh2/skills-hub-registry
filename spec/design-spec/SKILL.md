@@ -285,3 +285,4 @@ instructions: |
   - "Run `/iterate` to start building with the locked spec."
   - "Run `/arch-review` to validate architecture against the spec."
   - "Run `/bootstrap` to scaffold the project from the spec."
+---

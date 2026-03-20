@@ -1,6 +1,6 @@
 ---
 name: flutter
-description: "Builds Flutter applications from videos, screenshots, descriptions, or app clone requests. Triggers on: "flutter app", "build a mobile app", "replicate this app in Flutter", "build from video", "build from screenshots", "clone this app", "build an app", "make an app like", "recreate this UI"."
+description: "Builds Flutter applications from videos, screenshots, descriptions, or app clone requests. Triggers on: flutter app, build a mobile app, replicate this app in Flutter, build from video, build from screenshots, clone this app, build an app, make an app like, recreate this UI."
 version: "2.0.0"
 category: build
 platforms:

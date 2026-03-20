@@ -1,6 +1,6 @@
 ---
 name: readme
-description: "Generate project documentation — README files, API docs, and changelogs. Triggers: "README", "documentation", "generate docs", "document this project", "write README", "API docs", "changelog"."
+description: "Generate project documentation — README files, API docs, and changelogs. Triggers: README, documentation, generate docs, document this project, write README, API docs, changelog."
 version: "2.0.0"
 category: docs
 platforms:

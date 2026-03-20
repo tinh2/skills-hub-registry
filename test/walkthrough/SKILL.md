@@ -1,6 +1,6 @@
 ---
 name: walkthrough
-description: "Run an app walkthrough — launch a Flutter app on a simulator or emulator, generate and run exhaustive integration tests that exercise every screen, button, form, and user flow, then self-heal failures. Triggers: "app walkthrough", "integration test", "test on simulator", "exercise every screen", "Flutter integration tests"."
+description: "Run an app walkthrough — launch a Flutter app on a simulator or emulator, generate and run exhaustive integration tests that exercise every screen, button, form, and user flow, then self-heal failures. Triggers: app walkthrough, integration test, test on simulator, exercise every screen, Flutter integration tests."
 version: "2.0.0"
 category: test
 platforms:

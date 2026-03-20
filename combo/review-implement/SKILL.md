@@ -59,11 +59,11 @@ instructions: |
   ## Review & Implement Complete
 
 
-PARALLEL EXECUTION: When review findings span both backend and frontend, use the Agent tool to fix them concurrently.
-- Agent A (Backend Fixes): "Fix the following backend review findings: [backend findings]. Run backend tests after each fix. Return: files modified, tests pass/fail."
-- Agent B (Frontend Fixes): "Fix the following frontend review findings: [frontend findings]. Run frontend tests after each fix. Return: files modified, tests pass/fail."
-- Wait for both agents to complete.
-- Run the full test suite to verify integration.
+  PARALLEL EXECUTION: When review findings span both backend and frontend, use the Agent tool to fix them concurrently.
+  - Agent A (Backend Fixes): "Fix the following backend review findings: [backend findings]. Run backend tests after each fix. Return: files modified, tests pass/fail."
+  - Agent B (Frontend Fixes): "Fix the following frontend review findings: [frontend findings]. Run frontend tests after each fix. Return: files modified, tests pass/fail."
+  - Wait for both agents to complete.
+  - Run the full test suite to verify integration.
 
 
   **Feature:** [title]

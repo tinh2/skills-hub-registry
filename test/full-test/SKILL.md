@@ -1,6 +1,6 @@
 ---
 name: full-test
-description: "complete testing pipeline", "full test suite", "test everything", "automated + manual tests"
+description: "Complete testing pipeline — full test suite, test everything, automated and manual tests."
 version: "2.0.0"
 category: test
 instructions: |
@@ -110,12 +110,12 @@ instructions: |
   ## Full Test Pass Complete
 
 
-PARALLEL EXECUTION: Use the Agent tool to run both phases concurrently.
-- Agent A (E2E Tests): "Run /e2e skill instructions on this project. Auto-detect the stack, generate and run exhaustive integration tests. Apply self-healing for failures. Return: test results, coverage summary, issues found."
-- Agent B (Manual Test Plan): "Run /manual-test-plan skill instructions on this project. Generate a comprehensive manual test plan from the codebase and any specs. Return: the complete test plan document."
-- Wait for both agents to complete.
-- Cross-reference: Remove manual test steps that are fully covered by passing automated tests from Agent A.
-- Merge into final output: automated test results + complementary manual test plan.
+  PARALLEL EXECUTION: Use the Agent tool to run both phases concurrently.
+  - Agent A (E2E Tests): "Run /e2e skill instructions on this project. Auto-detect the stack, generate and run exhaustive integration tests. Apply self-healing for failures. Return: test results, coverage summary, issues found."
+  - Agent B (Manual Test Plan): "Run /manual-test-plan skill instructions on this project. Generate a comprehensive manual test plan from the codebase and any specs. Return: the complete test plan document."
+  - Wait for both agents to complete.
+  - Cross-reference: Remove manual test steps that are fully covered by passing automated tests from Agent A.
+  - Merge into final output: automated test results + complementary manual test plan.
 
 
   **Automated E2E Results:**
