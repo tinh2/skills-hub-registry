@@ -193,7 +193,7 @@ The user has provided a story or spec and wants architect-level feedback before 
 
   Why: Security was discovered in 3-5 separate reactive passes across all 6
   projects (Skills Hub: 38 security fix commits, DealWorthy: 5 IDOR fixes across
-  4 phases, Recipe AI: 3 security passes, PawPass: rate limits and userId scoping
+  4 phases, ProjectB: 3 security passes, ProjectA: rate limits and userId scoping
   retrofitted, Confidence Coach: error leaking fixed twice). A single upfront
   review with this checklist would have caught all of them in one pass.
 
@@ -237,9 +237,9 @@ The user has provided a story or spec and wants architect-level feedback before 
   - Any file with 25+ touches regardless of size: CRITICAL — this is a rework
     magnet that will accumulate fixes from every audit pass.
 
-  Why: Hotspot scores are climbing every /metrics run. PawPass profile_screen.dart
+  Why: Hotspot scores are climbing every /metrics run. ProjectA profile_screen.dart
   went from 48 to 68 touches across 5 metrics runs. Skills Hub skill.service.ts
-  hit 43 touches before being split on Day 8 (should have been Day 1). Recipe AI
+  hit 43 touches before being split on Day 8 (should have been Day 1). ProjectB
   analyze_screen.dart has 44 touches and is STILL 804 lines after 7 extraction
   attempts — because extractions created new large files that became hotspots
   themselves. Decomposition plans must be validated: extracted files should be

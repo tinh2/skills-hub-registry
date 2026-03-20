@@ -202,7 +202,7 @@ Create a `.claude-plugin/` manifest that makes the entire registry installable a
 
 **Key Requirements:**
 - `.claude-plugin/manifest.json` with plugin metadata
-- Install via: `/plugin marketplace add tinh2/skills-hub-registry`
+- Install via: `/plugin marketplace add your-org/skills-hub-registry`
 - Bundle selection: install all 500+ skills or choose by category
 - Category-based bundles: `skills-hub-dev-tools`, `skills-hub-industry`, `skills-hub-social-impact`
 - Version management via plugin system

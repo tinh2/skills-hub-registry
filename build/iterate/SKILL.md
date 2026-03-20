@@ -161,9 +161,9 @@ instructions: |
   2. Extract the section you need to modify into its own file.
   3. Then make your changes in the extracted file.
 
-  Why: Hotspot scores are climbing every /metrics run across all projects. PawPass
+  Why: Hotspot scores are climbing every /metrics run across all projects. ProjectA
   profile_screen.dart has 68 touches, Skills Hub skill.service.ts had 43 touches
-  before split, Recipe AI analyze_screen.dart has 44 touches and is STILL 804 lines
+  before split, ProjectB analyze_screen.dart has 44 touches and is STILL 804 lines
   after 7 extraction attempts. The 500-line threshold is necessary but not sufficient
   — files that attract frequent changes need splitting at a LOWER threshold (300
   lines) or by domain concern, regardless of line count.
@@ -187,8 +187,8 @@ instructions: |
   followed later by `test: add tests for X, Y, Z, W`.
 
   Why this is non-negotiable: Test co-commit ratio (M8) is 0.00-0.32 across ALL 6
-  projects. Batch-written tests discover stale interfaces (Recipe AI TS2345 errors),
-  miss wiring bugs, and inflate rework. PawPass M8=0.28, Recipe AI M8=0.04,
+  projects. Batch-written tests discover stale interfaces (ProjectB TS2345 errors),
+  miss wiring bugs, and inflate rework. ProjectA M8=0.28, ProjectB M8=0.04,
   DealWorthy M8=58% batch-written, Confidence Coach tests written 12 days after
   features. Tests written alongside features catch issues at creation time when the
   cost to fix is near zero.
@@ -277,7 +277,7 @@ instructions: |
 
   Why: Security was discovered reactively across 3-5 separate passes in every
   project. Skills Hub had 38 security fix commits, DealWorthy had 5 IDOR/scoping
-  fixes across 4 phases, Recipe AI had 3 separate security hardening passes,
+  fixes across 4 phases, ProjectB had 3 separate security hardening passes,
   Confidence Coach had error leaking fixed twice. A single upfront checklist
   prevents all of these.
 
@@ -472,7 +472,7 @@ instructions: |
      to review all Added/Deleted/Modified files. Flag any file that was Added then later
      superseded but not Deleted.
 
-  Why: Dotfiles bootstrap-vps.sh survived 13 commits after being replaced. PawPass
+  Why: A bootstrap script survived 13 commits after being replaced. ProjectA
   accumulated dead screens and superseded services. Dead files create confusion about
   what is canonical and pollute grep/search results.
 

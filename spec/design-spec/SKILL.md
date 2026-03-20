@@ -19,9 +19,9 @@ instructions: |
   === WHY THIS SKILL EXISTS ===
 
   Every project without a locked design spec experienced cascading rework:
-  - PawPass: 3 UI redesign waves hitting 20+ screen files, "Credits" to "Paw Points"
+  - ProjectA: 3 UI redesign waves hitting 20+ screen files, "old terminology" to "new terminology"
     rename caused 149 test failures, branding change on Day 7 after features were built.
-  - Recipe AI: No locked design spec led to reactive UI changes across the entire app.
+  - ProjectB: No locked design spec led to reactive UI changes across the entire app.
   - Confidence Coach: Design token consolidation required 6 separate commits to
     standardize colors and spacing that should have been defined from Day 1.
 
