@@ -14,3 +14,7 @@ Thumbs.db
 
 # Test artifacts
 /tmp/
+
+# Internal docs (competitive analysis, strategy, business plans)
+docs/competitive-gap-analysis.md
+docs/NewFeatures-*.md
