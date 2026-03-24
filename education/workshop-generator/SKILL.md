@@ -225,3 +225,43 @@ Files created:
 
 Ready to deliver in: 2-hour intro | Half-day deep dive | Full-day bootcamp
 ```
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After generating all files, validate:
+
+1. All 5 files exist in workshop/ and have substantive content (not just headers).
+2. Module count is consistent across outline, exercises, and assessment.
+3. Every module has at least 1 exercise and 1 assessment question.
+4. Time allocations sum correctly for each format (2h, 4h, 8h).
+5. All commands and code snippets are syntactically plausible.
+
+IF VALIDATION FAILS:
+- Identify incomplete files or missing cross-references
+- Regenerate deficient sections
+- Repeat up to 2 iterations
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md`
+
+Entry format:
+### /workshop-generator -- {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Topic: {{resolved topic}}
+- Modules: {{count}}
+- Files generated: {{count}} / 5
+- Self-healed: {{yes -- what was healed | no}}
+- Iterations used: {{N}} / 2
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea, or "none"}}
+
+Only log if the memory directory exists. Skip silently if not found.

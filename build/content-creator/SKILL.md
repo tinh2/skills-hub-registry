@@ -210,3 +210,40 @@ After generating all content, print a summary:
 - Variants generated: ...
 - Next step: Review variants, pick winners, schedule distribution
 ```
+
+### 7. Self-Healing Validation (max 2 iterations)
+
+After generating content, validate:
+
+1. All requested content types have substantive output (not just headers).
+2. Each type has 2-3 variants as required.
+3. SEO metadata section is present with real keywords (not placeholders).
+4. Distribution schedule matches the content types actually generated.
+5. Output files were written to `content/` directory.
+
+IF VALIDATION FAILS:
+- Identify incomplete types or missing variants
+- Regenerate deficient sections
+- Repeat up to 2 iterations
+
+### 8. Self-Evolution Telemetry
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md`
+
+Entry format:
+```
+### /content-creator -- {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Types generated: {{list}}
+- Variants: {{count}}
+- Self-healed: {{yes -- what was healed | no}}
+- Iterations used: {{N}} / 2
+- Bottleneck: {{type that struggled or "none"}}
+- Suggestion: {{one-line improvement idea, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.

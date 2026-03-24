@@ -319,3 +319,46 @@ NEXT STEPS
 Keep the entire output scannable. Use headers, tables, and code blocks generously.
 Avoid long paragraphs. The user should be able to skim this in 2 minutes and
 know exactly what to do.
+
+============================================================
+SELF-HEALING VALIDATION (max 2 iterations)
+============================================================
+
+After producing output, validate completeness:
+
+1. Project profile has all fields filled (not "unknown" for language or framework if manifest files were found).
+2. At least 5 skills were recommended across the three tiers.
+3. Install walkthrough includes the actual top recommendation slug.
+4. CLAUDE.md template is populated with detected project values.
+5. Workflow combo matches the detected stack.
+
+IF VALIDATION FAILS:
+- Re-scan manifest files for missed data
+- Expand skill recommendations if fewer than 5
+- Repeat up to 2 iterations
+
+IF STILL INCOMPLETE after 2 iterations:
+- Flag specific gaps in the output
+- Suggest what the user can provide to fill them
+
+============================================================
+SELF-EVOLUTION TELEMETRY
+============================================================
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+### /getting-started -- {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Stack detected: {{language + framework}}
+- Skills recommended: {{count}}
+- Self-healed: {{yes -- what was healed | no}}
+- Iterations used: {{N}} / 2
+- Bottleneck: {{phase that struggled or "none"}}
+- Suggestion: {{one-line improvement idea, or "none"}}
+
+Only log if the memory directory exists. Skip silently if not found.

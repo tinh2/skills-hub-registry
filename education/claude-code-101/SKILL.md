@@ -325,3 +325,42 @@ After completing all lessons (or the requested subset), present this summary:
 - Set up a project-specific slash command for a repeated task
 
 Ask the user if they want to dive deeper into any specific topic.
+
+---
+
+## SELF-HEALING VALIDATION (max 2 iterations)
+
+After completing a lesson, validate:
+
+1. Every tool demonstration actually executed (not just described).
+2. Real file names and function names from the project were used (not hypothetical examples).
+3. Temporary files created during lessons were cleaned up.
+4. Summary tables are complete for each finished lesson.
+
+IF VALIDATION FAILS:
+- Re-run demonstrations that only described but did not execute
+- Clean up any leftover temporary files
+- Repeat up to 2 iterations
+
+---
+
+## SELF-EVOLUTION TELEMETRY
+
+After producing output, record execution metadata for the /evolve pipeline.
+
+Check if a project memory directory exists:
+- Look for the project path in `~/.claude/projects/`
+- If found, append to `skill-telemetry.md` in that memory directory
+
+Entry format:
+```
+### /claude-code-101 -- {{YYYY-MM-DD}}
+- Outcome: {{SUCCESS | PARTIAL | FAILED}}
+- Lessons completed: {{N}} / 6
+- Self-healed: {{yes -- what was healed | no}}
+- Iterations used: {{N}} / 2
+- Bottleneck: {{lesson that struggled or "none"}}
+- Suggestion: {{one-line improvement idea, or "none"}}
+```
+
+Only log if the memory directory exists. Skip silently if not found.

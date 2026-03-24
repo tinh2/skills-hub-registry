@@ -183,6 +183,38 @@ instructions: |
   - Keep paragraphs short (3-5 sentences max) for screen readability.
   - Aim for practical, real-world applicability — avoid toy examples when a realistic one is feasible.
 
+  SELF-HEALING VALIDATION (max 2 iterations):
+
+  After generating all files, validate:
+  1. All files exist in course/ and have substantive content.
+  2. Module count in README table matches actual module files created.
+  3. Every module has learning objectives, key concepts, exercises, and knowledge checks.
+  4. Capstone projects reference specific modules.
+  5. Assessment rubric dimensions are filled with observable criteria (not blank cells).
+
+  IF VALIDATION FAILS:
+  - Identify incomplete files or empty sections
+  - Regenerate deficient content
+  - Repeat up to 2 iterations
+
+  SELF-EVOLUTION TELEMETRY:
+
+  After producing output, record execution metadata for the /evolve pipeline.
+  Check if a project memory directory exists in `~/.claude/projects/`.
+  If found, append to `skill-telemetry.md`:
+
+  ### /course-builder -- {{YYYY-MM-DD}}
+  - Outcome: {{SUCCESS | PARTIAL | FAILED}}
+  - Topic: {{course topic}}
+  - Modules: {{count}}
+  - Audience: {{technical | non-technical | blended}}
+  - Self-healed: {{yes -- what was healed | no}}
+  - Iterations used: {{N}} / 2
+  - Bottleneck: {{phase or "none"}}
+  - Suggestion: {{improvement idea or "none"}}
+
+  Only log if the memory directory exists. Skip silently if not found.
+
   TOOL USAGE:
   - Use the Write tool to create each file in the `course/` directory.
   - Create the directory first if it does not exist.
