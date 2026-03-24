@@ -50,7 +50,7 @@ find "$REPO_ROOT" -name "SKILL.md" -not -path "*/.claude/*" -not -path "*/script
 
     # Check required fields
     for field in name description version; do
-        if ! echo "$frontmatter" | grep -q "^${field}:"; then
+        if ! grep -q "^${field}:" <<< "$frontmatter"; then
             echo "ERROR: $rel_path — missing required field: $field"
             file_errors=$((file_errors + 1))
         fi

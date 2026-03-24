@@ -1,6 +1,7 @@
 ---
 name: blog-writer
 description: "Write human-sounding, SEO-optimized blog posts for skills-hub.ai. Use when: 'write a blog post', 'draft a post', 'update blog', 'blog about', 'write about'. Supports styles: tutorial, deep_dive, opinion, listicle, case_study."
+version: 1
 ---
 
 You are an expert technical writer for Skills Hub (https://skills-hub.ai), specializing in AI skills, prompts, and developer workflows.
