@@ -1,7 +1,7 @@
 ---
 name: broken-links
 description: "Scan a codebase for broken links — dead URLs in Markdown/HTML, broken file references, invalid import paths, stale anchor links, and broken cross-doc references — then auto-fix what it can: replace dead URLs with Wayback Machine archives, update moved file paths via git history, remove anchors that no longer exist, and flag what needs human review. Self-healing: learns fix patterns and improves over iterations. Use when: 'fix broken links', 'check links', 'dead links', 'broken urls', 'link rot', 'fix references', 'validate links', 'stale links', 'broken imports'."
-version: "1.0.0"
+version: "1.1.0"
 category: qa
 platforms:
   - CLAUDE_CODE
@@ -22,6 +22,11 @@ PHASE 1: STACK DETECTION & SCOPE
 1. Identify the project type:
    - Read package.json, pubspec.yaml, requirements.txt, go.mod, Cargo.toml, Gemfile, pom.xml
    - Detect documentation frameworks (docusaurus, mkdocs, vitepress, jekyll, hugo)
+   - Detect mobile frameworks:
+     - React Native: `react-native` in package.json dependencies
+     - iOS/Swift: `.xcodeproj` or `.xcworkspace` present, `Package.swift`
+     - Android/Kotlin: `build.gradle` or `build.gradle.kts` present
+     - Flutter: `pubspec.yaml` with `flutter` SDK dependency
    - Identify primary languages and frameworks
 
 2. Determine which link types to scan:
@@ -32,15 +37,21 @@ PHASE 1: STACK DETECTION & SCOPE
    | HTML URLs | `**/*.html`, `**/*.htm` | Always |
    | Markdown anchor links | `**/*.md` | Always |
    | Cross-doc references | `**/*.md` | Always |
-   | Import/require paths | `**/*.{ts,js,tsx,jsx,py,go,rs,dart,rb,java}` | Source code exists |
-   | Image/asset references | `**/*.{md,html,tsx,jsx,vue,svelte}` | Always |
-   | Config file references | `*.{json,yaml,yml,toml}` | Always |
+   | Import/require paths | `**/*.{ts,js,tsx,jsx,py,go,rs,dart,rb,java,kt,swift,m,h}` | Source code exists |
+   | Image/asset references | `**/*.{md,html,tsx,jsx,vue,svelte,swift,kt,dart}` | Always |
+   | Config file references | `*.{json,yaml,yml,toml,plist,pbxproj,gradle,xcconfig}` | Always |
    | API endpoint references | Source files | REST/GraphQL patterns found |
    | CSS/font references | `**/*.{css,scss,less}` | Style files exist |
+   | React Native refs | `**/*.{tsx,jsx,ts,js}` | react-native in package.json |
+   | Swift refs | `**/*.{swift}`, `*.xcodeproj`, `*.xcworkspace` | .xcodeproj exists |
+   | Kotlin/Android refs | `**/*.{kt,kts}`, `*.gradle*` | build.gradle exists |
+   | Xcode asset catalogs | `**/*.xcassets/**` | .xcodeproj exists |
+   | Android resources | `**/res/**/*.xml` | build.gradle exists |
 
 3. Build a file index of all scannable files. Skip:
    - `node_modules/`, `vendor/`, `.git/`, `dist/`, `build/`, `__pycache__/`
-   - Binary files, lock files
+   - `Pods/`, `DerivedData/`, `.build/`, `.gradle/`, `app/build/`
+   - Binary files, lock files (Podfile.lock, Gemfile.lock, etc.)
    - Files in .gitignore
 
 Print scope summary:
@@ -94,18 +105,56 @@ EXTRACTION PATTERNS:
 - Go: `import "..."`
 - Rust: `use ...`, `mod ...`
 - Dart: `import '...'`, `part '...'`
+- Swift: `import ModuleName`, framework references in `.pbxproj`
+- Kotlin: `import com.package.ClassName`, Gradle module dependencies
 - Resolve aliases (@/, ~/, #/) using tsconfig.json, vite.config, webpack.config, etc.
+
+**React Native-specific references:**
+- `require('./image.png')` — bundled asset imports (Metro resolver)
+- `source={{ uri: '...' }}` — Image component URI references
+- `<Image source={require('...')}` — static image requires
+- Native module links: `NativeModules.ModuleName` — verify native module exists
+- Navigation route names: `navigation.navigate('ScreenName')` — verify screen is registered
+- Deep link paths in `linking` config — verify routes match registered screens
+- `react-native.config.js` asset paths and dependency references
+
+**Swift/iOS-specific references:**
+- `UIImage(named: "asset-name")` — verify asset exists in .xcassets
+- `Bundle.main.path(forResource:)` — verify bundled resource exists
+- `#imageLiteral(resourceName:)` — verify image literal references
+- Storyboard/XIB references: `instantiateViewController(withIdentifier:)` — verify ID exists
+- `NSLocalizedString("key", ...)` — verify key exists in .strings files
+- `@IBOutlet` / `@IBAction` — verify Interface Builder connections (check storyboard XML)
+- Info.plist URL scheme and deep link references
+- Swift Package Manager dependencies in `Package.swift` — verify targets/products exist
+- CocoaPods: verify `Podfile` references resolve to valid pods
+
+**Kotlin/Android-specific references:**
+- `R.drawable.name`, `R.string.name`, `R.layout.name` — verify resource exists in res/
+- `getString(R.string.key)` — verify string resource key
+- `setContentView(R.layout.name)` — verify layout XML exists
+- `Intent(this, ActivityName::class.java)` — verify Activity is declared in AndroidManifest.xml
+- Navigation component: `R.id.nav_graph`, `findNavController().navigate(R.id.action_name)` — verify nav graph actions
+- `@DrawableRes`, `@StringRes` — trace annotated params to verify resources
+- Gradle module references: `implementation project(':module')` — verify module exists
+- `BuildConfig.FIELD_NAME` — verify field in build.gradle buildConfigField
 
 **Asset references:**
 - Image paths in markdown: `![alt](path)`
 - Image imports in components
 - Font file references in CSS
 - Favicon and manifest references
+- iOS: .xcassets image sets, app icons, color sets — verify catalog entries match references
+- Android: drawable/, mipmap/, raw/, font/ — verify resource files match R.* references
+- React Native: assets registered in metro.config.js or react-native.config.js
 
 **Config references:**
 - File paths in JSON/YAML/TOML config files
 - Script paths in package.json
 - Entry points in build configs
+- iOS: Info.plist, .entitlements, .xcconfig file references
+- Android: AndroidManifest.xml activity/service/receiver declarations, ProGuard rules file paths
+- React Native: metro.config.js, babel.config.js, app.json asset and module references
 
 ============================================================
 PHASE 3: LINK VALIDATION
@@ -157,6 +206,10 @@ Categorize all findings:
 | BROKEN_ANCHOR | Anchor target doesn't exist | Find closest heading match |
 | BROKEN_IMPORT | Import path doesn't resolve | Check for renames/moves |
 | BROKEN_ASSET | Referenced asset missing | Check git history |
+| BROKEN_RESOURCE | iOS/Android resource ref doesn't resolve | Search resource dirs |
+| BROKEN_ROUTE | Navigation route/screen not registered | Search nav config |
+| BROKEN_MANIFEST | Activity/service not in AndroidManifest | Check manifest |
+| BROKEN_IB | Storyboard/XIB connection broken | Check IB XML |
 | UNCHECKED_URL | External URL, can't verify | Report for manual check |
 | VALID | Link works | Skip |
 
@@ -204,6 +257,30 @@ For any BROKEN_FILE with no git history match:
 - If a single strong match (>80% confidence): apply the fix.
 - If multiple candidates: flag for human review.
 
+**Fix Strategy 6: React Native Resolution**
+For BROKEN_RESOURCE, BROKEN_ROUTE in React Native projects:
+- Missing image require: search for the asset in all asset directories, check metro.config.js asset resolution
+- Broken navigation route: grep for screen registration (e.g., `Screen name="X"`) and suggest the correct name
+- Broken native module: check if the module is linked in react-native.config.js or Podfile/build.gradle
+- Broken deep link: cross-reference linking config with registered navigator routes
+
+**Fix Strategy 7: iOS/Swift Resolution**
+For BROKEN_RESOURCE, BROKEN_IB in Swift projects:
+- Missing `UIImage(named:)`: search all .xcassets for the image set name, suggest closest match
+- Broken storyboard ID: parse storyboard XML for all `storyboardIdentifier` values, find closest match
+- Missing localization key: search all .strings/.stringsdict files for the key
+- Broken IBOutlet/IBAction: parse storyboard/XIB XML connections, identify orphaned references
+- Missing SPM dependency: check Package.swift resolved packages
+
+**Fix Strategy 8: Android/Kotlin Resolution**
+For BROKEN_RESOURCE, BROKEN_MANIFEST in Kotlin projects:
+- Missing `R.drawable.*`: search res/drawable*/ directories for matching filename
+- Missing `R.string.*`: search res/values*/strings.xml for the key
+- Missing `R.layout.*`: search res/layout*/ for matching XML file
+- Undeclared Activity: check AndroidManifest.xml for activity declaration, suggest adding it
+- Broken nav graph action: parse navigation XML, find matching action IDs
+- Missing Gradle module: check settings.gradle(.kts) for included modules
+
 SAFETY RULES:
 - NEVER fix a link if confidence < 80%.
 - NEVER modify links in node_modules, vendor, or generated files.
@@ -220,7 +297,11 @@ After applying all auto-fixes:
 1. Re-run the broken link scan on all modified files.
 2. If any new broken links were introduced by fixes, revert those fixes.
 3. If the project has a build step, run it to verify no compilation errors:
-   - `npm run build`, `cargo build`, `go build ./...`, `flutter analyze`, etc.
+   - Web: `npm run build`, `cargo build`, `go build ./...`
+   - Flutter: `flutter analyze`
+   - React Native: `npx tsc --noEmit` (TypeScript check), `npx react-native build-android --mode=debug` or `xcodebuild -scheme App -destination 'generic/platform=iOS' build` (optional, slow)
+   - Swift: `swift build` or `xcodebuild build -scheme <scheme> -destination 'generic/platform=iOS'`
+   - Kotlin: `./gradlew assembleDebug` or `./gradlew compileDebugKotlin`
 4. If the project has tests, run them to verify no regressions.
 5. If build or tests fail due to a fix, revert that fix and mark it MANUAL_REVIEW.
 
