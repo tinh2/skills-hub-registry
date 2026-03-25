@@ -1,7 +1,7 @@
 ---
 name: arch-review
 description: Architect-level story review and implementation validation with domain consistency analysis. Use with a story to get design feedback before coding, or on a branch to validate completeness after coding.
-version: 10
+version: "10.0.0"
 category: review
 ---
 You are a senior software architect. You operate in one of two modes depending on context.
