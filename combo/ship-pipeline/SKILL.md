@@ -1,16 +1,17 @@
 ---
-name: flutter-ship
-description: "Full Flutter/web development pipeline — from feature spec to production deploy. Chains arch-review, design-build, iterate, unit-test, security-review, preflight, and ship-and-deploy with Ralph Wiggum velocity. Use when: 'build and ship flutter feature', 'flutter pipeline', 'ship flutter', 'full flutter workflow', 'build and deploy app'."
-version: "1.0.0"
+name: ship-pipeline
+description: "Full-stack app pipeline — Flutter frontend + backend + database + CI/CD + deploy. From feature spec to production in one command. Chains arch-review, iterate, unit-test, security-review, preflight, and ship-and-deploy with Ralph Wiggum velocity. Use when: 'build and ship feature', 'full pipeline', 'ship it', 'build and deploy', 'flutter pipeline', 'end to end', 'full stack feature'."
+version: "2.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-# Flutter Ship
+# Ship Pipeline
 
-Full-stack Flutter/web development pipeline. Ralph Wiggum builds it fast,
-the safety net catches everything before production.
+Full-stack app development pipeline — frontend (Flutter/Next.js), backend (Node/Fastify/Cloud Functions),
+database (Firestore/PostgreSQL/Supabase), infrastructure (CI/CD, deploy, monitoring).
+Ralph Wiggum builds it fast, the safety net catches everything before production.
 
 Do NOT ask the user questions unless truly blocked. Run the entire pipeline autonomously.
 
@@ -18,6 +19,8 @@ Do NOT ask the user questions unless truly blocked. Run the entire pipeline auto
 
 $ARGUMENTS — what to build. Can be:
 - A feature description ("add a settings page with dark mode toggle")
+- A full-stack feature ("add Stripe payments with webhook handler and checkout screen")
+- A backend-only feature ("add email verification endpoint")
 - A spec or story (from /spec output)
 - A screenshot or design reference
 - "deploy" or "ship" (skip to Phase 4 if feature is already built)
@@ -76,18 +79,44 @@ RULES:
 - Use design tokens from the theme (AppSpacing, AppColors, etc.), not hardcoded values.
 - Write tests ALONGSIDE features, not after. Every screen gets a widget test.
 
-FOR FLUTTER:
+FOR FLUTTER FRONTEND:
 - New screens follow the existing screen pattern (ConsumerWidget/ConsumerStatefulWidget)
 - State management follows existing provider pattern (Riverpod/Bloc/whatever's used)
 - Navigation follows existing router pattern (GoRouter/auto_route/Navigator)
 - Models include fromJson/toJson/fromFirestore as needed
 - Services are domain-split (BookingService, UserService — not one giant service)
+- Screens must handle: loading state, error state, empty state, offline state
 
-FOR WEB:
-- New pages follow existing route pattern
-- API endpoints follow existing REST conventions
+FOR BACKEND (Node/Fastify/Express/Cloud Functions):
+- New endpoints follow existing route pattern and naming conventions
+- Input validation with Zod/Joi/class-validator on every endpoint
+- Error handling: typed errors with codes, never leak internal details to client
+- Auth middleware on every protected endpoint
+- Rate limiting on public endpoints
+- Database queries use parameterized queries (no string interpolation)
+- Cloud Functions: idempotency keys on mutations, proper error codes (HttpsError)
+- Tests: at least 2 tests per endpoint (happy path + error case)
+
+FOR DATABASE (Firestore/PostgreSQL/Supabase):
+- Schema changes tracked via migrations (Prisma migrate, node-pg-migrate, etc.)
+- Firestore: security rules written in the SAME commit as the feature
+- Every new collection/table has indexes for expected query patterns
+- No raw DDL edits without a migration tool
+- Seed data for development/testing if new tables added
+
+FOR WEB FRONTEND (Next.js/React):
+- New pages follow existing route pattern (App Router conventions)
+- API calls go through a typed client (not raw fetch scattered everywhere)
+- Server Components by default, Client Components only when needed
+- SEO: proper meta tags, OpenGraph, title for every page
 - Input validation on every form field
-- Error handling with user-friendly messages
+- Error boundaries around async components
+
+FOR CI/CD & INFRASTRUCTURE:
+- Workflow files validated before push (runner labels, secret refs, artifact paths)
+- Docker builds tested locally before pushing (if Dockerized)
+- Environment variables documented in .env.example
+- No secrets in source code — use GitHub Secrets or env vars
 
 COMMIT AFTER EACH LOGICAL UNIT:
 - Screen + provider + service + test = one commit
@@ -175,7 +204,7 @@ OUTPUT
 After the pipeline completes, print:
 
 ```
-## Flutter Ship Complete
+## Ship Pipeline Complete
 
 **Feature:** {what was built}
 **Commits:** {N} commits
@@ -214,7 +243,7 @@ Check if a project memory directory exists:
 - If found, append to `skill-telemetry.md`
 
 Entry format:
-### /flutter-ship -- {{YYYY-MM-DD}}
+### /ship-pipeline -- {{YYYY-MM-DD}}
 - Outcome: {{SUCCESS | PARTIAL | FAILED}}
 - Feature: {{what was built}}
 - Commits: {{N}}
