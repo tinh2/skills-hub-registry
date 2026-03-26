@@ -1,7 +1,7 @@
 ---
 name: ship-pipeline
-description: "Full-stack app pipeline — Flutter frontend + backend + database + CI/CD + deploy. From feature spec to production in one command. Chains arch-review, iterate, unit-test, security-review, preflight, and ship-and-deploy with Ralph Wiggum velocity. Use when: 'build and ship feature', 'full pipeline', 'ship it', 'build and deploy', 'flutter pipeline', 'end to end', 'full stack feature'."
-version: "2.0.0"
+description: "Full-stack app pipeline — build, test, review, and deploy across one or ALL repos. Scans CLAUDE.md, MEMORY.md, TODOs, open PRs, and issues for shippable work. Supports 'ship all' for multi-repo. Use when: 'build and ship', 'ship it', 'ship all', 'deploy everything', 'full pipeline', 'what needs shipping', 'end to end'."
+version: "3.0.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -17,30 +17,68 @@ Do NOT ask the user questions unless truly blocked. Run the entire pipeline auto
 
 ## INPUT
 
-$ARGUMENTS — what to build. Can be:
+$ARGUMENTS — what to build or ship. Can be:
 - A feature description ("add a settings page with dark mode toggle")
 - A full-stack feature ("add Stripe payments with webhook handler and checkout screen")
 - A backend-only feature ("add email verification endpoint")
 - A spec or story (from /spec output)
 - A screenshot or design reference
-- "deploy" or "ship" (skip to Phase 4 if feature is already built)
+- **"ship"** or **"deploy"** — ship uncommitted changes in the current repo
+- **"ship all"** — scan ALL repos in the current directory (or ~/personal/) for anything shippable and ship everything
 
 If no arguments provided, check for uncommitted changes and ship those.
 
 ============================================================
-PHASE 0: CONTEXT & PLANNING (30 seconds max)
+PHASE 0: CONTEXT & DISCOVERY
 ============================================================
 
+### 0.1 Multi-Repo Detection
+
+If the user said "ship all" or "all", or if the current directory contains multiple git repos:
+
+1. Scan for all git repos: `find . -maxdepth 2 -name ".git" -type d`
+2. For each repo, gather:
+   - Uncommitted changes (`git status --short`)
+   - Unpushed commits (`git log origin/main..HEAD --oneline`)
+   - Dirty worktrees
+   - Failing CI (`gh api repos/{owner}/{repo}/actions/runs?per_page=1`)
+3. Present the ship manifest:
+
+```
+SHIP MANIFEST
+====================================
+pet-sitter:       3 uncommitted files, 0 unpushed
+recipe-ai:        clean, 2 unpushed commits
+confidence-coach:  clean, clean
+skills-hub:       1 uncommitted, 0 unpushed, CI failing
+deal-worthy:      clean, clean
+====================================
+Repos to ship: 3 (pet-sitter, recipe-ai, skills-hub)
+Repos clean: 2 (confidence-coach, deal-worthy)
+```
+
+4. For each repo with something to ship, run Phases 0.2 through 4 sequentially.
+   Use subagents for repos that are independent (no shared state).
+
+### 0.2 Project Discovery (per repo, 30 seconds max)
+
 1. Read CLAUDE.md for project conventions, stack, and architecture.
-2. Run `git status` and `git log --oneline -5` to understand current state.
-3. Identify the tech stack:
+2. Read MEMORY.md for debt items, open issues, or pending work from last /recall.
+3. Scan for shippable items:
+   - `git status` — uncommitted changes
+   - `git log origin/main..HEAD` — unpushed commits
+   - `grep -r "TODO\|FIXME\|WIP\|HACK" --include="*.ts" --include="*.dart" --include="*.tsx" -l` — unfinished work in code
+   - `docs/` — any specs or stories that reference unimplemented features
+   - `gh pr list --state open` — open PRs that might need merging
+   - `gh issue list --state open --limit 5` — open issues assigned to you
+4. Identify the tech stack:
    - Flutter (Dart) — check pubspec.yaml
    - Web backend (Node/Express/Fastify) — check package.json
    - Database (Firebase/Supabase/PostgreSQL) — check configs
    - State management (Riverpod/Bloc/Provider) — check imports
-4. Summarize in 3 bullets: what exists, what's changing, what's the goal.
+5. Summarize in 3 bullets: what exists, what's shippable, what's the priority.
 
-DO NOT spend more than 30 seconds on this phase. Context rot kills velocity.
+DO NOT spend more than 30 seconds per repo on this phase.
 
 ============================================================
 PHASE 1: ARCH REVIEW (if new feature)
