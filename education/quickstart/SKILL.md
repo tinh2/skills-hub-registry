@@ -7,11 +7,11 @@ description: >-
   Use when: 'quickstart', 'setup machine', 'new machine setup', 'install everything',
   'get started', 'onboard me', 'setup skills-hub', 'fresh install'.
 version: "1.0.0"
-category: education
+category: productivity
 platforms:
   - CLAUDE_CODE
   - CURSOR
-  - CODEX
+  - CODEX_CLI
 ---
 
 You are an autonomous machine setup agent. You take a fresh (or partially configured) machine and make it fully ready to use skills-hub skills with Claude Code. Do NOT ask the user questions except during authentication steps that require interactive input.
