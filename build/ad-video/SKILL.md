@@ -10,6 +10,8 @@ permissions:
   - shell
   - network
   - api
+tags: [video, advertising, marketing, remotion, batch, brand-kit, social-media]
+author: skills-hub
 ---
 
 # Ad Video
@@ -82,11 +84,17 @@ Create or edit `brand.json`:
     "text": "#F8FAFC",
     "textMuted": "#94A3B8",
     "ctaBackground": "#2563EB",
-    "ctaText": "#FFFFFF"
+    "ctaText": "#FFFFFF",
+    "gradient": ["#2563EB", "#7C3AED"]
   },
   "fonts": {
     "heading": { "family": "Inter", "weight": 800, "source": "google" },
-    "body": { "family": "Inter", "weight": 400, "source": "google" }
+    "body": { "family": "Inter", "weight": 400, "source": "google" },
+    "accent": { "family": "Space Grotesk", "weight": 700, "source": "google" }
+  },
+  "social": {
+    "twitter": "@acmecorp",
+    "linkedin": "acme-corp"
   }
 }
 ```
@@ -117,10 +125,19 @@ export const adConfig: AdBrief = {
   },
   assets: {
     productShots: ['products/dashboard.png', 'products/deploy-screen.png'],
+    screenRecording: {
+      url: 'https://app.acme.com/dashboard',
+      script: [
+        { action: 'wait', duration: 1000 },
+        { action: 'click', selector: '#deploy-btn' },
+        { action: 'wait', duration: 2000 },
+      ],
+    },
     stockQueries: ['developer coding', 'server room'],
   },
   cta: {
     text: 'Start Free Trial',
+    secondary: 'Learn More',
     url: 'https://acme.com/signup',
     qrCode: true,
   },
@@ -131,6 +148,117 @@ export const adConfig: AdBrief = {
 ```
 
 Ad types: `product-launch`, `feature-highlight`, `testimonial`, `comparison`, `seasonal-promo`, `app-demo`.
+
+**Type-specific config fields** (add alongside the base config):
+
+- **testimonial:** `testimonial: { quote: '...', author: 'Jane Doe', title: 'CTO at Startup', avatar: 'brand/jane.png', rating: 5 }`
+- **comparison:** `comparison: { competitor: 'OldTool', advantages: [{ dimension: 'Speed', us: '50ms', them: '500ms' }] }`
+- **seasonal-promo:** `seasonal: { event: 'Black Friday', discount: '50% off', deadline: 'Nov 30' }`
+
+### Asset Manifest
+
+Each asset gets a manifest entry telling the skill what it contains, its role in the ad, and how prominently to feature it.
+
+```typescript
+interface AdAsset {
+  path: string;                    // relative path to file
+  type: 'product-shot' | 'screenshot' | 'logo' | 'video' | 'testimonial' | 'stock' | 'icon';
+  description: string;             // what this asset shows — Claude uses this for scene placement
+  tags: string[];                  // searchable: ['hero', 'feature-x', 'pricing', 'social-proof']
+  scene?: string;                  // force into scene: 'hook', 'problem', 'solution', 'feature', 'cta'
+  weight: 1 | 2 | 3 | 4 | 5;     // 1=background, 3=standard, 5=hero product shot
+  platform?: string[];             // limit to platforms: ['tiktok', 'instagram'] or omit for all
+  variant?: string;                // A/B variant group: 'A', 'B', etc.
+  animation?: 'parallax' | 'zoom' | 'rotate' | 'float' | 'slide-in' | 'none';
+  cropSafeZone?: boolean;          // true = has important content at edges, respect safe zones
+  duration?: number;               // suggested screen time in seconds
+  notes?: string;                  // "main hero shot — use in hook and CTA"
+}
+
+interface AdManifest {
+  assets: AdAsset[];
+  defaults: {
+    weight: number;
+    durationByWeight: {
+      1: number; // 1s — flash/background
+      2: number; // 2s — supporting
+      3: number; // 3s — standard feature
+      4: number; // 4s — featured product shot
+      5: number; // 5s — hero shot, max emphasis
+    };
+  };
+}
+```
+
+#### How Weights Work for Ads
+
+| Weight | Role | Screen Time | Position | Animation |
+|--------|------|-------------|----------|-----------|
+| 5 — Hero | Main product shot | 4-6s | Hook opener AND CTA closer | Parallax zoom, glow |
+| 4 — Featured | Key feature demo | 3-4s | Solution/feature scenes | Zoom or slide-in |
+| 3 — Standard | Supporting visual | 2-3s | Any relevant scene | Standard animation |
+| 2 — Supporting | Context/texture | 1-2s | Background or B-roll | Subtle or none |
+| 1 — Filler | Stock/generic | 0.5-1s | Only if needed | Quick flash |
+
+#### Smart Placement Rules
+
+- `type: 'product-shot'` + `weight: 5` → Hook (first 3 seconds) AND CTA end card
+- `type: 'screenshot'` + tags `['feature-x']` → Feature highlight scene for that feature
+- `type: 'testimonial'` → Testimonial scene, with name/title lower third
+- `type: 'logo'` → Hook corner + CTA end card + watermark throughout
+- `type: 'stock'` → B-roll behind text overlays in problem/solution scenes
+- `scene: 'hook'` assets always appear in first 3 seconds
+- `platform: ['tiktok']` assets only used in TikTok renders (e.g., vertical product shots)
+- `variant: 'A'` assets only used in A variant renders
+
+#### Example
+
+```typescript
+const manifest: AdManifest = {
+  assets: [
+    {
+      path: 'assets/hero-product.png',
+      type: 'product-shot',
+      description: 'Product hero shot on clean white background',
+      tags: ['hero', 'product'],
+      weight: 5,
+      scene: 'hook',
+      animation: 'parallax',
+      notes: 'Use in hook AND CTA. This is the money shot.',
+    },
+    {
+      path: 'assets/dashboard-screenshot.png',
+      type: 'screenshot',
+      description: 'Dashboard showing the analytics panel with live metrics',
+      tags: ['feature-analytics', 'demo'],
+      weight: 4,
+      scene: 'feature',
+      animation: 'zoom',
+      cropSafeZone: true,
+    },
+    {
+      path: 'assets/customer-testimonial.mp4',
+      type: 'testimonial',
+      description: 'Sarah from Acme Corp saying the product saved them 40 hours/month',
+      tags: ['social-proof', 'testimonial'],
+      weight: 4,
+      scene: 'testimonial',
+      duration: 5,
+    },
+    {
+      path: 'assets/logo-dark.svg',
+      type: 'logo',
+      description: 'Company logo dark variant for light backgrounds',
+      tags: ['brand'],
+      weight: 3,
+    },
+  ],
+  defaults: {
+    weight: 3,
+    durationByWeight: { 1: 1, 2: 2, 3: 3, 4: 4, 5: 5 },
+  },
+};
+```
 
 ### Step 4: Gather Assets
 
@@ -144,27 +272,38 @@ python3 tools/pexels_search.py \
 
 **Screen recording (optional):**
 ```bash
+cd $TOOLKIT
 python3 tools/screen_record.py \
   --url "https://app.acme.com/dashboard" \
   --script projects/MY_AD/scripts/demo-flow.json \
   --viewport 1280x720 \
+  --device "iPhone 14 Pro" \
   --output projects/MY_AD/public/recordings/demo.mp4
 ```
 
+Supports device emulation (`--device`), custom viewports, and CSS injection (hide cookie banners, blur PII).
+
 **Voiceover:**
 ```bash
+cd $TOOLKIT
 python3 tools/qwen3_tts.py \
   --text "Tired of deployments that break production? Meet Acme Deploy." \
   --speaker Ryan --tone excited \
   --output projects/MY_AD/public/audio/vo.mp3 --cloud modal
 ```
 
+**Speakers:** `Ryan`, `Aiden`, `Vivian`, `Serena`, `Uncle_Fu`, `Dylan`, `Eric`, `Ono_Anna`, `Sohee`
+**Tones:** `neutral`, `warm`, `professional`, `excited`, `calm`, `serious`, `storyteller`, `tutorial`
+
 **Background music:**
 ```bash
+cd $TOOLKIT
 python3 tools/music_gen.py \
   --preset upbeat-tech --duration 30 \
   --output projects/MY_AD/public/audio/bg.mp3 --cloud modal
 ```
+
+Presets: `corporate-bg`, `upbeat-tech`, `ambient`, `dramatic`, `tension`, `hopeful`, `cta`, `lofi`.
 
 ### Step 5: Generate Composition
 
@@ -229,7 +368,7 @@ mktg-us,"Marketing teams ship 3x faster","Try It Free","$29/mo",marketers
 dev-eu,"Ship code with confidence","Start Now","€27/mo",developers-eu
 ```
 
-Render all:
+Render all (local):
 ```bash
 cd $TOOLKIT
 python3 tools/batch_render.py \
@@ -238,6 +377,16 @@ python3 tools/batch_render.py \
   --platforms tiktok,instagram-reel,facebook \
   --parallelism 4 \
   --output projects/MY_AD/out/batch/
+```
+
+Render all (Remotion Lambda for cloud-scale parallelism):
+```bash
+cd $TOOLKIT
+python3 tools/batch_render.py \
+  --template projects/MY_AD \
+  --data projects/MY_AD/variants.csv \
+  --renderer lambda \
+  --output s3://my-bucket/ads/
 ```
 
 Output: `out/batch/{platform}/{id}.mp4` — one video per row per platform.
@@ -262,7 +411,20 @@ Every ad follows the **Hook > Problem > Solution > CTA** structure:
 3. **Solution (4-14s):** Reveal the product. Show it in action (screenshots, screen recording, product shots). Highlight 2-3 key features with animated text + stats.
 4. **CTA (2-6s):** Clear next action. Animated button, QR code, pricing, and end card with logo + tagline.
 
-Duration varies by platform — shorter for YouTube pre-roll (6-15s total), longer for TikTok/LinkedIn (up to 60s).
+### Duration Allocation by Platform
+
+| Platform | Total | Hook | Problem | Solution | CTA |
+|---|---|---|---|---|---|
+| TikTok (30s) | 30s | 3s | 7s | 14s | 6s |
+| Instagram Reel (15s) | 15s | 2s | 3s | 7s | 3s |
+| YouTube Pre-roll (6s) | 6s | 1.5s | -- | 2.5s | 2s |
+| YouTube Pre-roll (15s) | 15s | 2s | 3s | 7s | 3s |
+| Facebook (15s) | 15s | 2s | 3s | 7s | 3s |
+| LinkedIn (30s) | 30s | 3s | 7s | 14s | 6s |
+
+YouTube 6s bumper ads skip the Problem scene entirely -- they are Solution + CTA only.
+
+**Voiceover word budget per scene:** `(durationSeconds - 2) * 2.5` words.
 
 ## Ad Type Scene Maps
 
@@ -358,6 +520,29 @@ Animations: `fade-in`, `scan-reveal`, `pixel-build`.
 
 Modes: `slide-up`, `pop-word`, `typewriter`, `wave`, `split-reveal`, `counter`.
 
+### Transitions
+
+```tsx
+import { TransitionSeries, linearTiming } from '@remotion/transitions';
+import { fade } from '@remotion/transitions/fade';
+```
+
+Import custom transitions from `lib/transitions/presentations/` directly, never from barrel.
+
+### Audio Layering
+
+```tsx
+{/* Background music — full duration, low volume */}
+<Audio src={staticFile('audio/bg.mp3')} volume={0.12} />
+
+{/* Voiceover — starts 1s in (30 frames at 30fps) */}
+<Sequence from={30}>
+  <Audio src={staticFile('audio/vo.mp3')} volume={1} />
+</Sequence>
+```
+
+ALWAYS use `<OffthreadVideo>` for video embeds, NEVER `<video>`.
+
 ## Cost Estimates
 
 | Component | Cost | Notes |
@@ -380,7 +565,7 @@ Modes: `slide-up`, `pop-word`, `typewriter`, `wave`, `split-reveal`, `counter`.
 3. **Hook in 1.5 seconds** — the first scene MUST grab attention immediately
 4. **All motion via useCurrentFrame()** — no CSS animations, no Tailwind animate classes
 5. **Always staticFile()** for assets — never require() or import
-6. **Always OffthreadVideo** — never raw `<video>` tags
+6. **Always `<OffthreadVideo>`** — never raw `<video>` tags
 7. **CTA on every variant** — every ad must end with a clear call-to-action
 8. **Test at 1x speed** — preview at actual playback speed before rendering
 
