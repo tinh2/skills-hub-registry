@@ -18,3 +18,6 @@ Thumbs.db
 # Internal docs (competitive analysis, strategy, business plans)
 docs/competitive-gap-analysis.md
 docs/NewFeatures-*.md
+
+# Recall/analysis artifacts (internal, not for public repo)
+analysis/
