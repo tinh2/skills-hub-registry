@@ -617,6 +617,53 @@ Import custom transitions from `lib/transitions/presentations/` directly, never 
 
 **Total 5-minute tutorial:** ~$0.50-2.00 with AI avatar, ~$0.10-0.50 without.
 
+## Remotion Ecosystem Packages
+
+Install the official Remotion skills for best results: `npx skills i remotion-dev/skills/skills/remotion`. This provides 35 production rules covering animations, audio, transitions, text, 3D, and more.
+
+### Core Packages
+
+| Package | What it does |
+|---------|-------------|
+| `@remotion/transitions` | fade, slide, wipe, flip, clockWipe, iris |
+| `@remotion/captions` | TikTok-style word-by-word captions |
+| `@remotion/media-utils` | `visualizeAudio()`, `getAudioData()`, `getAudioDurationInSeconds()` |
+| `@remotion/layout-utils` | `measureText()`, `fitText()`, `fillTextBox()` — use for dynamic code block sizing |
+| `@remotion/noise` | Procedural noise for film grain |
+| `@remotion/google-fonts` | Google Fonts loading |
+| `@remotion/shapes` | Geometric shape components — use for overlays in explanations |
+| `@remotion/paths` | SVG path animation — use for animated diagrams and flowcharts |
+| `remotion-animated` | Declarative `<Animated>` with `Move()`, `Scale()`, `Fade()` |
+
+### Community Packages
+
+| Package | What it does |
+|---------|-------------|
+| **Remotion Bits** (`npx remotion-bits find/fetch`) | ParticleSystem, AnimatedText (char/word/line stagger), StaggeredMotion — use AnimatedText for step titles |
+| **GL Transitions** (`remotion-gl-transitions`) | Hundreds of GLSL shader transitions from gl-transitions.com |
+| **remotion-confetti** | Canvas-based confetti with physics |
+
+### AI Services
+
+| Service | What it does | Cost |
+|---------|-------------|------|
+| **fal.ai** | Single API for video gen (Veo 3.1, Kling 3, Wan 2.2). One key, all models | $0.05-0.50/sec |
+| **whisper.cpp** | LOCAL speech-to-text, zero cost. Use for caption generation instead of cloud APIs | Free |
+| **Suno** (via KIE) | AI music with vocals. Better than MusicGen for songs with lyrics | $0.03/song |
+
+### Producer Intelligence
+
+**Audio ducking:** Auto-lower music volume when voiceover speaks. Use Remotion's `interpolate()` on volume based on voiceover audio presence.
+
+**Loudness normalization:** Target LUFS per platform: YouTube -14, TikTok -14, Instagram -14, Podcast -16. Post-process:
+```bash
+ffmpeg -i input.mp4 -af loudnorm=I=-14:TP=-1.5:LRA=11 output.mp4
+```
+
+**Film grain via `@remotion/noise`:** Use `noise2D()` or `noise3D()` for procedural film grain instead of CSS overlay.
+
+**Light leaks via `@remotion/light-leaks`:** WebGL overlays for transitions between acts/scenes.
+
 ## Key Rules
 
 1. **All animation via `useCurrentFrame()` + `interpolate()`/`spring()`.** No CSS transitions or Tailwind animation classes.

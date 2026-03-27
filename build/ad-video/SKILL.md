@@ -527,7 +527,7 @@ import { TransitionSeries, linearTiming } from '@remotion/transitions';
 import { fade } from '@remotion/transitions/fade';
 ```
 
-Import custom transitions from `lib/transitions/presentations/` directly, never from barrel.
+Import custom transitions from `lib/transitions/presentations/` directly, never from barrel. For additional variety, use GL Transitions (`remotion-gl-transitions`).
 
 ### Audio Layering
 
@@ -557,6 +557,55 @@ ALWAYS use `<OffthreadVideo>` for video embeds, NEVER `<video>`.
 
 **Single ad, all 5 platforms:** ~$1-3 total
 **Batch of 50 variants x 5 platforms (250 videos):** ~$5-25 total (Lambda) or free (local, ~2 hours)
+
+## Remotion Ecosystem Packages
+
+Install the official Remotion skills for best results: `npx skills i remotion-dev/skills/skills/remotion`. This provides 35 production rules covering animations, audio, transitions, text, 3D, and more.
+
+### Core Packages
+
+| Package | What it does |
+|---------|-------------|
+| `@remotion/transitions` | fade, slide, wipe, flip, clockWipe, iris |
+| `@remotion/captions` | TikTok-style word-by-word captions |
+| `@remotion/media-utils` | `visualizeAudio()`, `getAudioData()`, `getAudioDurationInSeconds()` |
+| `@remotion/layout-utils` | `measureText()`, `fitText()`, `fillTextBox()` |
+| `@remotion/light-leaks` | WebGL light leak overlays — use for premium scene transitions |
+| `@remotion/motion-blur` | `<Trail>` and `<CameraMotionBlur>` — use for product shot reveals |
+| `@remotion/noise` | Procedural noise for film grain |
+| `@remotion/google-fonts` | Google Fonts loading |
+| `@remotion/shapes` | Geometric shape components |
+| `@remotion/paths` | SVG path animation |
+| `remotion-animated` | Declarative `<Animated>` with `Move()`, `Scale()`, `Fade()` |
+
+### Community Packages
+
+| Package | What it does |
+|---------|-------------|
+| **Remotion Bits** (`npx remotion-bits find/fetch`) | ParticleSystem, AnimatedText (char/word/line stagger), StaggeredMotion |
+| **GL Transitions** (`remotion-gl-transitions`) | Hundreds of GLSL shader transitions from gl-transitions.com — use for variety in ad cuts |
+| **remotion-confetti** | Canvas-based confetti with physics |
+
+### AI Services
+
+| Service | What it does | Cost |
+|---------|-------------|------|
+| **fal.ai** | Single API for video gen (Veo 3.1, Kling 3, Wan 2.2). One key for AI B-roll generation | $0.05-0.50/sec |
+| **whisper.cpp** | LOCAL speech-to-text, zero cost. Use for caption generation | Free |
+| **Suno** (via KIE) | AI music with vocals. Better than MusicGen for songs with lyrics | $0.03/song |
+
+### Producer Intelligence
+
+**Audio ducking:** Auto-lower music volume when voiceover speaks. Use Remotion's `interpolate()` on volume based on voiceover audio presence.
+
+**Loudness normalization:** Target LUFS per platform: YouTube -14, TikTok -14, Instagram -14, Facebook -14, LinkedIn -14. Post-process:
+```bash
+ffmpeg -i input.mp4 -af loudnorm=I=-14:TP=-1.5:LRA=11 output.mp4
+```
+
+**Film grain via `@remotion/noise`:** Use `noise2D()` or `noise3D()` for procedural film grain instead of CSS overlay.
+
+**Light leaks via `@remotion/light-leaks`:** WebGL overlays for premium transitions between scenes.
 
 ## Key Rules
 

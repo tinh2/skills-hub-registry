@@ -442,11 +442,11 @@ Caption config defaults:
 | `zoom-rush` | Rapid zoom in then out to next scene | High energy cuts |
 | `glitch` | Digital glitch distortion | Tech content, edgy |
 | `flash` | White flash between scenes | Photo reveals |
-| `whip-pan` | Motion blur simulating camera whip | Fast pacing |
+| `whip-pan` | Motion blur simulating camera whip (use `@remotion/motion-blur` `<CameraMotionBlur>`) | Fast pacing |
 | `fade` | Standard opacity crossfade | Calm transitions |
 | `cut` | Hard cut, no transition | Beat-synced montages |
 
-Import custom transitions from `lib/transitions/presentations/` directly, never from barrel files.
+Import custom transitions from `lib/transitions/presentations/` directly, never from barrel files. For additional variety, use GL Transitions (`remotion-gl-transitions`) for trend-matching styles.
 
 ## Content Types
 
@@ -611,13 +611,61 @@ ALWAYS use `<OffthreadVideo>`, NEVER `<video>`.
 | Voiceover (Qwen3-TTS) | ~$0.01 | Per clip, via Modal |
 | Background music (MusicGen) | ~$0.02-0.05 | Duration-dependent |
 | Image generation (FLUX.2) | ~$0.01/image | If AI backgrounds needed |
-| Whisper transcription | Free | Runs locally via whisper.cpp |
+| Whisper transcription | Free | Runs locally via whisper.cpp — preferred over cloud APIs |
 | Remotion render | Free | Local render, no license for personal use |
 | Auto-reframe analysis | Free | Local OpenCV processing |
 
 **Total per clip:** ~$0.05-0.10 for AI-generated assets. Free if using only user-provided media.
 
 **Batch export:** Rendering 4 platform variants costs zero extra -- same Remotion render with different dimensions.
+
+## Remotion Ecosystem Packages
+
+Install the official Remotion skills for best results: `npx skills i remotion-dev/skills/skills/remotion`. This provides 35 production rules covering animations, audio, transitions, text, 3D, and more.
+
+### Core Packages
+
+| Package | What it does |
+|---------|-------------|
+| `@remotion/transitions` | fade, slide, wipe, flip, clockWipe, iris |
+| `@remotion/captions` | TikTok-style word-by-word captions |
+| `@remotion/media-utils` | `visualizeAudio()`, `getAudioData()`, `getAudioDurationInSeconds()` |
+| `@remotion/layout-utils` | `measureText()`, `fitText()`, `fillTextBox()` |
+| `@remotion/motion-blur` | `<Trail>` and `<CameraMotionBlur>` — use for whip-pan transitions |
+| `@remotion/noise` | Procedural noise for film grain |
+| `@remotion/google-fonts` | Google Fonts loading |
+| `@remotion/shapes` | Geometric shape components |
+| `@remotion/paths` | SVG path animation |
+| `remotion-animated` | Declarative `<Animated>` with `Move()`, `Scale()`, `Fade()` |
+
+### Community Packages
+
+| Package | What it does |
+|---------|-------------|
+| **Remotion Bits** (`npx remotion-bits find/fetch`) | ParticleSystem (confetti, rain, starfields) for engagement effects, AnimatedText, StaggeredMotion |
+| **GL Transitions** (`remotion-gl-transitions`) | Hundreds of GLSL shader transitions from gl-transitions.com — use for trend-matching transition styles |
+| **remotion-confetti** | Canvas-based confetti with physics |
+
+### AI Services
+
+| Service | What it does | Cost |
+|---------|-------------|------|
+| **fal.ai** | Single API for video gen (Veo 3.1, Kling 3, Wan 2.2). One key for AI clip generation | $0.05-0.50/sec |
+| **whisper.cpp** | LOCAL speech-to-text, zero cost. Use for transcription instead of cloud APIs | Free |
+| **Suno** (via KIE) | AI music with vocals. Better than MusicGen for songs with lyrics | $0.03/song |
+
+### Producer Intelligence
+
+**Audio ducking:** Auto-lower music volume when voiceover speaks. Use Remotion's `interpolate()` on volume based on voiceover audio presence. Essential for voiceover clips.
+
+**Loudness normalization:** Target LUFS per platform: YouTube -14, TikTok -14, Instagram -14, Podcast -16. Post-process:
+```bash
+ffmpeg -i input.mp4 -af loudnorm=I=-14:TP=-1.5:LRA=11 output.mp4
+```
+
+**Film grain via `@remotion/noise`:** Use `noise2D()` or `noise3D()` for procedural film grain instead of CSS overlay.
+
+**Light leaks via `@remotion/light-leaks`:** WebGL overlays for transitions between scenes.
 
 ## Tips
 

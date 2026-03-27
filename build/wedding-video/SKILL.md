@@ -475,10 +475,10 @@ Song transitions should align with act boundaries. Map each act to the appropria
 
 All effects are composable and applied per-act via the `effects` config property:
 
-- **Film Grain** -- Animated noise overlay with configurable intensity (0.0-1.0). Uses deterministic seeded noise frames for render consistency.
+- **Film Grain** -- Use `@remotion/noise` `noise2D()`/`noise3D()` for procedural grain with configurable intensity (0.0-1.0). Deterministic seeded noise for render consistency.
 - **Vignette** -- Darkened edges with configurable spread and intensity. Draws focus to center.
 - **Letterbox** -- Cinematic 2.35:1 black bars. Applied as absolute-positioned overlays.
-- **Particles** -- Six types: `confetti`, `golden-rain`, `sparkles`, `snow`, `bokeh`, `dust`. Each has `density` (0.0-1.0) and `speed` controls. All rendered via `interpolate()` on divs -- no canvas.
+- **Particles** -- Six types: `confetti`, `golden-rain`, `sparkles`, `snow`, `bokeh`, `dust`. Use Remotion Bits ParticleSystem (`npx remotion-bits find ParticleSystem`) for confetti and golden-rain. Each has `density` (0.0-1.0) and `speed` controls.
 - **Depth Blur** -- Simulated depth of field via backdrop-filter blur with mask options.
 - **Split Screen** -- 2, 3, or 4 photos side by side with configurable gap and animation.
 
@@ -495,12 +495,61 @@ WeddingMontage (top-level composition)
       KenBurnsPhoto | SplitScreen | PhotoMosaic | BeatSyncedMontage | VideoClip | TextOnly
       TextOverlay (optional, per scene)
     FilmGrain | Vignette | Letterbox | Particles | DepthBlur (effects layer)
-  ActTransition (between acts: fade-to-black, crossfade, title-card, whoosh-cut, light-leak)
+  ActTransition (between acts: fade-to-black, crossfade, title-card, whoosh-cut, @remotion/light-leaks, GL Transitions)
   AudioTrack (multi-song with beat data)
   EndCard
 ```
 
 All components use Remotion primitives: `useCurrentFrame()`, `useVideoConfig()`, `interpolate()`, `spring()`, `staticFile()`, `<Sequence>`, `<Audio>`, `<Img>`. Never CSS animations, `setTimeout`, or `requestAnimationFrame`.
+
+## Remotion Ecosystem Packages
+
+Install the official Remotion skills for best results: `npx skills i remotion-dev/skills/skills/remotion`. This provides 35 production rules covering animations, audio, transitions, text, 3D, and more.
+
+### Core Packages
+
+| Package | What it does |
+|---------|-------------|
+| `@remotion/transitions` | fade, slide, wipe, flip, clockWipe, iris |
+| `@remotion/captions` | TikTok-style word-by-word captions |
+| `@remotion/media-utils` | `visualizeAudio()`, `getAudioData()`, `getAudioDurationInSeconds()` |
+| `@remotion/layout-utils` | `measureText()`, `fitText()`, `fillTextBox()` |
+| `@remotion/light-leaks` | WebGL light leak overlays — use for act transitions instead of fade-to-black |
+| `@remotion/motion-blur` | `<Trail>` and `<CameraMotionBlur>` — use for slow-mo proposal moments |
+| `@remotion/noise` | Procedural noise — use `noise2D()`/`noise3D()` for film grain instead of CSS overlay |
+| `@remotion/google-fonts` | Google Fonts loading |
+| `@remotion/shapes` | Geometric shape components |
+| `@remotion/paths` | SVG path animation |
+| `remotion-animated` | Declarative `<Animated>` with `Move()`, `Scale()`, `Fade()` |
+
+### Community Packages
+
+| Package | What it does |
+|---------|-------------|
+| **Remotion Bits** (`npx remotion-bits find/fetch`) | ParticleSystem (confetti, golden rain, starfields), AnimatedText (char/word/line stagger), StaggeredMotion — use ParticleSystem instead of custom CSS particles |
+| **GL Transitions** (`remotion-gl-transitions`) | Hundreds of GLSL shader transitions from gl-transitions.com — use for cinematic dissolves between acts |
+| **remotion-confetti** | Canvas-based confetti with physics |
+
+### AI Services
+
+| Service | What it does | Cost |
+|---------|-------------|------|
+| **fal.ai** | Single API for video gen (Veo 3.1, Kling 3, Wan 2.2). One key, all models | $0.05-0.50/sec |
+| **whisper.cpp** | LOCAL speech-to-text, zero cost. Use for caption generation | Free |
+| **Suno** (via KIE) | AI music with vocals — custom wedding songs with lyrics | $0.03/song |
+
+### Producer Intelligence
+
+**Audio ducking:** Auto-lower music volume when voiceover speaks. Use Remotion's `interpolate()` on volume based on voiceover audio presence. Essential for wedding videos with narration over music.
+
+**Loudness normalization:** Target LUFS per platform: YouTube -14, TikTok -14, Instagram -14, Podcast -16. Post-process:
+```bash
+ffmpeg -i input.mp4 -af loudnorm=I=-14:TP=-1.5:LRA=11 output.mp4
+```
+
+**Film grain via `@remotion/noise`:** Use `noise2D()` or `noise3D()` for procedural film grain instead of CSS overlay. Renders consistently across frames with deterministic seeds.
+
+**Light leaks via `@remotion/light-leaks`:** WebGL overlays for transitions between acts/scenes. Use instead of fade-to-black between upbeat acts.
 
 ## Remotion Rules
 
@@ -542,5 +591,5 @@ These rules apply to ALL Remotion code in this project:
 4. **Preview often.** Use `npm start` to check pacing in Remotion Studio before full render.
 5. **Photo quality:** 1920x1080 minimum. Larger is fine -- Remotion scales down.
 6. **Text overlays:** Less is more. 3-5 text moments across the whole video.
-7. **Act transitions:** Use fade-to-black between emotional shifts, light-leaks between upbeat acts.
+7. **Act transitions:** Use fade-to-black between emotional shifts, `@remotion/light-leaks` between upbeat acts, GL Transitions for cinematic dissolves.
 8. **Render time:** Expect 10-20 minutes for a 5-minute video on an M1 Mac.
