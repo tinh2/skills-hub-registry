@@ -21,3 +21,4 @@ docs/NewFeatures-*.md
 
 # Recall/analysis artifacts (internal, not for public repo)
 analysis/
+.aider*
