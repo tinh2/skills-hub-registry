@@ -20,7 +20,7 @@ PASSED=0
 FAILED=0
 
 SEEN_NAMES_FILE=$(mktemp)
-trap "rm -f $SEEN_NAMES_FILE" EXIT
+trap "rm -f '$SEEN_NAMES_FILE' '${SEEN_NAMES_FILE}.counts'" EXIT
 
 # Collect all SKILL.md files, excluding .claude worktrees and scripts
 find "$REPO_ROOT" -name "SKILL.md" -not -path "*/.claude/*" -not -path "*/scripts/*" | sort | while IFS= read -r file; do
