@@ -83,7 +83,7 @@ done
 
 # Read counters back from subshell
 if [[ -f "${SEEN_NAMES_FILE}.counts" ]]; then
-    read TOTAL PASSED FAILED ERRORS < "${SEEN_NAMES_FILE}.counts"
+    read -r TOTAL PASSED FAILED ERRORS < "${SEEN_NAMES_FILE}.counts"
     rm -f "${SEEN_NAMES_FILE}.counts"
 fi
 
