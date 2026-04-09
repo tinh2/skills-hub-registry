@@ -33,7 +33,7 @@ $ARGUMENTS — what to build. Examples: "landing page", "settings screen", "dash
 ### 1.3 Understand the Request
 - Parse $ARGUMENTS for the screen/component to build
 - If a specific page is named, check if routes/navigation exist for it
-- If no arguments, scan for TODO comments, empty route handlers, placeholder components
+- If no arguments, scan for unfinished comments, empty route handlers, placeholder components
 
 ---
 

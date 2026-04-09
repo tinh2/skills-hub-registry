@@ -276,7 +276,7 @@ $ARGUMENTS (optional). If provided, focus on specific components, pages, or hard
 ### 6.1 String Externalization
 - Scan for hardcoded user-facing strings in component files.
 - Flag strings that should be in a localization file (l10n, i18n, intl, arb).
-- Do NOT move all strings — flag them and create a TODO list.
+- Do NOT move all strings — flag them and create a task list for future extraction.
 - Ensure string templates use parameterized interpolation, not concatenation:
   ```typescript
   // Bad: "Welcome " + userName + "!"
