@@ -1,187 +1,195 @@
-# Competitive Gap Analysis — Remotion + AI Video Creation Skill
+# Competitive Gap Analysis — Skills Hub Registry
 
-> Generated 2026-03-26 | Domain: Programmatic video creation via Claude Code + Remotion — wedding montages, social media clips, tutorial videos, and advertising/marketing content
+> Generated 2026-04-09 | Domain: AI coding agent skills/plugin registry and marketplace
 
 ---
 
 ## Our Product
 
-- **What it does:** The `video-toolkit` skill in skills-hub-registry enables autonomous video creation from a text brief using Remotion (React) for composition, with AI-generated voiceovers (Qwen3-TTS), images (FLUX.2), background music (MusicGen), and talking head animation (SadTalker). Cloud GPU rendering via Modal or RunPod.
-- **Target user:** Developers and technical creators who want to generate professional videos programmatically from Claude Code — product demos, sprint reviews, explainer videos.
-- **Core value prop:** Full pipeline from text brief to rendered MP4, entirely from the terminal. No GUI video editor needed. ~$1-3 per 60s video.
-- **Features implemented:** 14
-
-### Current Feature Set (video-toolkit)
-
-- [x] Remotion (React) video composition
-- [x] Per-scene voiceover generation (Qwen3-TTS, 9 speakers, 8 tones)
-- [x] Voice cloning from reference audio
-- [x] AI image generation (FLUX.2) with presets
-- [x] Background music generation (MusicGen, 8 presets)
-- [x] Talking head animation (SadTalker)
-- [x] Cloud GPU rendering (Modal endpoints)
-- [x] Per-scene audio timing sync via ffprobe
-- [x] TransitionSeries with fade transitions
-- [x] Narrator picture-in-picture overlay
-- [x] Scene-based config system (TypeScript)
-- [x] Project templates (product-demo, sprint-review)
-- [x] Image upscaling (RealESRGAN)
-- [x] Cloudflare R2 file transfer
-
-### What's NOT in video-toolkit
-
-- No wedding/montage templates
-- No photo slideshow/Ken Burns support
-- No multi-song audio with hard-cut transitions
-- No beat-synced editing
-- No social media format presets (TikTok/Reels/Shorts)
-- No stock footage/photo integration
-- No cinematic color grading per act
-- No film grain/letterboxing/vignette effects
-- No split-screen compositions
-- No particle/confetti effects
-- No photo mosaic/grid layouts
-- No user photo import pipeline (Google Photos, folders)
+- **What it does:** Skills Hub Registry is a curated collection of 425+ production-tested autonomous AI agent skills organized into 13 categories covering the full software development lifecycle — from project scaffolding through deployment, security audits, domain-specific analysis across 40+ industry verticals, video production, and game development.
+- **Target user:** Developers using Claude Code (and increasingly Cursor, Codex CLI, Gemini CLI) who need turn-key AI-driven assistance for any software task.
+- **Core value prop:** Zero-question autonomy with self-healing validation and self-evolution telemetry — invoke a single skill (or a pre-built combo chain) and it runs end-to-end, retries on failure, and logs execution telemetry so a meta-skill can patch underperforming skills over time.
+- **Features implemented:** 425+ skills across 13 categories, 34 combo pipeline chains, 195+ domain-specific analysis skills, quality scoring rubric (0-100), CI validation, self-healing blocks, self-evolution telemetry, meta-skills for skill lifecycle management.
 
 ---
 
 ## Competitive Landscape
 
-| Competitor | Positioning | Pricing | Market Position | Key Differentiator |
-|---|---|---|---|---|
-| **Remotion Superpowers** (open-source plugin) | Full production studio via Claude Code MCP servers | Free (OSS) | Niche — developer tool | 13 slash commands, Suno music, ElevenLabs, Pexels, 100+ AI models via Replicate |
-| **Animoto** | Drag-and-drop video maker with wedding templates | Free–$59/mo | Challenger — consumer/SMB | 100+ wedding templates, 3,000 licensed songs, social posting |
-| **InVideo AI** | Prompt-based video generation | Free–$60/mo | Leader — AI video | 16M+ stock assets, VEO 3.1 integration, voice cloning |
-| **CapCut** | Free video editor with AI features | Free–$20/mo | Leader — consumer | AI Clipper (long-to-shorts), auto-captions, 12M+ assets |
-| **FlexClip** | AI-assisted online video editor | Free–$20/mo | Challenger — SMB | AI Recreate, wedding templates, Hailuo/Kling/Veo integration |
-| **Runway ML** | Generative AI video platform | Free–$28/mo | Leader — generative | Gen-4.5 text/image-to-video, best temporal consistency |
-| **Vidio.ai** | AI wedding-specific video maker | Freemium | Niche — wedding | Smart photo ordering, music-aware pacing, auto duplicate/blur detection |
-| **Mootion** | AI video generator | Freemium | Niche — speed | 3-min video in under 2 min, 65% faster than competitors |
-| **Shotstack** | Programmatic video API (JSON) | Pay-per-render | Niche — developer | Cloud rendering API, event-triggered renders, template system |
-| **Pictory** | Text/script to video | $19–$119/mo | Challenger — content | Blog-to-video, 3M+ clips, 15K music tracks |
+| Competitor | Positioning | Pricing | Market Position | Feature Count |
+|-----------|-------------|---------|-----------------|---------------|
+| [Skills.sh (Vercel)](https://skills.sh) | "npm for AI agents" — open CLI + registry/leaderboard | Free / Open Source | Leader | 350,000+ packages |
+| [SkillsMP](https://skillsmp.com) | Largest search/discovery layer aggregating GitHub skills | Free | Leader | 700,000+ indexed |
+| [LobeHub Skills](https://lobehub.com/skills) | Polished marketplace with multi-agent collaboration | Free / Freemium | Challenger | 110,000+ skills |
+| [Tons of Skills](https://tonsofskills.com) | CI-validated plugins with fuzzy search and CLI | Free | Challenger | 416 plugins / 2,787 skills |
+| [Cursor Directory](https://cursor.directory) | Community rules, MCP servers, and plugins for Cursor | Free / Team tiers | Niche (Cursor-specific) | 76.8k+ developers |
+| [Vibe Rules](https://viberules.app) | Cross-agent sync tool — write once, deploy to 18+ agents | Free (VSCode ext) | Niche (sync tool) | N/A (sync layer) |
+| [Anthropic Official](https://github.com/anthropics/skills) | First-party reference skills for Claude | Free | Reference | 17 skills |
+
+### Source URLs
+
+- Skills.sh: [Vercel announcement](https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem), [InfoQ coverage](https://www.infoq.com/news/2026/02/vercel-agent-skills/), [GitHub](https://github.com/vercel-labs/skills)
+- SkillsMP: [SmartScope review](https://smartscope.blog/en/blog/skillsmp-marketplace-guide/), [skillsmp.com](https://skillsmp.com/)
+- LobeHub: [lobehub.com/skills](https://lobehub.com/skills), [GitHub](https://github.com/lobehub/lobehub)
+- Tons of Skills: [tonsofskills.com](https://tonsofskills.com/compare-marketplaces/)
+- Cursor Directory: [cursor.directory](https://cursor.directory/)
+- Vibe Rules: [viberules.app](https://viberules.app/en)
+- Anthropic Official: [github.com/anthropics/skills](https://github.com/anthropics/skills)
 
 ---
 
 ## Feature Matrix
 
-| Feature | Us (video-toolkit) | Remotion Superpowers | Animoto | InVideo AI | CapCut | FlexClip | Vidio.ai | Pressure | Effort |
-|---|---|---|---|---|---|---|---|---|---|
-| **Remotion/React composition** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | — | — |
-| **CLI/terminal workflow** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | — | — |
-| **AI voiceover generation** | ✅ | ✅ (ElevenLabs) | ❌ | ✅ | ✅ | ✅ | ❌ | — | — |
-| **Voice cloning** | ✅ | ✅ (ElevenLabs) | ❌ | ✅ | ❌ | ❌ | ❌ | — | — |
-| **AI image generation** | ✅ | ✅ (FLUX/Imagen) | ❌ | ❌ | ❌ | ✅ | ❌ | — | — |
-| **AI music generation** | ✅ (MusicGen) | ✅ (Suno) | ❌ | ❌ | ❌ | ❌ | ❌ | — | — |
-| **Cloud GPU rendering** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | — | — |
-| **Wedding templates** | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | CRITICAL | M |
-| **Photo slideshow / Ken Burns** | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | CRITICAL | M |
-| **Multi-song audio w/ transitions** | ❌ | ❌ | partial | partial | ✅ | partial | ✅ | HIGH | M |
-| **Beat-synced editing** | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | HIGH | L |
-| **Split-screen compositions** | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | MEDIUM | S |
-| **Cinematic color grading** | ❌ | ❌ | partial | partial | ✅ | partial | ❌ | HIGH | M |
-| **Film grain / vignette effects** | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | MEDIUM | S |
-| **Letterboxing (cinematic bars)** | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | MEDIUM | S |
-| **Particle / confetti effects** | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | MEDIUM | M |
-| **Photo mosaic / grid layout** | ❌ | ❌ | ❌ | partial | ❌ | ❌ | ❌ | LOW | S |
-| **Stock footage integration** | ❌ | ✅ (Pexels) | ✅ (Getty) | ✅ (iStock/Shutterstock) | ✅ | ✅ | ❌ | HIGH | M |
-| **Social media format presets** | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | CRITICAL | S |
-| **TikTok-style captions** | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | HIGH | M |
-| **Auto-captions (Whisper)** | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | HIGH | M |
-| **Text-to-video (generative)** | ❌ | ✅ (Veo/Wan/Kling) | ❌ | ✅ | ✅ | ✅ | ❌ | MEDIUM | L |
-| **AI video clips (gen. B-roll)** | ❌ | ✅ (Replicate) | ❌ | ✅ (VEO 3.1) | ❌ | ✅ (Kling) | ❌ | MEDIUM | L |
-| **Licensed music library** | ❌ | ❌ | ✅ (3K tracks) | ✅ (16M assets) | ✅ | ✅ (4M assets) | ❌ | HIGH | M |
-| **User photo import pipeline** | ❌ | ❌ | ✅ (Facebook/IG) | ❌ | ❌ | ❌ | ✅ | HIGH | M |
-| **Smart photo ordering** | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | MEDIUM | L |
-| **Duplicate/blur detection** | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | MEDIUM | M |
-| **Direct social media posting** | ❌ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | LOW | L |
-| **Act-based narrative structure** | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | — | M |
-| **Remotion Lambda rendering** | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | MEDIUM | L |
+| Feature | Us | Skills.sh | SkillsMP | LobeHub | Tons of Skills | Cursor Dir | Vibe Rules |
+|---------|-----|-----------|----------|---------|----------------|------------|------------|
+| **Discovery & Distribution** | | | | | | | |
+| Web-based searchable directory | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| CLI installer (`npx skills add` or equiv.) | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| One-click install from web/app | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ✅ |
+| Download/install count tracking | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Trending/leaderboard | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| User reviews/ratings | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Fuzzy/intelligent search | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Category-based browsing | 🔶 | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Dedicated skill detail pages | ❌ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| **Quality & Security** | | | | | | | |
+| CI validation pipeline | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Frontmatter schema validation | ✅ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Quality scoring rubric | ⭐ | ❌ | 🔶 | 🔶 | ❌ | ❌ | ❌ |
+| Secret scanning | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Dangerous pattern detection | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ |
+| Security vetting before install | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ |
+| **Cross-Platform** | | | | | | | |
+| Multi-agent support (18+ agents) | 🔶 | ✅ | ✅ | ✅ | ❌ | ❌ | ✅ |
+| Automatic format conversion | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Cross-agent sync tool | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| **Developer Experience** | | | | | | | |
+| VSCode extension | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Skill creator/authoring tools | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Self-healing validation in skills | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Self-evolution telemetry | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Skill versioning (semver) | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Skill dependency management | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Permissions sandboxing (runtime) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Skill bundle packaging | 🔶 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| **Community & Enterprise** | | | | | | | |
+| Community skill submissions | 🔶 | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Team/private marketplace | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Multi-agent collaboration | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
+| User accounts/auth | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ |
+| **Content Depth** | | | | | | | |
+| SDLC coverage (build→deploy) | ⭐ | 🔶 | 🔶 | 🔶 | 🔶 | ❌ | ❌ |
+| Combo/pipeline chains | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Domain-specific analysis (40+ verticals) | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Enterprise compliance (HIPAA, SOC2, etc.) | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Video production pipeline | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Game development skills | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Meta-skills (skill lifecycle mgmt) | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Progressive token loading | ✅ | ✅ | N/A | N/A | N/A | N/A | N/A |
+
+Legend: ✅ = has it, 🔶 = partial, ❌ = missing, ⭐ = our edge
 
 ---
 
 ## Critical Gaps (Build Now)
 
-These are table-stakes features that nearly every competitor offers and our skill completely lacks.
+Features we're missing that every major competitor has. These are table stakes.
 
-### 1. Wedding / Event Montage Template System
-- **Who has it:** Animoto, InVideo, CapCut, FlexClip, Vidio.ai (5/6)
-- **Why it matters:** The user's wedding video spec demonstrates a clear need for act-based, emotionally-driven narrative templates. This is the #1 missing capability. Without it, every wedding video requires writing the full Remotion composition from scratch.
+### 1. Web-Based Searchable Directory
+
+- **Feature:** A hosted website where users can browse, search, and discover skills
+- **Who has it:** Skills.sh, SkillsMP, LobeHub, Tons of Skills, Cursor Directory (5/6 competitors)
+- **Why it matters:** Without a web presence, we are invisible to the 99% of developers who discover tools via web search, not GitHub repo browsing. Every competitor has this. We are the only registry that exists exclusively as a GitHub repo with a README.
+- **Effort:** L
+- **Implementation hint:** Build a static site (Astro/Next.js) that reads SKILL.md files at build time, generates category pages, skill detail pages, and a search index. Deploy to Vercel/Cloudflare Pages. Could use `scripts/` tooling to generate JSON catalog at CI time. Consider `docs/` as the source for site content.
+
+### 2. CLI Installer
+
+- **Feature:** A command-line tool for installing skills (e.g., `npx skills-hub add <skill>`)
+- **Who has it:** Skills.sh (`npx skills add`), Tons of Skills (`ccpi`)
+- **Why it matters:** The `npx skills add` pattern from Vercel has set the standard. Without a CLI, users must manually copy SKILL.md files — friction that discourages adoption. Skills.sh hit 350,000 packages in 2 months largely because of frictionless install.
 - **Effort:** M
-- **Implementation hint:** Create a `wedding-montage` template under `templates/` with act-based Sequences, configurable photo arrays per act, text overlays with timing, and pre-wired music segments.
+- **Implementation hint:** Create an npm package that reads from the GitHub repo (or a registry API), downloads the skill folder to `~/.claude/skills/`, and handles versioning. Could extend `scripts/package_skill.py` logic. Entry point: `npx @skills-hub/cli add <skill-name>`.
 
-### 2. Photo Slideshow with Ken Burns Effect
-- **Who has it:** Animoto, InVideo, CapCut, FlexClip, Vidio.ai (5/6)
-- **Why it matters:** Core mechanic of every wedding/memorial video. Still photos need motion to feel cinematic. The user's spec explicitly calls for "slow Ken Burns zoom" in Act 1.
+### 3. Security Scanning
+
+- **Feature:** Automated scanning of skill content for secrets, dangerous patterns, and supply-chain risks
+- **Who has it:** Skills.sh (Snyk partnership), LobeHub (security-first vetting), Tons of Skills (secret scanning + dangerous pattern detection)
+- **Why it matters:** The agent skills security crisis is real — 41.93% of marketplace skills flagged by scanners, supply-chain attacks via abandoned repo hijacking documented. Without security scanning, our registry risks hosting malicious content and losing trust. This is a market-wide concern highlighted by the Agent Skills Security Index launch.
 - **Effort:** M
-- **Implementation hint:** Remotion `interpolate()` + CSS `transform: scale() translate()` on `<Img>` components. Parameterize start/end zoom levels and pan directions.
+- **Implementation hint:** Add to `scripts/validate-skills.sh` or create a new `scripts/security-scan.sh`: grep for API keys/tokens/secrets patterns, detect `eval()` / `exec()` / shell injection patterns, check for data exfiltration URLs. Add as a CI step in `.github/workflows/validate.yml`. Consider integrating Snyk or Semgrep.
 
-### 3. Social Media Format Presets (9:16, 1:1, 4:5)
-- **Who has it:** Animoto, InVideo, CapCut, FlexClip, Remotion Superpowers (5/6)
-- **Why it matters:** User explicitly wants TikTok, Instagram, YouTube clips. Vertical video (9:16) is now the dominant format. Without presets, users must manually reconfigure compositions.
-- **Effort:** S
-- **Implementation hint:** Composition variants with different width/height/fps. Add `--format tiktok|reel|short|square` flag to render pipeline.
+### 4. Intelligent Search & Skill Detail Pages
+
+- **Feature:** Fuzzy search across skill names, descriptions, and categories + dedicated detail pages per skill
+- **Who has it:** Skills.sh, SkillsMP, LobeHub, Tons of Skills, Cursor Directory (5/6 competitors)
+- **Why it matters:** Our README lists skills but offers no way to search, filter, or deep-dive. Users looking for "HIPAA compliance" or "Flutter testing" can't find what we offer without scrolling a massive README.
+- **Effort:** M (if paired with web directory)
+- **Implementation hint:** Generate a JSON index from SKILL.md frontmatter at CI time. Build search with Fuse.js or Pagefind (for static sites). Each skill gets a page with: description, category, version, permissions, full instructions, related skills.
 
 ---
 
 ## Strategic Gaps (Plan & Schedule)
 
-High-pressure features requiring significant effort.
+High-pressure features that require significant effort.
 
-### 4. Beat-Synced Editing Pipeline
-- **Who has it:** CapCut, Vidio.ai (2/6 — but it's what makes montages feel professional)
-- **Why it matters:** The user's spec requires "beat-synced montage" in Act 3 with "cuts every 1-2 seconds" on high-energy beats. This is the difference between slideshow and film.
+### 5. Cross-Platform Format Conversion
+
+- **Feature:** Automatically convert SKILL.md to `.cursorrules`, Codex format, Copilot instructions, etc.
+- **Who has it:** Vibe Rules (automatic format conversion for 18+ agents)
+- **Why it matters:** We declare `platforms: [CLAUDE_CODE, CURSOR, CODEX_CLI]` in frontmatter but don't actually produce output for those platforms. As the market standardizes on SKILL.md, this becomes less urgent — but users on Cursor or Windsurf still need adapted formats today.
+- **Competitive pressure:** MEDIUM — the SKILL.md standard is gaining universal adoption (30+ agents), making conversion less necessary over time.
 - **Effort:** L
-- **Implementation hint:** Use Python `librosa` for beat detection, export beat timestamps as JSON, Remotion reads JSON to place `<Sequence>` boundaries and transition triggers on beat frames. Remotion's `visualizeAudio()` can supplement with reactive effects.
+- **Implementation hint:** Create `scripts/convert.py` with adapters per target format. Map SKILL.md sections to `.cursorrules` structure, Copilot instructions, etc. Run at CI time to generate platform-specific versions alongside each SKILL.md.
 
-### 5. Multi-Song Audio with Hard-Cut Transitions
-- **Who has it:** CapCut, Vidio.ai, partial in Animoto/InVideo/FlexClip (5/6)
-- **Why it matters:** User's spec uses two songs with an exact hard-cut at 2:12 plus a "cinematic audio whoosh." Current video-toolkit only supports single background music track.
-- **Effort:** M
-- **Implementation hint:** Multiple `<Audio>` components with `startFrom` and `endAt` props in Remotion. Add audio effects layer for whoosh/transition SFX. Config schema needs `audio.tracks[]` array.
+### 6. Install Count & Trending/Leaderboard
 
-### 6. Cinematic Color Grading Per Act
-- **Who has it:** CapCut (full), partial in InVideo/FlexClip/Animoto (4/6)
-- **Why it matters:** User spec requires different color palettes per act: "warm nostalgic" to "vibrant" to "soft cinematic" to "golden tone." This emotional progression is core to documentary filmmaking.
-- **Effort:** M
-- **Implementation hint:** CSS `filter` properties (brightness, contrast, saturate, sepia, hue-rotate) applied per-act `<Sequence>`. Create preset color grade objects. Remotion's `interpolateColors()` for transitions between grades.
+- **Feature:** Track how many times each skill is installed; surface popular/trending skills
+- **Who has it:** Skills.sh (install counts + leaderboard)
+- **Why it matters:** Install counts are the strongest quality signal in package ecosystems (npm, PyPI). Skills.sh uses this to surface top skills. Without it, we can't tell users which of our 425+ skills are battle-tested.
+- **Competitive pressure:** MEDIUM — only Skills.sh has this. But it's a powerful discovery mechanism.
+- **Effort:** L (requires infrastructure: analytics endpoint, database or counter service)
+- **Implementation hint:** If building a web directory, add a lightweight analytics ping on install (via CLI) or page view. Store counts in a simple KV store (Cloudflare KV, Vercel KV). Display on skill detail pages and a trending page.
 
-### 7. Stock Footage / Photo Integration (Pexels API)
-- **Who has it:** Remotion Superpowers, Animoto (Getty), InVideo (iStock/Shutterstock), CapCut, FlexClip (5/6)
-- **Why it matters:** Not everyone has enough personal photos. Stock footage fills gaps (e.g., "Denver skyline" in the user's spec). Pexels API is free.
-- **Effort:** M
-- **Implementation hint:** `python3 tools/pexels_search.py --query "denver skyline" --type video --output projects/PROJECT/public/stock/`. Pexels API: 200 req/hr, free, no attribution required.
+### 7. Skill Dependency Management
 
-### 8. User Photo Import & Organization Pipeline
-- **Who has it:** Animoto (Facebook/IG import), Vidio.ai (smart ordering) (2/6)
-- **Why it matters:** Wedding videos need 50-200+ photos organized by timeline. Manual import is painful. Google Photos Picker API still allows user-selected album import.
-- **Effort:** M
-- **Implementation hint:** Script to import from local folder, sort by EXIF date, auto-categorize by basic heuristics or CLIP embeddings. Output organized arrays matching the config schema's photo placeholders.
+- **Feature:** Skills can declare dependencies on other skills; installer resolves the graph
+- **Who has it:** No competitor has this yet
+- **Why it matters:** Our combo/pipeline chains already reference other skills by name in instruction text, but there's no machine-parseable dependency graph. As skills grow more interconnected, this becomes important for installation and version management.
+- **Competitive pressure:** LOW — no one has it yet. First-mover opportunity.
+- **Effort:** L
+- **Implementation hint:** Add `depends: [skill-name@^1.0]` to frontmatter schema. Build a resolver in the CLI installer. Update `scripts/validate-skills.sh` to validate dependency references.
 
 ---
 
 ## Differentiator Opportunities
 
-Features that could set us apart.
+Features that could set us apart or where we could lead the market.
 
-### 9. Act-Based Narrative Structure Engine
-- **Who has it:** Nobody (0/6)
-- **Why it matters:** No competitor offers a structured narrative engine with acts, emotional arcs, and music-synced pacing. They all offer templates or freeform timelines. An act-based system that maps emotional beats to music timestamps would be unique.
-- **Effort:** M
+### 8. VSCode / IDE Extension
 
-### 10. Prompt-to-Wedding-Video (Full Autonomy)
-- **Who has it:** Nobody at this level
-- **Why it matters:** "Make me a 6-minute wedding video for Gina and Tho with these photos and these two songs" to rendered MP4. No other tool does this from a single prompt in the terminal.
-- **Effort:** XL
-
-### 11. TikTok-Style Captions with Whisper
-- **Who has it:** Remotion Superpowers, InVideo, CapCut (3/6)
-- **Why it matters:** Word-by-word animated captions are now standard for social content. Remotion has `createTikTokStyleCaptions()` built in.
-- **Effort:** M
-
-### 12. AI B-Roll Generation (Veo/Kling/Wan)
-- **Who has it:** Remotion Superpowers (Replicate), InVideo (VEO 3.1), FlexClip (Kling) (3/6)
-- **Why it matters:** Generate short video clips to fill gaps between photos. "Dancing clip (if available)" from the spec could be generated if not available.
+- **Feature:** Browse and install skills directly from VS Code sidebar
+- **Who has it:** Vibe Rules (VSCode extension for sync)
+- **Why it matters:** Most developers live in their IDE. A sidebar panel for browsing/installing skills removes the context switch of going to a website or CLI.
+- **Competitive pressure:** LOW — only Vibe Rules has this, and it's a sync tool, not a full marketplace.
 - **Effort:** L
+- **Implementation hint:** VS Code extension with a tree view of categories → skills. Install action copies SKILL.md to `~/.claude/skills/`. Could reuse the JSON catalog from the web directory.
+
+### 9. Team / Private Marketplace
+
+- **Feature:** Organizations can curate a private set of approved skills for their team
+- **Who has it:** Cursor Directory (Teams/Enterprise plans)
+- **Why it matters:** Enterprise adoption requires governance — teams need to control which skills their developers use. This is the monetization path.
+- **Competitive pressure:** LOW — only Cursor Directory has this (for Cursor users only).
+- **Effort:** XL
+- **Implementation hint:** Would require user accounts, org management, access control. Defer until core platform (web + CLI) is solid. Could start simple: a `team.yml` config that whitelists approved skills.
+
+### 10. Multi-Agent Collaboration
+
+- **Feature:** Skills that coordinate multiple AI agents working together
+- **Who has it:** LobeHub (Agent Groups with intelligent assembly)
+- **Why it matters:** Multi-agent workflows are an emerging trend. Our combo chains are sequential; true multi-agent collaboration would be parallel.
+- **Competitive pressure:** LOW — emerging feature, only LobeHub has it.
+- **Effort:** XL
 
 ---
 
@@ -189,161 +197,91 @@ Features that could set us apart.
 
 Features where we're ahead. Protect and promote these.
 
-| Edge | Why It Matters |
-|---|---|
-| **Full terminal/CLI workflow** | No GUI needed. Fits developer workflow. No competitor except Remotion Superpowers offers this. |
-| **Open-source AI models** | Qwen3-TTS, FLUX.2, MusicGen, SadTalker — no API key costs for core generation. Competitors lock you into subscriptions. |
-| **Cloud GPU with pay-per-second** | ~$1-3 per 60s video vs $19-60/mo subscriptions. Massive cost advantage for occasional use. |
-| **Claude Code integration** | Natural language to video code. The user describes what they want; Claude writes the Remotion composition. No other tool has this depth of AI-assisted composition. |
-| **Fully customizable (React)** | Every frame is a React component. Unlimited creative control vs template-locked competitors. |
-| **Voice cloning** | Clone any voice from a 30-second sample. Only InVideo AI matches this (and charges $60/mo). |
-| **Self-hosted / no vendor lock-in** | Runs on your own infra. No account needed. No content ownership issues. |
+### 1. Self-Evolution Telemetry (Unique)
+Skills log execution metadata to `~/.claude/projects/*/skill-telemetry.md`. The `/evolve` meta-skill reads this telemetry, maps findings to skills, generates additive patches, and bumps versions. **No competitor has anything like this.** This is genuine AI-improving-AI capability.
+
+### 2. Self-Healing Validation (Unique)
+Every skill includes self-healing blocks with up to 2 retry iterations. Skills can detect their own failures and attempt corrective action. **No competitor has this.**
+
+### 3. Combo/Pipeline Chains (Unique)
+34 pre-built multi-skill workflows (e.g., `/polish` = parallel UX + scalability audit → QA → analyze). Competitors offer individual skills only. **Our chains are the equivalent of npm scripts vs individual packages.**
+
+### 4. Domain Depth — 40+ Industry Verticals (Unmatched)
+195+ domain-specific analysis skills covering healthcare, fintech, manufacturing, logistics, government, nonprofits, gaming, real estate, and more. **No competitor comes close to this breadth.** SkillsMP and LobeHub have community-contributed skills but nothing curated at this depth.
+
+### 5. Enterprise Compliance Suite (Unmatched)
+HIPAA, GDPR, SOC2, PCI-DSS, OWASP, manufacturing (ISO 9001/13485), government (FedRAMP, FISMA), and more — with dedicated review skills for each. **This is a defensible moat for enterprise adoption.**
+
+### 6. Full SDLC Coverage (Best-in-Class)
+From `/build` (scaffolding) through `/test-suite`, `/qa`, `/secure`, `/deploy`, `/pr`, to `/preflight` — we cover the entire software development lifecycle in a single registry. Competitors have fragmented coverage.
+
+### 7. Video Production Pipeline (Unique)
+8 video skills covering Remotion, ElevenLabs, FFmpeg, tutorial videos, ad videos, social clips, and wedding videos. **No competitor touches video production.**
+
+### 8. Meta-Skills for Skill Lifecycle (Unique)
+`/skill-creator`, `/skill-test`, `/registry-sync`, `/evolve`, `/promote` — tools for building, testing, validating, improving, and promoting skills. **We are the only registry that is self-improving.**
+
+### 9. Quality Scoring Rubric (Best-in-Class)
+0-100 scoring system (Schema 0-25 + Instruction Quality 0-75). SkillsMP and LobeHub have basic quality filtering; ours is a structured, transparent rubric.
 
 ---
 
 ## Industry Trends
 
+Emerging capabilities the market is moving toward. Early adoption opportunity.
+
 | Trend | Adoption Stage | Competitors With It | Our Status | Recommendation |
-|---|---|---|---|---|
-| **Generative AI video (text/image to video)** | Mainstream | Runway, InVideo, CapCut, FlexClip, Superpowers | Missing | Add via Replicate (Kling, Wan, Veo) — L effort |
-| **Beat-synced auto-editing** | Growing | CapCut, Vidio.ai | Missing | Build with librosa + Remotion — L effort |
-| **TikTok-style word-by-word captions** | Standard | CapCut, InVideo, Superpowers | Missing | Remotion has native support — M effort |
-| **Character consistency across scenes** | Emerging | Runway (Gen-4.5), InVideo (VEO 3.1) | Missing | Wait for API maturity — defer |
-| **Personalized video at scale** | Growing | Synthesia, Shotstack | Partial (config-driven) | Strengthen with batch render pipeline — M effort |
-| **Synchronized audio-visual generation** | Emerging | Kling 2.6 | Missing | Monitor — not actionable yet |
-| **Multi-format adaptive content** | Growing | Canva, CapCut, InVideo | Missing | Social media presets — S effort |
-| **Sub-second generation / real-time preview** | Early | Runway (Aleph editor) | Have (Remotion Studio) | Already ahead — Remotion Studio is real-time |
-| **Sora shutdown = market fragmentation** | Current | All shifting | N/A | Opportunity to integrate multiple gen providers |
+|-------|---------------|--------------------|-----------:|----------------|
+| SKILL.md as universal standard | Mainstream (30+ agents) | All | ✅ Already using | Promote our early adoption; ensure full spec compliance |
+| CLI-based skill installation | Early mainstream | Skills.sh, Tons of Skills | ❌ Missing | **Build CLI installer — this is the distribution standard** |
+| Security scanning / vetting | Early adopter | Skills.sh, LobeHub, Tons of Skills | ❌ Missing | **Add to CI pipeline — trust is a prerequisite for adoption** |
+| Skill installer meta-skill | Trending (142k installs) | Skills.sh, community | ❌ Missing | Build a `/skill-install` skill that fetches from our registry |
+| Browser-use skills | Emerging | LobeHub, community | ❌ Missing | Lower priority — let the standard mature |
+| Multi-agent coordination | Emerging | LobeHub | ❌ Missing | Monitor; our combo chains are a related pattern |
+| Agent Skills Security Index | Emerging | Independent initiative | ❌ Missing | Contribute and align with the security index |
+| Private/team marketplaces | Early adopter | Cursor Directory | ❌ Missing | Defer until core platform is solid — then target enterprises |
+| Monetization / paid skills | Nascent | PromptBase (prompts only) | ❌ N/A | Monitor; not yet proven in the skills market |
 
 ---
 
 ## Recommended Roadmap
 
-### Sprint 1 — Quick Wins (1-2 days each)
+Based on the full analysis, a prioritized build order:
 
-1. **Social media format presets** — CRITICAL pressure, S effort. Add `--format tiktok|reel|short|square` to render.
-2. **Split-screen composition component** — MEDIUM pressure, S effort. CSS flexbox in Remotion.
-3. **Film grain / vignette / letterbox effects** — MEDIUM pressure, S effort. CSS filters + pseudo-elements.
-4. **Photo mosaic / grid layout** — LOW pressure, S effort. CSS grid composition.
+### Sprint 1 — Quick Wins (1-2 weeks)
 
-### Sprint 2 — Wedding Montage Core (1 week)
+1. **Security scanning in CI** — CRITICAL pressure, M effort. Add secret/pattern scanning to `validate.yml`. Immediate trust signal. We already have the CI pipeline; extend it.
+2. **JSON skill catalog generator** — HIGH pressure, S effort. Script to produce `skills.json` from all SKILL.md frontmatter. Foundation for web directory, CLI, and search.
+3. **Skill installer meta-skill** — HIGH pressure, S effort. A `/skill-install` skill that downloads from our GitHub repo to `~/.claude/skills/`. Zero infrastructure needed.
 
-5. **Photo slideshow with Ken Burns** — CRITICAL pressure, M effort. Core mechanic for all photo-based videos.
-6. **Wedding montage template** — CRITICAL pressure, M effort. Act-based structure with configurable photo arrays, text overlays, music segments.
-7. **Multi-song audio pipeline** — HIGH pressure, M effort. Multiple `<Audio>` tracks with crossfade/hard-cut.
-8. **Cinematic color grading presets** — HIGH pressure, M effort. Per-act color palettes via CSS filters.
-9. **Particle / confetti effects** — MEDIUM pressure, M effort. Canvas-based or CSS animation particles.
+### Sprint 2 — Core Platform (2-4 weeks)
 
-### Next Quarter — Strategic Features
+4. **Static web directory** — CRITICAL pressure, L effort. Astro/Next.js site consuming `skills.json`. Category pages, skill detail pages, Pagefind search. Deploy to Vercel.
+5. **CLI installer (npm package)** — CRITICAL pressure, M effort. `npx @skills-hub/cli add <skill>`. Downloads from GitHub. Handles versioning. The distribution standard.
+6. **Install count tracking** — MEDIUM pressure, M effort. Lightweight analytics via CLI ping. Surface on web directory.
 
-10. **Beat-synced editing pipeline** — HIGH pressure, L effort. librosa to JSON to Remotion beat-aligned cuts.
-11. **Stock footage integration (Pexels)** — HIGH pressure, M effort. Free API, huge value.
-12. **User photo import & sort pipeline** — HIGH pressure, M effort. EXIF sorting, basic categorization.
-13. **TikTok-style captions (Whisper)** — HIGH pressure, M effort. Remotion native support.
-14. **Remotion Lambda rendering** — MEDIUM pressure, L effort. 80s video in 15s, $0.01-0.10/render.
+### Next Quarter — Strategic
+
+7. **Cross-platform format conversion** — MEDIUM pressure, L effort. Auto-generate .cursorrules / Copilot versions.
+8. **VSCode extension** — LOW pressure, L effort. Sidebar browser + installer.
+9. **Skill dependency management** — LOW pressure, L effort. First-mover advantage; no competitor has this.
 
 ### Future — Differentiators
 
-15. **Act-based narrative structure engine** — Unique differentiator, M effort.
-16. **AI B-roll generation** — MEDIUM pressure, L effort. Via Replicate/Kling/Veo APIs.
-17. **Prompt-to-wedding-video (full autonomy)** — Ultimate differentiator, XL effort.
+10. **Team/private marketplace** — LOW pressure, XL effort. Enterprise monetization path.
+11. **Multi-agent collaboration** — LOW pressure, XL effort. Wait for patterns to mature.
 
 ---
 
 ## Summary
 
 | Metric | Count |
-|---|---|
-| **Total features across competitors** | 29 |
-| **We have** | 7 (24%) |
-| **Partial** | 1 (3%) |
-| **Missing** | 18 (62%) |
-| **Our edges** | 7 |
-| **Critical gaps to close** | 3 |
-| **Strategic gaps to plan** | 5 |
-
-- **Biggest threat:** **CapCut** — free, has nearly every feature (beat sync, AI clipper, auto-captions, color grading, effects), and is owned by ByteDance with massive resources. However, it's a GUI tool, not programmable.
-- **Biggest opportunity:** **Full video creation suite from the terminal.** No competitor offers structured emotional storytelling + tutorial generation + ad creation from the CLI. Building wedding montage, tutorial, social clip, and ad skills creates a category of one: "describe what you need, get a film."
-
----
-
-## Extended Analysis: Tutorial Video Competitors
-
-| Competitor | Positioning | Pricing | Key Differentiator |
-|---|---|---|---|
-| **Screen Studio** | Premium macOS screen recorder | $9-29/mo | Auto-zoom on clicks, smooth cursor, cinematic feel |
-| **Descript** | AI-powered text-based video editor | Free-$65/user/mo | Edit video by editing transcript; Overdub voice clone |
-| **Code Hike** | Animated code walkthroughs (OSS) | Free | Markdown to animated code; Remotion integration |
-| **Motion Canvas** | Procedural animation engine (OSS) | Free | 3Blue1Brown-style vector animations |
-| **Guidde** | AI video documentation from workflow capture | ~$50/creator/mo | One-click Chrome capture to video guide |
-| **Synthesia** | AI avatar training videos | $18-custom/mo | 240+ avatars, 160+ languages, Doc2Video |
-| **Colossyan** | AI training video platform | $19-70/mo | MCQ/branching, SCORM export, avatar from photo |
-| **Loom AI** | Screen recording with AI features | Business plan | Auto titles/summaries/chapters, filler word removal |
-| **Tella** | All-in-one screen recorder | $12-39/mo | 30+ layouts, separate camera/screen tracks |
-| **Creatomate** | Video API (JSON-based) | Credit-based | Pure API; no UI needed; CI/CD integration |
-
-### Tutorial Features We're Missing
-
-| Feature | Screen Studio | Descript | Code Hike | Guidde | Synthesia | Pressure | Effort |
-|---|---|---|---|---|---|---|---|
-| **Animated code transitions** | ❌ | ❌ | ✅ | ❌ | ❌ | HIGH | M |
-| **Terminal replay in video** | ❌ | ❌ | ❌ | ❌ | ❌ | HIGH | M |
-| **Auto-zoom on regions** | ✅ | ❌ | ❌ | ❌ | ❌ | HIGH | M |
-| **Screen recording** | ✅ | ✅ | ❌ | ✅ | ❌ | MEDIUM | L |
-| **Text-based editing** | ❌ | ✅ | ❌ | ❌ | ❌ | LOW | XL |
-| **AI avatar presenter** | ❌ | ❌ | ❌ | ❌ | ✅ | MEDIUM | L |
-| **Step-by-step annotations** | ❌ | ❌ | ✅ | ✅ | ❌ | HIGH | M |
-| **Progress bar / chapters** | ❌ | ❌ | ❌ | ❌ | ❌ | MEDIUM | S |
-| **Smooth cursor animation** | ✅ | ❌ | ❌ | ❌ | ❌ | MEDIUM | M |
-| **Filler word removal** | ❌ | ✅ | ❌ | ❌ | ❌ | LOW | L |
-
----
-
-## Extended Analysis: Advertising/Marketing Video Competitors
-
-| Competitor | Positioning | Pricing | Key Differentiator |
-|---|---|---|---|
-| **Shotstack** | Programmatic video API | Pay-per-render | JSON-based, event-triggered, batch rendering |
-| **Creatomate** | Video rendering API | Credit-based | Template + API, multi-format output |
-| **InVideo AI** | Prompt-based video generation | Free-$60/mo | 16M+ stock assets, prompt-to-ad workflow |
-| **Canva Video** | Design suite with video | Free-$20/mo | Brand kits, massive template library |
-| **Lumen5** | Text/blog to marketing video | $29-199/mo | Blog-to-video, NLP scene selection |
-| **Revid.ai** | AI short-form ad generator | Free-$39/mo | Prompt to TikTok/Instagram ad |
-
-### Advertising Features We're Missing
-
-| Feature | Shotstack | Creatomate | InVideo | Canva | Lumen5 | Pressure | Effort |
-|---|---|---|---|---|---|---|---|
-| **Brand kit (logos, colors, fonts)** | ✅ | ✅ | ✅ | ✅ | ✅ | HIGH | M |
-| **Ad template library** | ✅ | ✅ | ✅ | ✅ | ✅ | HIGH | M |
-| **Batch personalization** | ✅ | ✅ | ❌ | ❌ | ❌ | HIGH | L |
-| **A/B variant generation** | ❌ | ✅ | ❌ | ❌ | ❌ | MEDIUM | M |
-| **Blog/URL to video** | ❌ | ❌ | ❌ | ❌ | ✅ | MEDIUM | L |
-| **Product shot integration** | ❌ | ✅ | ✅ | ✅ | ❌ | HIGH | M |
-| **CTA overlay system** | ✅ | ✅ | ✅ | ✅ | ✅ | HIGH | S |
-| **Platform-specific ad specs** | ✅ | ✅ | ✅ | ✅ | ❌ | CRITICAL | S |
-| **Dynamic text/price injection** | ✅ | ✅ | ❌ | ❌ | ❌ | HIGH | M |
-| **Render-at-scale (100s/1000s)** | ✅ | ✅ | ❌ | ❌ | ❌ | MEDIUM | L |
-
----
-
-## Sources
-
-- [Remotion Documentation](https://www.remotion.dev/docs/)
-- [Remotion Lambda](https://www.remotion.dev/lambda)
-- [Remotion AI Integration](https://www.remotion.dev/docs/ai/)
-- [Remotion Superpowers](https://github.com/DojoCodingLabs/remotion-superpowers)
-- [Remotion Skills](https://www.remotion.dev/docs/ai/skills)
-- [Animoto](https://animoto.com)
-- [InVideo AI](https://invideo.io)
-- [CapCut](https://www.capcut.com)
-- [FlexClip](https://www.flexclip.com)
-- [Runway ML](https://runwayml.com)
-- [Vidio.ai](https://www.vidio.ai)
-- [Mootion](https://www.mootion.com)
-- [Pictory](https://pictory.ai)
-- [Shotstack](https://shotstack.io)
-- [ElevenLabs](https://elevenlabs.io)
-- [Pexels API](https://www.pexels.com/api/)
-- [librosa](https://librosa.org)
-- [Google Photos Picker API](https://developers.google.com/photos/picker)
+|--------|-------|
+| **Total features across competitors** | 34 |
+| **We have** | 12 (35%) |
+| **Partial** | 5 (15%) |
+| **Missing** | 13 (38%) |
+| **Our edges** | 9 unique advantages |
+| **Critical gaps to close** | 4 (web directory, CLI installer, security scanning, search) |
+| **Biggest threat** | **Skills.sh (Vercel)** — with 350k packages, CLI installer, and Snyk security, they are becoming the npm of AI agent skills. Their distribution infrastructure makes content depth (our advantage) harder to discover. If developers default to `npx skills add`, we need to be in that ecosystem or build a competing install path. |
+| **Biggest opportunity** | **Our content depth + self-evolution system is unmatched and defensible.** No competitor has 40+ industry verticals, combo chains, or self-improving skills. If we add distribution infrastructure (web + CLI + security scanning), we become the "enterprise-grade, curated" alternative to Skills.sh's "npm-like, anything goes" model. The positioning is: **Skills.sh is npm; we are the standard library.** |
