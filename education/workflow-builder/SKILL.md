@@ -38,7 +38,7 @@ PHASE 1: UNDERSTAND THE GOAL
 
 4. Also scan the current working directory for project context:
    - Check for package.json, pubspec.yaml, Cargo.toml, go.mod, requirements.txt,
-     pyproject.toml, pom.xml, build.gradle, *.csproj, composer.json
+     pyproject.toml, pom.xml, build.gradle, \*.csproj, composer.json
    - Check for .git/ directory
    - Check for existing .claude/skills/ or .claude/commands/ directories
    - Check for CI/CD config (.github/workflows/, fly.toml, vercel.json, Dockerfile)
@@ -57,6 +57,7 @@ output feeds the next skill's input.
 Reference these proven chain templates, then adapt based on the specific goal:
 
 ### Ship a Feature
+
 ```
 1. /mvp              -- Analyze requirements and define scope
 2. /backend-spec     -- Generate implementation stories
@@ -64,10 +65,11 @@ Reference these proven chain templates, then adapt based on the specific goal:
 4. /test-gen         -- Generate tests for new code
 5. /code-review      -- Review changes before merge
 6. /preflight        -- Verify build, tests, conventions
-7. /ship-it          -- Final gate: PR or deploy
+7. /ship-pipeline    -- Final gate: PR or deploy
 ```
 
 ### Fix a Bug
+
 ```
 1. /hotfix           -- Diagnose and apply minimal fix
 2. /test-gen         -- Add regression test
@@ -76,6 +78,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Audit a Codebase
+
 ```
 1. /codebase-health  -- Overall health score and hotspots
 2. /tech-debt        -- Identify and prioritize debt
@@ -86,6 +89,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Deploy an Application
+
 ```
 1. /preflight        -- Build + test + convention check
 2. /secret-scan      -- No secrets in code
@@ -94,6 +98,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Improve Code Quality
+
 ```
 1. /lint-fix         -- Auto-fix lint and style issues
 2. /test-gen         -- Generate tests for untested code
@@ -103,6 +108,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Research and Plan
+
 ```
 1. /compete          -- Competitive analysis
 2. /mvp              -- Feature analysis and MVP definition
@@ -111,6 +117,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Launch Readiness
+
 ```
 1. /codebase-health  -- Health check
 2. /security         -- Security audit
@@ -121,6 +128,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Security Hardening
+
 ```
 1. /secret-scan      -- Find leaked secrets
 2. /dep-audit        -- Vulnerable dependencies
@@ -130,6 +138,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Documentation Sprint
+
 ```
 1. /codebase-health  -- Understand the codebase
 2. /readme-gen       -- Generate or improve README
@@ -138,6 +147,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 ### Performance Optimization
+
 ```
 1. /metrics          -- Baseline performance metrics
 2. /codebase-health  -- Identify hotspots
@@ -147,6 +157,7 @@ Reference these proven chain templates, then adapt based on the specific goal:
 ```
 
 **Adaptation rules:**
+
 - If the user's goal does not match a template exactly, compose a custom chain
   by selecting individual skills that address each sub-goal.
 - Remove skills that do not apply to the detected stack (e.g., drop /bundle-optimize
@@ -173,13 +184,14 @@ Estimated effort: {Quick (5-15 min) | Medium (15-45 min) | Deep (45+ min)}
 
 Then present each step as a detailed table:
 
-| Step | Skill | What It Does | Why This Order | Input | Output |
-|------|-------|-------------|----------------|-------|--------|
-| 1 | /skill-name | One-line description | Why it runs here | What it needs | What it produces |
-| 2 | /skill-name | One-line description | Why it runs here | Output from step 1 | What it produces |
-| ... | | | | | |
+| Step | Skill       | What It Does         | Why This Order   | Input              | Output           |
+| ---- | ----------- | -------------------- | ---------------- | ------------------ | ---------------- |
+| 1    | /skill-name | One-line description | Why it runs here | What it needs      | What it produces |
+| 2    | /skill-name | One-line description | Why it runs here | Output from step 1 | What it produces |
+| ...  |             |                      |                  |                    |                  |
 
 After the table, explain the data flow in plain language:
+
 - "Step 1 analyzes the codebase and produces a health report."
 - "Step 2 uses the health report to identify the highest-priority tech debt."
 - "Step 3 takes the debt items and generates fix plans."
@@ -196,7 +208,7 @@ Structure of the generated Combo:
 
 ```markdown
 ---
-name: {goal-as-kebab-case}
+name: { goal-as-kebab-case }
 description: "{One-line description of what this workflow does}"
 version: 1
 category: combo
@@ -210,7 +222,7 @@ Run the full pipeline below without pausing between phases.
 INPUT: $ARGUMENTS
 
 ============================================================
-PHASE 1: {STEP NAME}  (/{skill-name})
+PHASE 1: {STEP NAME} (/{skill-name})
 ============================================================
 
 Follow the instructions defined in the `/{skill-name}` skill exactly.
@@ -219,7 +231,7 @@ Follow the instructions defined in the `/{skill-name}` skill exactly.
 Do NOT stop here. Continue immediately to Phase 2.
 
 ============================================================
-PHASE 2: {STEP NAME}  (/{skill-name})
+PHASE 2: {STEP NAME} (/{skill-name})
 ============================================================
 
 {Continue pattern for each skill in the chain.}
@@ -241,6 +253,7 @@ After completing all phases, validate the combined output:
 5. Repeat up to 2 iterations.
 
 IF STILL INCOMPLETE after 2 iterations:
+
 - Document which phases succeeded and which failed
 - Report what data was missing or what went wrong
 - Suggest manual steps to complete the workflow
@@ -252,16 +265,19 @@ OUTPUT
 ## Workflow Report: {Goal Title}
 
 ### Pipeline Summary
-| Phase | Skill | Status | Key Finding |
-|-------|-------|--------|-------------|
-| 1 | /{skill} | DONE/PARTIAL/FAILED | One-line summary |
-| 2 | /{skill} | DONE/PARTIAL/FAILED | One-line summary |
-| ... | | | |
+
+| Phase | Skill    | Status              | Key Finding      |
+| ----- | -------- | ------------------- | ---------------- |
+| 1     | /{skill} | DONE/PARTIAL/FAILED | One-line summary |
+| 2     | /{skill} | DONE/PARTIAL/FAILED | One-line summary |
+| ...   |          |                     |                  |
 
 ### Results by Phase
+
 {Brief summary of each phase's output -- 2-3 bullets each.}
 
 ### Next Steps
+
 - {What to do next based on the workflow results.}
 - {Related workflows or follow-up skills to consider.}
 
@@ -272,12 +288,14 @@ SELF-EVOLUTION TELEMETRY
 After producing output, record execution metadata for the /evolve pipeline.
 
 Check if a project memory directory exists:
+
 - Look for the project path in `~/.claude/projects/`
 - If found, append to `skill-telemetry.md` in that memory directory
 
 Entry format:
 
 ### /{combo-name} -- {{YYYY-MM-DD}}
+
 - Outcome: {{SUCCESS | PARTIAL | FAILED}}
 - Self-healed: {{yes -- what was healed | no}}
 - Iterations used: {{N}} / {{N max}}
@@ -367,11 +385,13 @@ After producing output, validate data quality and completeness:
 6. Verify installation instructions are complete with actual file paths.
 
 IF VALIDATION FAILS:
+
 - Identify which sections are incomplete
 - Re-generate the deficient sections
 - Repeat up to 2 iterations
 
 IF STILL INCOMPLETE after 2 iterations:
+
 - Flag specific gaps in the output
 - Note what information would be needed to complete them
 
@@ -382,10 +402,12 @@ SELF-EVOLUTION TELEMETRY
 After producing output, record execution metadata for the /evolve pipeline.
 
 Check if a project memory directory exists:
+
 - Look for the project path in `~/.claude/projects/`
 - If found, append to `skill-telemetry.md` in that memory directory
 
 Entry format:
+
 ```
 ### /workflow-builder -- {{YYYY-MM-DD}}
 - Outcome: {{SUCCESS | PARTIAL | FAILED}}

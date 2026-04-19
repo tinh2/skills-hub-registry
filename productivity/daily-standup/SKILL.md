@@ -112,30 +112,35 @@ PHASE 3: CROSS-REPO SYNTHESIS
 Aggregate the per-repo data into four categories:
 
 ### 3.1 What Was Done (since last check)
+
 - Total commits across all repos, grouped by repo.
 - Highlight merged PRs or notable commit messages (features, fixes).
 - Call out any deployments if commit messages reference deploy/release.
 
 ### 3.2 What's In Progress
+
 - Open PRs awaiting review or with pending CI.
 - Branches with uncommitted changes.
 - Repos with staged but uncommitted work.
 
 ### 3.3 What's Blocked
+
 - PRs with failing CI (link to the failing run if possible).
 - PRs with changes requested by reviewers.
 - Stale PRs (open > 7 days with no activity).
 - Stale branches (no activity in 7+ days, not merged).
 
 ### 3.4 Suggested Priorities for Today
+
 Based on the gathered data, recommend up to 5 actions ranked by urgency:
+
 1. Fix failing CI (blocks merges).
 2. Address reviewer feedback on PRs with changes requested.
 3. Review PRs that are approved but not yet merged.
 4. Clean up stale branches.
 5. Continue in-progress work (uncommitted changes on active branches).
 
-Explain *why* each priority matters (e.g., "CI on feature-auth has been red for
+Explain _why_ each priority matters (e.g., "CI on feature-auth has been red for
 2 days -- this blocks the release branch").
 
 ============================================================
@@ -213,6 +218,7 @@ repos for someone who does not read git output. Example tone:
 > fix the pet-sitter deploy so the release is not blocked.
 
 Follow the paragraph with a bullet list:
+
 - Features shipped: {count}
 - PRs needing action: {count}
 - CI status: {green/red across repos}
@@ -238,11 +244,13 @@ After producing output, validate data quality and completeness:
    are incomplete and why.
 
 IF VALIDATION FAILS:
+
 - Identify which repos or sections are missing or contain placeholder data.
 - Re-run the data gathering for the deficient repos.
 - Repeat up to 2 iterations.
 
 IF STILL INCOMPLETE after 2 iterations:
+
 - Flag specific gaps in the output.
 - Note what data would be needed (e.g., "gh CLI not authenticated -- PR data
   unavailable for private repos").
@@ -267,7 +275,7 @@ NEXT STEPS
 
 - "Run `/codebase-health` on any repo flagged with high churn to assess debt."
 - "Run `/tech-debt` to inventory debt items surfaced by stale branches or failing CI."
-- "Run `/ship-it` when you are ready to merge an approved PR through the pre-merge gate."
+- "Run `/ship-pipeline` when you are ready to merge an approved PR through the pre-merge gate."
 
 ============================================================
 SELF-EVOLUTION TELEMETRY
@@ -276,10 +284,12 @@ SELF-EVOLUTION TELEMETRY
 After producing output, record execution metadata for the /evolve pipeline.
 
 Check if a project memory directory exists:
+
 - Look for the project path in `~/.claude/projects/`
 - If found, append to `skill-telemetry.md` in that memory directory
 
 Entry format:
+
 ```
 ### /daily-standup -- {{YYYY-MM-DD}}
 - Repos scanned: {{N}}
