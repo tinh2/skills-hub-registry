@@ -38,7 +38,7 @@ Most categories follow an orchestrator pattern where a **main skill** scans for 
 | `/secure`     | security     | owasp, pentest, gdpr, soc2, encryption, dependency-scan, check-vanta                                                |
 | `/test-suite` | test         | unit-test, e2e, integration-test, load-test, contract-test, accessibility-test, visual-regression, manual-test-plan |
 | `/document`   | docs         | readme, api-docs, adr, changelog, diagram, onboarding, runbook, gen-catalog, skills-list                            |
-| `/dx`         | productivity | devcontainer, env-setup, git-hooks, linter, monorepo, release, vscode                                               |
+| `/dx`         | productivity | devcontainer, env-setup, git-hooks, linter, monorepo, release                                                       |
 
 **Standalone orchestrators** (no sub-skill routing, self-contained pipelines):
 
