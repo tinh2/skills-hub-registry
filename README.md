@@ -861,7 +861,7 @@ loaded as context when the skill is invoked.
 
 ### Valid Categories
 
-`build` `test` `qa` `review` `deploy` `docs` `security` `ux` `analysis` `productivity` `integration` `combo` `meta`
+`build` `test` `qa` `review` `deploy` `docs` `security` `ux` `analysis` `productivity` `integration` `combo` `meta` `education` `spec`
 
 ### Valid Platforms
 

@@ -6,7 +6,7 @@ Developer experience tooling -- dev containers, linting, git hooks, monorepo set
 
 **[dx](dx/)** -- Audits developer experience foundations and generates a DX health report with actionable improvement recommendations. Routes to sub-skills based on gaps found.
 
-## Skills (8)
+## Skills (9)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -29,3 +29,10 @@ Developer experience tooling -- dev containers, linting, git hooks, monorepo set
 - Set up or migrate to a monorepo: `/monorepo`
 - Set up automated release pipeline: `/release`
 - Open VS Code: `/vscode`
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [ci-health](ci-health/) | 1.0.0 | Monitor and maintain CI runner health — check disk space, clear stale caches (Flutter, Gradle, npm, Docker), prune old worktrees, and report status. Prevents cache corruption... |
+| [daily-standup](daily-standup/) | 1 | >- |

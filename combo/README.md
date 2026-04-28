@@ -2,7 +2,7 @@
 
 Multi-skill chains and pipeline compositions -- automated sequences that run multiple skills without user intervention.
 
-## Skills (28)
+## Skills (34)
 
 | Skill | Version | Chain | Description |
 |-------|---------|-------|-------------|
@@ -90,3 +90,15 @@ Combo skills chain multiple skills together into automated pipelines. They run s
 
 **Maintenance:**
 - `/tech-debt-sprint` -- Debt inventory, code smell fixes, dead code removal, review pass
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [cleanup-sprint](cleanup-sprint/) | 3.0.0 | Deep codebase cleanup — kills dead code, fixes all lint/format warnings, removes orphaned files, cleans stale TODOs, strips security hazards, tightens TypeScript strict mode, and... |
+| [design-overhaul](design-overhaul/) | 1.0.0 | Complete autonomous design overhaul — tears down dated patterns and rebuilds with modern CSS, proper tokens, purposeful motion, and production-grade quality. The nuclear option... |
+| [design-pipeline](design-pipeline/) | 1.0.0 | Full autonomous design pipeline — Ralph Wiggum builds it, then the safety net polishes it. Chains: design-setup → design-build → (design-audit ∥ design-optimize) → design-polish →... |
+| [marketing-refresh](marketing-refresh/) | 1.0.0 | Autonomous competitive analysis and feature discovery pipeline. Runs /compete and /new-features on each project, produces actionable market positioning insights. Schedule daily or... |
+| [mvp-spec](mvp-spec/) | 2.0.0 | Chains /mvp → /spec — analyzes an app from video/screenshots/description, then generates implementation stories. Triggers: analyze and spec, product analysis to stories, app... |
+| [ship-pipeline](ship-pipeline/) | 3.0.0 | Full-stack app pipeline — build, test, review, and deploy across one or ALL repos. Scans CLAUDE.md, MEMORY.md, TODOs, open PRs, and issues for shippable work. Supports 'ship all'... |
+| [stitch-pipeline](stitch-pipeline/) | 1.0.0 | >- |

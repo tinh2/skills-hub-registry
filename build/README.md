@@ -2,7 +2,7 @@
 
 Project scaffolding and full build pipelines -- from competitor analysis to production-ready applications, including industry-specific API scaffolds.
 
-## Skills (21)
+## Skills (33)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -54,3 +54,21 @@ Project scaffolding and full build pipelines -- from competitor analysis to prod
 - Cross-platform mobile app: `/cross-platform-app`
 
 **Build orchestrators** (`/build`, `/ship`, `/iterate`) are self-contained pipelines that run analysis, testing, and quality checks internally. Use them for end-to-end work. Use the other skills for targeted scaffolding or focused tasks.
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [ad-video](ad-video/) | 1.0.0 | Generate platform-optimized video ads from a product brief. Supports brand kits, 6 ad types, 6 platform formats (TikTok, Instagram, YouTube, Facebook, LinkedIn), batch... |
+| [app-builder](app-builder/) | 1.0.0 | Build working apps from plain English descriptions -- scaffolding, styling, and deployment with zero coding knowledge required. Triggers on: build me an app, I want to make,... |
+| [app-icon](app-icon/) | 2.0.0 | Generates professional app icons and applies them to any project. Triggers on mentions of icon, logo, branding, launcher icon, favicon, app icon, PWA icon, splash icon, or store... |
+| [automation-builder](automation-builder/) | 1 | Build business automations from plain English -- scheduled tasks, file watchers, API integrations, and alerts with no coding required |
+| [content-creator](content-creator/) | 1 | Generate blog posts, social media, email sequences, landing pages, and newsletters — SEO-optimized and platform-formatted |
+| [data-analyst](data-analyst/) | 1 | Analyze CSV, Excel, or JSON data — summaries, trends, charts, and plain-English insights with no coding required |
+| [elevenlabs-voiceover](elevenlabs-voiceover/) | 1.0.0 | Generate professional AI voiceovers using ElevenLabs TTS for video narration, explainers, and content creation. Supports multiple voices, character presets (narrator, salesperson,... |
+| [ffmpeg-media](ffmpeg-media/) | 1.0.0 | Process audio and video with FFmpeg -- encoding, format conversion, trimming, concatenation, audio extraction, noise reduction, volume normalization, watermarking, subtitle... |
+| [remotion](remotion/) | 1.0.0 | Build programmatic videos with Remotion (React). Covers compositions, animations, sequencing, transitions, audio/video embedding, spring physics, text animations, voiceover... |
+| [social-clip](social-clip/) | 1.0.0 | Create short-form social media videos for TikTok, Instagram Reels, YouTube Shorts, and more. Two modes -- create from scratch with a brief, or repurpose long-form video into short... |
+| [tutorial-video](tutorial-video/) | 0.1.0 | Create Fireship-quality developer tutorial videos from annotated markdown and terminal recordings. Animated code transitions (Code Hike + Shiki Magic Move), terminal replay... |
+| [video-toolkit](video-toolkit/) | 1.0.0 | Create professional videos autonomously using AI -- voiceovers (Qwen3-TTS with voice cloning), image generation (FLUX.2), background music (MusicGen), talking head animation... |
+| [wedding-video](wedding-video/) | 1.0.0 | Create cinematic wedding montage videos from photos and songs using Remotion. Features act-based narrative structure (5 acts), Ken Burns photo animations, multi-song audio with... |

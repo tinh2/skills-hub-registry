@@ -6,7 +6,7 @@ Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, clo
 
 **[devops](devops/)** -- Scans infrastructure gaps and orchestrates deployment readiness across CI/CD, containers, monitoring, and IaC. Routes to the appropriate sub-skills based on what is missing.
 
-## Skills (15)
+## Skills (18)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -44,3 +44,12 @@ Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, clo
 - Configure OTA updates: `/ota-updates`
 - Full deploy pipeline (combo): `/full-deploy` chains docker, CI/CD, monitoring, and preflight
 - Mobile publish pipeline (combo): `/mobile-publish` chains mobile CI/CD, App Store, Play Store, and analytics
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [ci-fixer](ci-fixer/) | 1 | Scan all repos for failing or stuck GitHub Actions workflows, diagnose issues, and fix them. Use when: 'fix ci', 'ci is broken', 'github actions failing', 'unblock ci', 'clear... |
+| [flutter-deploy](flutter-deploy/) | 1.0.0 | Build and deploy Flutter apps to App Store (TestFlight) and Google Play (internal/production). Auto-detects project structure, pulls signing secrets from AWS Secrets Manager,... |
+| [free-keys](free-keys/) | 2.0.0 | Provision free LLM API keys from 20+ providers. Health-checks existing keys, opens signup pages, validates new keys, and saves them to your project. |
+| [hotfix](hotfix/) | 2.1.0 | Emergency bug fix pipeline — diagnose, fix, test, commit, push, and PR in 2 iterations max. Speed over perfection. |

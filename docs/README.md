@@ -6,7 +6,7 @@ Documentation generation -- README, API docs, ADR, changelog, diagrams, onboardi
 
 **[document](document/)** -- Scans for existing documentation, identifies gaps based on project maturity, and orchestrates sub-skills to fill missing docs. Start here if you want a comprehensive documentation pass.
 
-## Skills (10)
+## Skills (11)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -33,3 +33,10 @@ Documentation generation -- README, API docs, ADR, changelog, diagrams, onboardi
 - Generate operations runbook: `/runbook`
 - Auto-generate skill catalog from SKILL.md files: `/gen-catalog`
 - Display the full skills reference: `/skills-list`
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [engineering-spec](backend-spec/) | 2.0.0 | Generates structured engineering specs (backend or frontend) from feature descriptions, designs, or ticket references. Triggers on "spec", "story", "ticket", "engineering spec",... |
+| [blog-writer](blog-writer/) | 1 | Write human-sounding, SEO-optimized blog posts for skills-hub.ai. Use when: 'write a blog post', 'draft a post', 'update blog', 'blog about', 'write about'. Supports styles:... |

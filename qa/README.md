@@ -6,7 +6,7 @@ Quality assurance, performance profiling, chaos engineering, code smell detectio
 
 **[qa](qa/)** -- Automated QA agent that starts the app, walks through every screen and API endpoint, verifies functionality, evaluates design and usability, runs domain analysis, and fixes issues found.
 
-## Skills (13)
+## Skills (15)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -39,3 +39,10 @@ Quality assurance, performance profiling, chaos engineering, code smell detectio
 - Game balance testing and simulation: `/balance-test`
 - Automated game QA validation: `/game-qa`
 - Mobile platform QA (permissions, deep links, push): `/mobile-qa`
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [broken-links](broken-links/) | 1.1.0 | Scan a codebase for broken links — dead URLs in Markdown/HTML, broken file references, invalid import paths, stale anchor links, and broken cross-doc references — then auto-fix... |
+| [scale-audit](scale-audit/) | 1.0.0 | Scalability audit — identifies performance bottlenecks, unbounded queries, N+1 patterns, missing indexes, synchronous blocking operations on hot paths, and memory pressure points.... |

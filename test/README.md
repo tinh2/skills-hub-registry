@@ -6,7 +6,7 @@ Automated testing across every layer -- unit, integration, E2E, load, contract, 
 
 **[test-suite](test-suite/)** -- Analyzes test coverage across all testing types, identifies gaps, routes to the appropriate sub-skills, and produces a health report with scores per category. Start here if you are unsure which test type you need.
 
-## Skills (11)
+## Skills (13)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -37,3 +37,10 @@ Automated testing across every layer -- unit, integration, E2E, load, contract, 
 - `/full-test` (combo skill) to chain `/e2e` then `/manual-test-plan`
 - `/mobile-test` for Flutter/React Native specific test generation
 - `/device-matrix` for cross-device cloud testing configuration
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [full-test](full-test/) | 2.0.0 | Complete testing pipeline — full test suite, test everything, automated and manual tests. |
+| [walkthrough](walkthrough/) | 2.0.0 | Run an app walkthrough — launch a Flutter app on a simulator or emulator, generate and run exhaustive integration tests that exercise every screen, button, form, and user flow,... |

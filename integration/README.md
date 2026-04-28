@@ -6,7 +6,7 @@ Third-party service connectors -- authentication, payments, email, push notifica
 
 **[integrate](integrate/)** -- Master integration orchestrator that audits existing integrations, identifies gaps, routes to sub-skills, and produces an integration health score for production readiness.
 
-## Skills (9)
+## Skills (13)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -31,3 +31,12 @@ Third-party service connectors -- authentication, payments, email, push notifica
 - Set up object storage: `/storage`
 - Set up realtime communication: `/realtime`
 - Set up analytics tracking: `/analytics-tracking`
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [perplexity-search](perplexity-search/) | 1.0.0 | AI-powered web search and research using the Perplexity API (Sonar models). Performs deep web research with citations, fact-checking, competitive analysis, market research, and... |
+| [stitch-bridge](stitch-bridge/) | 1.0.0 | >- |
+| [stitch-compare](stitch-compare/) | 1.0.0 | >- |
+| [stitch-explore](stitch-explore/) | 1.0.0 | >- |

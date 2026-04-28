@@ -2,7 +2,7 @@
 
 Domain analysis, competitive research, metrics, technical debt, codebase health, engineering spec generation, executive strategy audits, industry verticals, and social-impact sector analysis.
 
-## Skills (193)
+## Skills (197)
 
 ### Core Analysis
 
@@ -472,3 +472,26 @@ Domain analysis, competitive research, metrics, technical debt, codebase health,
 - Skilled Trades: `/job-dispatch`, `/parts-inventory`, `/technician-productivity`, `/quote-automation`
 - Occupational Health: `/incident-tracking`, `/workplace-risk-scoring`, `/safety-compliance`, `/safety-training`
 - Behavioral Economics: `/survey-analysis`, `/pricing-sensitivity`, `/behavioral-segmentation`, `/consumer-modeling`
+
+## Recently Added
+
+| Skill | Version | Description |
+|-------|---------|-------------|
+| [app-size-optimizer](app-size-optimizer/) | 2.0.0 | > |
+| [app-store-optimization](app-store-optimization/) | 2.0.0 | > |
+| [cnc-furniture](cnc-furniture/) | 1.0.0 | >- |
+| [game-ai](game-ai/) | 2.0.0 | Analyze game AI systems including behavior trees, finite state machines, GOAP planning, utility AI scoring, A-star and NavMesh pathfinding, steering and flocking behaviors,... |
+| [game-design-review](game-design-review/) | 2.0.0 | Analyze game design documents and implementations for core gameplay loop clarity and depth, XP leveling curves and unlock pacing, difficulty curve spikes and plateaus, skill tree... |
+| [game-economy](game-economy/) | 2.0.0 | Analyze in-game economy systems including soft and hard currency source-sink balance, inflation projection modeling, loot table drop rate fairness and pity system evaluation,... |
+| [game-monetization](game-monetization/) | 2.0.0 | Analyze game monetization implementations including IAP purchase flow and server-side receipt validation, ad mediation waterfall and rewarded video placement, subscription... |
+| [game-performance](game-performance/) | 2.0.0 | Analyze game code for performance bottlenecks including draw call batching and overdraw, shader complexity and LOD strategy, per-frame GC allocation pressure, object pooling gaps,... |
+| [level-design](level-design/) | 2.0.0 | Audit game level design systems and procedural generation -- BSP room subdivision, Wave Function Collapse tile placement, cellular automata cave generation, Perlin noise terrain,... |
+| [mobile-analytics](mobile-analytics/) | 2.0.0 | Analyze mobile app analytics implementation including event tracking completeness and naming conventions, SDK configuration audit (Firebase Analytics, Amplitude, Mixpanel,... |
+| [mobile-monetization](mobile-monetization/) | 2.0.0 | Audit mobile app revenue implementation -- in-app purchases, subscriptions, ad SDKs, paywall design, trial conversion funnels, and store billing compliance. Covers StoreKit 2,... |
+| [mobile-performance](mobile-performance/) | 2.0.0 | Profile and audit mobile app performance -- cold/warm/hot startup time, memory leaks, battery drain, network efficiency, frame rate jank, and binary size. Covers Flutter, React... |
+| [mobile-ux-patterns](mobile-ux-patterns/) | 2.0.0 | Audit mobile UX implementation against platform conventions -- navigation patterns, gesture handling, pull-to-refresh, infinite scroll, skeleton screens, haptic feedback, adaptive... |
+| [narrative-design](narrative-design/) | 2.0.0 | Audit game narrative systems for technical quality -- branching dialogue trees, state/flag tracking, quest systems, choice-consequence mapping, localization pipelines, voice-over... |
+| [new-features](new-features/) | 1.0.0 | Feature discovery agent — mines project docs, memory, user feedback, and competitor gaps to surface the highest-leverage features to build next. Outputs a prioritized feature... |
+| [player-analytics](player-analytics/) | 2.0.0 | Audit game analytics and telemetry implementation -- event tracking completeness, FTUE and monetization funnel coverage, retention metric infrastructure, A/B testing framework,... |
+| [seo](seo/) | 2.0.0 | — a Claude Code skill for automating seo workflows. |
+| [skills-list](skills-list/) | 4.1.0 | Displays the full skills catalog with descriptions, autonomous build chains, recommended pipelines, and parallelization rules. |
