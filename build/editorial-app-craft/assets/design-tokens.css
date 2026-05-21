@@ -1,0 +1,111 @@
+/* ============================================================
+ * EDITORIAL APP CRAFT — Design Tokens
+ * Cozy editorial palette + refined motion + typography scale
+ * Drop into the :root of a single-file app.
+ * ============================================================ */
+
+:root {
+  /* ---------- Color palette ----------
+   * Sage + warm cream + terracotta accent + honey amber.
+   * Cozy and family-warm without being childish.
+   */
+  --ink: #2a3528; /* deep forest, body text */
+  --ink-soft: #4d5d4a; /* muted ink for secondary copy */
+  --clay: #b8c0a8; /* sage-tinted clay for muted UI */
+  --sand: #d5dec5; /* light sage tint */
+  --cream: #f4f1e8; /* warm oat — body background */
+  --mist: #fbfaf4; /* off-white */
+  --surface: #eeece1; /* soft surface */
+  --surface-strong: #e3e1d2;
+
+  --accent: #5d7355; /* moss — primary action */
+  --accent-strong: #475a40; /* deep moss */
+  --accent-soft: #9caf88; /* sage */
+
+  --outline: #d8d6c5;
+  --outline-strong: #b8c0a8;
+
+  --success: #5d8f4f; /* spring green for done */
+  --warning: #b88838; /* honey amber */
+  --error: #a04545; /* muted clay red */
+
+  --heart: #c97d5d; /* terracotta — for "meaningful" emphasis */
+  --heart-soft: #f2dcc9;
+  --heart-glow: rgba(201, 125, 93, 0.22);
+
+  /* ---------- Refined paper surfaces ---------- */
+  --paper: linear-gradient(180deg, #ffffff 0%, #fdfbf4 100%);
+  --paper-warm: linear-gradient(180deg, #fffefa 0%, #faf5e9 100%);
+
+  /* ---------- Multi-layer shadows ----------
+   * Two-stop shadows feel like paper on a desk. Never use a single big blur.
+   */
+  --shadow-sm:
+    0 1px 1px rgba(43, 36, 32, 0.025), 0 1px 1px rgba(43, 36, 32, 0.03);
+  --shadow: 0 1px 1px rgba(43, 36, 32, 0.03), 0 4px 14px rgba(43, 36, 32, 0.05);
+  --shadow-lift:
+    0 1px 1px rgba(43, 36, 32, 0.04), 0 14px 40px rgba(43, 36, 32, 0.12),
+    0 4px 12px rgba(43, 36, 32, 0.06);
+  --shadow-heart:
+    0 1px 1px rgba(201, 125, 93, 0.06), 0 8px 22px rgba(201, 125, 93, 0.11);
+
+  /* ---------- Motion tokens ----------
+   * Apple-style silky easing. One curve, used everywhere.
+   * Linear easing reads as robotic; this curve reads as human.
+   */
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-bounce: cubic-bezier(0.4, 1.4, 0.5, 1);
+  --t-fast: 140ms;
+  --t-med: 240ms;
+  --t-slow: 380ms;
+
+  /* ---------- Typography scale ----------
+   * Playfair Display (italic for value names + headings) +
+   * Source Sans 3 (body).  Stick to this scale; don't improvise.
+   */
+  --display-xl: 32px;
+  --display-lg: 24px;
+  --display-md: 20px;
+  --display-sm: 17px;
+  --body-lg: 15.5px;
+  --body: 14.5px;
+  --body-sm: 13.5px;
+  --label: 11.5px;
+  --eyebrow: 10.5px;
+
+  /* ---------- Radii ---------- */
+  --radius-sm: 10px;
+  --radius: 14px;
+  --radius-lg: 20px;
+}
+
+/* ---------- Body backdrop — soft tri-radial atmosphere ---------- */
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family:
+    "Source Sans 3",
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
+  background-image:
+    radial-gradient(1400px 700px at 8% -12%, #e6efd6 0%, transparent 58%),
+    radial-gradient(1100px 600px at 108% -4%, #f3deca 0%, transparent 52%),
+    radial-gradient(900px 600px at 50% 110%, #ecead8 0%, transparent 50%);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Type pairing ----------
+ * Display: Playfair Display (Google Fonts)
+ * Body:    Source Sans 3 (Google Fonts)
+ * Add this to <head>:
+ * <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
+ */
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0;
+}

@@ -1,0 +1,433 @@
+/* ============================================================
+ * EDITORIAL APP CRAFT — Component Patterns
+ * Include design-tokens.css first.
+ * ============================================================ */
+
+/* ---------- Editorial card (index-card aesthetic) ---------- */
+.card {
+  background: var(--paper);
+  border: 1px solid var(--outline);
+  border-radius: 14px;
+  padding: 16px 18px 14px;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  transition:
+    transform var(--t-med) var(--ease),
+    box-shadow var(--t-med) var(--ease),
+    border-color var(--t-med) var(--ease);
+}
+.card::before {
+  /* sage accent rail that reveals on hover */
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14px;
+  bottom: 14px;
+  width: 3px;
+  background: transparent;
+  border-radius: 0 3px 3px 0;
+  transition:
+    background var(--t-med) var(--ease),
+    top var(--t-med) var(--ease),
+    bottom var(--t-med) var(--ease);
+}
+.card:hover::before {
+  background: var(--accent-soft);
+  top: 8px;
+  bottom: 8px;
+}
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--outline-strong);
+  box-shadow:
+    0 1px 2px rgba(43, 36, 32, 0.035),
+    0 12px 30px rgba(43, 36, 32, 0.08),
+    0 4px 10px rgba(43, 36, 32, 0.045);
+}
+.card-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 16.5px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  margin-bottom: 12px;
+  padding-right: 32px;
+  text-wrap: pretty;
+}
+.card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  letter-spacing: 0.01em;
+}
+/* Editorial byline: dot separators between meta items, no pills */
+.card-left > * + *::before {
+  content: "·";
+  margin-right: 7px;
+  color: var(--outline-strong);
+  font-weight: 400;
+  font-size: 13px;
+  opacity: 0.9;
+}
+.card-left .avatar + *::before {
+  margin-left: 0;
+}
+
+/* "Meaningful" variant — warmer paper + always-visible terracotta rail */
+.card.meaningful {
+  border-color: rgba(201, 125, 93, 0.32);
+  background: linear-gradient(180deg, #fffdf9 0%, #fdf2e7 100%);
+  box-shadow: var(--shadow-heart);
+  transform: translateY(-1px);
+}
+.card.meaningful::before {
+  background: linear-gradient(180deg, var(--heart) 0%, #b5573f 100%);
+  top: 14px;
+  bottom: 14px;
+}
+
+/* Drag-ghost — the source slot becomes a dashed outline */
+.card.dragging {
+  opacity: 0.35;
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--outline-strong);
+  box-shadow: none;
+}
+
+/* ---------- Page-load orchestration ---------- */
+.board.first-paint .column {
+  animation: col-rise 0.5s var(--ease) backwards;
+}
+.board.first-paint .col-todo {
+  animation-delay: 0ms;
+}
+.board.first-paint .col-doing {
+  animation-delay: 70ms;
+}
+.board.first-paint .col-done {
+  animation-delay: 140ms;
+}
+.board.first-paint .card {
+  animation: card-rise 0.45s var(--ease) backwards;
+}
+.board.first-paint [data-cards] .card:nth-child(1) {
+  animation-delay: 180ms;
+}
+.board.first-paint [data-cards] .card:nth-child(2) {
+  animation-delay: 230ms;
+}
+.board.first-paint [data-cards] .card:nth-child(3) {
+  animation-delay: 280ms;
+}
+.board.first-paint [data-cards] .card:nth-child(4) {
+  animation-delay: 330ms;
+}
+.board.first-paint [data-cards] .card:nth-child(5) {
+  animation-delay: 380ms;
+}
+.board.first-paint [data-cards] .card:nth-child(n + 6) {
+  animation-delay: 430ms;
+}
+@keyframes col-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- Editorial empty state ---------- */
+.empty {
+  padding: 36px 14px 20px;
+  text-align: center;
+  color: var(--ink-soft);
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: 0.78;
+}
+
+/* ---------- Field Notes detail modal ---------- */
+.detail-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(43, 36, 32, 0.55);
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  z-index: 120;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-med) var(--ease);
+  padding: 24px;
+}
+.detail-modal-backdrop.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+.detail-modal {
+  background: #fbf9f0;
+  background-image:
+    radial-gradient(700px 360px at -10% -10%, #e9efd7 0%, transparent 55%),
+    radial-gradient(700px 360px at 110% 110%, #f3dcc7 0%, transparent 50%);
+  border-radius: 22px;
+  padding: 0;
+  width: min(560px, 100%);
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow:
+    0 40px 100px rgba(43, 36, 32, 0.32),
+    0 8px 24px rgba(43, 36, 32, 0.14);
+  border: 1px solid rgba(216, 214, 197, 0.65);
+  transform: translateY(14px) scale(0.96);
+  transition: transform var(--t-slow) var(--ease);
+}
+.detail-modal-backdrop.show .detail-modal {
+  transform: translateY(0) scale(1);
+}
+.detail-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 28px 32px 18px;
+  border-bottom: 1px solid rgba(216, 214, 197, 0.55);
+  position: relative;
+}
+.detail-eyebrow {
+  position: absolute;
+  top: 18px;
+  left: 32px;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-soft);
+  opacity: 0.7;
+}
+.detail-title {
+  flex: 1;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--ink);
+  padding: 18px 0 0;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+/* ---------- Field Notes list (subtasks etc.) ---------- */
+.fn-list {
+  padding: 4px 32px 6px;
+  counter-reset: fn-counter;
+}
+.fn-item {
+  display: grid;
+  grid-template-columns: 22px 24px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(216, 214, 197, 0.5);
+}
+.fn-item:last-child {
+  border-bottom: 0;
+}
+.fn-item::before {
+  content: counter(fn-counter, decimal-leading-zero);
+  counter-increment: fn-counter;
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 11px;
+  color: var(--ink-soft);
+  opacity: 0.5;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+.fn-item .check {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid rgba(93, 115, 85, 0.35);
+  border-radius: 5px;
+  display: grid;
+  place-items: center;
+  background: rgba(255, 255, 255, 0.7);
+  transition: all 0.22s var(--ease-bounce);
+}
+.fn-item:hover .check {
+  border-color: var(--accent);
+  background: white;
+}
+.fn-item.done .check {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.fn-item.done .check::after {
+  content: "✓";
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+.fn-item .text {
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.fn-item.done .text {
+  text-decoration: line-through;
+  text-decoration-color: var(--accent-soft);
+  color: var(--ink-soft);
+}
+.fn-add-form {
+  display: flex;
+  gap: 10px;
+  padding: 14px 32px 22px;
+  border-top: 1px solid rgba(216, 214, 197, 0.5);
+  background: rgba(252, 250, 244, 0.5);
+  border-radius: 0 0 22px 22px;
+}
+.fn-add-form input {
+  flex: 1;
+  border: 0;
+  background: transparent;
+  border-bottom: 1.5px solid rgba(216, 214, 197, 0.7);
+  padding: 8px 4px;
+  font-size: 14.5px;
+  outline: none;
+  transition: border-color var(--t-fast) var(--ease);
+}
+.fn-add-form input::placeholder {
+  color: var(--ink-soft);
+  opacity: 0.55;
+  font-style: italic;
+}
+.fn-add-form input:focus {
+  border-bottom-color: var(--accent);
+}
+.fn-add-form button {
+  background: var(--accent);
+  color: var(--mist);
+  border: 0;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* ---------- Daily quote (welcome modal) ---------- */
+.daily-quote {
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(216, 214, 197, 0.7);
+  text-align: center;
+}
+.daily-quote .dq-text {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--ink);
+  max-width: 320px;
+  margin: 0 auto;
+}
+.daily-quote .dq-text::before {
+  content: "\201C";
+  color: var(--accent-soft);
+}
+.daily-quote .dq-text::after {
+  content: "\201D";
+  color: var(--accent-soft);
+}
+.daily-quote .dq-by {
+  margin-top: 8px;
+  font-family: "Source Sans 3", sans-serif;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+/* ---------- Brand mark (daily ornament target) ---------- */
+.brand-mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #b4c9a0 0%, #5d7355 100%);
+  display: grid;
+  place-items: center;
+  color: var(--mist);
+  font-family: "Georgia", "Playfair Display", serif;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1;
+  box-shadow:
+    0 6px 16px rgba(93, 115, 85, 0.22),
+    0 1px 2px rgba(93, 115, 85, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  position: relative;
+  transition: background var(--t-slow) var(--ease);
+}
+
+/* ---------- Streak with milestone shimmer ---------- */
+.streak.milestone {
+  background: linear-gradient(180deg, #fbf0d8 0%, #f4e0b0 100%);
+  border-color: #d8b97a;
+  animation: streak-shimmer 2.4s var(--ease) infinite;
+}
+@keyframes streak-shimmer {
+  0%,
+  100% {
+    box-shadow:
+      0 1px 3px rgba(43, 36, 32, 0.04),
+      0 0 0 0 rgba(184, 136, 56, 0);
+  }
+  50% {
+    box-shadow:
+      0 1px 3px rgba(43, 36, 32, 0.04),
+      0 0 0 5px rgba(184, 136, 56, 0.12);
+  }
+}
+
+/* ---------- Mobile touch targets ---------- */
+@media (hover: none) {
+  .delete-btn,
+  .edit-btn,
+  .fn-edit,
+  .fn-delete,
+  .item-delete {
+    min-width: 40px;
+    min-height: 40px;
+    opacity: 0.85;
+  }
+}
