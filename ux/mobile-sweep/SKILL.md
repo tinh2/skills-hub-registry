@@ -20,7 +20,7 @@ description: |
 
   NOT for: visual / aesthetic critique (colors, typography, brand) — that's
   /design-claude. NOT for accessibility-only audits — see /accessibility-test.
-version: "1.0.0"
+version: "1.1.0"
 category: ux
 platforms: [CLAUDE_CODE]
 ---
@@ -43,6 +43,22 @@ override — the exact pattern that caused today's rewards-edit-row clipping bug
 The actual sweep is done by a bundled Playwright script (`scripts/sweep.py`).
 The skill body just orchestrates running it, interprets the findings, and
 proposes fixes the user can apply directly.
+
+## What the scanner exempts by default
+
+These elements are intentionally tiny or off-screen and should not be
+flagged. The scanner skips them automatically; pass `--no-default-ignores`
+to see them anyway.
+
+- **Visually-hidden a11y elements** — `.skip-to-content`, `.sr-only`,
+  `.visually-hidden`, `.screen-reader-text`, anything with `aria-label`
+  starting with "skip", and structurally-detected SR-only elements (1×1
+  absolutely-positioned with `overflow: hidden` / `clip-path`).
+- **Inline text links in prose** — anchors whose nearest block ancestor
+  is `<p>`, `<li>`, `<td>`, `<dd>`, `<blockquote>`, or any element with a
+  class containing `prose`. WCAG 2.5.8 explicitly exempts these from the
+  24×24 target size rule. Exempted only from the small-touch-target
+  check; off-screen and clipped-text still apply.
 
 ============================================================
 === PRE-FLIGHT ===
@@ -101,6 +117,8 @@ Useful flags:
 | `--wait-selectors ".board"`                               | Wait for these to appear before sweeping (handy when content is fetched after first paint).                                                                              |
 | `--static-css <path>`                                     | Path to scan for rigid-grid CSS issues. Defaults to `.`; pass an empty string `""` to disable.                                                                           |
 | `--out mobile-sweep-out`                                  | Output directory for the report + screenshots. Default `mobile-sweep-out/`.                                                                                              |
+| `--ignore-selectors ".chip-marketing,.fab-decoration"`    | Add custom selectors to skip during checks. Useful for known decoration-only elements that aren't worth flagging.                                                        |
+| `--no-default-ignores`                                    | Disable the built-in WCAG exemptions (skip-to-content links, sr-only/visually-hidden elements, inline prose anchors). Use when you want a strict baseline.               |
 
 The script writes:
 

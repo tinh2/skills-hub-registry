@@ -41,12 +41,15 @@ DEFAULT_BREAKPOINTS = [
     (768, 1024, "iPad portrait"),
 ]
 
-# JS that runs in the page to collect findings. Returns an array of
-# { kind, severity, selector, label, rect, text, scrollWidth, clientWidth,
-#   width, height, computedRule } objects.
+# JS that runs in the page to collect findings. Takes an opts object:
+#   { ignoreSelectors: string[], disableDefaultIgnores: boolean }
+# Returns an array of finding objects ({ kind, severity, selector, label,
+# rect, text, scrollWidth, clientWidth, width, height, computedRule, ... }).
 COLLECT_JS = r"""
-() => {
+(opts) => {
   const findings = [];
+  const ignoreSelectors = (opts && opts.ignoreSelectors) || [];
+  const disableDefaultIgnores = !!(opts && opts.disableDefaultIgnores);
   const viewportW = document.documentElement.clientWidth;
   const viewportH = document.documentElement.clientHeight;
   const isInteractive = (el) => {
@@ -54,6 +57,53 @@ COLLECT_JS = r"""
     if (["button", "a", "input", "select", "textarea"].includes(tag)) return true;
     const role = (el.getAttribute("role") || "").toLowerCase();
     return ["button", "link", "menuitem", "tab", "checkbox", "switch"].includes(role);
+  };
+  // Default exemptions for findings the user can't usefully act on:
+  //
+  // (1) Visually-hidden a11y elements — skip-to-content links, sr-only
+  //     containers. They're intentionally 1×1px and/or positioned off-screen
+  //     until focused. Exempted from ALL kinds (small-touch-target,
+  //     clipped-text, off-screen-left).
+  //
+  // (2) Inline text links in prose — WCAG 2.5.8 explicitly exempts these
+  //     from the 24×24 target-size rule. Exempted from small-touch-target.
+  //
+  // Pass --no-default-ignores to disable; pass --ignore-selectors to add more.
+  const matchesUserIgnore = (el) => {
+    for (const sel of ignoreSelectors) {
+      try { if (el.matches(sel)) return true; } catch (_) {}
+    }
+    return false;
+  };
+  const isVisuallyHidden = (el) => {
+    if (disableDefaultIgnores) return false;
+    const cls = (typeof el.className === "string" ? el.className : "") || "";
+    const aria = (el.getAttribute("aria-label") || "").toLowerCase();
+    if (/(^|\s)(skip[-_]?(to|content|nav)|sr-only|visually-hidden|screen-reader-text|usa-sr-only)/i.test(cls)) return true;
+    if (/^skip\b/.test(aria)) return true;
+    // Structural detection: a 1×1 (or smaller) absolutely-positioned element
+    // with overflow hidden / clip / clip-path is the canonical SR-only pattern.
+    const r = el.getBoundingClientRect();
+    if (r.width <= 2 && r.height <= 2) {
+      const s = getComputedStyle(el);
+      if (
+        s.position === "absolute" &&
+        (s.overflow === "hidden" || s.clipPath !== "none" || s.clip !== "auto")
+      ) return true;
+    }
+    return false;
+  };
+  const isExemptFromTouchTargetCheck = (el) => {
+    if (matchesUserIgnore(el)) return true;
+    if (isVisuallyHidden(el)) return true;
+    if (disableDefaultIgnores) return false;
+    if (el.tagName.toLowerCase() === "a") {
+      const proseAncestor = el.closest(
+        "p, li, td, dd, blockquote, [class*='prose'], [class*='Prose']",
+      );
+      if (proseAncestor) return true;
+    }
+    return false;
   };
   const isVisible = (el) => {
     const r = el.getBoundingClientRect();
@@ -86,6 +136,11 @@ COLLECT_JS = r"""
   const all = document.querySelectorAll("button, a, input, select, textarea, [role='button'], [role='link'], [role='menuitem'], [role='tab'], [role='checkbox'], [role='switch']");
   for (const el of all) {
     if (!isVisible(el)) continue;
+    // Visually-hidden a11y elements are intentionally tiny / off-screen — they
+    // shouldn't trigger any of the geometry checks (off-screen, clipped-text,
+    // or small-touch-target). User-provided --ignore-selectors also short-
+    // circuits the whole element, not just touch-target.
+    if (matchesUserIgnore(el) || isVisuallyHidden(el)) continue;
     const r = el.getBoundingClientRect();
 
     // Off-screen horizontal overflow
@@ -110,9 +165,15 @@ COLLECT_JS = r"""
       });
     }
 
-    // Touch target too small (only flag if not pure decoration)
+    // Touch target too small (only flag if not pure decoration and not
+    // WCAG-exempt — see isExemptFromTouchTargetCheck above).
     const minDim = Math.min(r.width, r.height);
-    if (isInteractive(el) && minDim > 0 && minDim < 44) {
+    if (
+      isInteractive(el)
+      && minDim > 0
+      && minDim < 44
+      && !isExemptFromTouchTargetCheck(el)
+    ) {
       findings.push({
         kind: "small-touch-target",
         severity: "error",
@@ -222,11 +283,24 @@ def static_css_scan(root: Path):
                 })
     return warnings
 
-def sweep_url(url, breakpoints, out_dir, open_selectors=None, wait_selectors=None):
+def sweep_url(
+    url,
+    breakpoints,
+    out_dir,
+    open_selectors=None,
+    wait_selectors=None,
+    ignore_selectors=None,
+    disable_default_ignores=False,
+):
     out_dir = Path(out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     open_selectors = open_selectors or []
     wait_selectors = wait_selectors or []
+    ignore_selectors = ignore_selectors or []
+    collect_opts = {
+        "ignoreSelectors": ignore_selectors,
+        "disableDefaultIgnores": disable_default_ignores,
+    }
     all_findings = []
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
@@ -243,7 +317,7 @@ def sweep_url(url, breakpoints, out_dir, open_selectors=None, wait_selectors=Non
                 except PWTimeout: pass
             page.wait_for_timeout(500)
             # Sweep the default state
-            findings = page.evaluate(COLLECT_JS)
+            findings = page.evaluate(COLLECT_JS, collect_opts)
             for f in findings:
                 f["breakpoint"] = f"{w}x{h} ({name})"
                 f["state"] = "default"
@@ -268,7 +342,7 @@ def sweep_url(url, breakpoints, out_dir, open_selectors=None, wait_selectors=Non
                     if not el: continue
                     el.click()
                     page.wait_for_timeout(400)
-                    extra = page.evaluate(COLLECT_JS)
+                    extra = page.evaluate(COLLECT_JS, collect_opts)
                     for f in extra:
                         f["breakpoint"] = f"{w}x{h} ({name})"
                         f["state"] = f"after click {s}"
@@ -358,6 +432,10 @@ def main():
                    help="Path to scan for rigid-grid CSS issues (defaults to '.' — disable with '')")
     p.add_argument("--out", default="mobile-sweep-out",
                    help="Output directory for the report and screenshots")
+    p.add_argument("--ignore-selectors", default="",
+                   help="Comma-separated CSS selectors to skip during touch-target checks (in addition to the WCAG defaults: skip-to-content links + inline prose anchors)")
+    p.add_argument("--no-default-ignores", action="store_true",
+                   help="Disable the built-in WCAG exemptions (skip-to-content links, inline prose anchors). Use to verify a clean baseline.")
     args = p.parse_args()
 
     widths = [int(w) for w in args.breakpoints.split(",") if w.strip()]
@@ -366,9 +444,18 @@ def main():
 
     open_sels = [s for s in args.open_selectors.split(",") if s.strip()]
     wait_sels = [s for s in args.wait_selectors.split(",") if s.strip()]
+    ignore_sels = [s.strip() for s in args.ignore_selectors.split(",") if s.strip()]
 
     print(f"Sweeping {args.url} at {len(breakpoints)} breakpoints…", file=sys.stderr)
-    runtime = sweep_url(args.url, breakpoints, args.out, open_selectors=open_sels, wait_selectors=wait_sels)
+    runtime = sweep_url(
+        args.url,
+        breakpoints,
+        args.out,
+        open_selectors=open_sels,
+        wait_selectors=wait_sels,
+        ignore_selectors=ignore_sels,
+        disable_default_ignores=args.no_default_ignores,
+    )
 
     static_warnings = []
     if args.static_css != "":
