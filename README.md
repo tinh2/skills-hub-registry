@@ -2,7 +2,7 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-428 production-tested skills organized into 15 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0 with built-in self-healing validation and self-evolution telemetry.
+429 production-tested skills organized into 15 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0+ with built-in self-healing validation and self-evolution telemetry.
 
 ## Directory Structure
 
@@ -20,7 +20,7 @@ skills-hub-registry/
 ├── productivity     #   9 skills — Developer Experience
 ├── integration      #  13 skills — Third-Party Service Connectors
 ├── combo            #  34 skills — Multi-Skill Chains
-├── meta             #  12 skills — Skills About Skills
+├── meta             #  13 skills — Skills About Skills
 ├── education        #   8 skills — Learning & Onboarding
 └── spec             #   1 skill  — Specification Authoring
 ```
@@ -86,9 +86,9 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [nextjs](build/nextjs/)                             | 2.0.0   | Builds a production-ready Next.js 15 app with App Router, Server Components, authentication, Prisma database, and a full dashboard UI from a description or brief. Triggers on:...     |
 | [react-native](build/react-native/)                 | 2.0.0   | Builds a production-ready React Native mobile app from designs, screenshots, or descriptions using Expo, typed navigation, TanStack Query, and full screen implementations....         |
 | [remotion](build/remotion/)                         | 1.0.0   | Build programmatic videos with Remotion (React). Covers compositions, animations, sequencing, transitions, audio/video embedding, spring physics, text animations, voiceover...        |
-| [ship](build/ship/)                                 | 2.0.0   | Fast autonomous build loop -- 4 iterations max. Ship it, quick build, fast implementation, just build it, ship fast.                                                                   |
+| [ship](build/ship/)                                 | 2.1.0   | Fast autonomous build loop -- 4 iterations max. Ship it, quick build, fast implementation, just build it, ship fast.                                                                   |
 | [social-clip](build/social-clip/)                   | 1.0.0   | Create short-form social media videos for TikTok, Instagram Reels, YouTube Shorts, and more. Two modes -- create from scratch with a brief, or repurpose long-form video into short... |
-| [story-implementer](build/story-implementer/)       | 2.0.0   | Implements a story, spec, or ticket from any format (text, image, structured doc) using the repository's existing conventions. Writes tests, commits, and creates a PR. Trigger...     |
+| [story-implementer](build/story-implementer/)       | 2.1.0   | Implements a story, spec, or ticket from any format (text, image, structured doc) using the repository's existing conventions. Writes tests, commits, and creates a PR. Trigger...     |
 | [tutorial-video](build/tutorial-video/)             | 0.1.0   | Create Fireship-quality developer tutorial videos from annotated markdown and terminal recordings. Animated code transitions (Code Hike + Shiki Magic Move), terminal replay...        |
 | [unity-scaffold](build/unity-scaffold/)             | 2.0.0   | Scaffolds a Unity game project with folder structure, assembly definitions, new Input System, scriptable object architecture, scene management, Git LFS, and CI/CD via GameCI....      |
 | [unreal-scaffold](build/unreal-scaffold/)           | 2.0.0   | Scaffolds an Unreal Engine 5 project with C++ module structure, Enhanced Input, Gameplay Ability System, subsystem architecture, .uproject config, and CI/CD via BuildGraph....        |
@@ -139,7 +139,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | Skill                                                        | Version | Description                                                                                                                                                                            |
 | ------------------------------------------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [api-review](review/api-review/)                             | 2.0.0   | Review API design against REST best practices and internal consistency. Audits naming conventions, HTTP method semantics, status code correctness, pagination and filtering...         |
-| [arch-review](review/arch-review/)                           | 10.0.0  | Architect-level story review and implementation validation with domain consistency analysis. Use with a story to get design feedback before coding, or on a branch to validate...      |
+| [arch-review](review/arch-review/)                           | 12.1.0  | Architect-level story review with component reuse, domain consistency, data privacy, service architecture, and infrastructure checks. Design review before coding or implementation... |
 | [care-burnout-audit](review/care-burnout-audit/)             | 2.0.0   | Audit healthcare and caregiving software for provider burnout risk factors. Analyzes workload distribution fairness, scheduling equity, documentation burden, alert fatigue...         |
 | [cfo-review](review/cfo-review/)                             | 2.0.0   | Conduct a CFO-perspective financial impact review of a codebase. Analyzes infrastructure costs and scaling projections, pricing model alignment with architecture, build-vs-buy...     |
 | [cpo-review](review/cpo-review/)                             | 2.0.0   | Conduct a CPO-perspective product strategy review of a codebase. Evaluates feature completeness against core value proposition, time-to-value for new users, user journey quality,...  |
@@ -494,7 +494,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [compliance-gate](combo/compliance-gate/)             | 2.0.0   | Runs a 4-phase compliance pipeline: security scan, GDPR audit, dependency vulnerability check, and penetration test, producing a unified pass/fail compliance report. Triggers on:...  |
 | [compliance-suite](combo/compliance-suite/)           | 2.0.0   | Runs a 5-phase enterprise compliance and security hardening pipeline: regulatory review, GDPR audit, SOC 2 evaluation, dependency scan, and penetration test with cross-framework...   |
 | [data-pipeline](combo/data-pipeline/)                 | 2.0.0   | Build a production-ready data API from scratch: scaffold REST endpoints with models and validation, generate integration tests that verify every route, then load test for...          |
-| [design-overhaul](combo/design-overhaul/)             | 1.0.0   | Complete autonomous design overhaul — tears down dated patterns and rebuilds with modern CSS, proper tokens, purposeful motion, and production-grade quality. The nuclear option...    |
+| [design-overhaul](combo/design-overhaul/)             | 2.1.0   | Complete autonomous design overhaul — tears down dated patterns and rebuilds with modern CSS, proper tokens, purposeful motion, and production-grade quality. The nuclear option...    |
 | [design-pipeline](combo/design-pipeline/)             | 1.0.0   | Full autonomous design pipeline — Ralph Wiggum builds it, then the safety net polishes it. Chains: design-setup → design-build → (design-audit ∥ design-optimize) → design-polish →... |
 | [design-to-code](combo/design-to-code/)               | 2.0.0   | Turn a design into production-quality frontend code: extract a design system with tokens and components, make layouts responsive across breakpoints, add dark mode with...             |
 | [education-suite](combo/education-suite/)             | 2.0.0   | Comprehensive K-12 or higher-ed system analysis: predict student dropout risk with early warning indicators, optimize curriculum alignment and pacing, personalize learning paths...   |
@@ -525,7 +525,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [story](combo/story/)                                 | 2.0.0   | Full story lifecycle — review, implement, and PR. Takes a story from architecture review through implementation to pull request creation.                                              |
 | [tech-debt-sprint](combo/tech-debt-sprint/)           | 2.0.0   | Run a focused tech debt reduction sprint — inventories all technical debt (TODOs, outdated deps, missing tests, god objects), fixes code smells, removes dead code, then hardens...    |
 
-### meta -- Skills About Skills (12 skills)
+### meta -- Skills About Skills (13 skills)
 
 | Skill                                      | Version | Description                                                                                                                                                                            |
 | ------------------------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -541,6 +541,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [skill-creator](meta/skill-creator/)       | 2.0.0   | Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run...  |
 | [skill-test](meta/skill-test/)             | 2.0.0   | Test a skill's quality before publishing — validate SKILL.md frontmatter schema, check instruction structure for phases and guardrails, score against the marketplace rubric out of... |
 | [skillify](meta/skillify/)                 | 1.1.0   | Create a reusable, self-healing, self-evolving global skill — either from the current conversation context OR from a plain-language description of a workflow. Triggers on: 'turn...   |
+| [tend](meta/tend/)                         | 1.2.0   | Automated app improvement cycles. Assesses each app's health, prioritizes by staleness and debt, consumes recall/metrics/evolve findings from cron, then runs targeted fix...          |
 
 ### education -- Learning & Onboarding (8 skills)
 

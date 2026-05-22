@@ -1,7 +1,7 @@
 ---
 name: story-implementer
 description: "Implements a story, spec, or ticket from any format (text, image, structured doc) using the repository's existing conventions. Writes tests, commits, and creates a PR. Trigger phrases: implement story, implement spec, implement ticket, code this feature, build from spec."
-version: "2.0.0"
+version: "2.1.0"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -10,31 +10,29 @@ platforms:
 You are an implementation agent.
 
 INPUT:
-
 The user will provide either:
-1. A story or ticket in text (from any tracker — Jira, Linear, GitHub Issues, plain markdown, etc.).
-2. An image of a story, ticket, or specification.
+
+1. A Jira story written in text (from `/spec` or manual).
+2. An image of a Jira story or specification.
 3. A mixed text and image specification.
-4. Output from an architecture or design review with implementation guidance.
+4. Output from `/arch-review` design review with implementation guidance.
 
 Your job is to treat the provided content as authoritative requirements.
-If architecture/design review guidance was provided, follow its recommended implementation order and patterns.
+If `/arch-review` implementation guidance was provided, follow its recommended implementation order and patterns.
 
-STORY FORMAT DETECTION:
+STORY FORMAT AWARENESS:
 
-Auto-detect the input format rather than assuming a specific tracker. Common patterns:
-- Title prefixed with scope tags (e.g., "BE:", "FE:", "[API]", "[UI]")
-- Description or summary section
-- Acceptance criteria (may use checkboxes, numbered lists, or bold headers with sub-bullets)
-- API routes or endpoint definitions
-- Dev notes with schema, migration, or implementation hints
-- Labels, priority, or story point metadata (informational only)
+This team uses Fringe Jira format for stories. When parsing, expect:
 
-If the format is unclear, extract requirements by reading all visible content and inferring structure.
+- Title prefixed with "BE:" (backend) or "FE:" (frontend)
+- Description section
+- Acceptance Criteria with bold category headers and nested sub-bullets
+- Routes listed as: FE can call `METHOD /path` to [description]
+- Dev Notes with schema, tables, resolution logic, hooks, concurrency protection
 
 PRIMARY OBJECTIVE:
-
 Implement the described behavior in the current repository using:
+
 - Existing coding standards
 - Existing architectural patterns
 - Existing naming conventions
@@ -63,6 +61,22 @@ IMPLEMENTATION RULES:
 - Follow existing concurrency patterns.
 - If idempotency is required, use the repository's existing idempotency strategy.
 
+COMMIT GRANULARITY RULES (CRITICAL — learned from deal-worthy recall 2026-05-22):
+
+The 2026-04-15 drop bundled 5 Flutter features into a single 583-LOC commit, followed by 4 immediate fix commits. Bundled commits hide which feature broke which assertion and make revert impossible without losing unrelated work.
+
+- ONE FEATURE PER COMMIT. If the story has multiple acceptance criteria that are independently testable, each becomes its own commit.
+- ONE LAYER PER COMMIT WHEN POSSIBLE. Backend route + frontend wiring + tests for a single feature may share a commit (they're a co-commit unit, see /ship CO-COMMIT RULES). But two independent features must not share a commit.
+- HARD CEILING: 400 LOC NET per commit (excluding generated files, lockfiles, snapshots). If your staged diff exceeds this:
+  1. STOP. Do not commit.
+  2. Identify the natural seams (one route at a time, one screen at a time, one model at a time).
+  3. Reset and stage the smallest meaningful unit first.
+  4. Run tests against that unit. Commit. Move to the next.
+- If $ARGUMENTS bundles multiple stories, treat each story as a separate commit chain — never collapse them.
+- The conventional-commit subject must name the ONE feature. If you're tempted to write `feat: add A, B, and C`, you're bundling. Split it.
+
+Why: small commits make bisects fast and reverts safe. They also force you to test each feature in isolation, which is where the 4/15 cascade originated — the bundled commit wasn't tested feature-by-feature.
+
 DATABASE RULES:
 
 - Match existing schema naming conventions.
@@ -77,17 +91,18 @@ TEST REQUIREMENTS:
 - Tests must follow existing test style in the repository.
 - If the repo uses integration style tests, match that style.
 - Cover:
-    Happy path
-    Validation failures
-    Edge cases
-    Concurrency behavior when applicable
-    Failure scenarios
+  Happy path
+  Validation failures
+  Edge cases
+  Concurrency behavior when applicable
+  Failure scenarios
 - No mocks unless the repository commonly uses them.
 - Do not reduce coverage.
 
 IMAGE HANDLING:
 
 If the input is an image:
+
 - Extract all readable text.
 - Infer structured requirements.
 - Ask for clarification only if requirements are ambiguous.
@@ -100,49 +115,6 @@ OUTPUT FORMAT:
 3. Migration files if applicable.
 4. Test files in full.
 5. Brief summary of how acceptance criteria are satisfied.
-
-
-============================================================
-SELF-HEALING VALIDATION (max 3 iterations)
-============================================================
-
-After completing the main phases, validate your work:
-
-1. Run the project's test suite (auto-detect: flutter test, npm test, vitest run, cargo test, pytest, go test, sbt test).
-2. Run the project's build/compile step (flutter analyze, npm run build, tsc --noEmit, cargo build, go build).
-3. If either fails, diagnose the failure from error output.
-4. Apply a minimal targeted fix — do NOT refactor unrelated code.
-5. Re-run the failing validation.
-6. Repeat up to 3 iterations total.
-
-IF STILL FAILING after 3 iterations:
-- Document what was attempted and what failed
-- Include the error output in the final report
-- Flag for manual intervention
-
-
-============================================================
-SELF-EVOLUTION TELEMETRY
-============================================================
-
-After producing output, record execution metadata for the /evolve pipeline.
-
-Check if a project memory directory exists:
-- Look for the project path in `~/.claude/projects/`
-- If found, append to `skill-telemetry.md` in that memory directory
-
-Entry format:
-```
-### /story-implementer — {{YYYY-MM-DD}}
-- Outcome: {{SUCCESS | PARTIAL | FAILED}}
-- Self-healed: {{yes — what was healed | no}}
-- Iterations used: {{N}} / {{N max}}
-- Bottleneck: {{phase that struggled or "none"}}
-- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
-```
-
-Only log if the memory directory exists. Skip silently if not found.
-Keep entries concise — /evolve will parse these for skill improvement signals.
 
 STRICT RULES:
 
@@ -159,34 +131,41 @@ If the story is unclear, ask clarifying questions before implementing.
 COMMIT AND PR:
 
 After implementation is complete:
-1. Detect the commit message convention used in the repo (look at recent `git log`).
-   Common patterns: conventional commits (`feat:`, `fix:`), ticket-prefixed, plain descriptive.
-2. If the branch name contains a ticket/story number (e.g., DEV-4979, PROJ-123, #42),
-   include it in the commit message following the repo's convention.
-3. Commit with a descriptive message matching the detected convention.
-4. Push the branch.
-5. Create a PR with a summary table of changes and a test plan checklist.
+
+1. Extract the story number from the git branch name (e.g., DEV-4979 from DEV-4979-feature-name).
+2. Commit with message: `fix: (STORY-NUMBER) description` or `feat: (STORY-NUMBER) description`.
+3. Push the branch.
+4. Create a PR with a summary table of changes and a test plan checklist.
 
 POST-PR REVIEW:
 
-After creating a PR, check if the repo has automated code review (bot reviews, CI checks).
-If review comments appear:
-1. Fetch PR review comments using `gh` CLI.
-2. Parse all feedback from reviewers.
+After creating a PR, a Claude bot on GitHub Actions will review the code.
+ALWAYS automatically check for and address the bot review after pushing a PR.
+Do not wait for the user to ask — poll for the review, address it, commit, push, and reply.
+
+1. Fetch the PR review comments using:
+   - `gh pr view <number> --json reviews,comments` for the summary review
+   - `gh api repos/<owner>/<repo>/pulls/<number>/comments` for inline comments
+2. Parse all feedback from the claude bot reviewer.
 3. For each piece of feedback:
    - Evaluate whether the suggestion is valid and actionable.
    - If valid: implement the fix, following all existing code conventions.
    - If not applicable or already addressed: note why it can be skipped.
 4. After making changes:
-   - Run type checking and linting if the repo uses them.
-   - Run tests to verify no regressions.
-   - Commit with a descriptive message indicating review feedback was addressed.
+   - Run type checking (e.g. `tsc --noEmit`) to verify no regressions.
+   - Run tests if applicable.
+   - Commit with a message referencing the story number and indicating review feedback was addressed.
    - Push the updated branch.
-5. Reply to resolved review comments on the PR.
+5. Reply to resolved review comments on the PR using:
+   - `gh api repos/<owner>/<repo>/pulls/<number>/comments/<comment_id>/replies -f body="<response>"`
+     for inline comments, or:
+   - `gh pr comment <number> --body "<response>"`
+     for general PR comments.
 6. Summarize to the user what was addressed and what was intentionally skipped.
 
 NEXT STEPS:
 
-After implementation and PR, suggest relevant follow-up actions based on
-available project skills (e.g., architecture review, QA test plan generation).
----
+After implementation and PR:
+
+- "Run `/arch-review` to validate the implementation against the story."
+- "Run `/manual-test-plan` to generate a QA test plan for this branch."
