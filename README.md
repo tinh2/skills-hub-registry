@@ -2,13 +2,13 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-429 production-tested skills organized into 15 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0+ with built-in self-healing validation and self-evolution telemetry.
+430 production-tested skills organized into 15 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0+ with built-in self-healing validation and self-evolution telemetry.
 
 ## Directory Structure
 
 ```
 skills-hub-registry/
-├── build            #  33 skills — Project Scaffolding & Build Pipelines
+├── build            #  34 skills — Project Scaffolding & Build Pipelines
 ├── test             #  13 skills — Automated Testing
 ├── qa               #  15 skills — Quality Assurance
 ├── review           #  26 skills — Architecture, Code, Industry, Gaming & Mobile Review
@@ -84,6 +84,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [ios-app](build/ios-app/)                           | 2.0.0   | Scaffolds a native iOS app with SwiftUI, MVVM architecture, dependency injection, persistence, networking, push notifications, keychain, App Clips, and multi-environment Xcode...     |
 | [iterate](build/iterate/)                           | 11      | Autonomous build loop — implements, tests, reviews, analyzes, and refines. Default 6 iterations (thorough) or --fast for 4 iterations (ship it quick).                                 |
 | [nextjs](build/nextjs/)                             | 2.0.0   | Builds a production-ready Next.js 15 app with App Router, Server Components, authentication, Prisma database, and a full dashboard UI from a description or brief. Triggers on:...     |
+| [parallel-features](build/parallel-features/)       | 1.0.0   | Dispatch independent feature work in parallel git worktrees. Spawns one agent per feature, each in its own isolated worktree, then merges sequentially. Use when 3+ independent...     |
 | [react-native](build/react-native/)                 | 2.0.0   | Builds a production-ready React Native mobile app from designs, screenshots, or descriptions using Expo, typed navigation, TanStack Query, and full screen implementations....         |
 | [remotion](build/remotion/)                         | 1.0.0   | Build programmatic videos with Remotion (React). Covers compositions, animations, sequencing, transitions, audio/video embedding, spring physics, text animations, voiceover...        |
 | [ship](build/ship/)                                 | 2.1.0   | Fast autonomous build loop -- 4 iterations max. Ship it, quick build, fast implementation, just build it, ship fast.                                                                   |
@@ -230,7 +231,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [design-amplify](ux/design-amplify/)     | 1.0.0   | Amplify safe, boring designs into visually confident interfaces. Increases contrast, adds dramatic typography, introduces bold color, and creates visual tension. Makes designs...     |
 | [design-animate](ux/design-animate/)     | 1.0.0   | Add purposeful motion to interfaces using modern CSS — scroll-driven animations, view transitions, @starting-style, and GPU-accelerated transforms. Zero JS animation libraries...     |
 | [design-audit](ux/design-audit/)         | 1.0.0   | Comprehensive autonomous design quality audit across accessibility (WCAG 2.2), performance, theming, responsive/adaptive design, and anti-pattern detection. Produces a prioritized... |
-| [design-build](ux/design-build/)         | 1.0.0   | Build distinctive, production-grade interfaces with Ralph Wiggum velocity. Ships working code — web or mobile — with modern CSS, fluid typography, purposeful motion, and zero...      |
+| [design-build](ux/design-build/)         | 1.1.0   | Build distinctive, production-grade interfaces with Ralph Wiggum velocity. Ships working code — web or mobile — with modern CSS, fluid typography, purposeful motion, and zero...      |
 | [design-claude](ux/design-claude/)       | 1.0.0   | HTML-first hi-fi design skill: interactive prototypes, slide decks, animation demos, design variant exploration, visual direction advising, and expert critique. Triggers: make a...   |
 | [design-color](ux/design-color/)         | 1.0.0   | Add strategic color to monochromatic or dull interfaces using oklch for perceptually uniform palettes. Generates harmonious color systems with automatic light/dark variants and...    |
 | [design-copy](ux/design-copy/)           | 1.0.0   | Autonomous UX copy improvement — rewrites unclear labels, error messages, microcopy, CTAs, tooltips, and onboarding text. Makes every word earn its place. Supports web and mobile.    |

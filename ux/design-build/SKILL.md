@@ -1,7 +1,7 @@
 ---
 name: design-build
 description: "Build distinctive, production-grade interfaces with Ralph Wiggum velocity. Ships working code — web or mobile — with modern CSS, fluid typography, purposeful motion, and zero generic AI aesthetics. Use when: 'build UI', 'design this', 'create interface', 'make it look good', 'build screen', 'implement design', 'frontend build', 'design build'."
-version: "1.0.0"
+version: "1.1.0"
 category: ux
 platforms:
   - CLAUDE_CODE
@@ -20,17 +20,20 @@ $ARGUMENTS — what to build. Examples: "landing page", "settings screen", "dash
 ## PHASE 1: CONTEXT LOADING
 
 ### 1.1 Read Design Context
+
 - Check CLAUDE.md for a "Design Context" section (written by /design-setup)
 - If found: use those colors, fonts, spacing, component conventions as constraints
 - If not found: perform a rapid version of design-setup inline — scan for colors, fonts, spacing in the codebase (spend no more than 2 minutes on this)
 
 ### 1.2 Understand the Target
+
 - Read existing screens/pages/components for patterns to match
 - Identify the component model: React, Vue, Svelte, Flutter widgets, SwiftUI views, Compose
 - Identify styling approach: Tailwind, CSS Modules, styled-components, Flutter ThemeData, etc.
 - Note existing layout patterns: sidebar, top nav, card grids, list views
 
 ### 1.3 Understand the Request
+
 - Parse $ARGUMENTS for the screen/component to build
 - If a specific page is named, check if routes/navigation exist for it
 - If no arguments, scan for unfinished comments, empty route handlers, placeholder components
@@ -42,6 +45,7 @@ $ARGUMENTS — what to build. Examples: "landing page", "settings screen", "dash
 Before writing code, make these decisions silently (document in code comments only if non-obvious):
 
 ### 2.1 Layout Strategy
+
 - Choose layout approach based on content type:
   - **Data tables/dashboards**: CSS Grid with named areas, sticky headers
   - **Content pages**: single column with `max-width: 65ch` reading width
@@ -50,7 +54,9 @@ Before writing code, make these decisions silently (document in code comments on
   - **Flutter**: `Scaffold` with appropriate navigation, `CustomScrollView` for complex scrolling
 
 ### 2.2 Color Application
+
 Apply colors from the design context with these rules:
+
 - **Surface hierarchy**: use 2-3 surface levels, not just white and grey
 - **Accent sparingly**: primary color on 1-2 elements per viewport, not everything
 - **Semantic always**: success=green family, error=red family, warning=amber family — never override
@@ -60,16 +66,17 @@ Apply colors from the design context with these rules:
 /* GOOD: oklch with light-dark() */
 :root {
   --surface-1: light-dark(oklch(0.99 0.005 250), oklch(0.15 0.01 250));
-  --surface-2: light-dark(oklch(0.96 0.008 250), oklch(0.20 0.01 250));
+  --surface-2: light-dark(oklch(0.96 0.008 250), oklch(0.2 0.01 250));
   --surface-3: light-dark(oklch(0.93 0.01 250), oklch(0.25 0.015 250));
   --text-1: light-dark(oklch(0.15 0.02 250), oklch(0.93 0.01 250));
-  --text-2: light-dark(oklch(0.40 0.02 250), oklch(0.70 0.01 250));
-  --accent: oklch(0.65 0.20 250);
-  --accent-hover: oklch(0.60 0.22 250);
+  --text-2: light-dark(oklch(0.4 0.02 250), oklch(0.7 0.01 250));
+  --accent: oklch(0.65 0.2 250);
+  --accent-hover: oklch(0.6 0.22 250);
 }
 ```
 
 ### 2.3 Typography Application
+
 - **Fluid type**: always use `clamp()` for font sizes on web
 
 ```css
@@ -88,7 +95,9 @@ Apply colors from the design context with these rules:
 - **Flutter**: use `TextTheme` from `ThemeData`, scale with `MediaQuery.textScaleFactorOf(context)`
 
 ### 2.4 Anti-AI-Slop Rules
+
 NEVER use these patterns — they scream "AI generated":
+
 - Cyan/teal on dark backgrounds (the ChatGPT aesthetic)
 - Purple-to-blue gradients everywhere
 - Glassmorphism on every surface (frosted glass abuse)
@@ -101,6 +110,7 @@ NEVER use these patterns — they scream "AI generated":
 - Drop shadows on everything
 
 INSTEAD, build interfaces that feel like a human designer made them:
+
 - Vary visual weight — some elements command attention, others recede
 - Use whitespace deliberately — not uniformly
 - Let content drive layout, not a grid template
@@ -112,7 +122,9 @@ INSTEAD, build interfaces that feel like a human designer made them:
 ## PHASE 3: BUILD
 
 ### 3.1 Component Structure
+
 Build from the inside out:
+
 1. **Atoms first**: buttons, inputs, badges, avatars — if they don't exist yet
 2. **Composition**: assemble atoms into the target UI
 3. **Layout**: wrap in the page/screen layout
@@ -121,6 +133,7 @@ Build from the inside out:
 ### 3.2 Modern CSS Patterns to Use
 
 **Container queries for component-level responsiveness:**
+
 ```css
 .card-container {
   container-name: card;
@@ -128,12 +141,17 @@ Build from the inside out:
 }
 
 @container card (min-width: 400px) {
-  .card { flex-direction: row; }
-  .card__image { width: 40%; }
+  .card {
+    flex-direction: row;
+  }
+  .card__image {
+    width: 40%;
+  }
 }
 ```
 
 **Scroll-driven animations for reveal effects:**
+
 ```css
 .reveal-on-scroll {
   animation: reveal linear both;
@@ -142,17 +160,28 @@ Build from the inside out:
 }
 
 @keyframes reveal {
-  from { opacity: 0; translate: 0 2rem; }
-  to { opacity: 1; translate: 0 0; }
+  from {
+    opacity: 0;
+    translate: 0 2rem;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
 }
 ```
 
 **@starting-style for entry animations (dialogs, popovers, new elements):**
+
 ```css
 dialog[open] {
   opacity: 1;
   scale: 1;
-  transition: opacity 0.3s, scale 0.3s, overlay 0.3s allow-discrete, display 0.3s allow-discrete;
+  transition:
+    opacity 0.3s,
+    scale 0.3s,
+    overlay 0.3s allow-discrete,
+    display 0.3s allow-discrete;
 
   @starting-style {
     opacity: 0;
@@ -162,6 +191,7 @@ dialog[open] {
 ```
 
 **Anchor positioning for tooltips and popovers:**
+
 ```css
 .trigger {
   anchor-name: --trigger;
@@ -176,6 +206,7 @@ dialog[open] {
 ```
 
 **:has() for parent-aware styling:**
+
 ```css
 /* Form group with error state */
 .form-group:has(:invalid:not(:placeholder-shown)) {
@@ -189,6 +220,7 @@ dialog[open] {
 ```
 
 **View transitions for page navigation:**
+
 ```css
 ::view-transition-old(main) {
   animation: fade-out 0.2s ease-out;
@@ -206,6 +238,7 @@ dialog[open] {
 ### 3.3 Flutter Patterns to Use
 
 **Material 3 theming:**
+
 ```dart
 ThemeData(
   useMaterial3: true,
@@ -218,6 +251,7 @@ ThemeData(
 ```
 
 **Adaptive layouts:**
+
 ```dart
 Widget build(BuildContext context) {
   final width = MediaQuery.sizeOf(context).width;
@@ -228,6 +262,7 @@ Widget build(BuildContext context) {
 ```
 
 **Purposeful animation:**
+
 ```dart
 AnimatedContainer(
   duration: const Duration(milliseconds: 300),
@@ -246,7 +281,9 @@ AnimatedContainer(
 ```
 
 ### 3.4 Interaction States
+
 Every interactive element MUST have:
+
 - **Hover**: subtle background shift or underline (web)
 - **Focus-visible**: visible focus ring, never `outline: none` without replacement
 - **Active/pressed**: slight scale or color shift
@@ -262,17 +299,31 @@ Every interactive element MUST have:
   border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s, scale 0.1s;
+  transition:
+    background 0.15s,
+    scale 0.1s;
 
-  &:hover { background: var(--accent-hover); }
-  &:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-  &:active { scale: 0.98; }
-  &:disabled { opacity: 0.5; cursor: not-allowed; }
+  &:hover {
+    background: var(--accent-hover);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  &:active {
+    scale: 0.98;
+  }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
 ```
 
 ### 3.5 Accessibility Built-In
+
 Every element ships with:
+
 - Semantic HTML: `<button>` not `<div onclick>`, `<nav>`, `<main>`, `<article>`, `<section>` with labels
 - ARIA only when HTML semantics are insufficient
 - Touch targets: minimum 44x44px (web), 48x48dp (mobile)
@@ -283,7 +334,9 @@ Every element ships with:
 
 ```css
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -297,28 +350,37 @@ Every element ships with:
 ## PHASE 4: RESPONSIVE / ADAPTIVE
 
 ### 4.1 Container Queries First
+
 Use container queries for component-level adaptation. Reserve viewport queries for page-level layout only.
 
 ```css
 /* Page layout — viewport query is appropriate here */
 @media (min-width: 768px) {
-  .page { grid-template-columns: 240px 1fr; }
+  .page {
+    grid-template-columns: 240px 1fr;
+  }
 }
 
 /* Component adaptation — container query */
-.card-wrapper { container-type: inline-size; }
+.card-wrapper {
+  container-type: inline-size;
+}
 
 @container (min-width: 300px) {
-  .card { /* horizontal layout */ }
+  .card {
+    /* horizontal layout */
+  }
 }
 ```
 
 ### 4.2 Content-Aware Sizing
+
 - `field-sizing: content` for auto-sizing textareas and inputs
 - `interpolate-size: allow-keywords` for smooth `height: auto` transitions
 - `min()`, `max()`, `clamp()` for fluid sizing without breakpoints
 
 ### 4.3 Mobile-First Construction
+
 - Start with the mobile layout, enhance for larger screens
 - Touch targets 48px minimum
 - Bottom-aligned primary actions (thumb zone)
@@ -330,29 +392,53 @@ Use container queries for component-level adaptation. Reserve viewport queries f
 
 After building, validate:
 
+### 5.0 Test-Run Gate (CRITICAL — learned from pet-sitter recall 2026-05-22)
+
+Before any other validation, run the project's existing test suite — NOT to add new tests, but to detect regressions introduced by the design changes.
+
+The 2026-04-24 pet-sitter `/design-stack` run was followed by an immediate round-2 commit that was essentially test updates the skill should have caught itself. The skill applied visual changes and committed without verifying that existing assertions still passed; the regression surfaced as the next commit.
+
+Procedure:
+
+1. Detect the project's test command from `package.json` scripts (look for `test`, `test:unit`), `pubspec.yaml` (`flutter test`), `Cargo.toml` (`cargo test`), or repo conventions.
+2. **Record the baseline**: before applying ANY changes, run the test command once and capture pass/fail counts. If the suite is already red, note which tests fail and treat those as the baseline (don't try to fix unrelated pre-existing failures).
+3. **After each auto-applied batch of design changes**, re-run the test command.
+4. If any test that was previously green now fails: STOP. Do not commit. Investigate.
+   - If the failure is a real regression (the change broke behavior), fix the underlying issue.
+   - If the failure is a snapshot/golden test that needs updating because the visual genuinely changed and the new visual is correct: update the snapshot AS PART OF THIS COMMIT. Do not commit the visual change without the snapshot update — that's the exact failure mode the recall flagged.
+   - If the test is a brittle text-string assertion (e.g., asserts on copy you intentionally changed): update it in this commit, with a note in the commit body.
+5. Only proceed to 5.1 Build Check after the test suite is at-or-above the baseline.
+
+Skip ONLY if there is genuinely no test infrastructure (`pnpm test` exits with "no tests found", `flutter test` reports no test files, etc.) — and log "no test infrastructure detected, skipping test-run gate" in the build summary.
+
 ### 5.1 Build Check
+
 - Run the project's build/compile command (detect from package.json scripts, Makefile, pubspec.yaml)
 - If build fails: read the error, fix it, rebuild
 - Repeat up to 3 times
 
 ### 5.2 Import Check
+
 - Verify all imports resolve to existing files
 - Remove any unused imports
 - Verify no circular dependencies introduced
 
 ### 5.3 Accessibility Spot Check
+
 - Verify all `<img>` tags have `alt` attributes (or `Image` widgets have `semanticLabel`)
 - Verify all buttons/links have accessible names
 - Verify no `tabindex` values greater than 0
 - Verify color contrast on primary text/background combinations
 
 ### 5.4 Consistency Check
+
 - Verify colors used match design context (no magic hex values)
 - Verify spacing follows the established scale
 - Verify typography uses the defined type scale
 - Verify component naming follows project conventions
 
 ### 5.5 Modern Pattern Check
+
 - Verify `prefers-reduced-motion` is handled if animations were added
 - Verify dark mode works if the project supports it
 - Verify container queries are used where appropriate (not just viewport queries on components)
@@ -362,6 +448,7 @@ After building, validate:
 ## PHASE 6: TELEMETRY AND REPORTING
 
 ### 6.1 Build Summary
+
 Output what was built:
 
 ```
@@ -387,6 +474,7 @@ Output what was built:
 ```
 
 ### 6.2 Self-Evolution Notes
+
 If during building you encountered patterns not covered by these instructions, or discovered better approaches than what's specified here, note them under "Suggested Skill Improvements" so the skill can be updated.
 
 ---
