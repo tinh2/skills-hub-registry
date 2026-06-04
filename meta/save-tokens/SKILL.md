@@ -1,7 +1,7 @@
 ---
 name: save-tokens
-description: "Token-efficient codebase navigation. Build a queryable knowledge graph of a repo (via graphify) ONCE, then answer questions by querying the graph instead of grepping and reading dozens of files. Invoke when about to explore an unfamiliar or large codebase, when the user says 'save tokens', 'save context', 'don't burn tokens', 'use the graph', 'graph this repo', 'map this codebase', 'how does X connect to Y', 'where is X', 'explain this architecture', or any time you're tempted to fan out Grep/Read across many files to understand structure. Use BEFORE a broad code exploration, not after."
-version: "1.0.0"
+description: "Token-efficient codebase navigation. Build a queryable knowledge graph of a repo (via graphify, running FULLY LOCAL on Ollama — no cloud LLM, no token cost) ONCE, then answer questions by querying the graph instead of grepping and reading dozens of files. Invoke when about to explore an unfamiliar or large codebase, when the user says 'save tokens', 'save context', 'don't burn tokens', 'use the graph', 'graph this repo', 'map this codebase', 'how does X connect to Y', 'where is X', 'explain this architecture', or any time you're tempted to fan out Grep/Read across many files to understand structure. Use BEFORE a broad code exploration, not after."
+version: "2.0.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -13,9 +13,20 @@ architecture/structure/connection questions about a codebase while spending the
 instead of repeatedly grepping and reading files into context.
 
 The core insight (from the `graphify` tool this skill wraps): reading 30 files to
-understand how a system fits together can cost 50k+ tokens. A knowledge graph
-extracts the structure once (locally, via tree-sitter AST — no API calls for
-code) and then answers the same questions for a few hundred tokens each.
+understand how a system fits together can cost 50k+ tokens of YOUR context. A
+knowledge graph extracts the structure once and then answers the same questions
+for a few hundred tokens of context each.
+
+HOW IT STAYS FREE — graphify builds the graph in two layers:
+
+- **Structural (AST)** — tree-sitter parses every code file. 100% local, no model.
+- **Semantic enrichment** — a model names the Leiden communities, extracts design
+  rationale from prose, and writes GRAPH_REPORT.md. graphify will NOT finish a
+  build with no backend at all, so this skill ALWAYS points that layer at a
+  **local Ollama model** (default `qwen3.6:35b`). Nothing is sent to any cloud
+  LLM and ZERO API tokens are spent — the only "LLM" is one running on this
+  machine. That is the whole point of a skill named save-tokens: it spends a
+  little local compute to save a lot of your (paid) context window.
 
 Do NOT ask the user questions. Proceed autonomously. Only stop if genuinely blocked.
 
@@ -29,36 +40,81 @@ Do NOT ask the user questions. Proceed autonomously. Only stop if genuinely bloc
   If empty, default to graphing the current directory and reporting the architecture.
 
 === PRE-FLIGHT ===
-Before any work, verify:
+Before any work, verify FOUR things — the last two are what make the build
+finish locally for free (they were discovered the hard way; skipping them makes
+the semantic layer crash with "no LLM API key" or "openai package required"):
 
-- [ ] `graphify` CLI is installed → check with `graphify --version` (or `which graphify`).
+- [ ] `graphify` CLI is installed → `graphify --version` (or `which graphify`).
 - [ ] You are inside (or were given) a real code directory, not an empty/home dir.
+- [ ] A LOCAL Ollama backend is ready → `ollama list` shows a model AND
+      `curl -s http://localhost:11434/api/tags` succeeds. graphify reaches Ollama
+      through its OpenAI-compatible API, so the `openai` client must be in
+      graphify's venv too.
 - [ ] Check whether a graph already exists: does `graphify-out/graph.json` exist?
 
-Recovery:
+Recovery (do these silently, then proceed — never fall back to a paid cloud LLM):
 
-- If `graphify` is NOT installed: install it with `pip install graphifyy` (PyPI
-  package is `graphifyy`, CLI is `graphify`). If pip is unavailable, try
-  `pipx install graphifyy` or `uv tool install graphifyy`. If install fails
-  entirely, fall back to the GRACEFUL DEGRADATION section at the bottom — do not
-  abort the user's actual question.
+- If `graphify` is NOT installed: `pipx install graphifyy` (CLI is `graphify`,
+  PyPI package is `graphifyy`). If pipx is unavailable, `pip install graphifyy`
+  or `uv tool install "graphifyy[ollama]"`.
+- If the `openai` client is missing from graphify's venv (chunks fail with
+  "the 'openai' package is required"): `pipx inject graphifyy openai`
+  (or `uv tool install "graphifyy[ollama]" --force`). This is REQUIRED for the
+  Ollama backend — it does NOT mean you're using OpenAI; graphify just speaks the
+  OpenAI wire protocol to your local Ollama server.
+- If Ollama isn't running: start it with `ollama serve &` and wait until
+  `curl -s http://localhost:11434/api/tags` returns. If no model is pulled,
+  `ollama pull qwen3.6:35b` (or use whatever model `ollama list` already shows —
+  prefer the largest already-present model; pulling 23GB is slow).
 - If the target path is the home dir or has no source files: tell the user the
-  path looks wrong, ask nothing, default to `.` only if `.` has code; otherwise
-  report "no codebase found at <path>" and stop.
+  path looks wrong, default to `.` only if `.` has code; otherwise report
+  "no codebase found at <path>" and stop.
 - If `graphify-out/graph.json` already exists and is recent: SKIP rebuilding
-  (Phase 1) and go straight to querying (Phase 2). Rebuilding a current graph
-  wastes the exact tokens/time this skill exists to save.
+  (Phase 1), go straight to querying (Phase 2). Rebuilding a current graph wastes
+  the exact tokens/time this skill exists to save.
+- Only if a local Ollama genuinely cannot be made to run: go to GRACEFUL
+  DEGRADATION. Do NOT silently switch to a cloud backend — that would spend the
+  very tokens this skill exists to save. (Advanced: a power user can set a cloud
+  key + `--backend` themselves, but never default to it.)
 
 === PHASE 1: BUILD OR UPDATE THE GRAPH ===
 
-Build the graph only if it's missing, stale, or `--rebuild` was passed.
+Build the graph only if it's missing, stale, or `--rebuild` was passed. ALWAYS
+pin the backend to the local Ollama model so nothing hits a cloud LLM and zero
+API tokens are spent. Export `OLLAMA_API_KEY=ollama` first (any non-empty value)
+to silence graphify's "no key set" warning — it is NOT a real key, just a flag
+that suppresses the warning for the local server.
 
-- No graph yet → `graphify <path>` (e.g. `graphify .`). Add `--mode deep` only
-  when the user wants exhaustive edge extraction (slower, more thorough).
-- Graph exists but files changed → `graphify <path> --update` (re-extracts only
-  changed files via the SHA256 cache in `graphify-out/cache/`, merges results).
-  This is the cheap path — prefer it over a full rebuild.
+Canonical command — PREFER a fast MoE model to avoid request timeouts. A dense
+35B (`qwen3.6:35b`) is slow enough that several semantic chunks time out (you'll
+see "chunk N/5 failed: Request timed out" — the build still succeeds with partial
+results, but you lose enrichment). The MoE variant `qwen3.6:35b-a3b` (~3B active
+params) is far faster and rarely times out. Pick the fastest capable model
+`ollama list` shows:
+
+```bash
+export OLLAMA_API_KEY=ollama
+graphify <path> --backend ollama --model qwen3.6:35b-a3b
+```
+
+- No graph yet → run the canonical command above. Add `--mode deep` only when the
+  user wants exhaustive edge extraction (slower, more thorough).
+- Graph exists but files changed → add `--update` to the canonical command
+  (re-extracts only changed files via the SHA256 cache in `graphify-out/cache/`,
+  merges results). The AST half is cached, so a rerun only redoes the local
+  semantic layer — cheap. Prefer this over a full rebuild.
 - Graph exists and is current → skip this phase entirely.
+
+TWO-STEP BUILD — `graphify <path>` writes `graph.json` but NOT `GRAPH_REPORT.md`.
+It finishes with a "next: run `graphify cluster-only <path>`" hint. You MUST run
+that second step to get named communities + the report:
+
+```bash
+graphify cluster-only <path> --backend ollama --model qwen3.6:35b-a3b
+```
+
+Only after cluster-only do `GRAPH_REPORT.md` and `graph.html` exist. If timeouts
+truncated naming, re-running cluster-only with the MoE model fills them in.
 
 The build produces three artifacts in `graphify-out/`:
 
@@ -145,15 +201,22 @@ Append one entry to ~/.claude/skills/save-tokens/LEARNINGS.md:
 **Keep it warm:** <commit graphify-out/ and/or `graphify hook install` suggestion>
 **Tokens saved (est.):** <rough: files you'd have read fan-out vs. graph lookups>
 
-=== GRACEFUL DEGRADATION (graphify unavailable) ===
-If graphify cannot be installed or run, do NOT abandon the user's question.
-Answer it with the most surgical Grep/Read possible: locate by symbol/filename
-first, read only the matching files, and explicitly note "graphify was
-unavailable, answered via direct search — install `graphifyy` for cheaper repeat
-queries." Then capture the install failure in LEARNINGS.md.
+=== GRACEFUL DEGRADATION (graphify/Ollama unavailable) ===
+If graphify can't be installed OR a local Ollama backend can't be made to run,
+do NOT abandon the user's question and do NOT reach for a paid cloud LLM. Answer
+with the most surgical Grep/Read possible: locate by symbol/filename first, read
+only the matching files, and note "graphify/Ollama was unavailable, answered via
+direct search — set up local Ollama for cheaper repeat queries." Capture the
+failure in LEARNINGS.md.
 
 === STRICT RULES ===
 
+- The build runs FULLY LOCAL on Ollama. NEVER default to a cloud LLM backend
+  (OpenAI/Anthropic/Gemini) — that spends the exact paid tokens this skill exists
+  to save. Local model = the only acceptable default.
+- `pipx inject graphifyy openai` installs the OpenAI _client library_ so graphify
+  can talk to Ollama's OpenAI-compatible endpoint. It does NOT route anything to
+  OpenAI's servers. Don't confuse the wire protocol with the destination.
 - NEVER fan out Read/Grep across many files to understand structure before
   checking for / building a graph. That defeats the entire point.
 - NEVER rebuild a current graph — use `--update`, or skip the build, when a valid
@@ -161,5 +224,5 @@ queries." Then capture the install failure in LEARNINGS.md.
 - Do NOT ask the user for approval between phases. Decide autonomously.
 - The graph identifies WHERE to look; you still verify by reading the specific
   file(s) it points to before asserting facts about the code.
-- Code extraction is local (tree-sitter AST) — reassure privacy-sensitive users
-  that code never leaves the machine; only PDFs/images/video use an LLM.
+- Everything stays on this machine: AST extraction is tree-sitter-local, and the
+  semantic layer runs on local Ollama. No code, prose, or context leaves the box.
