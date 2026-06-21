@@ -36,6 +36,7 @@ Third-party service connectors -- authentication, payments, email, push notifica
 
 | Skill | Version | Description |
 |-------|---------|-------------|
+| [hermes-tweet](hermes-tweet/) | 1.0.0 | Install and operate the Hermes Tweet plugin for Hermes Agent X/Twitter explore, read, and explicitly gated action workflows. |
 | [perplexity-search](perplexity-search/) | 1.0.0 | AI-powered web search and research using the Perplexity API (Sonar models). Performs deep web research with citations, fact-checking, competitive analysis, market research, and... |
 | [stitch-bridge](stitch-bridge/) | 1.0.0 | >- |
 | [stitch-compare](stitch-compare/) | 1.0.0 | >- |
