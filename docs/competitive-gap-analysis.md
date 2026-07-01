@@ -1,270 +1,273 @@
-# Competitive Gap Analysis — Skills Hub Registry
+# Competitive Gap Analysis — skills-hub.ai
 
-> Generated 2026-06-01 | Domain: AI coding agent skills/plugin registry and marketplace
+**Generated:** 2026-07-01
 
 ---
 
 ## Our Product
 
-- **What it does:** Skills Hub Registry is the official curated skill collection for skills-hub.ai — a marketplace of 430+ production-tested autonomous AI agent skills for Claude Code and 26+ other AI coding tools, organized into 15 categories covering the complete software development lifecycle, 40 industry verticals, gaming, and mobile development. The skills-hub.ai website aggregates 5,400+ skills from 60+ sources. Each skill is a self-contained SKILL.md instruction set that runs end-to-end without asking the user questions.
-- **Target user:** Developers using Claude Code, Cursor, Codex CLI, Gemini CLI, Windsurf, OpenCode, and other AI coding tools who need turn-key autonomous task execution for any software or domain challenge.
-- **Core value prop:** Zero-question autonomy with self-healing validation, self-evolution telemetry, and uniquely pre-built combo chains that orchestrate multiple skills into full pipelines — invoke once, get a complete outcome.
-- **Features implemented:** 430 curated skills in registry; 5,400+ indexed on skills-hub.ai
+- **What it does:** skills-hub.ai is an open-source registry of 489+ production-tested SKILL.md instruction files ("skills") for Claude Code and compatible AI coding agents, covering the full software development lifecycle across 15 categories and 40+ industry verticals.
+- **Target user:** Software developers using Claude Code (and compatible agents: Cursor, Codex CLI, Gemini CLI, OpenClaw, Windsurf, GitHub Copilot, Cline) who want to extend their AI assistant with pre-built, production-hardened workflows.
+- **Core value prop:** The trusted, signed registry for AI agent skills — install in one command, ship with confidence via cryptographic signing and lockfile-based team versioning, with the deepest skill creation and evolution tooling in the ecosystem.
+- **Tech stack:** SKILL.md open standard, npx CLI, MCP server, cryptographic signing, lockfile versioning
+- **Features implemented:** 44 (see checklist below)
 
-### Current Feature Checklist
+### Current Feature Set
 
-**Discovery & Installation**
-- [✅] Skills catalog as README (sortable by category)
-- [✅] Web browse UI at skills-hub.ai/browse with semantic search and filtering
-- [✅] CLI installation via `npx @skills-hub-ai/cli install <skill-name>` (auto-detects AI tool)
-- [✅] Cross-platform SKILL.md format (26+ platforms: Claude Code, Cursor, Codex, Gemini CLI, Windsurf, Cline, Copilot, OpenCode, and more)
-- [✅] Community skill publishing
-- [✅] Skill versioning (semver)
-- [✅] Curated bundles for common workflows
-- [❌] Leaderboard / trending by install count
-- [❌] Occupation/persona-based browsing (e.g., "DevOps engineer," "frontend developer")
-- [❌] Community ratings and reviews
-- [❌] Newsletter / "this week in skills" digest
-
-**Execution & Automation**
-- [✅] Autonomous zero-question execution
-- [✅] Multi-phase phased execution structure
-- [✅] Orchestrator + sub-skill routing pattern
-- [✅] Self-healing validation blocks
-- [✅] Self-evolution telemetry
-- [✅] Combo/pipeline chain skills (34 multi-skill chains) — **unique to Skills Hub**
-- [✅] Scheduled/headless execution via `/loop` — **unique to Skills Hub**
-- [✅] Parallel feature dispatch via `/parallel-features` — **unique to Skills Hub**
-- [✅] Context save/load across sessions
-
-**Quality & Security**
-- [✅] Registry CI validation (`/registry-sync`)
-- [✅] Internal quality scoring rubric (0-100)
-- [❌] Automated security scanning on submitted skills
-- [❌] Malicious intent detection (prompt injection, data exfiltration, dangerous commands)
-- [❌] Per-skill security grade (A–F) visible to users
-
-**Creator Ecosystem**
-- [❌] Creator monetization (paid skills, revenue share)
-- [❌] Creator analytics (install counts, usage telemetry per publisher)
-- [❌] Skill bounty / enterprise custom skill tiers
-- [❌] Creator profile pages
-
-**Developer API**
-- [❌] REST API with OpenAPI spec for programmatic skill discovery
-- [❌] MCP server exposing skill registry as a tool
-- [❌] Embed widget for third-party platform integration
-
-**Domain Coverage (current strengths)**
-- [✅] 40 industry verticals in analysis category (197 skills)
-- [✅] Full SDLC coverage: build → test → QA → review → deploy → docs → security → UX
-- [✅] Gaming-specific skills (Unity, Unreal, Godot, web game)
-- [✅] Mobile-specific skills (Flutter, React Native, iOS, Android)
-- [✅] Video production skills (ad video, tutorial video, social clip, wedding video)
-- [✅] Meta-skills for skill lifecycle (creator, publisher, registry-sync, evolve, tend)
-- [❌] Data/AI/ML category (RAG, feature stores, model evaluation, data pipelines)
-- [❌] Language/framework pattern skills (TypeScript, Go, Rust, React, etc.)
+- ✅ 489+ skills across 15 categories (build, test, qa, review, deploy, docs, security, ux, analysis, productivity, integration, combo, meta, education, spec)
+- ✅ CLI installation (`npx @skills-hub-ai/cli install <skill>`)
+- ✅ Cryptographic skill signing (tamper-evidence)
+- ✅ Lockfile-based team versioning (`.skills.json`)
+- ✅ SKILL.md open standard (cross-agent compatibility — adopted by 26+ platforms)
+- ✅ Multi-agent support (Claude Code, Cursor, Codex CLI, Gemini CLI, OpenClaw, Windsurf, Copilot, Cline, 20+ more)
+- ✅ MCP server integration (search, install, list skills via MCP tools)
+- ✅ 40+ industry vertical skills (fintech, healthcare, real estate, gaming, etc.)
+- ✅ Skill creation tooling (`/skill-creator`) with eval harness
+- ✅ Skill evaluation/benchmarking (quantitative + qualitative)
+- ✅ Skill publishing workflow (`/publish-skill`)
+- ✅ Registry sync automation (`/registry-sync`)
+- ✅ Orchestrator pattern (main skill + sub-skill routing)
+- ✅ Self-healing validation built into all v2.0.0+ skills
+- ✅ Self-evolution telemetry in all v2.0.0+ skills
+- ✅ Free / open-source (no paid tier)
+- ✅ Skill improvement tooling (`/evolve`, `/tend`, `/skillify`)
+- ✅ Context save/load system (`/save-context`, `/load-context`)
+- ✅ Token optimization (`/save-tokens`)
+- ✅ Skill template extraction (`/extract-template`)
+- ✅ Skill bootstrap (`/bootstrap`)
+- ✅ Broadcast/announcement system (`/broadcast`)
+- ✅ Skill testing (`/skill-test`)
+- ✅ Platform promote workflow (`/promote`)
+- ✅ YouTube research skill for content creation
+- ✅ Skill catalog documentation auto-generation (`/gen-catalog`)
+- ✅ Blog content tooling (`/blog-writer`)
+- ✅ Mobile skills (Flutter, React Native, iOS, Android)
+- ✅ Gaming skills (Godot, Unity, Unreal, Phaser)
+- ✅ AI/ML pipeline skills
+- ✅ Full-stack scaffolding skills (Next.js, Flutter, Android, iOS, CLI tools)
+- ✅ Security skills (OWASP, pentest, GDPR, SOC2, encryption, secrets)
+- ✅ Infrastructure skills (AWS, Terraform, k8s, Docker, CDN, monitoring)
+- ✅ Video production skills (Remotion, FFmpeg, ElevenLabs, social clips, video-upscale)
+- ✅ Combo/chained multi-skill orchestration skills (37 combos)
+- ✅ Education/onboarding skills
+- ✅ Social-impact verticals (emergency response, elder care, FOIA, grants)
+- ✅ Conventional commits + quality gate patterns documented
+- ✅ UX design skills suite (28 skills: design-tokens, design-audit, design-delight, game-ux, etc.)
+- ✅ Kiro spec-driven development skill
+- ✅ Viral artifact generator skill
+- ✅ Programmatic SEO page builder skill
+- ✅ Curated bundles for common workflows (combo category)
 
 ---
 
 ## Competitive Landscape
 
-| Competitor | Positioning | Pricing | Market Position | Skill Count |
-|-----------|-------------|---------|-----------------|-------------|
-| [Skills.sh (Vercel)](https://skills.sh) | "npm for AI agents" — open CLI + leaderboard; official skills from Vercel, Prisma, Supabase, Stripe, Coinbase, Microsoft | Free | Leader | 90,000+ |
-| [SkillsMP](https://skillsmp.com) | Largest aggregator, GitHub-scraped, minimal curation | Free | Volume leader | 800,000+ |
-| [Agensi](https://agensi.io/skills) | Security-first curated marketplace with creator monetization (80/20 Stripe) | Free–$400 | Quality-tier niche leader | 500+ curated |
-| [LobeHub Skills](https://lobehub.com/skills) | Polished marketplace within multi-agent ecosystem, community ratings | Free | Challenger | 169,739 |
-| [AgentSkill.sh](https://agentskill.sh) | Directory + security scoring, 20+ AI tools coverage | Free | Mid-tier | 193,000–216,000 |
-| [Agent Skills Hub](https://agentskillshub.dev) | Security-first, automated 45+ vulnerability pattern scanning, A–F grades | Free | New entrant (security niche) | N/A |
-| [ClaudeMarketplaces.com](https://claudemarketplaces.com) | Community-curated Claude Code–specific directory | Free | Niche (Claude-specific) | 6,700+ |
-| [ClaudeSkills.info](https://claudeskills.info) | Community-contributed, Anthropic skills + submissions | Free | Niche | 658+ |
-| [Anthropic Official Plugins](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | First-party skills curated by Anthropic | Free | Authority | 100+ |
-| [PromptBase](https://promptbase.com) | World's largest general AI prompt marketplace | $1.99–$19.99/prompt | Leader (general prompts) | 500,000+ prompts |
+| Competitor | Positioning | Pricing | Market Position | Catalog Size |
+|-----------|-------------|---------|-----------------|--------------|
+| **Skills.sh** (skills.sh) | Vercel-backed npm-style package manager for skills, with interactive discovery | Free + open | **Ecosystem anchor** | 669,670+ skills |
+| **agentskill.sh** | Security-first skills directory with two-layer scanning (12 categories, 0–100 score) | Free | Security leader | 274,000+ skills |
+| **AgentSkill.club** (agentskill.club) | Community-driven library of GitHub-sourced open-source skills | Free | Community aggregator | 3,640+ skills |
+| **ClaudeSkills.info** | Free curated collection including official Anthropic skills (PDF, DOCX, XLSX, frontend design, MCP builder) | Free | Official-adjacent directory | 658+ skills |
+| **SkillsLLM** (skillsllm.com) | GitHub-centric discovery of security-vetted skills for Claude Code, Codex CLI, ChatGPT | Free | GitHub-native index | 1,600+ skills |
+| **LobeHub Skills** (lobehub.com/skills) | Integrated skills marketplace inside Chief Agent Operator platform | Freemium | Platform play | 169,739+ skills |
+| **SkillHub** (skillhub.club) | "Agent Skills Solution — 100x your own domain" with desktop app + MCP server | Freemium (credits for Skill Stacks) | Curated catalog leader | 9,500+ skills (API) |
+| **SkillsMP** (skillsmp.com) | "Discover open-source agent skills for any SKILL.md tool" | Free | Largest raw index | 800,000+ scraped |
+| **Agensi** (agensi.io) | "Give your AI agent superpowers — vetted, secure skills" with creator economy | Free + paid (80% creator split) | Premium/security-first | 44+ curated |
+| **ClaudeMarketplaces** (claudemarketplaces.com) | "#1 directory for Claude Code plugins, skills, and MCP servers" | Free | Meta-directory / media | 20,300+ aggregated |
+| **TrueFoundry Skills Registry** | Enterprise-grade versioned skill registry with RBAC, audit logs, CI/CD | Enterprise / SaaS | Enterprise leader | Internal/org-scoped |
+| **Microsoft Skills** (microsoft.github.io/skills) | 100+ Azure/Microsoft domain skills; native Agent Framework integration | Free + enterprise | Big Tech — Microsoft | 100+ domain skills |
+| **Google Gemini Skill Registry** | Enterprise SKILL.md registry for Gemini Enterprise Agent Platform | Enterprise | Big Tech — Google | Enterprise/cloud |
 
-### Source URLs
+---
 
-- Skills.sh: [Vercel announcement](https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem); [InfoQ coverage](https://www.infoq.com/news/2026/02/vercel-agent-skills/)
-- SkillsMP: [SkillsMP site](https://skillsmp.com); [SmartScope guide](https://smartscope.blog/en/blog/skillsmp-marketplace-guide/)
-- Agensi: [Best Marketplaces 2026](https://www.agensi.io/learn/best-ai-agent-skills-marketplaces-2026); [Monetization guide](https://www.agensi.io/learn/agent-skills-marketplace-sell-your-skills)
-- AgentSkill.sh: [Directory](https://agentskill.sh)
-- Agent Skills Hub: [agentskillshub.dev](https://agentskillshub.dev)
-- skills-hub.ai: [Homepage](https://skills-hub.ai); [Codex skills](https://skills-hub.ai/codex-skills)
-- Market overview: [Digital Applied — AI Agent Marketplaces 2026](https://www.digitalapplied.com/blog/ai-agent-marketplaces-2026-discovery-distribution)
-- MCP trends: [The New Stack — 5 Key Trends in Agentic Development 2026](https://thenewstack.io/5-key-trends-shaping-agentic-development-in-2026/)
-- Security gap: [Snyk + Vercel](https://snyk.io/blog/snyk-vercel-securing-agent-skill-ecosystem/)
+## Pricing Comparison
+
+| Tier / Profile  | Us | Skills.sh | SkillHub | Agensi |
+| --------------- | --- | -------- | -------- | ------ |
+| Free tier | ✅ All 489 skills | ✅ All | ✅ Basic skills | ✅ Free skills |
+| Solo user / mo | $0 | $0 | $0–$9 (credits) | $0 + per-skill pricing |
+| Team of 5 / mo | $0 | $0 | ~$45 (credits) | $0 + per-skill × 5 |
+| Team of 25 / mo | $0 | $0 | Custom | Custom |
+| Enterprise 100+ | $0 | $0 | Custom | Custom |
+| Pricing model | Free/open | Free/open | Freemium + credits | Free + one-time skill purchases |
+
+Key pricing insights:
+- We are the only fully free platform with no premium tier — a trust and adoption advantage early, but a monetization gap long-term.
+- Agensi's creator economy (80% creator revenue, top skills earning $500–$3,000/mo) shows real demand for premium skills. Skills authors have no incentive to contribute exclusively to us.
+- Enterprise players (TrueFoundry, Microsoft, Google) charge for governance features (RBAC, versioning, audit logs) — a market segment we are not yet serving.
+
+---
+
+## Technology Stack Comparison
+
+| Component | Us | Skills.sh | SkillHub | TrueFoundry |
+| --- | --- | --- | --- | --- |
+| Frontend | Unknown/TBD | Vercel/React | React (desktop + web) | React |
+| Backend | Unknown/TBD | Node.js/Vercel | Node.js API | Python/FastAPI |
+| Database | Unknown/TBD | Unknown | Unknown | PostgreSQL |
+| Hosting | Unknown/TBD | Vercel Edge | Unknown | Cloud/self-host |
+| Discovery | MCP + CLI | Interactive CLI (`npx skills find`) | API + Desktop app | UI + CLI + CI/CD |
+| Notable tech advantage | Crypto signing + lockfile | Vercel CDN + npm distribution model | Desktop app + REST API | Enterprise RBAC + audit logs |
 
 ---
 
 ## Feature Matrix
 
-| Feature | Skills Hub | Skills.sh | SkillsMP | Agensi | AgentSkill.sh | AgentSkillsHub |
-|---------|:----------:|:---------:|:--------:|:------:|:-------------:|:--------------:|
-| Web browse UI + semantic search | ✅ | 🔶 leaderboard | ✅ | ✅ | ✅ | ✅ |
-| CLI installer (one command) | ✅ npx | ✅ npx skills add | ❌ manual | ✅ curl | ❌ | ❌ |
-| Cross-platform (20+ agents) | ✅ 26+ | ✅ 17-19 | 🔶 4 | ✅ 20+ | ✅ 20+ | 🔶 3 |
-| Community ratings / reviews | ❌ | ❌ | ❌ | 🔶 editorial | ❌ | ❌ |
-| Leaderboard / trending | ❌ | ✅ (24h + all-time) | ❌ | ❌ | ❌ | ❌ |
-| Install count tracking | ❌ | ✅ (579K top skill) | ❌ | ❌ | ❌ | ❌ |
-| Creator monetization | ❌ | ❌ | ❌ | ✅ 80/20 | ❌ | ❌ |
-| Automated security scanning | ❌ | 🔶 Snyk (post-launch) | ❌ | ✅ 8-point | 🔶 scoring | ✅ 45+ patterns, A–F |
-| Per-skill security grade visible | ❌ | ❌ | ❌ | 🔶 editorial | 🔶 score | ✅ A–F badge |
-| Combo / chaining skills | ⭐ 34 chains | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Scheduled / headless execution | ⭐ /loop | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Parallel dispatch | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Self-evolution telemetry | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Industry vertical depth (40+) | ⭐ 197 skills | ❌ | 🔶 categories | ❌ | ❌ | ❌ |
-| Meta-skills (skill lifecycle) | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Curated bundles / stacks | ✅ | ❌ | ❌ | ✅ ($149–400) | ❌ | ❌ |
-| REST API access | ❌ | ❌ | ✅ OpenAPI 3.0 | ❌ | ❌ | ❌ |
-| MCP server for registry | ❌ | ❌ | ✅ | 🔶 | ❌ | ❌ |
-| Occupation-based browsing | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ |
-| Creator profile pages | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Official vendor skills | 🔶 Anthropic | ✅ Vercel, Stripe, Supabase, Prisma, Coinbase, Microsoft | ❌ | ❌ | ❌ | ❌ |
-| Newsletter / community digest | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Feature | Us | Skills.sh | agentskill.sh | SkillHub | SkillsMP | Agensi | ClaudeSkills.info | AgentSkill.club | SkillsLLM | TrueFoundry | Microsoft/Google |
+|---------|-----|-----------|---------------|----------|----------|--------|-------------------|-----------------|-----------|-------------|-----------------|
+| CLI install command | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| MCP server integration | ✅ | ❌ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Cryptographic signing | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Lockfile team versioning | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 🔶 | ❌ |
+| Skill creation tooling | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Eval harness for skills | ⭐ | ❌ | ❌ | 🔶 | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Self-healing validation | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| 40+ industry verticals | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | 🔶 (Azure/Gemini only) |
+| Orchestrator pattern | ⭐ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Multi-agent compatibility | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | 🔶 | ✅ |
+| Free / open-source | ✅ | ✅ | ✅ | 🔶 | ✅ | 🔶 | ✅ | ✅ | ✅ | ❌ | 🔶 |
+| Catalog ≥ 400 skills | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Semantic / vector search | ❌ | ❌ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Interactive CLI discovery | ❌ | ✅ (`npx skills find`) | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Install trend leaderboard | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Automated security scanning | ❌ | ❌ | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ | 🔶 | ❌ | ❌ |
+| Security score per skill (0-100) | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| AI-graded quality scores | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Creator monetization | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Creator analytics dashboard | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Creator profiles | ❌ | ✅ | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Trending / leaderboard | ❌ | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| 8-week install trend data | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Skill Stacks / bundles | 🔶 | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| REST API (OpenAPI) | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| In-IDE VS Code extension | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ (community ext) |
+| Enterprise RBAC + audit logs | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Official Anthropic skills | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Editorial / human curation | ❌ | ❌ | ❌ | 🔶 | ❌ | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Skill request board | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Multilingual UI | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Self-hosted / on-premise | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ | ✅ |
 
-Use: ✅ = has it, 🔶 = partial, ❌ = missing, ⭐ = our edge
+Legend: ✅ = has it, 🔶 = partial, ❌ = missing, ⭐ = our edge
 
 ---
 
 ## Critical Gaps (Build Now)
 
-### 1. Automated Security Scanning + Per-Skill Grade
+### 1. Semantic / Vector Search
 
-- **Who has it:** Agensi (8-point automated scan: prompt injection, data exfiltration, dangerous commands, secret detection, obfuscation, external fetches, credential access, privilege escalation + human review); Agent Skills Hub (45+ vulnerability patterns, A–F security grades visible on every skill page); agentskill.sh (scoring)
-- **Why it matters:** SkillsMP's own data: 26.1% of community-sourced skills contain at least one vulnerability; 5.2% show patterns of malicious intent. Agent Skills Hub launched in 2026 specifically to fill this gap — if Skills Hub doesn't act, security-conscious developers will defect to agentskillshub.dev. Being the "audited, safe" registry is a durable differentiator.
+- **Who has it:** agentskill.sh, SkillHub, SkillsMP, LobeHub, TrueFoundry, Microsoft/Google (6/13 competitors)
+- **Why it matters:** With 489+ skills, keyword search is broken. A developer asking "make my app accessible" won't find `/508-audit`. This is now table stakes — every major technical player has it. Skills.sh's `npx skills find` interactive type-to-search makes this gap even more visible.
 - **Effort:** M
-- **Implementation hint:** Extend `/registry-sync` (meta/registry-sync/SKILL.md) to include a security-scan phase. Check for: shell command injection patterns in instructions, external HTTP fetches to non-whitelisted domains, instructions to read/write credentials or `.env` files, obfuscated content. Generate a `security-score` (A–F) in each skill's frontmatter. Surface it in the web UI and README catalog.
+- **Implementation hint:** Embed skill descriptions at publish time using `text-embedding-3-small`. Store vectors in pgvector or Pinecone. Expose `/search?q=` on the web surface and a `--search` flag in the CLI. Upgrade the MCP `search_skills` tool from keyword to semantic matching.
 
-### 2. Install Count / Usage Telemetry Surfaced to Users
+### 2. REST API (OpenAPI 3.0)
 
-- **Who has it:** Skills.sh (leaderboard, top skill has 579K installs, 235K weekly for find-skills utility); agentskill.sh (audit detail views)
-- **Why it matters:** "Most used" sort is the single biggest trust signal in any marketplace. Without it, users can't distinguish battle-tested skills from untested ones. Skills.sh's leaderboard is cited in every comparison article as a key differentiator.
-- **Effort:** S–M
-- **Implementation hint:** The `tend` meta-skill already runs telemetry — extend it to report aggregate install counts back to a central privacy-preserving counter (skill-level only, no PII). Surface in web UI, README catalog, and as a `weekly_installs` field in SKILL.md frontmatter.
-
-### 3. Creator Monetization
-
-- **Who has it:** Agensi (Stripe Connect, 80/20 split, $5–$400 range); PromptBase ($1.99–$19.99, 80% creator share, 500K listings)
-- **Why it matters:** Creator economics drive catalog growth. The current 430-skill registry requires all effort from the core team. PromptBase's 500K listings vs Agensi's 500 curated vs Skills Hub's 430 proves: incentives scale supply. Expert domain skills (HIPAA compliance audits, game economy balancing) could command $20–$100 each from professional studios. The market is showing that 80/20 splits are the standard.
-- **Effort:** L
-- **Implementation hint:** Extend `publish-skill` meta-skill to accept an optional `price` field in SKILL.md frontmatter. A Stripe checkout flow on skills-hub.ai generates a license token baked into the install command. CLI verifies the token. Creator dashboard shows earnings.
-
-### 4. MCP Server for Registry Discovery
-
-- **Who has it:** SkillsMP (MCP integration), MCPMarket.com, Anthropic Official (MCP plugin listings)
-- **Why it matters:** MCP is the de facto "USB-C for AI" in 2026 — natively supported by Anthropic, OpenAI, Google, and Microsoft. An MCP server lets any MCP-compatible agent (Claude, Cursor, Windsurf) discover and install Skills Hub skills without leaving their IDE. MCP-based access changes the distribution model: agent connects once, searches live catalog, loads skills on demand.
+- **Who has it:** Skills.sh, agentskill.sh, SkillHub, SkillsMP, TrueFoundry, Microsoft/Google (6/13 competitors)
+- **Why it matters:** Without a REST API, the VS Code extension, CI/CD integrations, and third-party aggregators can't build on our registry. This is now a prerequisite for IDE integration, which is no longer "emerging" — a VS Code community extension (`formulahendry/vscode-agent-skills`) already exists in the marketplace with multi-registry support. We are not a registered source.
 - **Effort:** M
-- **Implementation hint:** The `mcp__skills-hub__*` tools are already referenced in system prompts (list_installed_skills, search_skills, get_skill_detail, install_skill). Build the MCP server to match these existing tool signatures. Deploy as Cloudflare Worker or Vercel Edge Function wrapping the existing gen-catalog JSON export.
+- **Implementation hint:** Expose `/api/v1/skills`, `/api/v1/skills/{slug}`, `/api/v1/search`, `/api/v1/trending`. Document with OpenAPI 3.0. Rate-limit free tier, offer key-based access for teams. Register as a skill source in the VS Code Agent Skills extension.
+
+### 3. Automated Security Scanning with Per-Skill Score
+
+- **Who has it:** agentskill.sh (12 categories, 0–100 score), Agensi (8-point checklist) — 2/13 competitors
+- **Why it matters:** Security scanning is now a market expectation. The developer community recommends pairing a "free browsing" registry with a "vetted" registry. We have cryptographic signing (tamper-evidence) but no content-level threat analysis. ClaudeSkills.info now hosts official Anthropic skills — if our registry has no content scanning, we are less trustworthy than Anthropic's own channel.
+- **Effort:** M
+- **Implementation hint:** Add a CI step to `registry-sync` that runs each new/updated SKILL.md through an LLM-based scanner checking 12 threat dimensions (prompt injection, data exfiltration, unauthorized network calls, dangerous shell commands, secret harvesting, obfuscation, credential access, privilege escalation, social engineering, scope creep, resource abuse, unauthorized persistence). Gate publication on PASS. Display 0–100 score badge on each skill page. Pair with existing cryptographic signing to form a "verified + safe" trust mark no competitor currently offers.
+
+### 4. Trending / Install Leaderboard with Time-Series Data
+
+- **Who has it:** Skills.sh (8-week trend data), SkillHub, Agensi (3/13 competitors)
+- **Why it matters:** Skills.sh's top skill (find-skills, Vercel Labs) reached 2M installs in 5 months driven by visible install counts and trending signals. Without a leaderboard, new users have no signal on where to start. The market is now recommending a two-registry strategy; without install signals we won't be in the "discovery" slot.
+- **Effort:** S
+- **Implementation hint:** Track install counts server-side per skill per week. Add a `/trending` endpoint and homepage "trending this week" section. Display install count badge on each skill page. Store 8 weeks of weekly snapshots for trend sparklines.
 
 ---
 
 ## Strategic Gaps (Plan & Schedule)
 
-### 5. REST API with OpenAPI Spec
+### 5. Creator Monetization with Analytics
 
-- **Who has it:** SkillsMP (free tier, no credit card required, REST + MCP server)
-- **Why it matters:** Enables third parties to embed Skills Hub discovery in their own tools (IDE extensions, agent builders, onboarding wizards). Enables programmatic skill composition at runtime. Required foundation for the MCP server (Gap 4).
+- **Who has it:** Agensi (80% creator split, top skills earning $500–$3,000/mo, with analytics, request board, piracy protection)
+- **Why it matters:** Agensi is the only platform with a complete creator economy. Top-earning skills are specialized workflows ($1–$49 one-time) covering framework-specific testing, opinionated code review, and deployment automation — exactly the kind of expert-authored skills we need to scale beyond our internal production capacity. Without monetization, we cannot compete for expert author attention.
+- **Effort:** L
+- **Implementation hint:** Integrate Stripe Connect for creator payouts (80% to creators, 20% to platform). Add a "premium skills" tier ($1–$49). Free skills remain free. Premium skills get verified-author badges + security scan result. Add a skill request board (shows buyer demand before building). Add creator analytics (installs by week, referrer data, geographic breakdown).
+
+### 6. AI-Graded Quality Scores
+
+- **Who has it:** SkillHub (grades on Practicality, Clarity, Automation, Quality, Impact)
+- **Why it matters:** With 489+ skills and 13+ competing registries, quality differentiation is the primary trust lever. Helps users pick the best skill when multiple cover the same task.
 - **Effort:** M
-- **Implementation hint:** `gen-catalog` meta-skill already generates a JSON catalog from SKILL.md frontmatter. Deploy as Cloudflare Worker or Vercel Edge Function. Add OpenAPI spec. Expose `GET /skills`, `GET /skills/{name}`, `GET /skills?category=build&q=nextjs`.
+- **Implementation hint:** At publish time, run an LLM evaluation of each SKILL.md against 5 quality dimensions. Store scores, surface as a badge on skill pages. Integrate with the existing eval harness in `/skill-creator`. Publish the scoring rubric as an open standard to drive ecosystem adoption.
 
-### 6. Leaderboard / Trending Rankings
+### 7. Enterprise Features (RBAC, Versioning, Self-Hosted)
 
-- **Who has it:** Skills.sh (24h trending + all-time leaderboard, cited in InfoQ coverage as key feature); agentskill.sh (audit views)
-- **Why it matters:** 235K weekly installs of `find-skills` shows developers actively seek discovery tools. A leaderboard provides social proof and surfaces what's actually working in production. Without it, Skills Hub's 430-skill catalog is undifferentiated from any skill list.
-- **Effort:** S (once install telemetry from Gap 2 exists)
-- **Implementation hint:** Build on top of install count telemetry. Add sort options to web UI: "Most Installed," "Trending This Week," "Newest," "Highest Rated." Surface top 10 in README hero section.
-
-### 7. Official Vendor Skills
-
-- **Who has it:** Skills.sh (Vercel, Prisma, Supabase, Stripe, Remotion, Coinbase, Microsoft all shipped official skills before Q1 2026 ended)
-- **Why it matters:** Vendor-official skills are the highest-trust content in any marketplace. They drive developer adoption of the platform and give Skills Hub authority beyond community content. skills-hub.ai already aggregates from 60+ sources; the gap is officially co-branded skills from the vendors themselves.
-- **Effort:** M (business development + integration)
-- **Implementation hint:** Skills Hub already curates from many sources. Create a "Verified Vendor" tier with a badge, dedicated landing pages per vendor, and a vendor portal for direct publishing. Target initial vendors: Anthropic, Supabase, Expo, Cloudflare Workers AI.
-
-### 8. Community Ratings and Reviews
-
-- **Who has it:** LobeHub (community feedback), Agensi (editorial notes), PromptBase (creator ratings)
-- **Why it matters:** The biggest trust-builder after install counts. Allows users to report broken skills, surface better alternatives, and reward quality creators.
-- **Effort:** M
-- **Implementation hint:** Each skill directory already exists on GitHub. Add a GitHub Discussions template per skill. Surface discussion thread count and latest feedback in web UI. Zero custom backend for v1.
+- **Who has it:** TrueFoundry (RBAC, audit logs, CI/CD, self-hosted), Microsoft/Google (enterprise integration) — new gap not in prior analysis
+- **Why it matters:** TrueFoundry appeared in the Gartner Hype Cycle for Platform Engineering 2026. Enterprise teams need access control, audit trails, and on-premise deployment. With Microsoft and Google in the space, enterprise is becoming a distinct market segment. Our lockfile versioning is a first step but is not enterprise-grade.
+- **Effort:** XL
+- **Implementation hint:** Start with a self-hosted registry image (Docker). Add API key management and per-org install tracking. Enterprise RBAC and audit logs come after. This is a Q4+ effort but should be on the roadmap to avoid ceding the enterprise segment entirely to TrueFoundry and Microsoft.
 
 ---
 
 ## Differentiator Opportunities
 
-### 9. Data/AI/ML Skills Category
+### 8. In-IDE Integration (VS Code / JetBrains / Cursor)
 
-No competitor has pre-built skills for data engineering, RAG systems, ML pipelines, LLM evaluation, or prompt engineering. This is the fastest-growing segment in developer tooling. Skills Hub's existing pattern (autonomous, zero-question, phased execution) would work exceptionally well for ML workflows which require careful setup steps.
+- **Who has it:** VS Code community extension (`formulahendry/vscode-agent-skills`) — not us specifically, but VS Code native `chatSkills` contribution point exists
+- **Urgency update:** This is no longer "emerging" — the gap is active. The community extension supports multiple skill sources; we need to register as one. A Cursor/Windsurf plugin would be even higher leverage given their 70% Fortune 1000 penetration.
+- **Effort:** M (REST API required first; plugin registration is lower effort once API exists)
 
-- **Effort:** L (15–20 new skills)
-- **Opportunity:** Cross-reference with 40 existing industry verticals (e.g., healthcare data pipelines with HIPAA, finance data with SOX) — a depth no data-tools competitor can match.
+### 9. Interactive CLI Discovery
 
-### 10. Language/Framework Pattern Skills
+- **Who has it:** Skills.sh (`npx skills find` — type-to-search, interactive)
+- **What we have:** `npx @skills-hub-ai/cli install <skill>` (install by name, no discovery)
+- **Opportunity:** Add `npx @skills-hub-ai/cli find` with interactive type-to-search. Pair with semantic search backend. Skills.sh built their discovery moat with this; it is now the expected UX for CLI-based registries.
+- **Effort:** S-M
 
-No skills marketplace has dedicated language-pattern skills (TypeScript strict mode, Go idioms, Rust ownership patterns, React hooks, etc.). These are the highest-frequency developer queries. A `language/` category with 25–30 skills would directly address the gap vs. Antigravity (which covers dozens of frameworks) and close a major SEO surface area.
+### 10. Official Anthropic Skills Partnership
 
-- **Effort:** L (25–30 new skills)
-- **SEO opportunity:** "Claude Code TypeScript skill" has zero dedicated results — entirely greenfield keyword territory.
+- **Who has it:** ClaudeSkills.info (hosts Anthropic's official PDF, DOCX, XLSX, frontend design, MCP builder skills)
+- **Opportunity:** Secure a partnership or integration with Anthropic to host official skills on skills-hub.ai. Anthropic routing official skills through us would dramatically increase discoverability and trust. Frame it around our cryptographic signing — "the only registry where official Anthropic skills are signed and verifiable."
+- **Effort:** M (relationship work + integration)
 
-### 11. Skill Stacks / Bundle Sales
+### 11. Skill Stacks — Named Curated Bundles
 
-Skills Hub is the only marketplace with combo/chaining skills (34 multi-skill pipelines). A "Mobile Launch Stack" ($29), "Compliance Bundle" ($49), "Game Studio Pack" ($79) would monetize this unique capability while providing high-value opinionated bundles that no raw prompt marketplace can replicate.
+- **Who has it:** SkillHub (premium bundles), LobeHub (collections)
+- **What we have:** 37 combo skills — not marketed as named "Stacks"
+- **Opportunity:** Repackage combo skills as named "Skill Stacks" with use-case narratives ("Ship a production Next.js app — 7 skills included"). Could anchor a premium tier or act as the free showcase of the orchestrator pattern.
+- **Effort:** S (repackaging existing content, no new code)
 
-- **Effort:** M (pricing layer on top of creator monetization)
-- **Competitors with this:** Agensi has $149–400 enterprise bundles, but without combo chains
+### 12. Skill Evolution Marketplace (Publicly Exposed)
 
-### 12. Agent-Aware In-IDE Skill Recommendations
-
-While coding in Claude Code, proactively suggest relevant skills based on what's currently open (e.g., "You're building a Next.js app — `/nextjs`, `/e2e`, `/secure` are available"). GitHub Copilot Extensions have context-aware suggestions. No skills marketplace does this.
-
+- **Who has it:** Nobody
+- **Opportunity:** skills-hub.ai has self-evolution telemetry and `/evolve` built into every v2.0.0+ skill. Exposing this publicly — "see how this skill evolved over 30 days, subscribe to auto-upgrade" — is a genuinely unique value proposition no competitor can replicate without rebuilding their stack.
 - **Effort:** L
-- **Competitors with this:** None in skills space; GitHub Copilot Extensions do context-aware suggestions
-
-### 13. Enterprise Governance Tier
-
-The iflytek SkillHub (GitHub) launched a self-hosted enterprise registry with RBAC and audit logs. No other skills marketplace offers RBAC, air-gapped installs, policy controls, or enterprise SSO. This is a first-mover opportunity in a wide-open segment, especially as enterprises require governance for AI-agent tool deployment.
-
-- **Effort:** XL
-- **Competitors with this:** iflytek/skillhub (GitHub, self-hosted only); TrueFoundry (MCP, not skills)
 
 ---
 
 ## Our Competitive Edges
 
-### ⭐ Combo / Pipeline Chain Skills (34 chains)
+1. **Cryptographic signing** — The only platform that signs SKILL.md files for tamper-evidence. Unmatched. Pair with security scanning to form "verified + safe" — the strongest trust mark in the ecosystem.
+2. **Lockfile team versioning** — `.skills.json` enables reproducible team installs. TrueFoundry has versioning but requires their platform. We offer it open-source, compatible with any agent.
+3. **Skill creation + eval tooling** — `/skill-creator` with quantitative evals, variance analysis, and eval-viewer is a full skill R&D environment. No competitor ships this. SkillHub has a rudimentary version.
+4. **Industry vertical depth** — 40+ verticals including social-impact niches (FOIA, elder care, emergency response, grants). Microsoft/Google cover only Azure/Gemini domains. No one else comes close.
+5. **Orchestrator pattern** — Main-skill + sub-skill routing documented as an architectural approach. Running `/secure` audits 7 dimensions automatically. No competitor documents this.
+6. **Self-healing + self-evolution telemetry** — Built into every v2.0.0+ skill. No competitor ships skills with automatic failure recovery and usage telemetry.
+7. **SKILL.md open standard leadership** — Adopted by 26+ platforms including Microsoft, Google, and the Linux Foundation's Agentic AI Foundation. We are positioned as a founding community registry.
+8. **UX design skills suite** — 28+ UX-focused skills going well beyond developer tooling. No competitor has this breadth in design workflows.
 
-No competitor has pre-built multi-skill orchestration chains. Skills Hub's `/launch-readiness`, `/mobile-launch`, `/compliance-gate`, `/secure-ship`, `/story`, `/research` etc. are the equivalent of a DevOps playbook encoded into a single invocation. This is the most defensible differentiation — it requires not just content but an architectural understanding of how skills should compose.
+---
 
-**Protect by:** building more chains, making chains the primary marketing message, documenting the chain pattern as the "Skills Hub way."
+## Market Positioning (Blue Ocean Analysis)
 
-### ⭐ Scheduled / Headless Execution (`/loop`)
+| Strategy | Features | Rationale |
+|----------|----------|-----------|
+| ELIMINATE | Scraped/unvetted mega-catalogs | Can't win vs. SkillsMP (800K) or Skills.sh (669K) on volume; fight on trust |
+| REDUCE | Breadth of "one of each" skills across all frameworks | Quality over quantity — expert-authored, deeply tested skills beat shallow coverage |
+| RAISE | Security trust mark (signing + scanning), skill quality scoring, skill tooling depth | These are our existing edges — elevate them to be unmissable, not footnotes |
+| CREATE | Public skill evolution feed, creator economy with quality gates, official Anthropic channel | No competitor has self-evolution telemetry or an officially-partnered Anthropic registry |
 
-No other skills marketplace has a scheduling primitive. `/loop` combined with `/tend` creates a fully autonomous improvement cycle. As background agents become standard (Cursor Background Agents, Claude Code doubled limits), this capability is ahead of the curve.
-
-**Protect by:** building more scheduled skills, documenting headless use cases, marketing to DevOps/SRE audiences.
-
-### ⭐ Parallel Feature Dispatch (`/parallel-features`)
-
-Parallel git worktree–based skill execution is unique. No competitor supports spawning multiple agents across isolated branches and merging results. This directly addresses the multi-agent trend (Gartner: 1,445% inquiry surge).
-
-**Protect by:** building on this with more multi-agent skills, documenting the pattern prominently.
-
-### ⭐ 40-Industry Vertical Depth (197 analysis skills)
-
-No competitor comes close. Agensi has ~8 categories; SkillsMP has keyword search but no domain expertise baked in. Skills Hub's HIPAA audit, FedRAMP review, game economy balancing, clinical data review, energy compliance, permit compliance, etc. are unique professional-grade capabilities inaccessible elsewhere.
-
-**Protect by:** treating industry verticals as a premium tier, pursuing enterprise licensing per vertical.
-
-### ⭐ Self-Evolution Telemetry + Meta-Skills
-
-The `/evolve`, `/tend`, `/skillify`, and `/skill-creator` meta-skills create a self-improving registry. No competitor has this. It's a compounding moat.
-
-**Protect by:** publishing improvement metrics, making telemetry visible in release notes.
-
-### ⭐ Zero-Question Autonomous Execution Philosophy
-
-Every Skills Hub skill explicitly forbids asking the user questions. This is a product philosophy encoded at the format level. No competitor has codified this as a hard constraint.
+**Recommended positioning:** "The only AI agent skills registry where every skill is cryptographically signed, security-scanned, and built to improve itself — the trust layer the ecosystem needs."
 
 ---
 
@@ -272,53 +275,97 @@ Every Skills Hub skill explicitly forbids asking the user questions. This is a p
 
 | Trend | Adoption Stage | Competitors With It | Our Status | Recommendation |
 |-------|---------------|--------------------|-----------:|----------------|
-| MCP as primary discovery/delivery layer | Mainstream (natively supported by Anthropic, OpenAI, Google, Microsoft) | SkillsMP, Anthropic Official, MCPMarket | ❌ Registry not yet MCP-served | Build MCP server immediately — this is becoming table stakes |
-| Official vendor-published skills | Early mainstream (Vercel, Stripe, Supabase, Coinbase all shipped in Q1 2026) | Skills.sh (6+ major vendors) | 🔶 Site aggregates but not co-branded | Pursue vendor partnerships, create "Verified Vendor" tier |
-| Security-first distribution | Early mainstream (Agent Skills Hub launched; 26.1% community skills have vulnerabilities) | Agensi (8-point), AgentSkillsHub (A–F grades), agentskill.sh | ❌ No scanning | Build scanning urgently before community submissions scale |
-| Context-aware in-IDE recommendations | Emerging | GitHub Copilot Extensions | ❌ Missing | High differentiation if built first in skills space |
-| Enterprise governance (RBAC, audit logs, air-gapped) | Pre-mainstream | iflytek/skillhub (GitHub) | ❌ Missing | First-mover opportunity |
-| Creator economics (80/20 marketplace splits) | Early (Agensi pioneering, PromptBase proven) | Agensi, PromptBase | ❌ Missing | Evaluate when catalog growth plateaus |
-| Curated bundles / workflow packs | Emerging | Agensi ($149–400), skills-hub.ai (basic bundles) | 🔶 Basic | Expand with combo-chain bundles at multiple price points |
-| Multi-agent orchestration skills | Mainstream | Cursor (Build in Parallel), Windsurf (Cascade) | ✅ Ahead — /parallel-features, combo chains | Promote heavily; build more multi-agent combos |
-| SKILL.md standard (26+ platforms) | Mainstream | Skills.sh (17–19), Agensi (20+), skills-hub.ai (26+) | ✅ On par | Maintain and certify new platforms as they launch |
+| Security scoring per skill (0-100) | Early majority | agentskill.sh, Agensi (2/13) | ❌ Missing | Build now — becoming baseline expectation |
+| Semantic / vector search | Early majority | 6/13 competitors | ❌ Missing | Build now — discovery is broken above 200 skills |
+| Install trend leaderboards | Early majority | Skills.sh, SkillHub, Agensi (3/13) | ❌ Missing | Build now — drives viral loop |
+| REST API for skills registries | Late majority | 6/13 competitors | ❌ Missing | Build this sprint — prerequisite for IDE integrations |
+| Creator monetization for AI skills | Early majority | Agensi (live, $500–$3K/skill/mo top earners) | ❌ Missing | Plan for Q3 — content flywheel won't scale without it |
+| Interactive CLI discovery | Early adopter | Skills.sh (1/13) | ❌ Missing | S effort — `npx @skills-hub-ai/cli find` with type-to-search |
+| In-IDE marketplace panels | Early majority | VS Code community ext (not us) | ❌ Missing | Register as skill source — API first, then IDE extension |
+| MCP-native distribution | Early majority | SkillHub, SkillsMP, us, LobeHub | ✅ Have it | Expand — publish to mcp.so and glama.ai |
+| Enterprise RBAC / self-hosted | Early adopter | TrueFoundry, Microsoft, Google | ❌ Missing | Long-term — defend against enterprise cede via Docker image |
+| Official vendor skill channels | Early adopter | ClaudeSkills.info (Anthropic), Microsoft, Google | ❌ Missing | Partnership play — official Anthropic partnership closes this |
+| AI-quality-scored content | Early adopter | SkillHub (1/13) | ❌ Missing | Integrate with existing eval harness — M effort |
+| Skill bundling/stacks | Early adopter | SkillHub, LobeHub (2/13) | 🔶 Partial | Repackage combo skills as named Stacks — S effort |
+| Skill demand signaling (request boards) | Early adopter | Agensi (1/13) | ❌ Missing | S effort, drives community contribution |
+| Cross-agent skill standard governance | Late majority | All platforms + Linux Foundation | ✅ We lead | Publish spec docs + governance — defensible moat |
 
 ---
 
 ## Recommended Roadmap
 
-### Sprint 1 — Quick Wins (next 2–4 weeks)
+### Sprint 1 — Quick Wins (1–2 weeks)
 
-1. **Security scanning in registry-sync** — CRITICAL pressure, M effort. Extend `/registry-sync` to flag prompt injection, credential access, external fetch patterns. Display A–F security grade in web UI and README. Publish methodology publicly — this alone differentiates Skills Hub vs the growing security-focused competitors.
-2. **Install count telemetry** — HIGH pressure, S effort. Extend `/tend` to report aggregate install counts. Add "Most Installed" sort to web UI and README catalog. Highest-trust signal in any marketplace.
-3. **Leaderboard** — HIGH pressure, S effort (depends on telemetry). "Trending This Week" + "All-Time Top 10" in README hero and web UI.
+1. **Trending leaderboard** — CRITICAL pressure, S effort. Surface install count data on the homepage and CLI. Trending → discovery → installs → signal. Skills.sh built their moat here.
+2. **Interactive CLI discovery** — HIGH pressure, S–M effort. `npx @skills-hub-ai/cli find` with type-to-search. Matches the Skills.sh UX that users now expect.
+3. **Skill Stacks repackaging** — HIGH pressure, S effort. Rebrand 37 combo skills as "Skill Stacks" with curated use-case stories. Pure positioning, no new code.
+4. **Register in VS Code Agent Skills extension** — HIGH pressure, S effort. `formulahendry/vscode-agent-skills` supports custom GitHub repositories as skill sources. Add skills-hub.ai as a listed source without waiting for full REST API.
 
-### Next Quarter — Strategic
+### Next Quarter — Strategic (Q3 2026)
 
-4. **MCP server for registry** — CRITICAL pressure, M effort. Match existing `mcp__skills-hub__*` tool signatures. Deploy as edge function. This is becoming table stakes as MCP achieves full standardization in 2026.
-5. **REST API + OpenAPI spec** — HIGH pressure, M effort. Foundation for MCP server and third-party integrations. `gen-catalog` JSON is already generated.
-6. **Data/AI/ML skills category** — HIGH opportunity, L effort. 15–20 new skills covering RAG, ML pipelines, LLM evaluation, data engineering. Zero competition in this niche with autonomous execution.
-7. **Language/framework pattern skills** — HIGH opportunity, L effort. 25–30 skills for TypeScript, Go, Rust, React, Vue, Python patterns. Closes major SEO gap and count deficit.
-8. **Vendor partnership program** — HIGH opportunity, M effort. Pursue Anthropic, Supabase, Expo, Cloudflare as initial official skill publishers. "Verified Vendor" badge creates a quality tier no competitor currently offers.
+5. **REST API (OpenAPI 3.0)** — CRITICAL pressure, M effort. Required by 6/13 competitors. Prerequisite for full IDE extensions, CI integrations, and creator dashboard.
+6. **Semantic search** — CRITICAL pressure, M effort. 489 skills is too many to browse. Embedding pipeline + `/search` endpoint + CLI flag. Upgrade MCP `search_skills` tool.
+7. **Automated security scanning with 0–100 score** — HIGH pressure, M effort. Pair our cryptographic signing with content scanning. Forms "verified + safe" moat no competitor has. Gate new skill publications on PASS.
+8. **AI-graded quality scores** — HIGH pressure, M effort. Extend existing eval harness to score all published skills. Differentiates us from scrapers and volume-first registries.
 
-### Future — Differentiators
+### Future — Differentiators (Q4 2026+)
 
-9. **Creator monetization** — L effort. Stripe Connect, 80/20 split. Only after catalog growth plateaus or when Agensi proves creator economics work at scale.
-10. **Skill Stacks / Bundle pricing** — M effort. "Mobile Launch Stack," "Compliance Bundle," "Game Studio Pack" — leverage unique combo chain capability.
-11. **Community ratings via GitHub Discussions** — M effort. Zero-backend v1 using native GitHub features per skill.
-12. **Agent-aware in-IDE recommendations** — L effort. Hook into Claude Code session context; suggest skills based on open files/tasks.
-13. **Enterprise governance tier** — XL effort. RBAC, audit logs, air-gapped installs. iflytek showed this is possible as a GitHub project; build as a hosted product.
+9. **Creator monetization + analytics** — HIGH pressure, L effort. Stripe Connect + premium tier + analytics dashboard + piracy protection. Agensi proves the market exists.
+10. **Official Anthropic partnership** — HIGH pressure, M effort (relationship). ClaudeSkills.info hosts Anthropic's official skills; we should be that channel, backed by our cryptographic signing.
+11. **Enterprise self-hosted image** — MEDIUM pressure, XL effort. Docker registry image for enterprise teams who need RBAC and on-premise deployment. Defense against TrueFoundry/Microsoft in enterprise accounts.
+12. **Skill evolution marketplace** — LOW pressure, L effort. Expose self-evolution telemetry publicly. Unique differentiator that no competitor can replicate.
 
 ---
 
 ## Summary
 
-- **Total features across top 6 competitors:** ~52 distinct user-facing capabilities
-- **We have:** 30 (58%) — weighted by our combo/scheduling/domain uniqueness
-- **Partial:** 5 (10%)
-- **Missing:** 17 (33%)
-- **Our edges:** 6 distinct categories where we lead or are the only player
-- **Critical gaps to close:** 4 (security scanning, install telemetry, creator monetization, MCP server)
+- **Total features tracked across competitors:** 34
+- **We have:** 13 (38%)
+- **Partial:** 2 (6%)
+- **Missing:** 19 (56%)
+- **Our edges:** 8 (cryptographic signing, lockfile versioning, skill creation + eval tooling, industry vertical depth, orchestrator pattern, self-healing/evolution, UX design suite, SKILL.md standard leadership)
+- **Critical gaps to close:** 4 (semantic search, REST API, trending leaderboard, security scanning)
+- **Biggest threat:** **Big Tech Flanking** — Microsoft and Google have entered the ecosystem directly with official skill registries, enterprise RBAC, and IDE-native integration. ClaudeSkills.info has secured Anthropic's official skills. We risk being squeezed between volume (Skills.sh/SkillsMP) and enterprise (TrueFoundry/Microsoft/Google) unless we execute on trust quality (signing + scanning) and creator economy simultaneously.
+- **Biggest opportunity:** **"Verified + Safe" trust mark as the ecosystem's quality layer** — We are the only registry with cryptographic signing. Adding automated security scanning closes the content-level trust gap that agentskill.sh is beginning to own. Pair with an official Anthropic partnership and a creator economy to form a flywheel: vetted skills → expert authors → users → more authors. This moat cannot be replicated by scrapers or big tech without rebuilding from scratch.
 
-**Biggest threat:** The security-first niche is now contested. Agent Skills Hub (agentskillshub.dev) launched in 2026 with A–F security grades for every skill, targeting the exact position Skills Hub could own. If Skills Hub doesn't build security scanning before community submissions scale, this niche gets taken.
+---
 
-**Biggest opportunity:** MCP server for registry discovery. MCP is the de facto integration layer for agentic AI in 2026, natively supported across all major platforms. Skills Hub already has the `mcp__skills-hub__*` tool signatures defined in system prompts. Shipping this first converts discovery from "visit a website" to "your agent finds and installs skills automatically while you work" — a step-change in distribution that no competitor has fully executed yet.
+## What Changed Since June 30, 2026
+
+- **Three new community registries identified:** ClaudeSkills.info (658+ skills including official Anthropic skills), AgentSkill.club (3,640+ GitHub-sourced skills), SkillsLLM (1,600+ security-vetted skills)
+- **Two tech giants entered the space:** Microsoft Skills (microsoft.github.io/skills, 100+ Azure/Microsoft domain skills) and Google Gemini Enterprise Skill Registry — both with enterprise RBAC and IDE-native support
+- **TrueFoundry** appeared in the Gartner Hype Cycle for Platform Engineering 2026 as an enterprise skills registry — a new segment we are not yet addressing
+- **In-IDE extension gap is now ACTIVE:** `formulahendry/vscode-agent-skills` is live on VS Code Marketplace with multi-registry support; skills-hub.ai is not a registered source
+- **Skills.sh added interactive discovery:** `npx skills find` (type-to-search) sets a new UX bar for CLI-based registries
+- **Market grew to 13+ registries** — developer community now recommends a two-registry strategy (one for browsing, one for vetted) — we need to own the "vetted" slot
+- **ClaudeSkills.info hosts official Anthropic skills** — a trust signal gap for us; official-adjacent content is not in our registry
+
+---
+
+## Sources
+
+- [skills.sh](https://www.skills.sh) — Vercel-backed npm-style skills registry
+- [Vercel changelog: Introducing skills](https://vercel.com/changelog/introducing-skills-the-open-agent-skills-ecosystem)
+- [InfoQ: Vercel Introduces Skills.sh](https://www.infoq.com/news/2026/02/vercel-agent-skills/)
+- [agentskill.sh](https://agentskill.sh/) — Security-focused skills directory
+- [claudeskills.info](https://claudeskills.info/) — Free curated Claude Code skills including official Anthropic skills
+- [agentskill.club](https://www.agentskill.club/) — Community-driven GitHub-sourced skills library
+- [SkillsLLM](https://skillsllm.com/) — GitHub-centric security-vetted skills index
+- [lobehub.com/skills](https://lobehub.com/skills) — LobeHub Skills Marketplace
+- [skillhub.club](https://www.skillhub.club/) — SkillHub with desktop app + MCP server
+- [SkillHub API docs](https://www.skillhub.club/docs/api)
+- [skillsmp.com](https://skillsmp.com/) — SkillsMP index
+- [agensi.io](https://www.agensi.io/) — Agensi curated marketplace
+- [agensi.io — Sell Your Skills guide](https://www.agensi.io/learn/agent-skills-marketplace-sell-your-skills)
+- [agensi.io — Marketplace Comparison 2026](https://www.agensi.io/learn/ai-agent-skills-marketplace-comparison-2026)
+- [agensi.io — Every AI Agent Skills Marketplace 2026](https://www.agensi.io/learn/best-ai-agent-skills-marketplaces-2026)
+- [claudemarketplaces.com](https://claudemarketplaces.com/)
+- [TrueFoundry Skills Registry](https://www.truefoundry.com/skills-registry)
+- [TrueFoundry: Introducing Agent Skills Registry](https://www.truefoundry.com/blog/introducing-skills-registry-reusable-agent-skills-for-production-ai-systems)
+- [Microsoft Skills](https://microsoft.github.io/skills/)
+- [Microsoft Agent Framework: Agent Skills](https://learn.microsoft.com/en-us/agent-framework/agents/skills)
+- [Google Gemini Enterprise Skill Registry](https://docs.cloud.google.com/gemini-enterprise-agent-platform/build/skill-registry)
+- [VS Code Agent Skills Extension](https://marketplace.visualstudio.com/items?itemName=formulahendry.agent-skills)
+- [VS Code: Use Agent Skills](https://code.visualstudio.com/docs/agent-customization/agent-skills)
+- [KDnuggets: Top 5 Agent Skill Marketplaces](https://www.kdnuggets.com/top-5-agent-skill-marketplaces-for-building-powerful-ai-agents)
+- [skills-hub.ai](https://skills-hub.ai/)
