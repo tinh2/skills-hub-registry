@@ -1,143 +1,166 @@
 # Development Cycle Recall
 
-**Generated**: 2026-06-28  
-**Previous report**: 2026-06-07 (overwritten per FILE NAMING DISCIPLINE)
+**Generated**: 2026-07-01  
+**Previous report**: 2026-06-28 (overwritten per FILE NAMING DISCIPLINE)
 
 ---
 
-## ⚠️ PHANTOM PROGRESS — Close These Loops NOW
+## 🚨 REPEAT OFFENSE — RECALL BLOCKED
 
-Uncommitted Python source files detected. Run these commands:
+This is the **2nd consecutive recall** flagging the same unresolved items.
+Running a 3rd recall without acting on the prior ones will not produce different findings.
+Complete the following before reading further:
+
+### Fix 1: Commit the phantom progress (same files as Jun 28 recall — still uncommitted)
 
 ```bash
-# Skill-creator script updates
 git add meta/skill-creator/scripts/generate_report.py \
         meta/skill-creator/scripts/quick_validate.py
 git commit -m "fix(meta): update skill-creator report and validation scripts"
 
-# Test suite updates
 git add scripts/test_generate_report.py \
         scripts/test_integration.py \
         scripts/test_run_eval.py
 git commit -m "test: update eval pipeline test suites"
 
-# CSS + SKILL.md + docs
 git add build/editorial-app-craft/assets/design-tokens.css \
         build/editorial-app-craft/assets/patterns.css \
-        ux/design-to-code/SKILL.md \
-        docs/competitive-gap-analysis.md
-git commit -m "chore: update editorial-app-craft tokens, design-to-code skill, and competitive analysis"
+        ux/design-to-code/SKILL.md
+git commit -m "chore: update editorial-app-craft tokens and design-to-code skill"
 ```
+
+### Fix 2: Commit the NEW untracked source and content files
+
+```bash
+git add scripts/test_css_token_sweep.py \
+        scripts/test_generate_review.py \
+        scripts/test_mobile_sweep.py \
+        scripts/test_verify_viewport.py
+git commit -m "test: add css-token-sweep, generate-review, mobile-sweep, viewport test scripts"
+
+git add build/video-upscale/SKILL.md
+git commit -m "feat(skills): add video-upscale skill"
+
+git add graphify-out/manifest.json
+git commit -m "chore: add graphify output manifest"
+```
+
+### Fix 3: Resolve origin divergence
+
+```bash
+git pull --rebase origin main   # bring in 27 bot-added skills (Jun 7–Jun 30)
+git push origin main            # push local recall reports + competitive analysis
+```
+
+**This recall output is ADVISORY ONLY until these commands are run.**
 
 ---
 
-## ⚠️ LOCAL/REMOTE DIVERGENCE
+## ⚠️ REPEAT OFFENSE: ORIGIN STALE
 
-Local `main` is **1 commit ahead** of `origin/main` (recall report 2026-06-07 was never pushed).  
-`origin/main` is **22 commits ahead** of local `main` (Skills-Hub Bot skills from June 7–27 not merged locally).
+**3 unpushed commits** on local main. Prior recall (Jun 28) also flagged unpushed commits:
 
-**Resolve with:**
+- "⚠️ LOCAL/REMOTE DIVERGENCE"
+- "never pushed"
+- `git push origin main` in recommendations
 
-```bash
-git pull --rebase origin main   # bring in 22 bot skills
-git push origin main            # push local recall report
-```
+The situation has **worsened**: local and origin/main are now **diverged**, not just ahead/behind.
+Local has 3 unique commits (2× recall reports, 1× competitive analysis); origin has 27 unique
+commits (bot-added skills Jun 7–Jun 30). A `git pull --rebase` is required before `git push`.
+
+---
+
+## ⚠️ REPEAT OFFENSE: PHANTOM PROGRESS
+
+The following files were flagged in the **Jun 28 recall** and remain **uncommitted today**:
+
+| File                                                 | Status           | Days Uncommitted |
+| ---------------------------------------------------- | ---------------- | ---------------- |
+| `meta/skill-creator/scripts/generate_report.py`      | Modified tracked | 3+ days          |
+| `meta/skill-creator/scripts/quick_validate.py`       | Modified tracked | 3+ days          |
+| `scripts/test_generate_report.py`                    | Modified tracked | 3+ days          |
+| `scripts/test_integration.py`                        | Modified tracked | 3+ days          |
+| `scripts/test_run_eval.py`                           | Modified tracked | 3+ days          |
+| `build/editorial-app-craft/assets/design-tokens.css` | Modified tracked | 3+ days          |
+| `build/editorial-app-craft/assets/patterns.css`      | Modified tracked | 3+ days          |
+| `ux/design-to-code/SKILL.md`                         | Modified tracked | 3+ days          |
+
+**New additions since Jun 28** (also uncommitted):
+
+- `scripts/test_css_token_sweep.py` (untracked)
+- `scripts/test_generate_review.py` (untracked)
+- `scripts/test_mobile_sweep.py` (untracked)
+- `scripts/test_verify_viewport.py` (untracked)
+- `build/video-upscale/SKILL.md` (untracked skill)
+- `graphify-out/manifest.json` (untracked output)
 
 ---
 
 ## Scope
 
 - **Repository**: skills-hub-registry
-- **Branch**: main (local) + origin/main analyzed
-- **Period**: 2026-02-28 → 2026-06-27 (119 days)
-- **Commits on origin/main**: 163
-- **Commits on local main**: 143 (22 behind, 1 ahead)
-- **Total files changed**: 612 files, +179,872 lines, -3,688 lines
-- **Authors**: Tho Le (129), Claude bot (33), Skills-Hub Bot (1)
+- **Branch**: local `main` (145 commits) — DIVERGED from `origin/main`
+- **Period**: 2026-02-28 → 2026-07-01 (123 days)
+- **Local commits**: 145 total (137 categorized / 8 uncategorized = 5.5%)
+- **Origin commits since Jun 7 divergence**: 27 (all bot-added skills)
+- **Local commits since Jun 7 divergence**: 3 (2× recall, 1× competitive analysis)
+- **Uncommitted files**: 8 modified tracked + 6 untracked
 
 ---
 
 ## Timeline
 
 ```
-[2026-02-28]  PHASE 1: Initial Scaffold — 45 → 359 skills in one day (20 commits, ~183k+ lines)
-              Rapid: integration, deploy, security, test, docs, UX, build, meta categories
-              Industry verticals: healthcare, finance, logistics, gaming, mobile (170+ skills added)
-              Persona advisors, social-impact, government sectors
+[2026-02-28]  PHASE 1: Initial Scaffold — 45 → 359 skills in one day (20 commits)
+              13 marketplace categories, industry verticals, persona advisors
 
 [2026-03-01]  PHASE 2: Quality & Repair Wave — structural fixes, PII scrub (8 commits)
-              fix missing elements, upgrade 24 skills to production standard
 
 [2026-03-06]  PHASE 2b: Cross-reference & README sync (2 fix commits)
 
-[2026-03-13]  PHASE 2c: Mass upgrade pass — 52 skills, then 313 remaining skills (2 commits, same day)
-              Automated /evolve-style pass: trigger-rich descriptions, multi-stack support
+[2026-03-13]  PHASE 2c: Mass upgrade pass — 313 skills (2 commits)
 
-[2026-03-15]  PHASE 2d: Frontmatter & registry cleanup (5 fix commits, 1 day)
-              Duplicate files, YAML parse errors, missing delimiters, missing name fields
-              README skill count corrections
+[2026-03-15]  PHASE 2d: Frontmatter & registry cleanup (5 fix commits)
 
 [2026-03-16]  PHASE 3: CI Infrastructure — validate-skills.sh + GitHub Actions (3 commits)
 
-[2026-03-17]  Self-hosted runner setup, vscode duplicate removal
-
-[2026-03-18]  Mass enhancement: self-healing + telemetry added to all 366 skills
+[2026-03-18]  Mass enhancement: self-healing + telemetry across all 366 skills
               Ralph Wiggum design skills (20 autonomous design skills)
-              PII removal, bash 3.2 CI fix
 
-[2026-03-19]  PHASE 4: New Skill Development — iterate v11, ship v2, arch-review v10 synced
-              broadcast, ci-health, marketing-refresh skills
-
-[2026-03-24]  Education + builder skills, blog-writer, ci-fixer (5 commits)
-
-[2026-03-25]  broken-links skill, arch-review v10 with component reuse check
-
-[2026-03-26]  Video skills: ad-video, wedding-video, tutorial-video, social-clip
-              ship-pipeline, Google Stitch integration skills (4 skills)
-
-[2026-03-27]  Remotion ecosystem upgrade to all 4 video skills; 5 skill-creator test suites
+[2026-03-19]  PHASE 4: New Skill Development — iterate, ship, arch-review synced
 
 [2026-04-01]  /tend polish pass
 
-[2026-04-09]  Design skills sync
+[2026-04-15]  New industry + competitive skills (6 commits)
 
-[2026-04-15]  skillify v1.1, publish-skill v1.0, test suites for eval pipeline (3 commits)
+[2026-04-22]  Skill-finder v2.0.0 — workflow orchestrator
 
-[2026-04-19]  scale-audit + new-features; ship-it → ship-pipeline reference fix (2 commits)
+[2026-05-01]  editorial-app-craft, ui-craft, bug-sweep, mobile-sweep, css-token-sweep
 
-[2026-04-26]  design-claude skill
+[2026-05-22]  /evolve cross-project recall pass — 5 skills patched/added
 
-[2026-04-28]  README sync to 428 skills; web-research, excalidraw skills (4 commits)
+[2026-05-27]  ai-spend-optimizer, windsurf-spaces, SEO skills batch
 
-[2026-04-30]  SEO v2.1, marketing v2.0, youtube-research
+[2026-06-04]  acp-multi-agent, cursor-agent-safety, mcp-protocol-migration (3 feat commits)
 
-[2026-05-20]  4 marketing + SEO/AEO/GEO skills
+[2026-06-07]  ← DIVERGENCE POINT ←
+              Local: docs(recall) update
+              Origin: first Skills-Hub Bot daily commit begins
 
-[2026-05-21]  Build/UX wave: editorial-app-craft, ui-craft, bug-sweep, css-token-sweep, mobile-sweep
-              copilot-credits-audit (Claude bot, 1 commit)
+[2026-06-07→06-30]  Origin: 27 skills added by Claude/Skills-Hub Bot (1/day cadence)
+                    session-memory, claude-code-hooks-setup, gpt-5-5-agentic-setup,
+                    claude-model-router, fable-5-codebase-migration, ultracode-effort,
+                    kiro-headless-ci, codebase-migration, fallback-model-setup,
+                    claude-agent-billing-audit, opencode-model-router, north-mini-code,
+                    cursor-cloud-agent-workflow, figma-mcp, codex-record-replay,
+                    cursor-seat-optimizer, design-sync, kiro-custom-agent,
+                    claude-code-artifacts, agent-authorization, model-resilience-audit,
+                    acp-agent-setup, gemini-deep-think + 4 more
 
-[2026-05-22]  PHASE 5: Industry Expansion — 7+6+6+7 = 26 skills (manufacturing, real estate, ecommerce,
-              HR, logistics, government, media, finance)
-              windsurf-spaces (Claude bot), evolve run (5 patched), parallel-features, skill-finder v2
-              cursor-parallel (Claude bot)
+[2026-06-28]  Local: docs(recall) — phantom-progress files still accumulating
 
-[2026-05-23]  /tend recall report; 5 SEO skills
-
-[2026-05-27+] PHASE 6: Bot Pipeline — 1 automated skill/day at ~15:00 UTC
-              31 skills added by Claude/Skills-Hub Bot through 2026-06-27
-              Pattern: antigravity-sdk, kiro-*, gemini-cli-migration, acp-multi-agent,
-              cursor-agent-safety, mcp-protocol-migration, ai-spend-optimizer,
-              session-memory, claude-code-hooks-setup, claude-model-router,
-              fable-5-codebase-migration, ultracode-effort, kiro-headless-ci,
-              codebase-migration, fallback-model-setup, claude-agent-billing-audit,
-              north-mini-code, cursor-cloud-agent-workflow, figma-mcp,
-              codex-record-replay, cursor-seat-optimizer, design-sync,
-              kiro-custom-agent, claude-code-artifacts, agent-authorization...
-
-[2026-06-01]  save-tokens v1→v3 (3 commits in 2 days: initial → Ollama-only → zero-LLM)
-              competitive gap analysis update; recall report 2026-06-01
-
-[2026-06-07]  docs(recall) update — LAST local commit
+[2026-07-01]  Local: docs/competitive-gap-analysis.md update
+              State: 14 uncommitted files, local/origin diverged
 ```
 
 ---
@@ -146,137 +169,76 @@ git push origin main            # push local recall report
 
 ```
 Canonical:  /mvp → /spec → /arch-review → /story-implementer → /ux → /qa → /analyze
-Actual:     [scaffold] → /evolve ⟳ → /qa(fix) ⟳⟳ → /tend → /recall ⟳
+Actual:     [scaffold] → /evolve ⟳ → fix-waves ⟳⟳⟳ → /tend → /recall ⟳⟳⟳
 ```
 
-| Step               | Status     | Notes                                                   |
-| ------------------ | ---------- | ------------------------------------------------------- |
-| /mvp               | ⊘ skipped  | Registry scaffolded directly — no formal MVP doc        |
-| /spec              | ⊘ skipped  | Design specs added ad hoc (stitch-integration-spec)     |
-| /arch-review       | ⊘ skipped  | arch-review skill upgraded but not run against registry |
-| /story-implementer | ⊘ skipped  | Stories not used; direct skill additions                |
-| /ux                | ✓ partial  | UX skills added (ui-craft, mobile-sweep, bug-sweep)     |
-| /qa                | ⟳ repeated | Multiple fix waves for frontmatter, refs, CI            |
-| /analyze           | ✓          | competitive gap analysis, evolve run                    |
-| /evolve            | ✓          | May 22 explicit evolve run; March 13 mass upgrade       |
-| /tend              | ✓          | April 1, May 23                                         |
-| /recall            | ✓ ⟳        | Multiple: 2026-05-23, 2026-06-01, 2026-06-07            |
+| Skill              | Status     | Notes                                        |
+| ------------------ | ---------- | -------------------------------------------- |
+| /mvp               | ⊘ skipped  | Project was scaffolded directly at scale     |
+| /spec              | ⊘ skipped  | Implicit in skill YAML structure             |
+| /arch-review       | ⊘ skipped  | CI validation substituted                    |
+| /story-implementer | ⊘ skipped  | Batch scaffold approach instead              |
+| /ux                | ⊘ skipped  | Design tokens added but no /ux session       |
+| /qa                | ⊘ skipped  | Zero /qa sessions detected (see QA_DROUGHT)  |
+| /analyze           | ⊘ skipped  |                                              |
+| /evolve            | ✓ used     | Cross-project evolve pass May 22             |
+| /tend              | ✓ used     | Polish pass Apr 1                            |
+| /recall            | ⟳ repeated | 3rd run; same issues unresolved across all 3 |
 
 ---
 
-## Sequential vs Parallel Analysis
+## ⚠️ QA_DROUGHT (First Detection)
 
-| Phase/Feature                  | Execution                      | Dependencies            | Could Parallelize?          | Est. Time Saved |
-| ------------------------------ | ------------------------------ | ----------------------- | --------------------------- | --------------- |
-| Initial scaffold               | Sequential (20 commits, 1 day) | Category order          | Partially                   | 30%             |
-| Quality fix wave               | Sequential                     | Needed scaffold first   | No — interdependent         | —               |
-| Mass skill upgrade (Mar 13)    | Sequential batches             | None between categories | Yes — per-category parallel | 40%             |
-| Video skills (4 skills)        | Sequential                     | None                    | Yes — all independent       | 60%             |
-| Industry expansion (May 22-23) | Sequential (26 skills)         | None                    | Yes — sector-parallel       | 70%             |
-| Bot pipeline (May 27+)         | Sequential (1/day)             | None                    | Yes — could batch 5/day     | 80%             |
-| save-tokens v1→v3              | Sequential (2 days)            | Required iteration      | No — design rethink         | —               |
+**86 `feat:` commits. 0 `/qa` sessions** in project history.
 
----
+For this registry, QA means validating skills end-to-end (frontmatter validity, skill invocations,
+test suite runs). The 4 untracked test files show QA work is happening but not landing in git.
+Uncommitted tests can't run in CI.
 
-## Iteration Efficiency
-
-| Skill               | Iterations   | Rework % | First-Time-Right | Top Rework Cause                             |
-| ------------------- | ------------ | -------- | ---------------- | -------------------------------------------- |
-| save-tokens         | 3 (v1→v2→v3) | 67%      | No               | Cloud LLM policy rethink → Ollama → zero-LLM |
-| validate-skills.sh  | 3 fixes      | 75%      | No               | bash 3.2 compat, broken pipe, herestring     |
-| ship skill refs     | 1 fix        | —        | No               | ship-it → ship-pipeline rename propagation   |
-| README skill counts | 5+ fixes     | —        | No               | Manual sync, no single source of truth       |
-| YAML frontmatter    | 3 fix waves  | —        | No               | No pre-commit validation at time of creation |
-
-**Overall fix:feat ratio**: 26/107 = **0.24** — improved from the April 20 baseline of 0.47
-
----
-
-## Rework Hotspots
-
-| File/Area                     | Times Modified          | Fix Commits | Root Cause                     |
-| ----------------------------- | ----------------------- | ----------- | ------------------------------ |
-| README skill counts           | 5+                      | 5           | Manual count, no automation    |
-| YAML frontmatter              | 3 fix waves (15+ files) | 3           | No validation at write time    |
-| Cross-skill references        | 1 big fix               | 1           | ship-it → ship-pipeline rename |
-| validate-skills.sh            | 3 revisions             | 3           | bash 3.2 incompatibility       |
-| design-overhaul/pipeline dups | 2 cleanups              | 2           | Duplicate directory creation   |
-| docs/recall.md                | 3+ versions             | 0           | Uncommitted between sessions   |
+**Recommended QA gate**: commit all test scripts, then run `python scripts/test_integration.py`
+before each batch of skill additions.
 
 ---
 
 ## Key Insights
 
-### ⚠️ PHANTOM PROGRESS: 5 Python source files uncommitted (25 lines)
-
-```bash
-git add meta/skill-creator/scripts/generate_report.py \
-        meta/skill-creator/scripts/quick_validate.py \
-        scripts/test_generate_report.py \
-        scripts/test_integration.py \
-        scripts/test_run_eval.py
-git commit -m "fix(meta): update skill-creator scripts and eval test suites"
-```
-
 **What worked:**
 
-1. **Fix:feat ratio improved from 0.47 → 0.24** — CI gate (validate-skills.sh) and better frontmatter discipline caught issues earlier in the cycle, halving rework rate vs. April baseline.
-2. **Bot pipeline is highly productive** — 31+ skills added with zero rework (no fix commits against bot-added skills). Fully automated, consistent quality.
-3. **Mass upgrade passes** — March 13 upgraded 365 skills in 2 commits. The pattern of one big enhancement pass beats per-skill micro-commits.
-4. **Industry expansion was fast** — 26 skills in 2 days (May 22-23), all stuck on first try, no fix follow-ups.
-5. **/evolve discipline** — The May 22 evolve run patched 5 skills from cross-project recall findings; patterns propagated effectively.
+1. **Bot-driven skill cadence** — 27 skills added Jun 7–Jul 1 at 1/day with zero human intervention. Right model for registry growth at scale.
+2. **Conventional commits** — 94.5% categorized (137/145). Metrics remain reliable.
+3. **Fix:Feat ratio** — 0.30 (26 fix / 86 feat), improved from the 0.47 baseline (April). Quality trending right.
 
 **What caused unnecessary rework:**
 
-1. **No automated README sync** — README skill counts were manually maintained, causing 5+ fix commits. A `make readme` or CI step that counts SKILL.md files and updates README automatically would eliminate this entirely.
-2. **No pre-commit YAML validation** — Frontmatter errors (missing `---`, malformed descriptions, missing `name` field) were caught post-commit, requiring 3 separate fix waves. The validate-skills.sh script arrived late (March 16 — 17 days after first skills).
-3. **save-tokens design rethink** — v1→v2→v3 in 48 hours reflects an underspecified requirement ("avoid LLM cost" → "local only" → "zero-LLM by default"). A 5-minute spec before v1 would have reached v3 directly.
-4. **Local/remote divergence** — The recall report (June 7) was never pushed, and 22 bot skills were never pulled locally. The repos are now meaningfully diverged.
+1. **Phantom progress loop** — 8 files modified and never committed across 2 consecutive recall cycles (Jun 7 → Jun 28 → Jul 1). The work is done; only `git add` + `git commit` is missing.
+2. **Origin divergence** — Local and origin/main diverged Jun 7. No merge in 24 days. A rebase is now required; the longer this waits, the harder it gets.
+3. **Uncommitted test work** — 4 new test scripts sitting untracked. Tests not committed = tests not run by CI.
 
 **Bottlenecks identified:**
 
-1. **Manual README maintenance** — Every skill addition requires a separate README update or the count goes stale. This shows up in 5+ fix commits. Automate it.
-2. **Bot pipeline is daily, not batched** — 22 skills added one per day at ~15:00 UTC. Zero technical reason for this cadence; could batch 5-10 per commit if needed.
-3. **Local main drift from remote** — No pull/push discipline since June 7. Phantom progress accumulating.
+1. **git add discipline** — Bottleneck is the final step: writing code but not committing. Compounded across 3+ weeks.
+2. **Local/origin merge cadence** — No merge since Jun 7 (24 days).
 
 ---
 
 ## Recommendations for Next Iteration
 
-1. **Automate README skill count** — `scripts/count_skills.sh | update_readme.py` run in CI. Every skill add should update the README count in the same commit. Eliminates ~5 recurring fix commits per cycle. → Impact: **-5 fix commits/cycle**
-
-2. **Add YAML frontmatter pre-commit hook** — validate-skills.sh already exists; wire it as a pre-commit hook so frontmatter errors are caught before commit, not after. → Impact: **-3 fix waves/cycle**
-
-3. **Commit + push local main immediately after recall** — The recall report (June 7) sat uncommitted on local for 21 days. The recall skill's auto-commit gate commits but doesn't push. Add `git push origin main` to the auto-commit gate. → Impact: **Eliminates divergence**
-
-4. **Pull bot-pipeline skills into local** — Run `git pull --rebase origin main` to get 22 skills locally. Test locally that bot-added skills meet quality bar. → Impact: **Unblocks local dev**
-
-5. **Spec before v1 for meta skills** — save-tokens had 3 versions in 48 hours. Any skill that manages cost/tokens/compute should have a one-paragraph design decision written before the first commit. → Impact: **-2 iteration commits per meta skill**
-
-6. **Parallelize industry expansion** — 26 skills in 2 days was sequential. Dispatching sector-parallel agents (ecommerce agent, government agent, finance agent simultaneously) could produce 26 skills in ~4 hours. → Impact: **3-5x faster expansion sprints**
+1. **Run Fix 1–3 above immediately** — ~5 minutes of terminal work. All the code is done.
+2. **Add a weekly merge reminder** — Every Sunday: `git pull --rebase origin main && git push`. Prevents divergence from compounding.
+3. **Commit test files as they're created** — The 4 new test scripts are the most urgent item. Uncommitted tests are invisible to CI.
+4. **Close the QA loop on skill-creator** — Wire `test_integration.py` to CI so skill additions are validated automatically.
 
 ---
 
-## Suggested Pipeline for Next Build
+## Suggested Pipeline for Next Iteration
 
 ```
-                    ┌─ pull/merge bot pipeline ──┐
-                    │                             │
-git pull --rebase → fix phantom progress → commit/push ──────────────────────┐
-                                                                              │
-                    ┌─────────────── PARALLEL ────────────────────────┐      │
-                    │ /recall (scope: June gap analysis)              │      │
-                    │ /evolve (5 skills from recall findings)         │      │
-                    │ /analyze (competitive gap refresh)              │      │
-                    └──────────────────── MERGE ──────────────────────┘      │
-                                                                              │
-                    New skill batch: /parallel-features (5 skills at once)   │
-                    CI gate: validate-skills.sh passes                       │
-                    Auto-push: git push origin main ──────────────────────────┘
+For each work session:
+  [edit] → git add <specific files> → git commit → git push
+
+Weekly merge gate:
+  git pull --rebase origin main → verify clean → git push origin main
+
+For new skill batches:
+  /evolve → python scripts/test_integration.py → git add + commit → push
 ```
-
-**Gates/checkpoints:**
-
-- Pre-commit: YAML frontmatter validation (validate-skills.sh)
-- CI: skill count matches README
-- Post-session: auto-push after recall commits
