@@ -469,7 +469,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [monorepo](productivity/monorepo/)           | 2.0.0   | Set up or migrate to a monorepo with Turborepo, Nx, or pnpm workspaces. Scaffolds apps and packages directory structure, configures task pipeline with dependency graph, enables...    |
 | [release](productivity/release/)             | 2.0.0   | Set up automated releases with semantic versioning, changelog generation, and package publishing. Configures semantic-release, changesets, release-please, goreleaser, or...           |
 
-### integration -- Third-Party Service Connectors (13 skills)
+### integration -- Third-Party Service Connectors (14 skills)
 
 | Skill                                                 | Version | Description                                                                                                                                                                            |
 | ----------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -480,6 +480,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [perplexity-search](integration/perplexity-search/)   | 1.0.0   | AI-powered web search and research using the Perplexity API (Sonar models). Performs deep web research with citations, fact-checking, competitive analysis, market research, and...    |
 | [push-notifications](integration/push-notifications/) | 2.0.0   | Add push notifications to my app — set up FCM, APNs, or OneSignal for Flutter, React Native, Expo, or web with permission flows, foreground and background handlers, notification...   |
 | [realtime](integration/realtime/)                     | 2.0.0   | Add realtime features to my app — set up WebSockets or SSE with Socket.io, Pusher, Ably, Supabase Realtime, or Firebase using channels, presence tracking, typing indicators,...       |
+| [routerbase](integration/routerbase/)                 | 1.0.0   | Integrate [routerbase](https://routerbase.com/) as an OpenAI-compatible model gateway for chat, model routing, fallbacks, streaming, tool calling, JSON mode, and media workflows.     |
 | [search](integration/search/)                         | 2.0.0   | Add full-text search to my app — set up Algolia, Meilisearch, Typesense, or Elasticsearch with index configuration, typo tolerance, faceted filtering, real-time sync from database... |
 | [stitch-bridge](integration/stitch-bridge/)           | 1.0.0   | >-                                                                                                                                                                                     |
 | [stitch-compare](integration/stitch-compare/)         | 1.0.0   | >-                                                                                                                                                                                     |
