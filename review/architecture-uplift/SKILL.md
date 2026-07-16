@@ -40,7 +40,7 @@ FALLBACK: import scanning is unreliable (dynamic imports, DI containers, reflect
    - Fan-in / fan-out (from the Phase 1 edge list; file-level for big files).
    - Size: `wc -l`.
    - Churn: `git log --since='12 months ago' --name-only --pretty=format: | sort | uniq -c | sort -rn` (fall back to full history if the repo is younger).
-2. Hotspot score = normalized churn x normalized (fan-in + fan-out) x size factor. High-churn + high-coupling files are where architecture problems cost real money; a tangled file nobody touches scores low ON PURPOSE.
+2. Hotspot score = normalized churn x normalized (fan-in + fan-out) x size factor. High-churn + high-coupling files are where architecture problems cost real money; a tangled file nobody touches intentionally scores low.
 3. Produce the top 10 hotspots with all three raw numbers shown, not just the composite.
 
 VALIDATION: top-10 table exists with raw churn, fan-in/out, and LOC columns.
@@ -68,7 +68,7 @@ FALLBACK: fewer than 3 defensible moves exist (architecture is genuinely fine): 
 
 === PHASE 4: EXECUTE THE LOWEST-RISK MOVE ===
 
-1. Take the lowest-risk move from the ranking (not the highest-value one — this phase proves the process is safe).
+1. Take the lowest-risk move from the ranking (not the highest-value one; executing the smallest-blast-radius change first keeps the refactor recoverable).
 2. Execute in small steps; after each step run typecheck/build; commit each coherent step with message `refactor(arch): <step> [uplift: <move name>]`. Respect the ~400 LOC per commit ceiling.
 3. Mechanical rewrites of importers (path updates) may be scripted with sed/codemod, but verify by compiler, not by eyeball.
 4. Run the full test suite. Baseline-passing tests must all pass; the pre-existing failure set must not grow.
@@ -105,7 +105,7 @@ FALLBACK: module count too high for a readable diagram: diagram the affected sub
 
 === SELF-REVIEW ===
 
-Score 1-5: Complete (map + scoring + ranked moves + one executed move + doc), Robust (test baseline honored, revert path proven or unneeded), Clean (commits scoped, no unrelated edits). Any score < 4: repair in-run if possible, otherwise record as a known limitation in the doc's header.
+Before finishing, assess your own work on three dimensions, each 1-5: Complete (map + scoring + ranked moves + one executed move + doc all delivered), Robust (test baseline honored, revert path proven or unneeded), Clean (commits scoped, no unrelated edits). If any dimension falls below 4, repair it within this run when feasible; otherwise record it as a known limitation in the doc's header.
 
 === LEARNINGS CAPTURE ===
 
