@@ -92,7 +92,7 @@ Files written:
 | Type     | n     | scale ratio 1.25, families: ... |
 | Spacing  | n     | 8px base grid |
 | Radii    | n     | sm/md/full |
-| Shadows  | n     | 3 levels |
+| Elevation levels | n | 3 levels |
 
 ### Component inventory
 | Component | States captured | Tokens consumed |
