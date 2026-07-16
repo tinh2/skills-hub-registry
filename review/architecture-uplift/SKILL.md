@@ -1,6 +1,6 @@
 ---
 name: architecture-uplift
-description: Assess a codebase's architecture with hard evidence — module map, dependency direction, layering violations, coupling and cohesion hotspots weighted by git churn — then rank 3-5 improvement moves by risk-adjusted value and actually execute the lowest-risk move end to end with tests green before and after, finishing with a dated architecture doc containing before/after mermaid diagrams. Use when someone says "improve the architecture", "this codebase is a mess", "reduce coupling", "untangle dependencies", "refactor safely", "layering is broken", "circular imports", "tech debt assessment", "where should we refactor first", or "clean up module boundaries" and wants executed change, not just a slideware review.
+description: Assess a codebase's architecture with hard evidence — module map, dependency direction, layering breaks, coupling and cohesion hotspots weighted by git churn — then rank 3-5 improvement moves by risk-adjusted value and actually execute the lowest-risk move end to end with tests green before and after, finishing with a dated architecture doc containing before/after mermaid diagrams. Use when someone says "improve the architecture", "this codebase is a mess", "reduce coupling", "untangle dependencies", "refactor safely", "layering is broken", "circular imports", "tech debt assessment", "where should we refactor first", or "clean up module boundaries" and wants executed change, not just a slideware review.
 version: "2.0.0"
 category: review
 platforms:
@@ -24,14 +24,14 @@ If arguments name a directory, package, or concern (e.g. "the api layer"), scope
 1. Identify the module units the codebase actually uses (top-level dirs, workspace packages, Go packages, Python packages).
 2. Build the dependency edge list between modules by scanning imports (grep import/require/use/from statements; use `madge`/`dependency-cruiser`/`go list -deps`-style tools only if already installed — do not install tools).
 3. Infer the intended layering from structure and naming (e.g. ui -> application -> domain -> infrastructure, or routes -> services -> db). State the inferred layering explicitly; it is a hypothesis, labeled as such.
-4. Flag violations, each with the importing file:line as evidence:
+4. Flag boundary breaks, each with the importing file:line as evidence:
    - Edges pointing against the inferred layering direction.
    - Cycles between modules (list every edge in the cycle).
    - "shared"/"utils"/"common" modules that import FROM feature modules (dependency magnets).
-   - Deep imports that bypass a module's public entry point (index/mod/package facade).
+   - Deep imports that sidestep a module's public entry point (index/mod/package facade).
    - Modules imported by everything AND importing everything (god modules).
 
-VALIDATION: a module list, an edge list, and a violations list (possibly empty) all exist with file-level evidence for each violation (importing file:line).
+VALIDATION: a module list, an edge list, and a boundary breaks list (possibly empty) all exist with file-level evidence for each boundary break (importing file:line).
 FALLBACK: import scanning is unreliable (dynamic imports, DI containers, reflection): report edges you could verify and mark the map "partial — static analysis only".
 
 === PHASE 2: HOTSPOT SCORING ===
@@ -50,7 +50,7 @@ FALLBACK: no git history (fresh clone with shallow depth): run `git fetch --unsh
 
 1. Propose 3-5 concrete moves. Each MUST specify all six fields:
    - The change: files created, moved, and edited, by path.
-   - The violation or hotspot it addresses, referencing Phase 1/2 evidence.
+   - The boundary break or hotspot it addresses, referencing Phase 1/2 evidence.
    - Expected value: which future changes get cheaper, concretely.
    - Blast radius: exact count of importing files that must change, counted from the edge list — never guessed.
    - Risk level: Low = mechanical and fully verifiable by tests/typecheck; Medium = behavior-adjacent; High = touches runtime semantics.
@@ -72,9 +72,9 @@ FALLBACK: fewer than 3 defensible moves exist (architecture is genuinely fine): 
 2. Execute in small steps; after each step run typecheck/build; commit each coherent step with message `refactor(arch): <step> [uplift: <move name>]`. Respect the ~400 LOC per commit ceiling.
 3. Mechanical rewrites of importers (path updates) may be scripted with sed/codemod, but verify by compiler, not by eyeball.
 4. Run the full test suite. Baseline-passing tests must all pass; the pre-existing failure set must not grow.
-5. Re-derive the affected slice of the dependency map and confirm the targeted violation/cycle is actually gone.
+5. Re-derive the affected slice of the dependency map and confirm the targeted boundary break/cycle is actually gone.
 
-VALIDATION: tests green vs baseline, violation demonstrably removed, commits self-contained.
+VALIDATION: tests green vs baseline, boundary break demonstrably removed, commits self-contained.
 FALLBACK: the move turns out riskier mid-flight (hidden dynamic import, test explosion): stop, `git revert` the move's commits cleanly, mark it "attempted — reverted, here is what we learned", and execute the next-lowest-risk move if one qualifies; otherwise report with the revert documented.
 
 === PHASE 5: ARCHITECTURE DOC ===
@@ -83,11 +83,11 @@ Write `docs/architecture/uplift-<YYYY-MM-DD>.md` (create dirs) containing, in or
 
 1. Stack summary and how the module map was derived.
 2. Inferred layering with its confidence level and the evidence behind it.
-3. BEFORE mermaid `graph TD` of modules, violation edges styled red.
+3. BEFORE mermaid `graph TD` of modules, boundary break edges styled red.
 4. Hotspot top-10 table (churn, fan-in/out, LOC, composite).
 5. The ranked move list with all six fields per move.
 6. The executed move's narrative: steps, commit hashes, test evidence before/after.
-7. AFTER mermaid diagram showing the removed violation.
+7. AFTER mermaid diagram showing the removed boundary break.
 8. Remaining moves as a prioritized backlog with blast radii.
    Keep mermaid node counts <= 20 by grouping small modules into labeled clusters.
 
@@ -99,7 +99,7 @@ FALLBACK: module count too high for a readable diagram: diagram the affected sub
 1. The doc at docs/architecture/uplift-<date>.md.
 2. Executed commits on the current branch (listed by hash + message).
 3. A terminal summary:
-   - Violations found and hotspot #1.
+   - Boundary breaks found and hotspot #1.
    - Move executed, with test delta (before/after pass counts).
    - The top remaining move with its counted blast radius.
 
@@ -117,6 +117,6 @@ Append to ~/.claude/skills/architecture-uplift/LEARNINGS.md: date + repo, which 
 2. Blast radius is always a counted number from the edge list, never an adjective.
 3. Never execute a Medium- or High-risk move when a Low-risk move exists; never execute any move without a recorded test (or typecheck) baseline.
 4. Never leave a half-executed move in the tree — complete it or revert it fully.
-5. Every violation and hotspot claim cites file:line or a reproducible command.
+5. Every boundary break and hotspot claim cites file:line or a reproducible command.
 6. Do not install analysis tooling; work with what the repo has.
 7. Churn weighting is mandatory when git history exists; a coupling-only ranking must be labeled as degraded.
