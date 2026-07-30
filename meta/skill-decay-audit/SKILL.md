@@ -1,7 +1,7 @@
 ---
 name: skill-decay-audit
 description: "Semi-annual decay audit of AI scaffolding -- skills, CLAUDE.md, hooks, and memory -- deleting instructions written for older, weaker models while keeping incident post-mortems and environment facts. Triggers: 'audit my skills', 'skill decay', 'clean up CLAUDE.md', 'prune my hooks', 'reduce context bloat', 'I upgraded models, what should I delete', 'too many skills'."
-version: "1.0.1"
+version: "1.0.2"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -289,6 +289,18 @@ be on a clock too. An audit that depends on the user remembering to run it will 
 2. Record in `AUDIT-LOG.md` which model generation this audit was performed against. The
    next run needs to know what "current" meant last time — that is what makes the
    generation-over-generation comparison possible.
+
+3. If `~/.claude/state/scaffolding-audit.json` exists, update it — this is what an
+   automated due-date reminder reads, and if it is not advanced the reminder fires
+   forever and trains the user to ignore it:
+
+   ```bash
+   jq -n --arg m "<exact model id, e.g. claude-opus-5>" --arg a "$(date +%Y-%m-%d)" \
+     '{last_model:$m, last_audit:$a, last_notified:""}' \
+     > ~/.claude/state/scaffolding-audit.json
+   ```
+
+   Use the exact model identifier, not the display name — the reminder compares strings.
 
 VALIDATION: `NEXT_AUDIT.md` exists and contains a date ~6 months out.
 FALLBACK: If writing the file fails, state the due date in the final output so the user
