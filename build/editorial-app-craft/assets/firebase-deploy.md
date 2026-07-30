@@ -34,7 +34,7 @@ const params = new URLSearchParams({
   grant_type: "refresh_token",
   refresh_token: c.tokens.refresh_token,
   client_id:
-    "563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com",
+    "YOUR_CLIENT_ID.apps.googleusercontent.com",
   client_secret: "j9iVZfS8kkCEFUPaAeJV0sAi", // public client secret for firebase-tools
 });
 const r = await fetch("https://oauth2.googleapis.com/token", {
