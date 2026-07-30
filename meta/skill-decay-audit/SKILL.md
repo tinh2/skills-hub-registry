@@ -1,7 +1,7 @@
 ---
 name: skill-decay-audit
-description: "Semi-annual decay audit of all AI scaffolding — skills, CLAUDE.md, hooks, and memory — that deletes instructions written to compensate for older, weaker models and keeps only what the current model still needs. Use when: 'audit my skills', 'my skills are stale', 'clean up CLAUDE.md', 'prune my hooks', 'skill decay', 'six month skill refresh', 'reduce my context bloat', 'my scaffolding is slowing Claude down', 'I upgraded models, what should I delete', 'refresh skills for the new model', 'too many skills', 'dedupe my skills'. ALSO trigger proactively when the user mentions upgrading to a new model generation, complains about slow or noisy sessions, or when NEXT_AUDIT.md in this skill directory shows a due date in the past. NOT for writing a new skill (that is /skillify) and NOT for patching a skill from usage logs (that is /evolve) — this one only DELETES and MODERNIZES what already exists."
-version: "1.0.0"
+description: "Semi-annual decay audit of AI scaffolding -- skills, CLAUDE.md, hooks, and memory -- deleting instructions written for older, weaker models while keeping incident post-mortems and environment facts. Triggers: 'audit my skills', 'skill decay', 'clean up CLAUDE.md', 'prune my hooks', 'reduce context bloat', 'I upgraded models, what should I delete', 'too many skills'."
+version: "1.0.1"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -91,7 +91,24 @@ Measure and record:
    wc -c ~/.claude/CLAUDE.md
    wc -c ~/.claude/projects/*/memory/MEMORY.md 2>/dev/null
    ```
-2. **Skill listing cost** — every installed skill contributes its `name` + `description`
+2. **Enumerate every skill-contributing surface before measuring anything.** Skills reach
+   the system prompt from at least three places, and duplication across them is invisible
+   when each is counted alone:
+   - `~/.claude/skills/*/SKILL.md`
+   - `~/.claude/commands/*.md` (slash commands surface in the same listing)
+   - every enabled plugin under `~/.claude/plugins/` (check `installed_plugins.json` for
+     which versions are actually active — stale cached versions are not loaded)
+
+   Cross-tabulate all surfaces by name. A name present on two surfaces is either loaded
+   twice or silently shadowed; both are defects. On the 2026-07-30 run this step was what
+   found 108 duplicated names and 120 deletable files — none of it visible from
+   `~/.claude/skills` alone.
+
+   Resolve every symlink and count only entries that actually load. Report the raw-vs-real
+   inventory gap explicitly: that same run showed 336 entries by `ls` and 171 real skills,
+   the difference being broken symlinks that no plain inventory command distinguishes.
+
+3. **Skill listing cost** — every installed skill contributes its `name` + `description`
    to the system prompt even when never invoked. Sum those, do not sum the bodies:
    ```bash
    find ~/.claude -name SKILL.md -not -path "*/projects/*" \
@@ -99,13 +116,13 @@ Measure and record:
    ```
    Extract each skill's `description` field and total its length. A skill with a
    200-word description costs ~40x one with a 5-word description, invoked or not.
-3. **Hook injection cost** — hooks that emit text into the transcript (`SessionStart`,
+4. **Hook injection cost** — hooks that emit text into the transcript (`SessionStart`,
    `UserPromptSubmit`) are pure per-session or per-turn overhead:
    ```bash
    python3 -c "import json;d=json.load(open('$HOME/.claude/settings.json'));print(json.dumps(d.get('hooks',{}),indent=2))"
    ```
    For each hook, run its command (or read its script) and measure the emitted bytes.
-4. **Inventory counts** — skill dirs, dirs missing `SKILL.md`, total body bytes.
+5. **Inventory counts** — skill dirs, dirs missing `SKILL.md`, total body bytes.
 
 Convert bytes to approximate tokens at ~4 bytes/token and report the per-session and
 per-turn totals separately. Per-turn costs are the expensive ones.
