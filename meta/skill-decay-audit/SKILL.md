@@ -1,7 +1,7 @@
 ---
 name: skill-decay-audit
 description: "Semi-annual decay audit of AI scaffolding -- skills, CLAUDE.md, hooks, and memory -- deleting instructions written for older, weaker models while keeping incident post-mortems and environment facts. Triggers: 'audit my skills', 'skill decay', 'clean up CLAUDE.md', 'prune my hooks', 'reduce context bloat', 'I upgraded models, what should I delete', 'too many skills'."
-version: "1.0.2"
+version: "1.0.3"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -62,9 +62,13 @@ Before starting, verify:
 - [ ] `~/.claude/` exists and is readable
 - [ ] `git` is available (used to date-stamp skills and to back out changes)
 - [ ] Disk has room for a backup of `~/.claude` — check with `du -sh ~/.claude` and `df -h ~`
-- [ ] If scope includes `--registry`: `~/git/skills-hub-registry/` exists and is a clean git repo
-- [ ] If scope includes `--hub`: `~/git/skills-hub/` exists and AWS creds resolve
-      (`AWS_PROFILE=recipeai AWS_DEFAULT_REGION=us-east-1 aws sts get-caller-identity`)
+- [ ] If scope includes `--registry`: a skill-registry git repo is configured (see Phase 5)
+      and its working tree is clean
+- [ ] If scope includes `--hub`: a catalog/platform checkout is configured and whatever
+      credentials its sync needs resolve
+
+The `--registry` and `--hub` scopes are opt-in and environment-specific: they only apply
+if you publish skills to a registry you control. Most users will never pass them.
 
 Recovery:
 
@@ -72,7 +76,8 @@ Recovery:
   delete without a restorable copy.
 - If the registry repo has uncommitted changes: stop and report them. Auditing on top of
   someone else's work-in-progress makes the diff unreviewable.
-- If AWS creds fail: drop `--hub` from scope, continue with the rest, note it in the output.
+- If the catalog credentials do not resolve: drop `--hub` from scope, continue with the
+  rest, and note the omission in the output.
 
 VALIDATION: A backup path is confirmed writable, or the run is explicitly dry.
 FALLBACK: Downgrade scope rather than skipping the backup.
@@ -256,14 +261,21 @@ exactly which step failed. Partial application is acceptable only if reported it
 
 Skip this phase entirely unless `$ARGUMENTS` includes `--registry`, `--hub`, or `--all`.
 
-**5a. Registry (`~/git/skills-hub-registry`).** Apply Phase 2 classification to the
+These scopes assume you own a skill registry and a catalog deployment. If you do not —
+which is the common case — skip this phase and say so; it is not a failure. Never assume
+a specific repo path, cloud account, or credential profile: discover them from the local
+environment, and if they are absent, report that the scope does not apply and continue.
+Publishing requires write access to the registry you control; a registry you merely
+installed skills _from_ is read-only to you.
+
+**5a. Registry (a git repo you have push access to).** Apply Phase 2 classification to the
 registry copies of skills that were changed locally, so published versions do not drift
 from audited local ones. Bump the `version` of every modified skill — consumers use the
 version to decide whether to re-pull. Commit at one-feature-per-commit granularity by
 surface (`chore(meta): compress descriptions`, `refactor(qa): modernize test skills`),
 not as one giant sweep.
 
-**5b. Hub catalog (`~/git/skills-hub`).** For externally-sourced skills, do NOT audit
+**5b. Hub catalog (a platform checkout you deploy).** For externally-sourced skills, do NOT audit
 their content — they are upstream property and editing them creates a permanent merge
 conflict. The correct action for external sources is a **refresh**, not an audit: re-run
 the external sync so the catalog holds current upstream versions.
