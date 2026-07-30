@@ -1,7 +1,7 @@
 ---
 name: skill-decay-audit
 description: "Semi-annual decay audit of AI scaffolding -- skills, CLAUDE.md, hooks, and memory -- deleting instructions written for older, weaker models while keeping incident post-mortems and environment facts. Triggers: 'audit my skills', 'skill decay', 'clean up CLAUDE.md', 'prune my hooks', 'reduce context bloat', 'I upgraded models, what should I delete', 'too many skills'."
-version: "1.0.3"
+version: "1.1.0"
 category: meta
 platforms:
   - CLAUDE_CODE
@@ -21,10 +21,7 @@ $ARGUMENTS
 
 Interpret `$ARGUMENTS` as follows:
 
-- empty → audit local scaffolding only (`~/.claude`)
-- `--registry` → also audit the skills-hub registry repo
-- `--hub` → also refresh external sources in the skills-hub catalog
-- `--all` → all three
+- empty → audit all local scaffolding under `~/.claude`
 - `--dry-run` → analyze and report, apply nothing
 - a path or slug → audit only that scope
 
@@ -62,22 +59,10 @@ Before starting, verify:
 - [ ] `~/.claude/` exists and is readable
 - [ ] `git` is available (used to date-stamp skills and to back out changes)
 - [ ] Disk has room for a backup of `~/.claude` — check with `du -sh ~/.claude` and `df -h ~`
-- [ ] If scope includes `--registry`: a skill-registry git repo is configured (see Phase 5)
-      and its working tree is clean
-- [ ] If scope includes `--hub`: a catalog/platform checkout is configured and whatever
-      credentials its sync needs resolve
-
-The `--registry` and `--hub` scopes are opt-in and environment-specific: they only apply
-if you publish skills to a registry you control. Most users will never pass them.
-
 Recovery:
 
 - If the backup would not fit: reduce scope to `--dry-run` and say so explicitly. Never
   delete without a restorable copy.
-- If the registry repo has uncommitted changes: stop and report them. Auditing on top of
-  someone else's work-in-progress makes the diff unreviewable.
-- If the catalog credentials do not resolve: drop `--hub` from scope, continue with the
-  rest, and note the omission in the output.
 
 VALIDATION: A backup path is confirmed writable, or the run is explicitly dry.
 FALLBACK: Downgrade scope rather than skipping the backup.
@@ -255,42 +240,7 @@ projected reduction; no skill directory referenced by a surviving skill was dele
 FALLBACK: On any validation failure, restore from `~/.claude-backups/<date>/` and report
 exactly which step failed. Partial application is acceptable only if reported item by item.
 
----
-
-=== PHASE 5: REGISTRY AND HUB (scope-gated) ===
-
-Skip this phase entirely unless `$ARGUMENTS` includes `--registry`, `--hub`, or `--all`.
-
-These scopes assume you own a skill registry and a catalog deployment. If you do not —
-which is the common case — skip this phase and say so; it is not a failure. Never assume
-a specific repo path, cloud account, or credential profile: discover them from the local
-environment, and if they are absent, report that the scope does not apply and continue.
-Publishing requires write access to the registry you control; a registry you merely
-installed skills _from_ is read-only to you.
-
-**5a. Registry (a git repo you have push access to).** Apply Phase 2 classification to the
-registry copies of skills that were changed locally, so published versions do not drift
-from audited local ones. Bump the `version` of every modified skill — consumers use the
-version to decide whether to re-pull. Commit at one-feature-per-commit granularity by
-surface (`chore(meta): compress descriptions`, `refactor(qa): modernize test skills`),
-not as one giant sweep.
-
-**5b. Hub catalog (a platform checkout you deploy).** For externally-sourced skills, do NOT audit
-their content — they are upstream property and editing them creates a permanent merge
-conflict. The correct action for external sources is a **refresh**, not an audit: re-run
-the external sync so the catalog holds current upstream versions.
-
-Report per source: created / updated / skipped / failed. Any source with `failed > 0` or
-`created = 0 AND updated = 0` across two consecutive runs is a broken connector, not a
-quiet source — flag it for repair rather than reporting it as healthy.
-
-VALIDATION: Registry pushes exit 0; sync reports zero failed sources.
-FALLBACK: If the sync fails on credentials, report the exact secret ID that could not be
-read and continue — a failed hub refresh must not roll back a successful local audit.
-
----
-
-=== PHASE 6: RE-ARM THE TIMER ===
+=== PHASE 5: RE-ARM THE TIMER ===
 
 The whole premise of this skill is that scaffolding decays on a clock, so the audit has to
 be on a clock too. An audit that depends on the user remembering to run it will not run.
@@ -368,7 +318,7 @@ skill's actual intelligence; everything else is procedure.
 ## Scaffolding Decay Audit — <date>
 
 **Audited against:** <model generation>
-**Scope:** <local | +registry | +hub>
+**Scope:** <full ~/.claude | limited to $ARGUMENTS>
 
 ### Footprint
 | Surface | Before | After | Δ |
@@ -400,7 +350,6 @@ skill's actual intelligence; everything else is procedure.
   non-emptiness, not assumed.
 - **Never delete an incident-derived rule because it is old.** Age is a review trigger,
   never a verdict. Only a change in the world invalidates a world-fact.
-- **Never edit externally-sourced skills.** Upstream content is refreshed, not audited.
 - **Never let a hook edit go unvalidated.** `settings.json` must parse before the run ends.
 - **Default to KEEP under uncertainty.** The cost asymmetry is severe: a redundant line
   costs tokens, a deleted constraint costs an incident.
