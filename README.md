@@ -469,7 +469,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [monorepo](productivity/monorepo/)           | 2.0.0   | Set up or migrate to a monorepo with Turborepo, Nx, or pnpm workspaces. Scaffolds apps and packages directory structure, configures task pipeline with dependency graph, enables...    |
 | [release](productivity/release/)             | 2.0.0   | Set up automated releases with semantic versioning, changelog generation, and package publishing. Configures semantic-release, changesets, release-please, goreleaser, or...           |
 
-### integration -- Third-Party Service Connectors (13 skills)
+### integration -- Third-Party Service Connectors (14 skills)
 
 | Skill                                                 | Version | Description                                                                                                                                                                            |
 | ----------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -486,6 +486,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [stitch-explore](integration/stitch-explore/)         | 1.0.0   | >-                                                                                                                                                                                     |
 | [storage](integration/storage/)                       | 2.0.0   | Add file uploads and object storage to my app — set up AWS S3, Google Cloud Storage, Cloudflare R2, or Supabase Storage with presigned URLs, direct browser uploads, multipart...      |
 | [stripe](integration/stripe/)                         | 2.0.0   | Add Stripe payments to my app — set up checkout sessions, payment intents, webhook handling with signature verification, subscription billing with plan management, customer...        |
+| [x-mcp](integration/x-mcp/)                           | 2.0.0   | Safely connect X (formerly Twitter) data through MCP. Preserves existing providers, compares official self-hosted XMCP with opt-in Xquik, discloses data flow, and runs bounded...       |
 
 ### combo -- Multi-Skill Chains (34 skills)
 
