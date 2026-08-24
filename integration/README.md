@@ -6,7 +6,7 @@ Third-party service connectors -- authentication, payments, email, push notifica
 
 **[integrate](integrate/)** -- Master integration orchestrator that audits existing integrations, identifies gaps, routes to sub-skills, and produces an integration health score for production readiness.
 
-## Skills (13)
+## Skills (14)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -40,3 +40,4 @@ Third-party service connectors -- authentication, payments, email, push notifica
 | [stitch-bridge](stitch-bridge/) | 1.0.0 | >- |
 | [stitch-compare](stitch-compare/) | 1.0.0 | >- |
 | [stitch-explore](stitch-explore/) | 1.0.0 | >- |
+| [x-mcp](x-mcp/) | 2.0.0 | Safely connects X (formerly Twitter) data through MCP, preserves existing providers, discloses data flow, and runs bounded workflows |
