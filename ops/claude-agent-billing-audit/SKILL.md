@@ -1,7 +1,7 @@
 ---
 name: claude-agent-billing-audit
-description: "Audits your codebase for Claude Agent SDK usage affected by Anthropic's June 15 2026 billing split. Scans for claude -p invocations, GitHub Actions steps, and SDK imports; estimates monthly token cost per pipeline; flags automations that will hard-stop when credits run out; and produces a prioritized migration checklist with model-routing recommendations to stretch your credit pool."
-version: "1.0.0"
+description: "Audits your codebase for Claude Agent SDK usage affected by Anthropic's June 15 2026 billing split."
+version: "1.0.1"
 category: ops
 platforms:
   - CLAUDE_CODE

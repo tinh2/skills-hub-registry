@@ -1,7 +1,7 @@
 ---
 name: docs-grill
-description: "Documentation-grounded plan interrogation. Before asking you anything, it extracts every third-party dependency your plan touches, fetches and reads their real documentation (node_modules READMEs and type definitions, official docs URLs, OpenAPI specs in the repo), extracts hard constraints (rate limits, idempotency requirements, size caps, auth models, webhook semantics), and then grills you with questions that cite specific doc lines, like: Stripe requires webhook idempotency, how will you dedupe. Emits a constraints appendix with citations. Use when you hear: grill me with docs, check my plan against the actual docs, what do the docs say about this plan, doc-grounded review, will the API actually support this, verify my integration plan, constraints check, does Stripe/Firebase/AWS allow this, read the docs before I build."
-version: "2.0.0"
+description: "Documentation-grounded plan interrogation. Before asking you anything, it extracts every third-party dependency your plan touches, fetches and reads their real documentation (node_modules READMEs and type definitions, official docs URLs, OpenAPI specs in the repo)."
+version: "2.0.1"
 category: spec
 platforms:
   - CLAUDE_CODE

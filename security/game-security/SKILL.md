@@ -1,7 +1,7 @@
 ---
 name: game-security
-description: "Game-specific security review covering cheat prevention, exploit surfaces, and server authority. Audits client-side authority vulnerabilities (damage, health, currency, cooldown, movement speed), memory manipulation risks (value scanning, anti-debug, DLL injection), network security (packet tampering, replay attacks, speed hacking, MITM, DDoS resilience), save file integrity (encryption, checksums, cloud save abuse, config tampering, wallhacks), API and backend security (auth bypass, receipt validation, double-spend, botting, user enumeration), and anti-cheat architecture (server authority, statistical anomaly detection, client integrity, ban systems, shadow banning). Use for multiplayer, competitive, F2P economy, leaderboard, or single-player games with progression systems."
-version: "2.0.0"
+description: "Game-specific security review covering cheat prevention, exploit surfaces, and server authority."
+version: "2.0.1"
 category: security
 platforms:
   - CLAUDE_CODE

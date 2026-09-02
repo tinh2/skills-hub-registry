@@ -1,7 +1,7 @@
 ---
 name: gdpr
-description: "GDPR and CCPA/CPRA privacy compliance audit for codebases. Inventories PII fields (email, phone, SSN, IP, device ID, geolocation, biometrics, behavioral data), maps data collection points (forms, APIs, cookies, analytics, error tracking), audits consent mechanisms (cookie banners, opt-in, pre-checked boxes, consent withdrawal), verifies data subject rights implementation (right to access, erasure, rectification, portability, opt-out, Do Not Sell), traces third-party data sharing (Google Analytics, Facebook Pixel, Stripe, SendGrid, Sentry), and checks data retention policies and automated purging. Use when auditing privacy compliance, building data export or deletion endpoints, reviewing cookie consent, or assessing DSAR readiness."
-version: "2.0.0"
+description: "GDPR and CCPA/CPRA privacy compliance audit for codebases. Inventories PII fields (email, phone, SSN, IP, device ID, geolocation, biometrics, behavioral data), maps data collection points (forms, APIs, cookies, analytics, error tracking), audits consent mechanisms (cookie banners, opt-in."
+version: "2.0.1"
 category: security
 platforms:
   - CLAUDE_CODE

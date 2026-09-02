@@ -1,7 +1,7 @@
 ---
 name: benefits-fraud
-description: Audit government benefits and entitlement systems for fraud prevention, detection, and recovery capabilities. Assesses identity proofing (document verification, SSA cross-match, biometrics, NIST 800-63 IAL levels), synthetic and stolen identity detection, deceased and incarcerated person checks, duplicate applicant matching (fuzzy, probabilistic, Soundex/metaphone), cross-program and cross-jurisdiction benefit matching, income verification (state wages, IRS 1075, new hire reporting), anomaly detection (statistical outliers, behavioral analytics, geographic clustering, ML model bias testing), rule-based fraud scoring, EBT usage pattern analysis, provider and vendor billing fraud, overpayment calculation and recovery (recoupment, Treasury offset, hardship waivers), investigation case management, whistleblower hotline integration, and due process safeguards (notice, hearing rights, demographic bias analysis). Covers cash assistance, SNAP, Medicaid, housing, energy, and childcare programs.
-version: "2.0.0"
+description: "Audit government benefits and entitlement systems for fraud prevention, detection, and recovery capabilities."
+version: "2.0.1"
 category: security
 platforms:
   - CLAUDE_CODE

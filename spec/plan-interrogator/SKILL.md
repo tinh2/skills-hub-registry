@@ -1,7 +1,7 @@
 ---
 name: plan-interrogator
-description: "Interrogates a plan or feature idea until zero ambiguity remains, then persists a decision record. Enumerates every unstated assumption, asks prioritized question batches (blocking, then shaping, then polish, multiple-choice where possible), runs an adversarial pass attacking the plan for edge cases, failure modes, and hidden scope, and emits docs/decisions/<date>-<topic>.md with a decisions table, risk register, and explicit non-goals. Use when you hear: grill me on this plan, interrogate this idea, poke holes in my plan, stress-test this feature, what am I missing, challenge my assumptions, is this plan ready, pre-mortem, devil's advocate review, decision record, ADR for this feature, before I start building, make sure the spec is airtight."
-version: "2.0.0"
+description: "Interrogates a plan or feature idea until zero ambiguity remains, then persists a decision record. Triggers: you hear: grill me on this plan, interrogate this idea, poke holes in my plan, stress-test this feature."
+version: "2.0.1"
 category: spec
 platforms:
   - CLAUDE_CODE

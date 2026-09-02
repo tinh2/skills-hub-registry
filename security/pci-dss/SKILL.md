@@ -1,7 +1,7 @@
 ---
 name: pci-dss
-description: "PCI DSS v4.0 compliance audit for payment-handling codebases. Scans for PAN patterns (Visa, Mastercard, Amex, Discover), CVV storage violations, and track data retention. Audits all 12 requirements: network security controls (firewall rules, CDE segmentation, default-deny), secure configurations (default credentials, hardening), stored cardholder data protection (AES-256 encryption, masking first-6/last-4, tokenization, key rotation), transmission encryption (TLS 1.2+, certificate pinning, HSTS), vulnerability management (dependency scanning, container image scanning, web skimming detection per 6.4.3, SRI, CSP), access control (RBAC, least privilege, MFA for CDE per 8.4.2, 12-char passwords, session timeout), logging and monitoring (audit trails, immutable logs, SIEM, NTP sync), and security testing (SAST, DAST, file integrity monitoring). Estimates SAQ type (A, A-EP, D). Use when building or auditing payment flows, Stripe/Braintree/Adyen integrations, or any system processing credit card data."
-version: "2.0.0"
+description: "PCI DSS v4.0 compliance audit for payment-handling codebases. Scans for PAN patterns (Visa, Mastercard, Amex, Discover), CVV storage violations, and track data retention. Triggers: building or auditing payment flows, Stripe/Braintree/Adyen integrations."
+version: "2.0.1"
 category: security
 platforms:
   - CLAUDE_CODE

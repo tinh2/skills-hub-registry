@@ -1,7 +1,7 @@
 ---
 name: idea-to-prd
-description: "Turns a raw idea, brain dump, or conversation into a complete PRD with mandatory acceptance criteria and measurable success metrics. Extracts the problem, target users, and jobs-to-be-done, runs a quick competitive scan (web if available, logged as a gap if not), drafts the full PRD (problem, personas, user stories with testable acceptance criteria, non-goals, success metrics, launch milestones, open questions, and a distribution section answering how people will find this), then self-critiques against a 10-point rubric and patches gaps before writing docs/prd/<slug>.md. Use when you hear: write a PRD, turn this idea into a spec, product requirements, I have an app idea, formalize this feature, from idea to document, what should the requirements be, draft the product doc, PRD for X, spec out this product, capture this brainstorm."
-version: "2.0.0"
+description: "Turns a raw idea, brain dump, or conversation into a complete PRD with mandatory acceptance criteria and measurable success metrics. Triggers: you hear: write a PRD, turn this idea into a spec, product requirements, I have an app idea, formalize this feature."
+version: "2.0.1"
 category: spec
 platforms:
   - CLAUDE_CODE

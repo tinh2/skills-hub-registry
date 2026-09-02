@@ -1,7 +1,7 @@
 ---
 name: cursor-agent-safety
-description: "Audits and hardens Cursor agent run mode settings for Cursor 3.6+. Reviews the current run mode, writes project-appropriate classifier instructions (agent-policy.md), builds a terminal allowlist from the project's actual command usage, and tests the configuration against common prompt-injection and scope-creep patterns. Use when setting up a new Cursor project, after adding MCP servers or new tools, or when agents are producing too many approval interrupts."
-version: "1.0.0"
+description: "Audits and hardens Cursor agent run mode settings for Cursor 3.6+. Reviews the current run mode, writes project-appropriate classifier instructions (agent-policy.md), builds a terminal allowlist from the project's actual command usage."
+version: "1.0.1"
 category: security
 platforms:
   - CURSOR

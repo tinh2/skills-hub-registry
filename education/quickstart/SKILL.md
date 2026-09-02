@@ -1,12 +1,7 @@
 ---
 name: quickstart
-description: >-
-  Zero to power user in one invoke — detects OS, installs Homebrew/apt/Node.js/Python,
-  sets up Claude Code, authenticates skills-hub CLI, connects MCP servers, and installs
-  recommended skills based on your project. Cross-platform (macOS, Linux, WSL). Idempotent.
-  Use when: 'quickstart', 'setup machine', 'new machine setup', 'install everything',
-  'get started', 'onboard me', 'setup skills-hub', 'fresh install'.
-version: "1.0.0"
+description: "Zero to power user in one invoke — detects OS, installs Homebrew/apt/Node.js/Python, sets up Claude Code, authenticates skills-hub CLI, connects MCP servers, and installs recommended skills based on your project.."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

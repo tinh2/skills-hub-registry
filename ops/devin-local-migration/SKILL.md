@@ -1,7 +1,7 @@
 ---
 name: devin-local-migration
-description: "Audits a repository for all Cascade (legacy Windsurf local agent) references and migrates them to Devin Local. Finds CI configs, shell scripts, Makefiles, agent rules, and tool definitions. Generates a reviewed patch and flags any custom Python tool definitions that need manual rewrites. Run this on or after July 1, 2026 when Cascade reaches end-of-life."
-version: "1.0.0"
+description: "Audits a repository for all Cascade (legacy Windsurf local agent) references and migrates them to Devin Local."
+version: "1.0.1"
 category: ops
 platforms:
   - CLAUDE_CODE

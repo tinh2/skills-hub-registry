@@ -1,7 +1,7 @@
 ---
 name: encryption
-description: "Audit and harden encryption across the full stack. Checks data-at-rest encryption (database TDE, field-level AES-256-GCM, file storage SSE, backup encryption), data-in-transit security (TLS 1.2+, HSTS, certificate pinning, mTLS, WebSocket WSS), key management (KMS, envelope encryption, key rotation, key separation), password hashing (argon2id, bcrypt, scrypt, PBKDF2 work factors, salt uniqueness, migration plans), token security (JWT signing algorithms, CSPRNG, refresh token rotation), and API key management (hashed storage, scoping, revocation). Use when you need to audit crypto, fix weak hashing, implement envelope encryption, rotate keys, upgrade TLS, or harden token generation."
-version: "2.0.0"
+description: "Audit and harden encryption across the full stack. Checks data-at-rest encryption (database TDE, field-level AES-256-GCM, file storage SSE, backup encryption), data-in-transit security (TLS 1.2+, HSTS, certificate pinning, mTLS, WebSocket WSS), key management (KMS, envelope encryption."
+version: "2.0.1"
 category: security
 platforms:
   - CLAUDE_CODE

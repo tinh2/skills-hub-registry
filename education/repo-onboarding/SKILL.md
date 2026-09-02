@@ -1,7 +1,7 @@
 ---
 name: repo-onboarding
-description: "Generate a new-developer onboarding guide for any repository: detects the stack, entry points, and run/test/deploy commands from package scripts and CI config, maps the architecture of top-level modules, extracts conventions from linter configs and CLAUDE.md, then VERIFIES every documented command by actually running it (unverifiable ones are marked, never presented as working), and writes docs/ONBOARDING.md with a 15-minute quickstart, an architecture tour with a mermaid diagram, a where-things-live table, three real first-task suggestions mined from TODOs and small bugs, a project jargon glossary, and a freshness header pinned to the verified commit SHA. Use when the user says: onboard a new developer, write an onboarding guide, quickstart for this repo, help a new hire ramp up, explain this codebase to a newcomer, getting-started doc, ramp-up guide, first-day docs."
-version: "2.0.0"
+description: "Generate a new-developer onboarding guide for any repository: detects the stack, entry points, and run/test/deploy commands from package scripts and CI config, maps the architecture of top-level modules, extracts conventions from linter configs and CLAUDE.md."
+version: "2.0.1"
 category: education
 platforms:
   - CLAUDE_CODE
