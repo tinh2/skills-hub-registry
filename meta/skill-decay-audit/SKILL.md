@@ -1,6 +1,6 @@
 ---
 name: skill-decay-audit
-description: "Semi-annual decay audit of AI scaffolding -- skills, CLAUDE.md, hooks, and memory -- deleting instructions written for older, weaker models while keeping incident post-mortems and environment facts. Triggers: 'audit my skills', 'skill decay', 'clean up CLAUDE."
+description: "Semi-annual decay audit of AI scaffolding -- skills, CLAUDE.md, hooks, and memory -- deleting instructions written for older, weaker models while keeping incident post-mortems and environment facts. Triggers: 'audit my skills', 'skill decay', 'clean up CLAUDE.md'."
 version: "1.1.1"
 category: meta
 platforms:

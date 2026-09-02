@@ -1,6 +1,6 @@
 ---
 name: franchise-inventory
-description: "Analyze franchise inventory management for par level optimization, waste tracking and root cause analysis, theoretical vs."
+description: "Analyze franchise inventory management for par level optimization, waste tracking and root cause analysis, and theoretical vs. actual usage variance."
 version: "2.0.1"
 category: analysis
 platforms:

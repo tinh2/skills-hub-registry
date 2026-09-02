@@ -1,6 +1,6 @@
 ---
 name: marketing
-description: "Complete marketing pipeline for apps, dev tools, libraries, and SaaS products in 2026. Triggers: on: marketing, launch plan, app launch, go-to-market, ASO."
+description: "Complete marketing pipeline for apps, dev tools, libraries, and SaaS products in 2026. Triggers: marketing, launch plan, app launch, go-to-market, ASO, press kit, growth strategy."
 version: "2.0.1"
 category: combo
 platforms:

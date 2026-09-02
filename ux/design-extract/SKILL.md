@@ -1,6 +1,6 @@
 ---
 name: design-extract
-description: "Extracts a complete design system from a screenshot, live URL, or existing app codebase: palette, type scale, spacing rhythm, radii, shadows, and a component inventory, then normalizes everything into deduplicated tokens, emits them in the target stack's format (CSS custom properties."
+description: "Extracts a complete design system from a screenshot, live URL, or existing app codebase — palette, type scale, spacing, radii, shadows, component inventory — normalized into deduplicated tokens and emitted in the target stack's format (CSS custom properties, Tailwind, Flutter ThemeData)."
 version: "2.0.1"
 category: ux
 platforms:
