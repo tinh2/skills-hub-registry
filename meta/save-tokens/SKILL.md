@@ -1,7 +1,7 @@
 ---
 name: save-tokens
-description: "Token-efficient codebase navigation. Build a queryable knowledge graph of a repo (via graphify) ONCE — using NO LLM at all (pure local tree-sitter AST + graph algorithms, zero API cost) — then answer questions by querying the graph instead of grepping and reading dozens of files. Invoke when about to explore an unfamiliar or large codebase, when the user says 'save tokens', 'save context', 'don't burn tokens', 'use the graph', 'graph this repo', 'map this codebase', 'how does X connect to Y', 'where is X', 'what calls X', 'explain this architecture', or any time you're tempted to fan out Grep/Read across many files to understand structure. Use BEFORE a broad code exploration, not after."
-version: "3.0.0"
+description: "Token-efficient codebase navigation. Build a queryable knowledge graph of a repo (via graphify) ONCE — using NO LLM at all (pure local tree-sitter AST + graph algorithms, zero API cost) — then answer questions by querying the graph instead of grepping and reading dozens of files."
+version: "3.0.1"
 category: meta
 platforms:
   - CLAUDE_CODE

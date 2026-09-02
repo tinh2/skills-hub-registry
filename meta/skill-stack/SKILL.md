@@ -1,7 +1,7 @@
 ---
 name: skill-stack
-description: "Curated skill bundle installer keyed to project archetype. Classifies the repo as one of six archetypes (Next.js SaaS, Flutter app, API backend, CLI tool, data pipeline, mobile game), maps it to a 5-8 skill stack covering the whole lifecycle (build, test, review, deploy, docs), checks what is already installed, installs the missing pieces with a user-visible manifest, and records the stack plus rationale in .claude/skill-stack.md. Use when you hear: set up skills for this project, skill stack, install a skill bundle, what skills does a Next.js app need, bootstrap my agent tooling, starter skills, equip this repo, recommended skill set, new project skill setup, or when onboarding a fresh repo that has no skills configured yet."
-version: "2.0.0"
+description: "Curated skill bundle installer keyed to project archetype. Classifies the repo as one of six archetypes (Next.js SaaS, Flutter app, API backend, CLI tool, data pipeline, mobile game), maps it to a 5-8 skill stack covering the whole lifecycle (build, test, review, deploy, docs)."
+version: "2.0.1"
 category: meta
 platforms:
   - CLAUDE_CODE

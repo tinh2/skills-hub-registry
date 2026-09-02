@@ -1,7 +1,7 @@
 ---
 name: coding-guardrails
-description: "Installs behavioral guardrails against classic LLM coding failures and audits the current session against them. Encodes six enforceable rules: verify APIs exist in node_modules or docs before calling them, state assumptions before coding, prefer minimal diffs over rewrites, re-read the actual error text instead of pattern-matching a fix, never claim done without running the code, and express uncertainty numerically. Writes the rules into CLAUDE.md with an idempotent merge and demonstrates each with a before/after example from this repo. Use when you hear: install guardrails, coding guardrails, stop hallucinating APIs, the agent keeps rewriting everything, add LLM safety rules, make Claude more careful, audit this session, why did you claim it works, anti-slop rules, Karpathy-style guidelines, tighten your coding behavior."
-version: "2.0.0"
+description: "Installs behavioral guardrails against classic LLM coding failures and audits the current session against them. Triggers: you hear: install guardrails, coding guardrails, stop hallucinating APIs, the agent keeps rewriting everything."
+version: "2.0.1"
 category: meta
 platforms:
   - CLAUDE_CODE

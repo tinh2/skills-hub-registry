@@ -1,7 +1,7 @@
 ---
 name: terraform
-description: "Generate Terraform infrastructure-as-code for AWS, GCP, or Azure. Creates modular VPC, compute, database, cache, CDN, and monitoring configs with per-environment sizing, remote state, cost estimates, and security best practices. Use when you need to set up cloud infrastructure, provision servers, create IaC, deploy to AWS/GCP/Azure, or scaffold a Terraform project."
-version: "2.0.0"
+description: "Generate Terraform infrastructure-as-code for AWS, GCP, or Azure. Creates modular VPC, compute, database, cache, CDN, and monitoring configs with per-environment sizing, remote state, cost estimates, and security best practices.."
+version: "2.0.1"
 category: deploy
 platforms:
   - CLAUDE_CODE

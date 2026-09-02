@@ -1,7 +1,7 @@
 ---
 name: skillify
-description: "Create a reusable, self-healing, self-evolving global skill — either from the current conversation context OR from a plain-language description of a workflow. Triggers on: 'turn this into a skill', 'make a skill from this', 'skillify this', 'capture this as a skill', 'save this workflow as a skill', 'create a skill for this', 'make this repeatable', 'skill this up', 'build me a skill that does X', 'I want a skill for Y', or any time a workflow just played out and the user wants to preserve it. Invoke even if the user only hints at wanting to reuse what just happened."
-version: "1.1.0"
+description: "Create a reusable, self-healing, self-evolving global skill — either from the current conversation context OR from a plain-language description of a workflow. Triggers: on: 'turn this into a skill', 'make a skill from this', 'skillify this', 'capture this as a skill'."
+version: "1.1.1"
 category: meta
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: skill-scout
-description: "Project-aware skill discovery and installation. Scans the current repo for stack signals and pain points, searches the skills-hub registry and local ~/.claude/skills, scores candidates on relevance, quality, and maintenance, dedupes against what is already installed, and presents a ranked shortlist with exact install commands. Use when you hear: find skills, what skills should I install, discover skills, recommend skills for this project, search skills-hub, is there a skill for X, set up my agent tooling, what agent skills exist for Flutter/Next.js/Python, install the right skills, skill recommendations, browse the skill registry, or when a recurring manual workflow in the session looks like it should be a pre-built skill."
-version: "2.0.0"
+description: "Project-aware skill discovery and installation. Scans the current repo for stack signals and pain points, searches the skills-hub registry and local ~/.claude/skills, scores candidates on relevance, quality, and maintenance, dedupes against what is already installed."
+version: "2.0.1"
 category: meta
 platforms:
   - CLAUDE_CODE
