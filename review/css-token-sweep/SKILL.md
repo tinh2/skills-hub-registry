@@ -1,27 +1,7 @@
 ---
 name: css-token-sweep
-description: |
-  Statically scan a CSS / single-file HTML / multi-file frontend project for
-  references to undefined CSS custom properties — the silent class of bug
-  where `color: var(--ink-2)` is written but `--ink-2` is never declared in
-  any `:root { ... }` block, and the text renders invisible because `var()`
-  with no fallback resolves to the unset initial value.
-
-  TRIGGER this skill whenever the user says any of: "css token", "design
-  token", "var(", "custom property", "css variable", "theme variants",
-  "invisible text", "missing token", "lint css", "audit my design system",
-  "check theme", "verify dark mode tokens", "find undefined css vars",
-  "make sure my styles are consistent", "sweep my app", "make sure this
-  doesn't happen again" (in the context of a CSS contrast / visibility bug),
-  or whenever they're adding theme variants / tokens to a Firebase-style
-  single-file HTML app. Also use this proactively after writing new CSS
-  styles in a project that uses CSS custom properties — the safety net is
-  cheap; the silent invisible-text bug is expensive.
-
-  Output: a markdown report grouped by severity, with file:line, the bad
-  `var(--…)` reference, and a "did you mean?" suggestion mapping the typo
-  to the closest existing token.
-version: "1.0.0"
+description: "Statically scan a CSS / single-file HTML / multi-file frontend project for references to undefined CSS custom properties — the silent class of bug where `color: var(--ink-2)` is written but `--ink-2` is never declared in any `:root { ...."
+version: "1.0.1"
 category: analyze
 platforms: [CLAUDE_CODE]
 ---

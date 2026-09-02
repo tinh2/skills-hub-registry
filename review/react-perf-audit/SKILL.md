@@ -1,7 +1,7 @@
 ---
 name: react-perf-audit
-description: Audit React and Next.js codebases against roughly 50 concrete performance rules spanning re-render hygiene, bundle size, data-fetching waterfalls, images and fonts, list virtualization, and effect discipline, then apply the safest high-impact fixes and prove the win with before/after bundle numbers. Use when someone says "audit React performance", "why is my Next.js app slow", "reduce bundle size", "fix re-renders", "app feels laggy", "optimize my components", "check for waterfalls", "React best practices pass", "lighthouse score is bad", "hydration is slow", or before a launch when a performance sweep of routes and components is needed.
-version: "2.0.0"
+description: "Audit React and Next.js codebases against roughly 50 concrete performance rules spanning re-render hygiene, bundle size, data-fetching waterfalls, images and fonts, list virtualization, and effect discipline."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

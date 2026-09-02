@@ -1,7 +1,7 @@
 ---
 name: architecture-uplift
-description: Assess a codebase's architecture with hard evidence — module map, dependency direction, layering breaks, coupling and cohesion hotspots weighted by git churn — then rank 3-5 improvement moves by risk-adjusted value and actually execute the lowest-risk move end to end with tests green before and after, finishing with a dated architecture doc containing before/after mermaid diagrams. Use when someone says "improve the architecture", "this codebase is a mess", "reduce coupling", "untangle dependencies", "refactor safely", "layering is broken", "circular imports", "tech debt assessment", "where should we refactor first", or "clean up module boundaries" and wants executed change, not just a slideware review.
-version: "2.0.0"
+description: "Assess a codebase's architecture with hard evidence — module map, dependency direction, layering breaks, coupling and cohesion hotspots weighted by git churn — then rank 3-5 improvement moves by risk-adjusted value and actually execute the lowest-risk move end to end with tests green."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

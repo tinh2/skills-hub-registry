@@ -1,7 +1,7 @@
 ---
 name: permit-compliance
-description: Audit construction permit tracking, building code compliance, and inspection management software. Reviews permit lifecycle workflows (building, electrical, plumbing, mechanical, demolition, zoning, certificate of occupancy), IBC code reference systems, ADA and Fair Housing accessibility checks, fire and life safety compliance, NEPA and CWA environmental review, stormwater NPDES/SWPPP tracking, LEED and ENERGY STAR sustainability, plan review and RFI management, submittal workflows, inspector scheduling and coordination, and jurisdiction-specific regulatory reporting. Supports Procore, PlanGrid, e-Builder, Accela, Tyler Technologies, and custom platforms.
-version: "2.0.0"
+description: "Audit construction permit tracking, building code compliance, and inspection management software."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

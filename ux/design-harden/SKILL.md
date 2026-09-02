@@ -1,7 +1,7 @@
 ---
 name: design-harden
-description: "Make interfaces bulletproof — error boundaries, loading states, empty states, text overflow, i18n readiness, offline handling, and every edge case that breaks in production. Makes interfaces resilient. Use when: 'harden the UI', 'add error states', 'handle edge cases', 'add loading states', 'make it production ready', 'defensive UI', 'resilient interface'."
-version: "1.0.0"
+description: "Make interfaces bulletproof — error boundaries, loading states, empty states, text overflow, i18n readiness, offline handling, and every edge case that breaks in production. Triggers: 'harden the UI', 'add error states', 'handle edge cases', 'add loading states'."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

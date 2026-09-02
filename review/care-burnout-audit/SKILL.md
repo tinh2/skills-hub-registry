@@ -1,7 +1,7 @@
 ---
 name: care-burnout-audit
-description: Audit healthcare and caregiving software for provider burnout risk factors. Analyzes workload distribution fairness, scheduling equity, documentation burden, alert fatigue indicators, break and rest compliance, overtime patterns, and systemic contributors to staff burnout. Produces a burnout risk scorecard with actionable recommendations tied to patient safety outcomes. Use when you need to audit healthcare worker burnout, review caregiver scheduling fairness, assess clinical documentation burden, detect alert fatigue, check nurse staffing ratios, evaluate EHR workflow efficiency, or review care facility labor compliance.
-version: "2.0.0"
+description: "Audit healthcare and caregiving software for provider burnout risk factors. Triggers: you need to audit healthcare worker burnout, review caregiver scheduling fairness."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

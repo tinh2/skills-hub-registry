@@ -1,7 +1,7 @@
 ---
 name: "api-critique"
-description: Autonomous API effectiveness evaluation — contract clarity, consumer ergonomics, error experience, evolvability, and craft quality. Produces actionable feedback with specific before/after recommendations. The API counterpart to /design-critique. Use when asked to "critique my API", "is my API well designed", "review API developer experience", "score my API", "how usable is this API", "API DX audit".
-version: "1.0.0"
+description: "Autonomous API effectiveness evaluation — contract clarity, consumer ergonomics, error experience, evolvability, and craft quality. Triggers: \"critique my API\", \"is my API well designed\", \"review API developer experience\", \"score my API\"."
+version: "1.0.1"
 category: analyze
 platforms:
   - CLAUDE_CODE

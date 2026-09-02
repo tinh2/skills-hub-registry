@@ -1,26 +1,7 @@
 ---
 name: mobile-sweep
-description: |
-  Runtime sweep that catches mobile-layout bugs: content clipped off the edge
-  of a phone screen, touch targets smaller than 44×44px, text inside a button
-  or input that overflows its visible width, and modals that extend past the
-  viewport. Loads the running web app in headless Chromium at 360px / 390px /
-  768px and reports every offender with a screenshot crop and a concrete fix.
-
-  TRIGGER whenever the user says any of: "make sure mobile looks good",
-  "check mobile", "mobile sweep", "mobile audit", "responsive audit",
-  "this looks bad on mobile", "elements are cut off", "fix mobile UI",
-  "verify mobile", "is this mobile-friendly", "view on iPhone",
-  "test at 390", or simply "mobile" in the context of UI review.
-
-  ALSO use this proactively any time you just finished writing a new modal,
-  form, or grid layout — the bug class this skill catches is silent on
-  desktop and only shows up on phones, so the safety net is cheap and the
-  miss is expensive.
-
-  NOT for: visual / aesthetic critique (colors, typography, brand) — that's
-  /design-claude. NOT for accessibility-only audits — see /accessibility-test.
-version: "1.1.0"
+description: "Runtime sweep that catches mobile-layout bugs: content clipped off the edge of a phone screen, touch targets smaller than 44×44px, text inside a button or input that overflows its visible width, and modals that extend past the viewport.."
+version: "1.1.1"
 category: ux
 platforms: [CLAUDE_CODE]
 ---

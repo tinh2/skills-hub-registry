@@ -1,7 +1,7 @@
 ---
 name: design-optimize
-description: "Autonomous performance optimization for interfaces — content-visibility, CSS containment, scroll-driven animations replacing JS, view transitions replacing SPA transitions, image optimization, and bundle trimming. Use when: 'optimize UI performance', 'speed up the frontend', 'reduce bundle size', 'improve web vitals', 'optimize rendering', 'make it faster', 'performance audit'."
-version: "1.0.0"
+description: "Autonomous performance optimization for interfaces — content-visibility, CSS containment, scroll-driven animations replacing JS, view transitions replacing SPA transitions, image optimization, and bundle trimming.."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

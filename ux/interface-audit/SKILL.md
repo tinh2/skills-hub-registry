@@ -1,7 +1,7 @@
 ---
 name: interface-audit
-description: "Audits UI code against 90+ concrete accessibility and UX rules across ten groups (semantics/ARIA, keyboard navigation, focus management, color contrast, touch targets, motion and reduced-motion, forms, loading/empty/error states, responsive breakpoints, i18n readiness), scanning auth/checkout/navigation routes first and producing a severity-ranked findings table with file:line locations, WCAG references, and concrete fixes, then optionally auto-fixing the mechanical class of issues. Use when: 'audit the interface', 'accessibility audit', 'a11y check', 'review my UI code', 'check WCAG compliance', 'find UX issues', 'web design guidelines', 'is this accessible', 'fix accessibility issues', 'keyboard navigation review', 'contrast check'."
-version: "2.0.0"
+description: "Audits UI code against 90+ concrete accessibility and UX rules across ten groups (semantics/ARIA, keyboard navigation, focus management, color contrast, touch targets, motion and reduced-motion, forms, loading/empty/error states, responsive breakpoints, i18n readiness)."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

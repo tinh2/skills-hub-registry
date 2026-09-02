@@ -1,7 +1,7 @@
 ---
 name: store-compliance
-description: Pre-submission audit for Apple App Store and Google Play Store compliance. Checks App Store Review Guidelines (safety, performance, business, design, legal sections) and Google Play Developer Policies (user data, permissions, deceptive behavior, monetization, store listing, content). Reviews In-App Purchase and Play Billing requirements, privacy policy and data collection disclosure, App Tracking Transparency and PrivacyInfo.xcprivacy privacy manifests, iOS App Privacy nutrition labels, Android Data Safety section accuracy, COPPA and GDPR-K children's data protections, permission justification (camera, location, microphone, contacts, background location), iOS background modes and entitlement validation, foreground service types, content rating IARC verification, UGC moderation requirements, account deletion mandate, third-party SDK data collection disclosure, and metadata accuracy (screenshots, description, category).
-version: "2.0.0"
+description: "Pre-submission audit for Apple App Store and Google Play Store compliance."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

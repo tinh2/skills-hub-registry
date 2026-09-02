@@ -1,7 +1,7 @@
 ---
 name: design-polish
-description: "Final autonomous quality pass before shipping. Fixes alignment, spacing, consistency, typography hierarchy, color harmony, motion timing, and every micro-detail that separates good from great. The last 10% that takes 90% of the craft. Use when: 'polish the UI', 'make it pixel perfect', 'final design pass', 'fix visual inconsistencies', 'tighten up the design', 'design QA', 'visual cleanup'."
-version: "1.0.0"
+description: "Final autonomous quality pass before shipping. Fixes alignment, spacing, consistency, typography hierarchy, color harmony, motion timing, and every micro-detail that separates good from great.."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

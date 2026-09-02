@@ -1,7 +1,7 @@
 ---
 name: dark-mode
-description: Implement complete dark mode for any frontend project. Auto-detects theme system (Flutter ThemeData, Tailwind dark class, CSS variables, MUI, Chakra UI, styled-components), generates a dark color palette with proper surface elevation hierarchy and desaturated brand colors, creates a theme toggle with system preference detection and persistence, migrates all hardcoded colors to theme tokens, handles special cases like images, shadows, form inputs, and charts, then verifies WCAG AA contrast ratios for both modes. Use when you need to add dark mode, fix dark theme contrast issues, create a theme switcher, or migrate hardcoded colors to theme-aware tokens.
-version: "2.0.0"
+description: "Implement complete dark mode for any frontend project. Auto-detects theme system (Flutter ThemeData, Tailwind dark class, CSS variables, MUI, Chakra UI, styled-components), generates a dark color palette with proper surface elevation hierarchy and desaturated brand colors."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

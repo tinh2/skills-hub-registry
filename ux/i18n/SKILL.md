@@ -1,7 +1,7 @@
 ---
 name: i18n
-description: Set up internationalization by extracting all hardcoded user-facing strings to locale files. Auto-detects framework (Flutter, Next.js, React, Vue, Angular, iOS, Android) and configures the appropriate i18n library (react-intl, next-intl, vue-i18n, flutter_localizations, NSLocalizedString, strings.xml), generates namespaced translation keys with dot notation, handles pluralization via ICU MessageFormat, sets up date/number/currency formatting per locale, adds RTL layout support for Arabic and Hebrew, and replaces every hardcoded string with translation function calls. Use when you need to add multi-language support, extract hardcoded strings, set up locale files, configure translation workflows, handle pluralization, or add RTL support.
-version: "2.0.0"
+description: "Set up internationalization by extracting all hardcoded user-facing strings to locale files. Triggers: you need to add multi-language support, extract hardcoded strings, set up locale files."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

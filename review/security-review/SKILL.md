@@ -1,7 +1,7 @@
 ---
 name: security-review
-description: Security audit and vulnerability assessment for any codebase. Scans for authentication bypasses, missing auth middleware, broken JWT validation (algorithm confusion, weak secrets, missing expiry), OAuth state and PKCE flaws, IDOR and horizontal privilege escalation, vertical privilege escalation via role manipulation, SQL injection, NoSQL injection, XSS (stored, reflected, DOM), command injection, path traversal, SSRF, CSRF, hardcoded secrets and API keys (sk_live_, AKIA, ghp_), .env and credential file exposure, PII leaking in logs and error responses, overfetching sensitive fields, CORS misconfiguration, session fixation, missing secure/httpOnly/sameSite cookie flags, and Firebase/Firestore rule weaknesses. Produces a severity-ranked findings report with exploit scenarios and fix recommendations. Covers OWASP Top 10.
-version: "2.0.0"
+description: "Security audit and vulnerability assessment for any codebase. Scans for authentication bypasses, missing auth middleware, broken JWT validation (algorithm confusion, weak secrets, missing expiry), OAuth state and PKCE flaws, IDOR and horizontal privilege escalation."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

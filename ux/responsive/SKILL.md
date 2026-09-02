@@ -1,7 +1,7 @@
 ---
 name: responsive
-description: Audit and fix responsive design issues across all breakpoints. Scans for fixed widths that cause mobile overflow, missing media query variants, non-responsive images, undersized touch targets below 48px, unreadable typography, and horizontal scroll violations. Auto-detects framework (Flutter, Tailwind, React, Vue, Angular) and responsive system, then fixes layouts with proper flex/grid, clamp-based fluid typography, responsive image sizing, and adequate touch target spacing. Verifies every screen at mobile (375px), tablet (768px), desktop (1280px), and wide (1920px). Use when you need to fix mobile layout bugs, audit responsive breakpoints, fix overflow issues, ensure touch targets meet accessibility minimums, or verify no horizontal scroll at any viewport width.
-version: "2.0.0"
+description: "Audit and fix responsive design issues across all breakpoints. Scans for fixed widths that cause mobile overflow, missing media query variants, non-responsive images, undersized touch targets below 48px, unreadable typography, and horizontal scroll violations.."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: healthcare-ops
-description: "Review healthcare software for operational efficiency: appointment scheduling and resource allocation, clinical workflow burden (order entry clicks, documentation templates, alert fatigue), EHR/LIS/pharmacy/PACS integrations (HL7v2, FHIR, NCPDP SCRIPT, EDI 837/835), patient flow (ADT, bed management, wait times, throughput), quality reporting (CMS, HEDIS, MIPS), staff credentialing and workload balancing, and revenue cycle optimization. Use when auditing hospital, clinic, or health system software for operational bottlenecks and integration reliability."
-version: "2.0.0"
+description: "Review healthcare software for operational efficiency: appointment scheduling and resource allocation, clinical workflow burden (order entry clicks, documentation templates, alert fatigue), EHR/LIS/pharmacy/PACS integrations (HL7v2, FHIR, NCPDP SCRIPT, EDI 837/835), patient flow (ADT."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

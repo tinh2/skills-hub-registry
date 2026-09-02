@@ -1,7 +1,7 @@
 ---
 name: environmental-compliance
-description: "Audit environmental software for EPA reporting (CEDRI, NetDMR, RCRAInfo), Clean Air Act (Title V, NESHAP, CEMS, TRI), Clean Water Act (NPDES, SWPPP, SPCC), RCRA hazardous waste tracking (manifests, biennial reports), NEPA environmental impact assessment workflows, GHG reporting, and compliance calendar management. Use when reviewing environmental management systems, permit tracking, emissions monitoring, waste management, or environmental impact assessment software."
-version: "2.0.0"
+description: "Audit environmental software for EPA reporting (CEDRI, NetDMR, RCRAInfo), Clean Air Act (Title V, NESHAP, CEMS, TRI), Clean Water Act (NPDES, SWPPP, SPCC), RCRA hazardous waste tracking (manifests, biennial reports), NEPA environmental impact assessment workflows, GHG reporting."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

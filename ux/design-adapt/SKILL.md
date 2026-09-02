@@ -1,7 +1,7 @@
 ---
 name: design-adapt
-description: "Make interfaces truly adaptive — not just responsive. Uses container queries for component-level adaptation, adaptive navigation patterns, and platform-aware layouts for web, mobile, tablet, and desktop. Use when: 'make responsive', 'responsive design', 'adaptive layout', 'container queries', 'mobile layout', 'tablet layout', 'desktop layout', 'breakpoints'."
-version: "1.0.0"
+description: "Make interfaces truly adaptive — not just responsive. Uses container queries for component-level adaptation, adaptive navigation patterns, and platform-aware layouts for web, mobile, tablet, and desktop.."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

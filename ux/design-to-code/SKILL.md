@@ -1,7 +1,7 @@
 ---
 name: "design-to-code"
-description: "Turn a design into production-quality frontend code: extract a design system with tokens and components, make layouts responsive across breakpoints, add dark mode with WCAG-compliant theming, then run a UX audit to validate everything. Use when implementing UI from Figma, adding theming, making an app responsive, or overhauling frontend design consistency."
-version: 1.0.0
+description: "Turn a design into production-quality frontend code: extract a design system with tokens and components, make layouts responsive across breakpoints, add dark mode with WCAG-compliant theming, then run a UX audit to validate everything.."
+version: "1.0.1"
 category: combo
 ---
 

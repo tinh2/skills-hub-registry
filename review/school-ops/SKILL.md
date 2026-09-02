@@ -1,7 +1,7 @@
 ---
 name: school-ops
-description: Audit K-12 school operations, district management, and education administration software. Reviews master schedule building and constraint optimization, student course request scheduling with IEP service integration, staffing formula models and FTE allocation, class size management, Title I weighted per-pupil funding and comparability reporting, fund accounting and budget-to-actual variance, facility utilization and room capacity tracking, maintenance work order systems, transportation route optimization (multi-tier, special needs, McKinney-Vento), fleet and driver CDL compliance, enrollment forecasting (cohort survival, demographic analysis), IDEA special education IEP timeline management, Section 504 compliance, FERPA data privacy, and state and federal program reporting (Title I-III, Civil Rights Data Collection). Supports PowerSchool, Tyler Technologies, Frontline, and custom platforms.
-version: "2.0.0"
+description: "Audit K-12 school operations, district management, and education administration software."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

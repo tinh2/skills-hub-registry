@@ -1,7 +1,7 @@
 ---
 name: bug-sweep
-description: "Methodically walks a running app — every public route, every interactive control, every state (empty/loading/error/auth/un-auth) — to find real bugs, then root-causes, fixes, adds a regression test, and verifies each one before moving to the next. Use when: 'find bugs in the app', 'sweep for regressions', 'methodically hunt and fix bugs', 'audit user flows', 'find broken buttons / forms / links'. Distinct from /hotfix (one known bug, speed) and /triage (read-only ranked plan)."
-version: "1.0.0"
+description: "Methodically walks a running app — every public route, every interactive control, every state (empty/loading/error/auth/un-auth) — to find real bugs, then root-causes, fixes, adds a regression test, and verifies each one before moving to the next.."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

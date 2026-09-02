@@ -1,7 +1,7 @@
 ---
 name: cfo-review
-description: Conduct a CFO-perspective financial impact review of a codebase. Analyzes infrastructure costs and scaling projections, pricing model alignment with architecture, build-vs-buy economics, technical debt as financial liability, revenue system readiness, engineering burn rate efficiency, and compliance cost exposure. Produces a financial impact report with unit economics, cost projections at 10x/100x scale, and ROI-ranked investment recommendations. Use when you need a financial review of a tech product, cost analysis at scale, pricing model feasibility check, Series A due diligence prep, engineering ROI assessment, or compliance cost estimation.
-version: "2.0.0"
+description: "Conduct a CFO-perspective financial impact review of a codebase. Analyzes infrastructure costs and scaling projections, pricing model alignment with architecture, build-vs-buy economics, technical debt as financial liability, revenue system readiness, engineering burn rate efficiency."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

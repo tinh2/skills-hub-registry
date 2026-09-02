@@ -1,7 +1,7 @@
 ---
 name: design-tokens
-description: "Extract, consolidate, and modernize design tokens — oklch color scales, fluid spacing with clamp(), typography scales, motion timing, and shadow depths. Builds a systematic token architecture from scattered values. Use when: 'extract design tokens', 'create design system tokens', 'consolidate styles', 'modernize CSS variables', 'build token system', 'css custom properties', 'theme variables'."
-version: "1.0.0"
+description: "Extract, consolidate, and modernize design tokens — oklch color scales, fluid spacing with clamp(), typography scales, motion timing, and shadow depths. Triggers: 'extract design tokens', 'create design system tokens', 'consolidate styles', 'modernize CSS variables'."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

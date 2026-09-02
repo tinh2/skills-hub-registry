@@ -1,7 +1,7 @@
 ---
 name: multiplayer-review
-description: Audit multiplayer netcode, online game networking, and real-time synchronization. Reviews client-server authority, lag compensation, client-side prediction, server reconciliation, entity interpolation, server rewind hit detection, tick rate tuning, delta compression, bandwidth budgets, matchmaking (ELO, Glicko-2, TrueSkill), lobby systems, reconnection flows, host migration, anti-cheat architecture, and input validation. Supports Unity Mirror/NGO/Photon/FishNet, Unreal replication, Godot ENet, WebSocket/WebRTC, Colyseus, Nakama, and custom UDP/TCP stacks.
-version: "2.0.0"
+description: "Audit multiplayer netcode, online game networking, and real-time synchronization."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

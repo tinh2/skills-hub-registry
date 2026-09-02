@@ -1,7 +1,7 @@
 ---
 name: brand-safe-design-pass
-description: Raise a site's perceived production value with a rigorous UI/UX pass while PROVING no user-facing word changed. Use when the user says "make it look expensive", "premium design pass", "make it feel designed", "rigorous design audit", "improve visual craft", "brand-safe redesign", "polish the UI without changing copy", or "design pass but do not touch the words". ALSO use whenever a visual change is requested on a site whose copy was written or approved by someone else — a client, a lawyer, a clinician, a compliance team — because the real risk there is not ugly CSS, it is a heading getting quietly "improved" during a refactor. Do NOT use for greenfield design (that is a build skill) or for copywriting.
-version: "1.0.0"
+description: "Raise a site's perceived production value with a rigorous UI/UX pass while PROVING no user-facing word changed. Triggers: the user says \"make it look expensive\", \"premium design pass\", \"make it feel designed\", \"rigorous design audit\"."
+version: "1.0.1"
 category: analyze
 platforms: [CLAUDE_CODE]
 ---

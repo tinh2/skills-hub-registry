@@ -1,7 +1,7 @@
 ---
 name: web-research
-description: "Online research agent that searches the live web for any topic, fetches the strongest sources, and produces an easy-to-digest formatted report with citations. Triggers: 'research X online', 'find me info about X', 'search the web for X', 'look up X', 'what are the most used Y', 'who is doing Y now', 'compare X vs Y online', 'find references for X', 'is there a tool that does X', 'what's the current state of X', 'find recent articles about X'. Use this whenever the answer requires LIVE external information (recency, popularity, comparisons, vendor landscape, news, prices, tutorials, public discussion). Do NOT use for analyzing the local codebase — that's the `research` skill."
-version: "1.0.0"
+description: "Online research agent that searches the live web for any topic, fetches the strongest sources, and produces an easy-to-digest formatted report with citations. Triggers: 'research X online', 'find me info about X', 'search the web for X', 'look up X', 'what are the most used Y'."
+version: "1.0.1"
 category: analyze
 platforms:
   - CLAUDE_CODE

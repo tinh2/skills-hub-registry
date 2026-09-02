@@ -1,7 +1,7 @@
 ---
 name: design-audit
-description: "Comprehensive autonomous design quality audit across accessibility (WCAG 2.2), performance, theming, responsive/adaptive design, and anti-pattern detection. Produces a prioritized report with severity ratings and fix recommendations. Use when: 'audit design', 'check accessibility', 'a11y audit', 'design review', 'UI quality check', 'WCAG audit', 'design quality'."
-version: "1.0.0"
+description: "Comprehensive autonomous design quality audit across accessibility (WCAG 2.2), performance, theming, responsive/adaptive design, and anti-pattern detection. Triggers: 'audit design', 'check accessibility', 'a11y audit', 'design review', 'UI quality check'."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

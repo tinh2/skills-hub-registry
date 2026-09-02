@@ -1,7 +1,7 @@
 ---
 name: ui-craft
-description: "Polishes UI primitives one at a time using 2026 research-backed patterns — adds loading/icon states to buttons, replaces inline skeletons with primitives, adds secondary actions to errors, ensures 48px touch targets and visible focus indicators, applies a standard motion token ladder. Use when: 'make the UI feel more polished', 'add attention to detail', 'reduce component duplication', 'tighten the design system', 'apply craft to the frontend'."
-version: "1.0.0"
+description: "Polishes UI primitives one at a time using 2026 research-backed patterns — adds loading/icon states to buttons, replaces inline skeletons with primitives, adds secondary actions to errors, ensures 48px touch targets and visible focus indicators, applies a standard motion token ladder.."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: api-review
-description: Review API design against REST best practices and internal consistency. Audits naming conventions, HTTP method semantics, status code correctness, pagination and filtering patterns, error response format, versioning strategy, rate limiting, idempotency keys, HATEOAS links, and content negotiation. Works with Express, Fastify, Hono, Flask, Django REST, Spring, Rails, Gin, and any HTTP API framework. Use when you need to review an API, audit REST endpoints, check API consistency, fix HTTP status codes, add pagination, or prepare an API for public release.
-version: "2.0.0"
+description: "Review API design against REST best practices and internal consistency. Triggers: you need to review an API, audit REST endpoints, check API consistency, fix HTTP status codes, add pagination."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

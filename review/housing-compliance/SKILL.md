@@ -1,7 +1,7 @@
 ---
 name: housing-compliance
-description: "Audit affordable housing and property management software for Fair Housing Act (protected classes, disparate impact screening, AFFH), Section 504/ADA accessibility (5% mobility units, reasonable accommodations), HUD reporting (HUD-50058, PHAS, SEMAP), LIHTC compliance (IRS Section 42 income certification, rent calculation, 8823 noncompliance), lead paint disclosure (pre-1978, EPA RRP), VAWA protections (emergency transfer, lease bifurcation, confidentiality), HQS/NSPIRE inspections, and tenant rights. Use when reviewing PHA, multifamily, Section 8, or affordable housing management codebases."
-version: "2.0.0"
+description: "Audit affordable housing and property management software for Fair Housing Act (protected classes, disparate impact screening, AFFH), Section 504/ADA accessibility (5% mobility units, reasonable accommodations), HUD reporting (HUD-50058, PHAS, SEMAP)."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

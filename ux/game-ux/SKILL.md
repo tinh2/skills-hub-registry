@@ -1,7 +1,7 @@
 ---
 name: game-ux
-description: Audit game user experience across HUD clarity, menu navigation, tutorial effectiveness, control responsiveness, camera systems, feedback loops, loading screens, and settings completeness. Detects game engine (Unity UGUI/UI Toolkit, Unreal UMG, Godot Control, web-based), maps all UI screens and input contexts, evaluates information hierarchy, visual noise, touch target sizes, menu depth, tutorial pacing, input latency patterns, camera comfort settings, and produces rated findings per category with prioritized fixes. Use when you need to evaluate game UI usability, audit HUD readability, check settings menu completeness, review tutorial onboarding flow, assess control feel and feedback, or prepare for playtesting.
-version: "2.0.0"
+description: "Audit game user experience across HUD clarity, menu navigation, tutorial effectiveness, control responsiveness, camera systems, feedback loops, loading screens, and settings completeness.."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

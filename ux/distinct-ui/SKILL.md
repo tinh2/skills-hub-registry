@@ -1,7 +1,7 @@
 ---
 name: distinct-ui
-description: "Builds distinctive, production-grade UI by committing to one of 12 named visual directions (editorial, brutalist, luxury-minimal, terminal/dev-native, playful-geometric, glassmorphic, retro-futurist, swiss-grid, organic-soft, data-dense, art-deco-revival, neo-memphis), implementing a real typography scale, spacing system, and one signature flourish, then gating the result through a measurable anti-slop checklist and contrast/touch-target verification. Use when: 'make the UI distinctive', 'this looks like every AI site', 'avoid generic design', 'design a landing page', 'build a beautiful UI', 'frontend design', 'make it not look AI-generated', 'give this app a visual identity', 'pick a design direction', 'redesign this screen'."
-version: "2.0.0"
+description: "Builds distinctive, production-grade UI by committing to one of 12 named visual directions (editorial, brutalist, luxury-minimal, terminal/dev-native, playful-geometric, glassmorphic, retro-futurist, swiss-grid, organic-soft, data-dense, art-deco-revival, neo-memphis)."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

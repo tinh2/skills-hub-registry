@@ -1,7 +1,7 @@
 ---
 name: design-animate
-description: "Add purposeful motion to interfaces using modern CSS — scroll-driven animations, view transitions, @starting-style, and GPU-accelerated transforms. Zero JS animation libraries needed. Supports web and Flutter. Use when: 'add animation', 'animate', 'add motion', 'transitions', 'scroll animation', 'page transitions', 'loading animation', 'micro-interactions'."
-version: "1.0.0"
+description: "Add purposeful motion to interfaces using modern CSS — scroll-driven animations, view transitions, @starting-style, and GPU-accelerated transforms. Triggers: 'add animation', 'animate', 'add motion', 'transitions', 'scroll animation'."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: design-extract
-description: "Extracts a complete design system from a screenshot, live URL, or existing app codebase: palette, type scale, spacing rhythm, radii, shadows, and a component inventory, then normalizes everything into deduplicated tokens, emits them in the target stack's format (CSS custom properties, Tailwind config, Flutter ThemeData, or SCSS variables), and generates a living styleguide page rendering every token and component state. Use when: 'extract the design system', 'pull the colors from this screenshot', 'copy this site's design', 'turn this UI into tokens', 'reverse-engineer this design', 'build a design system from our app', 'make a styleguide', 'tokenize our styles', 'what fonts and colors does this site use'."
-version: "2.0.0"
+description: "Extracts a complete design system from a screenshot, live URL, or existing app codebase: palette, type scale, spacing rhythm, radii, shadows, and a component inventory, then normalizes everything into deduplicated tokens, emits them in the target stack's format (CSS custom properties."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: procurement-review
-description: Audit procurement and procure-to-pay software for sourcing, purchasing, and vendor management. Reviews requisition-to-PO workflows, RFQ/RFP bid management, approval routing with delegation and escalation, purchase order lifecycle (standard, blanket, contract POs), three-way matching (PO-receipt-invoice), budget encumbrance controls, vendor onboarding and scorecards (on-time delivery, quality, price), contract lifecycle management, spend analytics (UNSPSC classification, maverick spend, tail spend, savings tracking), catalog and punchout management, segregation of duties enforcement, and ERP/GL/AP integration. Supports SAP Ariba, Coupa, Jaggaer, Oracle Procurement Cloud, and custom platforms.
-version: "2.0.0"
+description: "Audit procurement and procure-to-pay software for sourcing, purchasing, and vendor management."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

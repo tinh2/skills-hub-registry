@@ -1,7 +1,7 @@
 ---
 name: energy-compliance
-description: "Audit energy utility software for NERC CIP cybersecurity, FERC market and tariff compliance, EPA emissions and CEMS reporting, renewable portfolio standards (RPS/REC tracking), pipeline safety (49 CFR 192/195), SCADA security, carbon market compliance, and state PUC/ISO/RTO requirements. Use when reviewing power generation, transmission, distribution, pipeline, renewable, EV charging, or energy trading codebases."
-version: "2.0.0"
+description: "Audit energy utility software for NERC CIP cybersecurity, FERC market and tariff compliance, EPA emissions and CEMS reporting, renewable portfolio standards (RPS/REC tracking), pipeline safety (49 CFR 192/195), SCADA security, carbon market compliance, and state PUC/ISO/RTO requirements.."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

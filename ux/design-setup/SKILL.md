@@ -1,7 +1,7 @@
 ---
 name: design-setup
-description: "One-time autonomous design context discovery. Scans the codebase to extract design tokens, typography, colors, spacing, brand patterns, and tech stack, then writes a Design Context section to CLAUDE.md. Zero questions asked. Use when: 'setup design', 'design context', 'design tokens', 'brand discovery', 'design system scan', 'initialize design', 'teach design'."
-version: "1.0.0"
+description: "One-time autonomous design context discovery. Scans the codebase to extract design tokens, typography, colors, spacing, brand patterns, and tech stack, then writes a Design Context section to CLAUDE.md.."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

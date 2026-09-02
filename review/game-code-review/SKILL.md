@@ -1,7 +1,7 @@
 ---
 name: game-code-review
-description: "Review game code architecture for component coupling, ECS vs OOP design, update loop organization (deltaTime, fixed timestep, frame budget), state machine quality (boolean soup, string states), save/load serialization (versioning, migration, corruption handling), input handling (action-based abstraction, buffering, remapping), and anti-patterns (god objects, find-in-update, tight loop allocation, missing object pooling, magic numbers). Supports Unity, Unreal, Godot, Phaser, and custom engines. Use when auditing game project code quality, architecture, or performance patterns."
-version: "2.0.0"
+description: "Review game code architecture for component coupling, ECS vs OOP design, update loop organization (deltaTime, fixed timestep, frame budget), state machine quality (boolean soup, string states), save/load serialization (versioning, migration, corruption handling)."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

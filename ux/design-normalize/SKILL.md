@@ -1,7 +1,7 @@
 ---
 name: design-normalize
-description: "Normalize a codebase to its design system — replace hardcoded values with tokens, enforce consistent component usage, align spacing/typography/color with the established system. Makes every screen look like it belongs. Use when: 'normalize the UI', 'enforce design system', 'make it consistent', 'align to design tokens', 'unify the design', 'design system compliance', 'style consistency'."
-version: "1.0.0"
+description: "Normalize a codebase to its design system — replace hardcoded values with tokens, enforce consistent component usage, align spacing/typography/color with the established system.."
+version: "1.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE

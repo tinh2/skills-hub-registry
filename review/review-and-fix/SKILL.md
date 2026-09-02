@@ -1,7 +1,7 @@
 ---
 name: review-and-fix
-description: Turn code-review findings into verified fixes, one commit per finding, test-first where a regression test is possible, with an explicit skip ledger for anything too risky to fix blind (auth, payments, migrations). Ingests findings from a report file, PR comments, or pasted text — or runs its own structured review of the diff against main first. Use when someone says "fix the review comments", "address the code review", "apply the findings", "we ran a review, now fix it", "resolve PR feedback", "fix what the audit found", "review this and fix it", or after any review/audit skill produced findings that now need to become commits instead of a to-do list.
-version: "2.0.0"
+description: "Turn code-review findings into verified fixes, one commit per finding, test-first where a regression test is possible, with an explicit skip ledger for anything too risky to fix blind (auth, payments, migrations).."
+version: "2.0.1"
 category: review
 platforms:
   - CLAUDE_CODE

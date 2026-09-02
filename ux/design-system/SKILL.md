@@ -1,7 +1,7 @@
 ---
 name: design-system
-description: Extract and formalize a design system from existing UI code. Scans for every hardcoded color, font size, spacing value, border radius, and shadow across the codebase, deduplicates near-identical values, generates framework-appropriate tokens (CSS custom properties, Tailwind config, Flutter ThemeData, SCSS variables), builds a component inventory with token coverage ratings, and replaces all hardcoded values with token references. Use when you need to create design tokens, consolidate inconsistent styles, audit component consistency, replace magic numbers with named values, or set up a shared design language across a project.
-version: "2.0.0"
+description: "Extract and formalize a design system from existing UI code. Scans for every hardcoded color, font size, spacing value, border radius, and shadow across the codebase, deduplicates near-identical values, generates framework-appropriate tokens (CSS custom properties, Tailwind config."
+version: "2.0.1"
 category: ux
 platforms:
   - CLAUDE_CODE
