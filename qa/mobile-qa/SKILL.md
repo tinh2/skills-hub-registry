@@ -1,7 +1,7 @@
 ---
 name: mobile-qa
-description: Run a comprehensive mobile app QA audit covering permission flows, deep link verification, push notification delivery, offline mode resilience, background/foreground state preservation, memory leak detection, network condition simulation, accessibility compliance, and iOS/Android platform edge cases. Supports Flutter, React Native, and native iOS/Android. Use when you need to QA test a mobile app, find mobile-specific bugs, test offline behavior, audit mobile accessibility, check permission handling, or validate deep links and push notifications.
-version: "2.0.0"
+description: "Run a comprehensive mobile app QA audit covering permission flows, deep link verification, push notification delivery, offline mode resilience, background/foreground state preservation, memory leak detection, network condition simulation, accessibility compliance."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

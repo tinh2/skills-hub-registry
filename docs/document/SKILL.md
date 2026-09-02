@@ -1,7 +1,7 @@
 ---
 name: document
-description: "Audit your project's documentation health and identify gaps. Scans for README, changelog, API docs, ADRs, runbooks, onboarding guides, and diagrams. Scores coverage against project maturity tier and recommends specific sub-skills to fill missing docs. Use when you need a documentation audit, want to check doc coverage, find missing documentation, or assess documentation quality."
-version: "2.0.0"
+description: "Audit your project's documentation health and identify gaps. Scans for README, changelog, API docs, ADRs, runbooks, onboarding guides, and diagrams. Triggers: you need a documentation audit, want to check doc coverage, find missing documentation, or assess documentation quality."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

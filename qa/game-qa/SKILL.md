@@ -1,7 +1,7 @@
 ---
 name: game-qa
-description: Run a full game QA audit on Unity, Unreal, Godot, or web game projects. Finds null reference bugs, missing asset references, broken scene transitions, physics edge cases, input binding conflicts, save/load corruption risks, localization gaps, audio issues, and platform certification blockers. Use when you need to QA test a game, audit game code quality, find game bugs, check game certification compliance, or validate game save systems.
-version: "2.0.0"
+description: "Run a full game QA audit on Unity, Unreal, Godot, or web game projects. Triggers: you need to QA test a game, audit game code quality, find game bugs, check game certification compliance."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

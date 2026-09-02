@@ -1,7 +1,7 @@
 ---
 name: office-suite
-description: "Creates and edits Word (.docx), PowerPoint (.pptx), Excel (.xlsx), and PDF files programmatically: detects the available runtime and picks the right library per format (python-docx or docx.js, python-pptx, openpyxl or exceljs, reportlab or pdf-lib), installs missing packages into an isolated venv or node env, drafts the document structure first (outline, slide map, or sheet schema), generates with real formatting (styles, headers/footers, page numbers, charts from actual data), then re-opens every file programmatically and asserts its structure before delivery. Use when: 'make a Word document', 'create a PowerPoint', 'build a spreadsheet', 'generate a PDF', 'export this as docx/pptx/xlsx', 'write a report file', 'slide deck from these notes', 'edit this Excel file', 'fill this document template', 'invoice PDF'."
-version: "2.0.0"
+description: "Creates and edits Word (.docx), PowerPoint (.pptx), Excel (.xlsx), and PDF files programmatically: detects the available runtime and picks the right library per format (python-docx or docx.js, python-pptx, openpyxl or exceljs, reportlab or pdf-lib)."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

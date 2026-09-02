@@ -1,7 +1,7 @@
 ---
 name: runbook
-description: "Generate an operations runbook from your deployment config, Docker/K8s manifests, CI/CD pipelines, and monitoring setup. Produces copy-pasteable procedures for deployment, rollback, scaling, database maintenance, incident response, and troubleshooting. Use when you need a runbook, ops playbook, deployment guide, incident response plan, or production operations documentation."
-version: "2.0.0"
+description: "Generate an operations runbook from your deployment config, Docker/K8s manifests, CI/CD pipelines, and monitoring setup. Triggers: you need a runbook, ops playbook, deployment guide, incident response plan, or production operations documentation."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: stress-test-personas
-description: Stress-test your product through 6 adversarial decision-maker personas -- skeptical board member, activist investor, power user, churned customer, competitor CEO, and enterprise procurement officer. Each persona attacks from a different strategic angle with findings grounded in actual code references. Use when you need to red-team a product, challenge business viability, find competitive weaknesses, evaluate enterprise readiness, identify churn risks, or pressure-test product strategy before a launch or fundraise.
-version: "2.0.0"
+description: "Stress-test your product through 6 adversarial decision-maker personas -- skeptical board member, activist investor, power user, churned customer, competitor CEO, and enterprise procurement officer.."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

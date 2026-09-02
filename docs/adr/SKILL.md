@@ -1,7 +1,7 @@
 ---
 name: adr
-description: "Create and manage Architecture Decision Records using the Michael Nygard format. Supports new ADR creation, retrospective analysis to document existing decisions, superseding, deprecating, and index generation. Use when you need to document architecture decisions, record technical choices, explain why a technology was chosen, or create decision logs."
-version: "2.0.0"
+description: "Create and manage Architecture Decision Records using the Michael Nygard format. Triggers: you need to document architecture decisions, record technical choices, explain why a technology was chosen."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

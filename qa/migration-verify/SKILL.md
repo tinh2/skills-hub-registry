@@ -1,7 +1,7 @@
 ---
 name: migration-verify
-description: Verify database migrations are safe before running them. Checks that migrations apply cleanly, reverse cleanly, preserve data integrity, are idempotent, and will not lock tables or cause downtime on large datasets. Supports Prisma, Knex, Alembic, Django, ActiveRecord, Flyway, TypeORM, Sequelize, and raw SQL. Use when you need to review migrations, check migration safety, validate schema changes, assess migration performance impact, or plan zero-downtime deployments.
-version: "2.0.0"
+description: "Verify database migrations are safe before running them. Checks that migrations apply cleanly, reverse cleanly, preserve data integrity, are idempotent, and will not lock tables or cause downtime on large datasets.."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

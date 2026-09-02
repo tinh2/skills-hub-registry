@@ -1,7 +1,7 @@
 ---
 name: load-test
-description: Generate and run load tests with k6, Locust, or Artillery. Auto-detects API framework, creates realistic user behavior flows (browsing, authenticated CRUD, search-heavy), runs ramp-up, sustained, spike, and stress test profiles with defined latency and error-rate thresholds, then produces a bottleneck analysis with optimization recommendations. Use when you need to benchmark API performance, find breaking points under traffic, test auto-scaling, validate SLAs, or identify slow endpoints before production deploy.
-version: "2.0.0"
+description: "Generate and run load tests with k6, Locust, or Artillery. Auto-detects API framework, creates realistic user behavior flows (browsing, authenticated CRUD, search-heavy), runs ramp-up, sustained, spike, and stress test profiles with defined latency and error-rate thresholds."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

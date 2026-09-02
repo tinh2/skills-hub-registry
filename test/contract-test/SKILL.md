@@ -1,7 +1,7 @@
 ---
 name: contract-test
-description: Generate consumer-driven contract tests for APIs. Auto-detects framework (Express, Fastify, NestJS, Django, FastAPI, Go), selects Pact, OpenAPI validation, or schema snapshots, verifies backward compatibility, catches breaking changes before deploy, and configures CI verification. Use when you need to validate API schemas, prevent breaking changes, verify backward compatibility, or set up consumer-driven contracts.
-version: "2.0.0"
+description: "Generate consumer-driven contract tests for APIs. Auto-detects framework (Express, Fastify, NestJS, Django, FastAPI, Go), selects Pact, OpenAPI validation, or schema snapshots, verifies backward compatibility, catches breaking changes before deploy, and configures CI verification.."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

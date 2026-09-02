@@ -1,7 +1,7 @@
 ---
 name: bug-triage
-description: Turn a pile of bugs, issues, and error reports into a ranked, actionable plan with reproduction evidence. Ingests GitHub issues via gh, TODO/FIXME scans, error logs, or a pasted list; attempts to reproduce or classify every item (confirmed, unconfirmed, cannot-repro, each with evidence); scores each by user impact times frequency times fix cost times regression risk; clusters duplicates and shared root causes; and emits a ranked table with a per-bug next action plus a suggested first-sprint slice of quick wins totaling at most one day. Use when you say "triage these bugs", "prioritize the backlog", "which bugs should we fix first", "make sense of these error reports", "rank the open issues", or "clean up the issue tracker".
-version: "2.0.0"
+description: "Turn a pile of bugs, issues, and error reports into a ranked, actionable plan with reproduction evidence. Triggers: you say \"triage these bugs\", \"prioritize the backlog\", \"which bugs should we fix first\"."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

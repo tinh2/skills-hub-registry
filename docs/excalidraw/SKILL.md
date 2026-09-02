@@ -1,7 +1,7 @@
 ---
 name: excalidraw
-description: "Generate Excalidraw architecture diagrams (.excalidraw JSON files) from your codebase. Produces hand-drawn-style C4 context and container diagrams, sequence diagrams for key flows, ER diagrams from database schemas, and module dependency graphs. Use when you need whiteboard-style sketches that read as a thinking artifact rather than a polished spec — ideal for design docs, onboarding, and slide decks. Complements the `diagram` skill (which produces Mermaid)."
-version: "1.0.0"
+description: "Generate Excalidraw architecture diagrams (.excalidraw JSON files) from your codebase. Triggers: you need whiteboard-style sketches that read as a thinking artifact rather than a polished spec — ideal for design."
+version: "1.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

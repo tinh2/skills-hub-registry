@@ -1,7 +1,7 @@
 ---
 name: pitch-deck
-description: "Build an investor or product pitch deck as a real PPTX file from a written brief: extracts the fundamentals (problem, solution, market, traction, business model, ask) and flags anything missing as explicit TODO placeholders instead of inventing numbers, chooses a narrative arc (problem-first for investors, demo-first for product, before/after for sales), drafts 10-12 slides each with speaker notes, renders with python-pptx using a clean typographic template (one idea per slide, big numbers, no clip art), then re-opens the file to assert slide count and non-empty notes. Use when the user says: make a pitch deck, investor deck, seed deck, fundraising slides, product pitch presentation, sales deck, turn this brief into slides, deck for the demo day, YC application deck, build me a PPTX pitch."
-version: "2.0.0"
+description: "Build an investor or product pitch deck as a real PPTX file from a written brief: extracts the fundamentals (problem, solution, market, traction, business model, ask) and flags anything missing as explicit TODO placeholders instead of inventing numbers."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

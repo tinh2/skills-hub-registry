@@ -1,7 +1,7 @@
 ---
 name: balance-test
-description: "Analyze game balance by extracting stats from code and running mathematical simulations. Calculates DPS tier lists, TTK matrices, EHP comparisons, and character power rankings. Stress-tests economy earn/spend rates, progression XP curves, and unlock pacing. Runs Monte Carlo simulations on drop rates, loot tables, and crafting RNG. Use when tuning weapon damage, checking if characters are overpowered, validating economy pacing, auditing gacha fairness, or testing PvP matchup balance."
-version: "2.0.0"
+description: "Analyze game balance by extracting stats from code and running mathematical simulations. Triggers: tuning weapon damage, checking if characters are overpowered, validating economy pacing, auditing gacha fairness."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

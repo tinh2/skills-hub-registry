@@ -1,7 +1,7 @@
 ---
 name: broken-links
-description: "Scan a codebase for broken links — dead URLs in Markdown/HTML, broken file references, invalid import paths, stale anchor links, and broken cross-doc references — then auto-fix what it can: replace dead URLs with Wayback Machine archives, update moved file paths via git history, remove anchors that no longer exist, and flag what needs human review. Self-healing: learns fix patterns and improves over iterations. Use when: 'fix broken links', 'check links', 'dead links', 'broken urls', 'link rot', 'fix references', 'validate links', 'stale links', 'broken imports'."
-version: "1.1.0"
+description: "Scan a codebase for broken links — dead URLs in Markdown/HTML, broken file references, invalid import paths, stale anchor links, and broken cross-doc references — then auto-fix what it can: replace dead URLs with Wayback Machine archives, update moved file paths via git history."
+version: "1.1.1"
 category: qa
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: unit-test
-description: Generate comprehensive unit tests with edge cases, error paths, and boundary values. Auto-detects test framework (Vitest, Jest, pytest, go test, flutter_test, RSpec, cargo test, JUnit), scans for untested functions by priority, adopts existing test conventions, generates tests with proper mocks, runs them, and self-heals failures in up to 3 iterations. Measures coverage before and after. Use when you need to add unit tests, increase code coverage, test edge cases, or verify error handling paths.
-version: "2.0.0"
+description: "Generate comprehensive unit tests with edge cases, error paths, and boundary values. Triggers: you need to add unit tests, increase code coverage, test edge cases, or verify error handling paths."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

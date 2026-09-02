@@ -1,7 +1,7 @@
 ---
 name: api-docs
-description: "Generate OpenAPI 3.1 documentation from your API codebase. Auto-detects Express, Fastify, NestJS, Django, FastAPI, Flask, Rails, Spring, Go, and more. Extracts routes, request/response schemas, auth requirements, and validation rules. Sets up interactive docs with Swagger UI, Redoc, or Scalar. Use when you need API documentation, OpenAPI spec, Swagger docs, endpoint reference, or REST API docs."
-version: "2.0.0"
+description: "Generate OpenAPI 3.1 documentation from your API codebase. Auto-detects Express, Fastify, NestJS, Django, FastAPI, Flask, Rails, Spring, Go, and more. Triggers: you need API documentation, OpenAPI spec, Swagger docs, endpoint reference, or REST API docs."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

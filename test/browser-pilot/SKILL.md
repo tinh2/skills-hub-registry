@@ -1,7 +1,7 @@
 ---
 name: browser-pilot
-description: Deterministic browser automation for testing and scripted web flows using Playwright with accessibility-snapshot navigation. Runs a pre-flight (Playwright installed, app reachable, dev server started if needed), then drives the requested flow snapshot-first: takes an accessibility tree snapshot, addresses every element by role and accessible name instead of brittle CSS selectors, re-snapshots after every mutation, asserts per step, and captures an evidence bundle (screenshot per key state, console errors, failed network calls). Delivers a step-by-step flow transcript with pass/fail. Use when you say "test this flow in the browser", "automate the signup flow", "click through the app", "drive the browser", "verify the checkout works", "browser automation", or "E2E this page without writing a spec file".
-version: "2.0.0"
+description: "Deterministic browser automation for testing and scripted web flows using Playwright with accessibility-snapshot navigation. Triggers: you say \"test this flow in the browser\", \"automate the signup flow\", \"click through the app\", \"drive the browser\"."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

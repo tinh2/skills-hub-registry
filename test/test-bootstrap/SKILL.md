@@ -1,7 +1,7 @@
 ---
 name: test-bootstrap
-description: Take an untested or under-tested repository to a real, running test suite in one pass. Detects the language and picks the native runner (Vitest, Jest, pytest, go test, flutter_test, RSpec, cargo test), ranks untested modules by risk using exported surface times git churn times complexity, scaffolds test infrastructure (config, helpers, factories, CI step), generates tests for the ten riskiest modules with happy path, edge cases, and error paths, runs them and self-heals failures for up to three iterations, and reports coverage before and after plus a ledger of real bugs found. Use when you say "this repo has no tests", "bootstrap a test suite", "add tests to this project", "set up testing from scratch", "we have zero coverage", or "get this codebase under test".
-version: "2.0.0"
+description: "Take an untested or under-tested repository to a real, running test suite in one pass. Triggers: you say \"this repo has no tests\", \"bootstrap a test suite\", \"add tests to this project\", \"set up testing from scratch\"."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

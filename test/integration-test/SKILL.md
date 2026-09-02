@@ -1,7 +1,7 @@
 ---
 name: integration-test
-description: Generate integration tests for APIs, databases, and external services. Auto-detects backend stack (Express, Fastify, NestJS, Django, FastAPI, Rails, Go), ORM (Prisma, TypeORM, SQLAlchemy, GORM), and database (PostgreSQL, MongoDB, Firestore), then creates tests covering endpoint CRUD, auth flows, DB transactions, and external service failures with proper fixtures and mocks. Self-heals failing tests up to 3 iterations. Use when you need to test API endpoints end-to-end, verify database operations, test service interactions, or validate auth and error handling.
-version: "2.0.0"
+description: "Generate integration tests for APIs, databases, and external services. Triggers: you need to test API endpoints end-to-end, verify database operations, test service interactions."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

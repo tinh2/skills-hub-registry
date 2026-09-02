@@ -1,7 +1,7 @@
 ---
 name: chaos
-description: "Chaos engineering analysis that maps every external dependency and I/O boundary, then generates tests for timeouts, connection failures, corrupt responses, disk errors, OOM, partial failures, and rate limiting. Runs the tests and reports which failures crash the app vs degrade gracefully. Use when hardening error handling, testing resilience before launch, finding missing timeouts or retries, validating circuit breakers, or stress-testing third-party API failures."
-version: "2.0.0"
+description: "Chaos engineering analysis that maps every external dependency and I/O boundary, then generates tests for timeouts, connection failures, corrupt responses, disk errors, OOM, partial failures, and rate limiting.."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

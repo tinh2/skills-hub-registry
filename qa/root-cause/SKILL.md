@@ -1,7 +1,7 @@
 ---
 name: root-cause
-description: Hypothesis-driven debugging that ends at a proven root cause, not a symptom patch. Captures the failure verbatim by running the reproduction yourself, forms two to four ranked hypotheses each paired with a discriminating test ("if H1 is true, then X will show Y"), runs the cheapest discriminating test first and eliminates hypotheses iteratively, confirms the root cause by toggling it (break it again on purpose, then unbreak), then fixes, adds a regression test, verifies the original repro passes, and writes a five-line postmortem. Use when you say "debug this", "find the root cause", "why is this failing", "this bug keeps coming back", "the fix didn't stick", "intermittent failure", or when a previous quick fix only moved the error.
-version: "2.0.0"
+description: "Hypothesis-driven debugging that ends at a proven root cause, not a symptom patch. Triggers: you say \"debug this\", \"find the root cause\", \"why is this failing\", \"this bug keeps coming back\", \"the fix didn't stick\"."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

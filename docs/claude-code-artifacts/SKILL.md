@@ -1,7 +1,7 @@
 ---
 name: claude-code-artifacts
-description: "Publishes structured, actionable artifacts from Claude Code sessions — PR walkthroughs, incident timelines, system explainers, release checklists, and security audits. Creates live web pages that auto-update as your session progresses, shareable with authenticated org members. Requires Claude Team or Enterprise (CLI 1.13576.0+, Artifacts enabled by admin)."
-version: "1.0.0"
+description: "Publishes structured, actionable artifacts from Claude Code sessions — PR walkthroughs, incident timelines, system explainers, release checklists, and security audits."
+version: "1.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

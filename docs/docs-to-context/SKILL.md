@@ -1,7 +1,7 @@
 ---
 name: docs-to-context
-description: "Convert any pile of documents (PDF, Word, HTML pages, wiki exports, PowerPoint slides) into clean, LLM-ready markdown context: inventories the sources, picks the right extractor per file type (pdftotext or PyMuPDF for PDF, pandoc or mammoth for docx, readability extraction for HTML, python-pptx for slides), preserves structure (headings, real markdown tables, code blocks), strips boilerplate and navigation, chunks by heading hierarchy into 2-4k token files under context/<source>/ with an INDEX.md, and spot-checks three random chunks against the originals for fidelity. Use when the user says: convert these docs to markdown, prep these PDFs for Claude, turn this documentation into context, markitdown these files, extract text from these documents, make this wiki LLM-readable, ingest these docs, build a context folder."
-version: "2.0.0"
+description: "Convert any pile of documents (PDF, Word, HTML pages, wiki exports, PowerPoint slides) into clean, LLM-ready markdown context: inventories the sources, picks the right extractor per file type (pdftotext or PyMuPDF for PDF, pandoc or mammoth for docx, readability extraction for HTML."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

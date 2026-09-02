@@ -1,7 +1,7 @@
 ---
 name: device-matrix
-description: Configure device matrix testing across real phones, tablets, and emulators. Sets up Firebase Test Lab, AWS Device Farm, or BrowserStack with smart device selection covering flagships to budget phones, test sharding for parallel execution, flaky test quarantine, and cross-device performance benchmarking. Use when you need to test on multiple devices, validate across screen sizes, catch device-specific bugs, or benchmark performance on low-end hardware.
-version: "2.0.0"
+description: "Configure device matrix testing across real phones, tablets, and emulators. Triggers: you need to test on multiple devices, validate across screen sizes, catch device-specific bugs."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

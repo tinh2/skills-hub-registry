@@ -1,7 +1,7 @@
 ---
 name: visual-regression
-description: Set up visual regression testing with baseline screenshots across breakpoints. Auto-detects frontend framework (Next.js, React, Vue, Angular, Flutter, Storybook), configures Playwright screenshot comparison, BackstopJS, or Flutter golden tests, captures every page at mobile/tablet/desktop/wide viewports plus interactive states (hover, focus, error, empty, loading), stabilizes dynamic content to prevent false positives, and reports pixel-level diffs. Use when you need to catch unintended UI changes, set up screenshot baselines, prevent CSS regressions, or verify layouts across screen sizes after refactoring.
-version: "2.0.0"
+description: "Set up visual regression testing with baseline screenshots across breakpoints. Triggers: you need to catch unintended UI changes, set up screenshot baselines, prevent CSS regressions."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

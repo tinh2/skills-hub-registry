@@ -1,7 +1,7 @@
 ---
 name: code-smell
-description: "Scan codebase for Martin Fowler's catalog of code smells: god classes, long methods, feature envy, data clumps, primitive obsession, shotgun surgery, message chains, and more. Reports each smell with file location, severity, and specific refactoring recommendation. Ranks worst files and builds a prioritized refactoring queue. Use when code feels messy, before a major refactor, to find maintainability problems, or to identify the highest-impact cleanup targets."
-version: "2.0.0"
+description: "Scan codebase for Martin Fowler's catalog of code smells: god classes, long methods, feature envy, data clumps, primitive obsession, shotgun surgery, message chains, and more. Triggers: code feels messy, before a major refactor, to find maintainability problems."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

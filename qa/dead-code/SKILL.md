@@ -1,7 +1,7 @@
 ---
 name: dead-code
-description: "Find and safely remove dead code: unreachable paths, unused exports, unused functions, unused variables, unused CSS selectors, unused npm/pip/cargo dependencies, unused env vars, and commented-out code blocks. Builds full import graph, verifies no dynamic references before removal, runs build and tests after cleanup. Use when trimming bloat, removing unused dependencies, cleaning up after a refactor, reducing bundle size, or eliminating stale code."
-version: "2.0.0"
+description: "Find and safely remove dead code: unreachable paths, unused exports, unused functions, unused variables, unused CSS selectors, unused npm/pip/cargo dependencies, unused env vars, and commented-out code blocks.."
+version: "2.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

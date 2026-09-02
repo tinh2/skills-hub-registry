@@ -1,7 +1,7 @@
 ---
 name: accessibility-test
-description: "Automated WCAG 2.1 AA accessibility testing with axe-core and Lighthouse CI. Auto-detects frontend framework (React, Next.js, Vue, Angular, Svelte, Astro, Flutter, React Native), discovers all routes and interactive components, installs Playwright + axe-core for page-level scanning and jest-axe/vitest-axe for component-level testing. Generates tests for color contrast (4.5:1), alt text, form labels, ARIA attributes, heading order, landmark regions, focus visibility, keyboard navigation (tab order, focus traps, modal focus management, skip-to-content), screen reader compatibility (aria-live regions, error announcements, toast notifications), and Flutter Semantics validation (48dp touch targets, semanticLabel). Reports violations by severity (critical, serious, moderate, minor) with WCAG criterion references. Use when adding a11y testing, auditing accessibility compliance, fixing contrast issues, or validating keyboard and screen reader support."
-version: "2.0.0"
+description: "Automated WCAG 2.1 AA accessibility testing with axe-core and Lighthouse CI. Triggers: adding a11y testing, auditing accessibility compliance, fixing contrast issues."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

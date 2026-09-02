@@ -1,7 +1,7 @@
 ---
 name: test-suite
-description: Analyze and score test coverage across all testing dimensions -- unit, integration, E2E, load, visual regression, contract, and accessibility. Auto-detects tech stack and test infrastructure, runs existing coverage tools, identifies gaps by category, scores each on a 0-10 scale with weighted overall health, and produces a prioritized remediation plan routing to the right testing sub-skill. Use when you need a test health overview, want to find coverage gaps, need to prioritize which tests to write next, or want to assess test quality before a release.
-version: "2.0.0"
+description: "Analyze and score test coverage across all testing dimensions -- unit, integration, E2E, load, visual regression, contract, and accessibility. Triggers: you need a test health overview, want to find coverage gaps, need to prioritize which tests to write next."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

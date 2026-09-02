@@ -1,7 +1,7 @@
 ---
 name: mobile-test
-description: Generate a complete mobile test suite covering unit, widget, integration, snapshot, accessibility, and platform-specific tests. Auto-detects Flutter, React Native, native iOS (XCTest), or native Android (JUnit/Espresso), then produces tests for models, services, ViewModels, screens, navigation, forms, and pull-to-refresh with proper mocks and golden image comparisons. Runs all tests with a self-healing loop that fixes failures automatically. Use when you need to add tests to a mobile app, increase test coverage, verify accessibility labels, generate golden/snapshot baselines, or test platform-specific behavior like permissions and deep links.
-version: "2.0.0"
+description: "Generate a complete mobile test suite covering unit, widget, integration, snapshot, accessibility, and platform-specific tests. Triggers: you need to add tests to a mobile app, increase test coverage, verify accessibility labels."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE

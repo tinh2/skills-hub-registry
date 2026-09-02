@@ -1,7 +1,7 @@
 ---
 name: onboarding
-description: "Generate a comprehensive developer onboarding guide from your codebase. Analyzes tech stack, project structure, build commands, environment variables, code conventions, and git workflow to produce setup instructions, architecture overview, common task recipes, and troubleshooting guides. Use when you need a getting started guide, developer setup docs, CONTRIBUTING.md, new developer documentation, or team onboarding materials."
-version: "2.0.0"
+description: "Generate a comprehensive developer onboarding guide from your codebase. Triggers: you need a getting started guide, developer setup docs, CONTRIBUTING."
+version: "2.0.1"
 category: docs
 platforms:
   - CLAUDE_CODE

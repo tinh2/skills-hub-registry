@@ -1,7 +1,7 @@
 ---
 name: browser-agent-verify
-description: "Verifies front-end changes by driving a real browser — spins up the local dev server, navigates to the changed route, executes the affected interaction flow, captures console output and screenshots, then reports pass/fail with structured findings. Works with Claude Code, Cursor, and Codex CLI via Playwright; mirrors the GitHub Copilot browser tools GA workflow announced July 1 2026."
-version: "1.0.0"
+description: "Verifies front-end changes by driving a real browser — spins up the local dev server, navigates to the changed route, executes the affected interaction flow, captures console output and screenshots, then reports pass/fail with structured findings."
+version: "1.0.1"
 category: qa
 platforms:
   - CLAUDE_CODE

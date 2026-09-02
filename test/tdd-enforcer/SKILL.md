@@ -1,7 +1,7 @@
 ---
 name: tdd-enforcer
-description: Enforce strict red-green-refactor test-driven development for a feature. Decomposes the feature into testable behaviors, then for each behavior writes a failing test, runs it and verifies it fails for the RIGHT reason by asserting on the failure message, writes the minimal implementation, runs green, refactors under green tests, and commits one cycle at a time. Detects violations where implementation code appeared before its test and halts. Ends with a coverage delta report and a commit-per-cycle audit trail. Use when you want to "do TDD", "build this feature test-first", "enforce red-green-refactor", "write the test first", "strict TDD", or "make sure every line was driven by a test".
-version: "2.0.0"
+description: "Enforce strict red-green-refactor test-driven development for a feature. Triggers: you want to \"do TDD\", \"build this feature test-first\", \"enforce red-green-refactor\", \"write the test first\"."
+version: "2.0.1"
 category: test
 platforms:
   - CLAUDE_CODE
