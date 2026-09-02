@@ -1,7 +1,7 @@
 ---
 name: insurance-claims
-description: Analyze an insurance claims processing system for lifecycle completeness, straight-through processing automation, fraud detection coverage, reserve estimation methodology, subrogation recovery workflows, and regulatory compliance with state prompt payment laws. Use when building or auditing claims platforms (auto, property, liability, workers comp, health), evaluating FNOL intake, or assessing SIU referral logic.
-version: "2.0.0"
+description: "Analyze an insurance claims processing system for lifecycle completeness, straight-through processing automation, fraud detection coverage, reserve estimation methodology, subrogation recovery workflows, and regulatory compliance with state prompt payment laws.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

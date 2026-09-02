@@ -1,24 +1,7 @@
 ---
 name: app-size-optimizer
-description: >
-  Analyzes mobile app binary size -- asset audit for unused images and font subsetting, code stripping
-  with ProGuard and tree-shaking, on-demand resources, dynamic feature modules, and app thinning strategies.
-
-  USE THIS SKILL WHEN:
-  - Your app's download size is too large or growing unexpectedly
-  - Someone asks "why is our app so big?" or "how do we reduce app size?"
-  - You need to audit assets (images, fonts, videos) for waste or optimization
-  - App store reviewers flag your app for exceeding cellular download limits (200MB)
-  - You want to check if ProGuard/R8, tree-shaking, or resource shrinking is properly configured
-  - Someone mentions ABI splits, dynamic feature modules, or on-demand resources
-  - You are preparing for a release and want to minimize download size
-  - Users are complaining about storage space or download times
-  - You need to audit dependencies for size bloat or lighter alternatives
-
-  TRIGGER PHRASES: "app size", "binary size", "reduce app size", "APK size", "IPA size",
-  "unused assets", "font subsetting", "ProGuard", "tree shaking", "app thinning",
-  "download size", "install size", "ABI splits", "dynamic feature", "asset optimization"
-version: "2.0.0"
+description: "Analyzes mobile app binary size -- asset audit for unused images and font subsetting, code stripping with ProGuard and tree-shaking, on-demand resources, dynamic feature modules, and app thinning strategies.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

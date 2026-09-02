@@ -1,7 +1,7 @@
 ---
 name: energy-efficiency
-description: Audit a manufacturing energy management system for monitoring quality, cost optimization, and compliance. Evaluates power metering infrastructure, energy baseline and EnPI calculations, peak demand management and load shifting, renewable energy and battery storage integration, GHG Protocol carbon footprint tracking (Scope 1/2/3), energy cost optimization, and ISO 50001 compliance. Use when building or reviewing industrial energy platforms, building management systems, or sustainability reporting tools.
-version: "2.0.0"
+description: "Audit a manufacturing energy management system for monitoring quality, cost optimization, and compliance. Triggers: building or reviewing industrial energy platforms, building management systems, or sustainability reporting tools."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

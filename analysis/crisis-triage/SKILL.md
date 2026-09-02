@@ -1,7 +1,7 @@
 ---
 name: crisis-triage
-description: Audit emergency and crisis triage systems for call prioritization accuracy, resource dispatching algorithm quality, severity classification model evaluation, response time optimization, geographic coverage analysis, mutual aid protocol readiness, and post-incident review workflows. Covers CAD integration, GIS spatial indexing, queue management under resource constraints, demand forecasting, NFIRS/NEMSIS compliance reporting, and interagency interoperability. Use when reviewing 911 dispatch platforms, emergency management software, crisis hotline systems, disaster response tools, or any software that classifies incident severity and coordinates responder dispatch.
-version: "2.0.0"
+description: "Audit emergency and crisis triage systems for call prioritization accuracy, resource dispatching algorithm quality, severity classification model evaluation, response time optimization, geographic coverage analysis, mutual aid protocol readiness, and post-incident review workflows.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: eviction-risk
-description: Audit a tenant management system for eviction prevention and risk prediction. Evaluates payment pattern analysis and arrears tracking, early warning indicators (financial, behavioral, external), intervention trigger automation, pre-filing mediation workflows, emergency rental assistance integration (ERAP, LIHEAP), legal process tracking with jurisdiction-specific compliance (VAWA, SCRA), and outcome measurement. Use when building or reviewing property management platforms, affordable housing systems, or tenant services applications.
-version: "2.0.0"
+description: "Audit a tenant management system for eviction prevention and risk prediction. Triggers: building or reviewing property management platforms, affordable housing systems, or tenant services applications."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

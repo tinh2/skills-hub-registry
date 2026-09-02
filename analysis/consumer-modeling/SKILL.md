@@ -1,7 +1,7 @@
 ---
 name: consumer-modeling
-description: "Analyze consumer modeling systems for purchase prediction, lifetime value estimation, multi-touch attribution, brand affinity, and switching cost analysis. Use when: 'evaluate CLV model', 'review purchase prediction', 'audit attribution model', 'assess customer lifetime value', 'check BG/NBD implementation', 'review Markov chain attribution', 'analyze brand affinity scoring', 'evaluate recommendation engine accuracy'."
-version: "2.0.0"
+description: "Analyze consumer modeling systems for purchase prediction, lifetime value estimation, multi-touch attribution, brand affinity, and switching cost analysis. Triggers: 'evaluate CLV model', 'review purchase prediction', 'audit attribution model', 'assess customer lifetime value'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

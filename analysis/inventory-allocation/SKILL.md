@@ -1,7 +1,7 @@
 ---
 name: inventory-allocation
-description: Analyze an inventory allocation system for demand-driven distribution accuracy, store clustering methodology, safety stock optimization, markdown timing, replenishment logic, and omnichannel inventory visibility. Evaluates against GS1 standards and retail best practices. Use when building or auditing retail allocation engines, warehouse management systems, replenishment platforms, or omnichannel order orchestration tools.
-version: "2.0.0"
+description: "Analyze an inventory allocation system for demand-driven distribution accuracy, store clustering methodology, safety stock optimization, markdown timing, replenishment logic, and omnichannel inventory visibility.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

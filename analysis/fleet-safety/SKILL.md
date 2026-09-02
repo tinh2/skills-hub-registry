@@ -1,7 +1,7 @@
 ---
 name: fleet-safety
-description: Analyze fleet safety programs including driver behavior scoring, accident trend analysis, CSA BASIC score monitoring, DOT audit readiness, Hours of Service compliance, and drug and alcohol testing programs. Covers telematics event review, dashcam AI classification, preventability determinations, roadside inspection management, and risk mitigation ROI per FMCSA regulations and CSA methodology.
-version: "2.0.0"
+description: "Analyze fleet safety programs including driver behavior scoring, accident trend analysis, CSA BASIC score monitoring, DOT audit readiness, Hours of Service compliance, and drug and alcohol testing programs."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: cart-recovery
-description: Generate a multi-channel abandoned cart recovery sequence — SMS at 15 min (98% open rate, 25-40% conversion) followed by email cadence at 1hr / 24hr / 72hr, plus optional push and retargeting touchpoints. Cart-value-segmented (under $50 / $50-$150 / over $150) with discount discipline (no incentive in Email 1, free shipping in Email 2 for mid-tier, full discount only in final touchpoint). Generates: ESP-ready templates (Klaviyo, Postscript, Attentive, Sendlane, Omnisend), webhook handlers for Shopify/WooCommerce/BigCommerce/Stripe Checkout, dynamic product blocks with real cart items, inventory urgency only when stock < N (FTC-safe), suppression rules (purchased? stop the sequence), and revenue attribution tracking. Target recovery: 20-35% of carts. TRIGGER on "abandoned cart", "cart recovery", "cart abandonment", "Klaviyo flow", "win back lost sales", "browse abandonment", "checkout abandonment". Distinct from PDP work — this is post-cart, pre-payment.
-version: "1.0.0"
+description: "Generate a multi-channel abandoned cart recovery sequence — SMS at 15 min (98% open rate, 25-40% conversion) followed by email cadence at 1hr / 24hr / 72hr, plus optional push and retargeting touchpoints.."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

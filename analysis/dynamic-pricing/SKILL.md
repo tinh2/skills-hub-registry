@@ -1,7 +1,7 @@
 ---
 name: dynamic-pricing
-description: Audit a dynamic pricing engine for revenue optimization and fairness. Evaluates price elasticity models, competitive intelligence feeds, promotional ROI, markdown optimization, price image management, and legal compliance including Robinson-Patman and price gouging regulations. Use when building or reviewing retail pricing systems, e-commerce price optimization, or revenue management platforms.
-version: "2.0.0"
+description: "Audit a dynamic pricing engine for revenue optimization and fairness. Evaluates price elasticity models, competitive intelligence feeds, promotional ROI, markdown optimization, price image management, and legal compliance including Robinson-Patman and price gouging regulations.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: commodity-pricing
-description: "Analyze commodity pricing and trading systems including forward curves, option models, position management, risk metrics, and regulatory reporting. Use when: 'review pricing models', 'audit trading system', 'evaluate VaR implementation', 'check commodity risk management', 'assess ETRM system', 'review derivatives valuation', 'analyze energy trading platform', 'evaluate hedge accounting'."
-version: "2.0.0"
+description: "Analyze commodity pricing and trading systems including forward curves, option models, position management, risk metrics, and regulatory reporting. Triggers: 'review pricing models', 'audit trading system', 'evaluate VaR implementation', 'check commodity risk management'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

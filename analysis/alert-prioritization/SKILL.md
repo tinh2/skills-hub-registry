@@ -1,24 +1,7 @@
 ---
 name: alert-prioritization
-description: >
-  Analyzes SIEM alert pipelines for rule optimization, alert fatigue reduction, criticality scoring,
-  asset-based prioritization, and correlation rule design using NIST CSF and detection engineering principles.
-
-  USE THIS SKILL WHEN:
-  - Your SOC team is drowning in alerts and you need to reduce noise
-  - Someone asks about alert fatigue, false positive rates, or SIEM tuning
-  - You need to design or evaluate an alert criticality scoring framework
-  - A project involves SIEM rules (Splunk, Elastic, Sentinel, Chronicle, QRadar)
-  - You are building or reviewing detection-as-code pipelines
-  - Someone mentions MITRE ATT&CK coverage gaps or detection engineering
-  - You need to optimize correlation rules or SOAR playbook coverage
-  - Alert-to-incident conversion rates are below 30%
-  - Analysts are bulk-closing alerts or MTTA is trending upward
-
-  TRIGGER PHRASES: "alert fatigue", "SIEM tuning", "detection rules", "alert prioritization",
-  "false positive rate", "correlation rules", "SOC optimization", "alert scoring",
-  "detection engineering", "MITRE ATT&CK coverage", "alert volume", "triage optimization"
-version: "2.0.0"
+description: "Analyzes SIEM alert pipelines for rule optimization, alert fatigue reduction, criticality scoring, asset-based prioritization, and correlation rule design using NIST CSF and detection engineering principles.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

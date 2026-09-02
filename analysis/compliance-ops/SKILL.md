@@ -1,7 +1,7 @@
 ---
 name: compliance-ops
-description: "Analyze compliance operations for regulatory change tracking, control mapping, policy management, audit readiness, and training compliance. Use when: 'audit compliance program', 'assess GRC platform', 'review regulatory change management', 'check control framework', 'evaluate policy lifecycle', 'audit readiness check', 'review SOX/HIPAA/GDPR controls', 'assess training compliance'."
-version: "2.0.0"
+description: "Analyze compliance operations for regulatory change tracking, control mapping, policy management, audit readiness, and training compliance. Triggers: 'audit compliance program', 'assess GRC platform', 'review regulatory change management', 'check control framework'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

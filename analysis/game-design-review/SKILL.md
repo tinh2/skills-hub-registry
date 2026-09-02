@@ -1,7 +1,7 @@
 ---
 name: game-design-review
-description: Analyze game design documents and implementations for core gameplay loop clarity and depth, XP leveling curves and unlock pacing, difficulty curve spikes and plateaus, skill tree viability, player motivation via Self-Determination Theory, feedback loop quality across immediate-short-medium-long timescales, session design and retention hooks, and MoSCoW/RICE feature prioritization scoring.
-version: "2.0.0"
+description: "Analyze game design documents and implementations for core gameplay loop clarity and depth, XP leveling curves and unlock pacing, difficulty curve spikes and plateaus, skill tree viability, player motivation via Self-Determination Theory."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

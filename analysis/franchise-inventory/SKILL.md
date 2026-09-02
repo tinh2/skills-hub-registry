@@ -1,7 +1,7 @@
 ---
 name: franchise-inventory
-description: Analyze franchise inventory management for par level optimization, waste tracking and root cause analysis, theoretical vs. actual food cost variance, menu engineering profitability, vendor scorecard performance, and cooperative purchasing ROI. Covers FIFO shelf life constraints, safety stock calculations, inventory turn benchmarking, and supply chain risk identification for multi-unit restaurant operations.
-version: "2.0.0"
+description: "Analyze franchise inventory management for par level optimization, waste tracking and root cause analysis, theoretical vs."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

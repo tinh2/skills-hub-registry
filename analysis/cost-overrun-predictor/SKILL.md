@@ -1,7 +1,7 @@
 ---
 name: cost-overrun-predictor
-description: Audit construction project management software for budget tracking accuracy, earned value management (EVM) formula correctness, risk factor modeling, schedule-cost integration, change order workflow completeness, and early warning detection. Covers CPI/SPI trending, Monte Carlo risk simulation, WBS cost code analysis, and historical benchmarking. Use when reviewing Procore, Primavera P6, MS Project, Buildertrend, Sage 300 CRE integrations, or any construction PM platform that tracks budgets, schedules, and change orders.
-version: "2.0.0"
+description: "Audit construction project management software for budget tracking accuracy, earned value management (EVM) formula correctness, risk factor modeling, schedule-cost integration, change order workflow completeness, and early warning detection.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

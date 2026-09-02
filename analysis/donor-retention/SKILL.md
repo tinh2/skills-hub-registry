@@ -1,7 +1,7 @@
 ---
 name: donor-retention
-description: Analyze donor retention and CRM systems — lapse risk scoring and prediction models, stewardship workflow automation, donor lifetime value (LTV) modeling, communication personalization engines, giving pattern analysis, and retention metric benchmarking. Audit nonprofit fundraising platforms for retention rate tracking, first-year donor conversion, reactivation campaigns, and data quality foundations.
-version: "2.0.0"
+description: "Analyze donor retention and CRM systems — lapse risk scoring and prediction models, stewardship workflow automation, donor lifetime value (LTV) modeling, communication personalization engines, giving pattern analysis, and retention metric benchmarking."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

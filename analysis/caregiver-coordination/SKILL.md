@@ -1,17 +1,7 @@
 ---
 name: caregiver-coordination
-description: >
-  Analyze caregiver coordination platforms for scheduling optimization, task assignment,
-  handoff communication, family/professional caregiver integration, care plan compliance,
-  burnout prevention, and documentation workflows.
-  USE THIS SKILL WHEN: user mentions caregiver scheduling, home care coordination, care team
-  management, shift handoffs, caregiver burnout, EVV (Electronic Visit Verification),
-  home health task tracking, family caregiver support, or care plan compliance monitoring.
-  Trigger phrases: "analyze caregiver platform", "scheduling optimization for caregivers",
-  "handoff communication review", "caregiver burnout detection", "care plan compliance audit",
-  "task assignment efficiency", "home care coordination analysis", "EVV integration review",
-  "caregiver workload balancing", "shift coverage gap analysis".
-version: "2.0.0"
+description: "Analyze caregiver coordination platforms for scheduling optimization, task assignment, handoff communication, family/professional caregiver integration, care plan compliance, burnout prevention, and documentation workflows.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

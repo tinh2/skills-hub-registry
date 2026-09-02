@@ -1,7 +1,7 @@
 ---
 name: lab-automation
-description: Audit laboratory automation systems -- LIMS architecture, instrument connectivity (SiLA 2, OPC-UA, serial drivers), sample tracking and chain of custody, protocol workflow engines, data acquisition pipelines, and regulatory compliance (21 CFR Part 11 electronic records/signatures, GAMP 5 software categorization, ALCOA+ data integrity). Use when reviewing pharma, biotech, clinical, or research lab codebases with liquid handlers, plate readers, sequencers, or automated workcells.
-version: "2.0.0"
+description: "Audit laboratory automation systems -- LIMS architecture, instrument connectivity (SiLA 2, OPC-UA, serial drivers), sample tracking and chain of custody, protocol workflow engines, data acquisition pipelines, and regulatory compliance (21 CFR Part 11 electronic records/signatures."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

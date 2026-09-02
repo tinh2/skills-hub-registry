@@ -1,7 +1,7 @@
 ---
 name: claims-workflow
-description: "Analyze insurance claims workflow systems for intake optimization, adjudication rules, subrogation, litigation management, and settlement analytics. Use when: 'audit claims process', 'review FNOL workflow', 'evaluate claims automation', 'check subrogation recovery', 'assess claims fraud detection', 'optimize claims cycle time', 'review Guidewire ClaimCenter setup'."
-version: "2.0.0"
+description: "Analyze insurance claims workflow systems for intake optimization, adjudication rules, subrogation, litigation management, and settlement analytics. Triggers: 'audit claims process', 'review FNOL workflow', 'evaluate claims automation', 'check subrogation recovery'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

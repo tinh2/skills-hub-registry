@@ -1,25 +1,7 @@
 ---
 name: affordable-housing
-description: >
-  Analyzes affordable housing management software for unit allocation algorithms, waitlist management,
-  income verification workflows, Fair Housing compliance, LIHTC and Section 8 program tracking,
-  inspection scheduling, and tenant reporting.
-
-  USE THIS SKILL WHEN:
-  - You are reviewing housing management software or tenant management systems
-  - Someone asks about Section 8, LIHTC, or public housing program compliance
-  - You need to audit unit allocation algorithms for fairness or bias
-  - A project involves waitlist management, income verification, or rent calculations
-  - You are evaluating HUD compliance (50058, EIV, PIC submissions)
-  - Someone mentions Fair Housing, reasonable accommodation, or protected class handling
-  - You need to review HQS/NSPIRE inspection tracking or abatement workflows
-  - A codebase handles tenant eligibility, subsidy calculations, or housing vouchers
-
-  TRIGGER PHRASES: "affordable housing", "Section 8", "LIHTC", "public housing",
-  "waitlist management", "income verification", "Fair Housing", "HUD compliance",
-  "rent calculation", "housing voucher", "tenant management", "HQS inspection",
-  "unit allocation", "housing authority"
-version: "2.0.0"
+description: "Analyzes affordable housing management software for unit allocation algorithms, waitlist management, income verification workflows, Fair Housing compliance, LIHTC and Section 8 program tracking, inspection scheduling, and tenant reporting.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: demand-forecasting
-description: Analyze demand forecasting systems — time-series decomposition (ARIMA, Prophet, ETS), seasonal and event-driven demand modeling, booking curve and pickup analysis, cancellation prediction, forecast accuracy metrics (MAPE, bias), and model retraining pipelines. Audit forecasting codebases for travel, hospitality, e-commerce, and supply chain planning applications.
-version: "2.0.0"
+description: "Analyze demand forecasting systems — time-series decomposition (ARIMA, Prophet, ETS), seasonal and event-driven demand modeling, booking curve and pickup analysis, cancellation prediction, forecast accuracy metrics (MAPE, bias), and model retraining pipelines."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

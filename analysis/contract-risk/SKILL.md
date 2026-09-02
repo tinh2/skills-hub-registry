@@ -1,7 +1,7 @@
 ---
 name: contract-risk
-description: Audit contract management codebases for clause extraction accuracy, obligation tracking completeness, risk scoring model quality, renewal management, SLA monitoring, liability exposure, force majeure handling, and IP assignment detection. Covers NLP/regex pattern evaluation, obligation state machines, financial exposure modeling, and audit trail compliance for SOX/GDPR. Use when reviewing legal tech, CLM platforms, procurement systems, or any software that parses, scores, or manages contracts.
-version: "2.0.0"
+description: "Audit contract management codebases for clause extraction accuracy, obligation tracking completeness, risk scoring model quality, renewal management, SLA monitoring, liability exposure, force majeure handling, and IP assignment detection.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

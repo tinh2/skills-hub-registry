@@ -1,7 +1,7 @@
 ---
 name: game-economy
-description: Analyze in-game economy systems including soft and hard currency source-sink balance, inflation projection modeling, loot table drop rate fairness and pity system evaluation, gacha probability disclosure, player marketplace health and price manipulation risks, pay-to-win power gap detection, economy stress testing for hoarder-whale-grinder-casual player archetypes, and currency exploit detection.
-version: "2.0.0"
+description: "Analyze in-game economy systems including soft and hard currency source-sink balance, inflation projection modeling, loot table drop rate fairness and pity system evaluation, gacha probability disclosure, player marketplace health and price manipulation risks."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

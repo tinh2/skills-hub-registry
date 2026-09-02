@@ -1,7 +1,7 @@
 ---
 name: codebase-health
-description: "Score your codebase 0-100 across complexity, coupling, cohesion, test coverage, documentation, churn hotspots, dependency health, and lint/type safety. Use when: 'how healthy is this codebase', 'check code quality', 'score my project', 'find tech debt hotspots', 'codebase assessment', 'what needs attention in this repo', 'health check', 'quality audit'."
-version: "2.0.0"
+description: "Score your codebase 0-100 across complexity, coupling, cohesion, test coverage, documentation, churn hotspots, dependency health, and lint/type safety. Triggers: 'how healthy is this codebase', 'check code quality', 'score my project', 'find tech debt hotspots'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

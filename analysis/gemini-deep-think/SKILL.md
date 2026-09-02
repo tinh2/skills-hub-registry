@@ -1,7 +1,7 @@
 ---
 name: gemini-deep-think
-description: "Whole-codebase analysis powered by Gemini 2.5 Pro's 2M token context window. Loads the entire repository into context, runs Deep Think extended reasoning to surface architecture issues, technical debt, security vulnerabilities, and performance bottlenecks across all files simultaneously — then produces a prioritized P0/P1/P2 remediation plan with file-precise citations. Use when bounded per-module analysis misses inter-module patterns or when you need a full-graph view before a major refactor."
-version: "1.0.0"
+description: "Whole-codebase analysis powered by Gemini 2.5 Pro's 2M token context window. Triggers: bounded per-module analysis misses inter-module patterns or when you need a full-graph view before a major refactor."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

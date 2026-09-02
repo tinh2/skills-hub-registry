@@ -1,7 +1,7 @@
 ---
 name: elder-care-ops
-description: Audit an assisted living or elder care platform for resident safety and operational quality. Evaluates vital sign monitoring, fall detection and prevention, medication administration (eMAR) safety, staff scheduling with continuity of care, ADL tracking and functional decline detection, family communication portals, and care plan optimization. Use when building or reviewing senior living software, nursing home management systems, or home health platforms.
-version: "2.0.0"
+description: "Audit an assisted living or elder care platform for resident safety and operational quality. Triggers: building or reviewing senior living software, nursing home management systems, or home health platforms."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: credit-risk
-description: Audit credit risk modeling software for scoring algorithm accuracy, regulatory compliance (ECOA, FCRA, SR 11-7), bias and disparate impact testing, model governance lifecycle, and explainability. Covers logistic regression, GBM, neural net evaluation, protected class proxy detection, adverse action notice generation, SHAP/LIME explainability, champion-challenger frameworks, and PSI drift monitoring. Use when reviewing lending platforms, underwriting engines, credit scoring APIs, fintech decisioning systems, or any codebase that scores creditworthiness or generates approval/denial decisions.
-version: "2.0.0"
+description: "Audit credit risk modeling software for scoring algorithm accuracy, regulatory compliance (ECOA, FCRA, SR 11-7), bias and disparate impact testing, model governance lifecycle, and explainability.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

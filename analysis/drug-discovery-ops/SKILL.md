@@ -1,7 +1,7 @@
 ---
 name: drug-discovery-ops
-description: Audit a drug discovery pipeline for operational efficiency and scientific rigor. Evaluates compound library management, HTS screening workflows, hit-to-lead optimization, ADMET prediction model quality, clinical candidate selection gates, and IND readiness. Use when building or reviewing pharma R&D platforms, cheminformatics pipelines, or screening data management systems.
-version: "2.0.0"
+description: "Audit a drug discovery pipeline for operational efficiency and scientific rigor. Triggers: building or reviewing pharma R&D platforms, cheminformatics pipelines, or screening data management systems."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

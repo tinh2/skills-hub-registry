@@ -1,7 +1,7 @@
 ---
 name: growth-audit
-description: Audit a product codebase for growth readiness using the AARRR pirate metrics framework. Scans actual code for SEO implementation, onboarding friction, retention hooks, monetization flows, and referral mechanics. Checks meta tags, notification systems, email triggers, sharing features, and conversion funnels against growth engineering best practices. Use when launching a new product, diagnosing low conversion, or planning a growth sprint.
-version: "2.0.0"
+description: "Audit a product codebase for growth readiness using the AARRR pirate metrics framework. Triggers: launching a new product, diagnosing low conversion, or planning a growth sprint."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

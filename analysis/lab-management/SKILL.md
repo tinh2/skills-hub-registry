@@ -1,7 +1,7 @@
 ---
 name: lab-management
-description: Audit laboratory management systems -- chemical inventory (SDS, GHS, CAS tracking), equipment lifecycle and calibration scheduling, safety compliance (OSHA 29 CFR 1910.1450, Chemical Hygiene Plans, biosafety levels), hazardous waste management (EPA 40 CFR 260-270), training record enforcement, and SOP/protocol version control. Use when reviewing university, corporate, or government lab software handling reagent tracking, instrument reservations, EH&S inspections, or waste stream classification.
-version: "2.0.0"
+description: "Audit laboratory management systems -- chemical inventory (SDS, GHS, CAS tracking), equipment lifecycle and calibration scheduling, safety compliance (OSHA 29 CFR 1910.1450, Chemical Hygiene Plans, biosafety levels), hazardous waste management (EPA 40 CFR 260-270)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,27 +1,7 @@
 ---
 name: app-store-optimization
-description: >
-  Analyzes App Store and Play Store listing optimization -- keyword research, title optimization,
-  screenshot conversion analysis, A/B testing setup, review sentiment analysis, competitor gaps,
-  and localization coverage.
-
-  USE THIS SKILL WHEN:
-  - You want to improve your app's discoverability or ranking in app stores
-  - Someone asks about ASO, keyword optimization, or store listing improvements
-  - Your app has low conversion rates from impressions to installs
-  - You need to audit your Fastlane metadata or store listing assets
-  - Someone asks about screenshot best practices or preview video strategy
-  - You want to analyze competitor store listings for keyword gaps
-  - You need to plan A/B tests for store listing elements
-  - Your app has poor ratings and you want to understand review sentiment
-  - You are expanding to new markets and need localization guidance
-  - Someone mentions "keyword field", "subtitle optimization", or "feature graphic"
-
-  TRIGGER PHRASES: "ASO", "app store optimization", "keyword research", "store listing",
-  "app ranking", "app conversion", "screenshot optimization", "app reviews",
-  "Play Store listing", "App Store listing", "app discoverability", "store metadata",
-  "app keywords", "competitor analysis app store", "localization app store"
-version: "2.0.0"
+description: "Analyzes App Store and Play Store listing optimization -- keyword research, title optimization, screenshot conversion analysis, A/B testing setup, review sentiment analysis, competitor gaps, and localization coverage.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

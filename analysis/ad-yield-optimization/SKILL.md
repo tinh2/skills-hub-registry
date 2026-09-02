@@ -1,24 +1,7 @@
 ---
 name: ad-yield-optimization
-description: >
-  Analyzes advertising yield across programmatic and direct-sold inventory including CPM/CPC/CPA
-  performance, header bidding efficiency, fill rate optimization, inventory monetization strategies,
-  and compliance with IAB standards and OpenRTB protocols.
-
-  USE THIS SKILL WHEN:
-  - You need to audit ad revenue performance or diagnose yield drops
-  - Someone asks about header bidding configuration or Prebid.js optimization
-  - You are analyzing fill rates, eCPM trends, or ad unit performance
-  - A project involves programmatic advertising, SSP integration, or ad serving
-  - You need to verify ads.txt, sellers.json, or supply chain compliance
-  - Someone mentions CPM floors, bid density, or auction dynamics
-  - You are evaluating ad quality controls, viewability, or ad-related UX impact
-  - A codebase integrates Google Ad Manager, AdMob, Prebid, or any SSP
-
-  TRIGGER PHRASES: "ad yield", "eCPM", "fill rate", "header bidding", "Prebid",
-  "programmatic ads", "ad monetization", "CPM optimization", "ad revenue",
-  "ads.txt", "ad serving", "SSP", "ad unit performance", "viewability"
-version: "2.0.0"
+description: "Analyzes advertising yield across programmatic and direct-sold inventory including CPM/CPC/CPA performance, header bidding efficiency, fill rate optimization, inventory monetization strategies, and compliance with IAB standards and OpenRTB protocols.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

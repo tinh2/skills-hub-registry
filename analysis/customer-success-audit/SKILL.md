@@ -1,7 +1,7 @@
 ---
 name: customer-success-audit
-description: Audit any product from a Customer Success Manager perspective -- evaluate onboarding flow completeness, self-service help infrastructure, customer health signal tracking, support channel accessibility, expansion and retention triggers, and customer communication systems. Covers first-run experience, time-to-value measurement, tooltip and contextual help coverage, analytics event tracking (Mixpanel, Amplitude, Segment), error message quality, feedback collection (NPS/CSAT), plan-based feature gating, upgrade prompts, churn risk indicators, and email drip sequences. Use when assessing product-market fit signals, preparing for CS team onboarding, evaluating customer retention architecture, or auditing any B2B or B2C product for customer lifecycle completeness.
-version: "2.0.0"
+description: "Audit any product from a Customer Success Manager perspective -- evaluate onboarding flow completeness, self-service help infrastructure, customer health signal tracking, support channel accessibility, expansion and retention triggers, and customer communication systems."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

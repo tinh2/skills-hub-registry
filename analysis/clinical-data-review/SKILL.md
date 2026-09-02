@@ -1,7 +1,7 @@
 ---
 name: clinical-data-review
-description: "Review clinical data models and APIs for HL7 FHIR conformance, terminology standards, interoperability, and clinical workflow correctness. Use when: 'check FHIR compliance', 'review clinical data model', 'audit HL7 conformance', 'validate medical terminology codes', 'assess interoperability readiness', 'check SNOMED/LOINC/ICD-10 usage', 'review EHR data layer'."
-version: "2.0.0"
+description: "Review clinical data models and APIs for HL7 FHIR conformance, terminology standards, interoperability, and clinical workflow correctness. Triggers: 'check FHIR compliance', 'review clinical data model', 'audit HL7 conformance', 'validate medical terminology codes'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

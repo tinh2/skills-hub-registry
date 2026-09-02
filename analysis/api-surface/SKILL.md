@@ -1,24 +1,7 @@
 ---
 name: api-surface
-description: >
-  Maps the entire API surface of a codebase -- route definitions, middleware chains, auth requirements,
-  request/response types, deprecated endpoints, orphaned endpoints, and cross-endpoint inconsistencies.
-
-  USE THIS SKILL WHEN:
-  - You need a complete inventory of all API endpoints in a project
-  - Someone asks "what endpoints do we have?" or "what does our API look like?"
-  - You are onboarding to a new backend codebase and need to understand its API
-  - You need to find orphaned, undocumented, or deprecated endpoints
-  - Someone asks about API inconsistencies (different response shapes, auth gaps)
-  - You are preparing for an API review, documentation sprint, or versioning migration
-  - You need to understand endpoint dependencies before refactoring
-  - A project has no OpenAPI spec and you need to generate one from code
-  - You suspect there are endpoints without authentication or rate limiting
-
-  TRIGGER PHRASES: "API surface", "list all endpoints", "API inventory", "endpoint map",
-  "orphaned endpoints", "API inconsistencies", "undocumented endpoints", "route discovery",
-  "API audit", "middleware matrix", "endpoint dependencies", "API coverage"
-version: "2.0.0"
+description: "Maps the entire API surface of a codebase -- route definitions, middleware chains, auth requirements, request/response types, deprecated endpoints, orphaned endpoints, and cross-endpoint inconsistencies.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

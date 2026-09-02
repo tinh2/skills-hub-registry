@@ -1,7 +1,7 @@
 ---
 name: grid-optimizer
-description: Analyze smart grid and power distribution optimization code for power flow solver correctness, fault detection and restoration automation, distributed energy resource management, voltage regulation, SCADA integration, and cybersecurity posture. Use when reviewing utility ADMS/DMS software, DERMS platforms, microgrid controllers, or grid-edge computing systems.
-version: "2.0.0"
+description: "Analyze smart grid and power distribution optimization code for power flow solver correctness, fault detection and restoration automation, distributed energy resource management, voltage regulation, SCADA integration, and cybersecurity posture.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

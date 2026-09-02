@@ -1,7 +1,7 @@
 ---
 name: ai-citation-optimizer
-description: "Rewrites existing landing pages, blog posts, and documentation so AI search engines (Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini) cite them. Applies the 2026 AEO pattern: 40-80 word direct answer at top, 4-intent classification (definitional / process / comparative / decision), Article + FAQPage + Organization schema, verified authorship, entity-consistent claims. Use when an existing page underperforms in AI answers despite ranking well in classic SERPs."
-version: "1.0.0"
+description: "Rewrites existing landing pages, blog posts, and documentation so AI search engines (Google AI Overviews, ChatGPT, Perplexity, Claude, Gemini) cite them. Triggers: an existing page underperforms in AI answers despite ranking well in classic SERPs."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,8 +1,7 @@
 ---
 name: cnc-furniture
-description: >-
-  Design CNC-ready modular, interlocking, flat-pack furniture and functional objects from sheet materials (plywood, MDF, acrylic) with slot/tab joinery, precise tolerances, full parts lists, cut layouts, assembly instructions, and CAD export guidance — no fasteners required.
-version: "1.0.0"
+description: "Design CNC-ready modular, interlocking, flat-pack furniture and functional objects from sheet materials (plywood, MDF, acrylic) with slot/tab joinery, precise tolerances, full parts lists, cut layouts, assembly instructions, and CAD export guidance — no fasteners required."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

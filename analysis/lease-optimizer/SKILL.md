@@ -1,7 +1,7 @@
 ---
 name: lease-optimizer
-description: Audit commercial lease optimization software -- lease abstraction quality, rent optimization (market comparison, net effective rent, blend-and-extend modeling), ASC 842/IFRS 16 accounting compliance (ROU assets, lease liabilities, discount rate methodology, modification remeasurement), portfolio analytics (occupancy cost ratios, expiration profiles, concentration risk), and renewal vs. relocation strategy. Use when reviewing corporate real estate platforms, lease accounting systems (LeaseAccelerator, Visual Lease, Nakisa), or any codebase calculating present value of lease obligations or modeling rent scenarios.
-version: "2.0.0"
+description: "Audit commercial lease optimization software -- lease abstraction quality, rent optimization (market comparison, net effective rent, blend-and-extend modeling), ASC 842/IFRS 16 accounting compliance (ROU assets, lease liabilities, discount rate methodology, modification remeasurement)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

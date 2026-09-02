@@ -1,7 +1,7 @@
 ---
 name: litigation-predictor
-description: Audit litigation analytics and case outcome prediction systems -- ML outcome models (logistic regression, gradient boosting, neural nets with temporal train/test splits), settlement range modeling (Monte Carlo simulation, comparable case matching, BATNA analysis), litigation cost forecasting by phase, judge profiling and venue analysis (win rates, motion grant rates, bias safeguards), precedent matching engines (semantic search, citation graph traversal, authority ranking), statute of limitations tracking with tolling rules, and damages calculators (present value, treble damages, fee-shifting). Use when reviewing legal tech platforms, case analytics tools, or any codebase predicting case outcomes, estimating settlement values, or calculating litigation budgets.
-version: "2.0.0"
+description: "Audit litigation analytics and case outcome prediction systems -- ML outcome models (logistic regression, gradient boosting, neural nets with temporal train/test splits), settlement range modeling (Monte Carlo simulation, comparable case matching, BATNA analysis)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

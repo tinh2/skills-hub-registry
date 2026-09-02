@@ -1,16 +1,7 @@
 ---
 name: bundle-analysis
-description: >
-  Analyze frontend bundle size, detect heavy dependencies, find duplicates, evaluate
-  tree-shaking, recommend code splitting, and generate size budget configs.
-  USE THIS SKILL WHEN: user mentions bundle size, JavaScript bundle, webpack analysis,
-  slow page load from large bundles, tree-shaking, code splitting, heavy dependencies,
-  duplicate packages, vendor chunk, DIM weight of JS, or performance budget.
-  Trigger phrases: "analyze bundle size", "why is my bundle so big", "find heavy dependencies",
-  "reduce bundle size", "code splitting opportunities", "tree-shaking not working",
-  "duplicate packages in bundle", "set up size budget", "vendor chunk too large",
-  "initial load too slow", "optimize webpack output", "vite build analysis".
-version: "2.0.0"
+description: "Analyze frontend bundle size, detect heavy dependencies, find duplicates, evaluate tree-shaking, recommend code splitting, and generate size budget configs. Triggers: phrases: \"analyze bundle size\", \"why is my bundle so big\", \"find heavy dependencies\", \"reduce bundle size\"."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

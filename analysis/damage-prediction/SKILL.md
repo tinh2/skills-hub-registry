@@ -1,7 +1,7 @@
 ---
 name: damage-prediction
-description: Audit transit damage prediction and prevention systems for packaging failure mode analysis, handling chain risk assessment, claims pattern detection, and protection level optimization. Covers ISTA/ASTM test protocol correlation, product fragility profiling (G-level sensitivity), carrier handling characterization, last-mile risk factors, route-level damage scoring, IoT sensor integration (shock, tilt, temperature), cost-optimal packaging tier modeling per MIL-HDBK-304, and continuous improvement feedback loops. Use when reviewing e-commerce fulfillment platforms, shipping and logistics software, packaging engineering tools, claims management systems, or any codebase that tracks, predicts, or prevents transit damage to shipped goods.
-version: "2.0.0"
+description: "Audit transit damage prediction and prevention systems for packaging failure mode analysis, handling chain risk assessment, claims pattern detection, and protection level optimization.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

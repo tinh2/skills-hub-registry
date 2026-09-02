@@ -1,7 +1,7 @@
 ---
 name: expansion-modeling
-description: Analyze franchise expansion plans, model new market entry, score site selection candidates, map territory density, assess cannibalization risk, and build multi-year growth scenarios. Covers market feasibility scoring, Huff gravity models, trade area overlap analysis, white space identification, and unit-level investment returns for franchise development teams.
-version: "2.0.0"
+description: "Analyze franchise expansion plans, model new market entry, score site selection candidates, map territory density, assess cannibalization risk, and build multi-year growth scenarios."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: disability-services
-description: Analyze disability services software — IEP and ISP management, person-centered planning workflows, HCBS Settings Rule compliance, accommodation tracking, assistive technology integration, EVV (Electronic Visit Verification), caregiver and DSP scheduling, and outcome measurement. Audit platforms serving individuals with intellectual, developmental, physical, and psychiatric disabilities for regulatory compliance and person-centered quality.
-version: "2.0.0"
+description: "Analyze disability services software — IEP and ISP management, person-centered planning workflows, HCBS Settings Rule compliance, accommodation tracking, assistive technology integration, EVV (Electronic Visit Verification), caregiver and DSP scheduling, and outcome measurement."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

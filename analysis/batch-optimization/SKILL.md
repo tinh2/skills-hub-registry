@@ -1,14 +1,7 @@
 ---
 name: batch-optimization
-description: >
-  Analyze pharmaceutical batch production records for yield optimization, process parameter tuning,
-  deviation trending, and cycle time reduction under cGMP compliance.
-  USE THIS SKILL WHEN: user mentions batch records, pharma manufacturing, yield optimization,
-  cGMP, process parameters, deviation analysis, batch production, pharmaceutical cycle time,
-  process capability (Cpk), or drug manufacturing quality. Trigger phrases: "optimize batch yield",
-  "analyze batch records", "pharma manufacturing analysis", "process parameter tuning",
-  "deviation trending", "cycle time reduction", "cGMP compliance review".
-version: "2.0.0"
+description: "Analyze pharmaceutical batch production records for yield optimization, process parameter tuning, deviation trending, and cycle time reduction under cGMP compliance. Triggers: phrases: \"optimize batch yield\", \"analyze batch records\", \"pharma manufacturing analysis\"."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

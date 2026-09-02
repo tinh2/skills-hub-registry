@@ -1,7 +1,7 @@
 ---
 name: kyc-aml-screener
-description: Generate a production-grade KYC / AML / sanctions screening pipeline for customer onboarding, transaction monitoring, and ongoing review. Screens against OFAC SDN, OFAC Consolidated, EU sanctions, UK HMT, UN Security Council, plus PEP (politically exposed persons), adverse media, and UBO (ultimate beneficial owner) traces. Implements fuzzy name matching (Damerau-Levenshtein + Jaro-Winkler), alias awareness, transliteration handling (Cyrillic/Arabic/Hangul to Latin), geo correlation, DOB matching, and configurable match thresholds to reduce the false-positive rate that buries compliance teams. Generates: list ingestion + nightly refresh, customer screening API, batch rescreening cron, watchlist diff detection (alert when an existing customer becomes newly listed), case management UI scaffold with disposition (clear / escalate / SAR), and SAR (Suspicious Activity Report) FinCEN Form 111 prep helpers. 70%+ of 2026 onboarding is automated via these systems. TRIGGER on "KYC", "AML", "OFAC", "sanctions screening", "PEP", "watchlist", "compliance onboarding", "FinCEN", "BSA", "SAR", "CIP", "CDD", "EDD", "ultimate beneficial owner", "UBO", "FATF", "MLRO".
-version: "1.0.0"
+description: "Generate a production-grade KYC / AML / sanctions screening pipeline for customer onboarding, transaction monitoring, and ongoing review. Triggers: \"KYC\", \"AML\", \"OFAC\", \"sanctions screening\", \"PEP\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

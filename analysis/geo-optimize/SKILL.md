@@ -1,7 +1,7 @@
 ---
 name: geo-optimize
-description: Generative Engine Optimization (GEO) / Answer Engine Optimization (AEO) — make a site citable by ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews. Generates llms.txt and llms-full.txt, fills schema.org coverage gaps (Organization, Person/Author, Article, Product, FAQPage, HowTo, BreadcrumbList), audits entity density (target 15+ recognized entities per pillar page → 4.8x AI Overview selection rate), tests AI crawler parity (fetches as GPTBot / PerplexityBot / OAI-SearchBot / ClaudeBot and confirms content visibility without JS), audits E-E-A-T author entity signals (Person → Organization → topic graph), and produces a prioritized GEO punch list. TRIGGER on "GEO", "generative engine optimization", "AEO", "answer engine optimization", "AI search optimization", "get cited by ChatGPT", "Perplexity citations", "AI Overviews", "llms.txt", "schema markup", "entity SEO", "topical authority", "AI search visibility". GEO is distinct from traditional SEO — invoke this skill whenever a user wants to be discovered by AI search agents specifically.
-version: "1.0.0"
+description: "Generative Engine Optimization (GEO) / Answer Engine Optimization (AEO) — make a site citable by ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews. Triggers: \"GEO\", \"generative engine optimization\", \"AEO\", \"answer engine optimization\", \"AI search optimization\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

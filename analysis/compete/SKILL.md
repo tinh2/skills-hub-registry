@@ -1,7 +1,7 @@
 ---
 name: compete
-description: "Competitive intelligence and market positioning analysis. Researches competitors, compares features, pricing, and tech stacks, then produces a prioritized gap analysis with actionable roadmap. Trigger on: competitors, competitive analysis, gap analysis, feature comparison, market research, what are we missing, who are our competitors, pricing comparison, market positioning."
-version: "2.0.0"
+description: "Competitive intelligence and market positioning analysis. Researches competitors, compares features, pricing, and tech stacks, then produces a prioritized gap analysis with actionable roadmap.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

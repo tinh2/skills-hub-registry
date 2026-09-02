@@ -1,7 +1,7 @@
 ---
 name: ai-citation-tracker
-description: Track brand mentions, URL citations, and share-of-voice across the 2026 AI search surface — ChatGPT (with browsing), Perplexity, Claude (with search), Google Gemini, Google AI Overviews, Bing Copilot, You.com, Phind, and Microsoft Copilot. Polls a configurable query set per engine on a schedule; logs whether your brand was mentioned, whether your URL was cited, who your competitors were, and how all of that moved week over week. Outputs share-of-voice dashboards, weekly delta reports, competitor matrices, and citation-gap analysis (queries where you SHOULD be cited but aren't). Closes the single biggest gap in legacy SEO platforms — Visibly AI / Semrush / Ahrefs / Moz / Conductor all under-cover this surface in 2026, even though AI Overviews now answer 30%+ of informational queries with zero clicks. TRIGGER on "AI citation tracking", "share of voice AI", "ChatGPT citations", "Perplexity citations", "AI Overview tracking", "brand mentions in AI", "LLM visibility", "GEO tracking", "AEO measurement", "AI search analytics", "track Claude citations".
-version: "1.0.0"
+description: "Track brand mentions, URL citations, and share-of-voice across the 2026 AI search surface — ChatGPT (with browsing), Perplexity, Claude (with search), Google Gemini, Google AI Overviews, Bing Copilot, You.com, Phind, and Microsoft Copilot.."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

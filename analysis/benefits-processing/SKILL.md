@@ -1,16 +1,7 @@
 ---
 name: benefits-processing
-description: >
-  Analyze government benefits processing software for eligibility determination, application
-  workflow efficiency, document verification, error rates, appeal tracking, multi-program
-  coordination, and ADA/Section 508 compliance.
-  USE THIS SKILL WHEN: user mentions benefits eligibility, SNAP, Medicaid, TANF, WIC,
-  government assistance programs, social services software, eligibility rules engine,
-  caseworker workflow, benefits application processing, or Section 508 accessibility.
-  Trigger phrases: "analyze benefits system", "eligibility determination review",
-  "benefits processing audit", "government program compliance", "caseworker workflow analysis",
-  "appeal tracking review", "benefits application efficiency".
-version: "2.0.0"
+description: "Analyze government benefits processing software for eligibility determination, application workflow efficiency, document verification, error rates, appeal tracking, multi-program coordination, and ADA/Section 508 compliance.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

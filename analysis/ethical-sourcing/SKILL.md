@@ -1,7 +1,7 @@
 ---
 name: ethical-sourcing
-description: Audit a supply chain compliance system for ethical sourcing and labor rights. Evaluates supplier audit programs (SMETA, BSCI), forced labor due diligence (UFLPA, Modern Slavery Act), environmental impact tracking (ZDHC, GHG Protocol), certification management (WRAP, SA8000, OEKO-TEX, GOTS, GRS, Higg Index), corrective action workflows, and multi-tier supply chain transparency. Use when building or reviewing supply chain compliance platforms, ESG reporting systems, or textile/garment sourcing tools.
-version: "2.0.0"
+description: "Audit a supply chain compliance system for ethical sourcing and labor rights. Triggers: building or reviewing supply chain compliance platforms, ESG reporting systems, or textile/garment sourcing tools."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

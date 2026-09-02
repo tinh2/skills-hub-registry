@@ -1,7 +1,7 @@
 ---
 name: content-performance
-description: "Analyze content engagement metrics, audience retention, attribution models, A/B test results, and recommendation engine effectiveness. Use when: 'audit content metrics', 'evaluate recommendation engine', 'review retention curves', 'assess content A/B tests', 'analyze streaming performance', 'check content attribution', 'evaluate personalization quality', 'benchmark content engagement'."
-version: "2.0.0"
+description: "Analyze content engagement metrics, audience retention, attribution models, A/B test results, and recommendation engine effectiveness. Triggers: 'audit content metrics', 'evaluate recommendation engine', 'review retention curves', 'assess content A/B tests'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

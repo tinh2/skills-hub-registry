@@ -1,7 +1,7 @@
 ---
 name: game-performance
-description: Analyze game code for performance bottlenecks including draw call batching and overdraw, shader complexity and LOD strategy, per-frame GC allocation pressure, object pooling gaps, physics timestep and collision matrix tuning, spatial partitioning for entity queries, async scene loading and asset streaming, mobile thermal throttling, WebGL bundle size, and frame budget compliance for 30/60/90 FPS targets on Unity, Unreal, and Godot engines.
-version: "2.0.0"
+description: "Analyze game code for performance bottlenecks including draw call batching and overdraw, shader complexity and LOD strategy, per-frame GC allocation pressure, object pooling gaps, physics timestep and collision matrix tuning, spatial partitioning for entity queries."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

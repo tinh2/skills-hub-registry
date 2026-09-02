@@ -1,7 +1,7 @@
 ---
 name: fundraising-optimizer
-description: Analyze nonprofit fundraising software for RFM donor segmentation, campaign performance modeling with A/B testing, recurring giving retention and failed payment recovery, major gift prospect scoring using capacity-affinity-propensity frameworks, event ROI calculation, multi-touch channel attribution, gift officer portfolio management, and donor data quality hygiene.
-version: "2.0.0"
+description: "Analyze nonprofit fundraising software for RFM donor segmentation, campaign performance modeling with A/B testing, recurring giving retention and failed payment recovery, major gift prospect scoring using capacity-affinity-propensity frameworks, event ROI calculation."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

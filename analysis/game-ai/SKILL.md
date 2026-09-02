@@ -1,7 +1,7 @@
 ---
 name: game-ai
-description: Analyze game AI systems including behavior trees, finite state machines, GOAP planning, utility AI scoring, A-star and NavMesh pathfinding, steering and flocking behaviors, perception and awareness models, dynamic difficulty adjustment, NPC dialogue trees and scheduling, boss AI patterns, and AI debug visualization tools for Unity, Unreal, and Godot projects.
-version: "2.0.0"
+description: "Analyze game AI systems including behavior trees, finite state machines, GOAP planning, utility AI scoring, A-star and NavMesh pathfinding, steering and flocking behaviors, perception and awareness models, dynamic difficulty adjustment, NPC dialogue trees and scheduling, boss AI patterns."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

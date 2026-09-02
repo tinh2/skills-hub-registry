@@ -1,7 +1,7 @@
 ---
 name: lease-compliance
-description: Audit commercial lease compliance systems -- CAM reconciliation accuracy (pro-rata share, caps, admin fees), lease abstraction completeness, critical date tracking and deadline alerting, clause compliance monitoring (insurance certificates, permitted use, co-tenancy), tenant obligation enforcement, and ASC 842/IFRS 16 lease accounting (ROU assets, lease liabilities, discount rates). Use when reviewing CRE property management software, lease administration platforms (Yardi, MRI, CoStar), or any codebase handling NNN leases, tenant billing, or lease portfolio analytics.
-version: "2.0.0"
+description: "Audit commercial lease compliance systems -- CAM reconciliation accuracy (pro-rata share, caps, admin fees), lease abstraction completeness, critical date tracking and deadline alerting, clause compliance monitoring (insurance certificates, permitted use, co-tenancy)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

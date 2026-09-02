@@ -1,7 +1,7 @@
 ---
 name: game-monetization
-description: Analyze game monetization implementations including IAP purchase flow and server-side receipt validation, ad mediation waterfall and rewarded video placement, subscription lifecycle and grace period handling, battle pass XP progression, loot box probability disclosure for regulatory compliance, regional pricing tiers, COPPA and GDPR consent, refund revocation, anti-predatory pattern detection, and revenue conversion optimization.
-version: "2.0.0"
+description: "Analyze game monetization implementations including IAP purchase flow and server-side receipt validation, ad mediation waterfall and rewarded video placement, subscription lifecycle and grace period handling, battle pass XP progression."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

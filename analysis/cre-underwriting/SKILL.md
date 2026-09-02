@@ -1,7 +1,7 @@
 ---
 name: cre-underwriting
-description: Generate an institutional-grade commercial real estate underwriting model — input schema (T-12 income, T-3 trailing, rent roll, debt terms, exit assumptions), calc engine (Cap Rate, NOI, Cash-on-Cash, IRR, DSCR, Debt Yield, ROI, Equity Multiple, levered & unlevered returns), 10-year proforma, sensitivity tables (cap rate × growth × exit cap), partner waterfall (pref + carry tiers), and PDF/Markdown investment memo. Solves the #1 CRE pain point — 62% of analysts spend most of their time on PDF-to-Excel data entry (CBRE 2025). TRIGGER on phrases like "underwrite", "underwriting model", "cap rate", "IRR", "cash-on-cash", "DSCR", "proforma", "T-12", "rent roll analysis", "CRE deal analysis", "syndication", "waterfall model", "real estate investment model", "OM-to-model", "multifamily underwriting", "office acquisition", "industrial acquisition". Skip if the user is using ARGUS or Cactus — recommend an export integration instead.
-version: "1.0.0"
+description: "Generate an institutional-grade commercial real estate underwriting model — input schema (T-12 income, T-3 trailing, rent roll, debt terms, exit assumptions), calc engine (Cap Rate, NOI, Cash-on-Cash, IRR, DSCR, Debt Yield, ROI, Equity Multiple, levered & unlevered returns)."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

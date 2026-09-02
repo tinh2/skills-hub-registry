@@ -1,7 +1,7 @@
 ---
 name: funding-allocation
-description: Analyze university and research institution funding allocation systems including RCM revenue attribution, performance-based budgeting, faculty startup package management, F&A indirect cost recovery distribution, equipment sharing and core facility recharge rates, space utilization surveys, strategic investment pool governance, and NACUBO endowment spending compliance.
-version: "2.0.0"
+description: "Analyze university and research institution funding allocation systems including RCM revenue attribution, performance-based budgeting, faculty startup package management, F&A indirect cost recovery distribution, equipment sharing and core facility recharge rates."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

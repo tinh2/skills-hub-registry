@@ -1,7 +1,7 @@
 ---
 name: deep-research
-description: "Run multi-source web research with adversarial verification and produce a cited report: decomposes the question into 3-6 distinct queries (broad, specific, comparative, recency-anchored), searches and ranks sources by authority, recency, and specificity, fetches the top 5-10 and extracts facts with per-fact source IDs, then runs an adversarial pass that actively searches for evidence CONTRADICTING each key claim, and synthesizes a themed report with a TL;DR, inline [n] citations, an explicit conflicts section, and coverage caveats, saved to ~/research-reports/ and printed inline. Use when the user says: research this topic, deep dive on X, what's the current state of X, compare X vs Y with sources, find evidence for/against, fact-checked report, is it true that X, literature scan, market scan, due diligence on X, cited summary of X."
-version: "2.0.0"
+description: "Run multi-source web research with adversarial verification and produce a cited report: decomposes the question into 3-6 distinct queries (broad, specific, comparative, recency-anchored), searches and ranks sources by authority, recency, and specificity."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

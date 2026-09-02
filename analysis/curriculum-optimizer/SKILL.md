@@ -1,7 +1,7 @@
 ---
 name: curriculum-optimizer
-description: Audit curriculum management software for learning outcome alignment, pacing guide optimization, standards coverage mapping (Common Core, NGSS, state standards), differentiation support, assessment design quality, and content gap detection across grade levels and subjects. Covers vertical and horizontal alignment analysis, Bloom's/Webb's DOK taxonomy usage, tiered differentiation for IEP and gifted learners, item analysis and reliability metrics, and LMS integration (Canvas, Schoology, Google Classroom). Use when reviewing ed-tech platforms, curriculum planning tools, assessment management systems, standards-based gradebook software, or any system that maps learning objectives to instructional content and assessments.
-version: "2.0.0"
+description: "Audit curriculum management software for learning outcome alignment, pacing guide optimization, standards coverage mapping (Common Core, NGSS, state standards), differentiation support, assessment design quality, and content gap detection across grade levels and subjects.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

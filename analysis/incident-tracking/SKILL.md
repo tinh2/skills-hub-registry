@@ -1,7 +1,7 @@
 ---
 name: incident-tracking
-description: Analyze a workplace safety incident tracking system for incident classification accuracy, root cause analysis depth, OSHA 300 log recordkeeping compliance, trend analysis capabilities, and leading indicator identification. Evaluates against ANSI Z10, ISO 45001, and OSHA 29 CFR 1904 standards. Use when building EHS software, auditing safety management systems, evaluating incident investigation quality, or preparing for OSHA inspections.
-version: "2.0.0"
+description: "Analyze a workplace safety incident tracking system for incident classification accuracy, root cause analysis depth, OSHA 300 log recordkeeping compliance, trend analysis capabilities, and leading indicator identification.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: 508-audit
-description: Run a full Section 508 + WCAG 2.2 Level AA accessibility audit on a federal / .gov / public-sector website or ICT product. Section 508 incorporates WCAG 2.0 AA as the binding federal standard, but most modern federal procurements now test against WCAG 2.2 AA (the 2024-incorporated update). Outputs the official compliance trio agencies require: (1) Voluntary Product Accessibility Template (VPAT® 2.5 Rev 508) covering all 508 chapters, (2) Accessibility Conformance Report (ACR) with each criterion marked Supports / Partially Supports / Does Not Support / Not Applicable + explanation, (3) Remediation plan with prioritized fixes (P0 blockers like keyboard traps, P1 perceivability fails, P2 cosmetic). Combines axe-core automated scan + manual keyboard / screen-reader / cognitive walkthrough findings. TRIGGER on "Section 508", "508 audit", "WCAG", "VPAT", "ACR", "federal accessibility", ".gov accessibility", "ADA Title II", "ICT accessibility", "accessibility audit for government", "GSA accessibility".
-version: "1.0.0"
+description: "Run a full Section 508 + WCAG 2.2 Level AA accessibility audit on a federal / .gov / public-sector website or ICT product. Triggers: \"Section 508\", \"508 audit\", \"WCAG\", \"VPAT\", \"ACR\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: defect-detection
-description: Analyze manufacturing defect detection and quality control systems — computer vision inspection pipelines, SPC control charts, Six Sigma process capability (Cp/Cpk), defect classification taxonomies, root cause analysis tooling, and measurement system analysis. Audit QC codebases for detection accuracy, false reject rates, statistical rigor, and traceability compliance.
-version: "2.0.0"
+description: "Analyze manufacturing defect detection and quality control systems — computer vision inspection pipelines, SPC control charts, Six Sigma process capability (Cp/Cpk), defect classification taxonomies, root cause analysis tooling, and measurement system analysis."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

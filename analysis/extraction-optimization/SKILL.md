@@ -1,7 +1,7 @@
 ---
 name: extraction-optimization
-description: Optimize mining extraction operations by analyzing ore grade control, processing plant throughput, metallurgical recovery rates, energy consumption, and water balance. Covers mine-to-mill reconciliation, comminution circuit tuning, flotation and leach kinetics, cut-off grade strategy, OEE analysis, and produces a prioritized improvement roadmap for mine operations teams.
-version: "2.0.0"
+description: "Optimize mining extraction operations by analyzing ore grade control, processing plant throughput, metallurgical recovery rates, energy consumption, and water balance."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

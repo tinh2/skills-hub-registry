@@ -1,7 +1,7 @@
 ---
 name: hr-ops
-description: Analyze an HR operations system for headcount planning effectiveness, attrition pattern detection, compensation benchmarking accuracy, workforce analytics maturity, and onboarding process optimization. Evaluates HRIS architecture, pay equity compliance, predictive attrition models, and people analytics governance against SHRM standards. Use when auditing HR tech platforms, building workforce planning tools, or assessing people analytics readiness.
-version: "2.0.0"
+description: "Analyze an HR operations system for headcount planning effectiveness, attrition pattern detection, compensation benchmarking accuracy, workforce analytics maturity, and onboarding process optimization.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

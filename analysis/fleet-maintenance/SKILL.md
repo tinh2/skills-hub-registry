@@ -1,7 +1,7 @@
 ---
 name: fleet-maintenance
-description: Analyze fleet maintenance programs for preventive maintenance scheduling effectiveness, parts inventory forecasting, vehicle downtime minimization, total cost of ownership modeling, and telematics integration. Covers DOT annual inspections, FMCSA DVIR requirements, ELD mandate compliance, condition-based maintenance from fault codes, PM compliance rates, and TCO replacement analysis.
-version: "2.0.0"
+description: "Analyze fleet maintenance programs for preventive maintenance scheduling effectiveness, parts inventory forecasting, vehicle downtime minimization, total cost of ownership modeling, and telematics integration."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

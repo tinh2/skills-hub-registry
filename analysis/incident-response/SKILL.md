@@ -1,7 +1,7 @@
 ---
 name: incident-response
-description: Analyze an incident response program for playbook coverage, MTTR optimization opportunities, evidence collection readiness, root cause analysis quality, and post-incident review effectiveness. Evaluates against NIST SP 800-61 and SANS frameworks. Use when building a SOC, assessing IR maturity, optimizing detection-to-recovery timelines, or preparing for compliance audits requiring IR documentation.
-version: "2.0.0"
+description: "Analyze an incident response program for playbook coverage, MTTR optimization opportunities, evidence collection readiness, root cause analysis quality, and post-incident review effectiveness. Triggers: building a SOC, assessing IR maturity, optimizing detection-to-recovery timelines."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

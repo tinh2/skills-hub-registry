@@ -1,17 +1,7 @@
 ---
 name: care-plan-optimizer
-description: >
-  Analyze mental health care planning systems for treatment goal alignment, intervention
-  scheduling, progress milestone tracking, multi-provider coordination, step-down/step-up
-  criteria, and individualized care pathway optimization.
-  USE THIS SKILL WHEN: user mentions care plan optimization, treatment planning, mental health
-  software, therapy scheduling, clinical goal tracking, level-of-care transitions, multi-provider
-  coordination, progress milestones, or recovery-oriented care systems.
-  Trigger phrases: "analyze care plan system", "treatment goal alignment review",
-  "intervention scheduling audit", "milestone tracking evaluation", "care coordination review",
-  "step-down criteria analysis", "care pathway optimization", "treatment planning system audit",
-  "multi-provider workflow review".
-version: "2.0.0"
+description: "Analyze mental health care planning systems for treatment goal alignment, intervention scheduling, progress milestone tracking, multi-provider coordination, step-down/step-up criteria, and individualized care pathway optimization.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

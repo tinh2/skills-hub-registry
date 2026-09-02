@@ -1,7 +1,7 @@
 ---
 name: level-design
-description: Audit game level design systems and procedural generation -- BSP room subdivision, Wave Function Collapse tile placement, cellular automata cave generation, Perlin noise terrain, chunk stitching, seed determinism, difficulty scaling curves, pacing rhythm (tension/rest analysis), navigation mesh quality (A*, flow fields, off-mesh links), spawn point distribution and fairness, collectible placement, and spatial design heuristics (wayfinding, sightlines, spatial rhythm). Use when reviewing roguelike, platformer, open-world, or any game codebase with tilemaps, procedural levels, enemy spawning, or pathfinding systems.
-version: "2.0.0"
+description: "Audit game level design systems and procedural generation -- BSP room subdivision, Wave Function Collapse tile placement, cellular automata cave generation, Perlin noise terrain, chunk stitching, seed determinism, difficulty scaling curves, pacing rhythm (tension/rest analysis)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

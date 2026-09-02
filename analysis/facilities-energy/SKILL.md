@@ -1,7 +1,7 @@
 ---
 name: facilities-energy
-description: Audit commercial building energy performance including HVAC optimization, ENERGY STAR scoring, utility cost analysis, demand response readiness, and sustainability compliance. Covers BMS/BAS systems, EUI benchmarking against CBECS and ASHRAE 90.1, lighting and plug load efficiency, on-site renewables, and local building performance standards like NYC LL97, Boston BERDO, and DC BEPS.
-version: "2.0.0"
+description: "Audit commercial building energy performance including HVAC optimization, ENERGY STAR scoring, utility cost analysis, demand response readiness, and sustainability compliance."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

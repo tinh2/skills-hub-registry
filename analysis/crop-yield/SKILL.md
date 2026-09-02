@@ -1,7 +1,7 @@
 ---
 name: crop-yield
-description: Audit precision agriculture and crop management software for yield prediction model accuracy, soil analysis integration, irrigation optimization algorithms, pest and disease detection pipelines, satellite and drone imagery processing, weather data integration, and harvest timing optimization. Covers NDVI/EVI index computation, DSSAT/APSIM crop simulation, variable-rate prescription map generation, Penman-Monteith ET estimation, GDD-based maturity modeling, and field-level data pipeline evaluation. Use when reviewing ag-tech platforms, farm management software, remote sensing pipelines, IoT sensor systems, or any codebase that predicts crop yields, optimizes inputs, or processes agricultural data.
-version: "2.0.0"
+description: "Audit precision agriculture and crop management software for yield prediction model accuracy, soil analysis integration, irrigation optimization algorithms, pest and disease detection pipelines, satellite and drone imagery processing, weather data integration."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

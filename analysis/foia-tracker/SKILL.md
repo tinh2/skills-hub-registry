@@ -1,7 +1,7 @@
 ---
 name: foia-tracker
-description: Manage the full Freedom of Information Act (FOIA) and state public records request lifecycle — intake form generation, agency-specific portal routing (FOIA.gov, FBI eFOIA, USCIS, FOIAonline successor portals), statutory clock tracking (20 working days federal + unusual circumstances tolling), exemption-aware redaction stub (b1 classified, b2 internal personnel rules, b3 statutory, b4 trade secrets, b5 deliberative, b6 personal privacy, b7 law enforcement, b8 financial institutions, b9 oil wells), appeal letter generator with case citations, response quality auditor (over-redaction detection, missing-page detection), and OPEN Government Act fee-waiver request templates. TRIGGER on "FOIA", "public records request", "5 U.S.C. § 552", "open records", "sunshine law", "freedom of information", "FOIA appeal", "FOIA redaction", "agency response", "FOIA backlog", "open government". Used by journalists, government accountability nonprofits, attorneys, agency FOIA officers, and researchers.
-version: "1.0.0"
+description: "Manage the full Freedom of Information Act (FOIA) and state public records request lifecycle — intake form generation, agency-specific portal routing (FOIA.gov, FBI eFOIA, USCIS, FOIAonline successor portals)."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

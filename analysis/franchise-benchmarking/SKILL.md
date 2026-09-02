@@ -1,7 +1,7 @@
 ---
 name: franchise-benchmarking
-description: Benchmark franchise locations by comparing top and bottom quartile performance across revenue, profitability, and operational scores. Covers same-store sales decomposition into traffic vs. ticket, KPI standardization across peer groups, operational audit correlation with financial results, NPS and online review analysis, mystery shop scoring, and brand standards compliance gaps.
-version: "2.0.0"
+description: "Benchmark franchise locations by comparing top and bottom quartile performance across revenue, profitability, and operational scores."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

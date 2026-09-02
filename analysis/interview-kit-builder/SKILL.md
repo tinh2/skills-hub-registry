@@ -1,7 +1,7 @@
 ---
 name: interview-kit-builder
-description: Generate a complete structured interview kit for a role — 3-5 role-specific competencies, one behavioral (STAR-format) question per competency, 1-5 scoring rubric with explicit behavioral anchors at each level, per-panel scorecards, interviewer debrief template, calibration session script, and a decision matrix. Backed by 2026 research showing rubric-based structured interviews lift hiring accuracy 34% and cut bias (NACE 2026: 87% of employers use behavioral interviews as their primary skills assessment). Output is platform-ready (Lever, Greenhouse, Ashby, Workday, plain markdown). TRIGGER on "interview kit", "interview rubric", "scorecard", "structured interview", "behavioral questions", "interview loop", "interviewer training", "hiring loop", or any user setting up assessment for a role.
-version: "1.0.0"
+description: "Generate a complete structured interview kit for a role — 3-5 role-specific competencies, one behavioral (STAR-format) question per competency, 1-5 scoring rubric with explicit behavioral anchors at each level, per-panel scorecards, interviewer debrief template."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

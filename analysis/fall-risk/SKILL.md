@@ -1,7 +1,7 @@
 ---
 name: fall-risk
-description: Evaluate elder care fall risk prediction systems including wearable sensor integration, gait and balance analytics, risk scoring algorithms, environmental hazard detection, medication interaction flagging, mobility trend tracking, and alert/response workflow effectiveness. Produces a system health scorecard across sensor data quality, model validation, and caregiver alert routing.
-version: "2.0.0"
+description: "Evaluate elder care fall risk prediction systems including wearable sensor integration, gait and balance analytics, risk scoring algorithms, environmental hazard detection, medication interaction flagging, mobility trend tracking, and alert/response workflow effectiveness."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

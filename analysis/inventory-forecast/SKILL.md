@@ -1,7 +1,7 @@
 ---
 name: inventory-forecast
-description: Audit demand forecasting models and inventory optimization logic -- forecast accuracy (MAPE, bias), safety stock calculations, reorder point strategies (EOQ, ROP, min/max), ABC/XYZ classification, demand signal pipelines, and multi-location network optimization. Use when reviewing supply chain software, warehouse management systems, or any codebase with SKU-level demand prediction and replenishment logic.
-version: "2.0.0"
+description: "Audit demand forecasting models and inventory optimization logic -- forecast accuracy (MAPE, bias), safety stock calculations, reorder point strategies (EOQ, ROP, min/max), ABC/XYZ classification, demand signal pipelines, and multi-location network optimization.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

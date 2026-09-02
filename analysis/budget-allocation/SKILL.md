@@ -1,16 +1,7 @@
 ---
 name: budget-allocation
-description: >
-  Analyze budget allocation systems for departmental budgeting, variance analysis, rolling
-  forecasts, zero-based budgeting, and capital allocation using FP&A frameworks and
-  driver-based planning methodologies.
-  USE THIS SKILL WHEN: user mentions budget planning, variance analysis, rolling forecasts,
-  zero-based budgeting, capital allocation, FP&A, departmental budgets, cost center analysis,
-  forecast accuracy, or budget vs actuals. Trigger phrases: "analyze budget process",
-  "variance analysis review", "forecast accuracy audit", "zero-based budgeting assessment",
-  "capital allocation review", "budget system evaluation", "FP&A workflow analysis",
-  "departmental budget review", "improve forecast accuracy".
-version: "2.0.0"
+description: "Analyze budget allocation systems for departmental budgeting, variance analysis, rolling forecasts, zero-based budgeting, and capital allocation using FP&A frameworks and driver-based planning methodologies.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

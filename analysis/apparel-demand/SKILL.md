@@ -1,26 +1,7 @@
 ---
 name: apparel-demand
-description: >
-  Analyzes apparel demand prediction systems for trend forecasting, size curve optimization,
-  color and style analytics, sell-through rate tracking, and markdown optimization following
-  CPFR collaborative planning and GTIN product identification standards.
-
-  USE THIS SKILL WHEN:
-  - You are reviewing a fashion or apparel demand planning system
-  - Someone asks about size curve optimization or sell-through analysis
-  - You need to evaluate trend forecasting accuracy or methodology
-  - A project involves markdown optimization or clearance strategy
-  - You are auditing assortment planning, OTB (open-to-buy), or inventory management
-  - Someone mentions WGSN, Trendalytics, or fashion trend integration
-  - You need to analyze color/style performance or product lifecycle management
-  - A codebase connects to POS, e-commerce, or wholesale order systems for demand signals
-  - Markdown rates are too high or sell-through is below target
-
-  TRIGGER PHRASES: "apparel demand", "size curve", "sell-through", "markdown optimization",
-  "fashion forecasting", "trend prediction", "assortment planning", "open-to-buy",
-  "inventory optimization apparel", "color analysis fashion", "style performance",
-  "demand planning fashion", "size allocation", "clearance strategy"
-version: "2.0.0"
+description: "Analyzes apparel demand prediction systems for trend forecasting, size curve optimization, color and style analytics, sell-through rate tracking, and markdown optimization following CPFR collaborative planning and GTIN product identification standards.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

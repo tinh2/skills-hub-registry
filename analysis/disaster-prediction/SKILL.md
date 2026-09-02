@@ -1,7 +1,7 @@
 ---
 name: disaster-prediction
-description: Analyze disaster prediction and early warning systems — model accuracy for flood, earthquake, wildfire, hurricane, and tsunami hazards, data pipeline reliability from sensor networks and satellite feeds, alert distribution latency and channel coverage, false positive/negative rate calibration, evacuation planning integration, and system resilience under disaster conditions. Audit emergency management software for prediction quality and operational readiness.
-version: "2.0.0"
+description: "Analyze disaster prediction and early warning systems — model accuracy for flood, earthquake, wildfire, hurricane, and tsunami hazards, data pipeline reliability from sensor networks and satellite feeds, alert distribution latency and channel coverage."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

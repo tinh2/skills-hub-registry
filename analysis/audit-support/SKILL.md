@@ -1,27 +1,7 @@
 ---
 name: audit-support
-description: >
-  Analyzes audit readiness systems for internal control testing, evidence collection workflows,
-  statistical sampling methodology, audit finding documentation, and remediation tracking using
-  PCAOB, ISA, and SOX compliance frameworks.
-
-  USE THIS SKILL WHEN:
-  - You are preparing for an internal or external audit and need a readiness assessment
-  - Someone asks about SOX compliance, control testing, or audit evidence management
-  - You need to evaluate sampling methodology (statistical vs. judgmental)
-  - A project involves GRC platforms (AuditBoard, Workiva, MetricStream, TeamMate)
-  - You are reviewing control design or operating effectiveness testing procedures
-  - Someone mentions material weakness, significant deficiency, or PCAOB standards
-  - You need to assess remediation tracking for open audit findings
-  - IT general controls (ITGC) need evaluation (access management, change management)
-  - Finding documentation quality is poor or repeat findings keep occurring
-  - You need to verify evidence collection workflows meet audit standards
-
-  TRIGGER PHRASES: "audit readiness", "SOX compliance", "internal controls", "audit evidence",
-  "sampling methodology", "audit findings", "remediation tracking", "PCAOB", "control testing",
-  "material weakness", "ITGC", "GRC platform", "audit workpapers", "control deficiency",
-  "audit preparation", "evidence collection"
-version: "2.0.0"
+description: "Analyzes audit readiness systems for internal control testing, evidence collection workflows, statistical sampling methodology, audit finding documentation, and remediation tracking using PCAOB, ISA, and SOX compliance frameworks.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

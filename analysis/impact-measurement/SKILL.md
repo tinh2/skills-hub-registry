@@ -1,7 +1,7 @@
 ---
 name: impact-measurement
-description: Analyze program impact measurement software for logic model completeness, indicator tracking rigor, data collection methodology, causal attribution modeling, cost-effectiveness analysis, beneficiary feedback integration, and funder reporting accuracy. Use when building M&E platforms, evaluating nonprofit program software, designing outcome tracking systems, or auditing social impact reporting tools.
-version: "2.0.0"
+description: "Analyze program impact measurement software for logic model completeness, indicator tracking rigor, data collection methodology, causal attribution modeling, cost-effectiveness analysis, beneficiary feedback integration, and funder reporting accuracy.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

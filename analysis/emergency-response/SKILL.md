@@ -1,7 +1,7 @@
 ---
 name: emergency-response
-description: Audit a 911 dispatch or emergency response system for operational reliability and compliance. Evaluates call routing and intake (E911/NG911), unit recommendation algorithms, AVL and response time tracking, mutual aid coordination, GIS integration, ICS/NIMS compliance, and mass casualty incident capabilities. Use when building or reviewing CAD systems, PSAP software, dispatch platforms, or emergency operations center tools.
-version: "2.0.0"
+description: "Audit a 911 dispatch or emergency response system for operational reliability and compliance. Triggers: building or reviewing CAD systems, PSAP software, dispatch platforms, or emergency operations center tools."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

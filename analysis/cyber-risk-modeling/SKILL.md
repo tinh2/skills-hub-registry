@@ -1,7 +1,7 @@
 ---
 name: cyber-risk-modeling
-description: Quantify cyber risk using FAIR methodology with Monte Carlo simulation, assess control effectiveness against NIST CSF/CIS/ISO 27001 frameworks, evaluate risk appetite alignment, and analyze cyber insurance coverage adequacy. Covers threat landscape mapping, asset valuation, loss event frequency and magnitude estimation, annualized loss expectancy calculation, control gap analysis with ROI ranking, residual risk assessment, and insurance policy gap modeling at 90th/95th/99th percentile loss scenarios. Use when building risk registers, preparing board-level risk dashboards, evaluating security investment priorities, assessing cyber insurance coverage, or auditing any organization's risk quantification maturity per NIST RMF, ISO 27005, or FAIR standards.
-version: "2.0.0"
+description: "Quantify cyber risk using FAIR methodology with Monte Carlo simulation, assess control effectiveness against NIST CSF/CIS/ISO 27001 frameworks, evaluate risk appetite alignment, and analyze cyber insurance coverage adequacy.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

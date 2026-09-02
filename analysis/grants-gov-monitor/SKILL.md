@@ -1,7 +1,7 @@
 ---
 name: grants-gov-monitor
-description: Monitor federal grant opportunities across Grants.gov (Simpler.grants.gov is the modern UX), SAM.gov assistance listings (the post-CFDA replacement that preserves CFDA program numbers), and direct agency portals — NIH RePORTER + NIH Guide, NSF Funding, DOE OSTI, USDA NIFA, EPA Grants, NEH/NEA, IES (Education), CDC, FEMA, HUD CPD, ACF. Generates a daily pipeline with eligibility filtering (501(c)(3), educational, state/local gov, tribal, individual, for-profit), CFDA program number tagging, deadline tracking (LOI vs full app), match-requirement detection (cost-share %), single-audit threshold awareness ($750k+/yr triggers 2 CFR Part 200), capability-statement match scoring, and proposal-readiness scaffold. TRIGGER on "Grants.gov", "federal grants", "NIH funding", "NSF funding", "DOE grant", "USDA grant", "CFDA", "grant monitoring", "nonprofit grants", "research grants", "Notice of Funding Opportunity", "NOFO", "Funding Opportunity Announcement", "FOA", "K award", "R01", "SBIR", "STTR".
-version: "1.0.0"
+description: "Monitor federal grant opportunities across Grants.gov (Simpler.grants.gov is the modern UX), SAM.gov assistance listings (the post-CFDA replacement that preserves CFDA program numbers), and direct agency portals — NIH RePORTER + NIH Guide, NSF Funding, DOE OSTI, USDA NIFA, EPA Grants."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: climate-risk-agriculture
-description: "Analyze agricultural climate risk systems for weather impact modeling, crop insurance, drought/flood prediction, soil moisture, and carbon tracking. Use when: 'assess crop climate risk', 'evaluate weather yield models', 'review crop insurance integration', 'audit drought prediction', 'check carbon sequestration tracking', 'analyze farm adaptation planning', 'evaluate DSSAT or APSIM models'."
-version: "2.0.0"
+description: "Analyze agricultural climate risk systems for weather impact modeling, crop insurance, drought/flood prediction, soil moisture, and carbon tracking. Triggers: 'assess crop climate risk', 'evaluate weather yield models', 'review crop insurance integration'."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

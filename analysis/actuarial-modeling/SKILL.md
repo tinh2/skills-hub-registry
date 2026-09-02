@@ -1,23 +1,7 @@
 ---
 name: actuarial-modeling
-description: >
-  Analyzes actuarial modeling systems for loss reserving accuracy, premium pricing methodology,
-  mortality/morbidity tables, stochastic modeling, and capital adequacy per SOA and Solvency II standards.
-
-  USE THIS SKILL WHEN:
-  - You need to review or audit actuarial models (reserving, pricing, capital)
-  - Someone asks about loss triangle analysis or reserve adequacy
-  - You are evaluating IBNR calculations, chain ladder methods, or Bornhuetter-Ferguson
-  - A project involves insurance pricing, GLM rating models, or ratemaking
-  - You need to assess Solvency II SCR calculations or RBC compliance
-  - Someone mentions actuarial opinions, ASOP compliance, or SOA standards
-  - You are reviewing stochastic models, ESG configurations, or DFA frameworks
-  - A codebase uses actuarial libraries (chainladder, lifetables, ChainLadder R package)
-
-  TRIGGER PHRASES: "actuarial", "loss reserving", "IBNR", "chain ladder", "premium pricing",
-  "mortality table", "Solvency II", "capital adequacy", "ratemaking", "GLM pricing",
-  "risk-based capital", "reserve analysis", "actuarial opinion"
-version: "2.0.0"
+description: "Analyzes actuarial modeling systems for loss reserving accuracy, premium pricing methodology, mortality/morbidity tables, stochastic modeling, and capital adequacy per SOA and Solvency II standards.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

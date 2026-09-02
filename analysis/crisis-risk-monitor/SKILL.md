@@ -1,7 +1,7 @@
 ---
 name: crisis-risk-monitor
-description: Audit mental health crisis monitoring systems for risk signal detection accuracy, escalation protocol completeness, safety planning integration, crisis team coordination, and ethical guardrail enforcement. Covers PHQ-9/C-SSRS/GAD-7 instrument integration, NLP risk detection in clinical notes, escalation tier workflows, safety plan accessibility and activation, mandatory reporting compliance, consent management, and algorithmic fairness in risk scoring. Use when reviewing behavioral health platforms, telehealth systems, EHR crisis modules, crisis hotline software, or any system that detects and responds to mental health risk signals.
-version: "2.0.0"
+description: "Audit mental health crisis monitoring systems for risk signal detection accuracy, escalation protocol completeness, safety planning integration, crisis team coordination, and ethical guardrail enforcement.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

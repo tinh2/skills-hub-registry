@@ -1,7 +1,7 @@
 ---
 name: employer-matching
-description: Audit a job matching platform for relevance, fairness, and candidate experience. Evaluates matching algorithm precision and recall, skill taxonomy and NLP extraction, culture fit modeling risks, algorithmic bias detection (EEOC, NYC Local Law 144, EU AI Act), geographic and remote work handling, salary range accuracy, and feedback loop quality. Use when building or reviewing job boards, ATS matching engines, internal mobility platforms, or workforce marketplaces.
-version: "2.0.0"
+description: "Audit a job matching platform for relevance, fairness, and candidate experience. Triggers: building or reviewing job boards, ATS matching engines, internal mobility platforms, or workforce marketplaces."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

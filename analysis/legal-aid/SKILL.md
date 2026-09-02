@@ -1,7 +1,7 @@
 ---
 name: legal-aid
-description: Audit legal aid and public defense case management systems -- client intake workflows, Federal Poverty Level eligibility screening accuracy, conflict-of-interest checking, document assembly and e-filing integration, court deadline calculation with rule-based calendaring, pro bono attorney matching and CLE tracking, LSC Case Statistical Report generation, and access-to-justice gap analysis. Use when reviewing legal services software, public defender platforms, or any codebase handling indigent client intake, legal case assignment, or funder compliance reporting.
-version: "2.0.0"
+description: "Audit legal aid and public defense case management systems -- client intake workflows, Federal Poverty Level eligibility screening accuracy, conflict-of-interest checking, document assembly and e-filing integration, court deadline calculation with rule-based calendaring."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

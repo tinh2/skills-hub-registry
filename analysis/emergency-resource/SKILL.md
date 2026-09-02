@@ -1,7 +1,7 @@
 ---
 name: emergency-resource
-description: Audit an emergency resource management system for crisis readiness. Evaluates inventory tracking accuracy, deployment request-to-arrival pipeline, logistics and route optimization, supply chain resilience, inter-agency resource sharing (NIMS/EDXL), staging area management, and real-time capacity dashboards. Use when building or reviewing FEMA-style resource platforms, disaster logistics systems, or emergency operations center software.
-version: "2.0.0"
+description: "Audit an emergency resource management system for crisis readiness. Evaluates inventory tracking accuracy, deployment request-to-arrival pipeline, logistics and route optimization, supply chain resilience, inter-agency resource sharing (NIMS/EDXL), staging area management."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

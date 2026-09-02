@@ -1,7 +1,7 @@
 ---
 name: humanizer
-description: "Multi-pass editor that removes AI-writing tells from drafted content — eliminates filler phrases, balances sentence length, restores opinion and voice, and strips em-dash overuse so posts sound human and opinionated rather than ChatGPT-generic. Use when the user wants to humanize AI-generated marketing copy, blog posts, landing pages, or social content."
-version: "1.0.0"
+description: "Multi-pass editor that removes AI-writing tells from drafted content — eliminates filler phrases, balances sentence length, restores opinion and voice, and strips em-dash overuse so posts sound human and opinionated rather than ChatGPT-generic.."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

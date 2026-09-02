@@ -1,7 +1,7 @@
 ---
 name: debt-payoff
-description: Analyze debt payoff software — avalanche vs snowball strategy engines, interest calculation accuracy, amortization schedules, payment scheduling automation, credit score impact modeling, hardship accommodation workflows, and progress visualization. Audit personal finance apps, debt management platforms, and loan repayment calculators for correctness and completeness.
-version: "2.0.0"
+description: "Analyze debt payoff software — avalanche vs snowball strategy engines, interest calculation accuracy, amortization schedules, payment scheduling automation, credit score impact modeling, hardship accommodation workflows, and progress visualization."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

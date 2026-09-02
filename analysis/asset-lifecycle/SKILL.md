@@ -1,26 +1,7 @@
 ---
 name: asset-lifecycle
-description: >
-  Analyzes asset lifecycle planning systems for capital expenditure forecasting, replacement scheduling,
-  total cost of ownership modeling, depreciation tracking, and facility condition assessments using
-  IFMA standards and Facility Condition Index scoring.
-
-  USE THIS SKILL WHEN:
-  - You are reviewing facilities management or asset management software
-  - Someone asks about capital planning, replacement scheduling, or deferred maintenance
-  - You need to evaluate Facility Condition Index (FCI) calculations or condition assessments
-  - A project involves total cost of ownership (TCO) or life cycle cost analysis (LCCA)
-  - You are auditing an asset registry, CMDB, or equipment database
-  - Someone mentions Maximo, SAP EAM, Archibus, TRIRIGA, or similar platforms
-  - You need to assess depreciation tracking or fixed asset register accuracy
-  - A facility portfolio has growing deferred maintenance or declining FCI scores
-  - Capital budget requests need data-driven prioritization
-
-  TRIGGER PHRASES: "asset lifecycle", "capital planning", "replacement schedule",
-  "facility condition index", "FCI", "deferred maintenance", "total cost of ownership",
-  "TCO", "depreciation", "asset management", "condition assessment", "capital renewal",
-  "useful life", "LCCA", "facilities management", "equipment replacement"
-version: "2.0.0"
+description: "Analyzes asset lifecycle planning systems for capital expenditure forecasting, replacement scheduling, total cost of ownership modeling, depreciation tracking, and facility condition assessments using IFMA standards and Facility Condition Index scoring.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

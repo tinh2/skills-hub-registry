@@ -1,7 +1,7 @@
 ---
 name: gsc-pull
-description: Pull and analyze Google Search Console data via the GSC API. Produces: weekly query × page performance with WoW/MoM/YoY deltas, top movers report (winners + losers ranked by absolute click change), click-loss attribution (lost rank? lost impressions? lost CTR?), query-page mismatch detection (page ranking for the wrong query), branded-vs-nonbranded split, position-bucket analysis (top 3, 4-10, 11-20, 21+), country / device / search-type segmentation, and the URL Inspection findings for sample URLs (indexed? canonical correct? mobile-friendly? Core Web Vitals?). All output is YOUR data in YOUR DB — no vendor lock-in. Matches the GSC integration that Visibly AI / Semrush / Ahrefs gate behind monthly subscriptions. TRIGGER on "GSC", "Google Search Console", "Search Console API", "rank tracking", "SEO position changes", "click loss", "impression loss", "top movers", "indexing report", "query analysis".
-version: "1.0.0"
+description: "Pull and analyze Google Search Console data via the GSC API. Produces: weekly query × page performance with WoW/MoM/YoY deltas, top movers report (winners + losers ranked by absolute click change), click-loss attribution (lost rank? Triggers: \"GSC\", \"Google Search Console\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

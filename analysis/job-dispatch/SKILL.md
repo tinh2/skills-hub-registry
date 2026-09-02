@@ -1,7 +1,7 @@
 ---
 name: job-dispatch
-description: Audit field service dispatch and workforce scheduling systems -- technician routing (VRP solvers, drive time modeling), skill-based job assignment, SLA priority scheduling, real-time re-dispatch on cancellations or emergencies, capacity planning, and travel time minimization. Use when reviewing HVAC, plumbing, electrical, or any field service codebase with work order assignment, GPS tracking, or route optimization logic.
-version: "2.0.0"
+description: "Audit field service dispatch and workforce scheduling systems -- technician routing (VRP solvers, drive time modeling), skill-based job assignment, SLA priority scheduling, real-time re-dispatch on cancellations or emergencies, capacity planning, and travel time minimization.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

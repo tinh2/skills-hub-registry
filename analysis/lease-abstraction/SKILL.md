@@ -1,7 +1,7 @@
 ---
 name: lease-abstraction
-description: Extract a structured abstract from a commercial lease PDF — tenant/landlord identification, premises description + RSF/USF, lease term + commencement/expiration, renewal options (count, notice windows, fair-market rent reset), base rent schedule + escalations (fixed %, CPI-linked, step-up, percentage rent breakpoints), operating expense structure (NNN, modified gross, full service, base year, expense stops, gross-ups), CAM provisions + caps + audit rights, tenant improvement allowance, security deposit (cash/LOC/burn-down), use restrictions, co-tenancy + exclusivity, assignment/sublet rights, recapture, termination/default provisions, kick-outs, options to expand/contract, holdover, insurance/indemnification, estoppel + SNDA. Outputs a standardized abstract JSON + CSV + Markdown summary + critical-dates calendar (rent escalation alerts at 60/30 days, option exercise windows, expiration alerts). 80-90% reduction in processing time per industry benchmarks. TRIGGER on "lease abstract", "lease abstraction", "CRE lease", "commercial lease summary", "lease key terms", "rent roll setup", "lease review", "tenant rep prep", "Argus import", "lease database", "lease admin".
-version: "1.0.0"
+description: "Extract a structured abstract from a commercial lease PDF — tenant/landlord identification, premises description + RSF/USF, lease term + commencement/expiration, renewal options (count, notice windows, fair-market rent reset), base rent schedule + escalations (fixed %, CPI-linked."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

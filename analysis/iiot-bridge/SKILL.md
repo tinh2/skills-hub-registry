@@ -1,7 +1,7 @@
 ---
 name: iiot-bridge
-description: Generate a production-grade Industrial IoT protocol bridge — OPC UA ↔ MQTT Sparkplug B, Modbus → MQTT, or direct PLC (Rockwell/Siemens/Beckhoff) → cloud (AWS IoT Core / Azure IoT Hub / GCP IoT / self-hosted HiveMQ). Output is real code with TLS / X.509 mutual auth, Sparkplug B lifecycle (NBIRTH/DBIRTH/DDATA/DDEATH), canonical topic schema, store-and-forward buffering for network drops, and a docker-compose test rig that runs end-to-end locally. TRIGGER on phrases like "OPC UA to MQTT", "Sparkplug B", "Modbus bridge", "industrial protocol bridge", "PLC to cloud", "IIoT gateway", "edge gateway", "device twin", "unified namespace", "UNS broker", "Ignition tag bridge", or any user describing a need to get plant-floor data into a cloud platform or unified namespace. Also trigger for OT/IT data convergence projects. The bridge is the single highest-friction integration in industrial software — this skill collapses 4-8 weeks of bespoke work into a generated scaffold.
-version: "1.0.0"
+description: "Generate a production-grade Industrial IoT protocol bridge — OPC UA ↔ MQTT Sparkplug B, Modbus → MQTT, or direct PLC (Rockwell/Siemens/Beckhoff) → cloud (AWS IoT Core / Azure IoT Hub / GCP IoT / self-hosted HiveMQ).."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

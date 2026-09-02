@@ -1,7 +1,7 @@
 ---
 name: load-forecast
-description: Analyze energy load forecasting systems including demand prediction models (ARIMA, Prophet, LSTM), weather API integration, peak shaving strategies, demand response program optimization, renewable intermittency handling, net load duck curve management, model validation with MAPE/RMSE accuracy metrics, and time-series data pipeline quality for utility and ISO/RTO operations.
-version: "2.0.0"
+description: "Analyze energy load forecasting systems including demand prediction models (ARIMA, Prophet, LSTM), weather API integration, peak shaving strategies, demand response program optimization, renewable intermittency handling, net load duck curve management."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

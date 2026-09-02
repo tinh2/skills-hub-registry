@@ -1,7 +1,7 @@
 ---
 name: checkout-audit
-description: Audit an ecommerce checkout flow against the 2026 conversion playbook. Average cart abandonment is 70.22% (Baymard 2026 meta-analysis); the top causes are unexpected shipping costs (48%), forced account creation (24%), complicated forms (18%), and security concerns (17%). The audit measures: step count + page count, express-checkout availability + above-fold positioning (Apple Pay +22.3% conversion, Shop Pay +50% returning, Google Pay), guest checkout, address autofill (Google Places, Stripe Address Element), payment-method coverage (cards, ACH, BNPL, digital wallets, regional methods), form-field count (every field reduces conversion ~7%), shipping-cost transparency, account-creation timing (offer AFTER purchase, not as gate), error UX, mobile-vs-desktop drop-off symmetry, accessibility, PCI scope, and HOLD payment friction (Apple Pay, Google Pay, Shop Pay = 4 clicks vs 120 clicks traditional). Outputs prioritized P0-P3 fixes with expected lift per Baymard 2026 + Stripe data. TRIGGER on "checkout audit", "checkout optimization", "Shopify checkout", "Stripe checkout", "Apple Pay", "Shop Pay", "guest checkout", "abandoned checkout", "checkout drop-off", "express checkout", "Baymard".
-version: "1.0.0"
+description: "Audit an ecommerce checkout flow against the 2026 conversion playbook. Triggers: \"checkout audit\", \"checkout optimization\", \"Shopify checkout\", \"Stripe checkout\", \"Apple Pay\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

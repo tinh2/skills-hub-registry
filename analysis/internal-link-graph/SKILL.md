@@ -1,7 +1,7 @@
 ---
 name: internal-link-graph
-description: Build the internal link graph for a site, run PageRank-style authority distribution, detect orphan pages, and recommend new internal links via embedding-based semantic similarity (not keyword matching). Crawls the site (sitemap-driven, respects robots), extracts internal links per page, constructs a directed NetworkX graph, computes weighted PageRank, identifies the top sources of authority sink (high-PageRank pages with too few outbound internal links) and the orphans (high-quality content with no inbound internal links). Recommends contextual links by embedding paragraphs from candidate target pages and finding semantically related passages in source pages where a natural link insertion fits. Beats Visibly AI's keyword-matching internal linking by being intent-aware. TRIGGER on "internal linking", "internal link graph", "PageRank", "orphan pages", "internal link recommendations", "site architecture", "link equity", "siloing", "topical clusters".
-version: "1.0.0"
+description: "Build the internal link graph for a site, run PageRank-style authority distribution, detect orphan pages, and recommend new internal links via embedding-based semantic similarity (not keyword matching).."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

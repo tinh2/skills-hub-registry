@@ -1,7 +1,7 @@
 ---
 name: jd-craft
-description: Generate a bias-free, ATS-optimized, skills-based job description for 2026. Runs a banned-word filter on gender-coded ("rockstar/ninja/guru/aggressive/dominate"), age-coded ("digital native/young/recent grad"), and ability-coded ("walk the floor") language; enforces skills-based requirements (drops "5+ years required" to "3 years preferred" unless regulatory); auto-injects pay transparency block for CA/CO/CT/HI/IL/MD/NV/NY/RI/WA states (and others added in 2026); generates ATS-parseable structure (single column, no tables, no graphics, plain headings) so the 75% of applications filtered by ATS see real text; produces multiple channel formats (LinkedIn long-form, Indeed structured, internal careers page, Slack/Lever/Greenhouse import). TRIGGER on "job description", "JD", "write a JD", "open req", "we're hiring", "post a job", "career posting", "writing a role". The Hewlett Packard finding still holds: women apply when they meet 100% of criteria, men at 60% — wording discipline directly affects who applies.
-version: "1.0.0"
+description: "Generate a bias-free, ATS-optimized, skills-based job description for 2026. Triggers: \"job description\", \"JD\", \"write a JD\", \"open req\", \"we're hiring\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

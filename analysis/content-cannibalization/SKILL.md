@@ -1,7 +1,7 @@
 ---
 name: content-cannibalization
-description: Detect content cannibalization on a site — multiple URLs ranking (or impressing) for the same query, splitting click-through, diluting authority, and confusing Google about which URL is canonical for the intent. Pulls GSC query × page data, identifies cannibalized clusters (≥ 2 pages with ≥ 50 impressions for the same query within position 1-50), classifies the underlying issue (true duplicate / intent overlap / template confusion / accidental same H1 / variant page leakage), and recommends one of five resolutions: consolidate-and-301, canonicalize, differentiate-intent, noindex-the-weaker, or update-internal-links-to-disambiguate. Generates the actual redirect rules, canonical tags, content briefs for differentiation, and a recovery model showing expected click consolidation. TRIGGER on "cannibalization", "content cannibalization", "keyword cannibalization", "ranking conflicts", "multiple pages for same query", "consolidate content", "GSC cannibalization".
-version: "1.0.0"
+description: "Detect content cannibalization on a site — multiple URLs ranking (or impressing) for the same query, splitting click-through, diluting authority, and confusing Google about which URL is canonical for the intent.."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE
