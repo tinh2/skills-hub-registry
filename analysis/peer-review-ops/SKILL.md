@@ -1,7 +1,7 @@
 ---
 name: peer-review-ops
-description: Audit academic peer review operations -- reviewer matching algorithms, conflict of interest detection, turnaround time optimization, review quality scoring, and editorial workflow management. Covers COPE guidelines compliance, COI screening (co-authorship, affiliation, funding), blinding enforcement, reviewer pool health metrics, ORCID/CrossRef integration, and plagiarism detection workflows. Supports ScholarOne, Editorial Manager, OJS, and custom editorial platforms. Use when optimizing reviewer assignment, reducing manuscript turnaround, auditing COI detection, or evaluating COPE compliance.
-version: "2.0.0"
+description: "Audit academic peer review operations -- reviewer matching algorithms, conflict of interest detection, turnaround time optimization, review quality scoring, and editorial workflow management.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

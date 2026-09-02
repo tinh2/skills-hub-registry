@@ -1,7 +1,7 @@
 ---
 name: medication-adherence
-description: Analyze medication adherence and management platforms including dose tracking accuracy (MPR, PDC metrics), drug-drug and drug-food interaction checking completeness, refill prediction algorithms, dosage schedule optimization with conflict detection, caregiver notification escalation workflows, pharmacy system integration (NCPDP, HL7 FHIR), adverse event signal detection, smart dispenser integration, and alert fatigue mitigation for patient safety systems.
-version: "2.0.0"
+description: "Analyze medication adherence and management platforms including dose tracking accuracy (MPR, PDC metrics), drug-drug and drug-food interaction checking completeness, refill prediction algorithms, dosage schedule optimization with conflict detection."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

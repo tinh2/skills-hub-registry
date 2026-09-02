@@ -1,7 +1,7 @@
 ---
 name: pharma-compliance
-description: Audit pharmaceutical regulatory compliance -- inspection readiness, CAPA system effectiveness, change control pipeline, data integrity (ALCOA+), and validation lifecycle tracking. Covers FDA 21 CFR 210/211, EU GMP Annexes, ICH Q7-Q12, WHO Prequalification, and PIC/S guidelines. Evaluates 483 observation history, SOP currency, equipment qualification, training matrices, and compliance gap remediation. Use when preparing for FDA or EMA inspection, assessing CAPA closure rates, evaluating change control backlogs, or auditing data integrity per 21 CFR Part 11.
-version: "2.0.0"
+description: "Audit pharmaceutical regulatory compliance -- inspection readiness, CAPA system effectiveness, change control pipeline, data integrity (ALCOA+), and validation lifecycle tracking.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

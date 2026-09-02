@@ -1,7 +1,7 @@
 ---
 name: public-resource-allocation
-description: Audit public sector and government resource allocation systems for budget optimization algorithms (zero-based, incremental, performance-based), service demand forecasting (ARIMA, Prophet, regression), equity-based distribution scoring (CDC SVI, environmental justice indices, disparate impact analysis), GIS geographic coverage and service gap analysis, workload-based staffing models, grant drawdown compliance tracking, and transparency dashboard reporting for municipal, county, and state agencies.
-version: "2.0.0"
+description: "Audit public sector and government resource allocation systems for budget optimization algorithms (zero-based, incremental, performance-based), service demand forecasting (ARIMA, Prophet, regression), equity-based distribution scoring (CDC SVI, environmental justice indices."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

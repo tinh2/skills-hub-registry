@@ -1,7 +1,7 @@
 ---
 name: patient-engagement
-description: Audit patient-facing healthcare software for portal feature completeness, secure messaging, health literacy, telehealth readiness, consent management, and HIPAA compliance. Covers health records access, appointment scheduling, bill pay, patient forms, notification PHI safety, WCAG accessibility, multilingual support, video visit integration, remote patient monitoring, and consent workflows. Use when evaluating a patient portal, checking PHI exposure in notifications, auditing telehealth flows, or assessing health literacy of patient-facing content.
-version: "2.0.0"
+description: "Audit patient-facing healthcare software for portal feature completeness, secure messaging, health literacy, telehealth readiness, consent management, and HIPAA compliance. Triggers: evaluating a patient portal, checking PHI exposure in notifications, auditing telehealth flows."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: warehouse-ops
-description: Audit warehouse management system operations -- evaluate WMS platform architecture (Manhattan, Blue Yonder, SAP EWM, Korber, Infor), inbound receiving and ASN processing, putaway rules and cross-docking logic, picking strategy selection (discrete, batch, zone, wave, cluster, goods-to-person), inventory accuracy with cycle counting and RFID tracking, labor management with engineered standards and productivity KPIs, and automation readiness for AS/RS, AMR, AGV, and conveyor sortation. Covers barcode and license plating, order allocation with FIFO/FEFO, cartonization and pack verification, carrier rate shopping, RF and voice-directed workflows, and ERP/TMS/OMS integration analysis.
-version: "2.0.0"
+description: "Audit warehouse management system operations -- evaluate WMS platform architecture (Manhattan, Blue Yonder, SAP EWM, Korber, Infor), inbound receiving and ASN processing, putaway rules and cross-docking logic, picking strategy selection (discrete, batch, zone, wave, cluster."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

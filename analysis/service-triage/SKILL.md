@@ -1,7 +1,7 @@
 ---
 name: service-triage
-description: Audit customer service triage systems for ticket routing, classification, and SLA compliance. Use when you need to evaluate ticket auto-classification accuracy, priority scoring models, skill-based routing logic, escalation pathways, sentiment analysis integration, SLA breach management, first-contact resolution rates, queue health, customer effort scoring, or resolution prediction. Covers Zendesk, Salesforce Service Cloud, Freshdesk, ServiceNow, and custom ticketing platforms using ITIL incident management frameworks.
-version: "2.0.0"
+description: "Audit customer service triage systems for ticket routing, classification, and SLA compliance. Triggers: you need to evaluate ticket auto-classification accuracy, priority scoring models, skill-based routing logic."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: rights-explainer
-description: Audit legal information systems that explain rights to the public, evaluating plain-language accuracy, jurisdiction-specific content correctness, reading level appropriateness targeting 5th-8th grade, multilingual support, WCAG accessibility compliance, and content update workflows when laws change. Use when reviewing legal aid websites, self-help law portals, court information systems, tenant rights platforms, or government benefits explainers.
-version: "2.0.0"
+description: "Audit legal information systems that explain rights to the public, evaluating plain-language accuracy, jurisdiction-specific content correctness, reading level appropriateness targeting 5th-8th grade, multilingual support, WCAG accessibility compliance."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

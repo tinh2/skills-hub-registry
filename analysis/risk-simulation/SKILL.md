@@ -1,7 +1,7 @@
 ---
 name: risk-simulation
-description: Audit risk simulation and decision support systems for Monte Carlo modeling quality, wargaming analysis, threat assessment, mission planning support, and course-of-action decision analysis. Use when reviewing probabilistic risk models, defense planning tools, cost-schedule risk engines, scenario simulators, or decision matrices built on DoD risk management and operational planning frameworks.
-version: "2.0.0"
+description: "Audit risk simulation and decision support systems for Monte Carlo modeling quality, wargaming analysis, threat assessment, mission planning support, and course-of-action decision analysis.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

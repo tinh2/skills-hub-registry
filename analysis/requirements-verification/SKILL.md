@@ -1,7 +1,7 @@
 ---
 name: requirements-verification
-description: "Autonomous requirements analysis agent. Parses a spec file (SPEC.md, requirements doc, or any plain-text specification) and runs a structured pass to surface logical contradictions, ambiguous requirements, and underdefined gaps — before any implementation begins. Inspired by Kiro's neurosymbolic Requirements Analysis engine (May 2026). Reports issues as structured, actionable resolution choices."
-version: "1.0.0"
+description: "Autonomous requirements analysis agent. Parses a spec file (SPEC.md, requirements doc, or any plain-text specification) and runs a structured pass to surface logical contradictions, ambiguous requirements, and underdefined gaps — before any implementation begins."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: procurement-analysis
-description: Audit procurement and procure-to-pay systems for spend analytics (Pareto analysis, tail spend visibility), supplier consolidation opportunities, Kraljic matrix category management, maverick spending detection, contract compliance and utilization tracking, three-way PO matching, CIPS-standard sourcing workflows, approval matrix enforcement, P-card policy controls, and total cost of ownership modeling in SAP Ariba, Coupa, Jaggaer, or custom P2P platforms.
-version: "2.0.0"
+description: "Audit procurement and procure-to-pay systems for spend analytics (Pareto analysis, tail spend visibility), supplier consolidation opportunities, Kraljic matrix category management, maverick spending detection, contract compliance and utilization tracking, three-way PO matching."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

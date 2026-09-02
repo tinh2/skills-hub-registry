@@ -1,7 +1,7 @@
 ---
 name: seo
-description: "Autonomous SEO + AI-search optimization agent for 2026. Audits and fixes technical SEO, on-page metadata, structured data, Core Web Vitals (LCP/INP/CLS), llms.txt, Generative Engine Optimization (GEO) for ChatGPT/Perplexity/AI Overviews, E-E-A-T author signals, programmatic SEO for catalog sites, and AI-crawler config. Reports findings + applies fixes."
-version: "2.1.0"
+description: "Autonomous SEO + AI-search optimization agent for 2026. Audits and fixes technical SEO, on-page metadata, structured data, Core Web Vitals (LCP/INP/CLS), llms.txt, Generative Engine Optimization (GEO) for ChatGPT/Perplexity/AI Overviews, E-E-A-T author signals."
+version: "2.1.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

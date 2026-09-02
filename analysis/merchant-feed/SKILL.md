@@ -1,7 +1,7 @@
 ---
 name: merchant-feed
-description: Generate and maintain a multi-channel product feed across Google Merchant Center, Meta Catalog (Instagram + Facebook Shops), TikTok Shop, Pinterest Catalogs, Bing Shopping, and Snapchat Catalogs from a single product source of truth (Shopify, BigCommerce, WooCommerce, custom DB). Enforces 2026 platform requirements: Google's new 500×500 image minimum (warnings Apr 14 2026, enforcement Jan 31 2027), title structure that wins matching (Google heavily weights title), required GTIN/MPN/brand triplet, GPC + condition + availability + price/sale_price accuracy, Meta dynamic-ad-eligibility constraints, TikTok's video-asset preference, Pinterest rich pin merchant-verification. Generates: feed file (XML / JSON / TSV per platform spec), validation report (catches disapprovals before submission), title-A/B-test harness, custom_label rotation calendar, weekly feed-audit cron, and disapproval-recovery playbook (48-hour SLA per platform best practice). TRIGGER on "product feed", "Google Shopping feed", "Merchant Center", "Meta catalog", "TikTok Shop", "Pinterest catalog", "Bing Shopping", "feed optimization", "shopping ads", "Performance Max feed", "Advantage+ Shopping", "DPA", "DSA", "catalog disapproval".
-version: "1.0.0"
+description: "Generate and maintain a multi-channel product feed across Google Merchant Center, Meta Catalog (Instagram + Facebook Shops), TikTok Shop, Pinterest Catalogs, Bing Shopping, and Snapchat Catalogs from a single product source of truth (Shopify, BigCommerce, WooCommerce, custom DB).."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

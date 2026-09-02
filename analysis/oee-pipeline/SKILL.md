@@ -1,7 +1,7 @@
 ---
 name: oee-pipeline
-description: Generate a production-grade OEE (Overall Equipment Effectiveness) measurement pipeline for a manufacturing line — data ingestion from MQTT/OPC-UA/Modbus/CSV, A×P×Q calculation engine, Six Big Losses categorizer, MTBF/MTTR/TEEP metrics, Grafana or Streamlit dashboard, and downtime alerting. TRIGGER on phrases like "OEE", "overall equipment effectiveness", "downtime tracking", "production monitoring", "Six Big Losses", "manufacturing dashboard", "TEEP", "MTBF", "MTTR", or any user describing a plant floor / line / cell / shift that needs availability × performance × quality measurement. Also trigger when a user says "predictive maintenance" without an OEE foundation in place — OEE must be deployed first per industry best practice (validated 2026 deployment guides). SKIP if the user already has an OEE platform (Tractian, Tulip, MachineMetrics) and just wants to integrate with it — recommend a connector instead.
-version: "1.0.0"
+description: "Generate a production-grade OEE (Overall Equipment Effectiveness) measurement pipeline for a manufacturing line — data ingestion from MQTT/OPC-UA/Modbus/CSV, A×P×Q calculation engine, Six Big Losses categorizer, MTBF/MTTR/TEEP metrics, Grafana or Streamlit dashboard."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

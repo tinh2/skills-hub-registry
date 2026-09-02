@@ -1,7 +1,7 @@
 ---
 name: research-data-management
-description: Audit research data management infrastructure -- score FAIR principles compliance (Findable, Accessible, Interoperable, Reusable) across all sub-principles, evaluate data governance frameworks and lifecycle management, assess metadata schema quality (Dublin Core, DataCite, DDI, ISO 19115), review electronic lab notebook integrity and IP protection, check controlled vocabulary and ontology usage, and verify repository integration and funder sharing compliance (NIH 2023 policy, NSF, ERC). Covers DSpace, Dataverse, CKAN, Zenodo, Figshare, and institutional repositories with persistent identifier (DOI, ORCID, ROR) assessment.
-version: "2.0.0"
+description: "Audit research data management infrastructure -- score FAIR principles compliance (Findable, Accessible, Interoperable, Reusable) across all sub-principles, evaluate data governance frameworks and lifecycle management, assess metadata schema quality (Dublin Core, DataCite, DDI."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

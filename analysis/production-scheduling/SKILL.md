@@ -1,7 +1,7 @@
 ---
 name: production-scheduling
-description: Audit factory production scheduling systems for finite capacity planning, Drum-Buffer-Rope (DBR) Theory of Constraints implementation, dispatching rules (EDD, SPT, critical ratio), sequence-dependent changeover optimization, MRP integration, lead time decomposition (queue/setup/run/wait/move), WIP tracking and aging, on-time delivery (OTD) performance, shop floor execution control, SPC quality integration, and schedule adherence analytics in SAP PP, Oracle Manufacturing, Preactor, PlanetTogether, or custom MES platforms.
-version: "2.0.0"
+description: "Audit factory production scheduling systems for finite capacity planning, Drum-Buffer-Rope (DBR) Theory of Constraints implementation, dispatching rules (EDD, SPT, critical ratio), sequence-dependent changeover optimization, MRP integration."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

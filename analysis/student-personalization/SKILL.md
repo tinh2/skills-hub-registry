@@ -1,7 +1,7 @@
 ---
 name: student-personalization
-description: Audit adaptive learning and student personalization systems for pedagogical quality. Use when you need to evaluate learning path algorithms (branching, remediation, acceleration), mastery detection models (Bayesian, IRT, threshold-based), knowledge graph prerequisite accuracy, recommendation engine fairness and bias, spaced repetition and interleaving, WCAG 2.1 AA and Section 508 accessibility compliance, IEP/504 accommodation implementation, xAPI/SCORM/LTI data integration, or teacher/student/admin analytics dashboards. Covers platforms like Knewton, DreamBox, ALEKS, IXL, Khan Academy, and custom adaptive systems.
-version: "2.0.0"
+description: "Audit adaptive learning and student personalization systems for pedagogical quality. Triggers: you need to evaluate learning path algorithms (branching, remediation, acceleration)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

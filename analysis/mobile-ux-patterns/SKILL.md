@@ -1,7 +1,7 @@
 ---
 name: mobile-ux-patterns
-description: Audit mobile UX implementation against platform conventions -- navigation patterns, gesture handling, pull-to-refresh, infinite scroll, skeleton screens, haptic feedback, adaptive layouts, deep linking, and accessibility. Checks compliance with iOS Human Interface Guidelines, Material Design 3, WCAG AA, and cross-platform adaptive behavior for Flutter and React Native apps. Use when reviewing navigation flows, fixing gesture conflicts, adding loading/error/empty states, or preparing for accessibility audit.
-version: "2.0.0"
+description: "Audit mobile UX implementation against platform conventions -- navigation patterns, gesture handling, pull-to-refresh, infinite scroll, skeleton screens, haptic feedback, adaptive layouts, deep linking, and accessibility.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

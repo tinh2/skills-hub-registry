@@ -1,7 +1,7 @@
 ---
 name: teacher-workload
-description: Evaluate edtech tools for their real impact on teacher time and administrative burden. Analyzes grading automation (auto-scoring, rubric-based feedback, batch workflows), lesson planning efficiency (template reuse, standards auto-tagging, pacing guide integration), parent communication systems (automated notifications, translation, conference scheduling), administrative task reduction (single-entry data flow, IEP/504 accommodation surfacing, compliance documentation), report generation (report cards, progress reports, data dashboards), and time-on-task optimization across platforms like Canvas, Schoology, PowerSchool, and Google Classroom.
-version: "2.0.0"
+description: "Evaluate edtech tools for their real impact on teacher time and administrative burden."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

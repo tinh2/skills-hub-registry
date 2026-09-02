@@ -1,7 +1,7 @@
 ---
 name: sku-optimization
-description: Audit SKU portfolio health and identify rationalization opportunities. Use when you need to evaluate assortment planning strategy, ABC/Pareto long-tail analysis, store clustering for localized assortments, product lifecycle stage detection, cannibalization and substitution modeling, SKU rationalization scoring, category management alignment, planogram feasibility, private label vs national brand performance, or new item hit rate analysis. Covers retail merchandising, CPG category management, and e-commerce catalog optimization using GMROII, sell-through, and velocity metrics.
-version: "2.0.0"
+description: "Audit SKU portfolio health and identify rationalization opportunities. Triggers: you need to evaluate assortment planning strategy, ABC/Pareto long-tail analysis."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

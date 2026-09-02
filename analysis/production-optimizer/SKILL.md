@@ -1,7 +1,7 @@
 ---
 name: production-optimizer
-description: Audit manufacturing production optimization systems for OEE (Overall Equipment Effectiveness) calculation accuracy, Six Big Losses categorization, job shop and flow shop scheduling algorithms (LP, MIP, constraint programming, genetic algorithm), Theory of Constraints bottleneck detection, SMED changeover optimization, sequence-dependent setup matrices, finite capacity planning, Kanban WIP limits, JIT pull system mechanics, takt time line balancing, and ERP/MES/SCADA integration quality.
-version: "2.0.0"
+description: "Audit manufacturing production optimization systems for OEE (Overall Equipment Effectiveness) calculation accuracy, Six Big Losses categorization, job shop and flow shop scheduling algorithms (LP, MIP, constraint programming, genetic algorithm), Theory of Constraints bottleneck detection."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

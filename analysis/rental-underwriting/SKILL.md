@@ -1,7 +1,7 @@
 ---
 name: rental-underwriting
-description: Analyze a residential rental property as an investment — 1-4 unit single-family / duplex / triplex / quadplex, condo, townhome. Computes: gross rent multiplier (GRM), cap rate (by property class, 4-12% range in 2026), cash-on-cash return (target 8-12%), DSCR, IRR (10-year hold), internal/external repair budgets, vacancy assumption, property tax + insurance projections, PM fees, capex reserves, and the BRRRR refinance math (cash out + new debt service vs hold-cash returns). Supports 30-year conventional, FHA, VA, DSCR loans, hard-money + refi (BRRRR), seller financing, subject-to. Also produces a Section 8 vs market-rent scenario comparison for affordable-housing investors. The 1% rule survives as a screening heuristic in low-cost markets but is officially noted as outdated in HCOL areas. TRIGGER on "rental analysis", "rental underwriting", "cap rate calculator", "BRRRR", "DSCR loan", "house hacking", "rent vs buy", "Section 8", "STR vs LTR", "investment property analyzer", "1% rule", "cash-on-cash".
-version: "1.0.0"
+description: "Analyze a residential rental property as an investment — 1-4 unit single-family / duplex / triplex / quadplex, condo, townhome. Triggers: \"rental analysis\", \"rental underwriting\", \"cap rate calculator\", \"BRRRR\", \"DSCR loan\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

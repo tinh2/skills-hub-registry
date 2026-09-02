@@ -1,7 +1,7 @@
 ---
 name: portfolio-optimizer
-description: Audit investment portfolio management software for mean-variance optimization, Black-Litterman model, risk parity allocation, VaR/CVaR risk metrics, Brinson performance attribution, tax-loss harvesting rebalancing logic, Sharpe ratio calculations, efficient frontier accuracy, and GIPS-compliant reporting in wealth management and robo-advisor codebases.
-version: "2.0.0"
+description: "Audit investment portfolio management software for mean-variance optimization, Black-Litterman model, risk parity allocation, VaR/CVaR risk metrics, Brinson performance attribution, tax-loss harvesting rebalancing logic, Sharpe ratio calculations, efficient frontier accuracy."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

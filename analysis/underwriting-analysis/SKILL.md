@@ -1,7 +1,7 @@
 ---
 name: underwriting-analysis
-description: Analyze insurance underwriting systems for risk assessment accuracy, pricing adequacy, and portfolio exposure management. Evaluates predictive models (GLM, GBM), rating algorithms, loss ratio performance by line of business, guideline automation engines, regulatory compliance (NAIC, SERFF filings), and model governance following SR 11-7 standards across personal, commercial, and specialty lines.
-version: "2.0.0"
+description: "Analyze insurance underwriting systems for risk assessment accuracy, pricing adequacy, and portfolio exposure management."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

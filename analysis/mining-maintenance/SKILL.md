@@ -1,7 +1,7 @@
 ---
 name: mining-maintenance
-description: Analyze mining equipment maintenance systems including heavy fleet condition monitoring (oil analysis, vibration per ISO 17359/10816, thermal imaging), predictive analytics with Weibull reliability modeling and remaining useful life estimation, PM compliance and planned-vs-unplanned work ratios, component life management for engines and transmissions, spare parts inventory optimization with critical spares strategy, shutdown planning, and maintenance maturity scoring from reactive through world-class per ISO 55000 asset management principles.
-version: "2.0.0"
+description: "Analyze mining equipment maintenance systems including heavy fleet condition monitoring (oil analysis, vibration per ISO 17359/10816, thermal imaging), predictive analytics with Weibull reliability modeling and remaining useful life estimation."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

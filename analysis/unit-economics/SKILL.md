@@ -1,7 +1,7 @@
 ---
 name: unit-economics
-description: Analyze franchise and multi-location unit economics including per-location P&L construction, four-wall EBITDA margins, prime cost optimization, contribution margin analysis, break-even modeling, and store-level ROI calculations. Covers FDD Item 19 benchmarking, revenue decomposition by daypart and channel, cost structure analysis (COGS, labor, occupancy), payback period, IRR, and scenario modeling for QSR, fast-casual, retail, and service franchises.
-version: "2.0.0"
+description: "Analyze franchise and multi-location unit economics including per-location P&L construction, four-wall EBITDA margins, prime cost optimization, contribution margin analysis, break-even modeling, and store-level ROI calculations."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

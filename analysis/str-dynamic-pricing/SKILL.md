@@ -1,7 +1,7 @@
 ---
 name: str-dynamic-pricing
-description: Dynamic pricing engine for short-term rentals (Airbnb, VRBO, Booking.com, Direct) — sets nightly rates based on a comp set (40+ filters: bedrooms, bathrooms, amenities, location radius, rating tier), seasonality patterns (weekly + monthly + annual cycles per market), local events (concerts, conferences, sports), lead-time demand curves (60+ day, 30-day, last-minute), booking pace (year-over-year same-day-of-week), gap-night and orphan-night pricing, minimum-stay enforcement, and your property's historical performance. Integrates with PriceLabs, Beyond Pricing, Wheelhouse APIs OR runs as a standalone Python engine pulling AirDNA / Rabbu / Mashvisor market data. Generates: rate calendar (next 365 days), price-change explanation per night, occupancy + ADR + RevPAR forecasts, and a weekly performance report vs comp set. TRIGGER on "Airbnb pricing", "VRBO pricing", "vacation rental pricing", "STR revenue management", "dynamic pricing", "PriceLabs", "Beyond Pricing", "Wheelhouse", "RevPAR", "ADR", "occupancy optimization", "smart pricing".
-version: "1.0.0"
+description: "Dynamic pricing engine for short-term rentals (Airbnb, VRBO, Booking.com, Direct) — sets nightly rates based on a comp set (40+ filters: bedrooms, bathrooms, amenities, location radius, rating tier), seasonality patterns (weekly + monthly + annual cycles per market)."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

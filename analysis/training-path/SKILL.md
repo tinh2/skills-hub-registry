@@ -1,7 +1,7 @@
 ---
 name: training-path
-description: Analyze learning management and training pathway systems for prerequisite mapping, competency-based progression, adaptive sequencing, and credential stacking. Evaluates LMS platforms, SCORM/xAPI compliance, completion prediction models, learning outcome measurement against Bloom's taxonomy, ROI tracking, and workforce development program effectiveness.
-version: "2.0.0"
+description: "Analyze learning management and training pathway systems for prerequisite mapping, competency-based progression, adaptive sequencing, and credential stacking."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

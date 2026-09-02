@@ -1,7 +1,7 @@
 ---
 name: production-budgeting
-description: Audit film, television, and digital content production budgets for above-the-line (ATL) and below-the-line (BTL) cost accuracy, SAG-AFTRA/DGA/WGA/IATSE union rate compliance, fringe and payroll tax calculations, VFX bid variance analysis, post-production cost validation, completion bond readiness, EFC (Estimated Final Cost) projections, tax incentive qualification tracking, and financing waterfall alignment using Movie Magic Budgeting, Hot Budget, or EP formats.
-version: "2.0.0"
+description: "Audit film, television, and digital content production budgets for above-the-line (ATL) and below-the-line (BTL) cost accuracy, SAG-AFTRA/DGA/WGA/IATSE union rate compliance, fringe and payroll tax calculations, VFX bid variance analysis, post-production cost validation."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

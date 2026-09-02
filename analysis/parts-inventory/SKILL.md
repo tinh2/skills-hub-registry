@@ -1,7 +1,7 @@
 ---
 name: parts-inventory
-description: Analyze MRO parts inventory systems for field service optimization -- truck stock composition, first-time fix rate improvement, reorder point calculation, safety stock sizing, obsolescence detection, and demand forecasting. Covers Croston's method for intermittent demand, SBA/TSB variants, ABC-VED classification, multi-echelon inventory placement, and equipment-driven demand modeling. Use when optimizing technician truck stock, calculating reorder points, identifying obsolete inventory, or improving warehouse fill rates.
-version: "2.0.0"
+description: "Analyze MRO parts inventory systems for field service optimization -- truck stock composition, first-time fix rate improvement, reorder point calculation, safety stock sizing, obsolescence detection, and demand forecasting.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

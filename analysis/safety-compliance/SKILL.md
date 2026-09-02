@@ -1,7 +1,7 @@
 ---
 name: safety-compliance
-description: Audit workplace safety compliance systems for OSHA regulatory gap analysis, inspection readiness assessment, permit-to-work management, lockout/tagout program compliance, confined space entry procedures, and electrical safety evaluation. Use when reviewing EHS platforms, safety management software, permit systems, industrial hygiene tools, or compliance tracking against OSHA 29 CFR 1910/1926, NFPA 70E, and ANSI standards.
-version: "2.0.0"
+description: "Audit workplace safety compliance systems for OSHA regulatory gap analysis, inspection readiness assessment, permit-to-work management, lockout/tagout program compliance, confined space entry procedures, and electrical safety evaluation.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

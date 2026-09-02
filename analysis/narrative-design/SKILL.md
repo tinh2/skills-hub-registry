@@ -1,7 +1,7 @@
 ---
 name: narrative-design
-description: Audit game narrative systems for technical quality -- branching dialogue trees, state/flag tracking, quest systems, choice-consequence mapping, localization pipelines, voice-over integration, and cinematic scripting. Supports Ink, Yarn Spinner, Twine, Articy Draft, Dialogue System for Unity, and custom engines. Use when reviewing dialogue branching logic, debugging quest state machines, validating localization readiness, checking for dead-end conversations, or mapping player choice consequences.
-version: "2.0.0"
+description: "Audit game narrative systems for technical quality -- branching dialogue trees, state/flag tracking, quest systems, choice-consequence mapping, localization pipelines, voice-over integration, and cinematic scripting.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

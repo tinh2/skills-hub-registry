@@ -1,7 +1,7 @@
 ---
 name: mobile-monetization
-description: Audit mobile app revenue implementation -- in-app purchases, subscriptions, ad SDKs, paywall design, trial conversion funnels, and store billing compliance. Covers StoreKit 2, Google Play Billing, RevenueCat, AdMob, Unity Ads, receipt validation, entitlement sync, and pricing localization. Use when reviewing IAP flows, optimizing subscription conversion, checking ad mediation setup, or preparing for App Store / Play Store review.
-version: "2.0.0"
+description: "Audit mobile app revenue implementation -- in-app purchases, subscriptions, ad SDKs, paywall design, trial conversion funnels, and store billing compliance. Triggers: reviewing IAP flows, optimizing subscription conversion, checking ad mediation setup."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

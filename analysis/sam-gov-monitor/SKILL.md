@@ -1,7 +1,7 @@
 ---
 name: sam-gov-monitor
-description: Monitor SAM.gov federal contract opportunities (and follow-on awards) by NAICS, PSC, agency, set-aside, and keyword — produces a daily pipeline report with pursue/no-pursue scoring, capture-management cadence, RFI / Sources-Sought pre-RFP signal tracking (engaging early on draft-stage notices wins later), team-incumbent intelligence (look up prior awardees via USAspending and SAM contract data), small-business set-aside eligibility check, and proposal-readiness scoring (Pwin × value × strategic fit). Generates: SAM.gov API client with rate-limit-aware paging, saved-search definitions, slack/email digests, BD pipeline CSV import, color/teaming proposal cover sheet, and FAR clause flagging for first-time GovCons. TRIGGER on "SAM.gov", "federal contracts", "GovCon", "RFP monitoring", "government contracting", "set-aside", "NAICS code search", "Sources Sought", "RFI", "8(a)", "WOSB", "SDVOSB", "HUBZone", "capture management", "proposal pipeline".
-version: "1.0.0"
+description: "Monitor SAM.gov federal contract opportunities (and follow-on awards) by NAICS, PSC, agency, set-aside, and keyword — produces a daily pipeline report with pursue/no-pursue scoring, capture-management cadence."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

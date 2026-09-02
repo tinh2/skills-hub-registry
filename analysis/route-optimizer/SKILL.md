@@ -1,7 +1,7 @@
 ---
 name: route-optimizer
-description: Generate a production-grade Vehicle Routing Problem (VRP) solver using Google OR-Tools — supports CVRP (capacity), VRPTW (time windows), VRPPD (pickup + delivery), multi-depot, multi-trip, heterogeneous fleet, driver hours-of-service (HOS) compliance, and soft-vs-hard window constraints with penalty modeling. Input: stops CSV (lat/lng/demand/window) + vehicle config + depots. Output: optimized routes (one per vehicle), total miles/duration/cost, GeoJSON FeatureCollection for map rendering, OSRM/Mapbox-compatible turn-by-turn URLs, KPI report (utilization, on-time %, last-mile cost share). Last-mile delivery accounts for over 50% of total shipping cost — optimizing it is the highest-leverage logistics fix. TRIGGER on "route optimization", "VRP", "vehicle routing", "delivery routing", "last mile", "OR-Tools routing", "courier routes", "TSP/VRP", "dispatch optimization", or any user describing multi-stop dispatch.
-version: "1.0.0"
+description: "Generate a production-grade Vehicle Routing Problem (VRP) solver using Google OR-Tools — supports CVRP (capacity), VRPTW (time windows), VRPPD (pickup + delivery), multi-depot, multi-trip, heterogeneous fleet, driver hours-of-service (HOS) compliance."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

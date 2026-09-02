@@ -1,7 +1,7 @@
 ---
 name: material-forecasting
-description: Analyze material forecasting and requirements planning systems including MRP/MRP II logic evaluation, BOM explosion accuracy, supplier lead time variability tracking, seasonal demand pattern detection, fabric yield and marker efficiency optimization, MOQ aggregation strategies, safety stock methodology, inventory turn analysis, and forecast accuracy measurement (MAPE, bias, tracking signal) for manufacturing and apparel supply chains.
-version: "2.0.0"
+description: "Analyze material forecasting and requirements planning systems including MRP/MRP II logic evaluation, BOM explosion accuracy, supplier lead time variability tracking, seasonal demand pattern detection, fabric yield and marker efficiency optimization, MOQ aggregation strategies."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

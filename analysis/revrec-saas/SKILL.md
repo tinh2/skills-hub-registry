@@ -1,7 +1,7 @@
 ---
 name: revrec-saas
-description: Generate an ASC 606 / IFRS 15 revenue recognition engine for SaaS — the five-step model (identify contract, identify performance obligations, determine transaction price, allocate to performance obligations, recognize as POs are satisfied) applied to subscription contracts, multi-element arrangements (subscription + implementation + training + support), contract modifications, ramp deals, usage-based billing, multi-year discounts, free trials, refundable setup fees, variable consideration (usage credits, performance bonuses, claw-backs), and contract assets/liabilities (deferred revenue, contract acquisition costs amortized per ASC 340-40). Outputs: schema for the rev-rec engine, a calc service that takes a Stripe / Chargebee / Maxio billing event and emits journal entries, ASC 606 footnote disclosure templates (contract balances, remaining performance obligations, significant judgments), and a SOX-grade audit trail for every recognition event. TRIGGER on "ASC 606", "IFRS 15", "rev rec", "revenue recognition", "deferred revenue", "performance obligation", "subscription accounting", "SaaS accounting", "contract modification", "SSP", "standalone selling price", "ARR vs revenue", "GAAP revenue".
-version: "1.0.0"
+description: "Generate an ASC 606 / IFRS 15 revenue recognition engine for SaaS — the five-step model (identify contract, identify performance obligations, determine transaction price, allocate to performance obligations, recognize as POs are satisfied) applied to subscription contracts."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

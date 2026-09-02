@@ -1,7 +1,7 @@
 ---
 name: revenue-management
-description: Audit dynamic pricing and revenue management systems for hotels, airlines, and hospitality including inventory controls, overbooking optimization, channel management, competitive rate shopping, and demand-driven pricing. Use when reviewing hotel PMS/RMS integrations, airline yield management, OTA channel managers, booking engines, or pricing optimization platforms using HEDNA standards and STR benchmarks.
-version: "2.0.0"
+description: "Audit dynamic pricing and revenue management systems for hotels, airlines, and hospitality including inventory controls, overbooking optimization, channel management, competitive rate shopping, and demand-driven pricing.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

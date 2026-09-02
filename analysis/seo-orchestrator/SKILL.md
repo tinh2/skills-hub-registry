@@ -1,7 +1,7 @@
 ---
 name: seo-orchestrator
-description: The full open SEO suite for 2026 — a single orchestrator that composes 10+ specialized sub-skills into a daily, weekly, and on-demand workflow that owns the SEO + GEO surface for a site. Built as a direct, open, code-first answer to Visibly AI's "6 agents + €399/month" pitch. Composes (a) the 2026 audit (`/seo-audit-2026`), (b) GEO/AEO optimization (`/geo-optimize`), (c) content brief generation (`/seo-content-brief`), (d) AI citation tracking across ChatGPT/Perplexity/Claude/Gemini/AI Overviews (`/ai-citation-tracker`), (e) GSC pipeline (`/gsc-pull`), (f) internal link graph + semantic recommendations (`/internal-link-graph`), (g) cannibalization detection (`/content-cannibalization`), (h) backlink outreach (`/backlink-outreach`), and (i) WordPress publish + content writing if applicable. Produces ONE prioritized punch list each Monday morning ranked by impact × confidence × effort, plus daily AI-citation deltas and GSC top-mover alerts. Your data stays yours (SQLite/Postgres of your choice). Your code stays yours (everything is generated, nothing is gated behind a vendor login). TRIGGER on "SEO suite", "SEO orchestrator", "full SEO audit and ongoing", "SEO weekly report", "automate SEO", "SEO agents pipeline", "alternative to Visibly AI", "alternative to Semrush", "alternative to Ahrefs", "alternative to Conductor", "open-source SEO platform", "SEO command center".
-version: "1.0.0"
+description: "The full open SEO suite for 2026 — a single orchestrator that composes 10+ specialized sub-skills into a daily, weekly, and on-demand workflow that owns the SEO + GEO surface for a site.."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

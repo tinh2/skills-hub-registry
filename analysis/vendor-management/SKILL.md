@@ -1,7 +1,7 @@
 ---
 name: vendor-management
-description: Analyze vendor management systems for performance scorecards, third-party risk assessment, SLA enforcement, vendor rationalization, and relationship governance. Evaluates vendor tiering strategies, risk taxonomy (financial, cyber, compliance, geopolitical), continuous monitoring with BitSight/SecurityScorecard, ITIL supplier management alignment, diversity program tracking, and lifecycle management from onboarding through offboarding following OCC, FFIEC, and GDPR frameworks.
-version: "2.0.0"
+description: "Analyze vendor management systems for performance scorecards, third-party risk assessment, SLA enforcement, vendor rationalization, and relationship governance."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

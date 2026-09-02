@@ -1,7 +1,7 @@
 ---
 name: mobile-analytics
-description: Analyze mobile app analytics implementation including event tracking completeness and naming conventions, SDK configuration audit (Firebase Analytics, Amplitude, Mixpanel, PostHog), attribution tracking with AppsFlyer/Adjust/Branch and SKAdNetwork conversion values, funnel analysis readiness for onboarding and conversion flows, crash monitoring setup (Crashlytics, Sentry) with symbolication and alerting, feature flag evaluation logging, retention cohort signal detection, and privacy compliance verification for App Tracking Transparency (ATT), GDPR consent, App Privacy Nutrition Labels, and Play Store Data Safety forms.
-version: "2.0.0"
+description: "Analyze mobile app analytics implementation including event tracking completeness and naming conventions, SDK configuration audit (Firebase Analytics, Amplitude, Mixpanel, PostHog), attribution tracking with AppsFlyer/Adjust/Branch and SKAdNetwork conversion values."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

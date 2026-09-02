@@ -1,7 +1,7 @@
 ---
 name: skill-gap
-description: Audit workforce skill gap identification systems and labor market alignment. Use when you need to evaluate skill taxonomy quality, individual and aggregate gap analysis accuracy, BLS/O*NET/Lightcast labor market data integration, credential-to-skill mapping and ROI, career pathway modeling with equity analysis, employer demand forecasting methodology, job posting skill extraction pipelines, or workforce board data integration. Covers workforce development portals, career services platforms, LMS integrations, and employer-facing talent pipeline tools.
-version: "2.0.0"
+description: "Audit workforce skill gap identification systems and labor market alignment. Triggers: you need to evaluate skill taxonomy quality, individual and aggregate gap analysis accuracy."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

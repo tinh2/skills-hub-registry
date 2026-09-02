@@ -1,7 +1,7 @@
 ---
 name: mls-listing-craft
-description: Generate MLS-compliant property listing copy in five length variants (tagline, MLS-short ≤250 char, MLS-long ≤4000 char, marketing description ~600-800 words, social caption) PLUS schema.org RealEstateListing JSON-LD for SEO/AEO syndication. Auto-runs HUD Fair Housing Act compliance check (catches discriminatory language patterns — "perfect for families", "walking distance", "exclusive", "safe neighborhood", "Christian community", etc.). TRIGGER on phrases like "MLS listing", "property listing description", "listing copy", "real estate description", "Zillow listing", "compelling listing", "write the listing", "MLS remarks", "marketing copy for [property]", "open house copy". Saves agents 30-60 minutes per listing — and prevents the fair-housing violations that cost agents licenses.
-version: "1.0.0"
+description: "Generate MLS-compliant property listing copy in five length variants (tagline, MLS-short ≤250 char, MLS-long ≤4000 char, marketing description ~600-800 words, social caption) PLUS schema.org RealEstateListing JSON-LD for SEO/AEO syndication.."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

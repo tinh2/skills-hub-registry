@@ -1,7 +1,7 @@
 ---
 name: tax-compliance
-description: Audit corporate tax compliance systems across jurisdictions. Analyzes tax engine configuration (Avalara, Vertex, ONESOURCE), nexus determination and Wayfair economic nexus tracking, sales/use tax calculation accuracy, federal and state income tax compliance (book-to-tax adjustments, NOL, R&D credits, apportionment), ASC 740 tax provision automation (ETR, deferred tax, uncertain tax positions), transfer pricing documentation (OECD BEPS Pillar One/Two, GloBE rules, CbCR), and filing calendar management.
-version: "2.0.0"
+description: "Audit corporate tax compliance systems across jurisdictions. Analyzes tax engine configuration (Avalara, Vertex, ONESOURCE), nexus determination and Wayfair economic nexus tracking, sales/use tax calculation accuracy, federal and state income tax compliance (book-to-tax adjustments, NOL."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

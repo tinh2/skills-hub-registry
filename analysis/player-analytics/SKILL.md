@@ -1,7 +1,7 @@
 ---
 name: player-analytics
-description: Audit game analytics and telemetry implementation -- event tracking completeness, FTUE and monetization funnel coverage, retention metric infrastructure, A/B testing framework, heatmap data collection, churn prediction signals, and LTV modeling support. Covers Firebase Analytics, Unity Analytics, GameAnalytics, Amplitude, Mixpanel, Adjust, and custom pipelines. Use when verifying event tracking coverage, debugging missing funnel steps, auditing A/B test variant assignment, checking for PII in analytics events, or evaluating GDPR/COPPA compliance of tracking code.
-version: "2.0.0"
+description: "Audit game analytics and telemetry implementation -- event tracking completeness, FTUE and monetization funnel coverage, retention metric infrastructure, A/B testing framework, heatmap data collection, churn prediction signals, and LTV modeling support.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

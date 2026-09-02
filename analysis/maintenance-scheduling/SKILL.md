@@ -1,7 +1,7 @@
 ---
 name: maintenance-scheduling
-description: Analyze preventive and predictive maintenance scheduling systems including CMMS/EAM work order optimization, asset condition scoring with Facility Condition Index, PM compliance tracking, maintenance backlog reduction, reliability-centered maintenance strategy, spare parts inventory management, and regulatory compliance for fire/life safety and elevator inspections per ASHRAE and BOMA standards.
-version: "2.0.0"
+description: "Analyze preventive and predictive maintenance scheduling systems including CMMS/EAM work order optimization, asset condition scoring with Facility Condition Index, PM compliance tracking, maintenance backlog reduction, reliability-centered maintenance strategy."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

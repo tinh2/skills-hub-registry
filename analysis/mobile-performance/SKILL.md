@@ -1,7 +1,7 @@
 ---
 name: mobile-performance
-description: Profile and audit mobile app performance -- cold/warm/hot startup time, memory leaks, battery drain, network efficiency, frame rate jank, and binary size. Covers Flutter, React Native, Swift, and Kotlin apps. Detects image memory issues, undisposed controllers, polling without backoff, missing virtualized lists, and unused asset bloat. Use when diagnosing slow launches, investigating ANRs, reducing app size, or benchmarking rendering performance.
-version: "2.0.0"
+description: "Profile and audit mobile app performance -- cold/warm/hot startup time, memory leaks, battery drain, network efficiency, frame rate jank, and binary size. Triggers: diagnosing slow launches, investigating ANRs, reducing app size, or benchmarking rendering performance."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

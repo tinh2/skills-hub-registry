@@ -1,7 +1,7 @@
 ---
 name: staff-scheduling
-description: Audit workforce scheduling systems for labor optimization and compliance. Use when you need to evaluate labor demand forecasting accuracy, shift generation and optimization algorithms, skill-based staff routing, FLSA overtime compliance, predictive scheduling law compliance (OR, NYC, Chicago, Seattle), union CBA shift bidding rules, real-time schedule adjustments (call-outs, flex staffing, VTO), cross-training ROI, or labor cost as percentage of revenue. Covers UKG/Kronos, ADP, Workday, Deputy, HotSchedules, and custom WFM platforms across hospitality, healthcare, retail, and service industries.
-version: "2.0.0"
+description: "Audit workforce scheduling systems for labor optimization and compliance. Triggers: you need to evaluate labor demand forecasting accuracy, shift generation and optimization algorithms."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: vehicle-routing
-description: Analyze vehicle routing and fleet optimization systems for route planning algorithms, multi-stop sequencing, time window constraints, and last-mile delivery performance. Evaluates VRP solver strategies (OR-Tools, OptaPlanner, VROOM), CVRP/VRPTW constraint handling, FMCSA hours-of-service compliance, load balancing, fleet utilization metrics, cost-per-delivery tracking, and dynamic re-routing for delivery and logistics operations.
-version: "2.0.0"
+description: "Analyze vehicle routing and fleet optimization systems for route planning algorithms, multi-stop sequencing, time window constraints, and last-mile delivery performance."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: treatment-outcome
-description: Analyze behavioral health outcome tracking systems for clinical measurement validity, treatment effectiveness, and provider performance comparison. Evaluates PHQ-9, GAD-7, PCL-5, and AUDIT instrument scoring accuracy, longitudinal trend analysis with Reliable Change Index, risk-adjusted provider benchmarking, evidence-based practice fidelity monitoring, and quality reporting for HEDIS, MIPS, and CARF accreditation.
-version: "2.0.0"
+description: "Analyze behavioral health outcome tracking systems for clinical measurement validity, treatment effectiveness, and provider performance comparison."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

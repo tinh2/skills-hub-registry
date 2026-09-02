@@ -1,7 +1,7 @@
 ---
 name: real-estate-market
-description: Audit a real estate analytics platform -- evaluate comparable sales and rental engines, automated valuation models (AVM), demographic and economic indicator pipelines, submarket scoring, gentrification detection, price forecasting accuracy, market cycle analysis, and risk modeling. Covers MLS, CoStar, Zillow, ATTOM, CoreLogic, Census/ACS, and BLS data integrations with spatial visualization and predictive model backtesting.
-version: "2.0.0"
+description: "Audit a real estate analytics platform -- evaluate comparable sales and rental engines, automated valuation models (AVM), demographic and economic indicator pipelines, submarket scoring, gentrification detection, price forecasting accuracy, market cycle analysis, and risk modeling."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

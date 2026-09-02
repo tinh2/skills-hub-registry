@@ -1,7 +1,7 @@
 ---
 name: predictive-maintenance
-description: Audit manufacturing predictive maintenance systems for OPC-UA/MQTT sensor data pipelines, time-series storage retention, ML model lifecycle (training-serving skew, drift detection, retraining triggers), MTBF/MTTF/MTTR reliability calculations, Weibull survival analysis, RUL prediction accuracy, alert threshold tuning and false positive management, CMMS/ERP integration, spare parts demand forecasting, and OT/IT security segmentation.
-version: "2.0.0"
+description: "Audit manufacturing predictive maintenance systems for OPC-UA/MQTT sensor data pipelines, time-series storage retention, ML model lifecycle (training-serving skew, drift detection, retraining triggers), MTBF/MTTF/MTTR reliability calculations, Weibull survival analysis."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

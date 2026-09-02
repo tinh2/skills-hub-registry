@@ -1,7 +1,7 @@
 ---
 name: pharma-quality-control
-description: Audit pharmaceutical QC laboratory operations -- OOS/OOT investigations, stability program trending, analytical method validation status, release testing optimization, and specification compliance. Covers ICH Q1A-Q1E stability guidelines, ICH Q2(R2) method validation, USP compendial verification, ALCOA+ data integrity, Croston shelf life estimation, and LIMS/CDS system evaluation. Use when reviewing OOS investigation quality, trending stability data, auditing method validation coverage, optimizing release testing turnaround, or assessing data integrity in QC labs.
-version: "2.0.0"
+description: "Audit pharmaceutical QC laboratory operations -- OOS/OOT investigations, stability program trending, analytical method validation status, release testing optimization, and specification compliance.."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

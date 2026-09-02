@@ -1,7 +1,7 @@
 ---
 name: podcast-pipeline
-description: Audio file → full publishing kit pipeline. From a single .mp3 or .wav per episode, generates Whisper-large-v3 transcript with word-level timestamps, automatic chapter detection (audio scene change + topic shift), two show-notes lengths (scannable summary + long-form SEO), a 600-1000 word blog post with JSON-LD PodcastEpisode + BlogPosting schema, social shorts (60-second vertical clips with auto-burned captions for TikTok / Reels / YouTube Shorts), quote graphics (pull 3-5 highest-engagement quotes for Instagram), an episode-page HTML template ready to drop into the user's CMS, and an X/LinkedIn/Threads thread draft. Pipeline closes the 4-hour-per-episode publishing tax that 2026 podcasters describe as the #1 time sink. TRIGGER on "podcast workflow", "podcast publishing", "show notes", "podcast transcript", "podcast SEO", "podcast clips", "podcast repurposing", "Whisper transcript", "podcast chapters", "podcast to blog", "audiogram", "podcast to social".
-version: "1.0.0"
+description: "Audio file → full publishing kit pipeline. From a single .mp3 or .wav per episode, generates Whisper-large-v3 transcript with word-level timestamps, automatic chapter detection (audio scene change + topic shift), two show-notes lengths (scannable summary + long-form SEO)."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

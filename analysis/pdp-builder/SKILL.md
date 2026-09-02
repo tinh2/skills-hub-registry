@@ -1,7 +1,7 @@
 ---
 name: pdp-builder
-description: Generate a production-grade Product Detail Page (PDP) optimized for the 2026 conversion benchmarks — 4-8% target vs 1.5-3% average. Outputs: F-pattern visual hierarchy with hero image grid + lifestyle shots + video placeholder, social proof block (reviews/ratings — products with 5+ reviews convert 270% better), trust signals (returns/shipping/security), mobile-first responsive markup (73% of ecommerce traffic is mobile in 2026), schema.org Product + Offer + AggregateRating + Review JSON-LD for SEO/AEO, AVIF/WebP image markup with width/height attributes (CLS prevention), and a built-in CRO experimentation harness (Optimizely/VWO/Statsig variant config). Targets Shopify Hydrogen, Next.js Commerce, BigCommerce Catalyst, WooCommerce blocks. TRIGGER on "product page", "PDP", "product detail page", "Shopify product page", "ecommerce conversion", "improve product page", "convert more shoppers", or any user describing a need to lift product-page conversion. SKIP if user just wants product images — recommend a photographer.
-version: "1.0.0"
+description: "Generate a production-grade Product Detail Page (PDP) optimized for the 2026 conversion benchmarks — 4-8% target vs 1.5-3% average. Triggers: \"product page\", \"PDP\", \"product detail page\", \"Shopify product page\", \"ecommerce conversion\"."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: supply-chain-risk
-description: Assess supply chain risk exposure and resilience posture. Analyzes supplier dependency mapping (Tier 1/2/3), geographic concentration risk, single-source vulnerability, disruption scenario modeling (pandemic, trade war, port closure), Monte Carlo simulation, financial health monitoring (Altman Z-score), early warning systems, compliance tracking (UFLPA, conflict minerals, sanctions), ESG supply chain scoring, and mitigation strategy evaluation.
-version: "2.0.0"
+description: "Assess supply chain risk exposure and resilience posture. Analyzes supplier dependency mapping (Tier 1/2/3), geographic concentration risk, single-source vulnerability, disruption scenario modeling (pandemic, trade war, port closure), Monte Carlo simulation."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

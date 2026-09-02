@@ -1,7 +1,7 @@
 ---
 name: nist-800-53
-description: Map a cloud system against NIST SP 800-53 Rev. 5 + FedRAMP baselines to produce the documentation an authorization needs — System Security Plan (SSP), Control Implementation Summary (CIS), Plan of Action and Milestones (POA&M), Continuous Monitoring (ConMon) Plan. Aware of 2026 FedRAMP CR26 changes (Certification Classes A/B/C/D replacing Pilot/Ready/Low/Li-SaaS/Moderate/High; JAB authorization model deprecated). Walks the 20 control families (AC, AT, AU, CA, CM, CP, IA, IR, MA, MP, PE, PL, PS, PT, RA, SA, SC, SI, SR, PM) — for each control + control enhancement applicable to the chosen class, generates an implementation statement template referencing your actual stack (AWS/Azure/GCP/Kubernetes/Terraform/CI/CD), customer/provider responsibility mapping, inheritance from underlying CSP (AWS GovCloud, Azure Government, GCC High), evidence collection mapping (screenshots, configs, scan reports), and 30/90/180-day remediation timelines per finding severity. TRIGGER on "NIST 800-53", "FedRAMP", "ATO", "SSP", "POA&M", "ConMon", "continuous monitoring", "FISMA", "RMF", "DoD CC SRG", "IL2/IL4/IL5/IL6", "STIG", "control inheritance", "3PAO", "FedRAMP authorization".
-version: "1.0.0"
+description: "Map a cloud system against NIST SP 800-53 Rev. 5 + FedRAMP baselines to produce the documentation an authorization needs — System Security Plan (SSP), Control Implementation Summary (CIS), Plan of Action and Milestones (POA&M), Continuous Monitoring (ConMon) Plan.."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

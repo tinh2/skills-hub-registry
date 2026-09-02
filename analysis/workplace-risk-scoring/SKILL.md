@@ -1,7 +1,7 @@
 ---
 name: workplace-risk-scoring
-description: Audit workplace risk scoring systems and occupational safety programs -- evaluate job hazard analysis (JHA/JSA) methodology and task-level hazard identification, risk matrix calibration for likelihood and consequence scales, exposure assessment accuracy for chemical, noise, vibration, and heat stress monitoring, PPE adequacy under 29 CFR 1910.132(d) and respirator fit testing per 29 CFR 1910.134, and ergonomic risk factors using REBA, RULA, NIOSH Lifting Equation, and Strain Index. Covers NIOSH hierarchy of controls (elimination, substitution, engineering, administrative, PPE), ALARP risk tolerance criteria, musculoskeletal disorder prevention programs, OSHA PEL and ACGIH TLV compliance, inter-rater reliability for risk assessors, and management of change for safety-critical controls.
-version: "2.0.0"
+description: "Audit workplace risk scoring systems and occupational safety programs -- evaluate job hazard analysis (JHA/JSA) methodology and task-level hazard identification, risk matrix calibration for likelihood and consequence scales, exposure assessment accuracy for chemical, noise, vibration."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

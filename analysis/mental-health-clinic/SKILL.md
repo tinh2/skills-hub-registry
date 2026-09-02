@@ -1,7 +1,7 @@
 ---
 name: mental-health-clinic
-description: Analyze mental health clinic and therapy practice software including appointment scheduling optimization with no-show backfill, therapist-client matching algorithms (specialization, modality, caseload balance), session documentation workflows (SOAP, DAP, BIRP templates), crisis detection and safety plan management (C-SSRS, PHQ-9 Item 9 flagging), insurance claims processing (CPT 90834/90837/90847), sliding scale fee management, waitlist intelligence, and measurement-based care outcome tracking (PHQ-9, GAD-7, PCL-5, OQ-45).
-version: "2.0.0"
+description: "Analyze mental health clinic and therapy practice software including appointment scheduling optimization with no-show backfill, therapist-client matching algorithms (specialization, modality, caseload balance), session documentation workflows (SOAP, DAP, BIRP templates)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

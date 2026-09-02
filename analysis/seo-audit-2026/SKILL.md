@@ -1,7 +1,7 @@
 ---
 name: seo-audit-2026
-description: Comprehensive 2026 SEO audit covering classic technical SEO (crawl, render, index, Core Web Vitals with INP), on-page (titles, meta, headings, internal linking), content (topical authority, entity density), and the new mandatory layer — Generative Engine Optimization (GEO/AEO) for ChatGPT, Perplexity, Claude, Gemini, and Google AI Overviews. Produces a single prioritized report with P0–P3 items, fix code snippets, and a re-audit checklist. Replaces the older "SEO checklist" workflow — modern audits MUST cover AI crawler parity, llms.txt, schema depth, entity density, and E-E-A-T author entity, OR they'll grade well on Google and badly on the engines that drive 30%+ of zero-click answers in 2026. TRIGGER on "SEO audit", "site SEO check", "Core Web Vitals", "INP", "ranking issues", "crawl issues", "Google not indexing", "AI Overviews", "Lighthouse SEO", "site:visibility report", or any general "fix my SEO" prompt.
-version: "2.0.0"
+description: "Comprehensive 2026 SEO audit covering classic technical SEO (crawl, render, index, Core Web Vitals with INP), on-page (titles, meta, headings, internal linking), content (topical authority, entity density)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: safety-training
-description: Audit OSHA training compliance, certification expirations, competency tracking, and LMS integration. Use when you need to evaluate safety training programs, check ANSI Z490.1 compliance, analyze training effectiveness with Kirkpatrick levels, identify expired certifications, assess training needs gaps, review contractor training verification, or optimize training ROI. Covers forklift, confined space, LOTO, fall protection, respirator, hazmat, and all OSHA-mandated programs.
-version: "2.0.0"
+description: "Audit OSHA training compliance, certification expirations, competency tracking, and LMS integration. Triggers: you need to evaluate safety training programs, check ANSI Z490."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

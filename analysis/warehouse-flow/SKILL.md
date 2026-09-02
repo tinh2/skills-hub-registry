@@ -1,7 +1,7 @@
 ---
 name: warehouse-flow
-description: Audit warehouse flow design and material movement -- evaluate pick path optimization algorithms, ABC velocity-based slotting compliance, zone configuration and boundary balancing, conveyor merge point and sortation system capacity, wave planning logic, and throughput bottleneck identification. Covers S-pattern and serpentine routing, golden zone placement, goods-to-person vs. pick-to-light vs. voice-directed picking, inbound-to-outbound flow path modeling, replenishment timing, Theory of Constraints drum-buffer-rope analysis, and labor planning with engineered standards for distribution centers and fulfillment operations.
-version: "2.0.0"
+description: "Audit warehouse flow design and material movement -- evaluate pick path optimization algorithms, ABC velocity-based slotting compliance, zone configuration and boundary balancing, conveyor merge point and sortation system capacity, wave planning logic."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

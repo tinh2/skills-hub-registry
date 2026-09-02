@@ -1,7 +1,7 @@
 ---
 name: studio-operations
-description: Audit a media production studio or post-production facility. Analyzes facility scheduling and utilization, equipment lifecycle tracking, editorial and VFX pipelines, color grading and finishing workflows, digital asset management (MAM/DAM), IMF/MXF format compliance, SMPTE standards adherence, content security posture (TPN readiness), and talent/crew coordination systems.
-version: "2.0.0"
+description: "Audit a media production studio or post-production facility. Analyzes facility scheduling and utilization, equipment lifecycle tracking, editorial and VFX pipelines, color grading and finishing workflows, digital asset management (MAM/DAM), IMF/MXF format compliance."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

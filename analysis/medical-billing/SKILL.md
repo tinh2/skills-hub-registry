@@ -1,7 +1,7 @@
 ---
 name: medical-billing
-description: Analyze medical billing and revenue cycle management software including claims processing pipelines, EDI transaction handling (837P/837I/835/270/271/276/277), ICD-10 and CPT code validation with NCCI edit checking, payer rules engine configuration, denial management and appeal workflows, prior authorization tracking, charge capture completeness, AR aging analysis, underpayment detection, and compliance review for False Claims Act, No Surprises Act, and price transparency requirements.
-version: "2.0.0"
+description: "Analyze medical billing and revenue cycle management software including claims processing pipelines, EDI transaction handling (837P/837I/835/270/271/276/277), ICD-10 and CPT code validation with NCCI edit checking, payer rules engine configuration, denial management and appeal workflows."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

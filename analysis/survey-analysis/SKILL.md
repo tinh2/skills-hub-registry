@@ -1,7 +1,7 @@
 ---
 name: survey-analysis
-description: Evaluate survey data pipelines and research methodology. Analyzes response bias detection (speeders, straight-liners, bots), statistical significance testing (t-test, chi-square, ANOVA with Bonferroni correction), sentiment and theme extraction from open-ended responses, conjoint analysis (CBC/ACA with Hierarchical Bayes estimation), MaxDiff best-worst scaling, survey design quality, weighting methodology, and cross-tabulation reporting for platforms like Qualtrics and SurveyMonkey.
-version: "2.0.0"
+description: "Evaluate survey data pipelines and research methodology. Analyzes response bias detection (speeders, straight-liners, bots), statistical significance testing (t-test, chi-square, ANOVA with Bonferroni correction), sentiment and theme extraction from open-ended responses."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

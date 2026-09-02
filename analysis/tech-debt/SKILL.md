@@ -1,7 +1,7 @@
 ---
 name: tech-debt
-description: Inventory and prioritize all technical debt in a codebase. Scans for TODO/FIXME/HACK markers and stale comments, outdated and deprecated dependencies with CVE detection, high-churn files and cyclomatic complexity hotspots, duplicated code blocks, missing test coverage on critical paths (auth, payments, data mutations), hardcoded magic numbers and configuration debt, god objects over 500 lines, circular dependencies, and architectural inconsistencies. Produces a scored priority backlog with quick wins, effort estimates, and a debt score out of 100.
-version: "2.0.0"
+description: "Inventory and prioritize all technical debt in a codebase. Scans for TODO/FIXME/HACK markers and stale comments, outdated and deprecated dependencies with CVE detection, high-churn files and cyclomatic complexity hotspots, duplicated code blocks."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: setback-predictor
-description: Audit rehabilitation setback prediction systems for clinical risk modeling and early intervention. Use when you need to evaluate risk factor models (Charlson, Elixhauser), early warning indicators for functional decline, 30/60/90-day readmission prediction (LACE index), treatment adherence correlation, psychosocial factor integration (PHQ-9, GAD-7, pain catastrophizing), wearable data ingestion, intervention trigger thresholds, alert fatigue management, or discharge readiness scoring. Covers physical therapy, post-surgical recovery, and inpatient rehabilitation programs.
-version: "2.0.0"
+description: "Audit rehabilitation setback prediction systems for clinical risk modeling and early intervention. Triggers: you need to evaluate risk factor models (Charlson, Elixhauser), early warning indicators for functional decline."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

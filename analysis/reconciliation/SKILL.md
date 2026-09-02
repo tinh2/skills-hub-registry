@@ -1,7 +1,7 @@
 ---
 name: reconciliation
-description: Audit financial reconciliation workflows -- evaluate automated transaction matching engines, intercompany balance reconciliation, suspense and clearing account health, variance root-cause investigation, and close calendar integration. Covers bank reconciliation, subledger-to-GL matching, IC elimination for consolidation, balance sheet substantiation, and reconciliation quality metrics using BlackLine, FloQast, Trintech, or ERP-native tools.
-version: "2.0.0"
+description: "Audit financial reconciliation workflows -- evaluate automated transaction matching engines, intercompany balance reconciliation, suspense and clearing account health, variance root-cause investigation, and close calendar integration."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

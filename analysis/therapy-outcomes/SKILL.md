@@ -1,7 +1,7 @@
 ---
 name: therapy-outcomes
-description: Evaluate therapy outcome measurement systems for rehabilitation and physical therapy. Analyzes functional improvement scoring (MCID, MDC, risk-adjusted residuals), treatment effectiveness comparison by therapist, diagnosis, and facility with case-mix adjustment, discharge readiness prediction (plateau detection, visit utilization trending), patient satisfaction correlation with clinical outcomes, and quality reporting compliance (CMS MIPS, CARF accreditation) using FOTO, AM-PAC, OPTIMAL, DASH, LEFS, ODI, and PHQ-9 outcome instruments.
-version: "2.0.0"
+description: "Evaluate therapy outcome measurement systems for rehabilitation and physical therapy."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

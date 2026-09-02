@@ -1,7 +1,7 @@
 ---
 name: shipping-cost
-description: Audit shipping costs and identify savings across carriers, zones, and modes. Use when you need to compare UPS/FedEx/USPS/DHL rates, analyze zone-skip and zone-reduction opportunities, find parcel-to-LTL and LTL-to-FTL modal break points, audit accessorial surcharges (fuel, residential, DAS, DIM weight), evaluate carrier contract negotiation leverage, benchmark lane rates against market, optimize multi-origin fulfillment, or quantify invoice audit recovery. Produces a prioritized savings waterfall with dollar estimates.
-version: "2.0.0"
+description: "Audit shipping costs and identify savings across carriers, zones, and modes. Triggers: you need to compare UPS/FedEx/USPS/DHL rates, analyze zone-skip and zone-reduction opportunities."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

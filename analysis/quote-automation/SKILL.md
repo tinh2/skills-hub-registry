@@ -1,7 +1,7 @@
 ---
 name: quote-automation
-description: Audit a quoting or estimation system -- analyze labor hour estimation accuracy, material take-off completeness, pricing rule engines, markup and margin optimization, good-better-best tiered pricing, and quote-to-close win rates. Covers flat-rate price books, RSMeans cost data, cost-plus and T&M models, supplier pricing integration, and competitive bid analysis for HVAC, plumbing, electrical, and general contracting trades.
-version: "2.0.0"
+description: "Audit a quoting or estimation system -- analyze labor hour estimation accuracy, material take-off completeness, pricing rule engines, markup and margin optimization, good-better-best tiered pricing, and quote-to-close win rates."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

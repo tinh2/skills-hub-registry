@@ -1,7 +1,7 @@
 ---
 name: seo-content-brief
-description: Generate a 2026-grade content brief for a target query — combines classic SERP analysis with AI Overview / Perplexity / ChatGPT citation analysis, entity recommendations (target ≥15 recognized entities), topical authority gap map, intent-mapped heading structure, internal linking targets, FAQ from PAA + Reddit + AI prompt mining, and explicit E-E-A-T requirements (author entity profile, first-party data needed, primary source citations). Replaces older keyword-density-focused briefs. The brief tells a writer EXACTLY what to include for both Google ranking AND AI citation. TRIGGER on "content brief", "SEO brief", "article outline", "blog post brief", "topic outline", "write a brief for [keyword]", "content strategy for [topic]", "what should we write about [X]". Skip if user just wants a content idea — this skill is for the page-level brief, not the editorial calendar.
-version: "1.0.0"
+description: "Generate a 2026-grade content brief for a target query — combines classic SERP analysis with AI Overview / Perplexity / ChatGPT citation analysis, entity recommendations (target ≥15 recognized entities), topical authority gap map, intent-mapped heading structure, internal linking targets."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

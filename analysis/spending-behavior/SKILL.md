@@ -1,7 +1,7 @@
 ---
 name: spending-behavior
-description: Audit personal finance and budgeting app spending intelligence features. Use when you need to evaluate transaction categorization accuracy (MCC mapping, ML classification, merchant matching), budget adherence tracking and alerts, behavioral nudge effectiveness and fatigue, savings goal automation (round-ups, found money), subscription detection and cancellation workflows, financial health scoring models, bank aggregation pipeline quality (Plaid, Yodlee, MX), or variable income budget handling. Covers spending categorization edge cases like transfers, refunds, and P2P payments.
-version: "2.0.0"
+description: "Audit personal finance and budgeting app spending intelligence features. Triggers: you need to evaluate transaction categorization accuracy (MCC mapping, ML classification, merchant matching)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

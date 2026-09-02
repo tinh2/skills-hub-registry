@@ -1,7 +1,7 @@
 ---
 name: merchandising-analytics
-description: Analyze retail merchandising systems including planogram optimization (space-to-sales alignment, fair share index, sales per linear foot), visual merchandising effectiveness for in-store displays and e-commerce product pages, market basket analysis with association rule mining (Apriori, FP-Growth), cross-sell and upsell recommendation engine performance, seasonal calendar and event planning execution, A/B testing infrastructure for merchandising decisions, and compliance monitoring with photo recognition AI.
-version: "2.0.0"
+description: "Analyze retail merchandising systems including planogram optimization (space-to-sales alignment, fair share index, sales per linear foot), visual merchandising effectiveness for in-store displays and e-commerce product pages, market basket analysis with association rule mining (Apriori."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

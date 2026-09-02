@@ -1,7 +1,7 @@
 ---
 name: sales-readiness
-description: Audit whether a product is ready for enterprise sales. Use when you need to assess SSO/SAML/SCIM support, RBAC maturity, multi-tenancy data isolation, audit logging coverage, public API quality, SLA operational readiness, SOC2/ISO27001 certification gaps, GDPR data residency controls, or white-labeling capabilities. Produces a scored enterprise readiness scorecard with deal-size qualification and a phased roadmap to close gaps for SMB through Fortune 500 buyers.
-version: "2.0.0"
+description: "Audit whether a product is ready for enterprise sales. Use when you need to assess SSO/SAML/SCIM support, RBAC maturity, multi-tenancy data isolation, audit logging coverage, public API quality, SLA operational readiness, SOC2/ISO27001 certification gaps, GDPR data residency controls."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: property-roi
-description: Audit real estate investment software for IRR/NPV/cap rate/cash-on-cash return calculations, pro forma income modeling (GPR, vacancy, rent growth, NNN pass-throughs), equity waterfall and promote structures, debt modeling (fixed/ARM/IO/construction loans), cost segregation and bonus depreciation tax analysis, 1031 exchange and Opportunity Zone modeling, Monte Carlo sensitivity analysis, and NCREIF/NAREIT-benchmarked portfolio analytics for multifamily, commercial, and mixed-use properties.
-version: "2.0.0"
+description: "Audit real estate investment software for IRR/NPV/cap rate/cash-on-cash return calculations, pro forma income modeling (GPR, vacancy, rent growth, NNN pass-throughs), equity waterfall and promote structures, debt modeling (fixed/ARM/IO/construction loans)."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

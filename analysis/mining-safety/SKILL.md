@@ -1,7 +1,7 @@
 ---
 name: mining-safety
-description: Analyze mining safety management systems including incident investigation quality (ICAM, TapRooT, BowTie analysis), hazard identification and risk register completeness, critical control verification per ICMM framework, occupational health exposure monitoring (respirable dust, silica, noise dosimetry), ground control and geotechnical safety (pit slope stability, underground support, tailings per GISTM), emergency preparedness and mine rescue capability, and regulatory compliance with MSHA 30 CFR, state WHS Acts, and ILO Convention 176.
-version: "2.0.0"
+description: "Analyze mining safety management systems including incident investigation quality (ICAM, TapRooT, BowTie analysis), hazard identification and risk register completeness, critical control verification per ICMM framework, occupational health exposure monitoring (respirable dust, silica."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

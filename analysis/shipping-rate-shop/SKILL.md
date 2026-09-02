@@ -1,7 +1,7 @@
 ---
 name: shipping-rate-shop
-description: Multi-carrier shipping rate comparison and label-generation pipeline — real-time quotes from USPS, UPS, FedEx, DHL via direct carrier APIs OR aggregators (Shippo / EasyPost / ShipStation / Pirate Ship). Handles 2026 rate landscape: FedEx/UPS/DHL each +5.9% GRI, USPS service-specific changes Jan 2026 + temporary 8% surcharge Apr 26 - Jan 17 2027. Carrier-strength heuristics built in: USPS dominates <1lb, UPS/FedEx win >10-15lbs, DHL eCommerce <4.4lbs international. Account-specific discount layering, variable-pricing-aware (UPS/FedEx/DHL use lane + volume models, not fixed tables). Generates: rate-shop function, label purchase + tracking, address validation, dimensional weight calc, return label support, manifest creation, EDI/272 acknowledgment, carrier-pickup scheduling. TRIGGER on "shipping rates", "label generation", "carrier comparison", "EasyPost", "Shippo", "shipping API", "rate shop", "best shipping carrier", "USPS API", "UPS API".
-version: "1.0.0"
+description: "Multi-carrier shipping rate comparison and label-generation pipeline — real-time quotes from USPS, UPS, FedEx, DHL via direct carrier APIs OR aggregators (Shippo / EasyPost / ShipStation / Pirate Ship).."
+version: "1.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE

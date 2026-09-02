@@ -1,7 +1,7 @@
 ---
 name: pricing-sensitivity
-description: Audit pricing research and sensitivity analysis systems for Van Westendorp price sensitivity meter (OPP/IDP/PMC/PME intersections), Gabor-Granger demand curves, Newton-Miller-Smith revenue extension, price elasticity econometric modeling, willingness-to-pay estimation, behavioral pricing effects (prospect theory, anchoring, charm pricing, decoy effect), competitive price mapping, and dynamic pricing optimization for SaaS, e-commerce, and consumer products.
-version: "2.0.0"
+description: "Audit pricing research and sensitivity analysis systems for Van Westendorp price sensitivity meter (OPP/IDP/PMC/PME intersections), Gabor-Granger demand curves, Newton-Miller-Smith revenue extension, price elasticity econometric modeling, willingness-to-pay estimation."
+version: "2.0.1"
 category: analysis
 platforms:
   - CLAUDE_CODE
