@@ -1,7 +1,7 @@
 ---
 name: compliance-gate
-description: "Runs a 4-phase compliance pipeline: security scan, GDPR audit, dependency vulnerability check, and penetration test, producing a unified pass/fail compliance report. Triggers on: \"compliance check\", \"compliance gate\", \"run compliance\", \"pre-release compliance\", \"security and compliance\", \"compliance audit\", \"is this app compliant\", \"gdpr and security check\", \"full security audit\", \"compliance scan\", \"check compliance before release\", \"compliance review\"."
-version: "2.0.0"
+description: "Runs a 4-phase compliance pipeline: security scan, GDPR audit, dependency vulnerability check, and penetration test, producing a unified pass/fail compliance report. Triggers: on: \"compliance check\", \"compliance gate\", \"run compliance\", \"pre-release compliance\", \"security and compliance\"."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

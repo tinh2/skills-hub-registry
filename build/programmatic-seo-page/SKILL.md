@@ -1,7 +1,7 @@
 ---
 name: programmatic-seo-page
-description: "Generates production-ready programmatic SEO landing pages using the three winning 2026 templates ('Best X for Niche', '[Service] in [City]', '[A] vs [B] for [User Type]') with unique scraped data, Article + Product + FAQ schema, a viral artifact (custom score or grader), and editorial-review checklist. Avoids site-wide thin-content penalties. Use when scaling organic acquisition past 100 pages."
-version: "1.0.0"
+description: "Generates production-ready programmatic SEO landing pages using the three winning 2026 templates ('Best X for Niche', '[Service] in [City]', '[A] vs [B] for [User Type]') with unique scraped data, Article + Product + FAQ schema, a viral artifact (custom score or grader)."
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

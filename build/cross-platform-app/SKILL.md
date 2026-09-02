@@ -1,7 +1,7 @@
 ---
 name: cross-platform-app
-description: Scaffold a production-ready cross-platform mobile app -- auto-detect or select framework (Flutter with Riverpod and GoRouter, React Native with Redux Toolkit and React Navigation 7, Kotlin Multiplatform with Ktor and SQLDelight, or .NET MAUI with CommunityToolkit.Mvvm) and generate shared business logic, platform-adaptive UI with iOS Cupertino and Android Material conventions, deep link navigation, offline-first data layer with secure credential storage, environment configs for dev/staging/prod, CI/CD workflow stubs for both platforms, and test infrastructure. Build a mobile app, create cross-platform app, scaffold Flutter app, scaffold React Native app, new mobile project, iOS and Android app.
-version: "2.0.0"
+description: "Scaffold a production-ready cross-platform mobile app -- auto-detect or select framework (Flutter with Riverpod and GoRouter, React Native with Redux Toolkit and React Navigation 7, Kotlin Multiplatform with Ktor and SQLDelight."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

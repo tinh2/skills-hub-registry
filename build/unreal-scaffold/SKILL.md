@@ -1,7 +1,7 @@
 ---
 name: unreal-scaffold
-description: "Scaffolds an Unreal Engine 5 project with C++ module structure, Enhanced Input, Gameplay Ability System, subsystem architecture, .uproject config, and CI/CD via BuildGraph. Triggers on: \"unreal project\", \"unreal engine game\", \"UE5 project\", \"unreal game\", \"scaffold unreal\", \"new unreal project\", \"create an unreal game\", \"unreal fps\", \"unreal tps\", \"unreal rpg\", \"unreal C++ project\", \"blueprint project\", \"UE5 setup\", \"unreal engine starter\"."
-version: "2.0.0"
+description: "Scaffolds an Unreal Engine 5 project with C++ module structure, Enhanced Input, Gameplay Ability System, subsystem architecture, .uproject config, and CI/CD via BuildGraph. Triggers: on: \"unreal project\", \"unreal engine game\", \"UE5 project\", \"unreal game\", \"scaffold unreal\"."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

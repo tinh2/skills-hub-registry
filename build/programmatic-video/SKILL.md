@@ -1,7 +1,7 @@
 ---
 name: programmatic-video
-description: "Builds programmatic videos (product demos, explainer clips, social videos, launch teasers) with Remotion: verifies node/ffmpeg/Remotion pre-flight, writes a timed storyboard (scene list with durations, on-screen text, and motion notes) as a hard gate before any code, implements scenes as composable React components over a shared theme, renders a low-res preview and self-reviews it frame-by-frame against the storyboard, then produces the final render with destination-aware presets (YouTube 1080p 16:9, Reels/TikTok 9:16, X 16:9 under 2:20). Use when: 'make a video with code', 'Remotion video', 'product demo video', 'animated explainer', 'launch video', 'render a social clip', 'programmatic video', 'turn this into a video', 'video for the release'."
-version: "2.0.0"
+description: "Builds programmatic videos (product demos, explainer clips, social videos, launch teasers) with Remotion: verifies node/ffmpeg/Remotion pre-flight, writes a timed storyboard (scene list with durations, on-screen text, and motion notes) as a hard gate before any code."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: unity-scaffold
-description: "Scaffolds a Unity game project with folder structure, assembly definitions, new Input System, scriptable object architecture, scene management, Git LFS, and CI/CD via GameCI. Triggers on: \"unity project\", \"unity game\", \"new unity project\", \"scaffold unity\", \"unity 2d game\", \"unity 3d game\", \"create a unity game\", \"unity setup\", \"unity fps\", \"unity rpg\", \"unity platformer\", \"unity mobile game\", \"C# game project\", \"unity starter\"."
-version: "2.0.0"
+description: "Scaffolds a Unity game project with folder structure, assembly definitions, new Input System, scriptable object architecture, scene management, Git LFS, and CI/CD via GameCI. Triggers: on: \"unity project\", \"unity game\", \"new unity project\", \"scaffold unity\", \"unity 2d game\"."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

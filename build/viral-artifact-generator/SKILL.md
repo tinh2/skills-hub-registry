@@ -1,7 +1,7 @@
 ---
 name: viral-artifact-generator
-description: "Generates shareable interactive widgets (custom scores, calculators, decision trees, grader quizzes) for landing pages and blog posts. The artifact produces a personalized result the user wants to share — a bookmark-worthy reason to link back. Use when adding the missing 'why share this page' element to programmatic SEO landings, alternatives pages, or comparison pages."
-version: "1.0.0"
+description: "Generates shareable interactive widgets (custom scores, calculators, decision trees, grader quizzes) for landing pages and blog posts. Triggers: adding the missing 'why share this page' element to programmatic SEO landings, alternatives pages, or comparison pages."
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

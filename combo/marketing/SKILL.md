@@ -1,7 +1,7 @@
 ---
 name: marketing
-description: "Complete marketing pipeline for apps, dev tools, libraries, and SaaS products in 2026. Generates positioning, listing/ASO/package-SEO assets, press kit, launch plan, social calendar, email sequences, growth/referral strategy, paid playbook, retention, and community plan. Adapts automatically to app vs dev-tool vs SaaS. Trigger on: marketing, launch plan, app launch, go-to-market, ASO, press kit, product hunt launch, hacker news launch, dev tool marketing, growth strategy, launch checklist, marketing plan, distribution plan."
-version: "2.0.0"
+description: "Complete marketing pipeline for apps, dev tools, libraries, and SaaS products in 2026. Triggers: on: marketing, launch plan, app launch, go-to-market, ASO."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

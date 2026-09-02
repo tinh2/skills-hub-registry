@@ -1,7 +1,7 @@
 ---
 name: full-deploy
-description: "Ship an app from code to production-ready infrastructure: containerize with Docker and multi-stage builds, set up GitHub Actions CI/CD with automated testing and deployment, add monitoring with health checks and alerting, then run preflight verification. Use when deploying a new service, adding DevOps to an existing project, or setting up a complete CI/CD pipeline from scratch."
-version: "2.0.0"
+description: "Ship an app from code to production-ready infrastructure: containerize with Docker and multi-stage builds, set up GitHub Actions CI/CD with automated testing and deployment, add monitoring with health checks and alerting, then run preflight verification.."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

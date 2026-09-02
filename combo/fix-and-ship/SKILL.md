@@ -1,7 +1,7 @@
 ---
 name: fix-and-ship
-description: "Emergency fix-and-deploy pipeline — diagnose a bug, apply a minimal fix, verify safety, deploy to production, and confirm the service is healthy. Supports Vercel, AWS, Railway, Fly.io, Heroku, and Kubernetes. Tracks incident timeline and MTTR. Triggered by 'fix and deploy', 'hotfix and ship', 'emergency fix', 'fix this bug and deploy', 'patch and push', 'fix and ship'."
-version: "2.0.0"
+description: "Emergency fix-and-deploy pipeline — diagnose a bug, apply a minimal fix, verify safety, deploy to production, and confirm the service is healthy."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

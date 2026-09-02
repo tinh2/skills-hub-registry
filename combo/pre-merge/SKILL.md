@@ -1,7 +1,7 @@
 ---
 name: pre-merge
-description: One-command PR gate that runs four passes over exactly the changed surface — code review (correctness then simplification), security (injection, authz, secrets, dependency diff), tests (run the suite and flag untested changed lines), and accessibility when UI files changed — and emits a single machine-parseable verdict: MERGE, MERGE-WITH-NITS, or BLOCK with numbered findings, each carrying file:line and a concrete fix. Use when someone says "is this PR ready to merge", "pre-merge check", "gate this branch", "review before I merge", "run the full check on my diff", "can I ship this", "final check", "PR gate", or in CI-like flows where one verdict must summarize review, security, tests, and a11y in a single run.
-version: "2.0.0"
+description: "One-command PR gate that runs four passes over exactly the changed surface — code review (correctness then simplification), security (injection, authz, secrets, dependency diff), tests (run the suite and flag untested changed lines)."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

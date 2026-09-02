@@ -1,7 +1,7 @@
 ---
 name: healthcare-audit
-description: "Comprehensive healthcare system compliance and security audit: review HIPAA Privacy and Security Rule adherence, check HITECH and 21st Century Cures Act obligations, validate clinical data integrity for HL7 FHIR and patient safety, then audit infrastructure security with PHI-specific focus. Use when building or auditing an EHR, patient portal, telehealth platform, clinical decision support system, or any application handling protected health information."
-version: "2.0.0"
+description: "Comprehensive healthcare system compliance and security audit: review HIPAA Privacy and Security Rule adherence, check HITECH and 21st Century Cures Act obligations, validate clinical data integrity for HL7 FHIR and patient safety."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

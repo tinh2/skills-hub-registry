@@ -1,7 +1,7 @@
 ---
 name: android-app
-description: Scaffold a production-ready native Android app -- generate a complete Kotlin project with Jetpack Compose UI, MVVM architecture, Hilt dependency injection, Room database with offline-first caching, Retrofit and OkHttp networking with auth interceptors, Firebase push notifications with notification channels, Material 3 theming with dynamic color and design tokens, EncryptedSharedPreferences for secure storage, NavHost navigation with typed routes, build variants (debug, staging, release) with per-environment API URLs, Gradle version catalog (libs.versions.toml), ProGuard/R8 rules, and Vitest unit and Compose UI test setup. Build an Android app, create Android project, generate Kotlin app, native mobile app scaffold.
-version: "2.0.0"
+description: "Scaffold a production-ready native Android app -- generate a complete Kotlin project with Jetpack Compose UI, MVVM architecture, Hilt dependency injection, Room database with offline-first caching, Retrofit and OkHttp networking with auth interceptors."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

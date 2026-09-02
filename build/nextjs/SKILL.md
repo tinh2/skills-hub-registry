@@ -1,7 +1,7 @@
 ---
 name: nextjs
-description: "Builds a production-ready Next.js 15 app with App Router, Server Components, authentication, Prisma database, and a full dashboard UI from a description or brief. Triggers on: \"next.js app\", \"nextjs app\", \"build a web app\", \"saas dashboard\", \"build a dashboard\", \"next.js project\", \"scaffold nextjs\", \"react web app with backend\", \"full-stack web app\", \"admin panel\", \"create a next app\", \"build a saas\", \"web application\", \"nextjs starter\"."
-version: "2.0.0"
+description: "Builds a production-ready Next.js 15 app with App Router, Server Components, authentication, Prisma database, and a full dashboard UI from a description or brief."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

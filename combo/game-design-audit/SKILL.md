@@ -1,7 +1,7 @@
 ---
 name: game-design-audit
-description: "Deep game design health assessment across five dimensions: review core loop and progression systems, analyze in-game economy for inflation and sink/source balance, mathematically simulate combat balance and drop rates, audit analytics event coverage, and evaluate monetization ethics. Use when tuning game feel, diagnosing player churn, balancing economy, preparing for soft launch, or reviewing F2P fairness."
-version: "2.0.0"
+description: "Deep game design health assessment across five dimensions: review core loop and progression systems, analyze in-game economy for inflation and sink/source balance, mathematically simulate combat balance and drop rates, audit analytics event coverage, and evaluate monetization ethics.."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

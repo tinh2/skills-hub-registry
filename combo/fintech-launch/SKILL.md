@@ -1,7 +1,7 @@
 ---
 name: fintech-launch
-description: "Pre-launch compliance and security gate for fintech apps: audit PCI DSS payment card handling, review financial API integrations for idempotency and error handling, evaluate fraud detection coverage, validate credit risk models for fairness, then run preflight checks. Use before launching a payments app, neobank, lending platform, BNPL product, or any money-movement system."
-version: "2.0.0"
+description: "Pre-launch compliance and security gate for fintech apps: audit PCI DSS payment card handling, review financial API integrations for idempotency and error handling, evaluate fraud detection coverage, validate credit risk models for fairness, then run preflight checks."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

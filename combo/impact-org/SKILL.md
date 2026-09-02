@@ -1,7 +1,7 @@
 ---
 name: impact-org
-description: "Full nonprofit operational health analysis: validate impact measurement methodology and theory of change, optimize fundraising channels and campaign ROI, audit grant management for compliance and proposal quality, and assess donor retention with churn prediction and stewardship workflows. Use when building or auditing a nonprofit CRM, donor management platform, grant tracking system, or impact reporting tool."
-version: "2.0.0"
+description: "Full nonprofit operational health analysis: validate impact measurement methodology and theory of change, optimize fundraising channels and campaign ROI, audit grant management for compliance and proposal quality, and assess donor retention with churn prediction and stewardship workflows.."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

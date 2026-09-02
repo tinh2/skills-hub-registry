@@ -1,7 +1,7 @@
 ---
 name: cli-tool
-description: Generate a production-ready command-line tool -- scaffold a complete CLI application with subcommand parsing, interactive prompts with validation, colored and structured output (tables, spinners, progress bars), JSON output mode for scripting, XDG-compliant config management, custom error types with exit codes, and distribution setup for publishing. Supports Node.js (Commander.js, Inquirer, chalk, ora), Python (Typer, Rich, httpx, Pydantic), Go (Cobra, Bubble Tea, Lip Gloss, Viper, goreleaser), and Rust (clap derive, dialoguer, console, comfy-table). Build a CLI, create command-line app, generate terminal tool, scaffold CLI utility, new CLI project.
-version: "2.0.0"
+description: "Generate a production-ready command-line tool -- scaffold a complete CLI application with subcommand parsing, interactive prompts with validation, colored and structured output (tables, spinners, progress bars), JSON output mode for scripting, XDG-compliant config management."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

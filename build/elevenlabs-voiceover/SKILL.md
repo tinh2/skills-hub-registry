@@ -1,7 +1,7 @@
 ---
 name: elevenlabs-voiceover
-description: Generate professional AI voiceovers using ElevenLabs TTS for video narration, explainers, and content creation. Supports multiple voices, character presets (narrator, salesperson, expert), scene-based generation with request stitching, single scene regeneration, timing validation, and thumbnail embedding. Integrates with Remotion for precise audio-visual sync.
-version: 1.0.0
+description: "Generate professional AI voiceovers using ElevenLabs TTS for video narration, explainers, and content creation."
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

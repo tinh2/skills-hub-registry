@@ -1,7 +1,7 @@
 ---
 name: education-suite
-description: "Comprehensive K-12 or higher-ed system analysis: predict student dropout risk with early warning indicators, optimize curriculum alignment and pacing, personalize learning paths for at-risk and diverse populations, and audit school operations for resource efficiency. Use when building or auditing an SIS, LMS, student success platform, or education data system."
-version: "2.0.0"
+description: "Comprehensive K-12 or higher-ed system analysis: predict student dropout risk with early warning indicators, optimize curriculum alignment and pacing, personalize learning paths for at-risk and diverse populations, and audit school operations for resource efficiency.."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

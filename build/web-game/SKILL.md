@@ -1,7 +1,7 @@
 ---
 name: web-game
-description: "Scaffolds a browser-based game with Phaser 3, PixiJS, or Three.js including game loop, asset pipeline, responsive canvas, input handling, audio, save/load, and deployment to itch.io or web. Triggers on: \"web game\", \"browser game\", \"html5 game\", \"phaser game\", \"pixi game\", \"three.js game\", \"javascript game\", \"typescript game\", \"make a game for the browser\", \"build a web game\", \"2d browser game\", \"3d web game\", \"itch.io game\", \"canvas game\", \"webgl game\"."
-version: "2.0.0"
+description: "Scaffolds a browser-based game with Phaser 3, PixiJS, or Three.js including game loop, asset pipeline, responsive canvas, input handling, audio, save/load, and deployment to itch.io or web. Triggers: on: \"web game\", \"browser game\", \"html5 game\", \"phaser game\", \"pixi game\"."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

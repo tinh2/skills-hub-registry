@@ -1,7 +1,7 @@
 ---
 name: godot-scaffold
-description: "Scaffolds a complete Godot 4 game project with scene tree, autoloads, signal bus, state machine, save system, export presets, and CI/CD. Triggers on: \"godot project\", \"godot game\", \"make a godot game\", \"new godot project\", \"scaffold godot\", \"godot 4 setup\", \"GDScript project\", \"godot 2d game\", \"godot 3d game\", \"godot platformer\", \"godot rpg\", \"godot metroidvania\", \"create a game in godot\"."
-version: "2.0.0"
+description: "Scaffolds a complete Godot 4 game project with scene tree, autoloads, signal bus, state machine, save system, export presets, and CI/CD. Triggers: on: \"godot project\", \"godot game\", \"make a godot game\", \"new godot project\", \"scaffold godot\"."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

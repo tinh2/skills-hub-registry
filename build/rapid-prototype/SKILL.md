@@ -1,7 +1,7 @@
 ---
 name: rapid-prototype
-description: "Turns an idea into a clickable, verified prototype in one run: ruthlessly scopes to at most 3 screens with one happy path and an explicit written cut-list, scaffolds on the existing repo stack (or Vite standalone), fills it with realistic seed data instead of lorem ipsum, then actually launches the app and clicks through the happy path (Playwright when available) before delivering run instructions. Use when: 'build a prototype', 'quick mockup I can click', 'proof of concept', 'spike this idea', 'demo for tomorrow', 'MVP of just the flow', 'throwaway version to test the idea', 'clickable demo', 'prototype this feature', 'hack something together fast'."
-version: "2.0.0"
+description: "Turns an idea into a clickable, verified prototype in one run: ruthlessly scopes to at most 3 screens with one happy path and an explicit written cut-list, scaffolds on the existing repo stack (or Vite standalone), fills it with realistic seed data instead of lorem ipsum."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: react-native
-description: "Builds a production-ready React Native mobile app from designs, screenshots, or descriptions using Expo, typed navigation, TanStack Query, and full screen implementations. Triggers on: \"react native app\", \"build a mobile app\", \"expo app\", \"cross-platform mobile app\", \"react native project\", \"build an app with expo\", \"mobile app from design\", \"rn app\", \"scaffold react native\", \"build ios and android app\", \"mobile app from screenshots\", \"create a mobile app\", \"react native starter\"."
-version: "2.0.0"
+description: "Builds a production-ready React Native mobile app from designs, screenshots, or descriptions using Expo, typed navigation, TanStack Query, and full screen implementations. Triggers: on: \"react native app\", \"build a mobile app\", \"expo app\", \"cross-platform mobile app\"."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

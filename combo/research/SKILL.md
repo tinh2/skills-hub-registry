@@ -1,7 +1,7 @@
 ---
 name: research
-description: "Full-spectrum product research pipeline. Runs competitive analysis, technology trend scouting, user feedback analysis, and feature ideation. Trigger on: research, competitive research, market research, feature discovery, what should we build next, technology trends, user feedback, app store reviews, GitHub issues analysis, competitive landscape, product strategy."
-version: "2.0.0"
+description: "Full-spectrum product research pipeline. Runs competitive analysis, technology trend scouting, user feedback analysis, and feature ideation. Triggers: on: research, competitive research, market research, feature discovery, what should we build next."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

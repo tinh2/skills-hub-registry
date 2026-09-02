@@ -1,7 +1,7 @@
 ---
 name: parallel-features
-description: "Dispatch independent feature work in parallel git worktrees. Spawns one agent per feature, each in its own isolated worktree, then merges sequentially. Use when 3+ independent features need shipping and would otherwise run serially. Triggers: parallel features, fan out features, multiple features in parallel, build features in parallel, parallelize features, worktree dispatch."
-version: "1.0.0"
+description: "Dispatch independent feature work in parallel git worktrees. Spawns one agent per feature, each in its own isolated worktree, then merges sequentially. Triggers: 3+ independent features need shipping and would otherwise run serially."
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

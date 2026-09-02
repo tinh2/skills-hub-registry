@@ -1,7 +1,7 @@
 ---
 name: social-clip
-description: Create short-form social media videos for TikTok, Instagram Reels, YouTube Shorts, and more. Two modes -- create from scratch with a brief, or repurpose long-form video into short clips. Includes TikTok-style animated captions (Whisper + Remotion), auto-reframe (16:9 to 9:16), hook-first structure, engagement overlays, transition library, and batch export across all platforms.
-version: 1.0.0
+description: "Create short-form social media videos for TikTok, Instagram Reels, YouTube Shorts, and more."
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

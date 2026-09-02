@@ -1,7 +1,7 @@
 ---
 name: workflow-conductor
-description: Conduct a complete feature workflow in one skill — brainstorm, plan, TDD implementation, self-review, delivery summary — with hard gates between stages: no stage starts until the prior stage's artifact exists on disk (brainstorm note, plan doc, green tests per step). Use when someone says "build this feature properly", "take this from idea to done", "brainstorm then implement", "run the full workflow", "plan and build X", "do this the right way", "TDD this feature", "structured feature development", or when a feature request arrives raw and needs the whole arc — options weighed, plan written, red-green-refactor execution, and a reviewed diff — without plugin sprawl or human babysitting between stages.
-version: "2.0.0"
+description: "Conduct a complete feature workflow in one skill — brainstorm, plan, TDD implementation, self-review, delivery summary — with hard gates between stages: no stage starts until the prior stage's artifact exists on disk (brainstorm note, plan doc, green tests per step).."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: fable-5-codebase-migration
-description: "Autonomous large codebase migration agent optimised for Claude Fable 5 (Mythos class). Scopes the migration, builds a dependency-ordered wave plan, executes incremental file changes, validates behaviour equivalence after each wave, and halts on first validation failure. Works on framework upgrades, API version bumps, language migrations, and architectural refactors spanning 10–500+ files."
-version: "1.0.0"
+description: "Autonomous large codebase migration agent optimised for Claude Fable 5 (Mythos class)."
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

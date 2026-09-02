@@ -1,12 +1,7 @@
 ---
 name: stitch-pipeline
-description: >-
-  Full design improvement pipeline — syncs your app to Google Stitch, generates alternatives,
-  presents side-by-side comparison, and adopts cherry-picked improvements. Chains stitch-bridge,
-  stitch-explore, and stitch-compare in one invoke. Use when: 'stitch pipeline', 'improve my
-  design with stitch', 'make my app look better', 'stitch redesign everything',
-  'stitch full pipeline', 'redesign with stitch'.
-version: "1.0.0"
+description: "Full design improvement pipeline — syncs your app to Google Stitch, generates alternatives, presents side-by-side comparison, and adopts cherry-picked improvements. Triggers: 'stitch pipeline', 'improve my design with stitch', 'make my app look better', 'stitch redesign everything'."
+version: "1.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

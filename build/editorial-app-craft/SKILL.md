@@ -1,17 +1,7 @@
 ---
 name: editorial-app-craft
-description: |
-  Build a considered, cozy, editorial single-file web app (Firebase backend optional).
-  Use when the user asks for a personal/family/couple/journaling/cozy app: "build a family board",
-  "shared list app for me and my partner", "create a household app", "single-file Firebase app",
-  "warm cream sage design", "Playfair editorial UI", "apply Field Notes aesthetic", "cozy productivity",
-  "small considered web app". NOT for marketing landing pages, dashboards, or generic SaaS.
-  Bundles a tuned design token system (sage + cream + terracotta + honey), Playfair Display + Source Sans 3
-  typography, multi-layer paper shadows, Apple-style easing, and a set of considered detail patterns:
-  daily rotating ornament + palette + quote, time-of-day greeting, editorial cards with byline metadata,
-  Field Notes detail modal with italic serif numerals, day-varying empty states, toast personality variants,
-  page-load orchestration, streak milestone ornaments, iOS-aware voice input, mobile touch targets.
-version: "1.0.0"
+description: "Build a considered, cozy, editorial single-file web app (Firebase backend optional). Triggers: the user asks for a personal/family/couple/journaling/cozy app: \"build a family board\"."
+version: "1.0.1"
 category: build
 platforms: [CLAUDE_CODE]
 ---

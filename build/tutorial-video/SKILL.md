@@ -1,7 +1,7 @@
 ---
 name: tutorial-video
-description: Create Fireship-quality developer tutorial videos from annotated markdown and terminal recordings. Animated code transitions (Code Hike + Shiki Magic Move), terminal replay (Asciinema), auto-zoom effects, AI voiceover (Qwen3-TTS or ElevenLabs), progress bar with chapters, webcam/avatar PiP, step annotations, and social format export. Full pipeline from markdown to rendered MP4 via Remotion.
-version: 0.1.0
+description: "Create Fireship-quality developer tutorial videos from annotated markdown and terminal recordings."
+version: "0.1.1"
 category: build
 platforms:
   - CLAUDE_CODE

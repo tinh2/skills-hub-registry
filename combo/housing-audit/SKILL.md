@@ -1,7 +1,7 @@
 ---
 name: housing-audit
-description: "End-to-end affordable housing compliance and risk audit: analyze property management and waitlist operations, predict eviction risk with early warning models, review Fair Housing Act and HUD regulatory compliance, and model rent burden and subsidy accuracy across the portfolio. Use when building or auditing a housing authority system, property management platform, Section 8 voucher program, LIHTC portfolio, or tenant services application."
-version: "2.0.0"
+description: "End-to-end affordable housing compliance and risk audit: analyze property management and waitlist operations, predict eviction risk with early warning models, review Fair Housing Act and HUD regulatory compliance, and model rent burden and subsidy accuracy across the portfolio.."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: launch-kit
-description: Build a complete indie launch package for an app, tool, or library — product audit, positioning (one-liner, value props, objection answers), finished launch assets written to a launch/ directory (landing copy, App Store or Play Store or npm/directory listing text, Product Hunt draft, Show HN draft, a 2-week social calendar with 14 fully written posts), an SEO baseline audit with fixes applied when the repo is present, and an hour-by-hour launch-day runbook. Use when someone says "help me launch", "launch plan", "Product Hunt draft", "Show HN post", "write my landing copy", "app store listing", "marketing for my app", "go to market", "launch checklist", "how do I announce this", or when a product is built and needs distribution artifacts, not more code.
-version: "2.0.0"
+description: "Build a complete indie launch package for an app, tool, or library — product audit, positioning (one-liner, value props, objection answers), finished launch assets written to a launch/ directory (landing copy, App Store or Play Store or npm/directory listing text, Product Hunt draft."
+version: "2.0.1"
 category: combo
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: wedding-video
-description: Create cinematic wedding montage videos from photos and songs using Remotion. Features act-based narrative structure (5 acts), Ken Burns photo animations, multi-song audio with beat-synced cuts, cinematic color grading, film effects (grain, vignette, letterbox, particles), split-screen, photo mosaic, and social media format export (16:9, 9:16, 1:1). Config-driven -- describe your story, get a film.
-version: 1.0.0
+description: "Create cinematic wedding montage videos from photos and songs using Remotion."
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

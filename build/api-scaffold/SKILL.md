@@ -1,7 +1,7 @@
 ---
 name: api-scaffold
-description: Scaffold a production-ready backend REST API -- generate a complete server project with routes, controllers, service layer, repository pattern, database models with migrations, JWT authentication with RBAC, request validation, global error handling with custom error classes, structured JSON logging, rate limiting, CORS, health check endpoint, OpenAPI/Swagger documentation, multi-stage Dockerfile, and docker-compose with PostgreSQL and Redis. Supports Fastify 5, NestJS, Express, FastAPI, Django REST, Gin, Chi, Echo, and Rails -- auto-detects framework from context. Build a backend, create an API, generate server, scaffold REST service, new backend project.
-version: "2.0.0"
+description: "Scaffold a production-ready backend REST API -- generate a complete server project with routes, controllers, service layer, repository pattern, database models with migrations, JWT authentication with RBAC, request validation, global error handling with custom error classes."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

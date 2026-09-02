@@ -1,7 +1,7 @@
 ---
 name: ios-app
-description: "Scaffolds a native iOS app with SwiftUI, MVVM architecture, dependency injection, persistence, networking, push notifications, keychain, App Clips, and multi-environment Xcode configuration. Triggers on: \"ios app\", \"iphone app\", \"build an ios app\", \"swift app\", \"swiftui app\", \"native ios\", \"apple app\", \"ipad app\", \"scaffold ios project\", \"xcode project\", \"build for iphone\", \"ios starter\", \"create an iphone app\", \"swift project setup\"."
-version: "2.0.0"
+description: "Scaffolds a native iOS app with SwiftUI, MVVM architecture, dependency injection, persistence, networking, push notifications, keychain, App Clips, and multi-environment Xcode configuration. Triggers: on: \"ios app\", \"iphone app\", \"build an ios app\", \"swift app\", \"swiftui app\"."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE

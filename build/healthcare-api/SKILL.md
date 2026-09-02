@@ -1,7 +1,7 @@
 ---
 name: healthcare-api
-description: "Scaffolds a FHIR R4-compliant healthcare API with clinical resource models, SMART on FHIR auth, HIPAA audit logging, PHI-safe error handling, and interoperability endpoints. Triggers on: \"healthcare api\", \"FHIR api\", \"medical api\", \"health api\", \"build a FHIR server\", \"clinical data api\", \"patient api\", \"EHR integration\", \"SMART on FHIR\", \"HIPAA compliant api\", \"healthcare backend\", \"HL7 api\", \"build a health platform\", \"medical records api\", \"telehealth backend\"."
-version: "2.0.0"
+description: "Scaffolds a FHIR R4-compliant healthcare API with clinical resource models, SMART on FHIR auth, HIPAA audit logging, PHI-safe error handling, and interoperability endpoints. Triggers: on: \"healthcare api\", \"FHIR api\", \"medical api\", \"health api\", \"build a FHIR server\"."
+version: "2.0.1"
 category: build
 platforms:
   - CLAUDE_CODE
