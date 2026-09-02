@@ -1,7 +1,7 @@
 ---
 name: claude-code-hooks-setup
-description: "Autonomous Claude Code hooks configurator. Audits your project's existing .claude/settings.json hook setup, then installs a production-grade suite: PreToolUse safety enforcement (blocks rm -rf, sudo writes, secret leaks), PostToolUse auto-formatting and lint gates, SessionStart dynamic context injection, and FileChanged secret detection. Generates hook scripts and wires them into settings.json at project scope."
-version: "1.0.0"
+description: "Autonomous Claude Code hooks configurator. Audits your project's existing .claude/settings.json hook setup, then installs a production-grade suite: PreToolUse safety enforcement (blocks rm -rf, sudo writes, secret leaks), PostToolUse auto-formatting and lint gates."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

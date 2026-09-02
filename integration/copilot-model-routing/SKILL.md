@@ -1,7 +1,7 @@
 ---
 name: copilot-model-routing
-description: "Intelligent task-to-model routing for GitHub Copilot's multi-lab model picker (2026). Audits your workflow, assigns the right model (OpenAI / Anthropic / Google / Microsoft / Moonshot) to each task type, configures VS Code settings, and writes a routing matrix your team can commit. Covers Kimi K2.7 Code, Claude Sonnet 5, GPT-5.6 tiers, Gemini 2.5, and Phi-4. Includes cost-per-accepted-change pilot framework and admin policy checklist for Business/Enterprise plans."
-version: "1.0.0"
+description: "Intelligent task-to-model routing for GitHub Copilot's multi-lab model picker (2026)."
+version: "1.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

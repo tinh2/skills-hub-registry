@@ -1,7 +1,7 @@
 ---
 name: cursor-seat-optimizer
-description: "Audits your Cursor Teams usage data and produces a right-sized Standard vs Premium seat assignment plan, saving typical teams 20–40% vs blanket Premium upgrades. Analyzes per-engineer usage patterns, classifies seat needs, calculates break-even cost, and outputs a migration checklist ready to execute in the Cursor admin dashboard. Run before any billing cycle renewal."
-version: "1.0.0"
+description: "Audits your Cursor Teams usage data and produces a right-sized Standard vs Premium seat assignment plan, saving typical teams 20–40% vs blanket Premium upgrades."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

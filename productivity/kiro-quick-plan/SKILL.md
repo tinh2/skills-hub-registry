@@ -1,7 +1,7 @@
 ---
 name: kiro-quick-plan
-description: "Fast single-pass spec-and-execute loop that mirrors Kiro 0.12's Quick Plan Mode. Generates requirements, design, and task list in one pass (no approval gates), then executes tasks in parallel where dependencies allow. Use when you want spec-driven rigor without the three-gate approval workflow — spikes, small features, or well-understood tasks where speed beats review overhead."
-version: 1.0.0
+description: "Fast single-pass spec-and-execute loop that mirrors Kiro 0.12's Quick Plan Mode. Triggers: you want spec-driven rigor without the three-gate approval workflow — spikes, small features."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

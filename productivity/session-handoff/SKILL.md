@@ -1,7 +1,7 @@
 ---
 name: session-handoff
-description: Compress the current working session into a handoff document that a fresh session (or another person) can resume from without re-discovery. Inventories the session (task, decisions made and why, files touched with one-line diff summaries, commands that worked, dead ends to avoid, current blockers), writes it to .claude/handoff/<date>-<topic>.md with a paste-ready RESUME PROMPT section at the top, runs a stranger-test completeness check (no unexplained jargon, absolute file paths, next three actions explicit), and lists stale handoffs older than 30 days for pruning. Use when you say "hand off this session", "write a handoff", "save context before I close this", "I'm out of context, summarize for the next session", "pick this up tomorrow", "create a resume doc", or before compaction on a long task.
-version: "2.0.0"
+description: "Compress the current working session into a handoff document that a fresh session (or another person) can resume from without re-discovery. Triggers: you say \"hand off this session\", \"write a handoff\", \"save context before I close this\"."
+version: "2.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

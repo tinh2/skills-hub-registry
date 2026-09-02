@@ -1,7 +1,7 @@
 ---
 name: north-mini-code
-description: "Wires Cohere's North Mini Code 1.0 (30B MoE, Apache 2.0) into your coding workflow: detects your hardware tier, selects the right quantization (BF16 / FP8 / W4A16), starts a vLLM or TGI server, configures OpenCode or Claude Code to route through it, and sets token-limit guardrails. Falls back to the Cohere API or OpenRouter if no compatible GPU is found."
-version: 1.0.0
+description: "Wires Cohere's North Mini Code 1.0 (30B MoE, Apache 2.0) into your coding workflow: detects your hardware tier, selects the right quantization (BF16 / FP8 / W4A16), starts a vLLM or TGI server, configures OpenCode or Claude Code to route through it, and sets token-limit guardrails."
+version: "1.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

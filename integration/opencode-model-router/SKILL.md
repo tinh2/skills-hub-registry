@@ -1,7 +1,7 @@
 ---
 name: opencode-model-router
-description: "Sets up and optimises an OpenCode terminal-agent project: installs the CLI, configures multi-provider routing (Claude for hard tasks, Qwen/open-weight for fast tasks, Ollama for offline/air-gap), wires LSP servers for your stack, and enforces a spending-cap policy. Leaves you with a validated opencode.json and a three-tier /model switching workflow."
-version: 1.0.0
+description: "Sets up and optimises an OpenCode terminal-agent project: installs the CLI, configures multi-provider routing (Claude for hard tasks, Qwen/open-weight for fast tasks, Ollama for offline/air-gap), wires LSP servers for your stack, and enforces a spending-cap policy."
+version: "1.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

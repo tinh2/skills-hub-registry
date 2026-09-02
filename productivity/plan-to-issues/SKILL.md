@@ -1,7 +1,7 @@
 ---
 name: plan-to-issues
-description: "Convert a plan, PRD, spec, or roadmap document into tracked GitHub issues with a dependency graph: parses the plan into atomic work items (each independently shippable, one day or less, with acceptance criteria), detects dependency cycles before creating anything, then uses the gh CLI to create a milestone, type and priority labels, and issues whose bodies carry context, acceptance criteria, likely-touched files, and depends-on links created in topological order so references resolve. Verifies the created set and emits a plan-item to issue-URL mapping table. Use when the user says: turn this plan into issues, create GitHub issues from this PRD, break this spec into tickets, file issues for this roadmap, to-issues, convert plan to tasks, issue-ify this, populate the milestone."
-version: "2.0.0"
+description: "Convert a plan, PRD, spec, or roadmap document into tracked GitHub issues with a dependency graph: parses the plan into atomic work items (each independently shippable, one day or less, with acceptance criteria), detects dependency cycles before creating anything."
+version: "2.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

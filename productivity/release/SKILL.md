@@ -1,7 +1,7 @@
 ---
 name: release
-description: "Set up automated releases with semantic versioning, changelog generation, and package publishing. Configures semantic-release, changesets, release-please, goreleaser, or cargo-release based on stack. Generates GitHub Actions CI workflow for automated version bumps, git tags, and npm/PyPI/crates.io publishing. Use when you want automated versioning, need to publish packages, want changelogs from conventional commits, or need release automation for a monorepo."
-version: "2.0.0"
+description: "Set up automated releases with semantic versioning, changelog generation, and package publishing. Triggers: you want automated versioning, need to publish packages, want changelogs from conventional commits."
+version: "2.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

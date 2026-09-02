@@ -1,7 +1,7 @@
 ---
 name: analytics-tracking
-description: "Set up production-ready event tracking with Amplitude, Mixpanel, PostHog, or GA4. Auto-detects your framework (React, Next.js, Vue, Flutter, Angular, Python, Go, Rails), installs the correct SDK, creates a provider-agnostic analytics service wrapper, defines a typed event taxonomy, instruments page views and key user flows, and adds privacy/consent controls. Use when you need analytics, event tracking, user tracking, product analytics, usage metrics, or telemetry."
-version: "2.0.0"
+description: "Set up production-ready event tracking with Amplitude, Mixpanel, PostHog, or GA4. Triggers: you need analytics, event tracking, user tracking, product analytics, usage metrics."
+version: "2.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

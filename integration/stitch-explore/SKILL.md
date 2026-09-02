@@ -1,11 +1,7 @@
 ---
 name: stitch-explore
-description: >-
-  Generate design alternatives in Google Stitch with constraints. Tell Stitch what to
-  improve about your UI and get back multiple variations — vibe-based, targeted, or
-  constraint-locked. Use when: 'stitch explore', 'stitch redesign', 'stitch alternatives',
-  'improve design with stitch', 'stitch variations', 'make it look better with stitch'.
-version: "1.0.0"
+description: "Generate design alternatives in Google Stitch with constraints. Tell Stitch what to improve about your UI and get back multiple variations — vibe-based, targeted, or constraint-locked. Use when: 'stitch explore', 'stitch redesign', 'stitch alternatives', 'improve design with stitch', 'stitch variations', 'make it look better with stitch'."
+version: "1.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

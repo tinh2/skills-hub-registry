@@ -1,11 +1,7 @@
 ---
 name: daily-standup
-description: >-
-  Cross-repo morning briefing -- recent commits, PR status, CI health, blockers,
-  and suggested priorities for today. Use when: 'morning standup', 'what happened
-  yesterday', 'daily briefing', 'repo status', 'what should I work on today',
-  'standup report', 'team update', 'cross-repo summary', 'CI health check'.
-version: 1
+description: "Cross-repo morning briefing -- recent commits, PR status, CI health, blockers, and suggested priorities for today. Use when: 'morning standup', 'what happened yesterday', 'daily briefing', 'repo status', 'what should I work on today', 'standup report', 'team update', 'cross-repo summary', 'CI health check'."
+version: "2"
 category: productivity
 platforms:
   - CLAUDE_CODE

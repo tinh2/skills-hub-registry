@@ -1,7 +1,7 @@
 ---
 name: dynamic-skill-loader
-description: "Auto-detects the current project's technology stack and hot-loads context-appropriate skills at session start using Claude Code's SessionStart hook with reloadSkills: true. Detects Node.js/TypeScript, Next.js, Python, Rust, Go, Ruby, and monorepo layouts. Emits a .claude/dynamic-context.md with the detected stack and recommended skill list, then signals Claude Code to reload skills before the first agent turn."
-version: "1.0.0"
+description: "Auto-detects the current project's technology stack and hot-loads context-appropriate skills at session start using Claude Code's SessionStart hook with reloadSkills: true."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

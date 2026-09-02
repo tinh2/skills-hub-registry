@@ -1,7 +1,7 @@
 ---
 name: terse-mode
-description: "Install a token-efficiency output contract for the current session and project: writes strict brevity rules into CLAUDE.md (answer-first structure, no tool-call narration, no restated questions, no preamble filler, code without prose bookends), defines exceptions where brevity is banned (error reports, destructive-action confirmations, multi-step summaries), measures the token savings on a real sample, and installs a 'verbosity check' self-audit trigger. Use when the user says: be more concise, stop being verbose, save tokens, terse mode, shorter answers, cut the fluff, too wordy, reduce token usage, stop narrating, answer-first, brevity mode, caveman mode, or complains that replies are long."
-version: "2.0.0"
+description: "Install a token-efficiency output contract for the current session and project: writes strict brevity rules into CLAUDE.md (answer-first structure, no tool-call narration, no restated questions, no preamble filler, code without prose bookends)."
+version: "2.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

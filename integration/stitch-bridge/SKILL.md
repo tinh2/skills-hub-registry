@@ -1,11 +1,7 @@
 ---
 name: stitch-bridge
-description: >-
-  Bidirectional sync between your codebase and Google Stitch. Pushes current design state
-  (tokens, components, screenshots) to Stitch and pulls generated designs back into a
-  platform-agnostic staging directory. Use when: 'sync to stitch', 'push to stitch',
-  'pull from stitch', 'stitch sync', 'connect stitch', 'stitch bridge'.
-version: "1.0.0"
+description: "Bidirectional sync between your codebase and Google Stitch. Pushes current design state (tokens, components, screenshots) to Stitch and pulls generated designs back into a platform-agnostic staging directory. Use when: 'sync to stitch', 'push to stitch', 'pull from stitch', 'stitch sync', 'connect stitch', 'stitch bridge'."
+version: "1.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

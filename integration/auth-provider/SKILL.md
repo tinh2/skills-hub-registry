@@ -1,7 +1,7 @@
 ---
 name: auth-provider
-description: "Set up complete OAuth/SSO authentication with Google, GitHub, Apple, or SAML providers. Auto-detects your framework and configures the best auth library (NextAuth, Passport, Firebase Auth, Supabase, Clerk, Lucia, django-allauth). Includes session management, JWT token refresh, login/logout UI components, route protection middleware, and database schema updates. Use when you need OAuth login, social sign-in, SSO integration, authentication setup, login page, or user authentication."
-version: "2.0.0"
+description: "Set up complete OAuth/SSO authentication with Google, GitHub, Apple, or SAML providers. Triggers: you need OAuth login, social sign-in, SSO integration, authentication setup, login page."
+version: "2.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

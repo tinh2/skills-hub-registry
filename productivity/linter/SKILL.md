@@ -1,7 +1,7 @@
 ---
 name: linter
-description: "Configure linting, formatting, and editor integration for any stack. Sets up ESLint 9 or Biome for JS/TS, Ruff for Python, golangci-lint for Go, Clippy for Rust, RuboCop for Ruby, or dart analyze for Flutter. Adds Prettier or equivalent formatter, .editorconfig, and VS Code format-on-save. Use when you need to add a linter, fix formatting inconsistencies, migrate from legacy lint tools, or set up code style enforcement."
-version: "2.0.0"
+description: "Configure linting, formatting, and editor integration for any stack. Sets up ESLint 9 or Biome for JS/TS, Ruff for Python, golangci-lint for Go, Clippy for Rust, RuboCop for Ruby, or dart analyze for Flutter.."
+version: "2.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

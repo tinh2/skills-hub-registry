@@ -1,7 +1,7 @@
 ---
 name: gemini-cli-migration
-description: "Migrate Gemini CLI workflows to a new AI coding tool (Claude Code, Antigravity CLI, or Codex CLI). Scans shell config, scripts, and CI pipelines for gemini calls, maps each to an equivalent command in the target tool, rewrites config files, and validates the migration. Use when Gemini CLI free-tier access ends June 18 2026 or when switching AI coding CLIs."
-version: "1.0.0"
+description: "Migrate Gemini CLI workflows to a new AI coding tool (Claude Code, Antigravity CLI, or Codex CLI). Triggers: Gemini CLI free-tier access ends June 18 2026 or when switching AI coding CLIs."
+version: "1.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: cursor-parallel
-description: "Sets up and optimizes parallel task workflows for Cursor Composer 2.5. Decomposes multi-step work into concurrent sub-tasks with acceptance criteria, installs complementary skills, and verifies that the parallel output is correct and coherent before committing. Use after upgrading to Cursor Composer 2.5 or when long-running agentic tasks are producing inconsistent results."
-version: "1.0.0"
+description: "Sets up and optimizes parallel task workflows for Cursor Composer 2.5."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

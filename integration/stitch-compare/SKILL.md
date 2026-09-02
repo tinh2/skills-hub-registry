@@ -1,11 +1,7 @@
 ---
 name: stitch-compare
-description: >-
-  Side-by-side comparison of your current design against Stitch variations. Cherry-pick
-  improvements at section-level and token-level, then delegates code changes to existing
-  design skills. Use when: 'stitch compare', 'compare stitch designs', 'pick stitch design',
-  'adopt stitch changes', 'stitch diff', 'review stitch variations'.
-version: "1.0.0"
+description: "Side-by-side comparison of your current design against Stitch variations. Cherry-pick improvements at section-level and token-level, then delegates code changes to existing design skills. Use when: 'stitch compare', 'compare stitch designs', 'pick stitch design', 'adopt stitch changes', 'stitch diff', 'review stitch variations'."
+version: "1.0.1"
 category: integration
 platforms:
   - CLAUDE_CODE

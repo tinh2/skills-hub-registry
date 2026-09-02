@@ -1,7 +1,7 @@
 ---
 name: copilot-credits-audit
-description: "Audits GitHub Copilot AI Credit usage patterns before the June 2026 flex-billing transition. Pulls usage data from the GitHub API, identifies high-credit-cost workflows (agentic sessions, cloud review, heavy chat), recommends the right plan tier (Pro / Pro+ / Max), and generates per-user budget configs for team admins. Run before June 1, 2026 — or any time you want to understand and reduce Copilot spend."
-version: "1.0.0"
+description: "Audits GitHub Copilot AI Credit usage patterns before the June 2026 flex-billing transition."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE

@@ -1,7 +1,7 @@
 ---
 name: background-agent-pr-driver
-description: "Configures Claude Code's July 2026 async workflow: background agents that auto-commit, push, and open draft PRs when worktree tasks finish. Sets up Notification hooks for agent_needs_input and agent_completed events, enforces Manual permission mode, and wires dynamic workflow sizing. Lets you dispatch multiple agents in the morning and receive reviewable PRs without watching the terminal."
-version: "1.0.0"
+description: "Configures Claude Code's July 2026 async workflow: background agents that auto-commit, push, and open draft PRs when worktree tasks finish."
+version: "1.0.1"
 category: productivity
 platforms:
   - CLAUDE_CODE
