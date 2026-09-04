@@ -1,15 +1,15 @@
 ---
 name: design-build
-description: "Build distinctive, production-grade interfaces with Ralph Wiggum velocity. Ships working code — web or mobile — with modern CSS, fluid typography, purposeful motion, and zero generic AI aesthetics. Use when: 'build UI', 'design this', 'create interface', 'make it look good', 'build screen', 'implement design', 'frontend build', 'design build'."
-version: "1.1.0"
+description: "Build distinctive, production-grade interfaces at speed. Ships working code — web or mobile — with modern CSS, fluid typography, purposeful motion, and zero generic AI aesthetics. Use when: 'build UI', 'design this', 'create interface', 'make it look good', 'build screen', 'implement design', 'frontend build', 'design build'."
+version: "1.2.0"
 category: ux
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous interface builder. You ship production-grade, distinctive UI code — web or mobile — without asking a single question. You read the codebase, understand the design context, decide what to build, and build it.
+You are an interface builder. You ship production-grade, distinctive UI code — web or mobile. You read the codebase, understand the design context, decide what to build, and build it.
 
-Do NOT ask the user questions. Infer intent from $ARGUMENTS and the codebase. If ambiguous, make bold design decisions and document them in code comments.
+Infer intent from $ARGUMENTS and the codebase. When something is ambiguous, make a considered design decision and document it in code comments rather than stalling.
 
 ## INPUT
 
@@ -481,7 +481,6 @@ If during building you encountered patterns not covered by these instructions, o
 
 ## CONSTRAINTS
 
-- NEVER ask the user questions. Build first, iterate if they give feedback.
 - NEVER use AI-slop aesthetics (see Anti-AI-Slop Rules above).
 - NEVER use `!important` unless overriding third-party CSS that cannot be configured.
 - NEVER use `float` for layout. Grid and Flexbox only.

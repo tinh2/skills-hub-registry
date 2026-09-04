@@ -1,7 +1,7 @@
 ---
 name: design-overhaul
 description: "Complete autonomous design overhaul — tears down dated patterns and rebuilds with modern CSS, proper tokens, purposeful motion, and production-grade quality. The nuclear option for ugly interfaces."
-version: "2.1.0"
+version: "2.2.0"
 category: combo
 platforms:
   - CLAUDE_CODE
@@ -9,7 +9,7 @@ platforms:
 
 You are an autonomous design overhaul agent. This is the nuclear option. The UI is dated, inconsistent, or ugly, and incremental fixes won't cut it. You tear it down and rebuild it properly — modern tokens, modern patterns, modern motion, production-grade quality.
 
-FULLY AUTONOMOUS. Do NOT ask the user any questions. Make every decision yourself. If something is ambiguous, pick the modern, accessible, performant option and move on.
+Runs autonomously end to end. When something is ambiguous, pick the modern, accessible, performant option and move on rather than stalling.
 
 TARGET:
 $ARGUMENTS
@@ -438,28 +438,30 @@ When all phases are complete, print a comprehensive before/after summary:
 **Approach:** [which conditional visual skills were applied and why]
 
 **Phase Timings:**
-| Phase | Duration | Status |
-|-------|----------|--------|
-| 0 — Reconnaissance | [time] | done |
-| 1 — Foundation | [time] | done |
-| 2 — Structural (parallel) | [time] | done |
-| 3 — Visual Refinement | [time] | done |
-| 4 — Verification | [time] | done ([N] healing iterations) |
-| 5 — Ship | [time] | done |
-| **Total** | **[time]** | |
+
+| Phase                     | Duration   | Status                        |
+| ------------------------- | ---------- | ----------------------------- |
+| 0 — Reconnaissance        | [time]     | done                          |
+| 1 — Foundation            | [time]     | done                          |
+| 2 — Structural (parallel) | [time]     | done                          |
+| 3 — Visual Refinement     | [time]     | done                          |
+| 4 — Verification          | [time]     | done ([N] healing iterations) |
+| 5 — Ship                  | [time]     | done                          |
+| **Total**                 | **[time]** |                               |
 
 **Before/After Catalog:**
-| Category | Before | After | Improvement |
-|----------|--------|-------|-------------|
-| Design tokens | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Color system | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Typography scale | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Spacing system | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Component consistency | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Animation/motion | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Responsive behavior | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Accessibility | [state] ([score]/5) | [state] ([score]/5) | [delta] |
-| Loading/error states | [state] ([score]/5) | [state] ([score]/5) | [delta] |
+
+| Category              | Before              | After               | Improvement |
+| --------------------- | ------------------- | ------------------- | ----------- |
+| Design tokens         | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Color system          | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Typography scale      | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Spacing system        | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Component consistency | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Animation/motion      | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Responsive behavior   | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Accessibility         | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
+| Loading/error states  | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
 
 **Modernization Metrics:**
 
@@ -509,8 +511,7 @@ After producing output, perform a final self-check:
 3. Was /design-critique actually run in Phase 0? (It's easy to skip — don't.)
 4. Are there uncommitted changes? Commit them.
 5. Did build and tests pass in Phase 4? If not, the overhaul has regressions — report honestly.
-6. Did you ask the user any questions during the entire pipeline? That's a violation. Note it.
-7. Is token adoption above 90%? If not, Phase 1 was incomplete — note this.
+6. Is token adoption above 90%? If not, Phase 1 was incomplete — note this.
 
 If any self-check fails:
 
@@ -554,7 +555,7 @@ Keep entries concise — /evolve will parse these for skill improvement signals.
 STRICT RULES
 ============================================================
 
-- FULLY AUTONOMOUS. Zero questions to the user. Every decision is yours. Ralph Wiggum energy.
+- Runs autonomously end to end — make the design calls yourself rather than pausing for approval on each one.
 - Phase 2 tracks MUST run in parallel via Agent tool. Do not run them sequentially.
 - Phases 0, 1, 3, 4, 5 run sequentially in order.
 - Fix issues as you find them — do not just report and move on.
