@@ -2,7 +2,7 @@
 
 The official skill collection for [skills-hub.ai](https://skills-hub.ai) -- a marketplace for Claude Code skills.
 
-430 production-tested skills organized into 15 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0+ with built-in self-healing validation and self-evolution telemetry.
+431 production-tested skills organized into 15 categories covering the complete software development lifecycle, 40 industry verticals and social-impact sectors, plus gaming and mobile app development. All skills ship as v2.0.0+ with built-in self-healing validation and self-evolution telemetry.
 
 ## Directory Structure
 
@@ -14,7 +14,7 @@ skills-hub-registry/
 ├── review           #  26 skills — Architecture, Code, Industry, Gaming & Mobile Review
 ├── deploy           #  18 skills — Infrastructure & Deployment
 ├── docs             #  11 skills — Documentation
-├── security         #  12 skills — Security & Compliance
+├── security         #  13 skills — Security & Compliance
 ├── ux               #  26 skills — User Experience & Design
 ├── analysis         # 197 skills — Domain Analysis, Research & Industry Verticals
 ├── productivity     #   9 skills — Developer Experience
@@ -205,7 +205,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [readme](docs/readme/)                 | 2.0.0   | Generate project documentation — README files, API docs, and changelogs. Triggers: README, documentation, generate docs, document this project, write README, API docs, changelog.   |
 | [runbook](docs/runbook/)               | 2.0.0   | Generate an operations runbook from your deployment config, Docker/K8s manifests, CI/CD pipelines, and monitoring setup. Produces copy-pasteable procedures for deployment,...       |
 
-### security -- Security & Compliance (12 skills)
+### security -- Security & Compliance (13 skills)
 
 | Skill                                        | Version | Description                                                                                                                                                                            |
 | -------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -216,6 +216,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [game-security](security/game-security/)     | 2.0.0   | Game-specific security review covering cheat prevention, exploit surfaces, and server authority. Audits client-side authority vulnerabilities (damage, health, currency, cooldown,...  |
 | [gdpr](security/gdpr/)                       | 2.0.0   | GDPR and CCPA/CPRA privacy compliance audit for codebases. Inventories PII fields (email, phone, SSN, IP, device ID, geolocation, biometrics, behavioral data), maps data...           |
 | [hipaa](security/hipaa/)                     | 2.0.0   | Deep HIPAA Security Rule technical audit mapping code-level findings to 45 CFR sections. Covers administrative safeguards (164.308 -- risk analysis, workforce security, access...     |
+| [hol-guard](security/hol-guard/)             | 1.0.0   | Install and operate HOL Guard around supported local AI harnesses with fail-closed runtime verification, approvals, audit evidence, and package scanning.                              |
 | [owasp](security/owasp/)                     | 2.0.0   | Systematic audit against the OWASP 2021 Top 10 web application security risks with severity-rated, file-level findings. Checks A01 Broken Access Control (IDOR, path traversal,...     |
 | [pci-dss](security/pci-dss/)                 | 2.0.0   | PCI DSS v4.0 compliance audit for payment-handling codebases. Scans for PAN patterns (Visa, Mastercard, Amex, Discover), CVV storage violations, and track data retention. Audits...   |
 | [pentest](security/pentest/)                 | 2.0.0   | Static-analysis penetration test that hunts for exploitable vulnerabilities with proof-of-concept payloads and fix code. Covers SQL and NoSQL injection (string concatenation, raw...  |
