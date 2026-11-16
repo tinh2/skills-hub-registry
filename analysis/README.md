@@ -2,12 +2,13 @@
 
 Domain analysis, competitive research, metrics, technical debt, codebase health, engineering spec generation, executive strategy audits, industry verticals, and social-impact sector analysis.
 
-## Skills (197)
+## Skills (198)
 
 ### Core Analysis
 
 | Skill | Version | Description |
 |-------|---------|-------------|
+| [datacircle-gtm-api-picker](datacircle-gtm-api-picker/) | 1.0.0 | Compare and price GTM APIs (people, company, search, social, e-commerce) from Datacircle's benchmark file, then pick a plan for a call and volume. |
 | [analyze](analyze/) | 3.0.0 | End-to-end domain analysis -- traces every feature across all layers, verifies consistency, and fixes issues |
 | [compete](compete/) | 1.0.0 | Researches competing products, catalogs their features, and produces a prioritized feature gap analysis |
 | [mvp](mvp/) | 2.1.0 | Analyzes a video or screenshots of an application to decipher its MVP and suggest improvements |
@@ -477,6 +478,7 @@ Domain analysis, competitive research, metrics, technical debt, codebase health,
 
 | Skill | Version | Description |
 |-------|---------|-------------|
+| [datacircle-gtm-api-picker](datacircle-gtm-api-picker/) | 1.0.0 | Compare and price GTM APIs (people, company, search, social, e-commerce) from Datacircle's benchmark file, then pick a plan for a call and volume. |
 | [app-size-optimizer](app-size-optimizer/) | 2.0.0 | > |
 | [app-store-optimization](app-store-optimization/) | 2.0.0 | > |
 | [cnc-furniture](cnc-furniture/) | 1.0.0 | >- |
