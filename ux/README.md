@@ -52,3 +52,44 @@ User experience auditing, design systems, dark mode, responsive design, and inte
 | [design-to-code](design-to-code/) | 1.0.0 | Turn a design into production-quality frontend code: extract a design system with tokens and components, make layouts responsive across breakpoints, add dark mode with... |
 | [design-tokens](design-tokens/) | 1.0.0 | Extract, consolidate, and modernize design tokens — oklch color scales, fluid spacing with clamp(), typography scales, motion timing, and shadow depths. Builds a systematic token... |
 | [design-tone-down](design-tone-down/) | 1.0.0 | Reduce visual intensity without losing design quality. Softens aggressive colors, calms excessive animations, balances overwhelming layouts, and restores visual breathing room. |
+
+<!-- BEGIN GENERATED: skills-hub-index (scripts/gen-index.mjs, do not edit by hand) -->
+## All Ux skills on skills-hub.ai
+
+Each skill page on skills-hub.ai shows ratings and reviews, install counts, a one-command install, and related skills. 32 of 32 skills in this folder have a page. You can also [browse the Ux category on skills-hub.ai](https://skills-hub.ai/browse?category=ux), which includes skills from other publishers.
+
+| Skill | Description | Page |
+|-------|-------------|------|
+| [bug-sweep](bug-sweep/) | Methodically walks a running app — every public route, every interactive control, every state (empty/loading/error/auth/un-auth) — to... | [View on skills-hub](https://skills-hub.ai/skills/bug-sweep) |
+| [dark-mode](dark-mode/) | Implement complete dark mode for any frontend project. | [View on skills-hub](https://skills-hub.ai/skills/dark-mode) |
+| [design-adapt](design-adapt/) | Make interfaces truly adaptive — not just responsive. | [View on skills-hub](https://skills-hub.ai/skills/design-adapt) |
+| [design-amplify](design-amplify/) | Amplify safe, boring designs into visually confident interfaces. | [View on skills-hub](https://skills-hub.ai/skills/design-amplify) |
+| [design-animate](design-animate/) | Add purposeful motion to interfaces using modern CSS — scroll-driven animations, view transitions, @starting-style, and GPU-accelerated... | [View on skills-hub](https://skills-hub.ai/skills/design-animate) |
+| [design-audit](design-audit/) | Comprehensive autonomous design quality audit across accessibility (WCAG 2.2), performance, theming, responsive/adaptive design, and... | [View on skills-hub](https://skills-hub.ai/skills/design-audit) |
+| [design-build](design-build/) | Build distinctive, production-grade interfaces at speed. | [View on skills-hub](https://skills-hub.ai/skills/design-build) |
+| [design-claude](design-claude/) | HTML-first hi-fi design skill: interactive prototypes, slide decks, animation demos, design variant exploration, visual direction... | [View on skills-hub](https://skills-hub.ai/skills/design-claude) |
+| [design-color](design-color/) | Add strategic color to monochromatic or dull interfaces using oklch for perceptually uniform palettes. | [View on skills-hub](https://skills-hub.ai/skills/design-color) |
+| [design-copy](design-copy/) | Autonomous UX copy improvement — rewrites unclear labels, error messages, microcopy, CTAs, tooltips, and onboarding text. | [View on skills-hub](https://skills-hub.ai/skills/design-copy) |
+| [design-critique](design-critique/) | Autonomous design effectiveness evaluation — visual hierarchy, information architecture, emotional resonance, and craft quality. | [View on skills-hub](https://skills-hub.ai/skills/design-critique) |
+| [design-delight](design-delight/) | Add moments of joy — success celebrations, subtle hover reactions, personality in empty states, easter eggs, and contextual surprises. | [View on skills-hub](https://skills-hub.ai/skills/design-delight) |
+| [design-extract](design-extract/) | Extracts a complete design system from a screenshot, live URL, or existing app codebase — palette, type scale, spacing, radii, shadows,... | [View on skills-hub](https://skills-hub.ai/skills/design-extract) |
+| [design-harden](design-harden/) | Make interfaces bulletproof — error boundaries, loading states, empty states, text overflow, i18n readiness, offline handling, and every... | [View on skills-hub](https://skills-hub.ai/skills/design-harden) |
+| [design-normalize](design-normalize/) | Normalize a codebase to its design system — replace hardcoded values with tokens, enforce consistent component usage, align... | [View on skills-hub](https://skills-hub.ai/skills/design-normalize) |
+| [design-onboard](design-onboard/) | Design or improve onboarding flows, empty states, and first-time experiences. | [View on skills-hub](https://skills-hub.ai/skills/design-onboard) |
+| [design-optimize](design-optimize/) | Autonomous performance optimization for interfaces — content-visibility, CSS containment, scroll-driven animations replacing JS, view... | [View on skills-hub](https://skills-hub.ai/skills/design-optimize) |
+| [design-polish](design-polish/) | Final autonomous quality pass before shipping. | [View on skills-hub](https://skills-hub.ai/skills/design-polish) |
+| [design-setup](design-setup/) | One-time autonomous design context discovery. | [View on skills-hub](https://skills-hub.ai/skills/design-setup) |
+| [design-simplify](design-simplify/) | Strip interfaces to their essence — remove unnecessary complexity, reduce visual noise, simplify navigation, and eliminate redundant UI... | [View on skills-hub](https://skills-hub.ai/skills/design-simplify) |
+| [design-sync](design-sync/) | Orchestrates the Claude Design ↔ Claude Code /design-sync handoff loop — imports your design system into the active project, validates... | [View on skills-hub](https://skills-hub.ai/skills/design-sync) |
+| [design-system](design-system/) | Extract and formalize a design system from existing UI code. | [View on skills-hub](https://skills-hub.ai/skills/design-system) |
+| [design-tokens](design-tokens/) | Extract, consolidate, and modernize design tokens — oklch color scales, fluid spacing with clamp(), typography scales, motion timing,... | [View on skills-hub](https://skills-hub.ai/skills/design-tokens) |
+| [design-tone-down](design-tone-down/) | Reduce visual intensity without losing design quality. | [View on skills-hub](https://skills-hub.ai/skills/design-tone-down) |
+| [distinct-ui](distinct-ui/) | Builds distinctive, production-grade UI by committing to one of 12 named visual directions (editorial, brutalist, luxury-minimal,... | [View on skills-hub](https://skills-hub.ai/skills/distinct-ui) |
+| [game-ux](game-ux/) | Audit game user experience across HUD clarity, menu navigation, tutorial effectiveness, control responsiveness, camera systems, feedback... | [View on skills-hub](https://skills-hub.ai/skills/game-ux) |
+| [i18n](i18n/) | Set up internationalization by extracting all hardcoded user-facing strings to locale files. | [View on skills-hub](https://skills-hub.ai/skills/i18n) |
+| [interface-audit](interface-audit/) | Audits UI code against 90+ concrete accessibility and UX rules across ten groups (semantics/ARIA, keyboard navigation, focus management,... | [View on skills-hub](https://skills-hub.ai/skills/interface-audit) |
+| [mobile-sweep](mobile-sweep/) | Runtime sweep that catches mobile-layout bugs: content clipped off the edge of a phone screen, touch targets smaller than 44×44px, text... | [View on skills-hub](https://skills-hub.ai/skills/mobile-sweep) |
+| [responsive](responsive/) | Audit and fix responsive design issues across all breakpoints. | [View on skills-hub](https://skills-hub.ai/skills/responsive) |
+| [ui-craft](ui-craft/) | Polishes UI primitives one at a time using 2026 research-backed patterns — adds loading/icon states to buttons, replaces inline... | [View on skills-hub](https://skills-hub.ai/skills/ui-craft) |
+| [ux](ux/) | Dual-mode UX quality skill — runs a heuristic/accessibility/motion audit on the current codebase, or validates implementation against... | [View on skills-hub](https://skills-hub.ai/skills/ux) |
+<!-- END GENERATED: skills-hub-index -->

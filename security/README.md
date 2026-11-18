@@ -42,3 +42,26 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 - Benefits fraud detection for government services: `/benefits-fraud`
 - Game security review (anti-cheat, packet tampering, exploits): `/game-security`
 - Public services audit (combo): `/public-services-audit` chains benefits-processing, benefits-fraud, government-compliance, security-review
+
+<!-- BEGIN GENERATED: skills-hub-index (scripts/gen-index.mjs, do not edit by hand) -->
+## All Security skills on skills-hub.ai
+
+Each skill page on skills-hub.ai shows ratings and reviews, install counts, a one-command install, and related skills. 14 of 14 skills in this folder have a page. You can also [browse the Security category on skills-hub.ai](https://skills-hub.ai/browse?category=security), which includes skills from other publishers.
+
+| Skill | Description | Page |
+|-------|-------------|------|
+| [agent-authorization](agent-authorization/) | Audits and implements authorization controls for production AI agent systems — policy definition, tool-call enforcement, immutable audit... | [View on skills-hub](https://skills-hub.ai/skills/agent-authorization) |
+| [benefits-fraud](benefits-fraud/) | Audit government benefits and entitlement systems for fraud prevention, detection, and recovery capabilities. | [View on skills-hub](https://skills-hub.ai/skills/benefits-fraud) |
+| [check-vanta](check-vanta/) | Fetches dependency vulnerabilities from Vanta, Snyk, Dependabot, or GitHub Security Advisories, creates a tracking issue in... | [View on skills-hub](https://skills-hub.ai/skills/check-vanta) |
+| [cursor-agent-safety](cursor-agent-safety/) | Audits and hardens Cursor agent run mode settings for Cursor 3.6+. | [View on skills-hub](https://skills-hub.ai/skills/cursor-agent-safety) |
+| [dependency-scan](dependency-scan/) | Scan project dependencies for known vulnerabilities (CVEs), auto-fix safe patches, and generate SBOM. | [View on skills-hub](https://skills-hub.ai/skills/dependency-scan) |
+| [encryption](encryption/) | Audit and harden encryption across the full stack. | [View on skills-hub](https://skills-hub.ai/skills/encryption) |
+| [game-security](game-security/) | Game-specific security review covering cheat prevention, exploit surfaces, and server authority. | [View on skills-hub](https://skills-hub.ai/skills/game-security) |
+| [gdpr](gdpr/) | GDPR and CCPA/CPRA privacy compliance audit for codebases. | [View on skills-hub](https://skills-hub.ai/skills/gdpr) |
+| [hipaa](hipaa/) | Deep HIPAA Security Rule technical audit mapping code-level findings to 45 CFR sections. | [View on skills-hub](https://skills-hub.ai/skills/hipaa) |
+| [owasp](owasp/) | Systematic audit against the OWASP 2021 Top 10 web application security risks with severity-rated, file-level findings. | [View on skills-hub](https://skills-hub.ai/skills/owasp) |
+| [pci-dss](pci-dss/) | PCI DSS v4.0 compliance audit for payment-handling codebases. | [View on skills-hub](https://skills-hub.ai/skills/pci-dss) |
+| [pentest](pentest/) | Static-analysis penetration test that hunts for exploitable vulnerabilities with proof-of-concept payloads and fix code. | [View on skills-hub](https://skills-hub.ai/skills/pentest) |
+| [secure](secure/) | Full-stack security posture assessment with 0-100 risk scoring. | [View on skills-hub](https://skills-hub.ai/skills/secure) |
+| [soc2](soc2/) | SOC 2 Type II readiness assessment against all five Trust Service Criteria. | [View on skills-hub](https://skills-hub.ai/skills/soc2) |
+<!-- END GENERATED: skills-hub-index -->

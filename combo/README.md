@@ -102,3 +102,51 @@ Combo skills chain multiple skills together into automated pipelines. They run s
 | [mvp-spec](mvp-spec/) | 2.0.0 | Chains /mvp → /spec — analyzes an app from video/screenshots/description, then generates implementation stories. Triggers: analyze and spec, product analysis to stories, app... |
 | [ship-pipeline](ship-pipeline/) | 3.1.0 | Full-stack app pipeline — build, test, review, and deploy across one or ALL repos. Scans CLAUDE.md, MEMORY.md, TODOs, open PRs, and issues for shippable work. Supports 'ship all'... |
 | [stitch-pipeline](stitch-pipeline/) | 1.0.0 | >- |
+
+<!-- BEGIN GENERATED: skills-hub-index (scripts/gen-index.mjs, do not edit by hand) -->
+## All Combo skills on skills-hub.ai
+
+Each skill page on skills-hub.ai shows ratings and reviews, install counts, a one-command install, and related skills. 39 of 39 skills in this folder have a page. You can also [browse the Combo category on skills-hub.ai](https://skills-hub.ai/browse?category=combo), which includes skills from other publishers.
+
+| Skill | Description | Page |
+|-------|-------------|------|
+| [cleanup-sprint](cleanup-sprint/) | Deep codebase cleanup — kills dead code, fixes all lint/format warnings, removes orphaned files, cleans stale TODOs, strips security... | [View on skills-hub](https://skills-hub.ai/skills/cleanup-sprint) |
+| [compliance-gate](compliance-gate/) | Runs a 4-phase compliance pipeline: security scan, GDPR audit, dependency vulnerability check, and penetration test, producing a unified... | [View on skills-hub](https://skills-hub.ai/skills/compliance-gate) |
+| [compliance-suite](compliance-suite/) | Runs a 5-phase enterprise compliance and security hardening pipeline: regulatory review, GDPR audit, SOC 2 evaluation, dependency scan,... | [View on skills-hub](https://skills-hub.ai/skills/compliance-suite) |
+| [data-pipeline](data-pipeline/) | Build a production-ready data API from scratch: scaffold REST endpoints with models and validation, generate integration tests that... | [View on skills-hub](https://skills-hub.ai/skills/data-pipeline) |
+| [design-overhaul](design-overhaul/) | Complete autonomous design overhaul — tears down dated patterns and rebuilds with modern CSS, proper tokens, purposeful motion, and... | [View on skills-hub](https://skills-hub.ai/skills/design-overhaul) |
+| [design-pipeline](design-pipeline/) | Full autonomous design pipeline — builds fast, then the safety net polishes it. | [View on skills-hub](https://skills-hub.ai/skills/design-pipeline) |
+| [design-to-code](design-to-code/) | Turn a design into production-quality frontend code: extract a design system with tokens and components, make layouts responsive across... | [View on skills-hub](https://skills-hub.ai/skills/design-to-code) |
+| [education-suite](education-suite/) | Comprehensive K-12 or higher-ed system analysis: predict student dropout risk with early warning indicators, optimize curriculum... | [View on skills-hub](https://skills-hub.ai/skills/education-suite) |
+| [fintech-launch](fintech-launch/) | Pre-launch compliance and security gate for fintech apps: audit PCI DSS payment card handling, review financial API integrations for... | [View on skills-hub](https://skills-hub.ai/skills/fintech-launch) |
+| [fix-and-ship](fix-and-ship/) | Emergency fix-and-deploy pipeline — diagnose a bug, apply a minimal fix, verify safety, deploy to production, and confirm the service is... | [View on skills-hub](https://skills-hub.ai/skills/fix-and-ship) |
+| [full-deploy](full-deploy/) | Ship an app from code to production-ready infrastructure: containerize with Docker and multi-stage builds, set up GitHub Actions CI/CD... | [View on skills-hub](https://skills-hub.ai/skills/full-deploy) |
+| [game-design-audit](game-design-audit/) | Deep game design health assessment across five dimensions: review core loop and progression systems, analyze in-game economy for... | [View on skills-hub](https://skills-hub.ai/skills/game-design-audit) |
+| [game-launch](game-launch/) | Pre-launch quality gate for games: audit rendering and memory performance against platform budgets, run QA for crash-causing defects and... | [View on skills-hub](https://skills-hub.ai/skills/game-launch) |
+| [healthcare-audit](healthcare-audit/) | Comprehensive healthcare system compliance and security audit: review HIPAA Privacy and Security Rule adherence, check HITECH and 21st... | [View on skills-hub](https://skills-hub.ai/skills/healthcare-audit) |
+| [housing-audit](housing-audit/) | End-to-end affordable housing compliance and risk audit: analyze property management and waitlist operations, predict eviction risk with... | [View on skills-hub](https://skills-hub.ai/skills/housing-audit) |
+| [impact-org](impact-org/) | Full nonprofit operational health analysis: validate impact measurement methodology and theory of change, optimize fundraising channels... | [View on skills-hub](https://skills-hub.ai/skills/impact-org) |
+| [investor-ready](investor-ready/) | Prepare for fundraising due diligence — runs CTO, CFO, CPO, sales, and codebase health reviews to produce a consolidated investor brief... | [View on skills-hub](https://skills-hub.ai/skills/investor-ready) |
+| [launch-kit](launch-kit/) | Build a complete indie launch package for an app, tool, or library — product audit, positioning (one-liner, value props, objection... | [View on skills-hub](https://skills-hub.ai/skills/launch-kit) |
+| [launch-readiness](launch-readiness/) | Run a full pre-launch quality gate before shipping — chains product review, growth audit, UX audit, security scan, and deployment... | [View on skills-hub](https://skills-hub.ai/skills/launch-readiness) |
+| [logistics-optimize](logistics-optimize/) | Optimize and stress-test a logistics system end-to-end — chains route optimization, warehouse operations review, inventory demand... | [View on skills-hub](https://skills-hub.ai/skills/logistics-optimize) |
+| [marketing](marketing/) | Complete marketing pipeline for apps, dev tools, libraries, and SaaS products in 2026. | [View on skills-hub](https://skills-hub.ai/skills/marketing) |
+| [marketing-refresh](marketing-refresh/) | Autonomous competitive analysis and feature discovery pipeline. | [View on skills-hub](https://skills-hub.ai/skills/marketing-refresh) |
+| [mobile-launch](mobile-launch/) | Run a complete mobile app pre-launch verification — chains performance audit, QA testing, OWASP mobile security review, App Store and... | [View on skills-hub](https://skills-hub.ai/skills/mobile-launch) |
+| [mobile-publish](mobile-publish/) | Set up a complete mobile publishing pipeline — chains CI/CD workflow generation, iOS App Store publishing via Fastlane, Google Play... | [View on skills-hub](https://skills-hub.ai/skills/mobile-publish) |
+| [mvp-spec](mvp-spec/) | Chains /mvp → /spec — analyzes an app from video/screenshots/description, then generates implementation stories. | [View on skills-hub](https://skills-hub.ai/skills/mvp-spec) |
+| [polish](polish/) | Full quality pass -- chains parallel UX + scalability audit, then QA verification, then consistency gate. | [View on skills-hub](https://skills-hub.ai/skills/polish) |
+| [pre-merge](pre-merge/) | One-command PR gate that runs four passes over exactly the changed surface — code review (correctness then simplification), security... | [View on skills-hub](https://skills-hub.ai/skills/pre-merge) |
+| [public-services-audit](public-services-audit/) | Audit a government or public services system for compliance, fraud risk, and security — chains benefits processing review, fraud... | [View on skills-hub](https://skills-hub.ai/skills/public-services-audit) |
+| [research](research/) | Full-spectrum product research pipeline. Runs competitive analysis, technology trend scouting, user feedback analysis, and feature ideation. | [View on skills-hub](https://skills-hub.ai/skills/research) |
+| [retro](retro/) | Run a full retrospective and dev cycle analysis. | [View on skills-hub](https://skills-hub.ai/skills/retro) |
+| [review-implement](review-implement/) | Review then build — chains architecture review into implementation. | [View on skills-hub](https://skills-hub.ai/skills/review-implement) |
+| [secure-ship](secure-ship/) | Build and ship features with security baked in — runs OWASP Top 10 pre-scan, builds and ships with /ship, validates with post-build... | [View on skills-hub](https://skills-hub.ai/skills/secure-ship) |
+| [ship-pipeline](ship-pipeline/) | Full-stack app pipeline — build, test, review, and deploy across one or ALL repos. | [View on skills-hub](https://skills-hub.ai/skills/ship-pipeline) |
+| [skill-finder](skill-finder/) | Workflow orchestrator. Decomposes a task into ordered steps, finds or installs the right skill for each step, runs the chain, and offers... | [View on skills-hub](https://skills-hub.ai/skills/skill-finder) |
+| [spec](spec/) | Chains /mvp → /backend-spec — analyzes an app from video/screenshots/description, then generates implementation stories from the analysis. | [View on skills-hub](https://skills-hub.ai/skills/spec) |
+| [stitch-pipeline](stitch-pipeline/) | Full design improvement pipeline — syncs your app to Google Stitch, generates alternatives, presents side-by-side comparison, and adopts... | [View on skills-hub](https://skills-hub.ai/skills/stitch-pipeline) |
+| [story](story/) | Full story lifecycle — review, implement, and PR. | [View on skills-hub](https://skills-hub.ai/skills/story) |
+| [tech-debt-sprint](tech-debt-sprint/) | Run a focused tech debt reduction sprint — inventories all technical debt (TODOs, outdated deps, missing tests, god objects), fixes code... | [View on skills-hub](https://skills-hub.ai/skills/tech-debt-sprint) |
+| [workflow-conductor](workflow-conductor/) | Conduct a complete feature workflow in one skill — brainstorm, plan, TDD implementation, self-review, delivery summary — with hard gates... | [View on skills-hub](https://skills-hub.ai/skills/workflow-conductor) |
+<!-- END GENERATED: skills-hub-index -->

@@ -53,3 +53,30 @@ Infrastructure, CI/CD, containers, monitoring, DNS, CDN, secrets management, clo
 | [flutter-deploy](flutter-deploy/) | 1.0.0 | Build and deploy Flutter apps to App Store (TestFlight) and Google Play (internal/production). Auto-detects project structure, pulls signing secrets from AWS Secrets Manager,... |
 | [free-keys](free-keys/) | 2.0.0 | Provision free LLM API keys from 20+ providers. Health-checks existing keys, opens signup pages, validates new keys, and saves them to your project. |
 | [hotfix](hotfix/) | 2.1.0 | Emergency bug fix pipeline — diagnose, fix, test, commit, push, and PR in 2 iterations max. Speed over perfection. |
+
+<!-- BEGIN GENERATED: skills-hub-index (scripts/gen-index.mjs, do not edit by hand) -->
+## All Deploy skills on skills-hub.ai
+
+Each skill page on skills-hub.ai shows ratings and reviews, install counts, a one-command install, and related skills. 18 of 18 skills in this folder have a page. You can also [browse the Deploy category on skills-hub.ai](https://skills-hub.ai/browse?category=deploy), which includes skills from other publishers.
+
+| Skill | Description | Page |
+|-------|-------------|------|
+| [app-store-publish](app-store-publish/) | Configure a complete iOS App Store publishing pipeline — sets up Fastlane with code signing (match), App Store Connect API key,... | [View on skills-hub](https://skills-hub.ai/skills/app-store-publish) |
+| [aws](aws/) | Generates production-ready Terraform files for AWS infrastructure. | [View on skills-hub](https://skills-hub.ai/skills/aws) |
+| [cdn](cdn/) | Configure a CDN with optimized caching, SSL/TLS, security headers, and cache invalidation — auto-detects hosting provider and app type,... | [View on skills-hub](https://skills-hub.ai/skills/cdn) |
+| [ci-fixer](ci-fixer/) | Scan all repos for failing or stuck GitHub Actions workflows, diagnose issues, and fix them. | [View on skills-hub](https://skills-hub.ai/skills/ci-fixer) |
+| [devops](devops/) | Audit deployment readiness across CI/CD, containers, monitoring, IaC, secrets, CDN, and DNS — score each area 0-100, identify critical... | [View on skills-hub](https://skills-hub.ai/skills/devops) |
+| [dns](dns/) | Set up DNS records, SSL/TLS certificates, subdomains, SPF/DKIM/DMARC email authentication, and health-check failover routing for... | [View on skills-hub](https://skills-hub.ai/skills/dns) |
+| [docker](docker/) | Detect project stack and generate production-ready multi-stage Dockerfiles with compose services, .dockerignore, non-root users, health... | [View on skills-hub](https://skills-hub.ai/skills/docker) |
+| [flutter-deploy](flutter-deploy/) | Build and deploy Flutter apps to App Store (TestFlight) and Google Play (internal/production). | [View on skills-hub](https://skills-hub.ai/skills/flutter-deploy) |
+| [free-keys](free-keys/) | Provision free LLM API keys from 20+ providers. | [View on skills-hub](https://skills-hub.ai/skills/free-keys) |
+| [github-actions](github-actions/) | Detect project stack and generate GitHub Actions CI/CD workflows — PR checks with lint/test/build/security, deploy pipelines for... | [View on skills-hub](https://skills-hub.ai/skills/github-actions) |
+| [hotfix](hotfix/) | Emergency bug fix pipeline — diagnose, fix, test, commit, push, and PR in 2 iterations max. | [View on skills-hub](https://skills-hub.ai/skills/hotfix) |
+| [k8s](k8s/) | Generate production-grade Kubernetes manifests — Deployments with probes and security contexts, Services, Ingress with TLS, HPA, PDB,... | [View on skills-hub](https://skills-hub.ai/skills/k8s) |
+| [mobile-ci-cd](mobile-ci-cd/) | Set up mobile CI/CD pipelines for Flutter, React Native, or native iOS/Android — GitHub Actions workflows for testing, code signing,... | [View on skills-hub](https://skills-hub.ai/skills/mobile-ci-cd) |
+| [monitoring](monitoring/) | Set up application observability with Prometheus, Grafana, Datadog, or CloudWatch — instrument metrics endpoints, configure Golden... | [View on skills-hub](https://skills-hub.ai/skills/monitoring) |
+| [ota-updates](ota-updates/) | Configure over-the-air mobile updates — Shorebird for Flutter, CodePush or EAS Update for React Native — with update channels, staged... | [View on skills-hub](https://skills-hub.ai/skills/ota-updates) |
+| [play-store-publish](play-store-publish/) | Configure the complete Google Play Store publishing pipeline — upload key generation, AAB bundle optimization, Fastlane supply lanes for... | [View on skills-hub](https://skills-hub.ai/skills/play-store-publish) |
+| [secrets](secrets/) | Audit codebases for leaked secrets and hardcoded credentials, generate .env templates, configure secrets management with AWS Secrets... | [View on skills-hub](https://skills-hub.ai/skills/secrets) |
+| [terraform](terraform/) | Generate Terraform infrastructure-as-code for AWS, GCP, or Azure. | [View on skills-hub](https://skills-hub.ai/skills/terraform) |
+<!-- END GENERATED: skills-hub-index -->
