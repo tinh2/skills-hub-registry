@@ -6,7 +6,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 
 **[secure](secure/)** -- Comprehensive security posture scan covering dependencies, code patterns, config, auth, and data handling with risk scoring. Routes to sub-skills for detailed analysis.
 
-## Skills (12)
+## Skills (13)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -19,6 +19,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 | [dependency-scan](dependency-scan/) | 1.0.0 | Auto-detect package manager, scan for vulnerable dependencies, auto-fix where possible, and generate SBOM |
 | [check-vanta](check-vanta/) | 2.1.0 | Fetches Vanta vulnerabilities due for remediation, creates a Jira story, then fixes, commits, pushes, and opens PRs |
 | [hipaa](hipaa/) | 1.0.0 | Deep HIPAA Security Rule audit -- administrative, physical, and technical safeguards with code-level CFR mappings |
+| [hol-guard](hol-guard/) | 1.0.0 | Install and operate HOL Guard around supported local AI harnesses with fail-closed runtime verification, approvals, audit evidence, and package scanning |
 | [pci-dss](pci-dss/) | 1.0.0 | PCI DSS v4.0 audit -- network security, data protection, encryption, access controls, logging, and vulnerability management |
 | [benefits-fraud](benefits-fraud/) | 1.0.0 | Benefits fraud detection -- identity verification, duplicate detection, anomaly detection, overpayment recovery |
 | [game-security](game-security/) | 1.0.0 | Reviews game security including client-side authority vulnerabilities, memory manipulation, packet tampering, speed hacking, save tampering, API abuse, DDoS resilience, and anti-cheat architecture |
@@ -34,6 +35,7 @@ Security scanning, penetration testing, compliance auditing, encryption, vulnera
 - Dependency vulnerability scan with SBOM: `/dependency-scan`
 - Vanta vulnerability remediation pipeline: `/check-vanta`
 - HIPAA Security Rule audit for healthcare: `/hipaa`
+- HOL Guard protected local harness setup and evidence: `/hol-guard`
 - PCI DSS v4.0 audit for payment processing: `/pci-dss`
 - Full compliance pass (combo): `/compliance-gate` chains secure, GDPR, dependency-scan, and pentest
 - Security-first build (combo): `/secure-ship` chains OWASP, ship, security-review, and pentest
