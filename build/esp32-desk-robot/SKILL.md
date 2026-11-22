@@ -1,7 +1,7 @@
 ---
 name: esp32-desk-robot
 description: "Build a tiny desk robot with an ESP32 and a 1.3 inch OLED face, then add features one prompt at a time: blinking eyes, a 25-minute focus timer, a to-do list you edit from your phone, a drink-water reminder. Ships tested starter firmware, the 4-wire wiring, flashing and troubleshooting. Triggers: 'ESP32 desk robot', 'OLED face robot', 'build a desk robot', 'Tabbie', 'make my ESP32 show eyes', 'ESP32 focus timer'."
-version: "1.0.0"
+version: "1.0.1"
 category: build
 platforms:
   - CLAUDE_CODE
@@ -53,7 +53,17 @@ unless the module's listing says it is 5V-tolerant; 3V3 is always safe.
 
 ## Step 3: Create the project from the starter
 
-Copy `references/firmware/` (next to this file) into the user's project folder:
+Get the compile-tested starter project into the user's folder. If this skill was
+installed with its `references/firmware/` folder, copy that. Otherwise (the
+skills-hub CLI installs SKILL.md only) download it from the public registry:
+
+```bash
+mkdir -p desk-robot/src && cd desk-robot
+BASE=https://raw.githubusercontent.com/tinh2/skills-hub-registry/main/build/esp32-desk-robot/references/firmware
+for f in platformio.ini .gitignore src/main.cpp src/secrets.h.example; do curl -fsSL "$BASE/$f" -o "$f"; done
+```
+
+What you get:
 
 ```
 platformio.ini            esp32dev + U8g2
