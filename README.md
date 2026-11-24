@@ -42,7 +42,7 @@ skills-hub-registry/
 ├── analysis         # 197 skills — Domain Analysis, Research & Industry Verticals
 ├── productivity     #   9 skills — Developer Experience
 ├── integration      #  13 skills — Third-Party Service Connectors
-├── combo            #  34 skills — Multi-Skill Chains
+├── combo            #  35 skills — Multi-Skill Chains
 ├── meta             #  13 skills — Skills About Skills
 ├── education        #   8 skills — Learning & Onboarding
 └── spec             #   1 skill  — Specification Authoring
@@ -511,7 +511,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [stripe](integration/stripe/)                         | 2.0.0   | Add Stripe payments to my app — set up checkout sessions, payment intents, webhook handling with signature verification, subscription billing with plan management, customer...        |
 | [x-mcp](integration/x-mcp/)                           | 2.0.0   | Safely connect X (formerly Twitter) data through MCP. Preserves existing providers, compares official self-hosted XMCP with opt-in Xquik, discloses data flow, and runs bounded...       |
 
-### combo -- Multi-Skill Chains (34 skills)
+### combo -- Multi-Skill Chains (35 skills)
 
 | Skill                                                 | Version | Description                                                                                                                                                                            |
 | ----------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -532,6 +532,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [housing-audit](combo/housing-audit/)                 | 2.0.0   | End-to-end affordable housing compliance and risk audit: analyze property management and waitlist operations, predict eviction risk with early warning models, review Fair Housing...  |
 | [impact-org](combo/impact-org/)                       | 2.0.0   | Full nonprofit operational health analysis: validate impact measurement methodology and theory of change, optimize fundraising channels and campaign ROI, audit grant management...    |
 | [investor-ready](combo/investor-ready/)               | 2.0.0   | Prepare for fundraising due diligence — runs CTO, CFO, CPO, sales, and codebase health reviews to produce a consolidated investor brief with scorecard, red flags, and strengths....   |
+| [issue-to-qa](combo/issue-to-qa/)                     | 1.0.0   | Takes one issue to ready for QA: research, lean BE/FE stories, one approval stop, worktree builds, PRs, review bot rounds, dev deploy, Playwright with screenshots, an HTML report...   |
 | [launch-readiness](combo/launch-readiness/)           | 2.0.0   | Run a full pre-launch quality gate before shipping — chains product review, growth audit, UX audit, security scan, and deployment preflight into a go/no-go launch decision. Stops...  |
 | [logistics-optimize](combo/logistics-optimize/)       | 2.0.0   | Optimize and stress-test a logistics system end-to-end — chains route optimization, warehouse operations review, inventory demand forecasting, supply chain risk analysis, and...      |
 | [marketing-refresh](combo/marketing-refresh/)         | 1.0.0   | Autonomous competitive analysis and feature discovery pipeline. Runs /compete and /new-features on each project, produces actionable market positioning insights. Schedule daily or... |
