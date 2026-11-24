@@ -39,7 +39,7 @@ skills-hub-registry/
 ├── docs             #  11 skills — Documentation
 ├── security         #  12 skills — Security & Compliance
 ├── ux               #  26 skills — User Experience & Design
-├── analysis         # 197 skills — Domain Analysis, Research & Industry Verticals
+├── analysis         # 198 skills — Domain Analysis, Research & Industry Verticals
 ├── productivity     #   9 skills — Developer Experience
 ├── integration      #  13 skills — Third-Party Service Connectors
 ├── combo            #  35 skills — Multi-Skill Chains
@@ -276,7 +276,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [responsive](ux/responsive/)             | 2.0.0   | Audit and fix responsive design issues across all breakpoints. Scans for fixed widths that cause mobile overflow, missing media query variants, non-responsive images, undersized...   |
 | [ux](ux/ux/)                             | 2.1.0   | Dual-mode UX quality skill — runs a heuristic/accessibility/motion audit on the current codebase, or validates implementation against design mockups. Fixes all issues found and...    |
 
-### analysis -- Domain Analysis, Research & Industry Verticals (197 skills)
+### analysis -- Domain Analysis, Research & Industry Verticals (198 skills)
 
 | Skill                                                              | Version | Description                                                                                                                                                                            |
 | ------------------------------------------------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -325,6 +325,7 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [customer-success-audit](analysis/customer-success-audit/)         | 2.0.0   | Audit any product from a Customer Success Manager perspective -- evaluate onboarding flow completeness, self-service help infrastructure, customer health signal tracking, support...  |
 | [cyber-risk-modeling](analysis/cyber-risk-modeling/)               | 2.0.0   | Quantify cyber risk using FAIR methodology with Monte Carlo simulation, assess control effectiveness against NIST CSF/CIS/ISO 27001 frameworks, evaluate risk appetite alignment,...   |
 | [damage-prediction](analysis/damage-prediction/)                   | 2.0.0   | Audit transit damage prediction and prevention systems for packaging failure mode analysis, handling chain risk assessment, claims pattern detection, and protection level...          |
+| [datacircle-gtm-api-picker](analysis/datacircle-gtm-api-picker/)   | 1.0.0   | Compare and price GTM APIs (people, company, search, social, e-commerce) from Datacircle's benchmark file, then pick a plan for a call and volume.                                     |
 | [debt-payoff](analysis/debt-payoff/)                               | 2.0.0   | Analyze debt payoff software — avalanche vs snowball strategy engines, interest calculation accuracy, amortization schedules, payment scheduling automation, credit score impact...    |
 | [defect-detection](analysis/defect-detection/)                     | 2.0.0   | Analyze manufacturing defect detection and quality control systems — computer vision inspection pipelines, SPC control charts, Six Sigma process capability (Cp/Cpk), defect...        |
 | [defense-budget](analysis/defense-budget/)                         | 2.0.0   | Analyze defense program budgets and acquisition costs — earned value management (EVM/CPI/SPI), should-cost modeling, PPBE process alignment, cost estimation per GAO guidelines,...    |
