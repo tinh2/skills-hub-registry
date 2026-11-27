@@ -1,569 +1,95 @@
 ---
 name: design-overhaul
-description: "Complete autonomous design overhaul — tears down dated patterns and rebuilds with modern CSS, proper tokens, purposeful motion, and production-grade quality. The nuclear option for ugly interfaces."
-version: "2.2.0"
+description: "Full UI overhaul for dated or inconsistent interfaces: token system, adaptive layouts, hardened states, UX copy, visual refinement and motion, verified and committed. Has a 7-day cooldown. Triggers: design overhaul, redesign the UI, modernize the interface."
+version: "2.3.0"
 category: combo
 platforms:
   - CLAUDE_CODE
 ---
 
-You are an autonomous design overhaul agent. This is the nuclear option. The UI is dated, inconsistent, or ugly, and incremental fixes won't cut it. You tear it down and rebuild it properly — modern tokens, modern patterns, modern motion, production-grade quality.
+Rebuild a dated, inconsistent UI properly, when incremental fixes won't do. Run end to end and make the design calls yourself; when something is ambiguous, choose the modern, accessible, performant option and keep going.
 
-Runs autonomously end to end. When something is ambiguous, pick the modern, accessible, performant option and move on rather than stalling.
+**Target:** `$ARGUMENTS` (screens, features or components); if empty, the whole application UI. `--force "<reason>"` bypasses the cooldown below.
 
-TARGET:
-$ARGUMENTS
+This skill chains the `/design-*` skills; when one is named, follow that skill's instructions and rules for its phase.
 
-If arguments are provided, focus the overhaul on those screens/features/components.
-If no arguments are provided, overhaul the entire application UI.
+## Cooldown gate (run first)
 
-PIPELINE OVERVIEW:
-Phase 0: Reconnaissance → Phase 1: Foundation → Phase 2: Structural (parallel) → Phase 3: Visual Refinement → Phase 4: Verification → Phase 5: Ship
+Three competing /design-overhaul runs in 12 days on deal-worthy (2026-04-15, 04-24, 04-27) ended with `refactor: kill AI-slop patterns` (-2,273 LOC) partly reversing the first two: with no design freeze, later runs undid earlier work before anyone had used it. Design changes need about a work-week of real use to surface friction.
 
-Record the start time of each phase for the final timing report.
+```bash
+git log -1 --format="%ct" --diff-filter=AM -- "**/design-tokens*" "**/theme*" "**/globals.css" "tailwind.config*" "**/styles/**"
+git log --format="%ct %s" --all | grep -iE "design[- ]overhaul|refactor.*design|refactor.*ai[- ]slop" | head -3
+```
 
-============================================================
-PRE-PHASE: COOLDOWN GATE (CRITICAL — learned from deal-worthy recall 2026-05-22)
-============================================================
+If either shows a commit within the last 7 days, stop without changes and say: "Cooldown gate: previous design pass landed {N}d ago, within the 7-day cooldown. Use `--force \"<reason>\"` to override." Accept `--force` only with a reason, and put that reason in the commit bodies.
 
-Three competing /design-overhaul runs in 12 days (4/15, 4/24, 4/27) ended with `refactor: kill AI-slop patterns` (-2,273 LOC) partly reversing the first two. No design-freeze meant later runs undid earlier work before it was validated.
+## Phase 0: Understand before demolishing
 
-Before running any phase, check the cooldown:
+Map the frontend: framework and version, UI library, where screens/components/styles live, counts of screens and shared components. Score the current state 1-5 for: tokens, color system, type scale, spacing, component consistency, motion, responsive behavior, accessibility, dark mode, loading/error states. Run `/design-critique` (what works and should stay, what's mediocre, what's actively bad). Distill the **top 5 problems** by impact; they set the priorities.
 
-1. From the project root, run:
-   `git log -1 --format="%ct" --diff-filter=AM -- "**/design-tokens*" "**/theme*" "**/globals.css" "tailwind.config*" "**/styles/**" 2>/dev/null | head -1`
-   Plus a grep for prior overhaul markers:
-   `git log --format="%ct %s" --all | grep -iE "design[- ]overhaul|design overhaul run|refactor.*design|refactor.*ai[- ]slop" | head -3`
-2. If any matching commit landed within the last 7 days (604800 seconds), STOP. Output:
-   "Cooldown gate: previous design pass landed {N}d ago — within 7-day cooldown. Refusing to re-overhaul. Use `--force` to override (and document the reason in the commit body)."
-3. Exit with no changes.
+## Phase 1: Foundation
 
-The cooldown can be bypassed with `--force` in $ARGUMENTS, but the user MUST include a one-line justification (e.g., `--force "reverting AI-slop patterns from prior run"`). Refuse `--force` without a justification.
+Get this right first; everything else builds on it.
 
-Why 7 days: design changes need at least one work-week of usage to surface friction. Re-overhauling within the cooldown means you're reacting to first-impression bias, not validated UX feedback — that's how reversal cycles start.
+- `/design-tokens`: semantic colors in oklch (primary, secondary, accent, neutral, success, warning, error, info, each with hover/active/disabled/foreground), light and dark, WCAG AA contrast (4.5:1 text, 3:1 large). Spacing scale on a consistent ratio, fluid type scale with `clamp()` (size, line-height, tracking, weight), radius, elevation, durations (~150/250/400ms), easings, z-index layers.
+- `/design-normalize`: replace hardcoded colors, sizes, spacing, radii, shadows, durations and z-indexes with tokens. Track found / replaced / intentionally skipped and the adoption rate; aim for 95%+.
+- `/design-color` if color was a top-5 problem or scored 3 or below.
+- Commit: `refactor: modernize design token system`.
 
-============================================================
-PHASE 0: RECONNAISSANCE
-============================================================
+## Phase 2: Structure (three parallel tracks)
 
-Before you demolish, understand what you're working with.
+These touch mostly separate files, so run them as parallel subagents when your harness supports it. Each returns a count summary.
 
-STEP 0.1 — Full UI Codebase Scan.
-Map the entire frontend surface area:
+- **Layouts (`/design-adapt`).** Grid/flex with gap spacing; media queries for page grids, container queries for components; mobile-first at 320/768/1024/1440+. No horizontal scroll, no meaning-hiding truncation, touch targets intact.
+- **Hardening (`/design-harden`).** Skeletons shaped like the content for every fetch; empty states that explain and offer the next action; errors in plain language with retry, distinguishing network, server and validation; long text, missing images and missing optional data degrade gracefully; buttons disabled during async work; debounce where rapid input causes trouble.
+- **Copy (`/design-copy`).** Specific verb labels ("Save changes", "Delete project"), one capitalization style, labels not placeholders, helper text before errors, errors that say what happened and how to fix it without blame, confirmations that state consequences.
 
-- Framework and version (React 18, Vue 3, Svelte 5, Flutter 3, Next.js 14, etc.)
-- UI library (Tailwind, MUI, Chakra, Radix, shadcn, raw CSS, styled-components, etc.)
-- File tree pattern: where screens, components, layouts, and styles live
-- Total number of screens/pages/views
-- Total number of reusable components
+Resolve conflicts with priority structure > content > style. Commit each track separately: `refactor: implement adaptive layouts and container queries`, `feat: add loading, empty, and error states`, `copy: rewrite UX copy for clarity and consistency`.
 
-STEP 0.2 — Current Design State Catalog.
-For each of these categories, note what exists and its quality:
+## Phase 3: Visual refinement
 
-| Category              | Current State                                       | Quality (1-5) |
-| --------------------- | --------------------------------------------------- | ------------- |
-| Design tokens         | [hardcoded / partial tokens / full system]          | [score]       |
-| Color system          | [random hex / themed / oklch-based]                 | [score]       |
-| Typography scale      | [ad-hoc sizes / partial scale / fluid type]         | [score]       |
-| Spacing system        | [magic numbers / partial rhythm / consistent grid]  | [score]       |
-| Component consistency | [each screen different / mostly consistent / tight] | [score]       |
-| Animation/motion      | [none / basic transitions / purposeful system]      | [score]       |
-| Responsive behavior   | [desktop-only / breakpoints / container queries]    | [score]       |
-| Accessibility         | [none / partial / WCAG AA]                          | [score]       |
-| Dark mode             | [none / partial / complete]                         | [score]       |
-| Loading/error states  | [missing / some / comprehensive]                    | [score]       |
+Pick from the critique, in this order when several apply: too noisy → `/design-tone-down` then `/design-simplify`; too bland → `/design-amplify`; lifeless → `/design-delight`; color still weak → `/design-color`. Tone down before amplifying, simplify before adding delight.
 
-STEP 0.3 — Run /design-critique.
-Follow the /design-critique skill instructions to get an honest, unfiltered assessment of the current UI. This skill will identify:
+Always finish with `/design-polish` (alignment, type tuning, radius and elevation consistency, icon alignment, input and button hierarchy, visible on-brand focus rings) and `/design-animate`: 150-300ms micro-interactions, 300-500ms page transitions, ease-out in / ease-in out, transform and opacity only, `prefers-reduced-motion` respected, every animation earning its place.
 
-- What's actually working (keep these)
-- What's mediocre (improve these)
-- What's actively bad (demolish these)
-- The overall visual impression
-- The biggest opportunities for improvement
+Commit: `style: visual refinement (<skills applied>)`.
 
-STEP 0.4 — Identify Top 5 Problems.
-From the catalog and critique, distill the 5 biggest problems. Rank them by impact:
+## Phase 4: Verify
 
-1. [Problem] — affects [what], impact [HIGH/CRITICAL]
-2. [Problem] — affects [what], impact [HIGH/CRITICAL]
-3. [Problem] — affects [what], impact [HIGH/CRITICAL]
-4. [Problem] — affects [what], impact [HIGH/MEDIUM]
-5. [Problem] — affects [what], impact [HIGH/MEDIUM]
+Run `/design-audit` over hierarchy, type, contrast, spacing, consistency, interactive states, responsive, accessibility (semantics, keyboard, screen reader), touch targets, states, motion and token adoption. Fix every CRITICAL and HIGH, re-audit the affected files, up to 2 rounds; fix MEDIUMs that are quick and document the rest as architectural, framework-bound, or needing a human design decision. Build and run tests; update snapshots only for intentional changes. Commit `fix: resolve N post-overhaul audit issues` if needed, then commit anything left and push the branch.
 
-These 5 problems define the overhaul priorities. Everything else is secondary.
+Before reporting, confirm: every phase ran, all three Phase 2 tracks returned, the critique actually ran, nothing is uncommitted, build and tests pass (report honestly if not), token adoption is above 90% (otherwise say Phase 1 is incomplete).
 
-Do NOT stop. Proceed immediately to Phase 1.
+## Output
 
-============================================================
-PHASE 1: FOUNDATION (Tokens + System)
-============================================================
-
-Rebuild the foundation before touching any UI. This is the most important phase. Get this wrong and everything downstream is built on sand.
-
-STEP 1.1 — Run /design-tokens skill instructions.
-Create or overhaul the design token system:
-
-Color tokens:
-
-- Use oklch color space for perceptual uniformity
-- Define semantic tokens: primary, secondary, accent, neutral, success, warning, error, info
-- Each semantic color needs: base, hover, active, disabled, foreground (text on that color)
-- Light and dark mode variants
-- Contrast ratios must meet WCAG AA (4.5:1 for normal text, 3:1 for large text)
-
-Spacing tokens:
-
-- Fluid spacing scale based on a consistent ratio (e.g., 4px base with 1.5x or 2x steps)
-- Named tokens: space-xs, space-sm, space-md, space-lg, space-xl, space-2xl, space-3xl
-- Used for: padding, margin, gap, component internal spacing
-
-Typography tokens:
-
-- Fluid type scale using clamp() or framework equivalent
-- Named tokens: text-xs, text-sm, text-base, text-lg, text-xl, text-2xl, text-3xl, text-4xl
-- Each size includes: font-size, line-height, letter-spacing, font-weight
-- Heading styles and body styles as composed tokens
-
-Other tokens:
-
-- Border radius scale: radius-sm, radius-md, radius-lg, radius-xl, radius-full
-- Shadow/elevation scale: shadow-sm, shadow-md, shadow-lg, shadow-xl
-- Transition durations: duration-fast (150ms), duration-normal (250ms), duration-slow (400ms)
-- Transition easings: ease-default, ease-in, ease-out, ease-bounce
-- Z-index scale: z-dropdown, z-modal, z-tooltip, z-toast
-
-STEP 1.2 — Run /design-normalize skill instructions.
-Sweep the entire codebase and replace hardcoded values with tokens:
-
-- Every hex/rgb/hsl color → semantic color token
-- Every px/rem font-size → typography token
-- Every px/rem margin/padding → spacing token
-- Every border-radius value → radius token
-- Every box-shadow → shadow token
-- Every transition duration → duration token
-- Every z-index → z-index token
-
-Track replacement metrics:
-
-- Total hardcoded values found: [N]
-- Successfully replaced with tokens: [N]
-- Skipped (intentional one-offs): [N]
-- Token adoption rate: [N]%
-
-STEP 1.3 — Run /design-color skill instructions (if color system needs work).
-If the critique identified color as a top-5 problem or the color quality score was 3 or below:
-
-- Establish a proper color system based on the token foundation
-- Ensure accessible contrast ratios across all color combinations
-- Define color usage rules: which colors for which purposes
-
-STEP 1.4 — Commit.
-
-- Commit message: "refactor: modernize design token system"
-- This commit should touch token definitions and all files where hardcoded values were replaced.
-
-Do NOT stop. Proceed immediately to Phase 2.
-
-============================================================
-PHASE 2: STRUCTURAL IMPROVEMENTS (Parallel)
-============================================================
-
-Three independent improvement tracks running simultaneously. Each touches different concerns with minimal file overlap.
-
-PARALLEL EXECUTION: Use the Agent tool to run all three tracks at the same time.
-
-AGENT A — Adaptive Layouts (/design-adapt):
-Prompt for Agent A:
-"You are a responsive design specialist. Run the /design-adapt skill instructions on this project. Your mission:
-
-1. Audit all layouts for responsive behavior.
-2. Replace media-query-only approaches with container queries where beneficial:
-   - Component-level responsiveness (cards, sidebars, navs) → container queries
-   - Page-level layout shifts → keep media queries
-   - Hybrid approach: media queries for page grid, container queries for components
-3. Implement fluid layouts:
-   - Use CSS Grid or Flexbox (or framework equivalents) for all major layouts
-   - Add proper gap-based spacing (no margin hacks)
-   - Handle content overflow gracefully
-4. Test breakpoint behavior:
-   - Mobile-first approach (320px → 768px → 1024px → 1440px+)
-   - Verify no horizontal scroll at any width
-   - Verify no text truncation that hides meaning
-   - Verify touch targets remain accessible on mobile
-5. Fix all responsive issues found.
-6. Return a summary: [N] layouts updated, [N] container queries added, [N] responsive issues fixed."
-
-AGENT B — Hardening (/design-harden):
-Prompt for Agent B:
-"You are a UI resilience specialist. Run the /design-harden skill instructions on this project. Your mission:
-
-1. Audit every interactive component and data-displaying view for edge cases:
-
-   Loading states:
-   - Every data fetch must show a loading indicator
-   - Use skeleton screens (not spinners) for content areas
-   - Skeleton shapes should match the expected content layout
-   - Show loading state for a minimum perceptible duration (300ms)
-
-   Empty states:
-   - Every list/grid/table needs an empty state
-   - Empty states should explain why it's empty and suggest action
-   - Use illustration or icon + text pattern, not just text
-
-   Error states:
-   - Every data fetch must handle failure
-   - Show user-friendly error messages (not stack traces or HTTP codes)
-   - Provide retry action where applicable
-   - Distinguish between network errors, server errors, and validation errors
-
-   Edge cases:
-   - Long text: verify truncation/wrapping behavior
-   - Missing images: provide fallback/placeholder
-   - Missing optional data: graceful degradation, not broken layout
-   - Rapid interaction: debounce/throttle where needed
-   - Concurrent actions: disable buttons during async operations
-
-2. Fix all issues found.
-3. Return a summary: [N] loading states added, [N] empty states added, [N] error states added, [N] edge cases fixed."
-
-AGENT C — UX Copy (/design-copy):
-Prompt for Agent C:
-"You are a UX copywriter. Run the /design-copy skill instructions on this project. Your mission:
-
-1. Audit all user-facing text in the application:
-
-   Button labels:
-   - Use action verbs: 'Save changes' not 'Submit', 'Create account' not 'Sign up'
-   - Be specific: 'Delete project' not 'Delete', 'Add to cart' not 'Add'
-   - Keep under 3 words where possible
-
-   Headings and titles:
-   - Clear hierarchy: page title > section title > subsection
-   - Descriptive: tell users where they are and what they can do
-   - Consistent capitalization (Title Case or Sentence case — pick one)
-
-   Form labels and helpers:
-   - Labels describe the field, not the format
-   - Helper text explains requirements upfront, not after validation failure
-   - Placeholder text is not a replacement for labels
-
-   Error messages:
-   - Tell the user what went wrong
-   - Tell the user how to fix it
-   - Use calm, helpful tone — not blame ('That email is already registered' not 'Error: duplicate email')
-
-   Empty states and onboarding:
-   - Guide users toward their first action
-   - Use encouraging, active language
-
-   Microcopy (tooltips, toasts, confirmations):
-   - Confirmation dialogs: describe the consequences, not just 'Are you sure?'
-   - Toast messages: confirm the action completed
-   - Tooltips: clarify, don't repeat the label
-
-2. Rewrite all copy that doesn't meet these standards.
-3. Return a summary: [N] strings rewritten across [N] files."
-
-Wait for all three agents to complete.
-
-POST-MERGE:
-
-- Agent A's changes are primarily in layout/style files.
-- Agent B's changes are primarily in component logic and templates.
-- Agent C's changes are primarily in text/string content.
-- If any conflicts exist between agents, resolve them: structure > content > style.
-- Commit each track separately for clean history:
-  - "refactor: implement adaptive layouts and container queries"
-  - "feat: add loading, empty, and error states across all views"
-  - "copy: rewrite UX copy for clarity and consistency"
-
-Do NOT stop. Proceed immediately to Phase 3.
-
-============================================================
-PHASE 3: VISUAL REFINEMENT
-============================================================
-
-The foundation is solid, the structure is hardened. Now make it beautiful. Use the critique findings from Phase 0 to determine which visual skills to apply.
-
-STEP 3.1 — Conditional Visual Skills.
-Based on the /design-critique findings and the top 5 problems, run the appropriate skills:
-
-IF the UI is too bland / generic / safe:
-
-- Run /design-amplify skill instructions
-- Increase visual personality: bolder typography, stronger color use, distinctive component styling
-- Add visual interest without sacrificing usability
-
-IF the UI is too noisy / cluttered / overwhelming:
-
-- Run /design-tone-down skill instructions first: reduce visual noise, simplify color palette, calm down competing elements
-- Then run /design-simplify skill instructions: remove unnecessary UI elements, streamline flows, reduce cognitive load
-
-IF the UI is lifeless / static / boring:
-
-- Run /design-delight skill instructions: add personality moments, Easter eggs (subtle), satisfying micro-interactions
-- Then run /design-animate skill instructions: add purposeful motion (see Phase 4 animation principles)
-
-IF the UI needs color work (already handled partially in Phase 1):
-
-- Run /design-color skill instructions again for deeper color refinement
-- Focus on: color harmony, emotional tone, brand alignment
-
-IF multiple conditions apply: run them in the order listed above. Tone down before amplifying. Simplify before adding delight.
-
-STEP 3.2 — Run /design-polish skill instructions.
-Regardless of which conditional skills ran, always run the final polish pass:
-
-- Subpixel alignment and spacing precision
-- Typography refinements (line-height, letter-spacing, font-weight tuning)
-- Border radius consistency across the entire UI
-- Shadow depth hierarchy (elevation system)
-- Icon sizing and baseline alignment
-- Input field styling consistency
-- Button hierarchy clarity (primary > secondary > tertiary > ghost)
-- Card and container internal spacing
-- Divider visual weight
-- Selection and highlight colors
-- Focus ring styling (visible, consistent, on-brand)
-
-STEP 3.3 — Animation pass.
-Run /design-animate skill instructions if not already run in Step 3.1:
-
-- Entrance/exit transitions for pages and modals
-- Micro-interactions: button press, toggle, expand/collapse, hover
-- Loading transitions: skeleton shimmer → content fade-in
-- State changes: error shake, success checkmark, progress updates
-- Scroll-triggered reveals (subtle parallax or fade-up)
-
-Motion principles:
-
-- 150-300ms for micro-interactions
-- 300-500ms for page transitions
-- ease-out for enters, ease-in for exits
-- GPU-accelerated only (transform, opacity)
-- Respect prefers-reduced-motion
-- Every animation justifies its existence
-
-STEP 3.4 — Commit.
-
-- Commit message: "style: visual refinement — [list which skills were applied]"
-
-Do NOT stop. Proceed immediately to Phase 4.
-
-============================================================
-PHASE 4: VERIFICATION
-============================================================
-
-Full re-audit to catch anything the overhaul introduced or missed.
-
-STEP 4.1 — Run /design-audit skill instructions.
-Complete re-audit of the overhauled UI:
-
-- Visual hierarchy and layout consistency
-- Typography scale adherence
-- Color contrast (WCAG AA minimum)
-- Spacing rhythm
-- Component consistency
-- Interactive states (hover, focus, active, disabled)
-- Responsive behavior
-- Accessibility (semantic structure, ARIA, keyboard nav, screen readers)
-- Touch targets
-- Loading, empty, and error states (should now all exist from Phase 2)
-- Animation quality and performance
-- Token usage (should be near 100% from Phase 1)
-
-Classify all findings by severity: CRITICAL, HIGH, MEDIUM, LOW.
-
-STEP 4.2 — Self-Healing Loop (max 2 iterations).
-IF CRITICAL issues remain:
-
-- Fix all critical issues immediately.
-- Re-run audit on affected files only.
-- If new critical issues appeared from fixes, fix those too.
-- Max 2 fix-reaudit iterations.
-
-IF only HIGH/MEDIUM issues remain after critical fixes:
-
-- Fix HIGH issues.
-- MEDIUM issues: fix if quick (<2 min each), otherwise document for future pass.
-
-IF still failing after 2 iterations:
-
-- Document remaining issues with full context.
-- Classify as: architectural limitation, framework constraint, or needs manual design decision.
-- Do not block the ship on MEDIUM/LOW issues.
-
-STEP 4.3 — Run build.
-
-- Detect and execute the project's build command.
-- Fix any build failures immediately.
-
-STEP 4.4 — Run tests.
-
-- Detect and execute the project's test suite.
-- Update snapshot tests if UI intentionally changed.
-- Fix actual test regressions.
-
-STEP 4.5 — Commit if fixes were needed.
-
-- Commit message: "fix: resolve [N] post-overhaul audit issues"
-
-Do NOT stop. Proceed immediately to Phase 5.
-
-============================================================
-PHASE 5: SHIP
-============================================================
-
-STEP 5.1 — Final state commit.
-
-- If there are any remaining uncommitted changes, commit them.
-- Commit message: "chore: finalize design overhaul"
-
-STEP 5.2 — Push.
-
-- Push all commits to the current branch.
-
-============================================================
-OUTPUT
-============================================================
-
-When all phases are complete, print a comprehensive before/after summary:
-
----
-
+```
 ## Design Overhaul Complete
+Target: ... | Visual skills applied and why: ...
 
-**Target:** [what was overhauled]
-**Approach:** [which conditional visual skills were applied and why]
+| Phase | Duration | Status |  (0 Recon ... 5 Ship, total)
 
-**Phase Timings:**
+| Category | Before (score/5) | After (score/5) | Delta |  (the 9 Phase 0 categories)
 
-| Phase                     | Duration   | Status                        |
-| ------------------------- | ---------- | ----------------------------- |
-| 0 — Reconnaissance        | [time]     | done                          |
-| 1 — Foundation            | [time]     | done                          |
-| 2 — Structural (parallel) | [time]     | done                          |
-| 3 — Visual Refinement     | [time]     | done                          |
-| 4 — Verification          | [time]     | done ([N] healing iterations) |
-| 5 — Ship                  | [time]     | done                          |
-| **Total**                 | **[time]** |                               |
+Token adoption N% | Container queries N | oklch yes/partial/no | est. WCAG level
+Hardened: N loading + N empty + N error states
 
-**Before/After Catalog:**
-
-| Category              | Before              | After               | Improvement |
-| --------------------- | ------------------- | ------------------- | ----------- |
-| Design tokens         | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Color system          | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Typography scale      | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Spacing system        | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Component consistency | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Animation/motion      | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Responsive behavior   | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Accessibility         | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-| Loading/error states  | [state] ([score]/5) | [state] ([score]/5) | [delta]     |
-
-**Modernization Metrics:**
-
-- Token adoption: [N]% of values use tokens (target: 95%+)
-- Container query usage: [N] components use container queries
-- oklch color adoption: [yes/no/partial]
-- Accessibility score: [estimated WCAG level achieved]
-- Hardened states: [N] loading + [N] empty + [N] error states added
-
-**Top 5 Problems Addressed:**
-
-1. [Problem] → [Solution applied] → [Result]
-2. [Problem] → [Solution applied] → [Result]
-3. [Problem] → [Solution applied] → [Result]
-4. [Problem] → [Solution applied] → [Result]
-5. [Problem] → [Solution applied] → [Result]
-
-**Issues:**
-
-- Found in audit: [N] (Critical: [N], High: [N], Medium: [N])
-- Fixed: [N]
-- Deferred: [N] (with reasons)
-
-**Commits Made:**
-
-1. [hash] — [message]
-2. [hash] — [message]
-   ...
-
-**Next Steps:**
-
-- Run `/design-critique` for a fresh independent assessment of the new UI
-- Run `/design-audit` in 1 week to catch any regression after continued development
-- Gather real user feedback — the overhaul should be validated by humans
-- Consider `/design-onboard` if the new design significantly changed user flows
-
----
-
-============================================================
-SELF-HEALING VALIDATION
-============================================================
-
-After producing output, perform a final self-check:
-
-1. Did every phase actually execute? Check for skipped phases.
-2. Did all three parallel agents in Phase 2 return results? If any failed silently, re-run.
-3. Was /design-critique actually run in Phase 0? (It's easy to skip — don't.)
-4. Are there uncommitted changes? Commit them.
-5. Did build and tests pass in Phase 4? If not, the overhaul has regressions — report honestly.
-6. Is token adoption above 90%? If not, Phase 1 was incomplete — note this.
-
-If any self-check fails:
-
-- Attempt automatic recovery (re-run the failed step).
-- Max 2 recovery attempts per failure.
-- If still failing, document the failure clearly in the output.
-
-============================================================
-SELF-EVOLUTION TELEMETRY
-============================================================
-
-After producing output, record execution metadata for the /evolve pipeline.
-
-Check if a project memory directory exists:
-
-- Look for the project path in `~/.claude/projects/`
-- If found, append to `skill-telemetry.md` in that memory directory
-
-Entry format:
-
-```
-### /design-overhaul — {{YYYY-MM-DD}}
-- Outcome: {{SUCCESS | PARTIAL | FAILED}}
-- Target: {{what was overhauled}}
-- Phases completed: {{N}} / 6
-- Top 5 problems: {{one-line each}}
-- Skills chained: {{list of /design-* skills actually invoked}}
-- Self-healed: {{yes — what was healed | no}}
-- Healing iterations used: {{N}} / 2 max
-- Token adoption: {{before}}% → {{after}}%
-- Audit issues: {{found}} found, {{fixed}} fixed
-- Quality delta: {{average score before}} → {{average score after}}
-- Bottleneck: {{phase that took longest or struggled, or "none"}}
-- Suggestion: {{one-line improvement idea for /evolve, or "none"}}
+Top 5 problems: problem -> fix -> result
+Issues: found N (C/H/M), fixed N, deferred N (reasons)
+Commits: hash message
 ```
 
-Only log if the memory directory exists. Skip silently if not found.
-Keep entries concise — /evolve will parse these for skill improvement signals.
+Next: a fresh `/design-critique`, `/design-audit` again in a week, and real user feedback.
 
-============================================================
-STRICT RULES
-============================================================
+## Telemetry
 
-- Runs autonomously end to end — make the design calls yourself rather than pausing for approval on each one.
-- Phase 2 tracks MUST run in parallel via Agent tool. Do not run them sequentially.
-- Phases 0, 1, 3, 4, 5 run sequentially in order.
-- Fix issues as you find them — do not just report and move on.
-- /design-critique in Phase 0 is mandatory. Do not skip it.
-- /design-normalize in Phase 1 is mandatory. Token adoption must be tracked.
-- /design-polish in Phase 3 is mandatory regardless of which conditional skills ran.
-- /design-audit in Phase 4 is mandatory. It's the quality gate.
-- If build/tests fail at any point, fix before proceeding.
-- Every phase must produce at least one commit.
-- This is the nuclear option — be bold. Don't preserve bad patterns out of politeness.
-- All rules from chained skills (/design-critique, /design-tokens, /design-normalize, /design-color, /design-adapt, /design-harden, /design-copy, /design-amplify, /design-tone-down, /design-simplify, /design-delight, /design-animate, /design-polish, /design-audit) apply to their respective phases.
+If a memory directory for this project exists under `~/.claude/projects/`, append to its `skill-telemetry.md`:
+
+```
+### /design-overhaul — YYYY-MM-DD
+- Outcome: SUCCESS | PARTIAL | FAILED
+- Target / Phases completed N/6 / Skills chained
+- Token adoption: before% -> after%
+- Audit issues: found, fixed; quality delta: avg before -> after
+- Bottleneck / Suggestion for /evolve
+```
