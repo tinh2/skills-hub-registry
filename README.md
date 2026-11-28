@@ -492,12 +492,13 @@ Duplicated names: `backend-spec` (analysis, docs), `design-to-code` (ux, combo).
 | [monorepo](productivity/monorepo/)           | 2.0.0   | Set up or migrate to a monorepo with Turborepo, Nx, or pnpm workspaces. Scaffolds apps and packages directory structure, configures task pipeline with dependency graph, enables...    |
 | [release](productivity/release/)             | 2.0.0   | Set up automated releases with semantic versioning, changelog generation, and package publishing. Configures semantic-release, changesets, release-please, goreleaser, or...           |
 
-### integration -- Third-Party Service Connectors (14 skills)
+### integration -- Third-Party Service Connectors (15 skills)
 
-| Skill                                                 | Version | Description                                                                                                                                                                            |
-| ----------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [analytics-tracking](integration/analytics-tracking/) | 2.0.0   | Set up production-ready event tracking with Amplitude, Mixpanel, PostHog, or GA4. Auto-detects your framework (React, Next.js, Vue, Flutter, Angular, Python, Go, Rails), installs...  |
-| [auth-provider](integration/auth-provider/)           | 2.0.0   | Set up complete OAuth/SSO authentication with Google, GitHub, Apple, or SAML providers. Auto-detects your framework and configures the best auth library (NextAuth, Passport,...       |
+| Skill                                                   | Version | Description                                                                                                                                                                            |
+| ------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [analytics-tracking](integration/analytics-tracking/)   | 2.0.0   | Set up production-ready event tracking with Amplitude, Mixpanel, PostHog, or GA4. Auto-detects your framework (React, Next.js, Vue, Flutter, Angular, Python, Go, Rails), installs...  |
+| [auth-provider](integration/auth-provider/)             | 2.0.0   | Set up complete OAuth/SSO authentication with Google, GitHub, Apple, or SAML providers. Auto-detects your framework and configures the best auth library (NextAuth, Passport,...       |
+| [directory-submission](integration/directory-submission/) | 1.0.0   | Audit a product homepage for launch readiness, filter 1,600+ startup directories by Ahrefs DR and link type via SaaSCity MCP, assemble a listing kit, and verify live backlinks.       |
 | [email](integration/email/)                           | 2.0.0   | Add transactional email to my app — set up Resend, SendGrid, SES, Postmark, or Mailgun with HTML templates for welcome, password reset, and notification emails, delivery webhooks,... |
 | [integrate](integration/integrate/)                   | 2.0.0   | Audit my project's third-party integrations or set up multiple at once — scans for payments, auth, email, push, analytics, storage, search, and realtime, calculates a...              |
 | [perplexity-search](integration/perplexity-search/)   | 1.0.0   | AI-powered web search and research using the Perplexity API (Sonar models). Performs deep web research with citations, fact-checking, competitive analysis, market research, and...    |
