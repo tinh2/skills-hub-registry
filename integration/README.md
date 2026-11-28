@@ -6,7 +6,7 @@ Third-party service connectors -- authentication, payments, email, push notifica
 
 **[integrate](integrate/)** -- Master integration orchestrator that audits existing integrations, identifies gaps, routes to sub-skills, and produces an integration health score for production readiness.
 
-## Skills (14)
+## Skills (15)
 
 | Skill | Version | Description |
 |-------|---------|-------------|
@@ -36,6 +36,7 @@ Third-party service connectors -- authentication, payments, email, push notifica
 
 | Skill | Version | Description |
 |-------|---------|-------------|
+| [directory-submission](directory-submission/) | 1.0.0 | Audit a product homepage for launch readiness, filter 1,600+ startup directories by Ahrefs DR and link type via SaaSCity MCP, assemble a listing kit, and verify live backlinks |
 | [perplexity-search](perplexity-search/) | 1.0.0 | AI-powered web search and research using the Perplexity API (Sonar models). Performs deep web research with citations, fact-checking, competitive analysis, market research, and... |
 | [stitch-bridge](stitch-bridge/) | 1.0.0 | >- |
 | [stitch-compare](stitch-compare/) | 1.0.0 | >- |
